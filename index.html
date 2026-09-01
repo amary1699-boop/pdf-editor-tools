@@ -1,20 +1,478 @@
-){
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
-pageBox.classList.add(
-"deleted"
-);
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PDF Editor Tools Free</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f6f9;
+}
+
+header{
+    background:#0d6efd;
+    color:white;
+    text-align:center;
+    padding:25px 15px;
+}
+
+header h1{
+    margin:0 0 8px;
+}
+
+.container{
+    width:95%;
+    max-width:1000px;
+    margin:25px auto;
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 3px 15px rgba(0,0,0,.1);
+}
+
+.upload-box{
+    border:2px dashed #0d6efd;
+    padding:35px 15px;
+    text-align:center;
+    border-radius:10px;
+    background:#f8fbff;
+}
+
+input[type="file"]{
+    display:none;
+}
+
+.upload-btn{
+    display:inline-block;
+    background:#0d6efd;
+    color:white;
+    padding:13px 22px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.file-name{
+    margin-top:15px;
+    font-weight:bold;
+}
+
+#preview{
+    display:none;
+    margin-top:30px;
+}
+
+.page{
+    margin:25px auto;
+    padding:15px;
+    text-align:center;
+    border:1px solid #ddd;
+    border-radius:10px;
+    background:white;
+}
+
+.page-number{
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.page canvas{
+    display:block;
+    width:100%;
+    max-width:700px;
+    height:auto;
+    margin:auto;
+    border:1px solid #ddd;
+}
+
+.page-buttons{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:15px;
+}
+
+.page-buttons button{
+    border:none;
+    color:white;
+    padding:10px 20px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.rotate-button{
+    background:#0d6efd;
+}
+
+.delete-button{
+    background:#dc3545;
+}
+
+.deleted{
+    display:none;
+}
+
+@media(max-width:600px){
+
+    .container{
+        padding:15px;
+    }
+
+    header h1{
+        font-size:24px;
+    }
+
+    .page{
+        padding:10px;
+    }
+
+    .page-buttons{
+        flex-direction:row;
+    }
+
+    .page-buttons button{
+        flex:1;
+    }
 
 }
 
-};
+</style>
 
+</head>
+
+<body>
+
+<header>
+
+<h1>PDF Editor Tools Free</h1>
+
+<p>Edit PDF Online for Free</p>
+
+</header>
+
+
+<div class="container">
+
+
+<div class="upload-box">
+
+<h2>Upload Your PDF</h2>
+
+<p>Select a PDF file from your device</p>
+
+<label
+for="pdfFile"
+class="upload-btn">
+
+Choose PDF
+
+</label>
+
+<input
+type="file"
+id="pdfFile"
+accept="application/pdf">
+
+<div
+id="fileName"
+class="file-name">
+</div>
+
+</div>
+
+
+<div id="preview">
+
+<h2>PDF Preview</h2>
+
+<div id="pages"></div>
+
+</div>
+
+
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+
+<script>
+
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+
+const fileInput =
+document.getElementById("pdfFile");
+
+const fileName =
+document.getElementById("fileName");
+
+const preview =
+document.getElementById("preview");
+
+const pagesContainer =
+document.getElementById("pages");
+
+
+fileInput.addEventListener("change", function(){
+
+    const file = this.files[0];
+
+    if(!file){
+        return;
+    }
+
+    if(file.type !== "application/pdf"){
+
+        alert("Please select a PDF file.");
+
+        return;
+    }
+
+
+    fileName.textContent =
+    "Selected: " + file.name;
+
+
+    pagesContainer.innerHTML = "";
+
+    preview.style.display = "block";
+
+
+    const reader =
+    new FileReader();
+
+
+    reader.onload =
+    function(){
+
+        const data =
+        new Uint8Array(reader.result);
+
+
+        pdfjsLib
+        .getDocument(data)
+        .promise
+        .then(function(pdf){
+
+            console.log(
+                "Total Pages: " +
+                pdf.numPages
+            );
+
+
+            pagesContainer.innerHTML = "";
+
+
+            for(
+                let i = 1;
+                i <= pdf.numPages;
+                i++
+            ){
+
+                createPage(
+                    pdf,
+                    i
+                );
+
+            }
+
+        })
+        .catch(function(error){
+
+            console.error(error);
+
+            alert(
+                "PDF could not be loaded."
+            );
+
+        });
+
+    };
+
+
+    reader.readAsArrayBuffer(file);
 
 });
+
+
+function createPage(
+    pdf,
+    pageNumber
+){
+
+    pdf.getPage(pageNumber)
+    .then(function(page){
+
+        const pageBox =
+        document.createElement("div");
+
+        pageBox.className =
+        "page";
+
+
+        const number =
+        document.createElement("div");
+
+        number.className =
+        "page-number";
+
+        number.textContent =
+        "Page " + pageNumber;
+
+
+        const canvas =
+        document.createElement("canvas");
+
+
+        const buttonBox =
+        document.createElement("div");
+
+        buttonBox.className =
+        "page-buttons";
+
+
+        const rotateButton =
+        document.createElement("button");
+
+        rotateButton.className =
+        "rotate-button";
+
+        rotateButton.textContent =
+        "🔄 Rotate";
+
+
+        const deleteButton =
+        document.createElement("button");
+
+        deleteButton.className =
+        "delete-button";
+
+        deleteButton.textContent =
+        "🗑️ Delete";
+
+
+        buttonBox.appendChild(
+            rotateButton
+        );
+
+        buttonBox.appendChild(
+            deleteButton
+        );
+
+
+        pageBox.appendChild(
+            number
+        );
+
+        pageBox.appendChild(
+            canvas
+        );
+
+        pageBox.appendChild(
+            buttonBox
+        );
+
+
+        pagesContainer.appendChild(
+            pageBox
+        );
+
+
+        let rotation = 0;
+
+
+        function renderPage(){
+
+            const viewport =
+            page.getViewport({
+
+                scale:1.5,
+
+                rotation:rotation
+
+            });
+
+
+            canvas.width =
+            viewport.width;
+
+            canvas.height =
+            viewport.height;
+
+
+            const context =
+            canvas.getContext("2d");
+
+
+            page.render({
+
+                canvasContext:
+                context,
+
+                viewport:
+                viewport
+
+            });
+
+        }
+
+
+        renderPage();
+
+
+        rotateButton.addEventListener(
+            "click",
+            function(){
+
+                rotation =
+                (rotation + 90) % 360;
+
+                renderPage();
+
+            }
+        );
+
+
+        deleteButton.addEventListener(
+            "click",
+            function(){
+
+                const answer =
+                confirm(
+                    "Delete Page " +
+                    pageNumber +
+                    "?"
+                );
+
+
+                if(answer){
+
+                    pageBox.classList.add(
+                        "deleted"
+                    );
+
+                }
+
+            }
+        );
+
+    });
 
 }
 
 </script>
-
 
 </body>
 
