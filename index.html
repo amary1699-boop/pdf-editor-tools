@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,37 +71,36 @@ header h1{
     display:none;
 }
 
-#pdfCanvas{
-    width:100%;
-    max-width:800px;
-    border:1px solid #ddd;
-    display:block;
-    margin:auto;
-}
-
-.controls{
-    display:none;
-    margin-top:20px;
+.page{
+    margin:25px auto;
     text-align:center;
 }
 
-.controls button{
-    background:#0d6efd;
-    color:white;
-    border:0;
-    padding:10px 18px;
-    margin:5px;
-    border-radius:6px;
-    cursor:pointer;
+.page-title{
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.page canvas{
+    width:100%;
+    max-width:750px;
+    height:auto;
+    border:1px solid #ddd;
+    box-shadow:0 2px 8px rgba(0,0,0,.12);
 }
 
 @media(max-width:600px){
+
     .container{
         padding:15px;
     }
 
     header h1{
         font-size:24px;
+    }
+
+    .page canvas{
+        max-width:100%;
     }
 }
 </style>
@@ -110,60 +110,59 @@ header h1{
 <body>
 
 <header>
-    <h1>PDF Editor Tools Free</h1>
-    <p>Edit PDF Online for Free</p>
+
+<h1>PDF Editor Tools Free</h1>
+
+<p>Edit PDF Online for Free</p>
+
 </header>
 
 <div class="container">
 
-    <div class="upload-box">
+<div class="upload-box">
 
-        <h2>Upload Your PDF</h2>
+<h2>Upload Your PDF</h2>
 
-        <p>Select a PDF file from your device</p>
+<p>Select a PDF file from your device</p>
 
-        <label for="pdfFile" class="upload-btn">
-            Choose PDF
-        </label>
+<label for="pdfFile" class="upload-btn">
+Choose PDF
+</label>
 
-        <input type="file" id="pdfFile" accept="application/pdf">
+<input type="file" id="pdfFile" accept="application/pdf">
 
-        <div class="file-name" id="fileName"></div>
-
-    </div>
-
-    <div id="preview">
-
-        <h2>PDF Preview</h2>
-
-        <canvas id="pdfCanvas"></canvas>
-
-    </div>
-
-    <div class="controls">
-
-        <button>↩ Rotate</button>
-        <button>✏️ Add Text</button>
-        <button>🖼️ Add Image</button>
-        <button>🗑️ Delete Page</button>
-        <button>💾 Download</button>
-
-    </div>
+<div class="file-name" id="fileName"></div>
 
 </div>
+
+
+<div id="preview">
+
+<h2>PDF Preview</h2>
+
+<div id="pages"></div>
+
+</div>
+
+</div>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 <script>
 
 const pdfFile = document.getElementById("pdfFile");
+
 const fileName = document.getElementById("fileName");
+
 const preview = document.getElementById("preview");
-const canvas = document.getElementById("pdfCanvas");
-const ctx = canvas.getContext("2d");
+
+const pagesContainer = document.getElementById("pages");
+
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
 "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
 
 pdfFile.addEventListener("change", function(){
 
@@ -173,52 +172,149 @@ pdfFile.addEventListener("change", function(){
         return;
     }
 
+
     if(file.type !== "application/pdf"){
+
         alert("Please select a PDF file.");
+
         return;
+
     }
 
-    fileName.textContent = "Selected: " + file.name;
+
+    fileName.textContent =
+    "Selected: " + file.name;
+
+
+    pagesContainer.innerHTML =
+    "<p>Loading PDF...</p>";
+
+    preview.style.display = "block";
+
 
     const reader = new FileReader();
 
+
     reader.onload = function(){
 
-        const typedarray = new Uint8Array(this.result);
+        const typedarray =
+        new Uint8Array(this.result);
 
-        pdfjsLib.getDocument(typedarray).promise.then(function(pdf){
 
-            preview.style.display = "block";
+        pdfjsLib.getDocument(typedarray).promise
 
-            document.querySelector(".controls").style.display = "block";
+        .then(function(pdf){
 
-            pdf.getPage(1).then(function(page){
+            pagesContainer.innerHTML = "";
 
-                const viewport = page.getViewport({scale:1.5});
+            console.log(
+                "Total Pages:",
+                pdf.numPages
+            );
 
-                canvas.width = viewport.width;
-                canvas.height = viewport.height;
 
-                page.render({
-                    canvasContext:ctx,
-                    viewport:viewport
-                });
+            for(let pageNumber = 1;
+                pageNumber <= pdf.numPages;
+                pageNumber++){
 
-            });
+                renderPage(
+                    pdf,
+                    pageNumber
+                );
 
-        }).catch(function(){
+            }
 
-            alert("PDF could not be loaded.");
+        })
+
+        .catch(function(error){
+
+            console.error(error);
+
+            pagesContainer.innerHTML = "";
+
+            alert(
+                "PDF could not be loaded."
+            );
 
         });
 
     };
 
+
     reader.readAsArrayBuffer(file);
 
 });
+
+
+function renderPage(pdf,pageNumber){
+
+    pdf.getPage(pageNumber)
+
+    .then(function(page){
+
+        const pageDiv =
+        document.createElement("div");
+
+        pageDiv.className =
+        "page";
+
+
+        const title =
+        document.createElement("div");
+
+        title.className =
+        "page-title";
+
+        title.textContent =
+        "Page " + pageNumber;
+
+
+        const canvas =
+        document.createElement("canvas");
+
+
+        pageDiv.appendChild(title);
+
+        pageDiv.appendChild(canvas);
+
+        pagesContainer.appendChild(
+            pageDiv
+        );
+
+
+        const scale = 1.5;
+
+        const viewport =
+        page.getViewport({
+            scale:scale
+        });
+
+
+        canvas.width =
+        viewport.width;
+
+        canvas.height =
+        viewport.height;
+
+
+        const context =
+        canvas.getContext("2d");
+
+
+        page.render({
+
+            canvasContext:context,
+
+            viewport:viewport
+
+        });
+
+    });
+
+}
 
 </script>
 
 </body>
 </html>
+```
