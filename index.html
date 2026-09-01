@@ -3,43 +3,105 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>PDF Editor Tools Free</title>
 
 <style>
+*{
+    box-sizing:border-box;
+}
+
 body{
     margin:0;
     font-family:Arial,sans-serif;
-    background:#f4f4f4;
+    background:#f4f6f9;
 }
 
 header{
     background:#0d6efd;
     color:white;
-    padding:20px;
     text-align:center;
+    padding:25px 15px;
+}
+
+header h1{
+    margin:0 0 8px;
 }
 
 .container{
+    width:95%;
     max-width:1000px;
-    margin:30px auto;
+    margin:25px auto;
     background:white;
-    padding:30px;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,.15);
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 3px 15px rgba(0,0,0,.1);
 }
 
-button{
+.upload-box{
+    border:2px dashed #0d6efd;
+    padding:35px 15px;
+    text-align:center;
+    border-radius:10px;
+    background:#f8fbff;
+}
+
+.upload-box input{
+    display:none;
+}
+
+.upload-btn{
+    display:inline-block;
     background:#0d6efd;
     color:white;
-    border:none;
-    padding:12px 20px;
+    padding:13px 22px;
     border-radius:6px;
     cursor:pointer;
     font-size:16px;
 }
 
-button:hover{
-    background:#084298;
+.file-name{
+    margin-top:15px;
+    font-weight:bold;
+}
+
+#preview{
+    margin-top:25px;
+    display:none;
+}
+
+#pdfCanvas{
+    width:100%;
+    max-width:800px;
+    border:1px solid #ddd;
+    display:block;
+    margin:auto;
+}
+
+.controls{
+    display:none;
+    margin-top:20px;
+    text-align:center;
+}
+
+.controls button{
+    background:#0d6efd;
+    color:white;
+    border:0;
+    padding:10px 18px;
+    margin:5px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+@media(max-width:600px){
+    .container{
+        padding:15px;
+    }
+
+    header h1{
+        font-size:24px;
+    }
 }
 </style>
 
@@ -48,19 +110,115 @@ button:hover{
 <body>
 
 <header>
-<h1>PDF Editor Tools Free</h1>
-<p>Edit PDF Online for Free</p>
+    <h1>PDF Editor Tools Free</h1>
+    <p>Edit PDF Online for Free</p>
 </header>
 
 <div class="container">
 
-<h2>Welcome</h2>
+    <div class="upload-box">
 
-<p>Your PDF Editor website is now ready.</p>
+        <h2>Upload Your PDF</h2>
 
-<button>Upload PDF (Coming Soon)</button>
+        <p>Select a PDF file from your device</p>
+
+        <label for="pdfFile" class="upload-btn">
+            Choose PDF
+        </label>
+
+        <input type="file" id="pdfFile" accept="application/pdf">
+
+        <div class="file-name" id="fileName"></div>
+
+    </div>
+
+    <div id="preview">
+
+        <h2>PDF Preview</h2>
+
+        <canvas id="pdfCanvas"></canvas>
+
+    </div>
+
+    <div class="controls">
+
+        <button>↩ Rotate</button>
+        <button>✏️ Add Text</button>
+        <button>🖼️ Add Image</button>
+        <button>🗑️ Delete Page</button>
+        <button>💾 Download</button>
+
+    </div>
 
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<script>
+
+const pdfFile = document.getElementById("pdfFile");
+const fileName = document.getElementById("fileName");
+const preview = document.getElementById("preview");
+const canvas = document.getElementById("pdfCanvas");
+const ctx = canvas.getContext("2d");
+
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+pdfFile.addEventListener("change", function(){
+
+    const file = this.files[0];
+
+    if(!file){
+        return;
+    }
+
+    if(file.type !== "application/pdf"){
+        alert("Please select a PDF file.");
+        return;
+    }
+
+    fileName.textContent = "Selected: " + file.name;
+
+    const reader = new FileReader();
+
+    reader.onload = function(){
+
+        const typedarray = new Uint8Array(this.result);
+
+        pdfjsLib.getDocument(typedarray).promise.then(function(pdf){
+
+            preview.style.display = "block";
+
+            document.querySelector(".controls").style.display = "block";
+
+            pdf.getPage(1).then(function(page){
+
+                const viewport = page.getViewport({scale:1.5});
+
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+
+                page.render({
+                    canvasContext:ctx,
+                    viewport:viewport
+                });
+
+            });
+
+        }).catch(function(){
+
+            alert("PDF could not be loaded.");
+
+        });
+
+    };
+
+    reader.readAsArrayBuffer(file);
+
+});
+
+</script>
 
 </body>
 </html>
