@@ -122,6 +122,26 @@ input[type="file"]{
     display:none;
 }
 
+.download-box{
+    text-align:center;
+    margin:30px 0 10px;
+}
+
+.download-button{
+    border:none;
+    background:#198754;
+    color:white;
+    padding:14px 30px;
+    border-radius:7px;
+    cursor:pointer;
+    font-size:17px;
+    font-weight:bold;
+}
+
+.download-button:hover{
+    background:#157347;
+}
+
 @media(max-width:600px){
 
     .container{
@@ -197,13 +217,33 @@ class="file-name">
 
 <div id="pages"></div>
 
+
+<div class="download-box">
+
+<button
+id="downloadButton"
+class="download-button">
+
+💾 Download Edited PDF
+
+</button>
+
+</div>
+
 </div>
 
 
 </div>
 
+
+<!-- PDF.JS -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+
+<!-- PDF-LIB -->
+
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 
 
 <script>
@@ -224,18 +264,32 @@ document.getElementById("preview");
 const pagesContainer =
 document.getElementById("pages");
 
+const downloadButton =
+document.getElementById("downloadButton");
 
-fileInput.addEventListener("change", function(){
 
-    const file = this.files[0];
+let originalPdfBytes = null;
+
+let pageSettings = [];
+
+
+fileInput.addEventListener(
+"change",
+function(){
+
+    const file =
+    this.files[0];
 
     if(!file){
         return;
     }
 
+
     if(file.type !== "application/pdf"){
 
-        alert("Please select a PDF file.");
+        alert(
+            "Please select a PDF file."
+        );
 
         return;
     }
@@ -247,7 +301,11 @@ fileInput.addEventListener("change", function(){
 
     pagesContainer.innerHTML = "";
 
-    preview.style.display = "block";
+    pageSettings = [];
+
+
+    preview.style.display =
+    "block";
 
 
     const reader =
@@ -257,8 +315,14 @@ fileInput.addEventListener("change", function(){
     reader.onload =
     function(){
 
+        originalPdfBytes =
+        reader.result;
+
+
         const data =
-        new Uint8Array(reader.result);
+        new Uint8Array(
+            originalPdfBytes
+        );
 
 
         pdfjsLib
@@ -266,20 +330,31 @@ fileInput.addEventListener("change", function(){
         .promise
         .then(function(pdf){
 
+
             console.log(
                 "Total Pages: " +
                 pdf.numPages
             );
 
 
-            pagesContainer.innerHTML = "";
+            pagesContainer.innerHTML =
+            "";
 
 
             for(
-                let i = 1;
-                i <= pdf.numPages;
+                let i=1;
+                i<=pdf.numPages;
                 i++
             ){
+
+                pageSettings.push({
+
+                    rotation:0,
+
+                    deleted:false
+
+                });
+
 
                 createPage(
                     pdf,
@@ -287,6 +362,7 @@ fileInput.addEventListener("change", function(){
                 );
 
             }
+
 
         })
         .catch(function(error){
@@ -314,6 +390,7 @@ function createPage(
 
     pdf.getPage(pageNumber)
     .then(function(page){
+
 
         const pageBox =
         document.createElement("div");
@@ -390,10 +467,13 @@ function createPage(
         );
 
 
-        let rotation = 0;
-
-
         function renderPage(){
+
+            const rotation =
+            pageSettings[
+                pageNumber - 1
+            ].rotation;
+
 
             const viewport =
             page.getViewport({
@@ -413,7 +493,9 @@ function createPage(
 
 
             const context =
-            canvas.getContext("2d");
+            canvas.getContext(
+                "2d"
+            );
 
 
             page.render({
@@ -433,44 +515,225 @@ function createPage(
 
 
         rotateButton.addEventListener(
-            "click",
-            function(){
+        "click",
+        function(){
 
-                rotation =
-                (rotation + 90) % 360;
+            const settings =
+            pageSettings[
+                pageNumber - 1
+            ];
 
-                renderPage();
 
-            }
-        );
+            settings.rotation =
+            (settings.rotation + 90)
+            % 360;
+
+
+            renderPage();
+
+        });
 
 
         deleteButton.addEventListener(
-            "click",
-            function(){
+        "click",
+        function(){
 
-                const answer =
+            const settings =
+            pageSettings[
+                pageNumber - 1
+            ];
+
+
+            if(
                 confirm(
                     "Delete Page " +
                     pageNumber +
                     "?"
+                )
+            ){
+
+                settings.deleted =
+                true;
+
+
+                pageBox.classList.add(
+                    "deleted"
                 );
 
-
-                if(answer){
-
-                    pageBox.classList.add(
-                        "deleted"
-                    );
-
-                }
-
             }
-        );
+
+        });
 
     });
 
 }
+
+
+downloadButton.addEventListener(
+"click",
+async function(){
+
+    if(!originalPdfBytes){
+
+        alert(
+            "Please upload a PDF first."
+        );
+
+        return;
+    }
+
+
+    downloadButton.textContent =
+    "⏳ Creating PDF...";
+
+
+    try{
+
+
+        const sourcePdf =
+        await PDFLib.PDFDocument.load(
+            originalPdfBytes
+        );
+
+
+        const newPdf =
+        await PDFLib.PDFDocument.create();
+
+
+        for(
+            let i=0;
+            i<sourcePdf.getPageCount();
+            i++
+        ){
+
+            const settings =
+            pageSettings[i];
+
+
+            if(
+                settings &&
+                settings.deleted
+            ){
+
+                continue;
+
+            }
+
+
+            const sourcePage =
+            sourcePdf.getPage(i);
+
+
+            const copiedPages =
+            await newPdf.copyPages(
+                sourcePdf,
+                [i]
+            );
+
+
+            const newPage =
+            copiedPages[0];
+
+
+            if(
+                settings &&
+                settings.rotation
+            ){
+
+                newPage.setRotation(
+                    PDFLib.degrees(
+                        settings.rotation
+                    )
+                );
+
+            }
+
+
+            newPdf.addPage(
+                newPage
+            );
+
+        }
+
+
+        if(
+            newPdf.getPageCount() === 0
+        ){
+
+            alert(
+                "You cannot delete all pages."
+            );
+
+            downloadButton.textContent =
+            "💾 Download Edited PDF";
+
+            return;
+
+        }
+
+
+        const pdfBytes =
+        await newPdf.save();
+
+
+        const blob =
+        new Blob(
+            [pdfBytes],
+            {
+                type:"application/pdf"
+            }
+        );
+
+
+        const url =
+        URL.createObjectURL(blob);
+
+
+        const link =
+        document.createElement("a");
+
+
+        link.href =
+        url;
+
+        link.download =
+        "edited-pdf.pdf";
+
+
+        document.body.appendChild(
+            link
+        );
+
+
+        link.click();
+
+
+        document.body.removeChild(
+            link
+        );
+
+
+        URL.revokeObjectURL(
+            url
+        );
+
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "Could not create edited PDF."
+        );
+
+    }
+
+
+    downloadButton.textContent =
+    "💾 Download Edited PDF";
+
+});
 
 </script>
 
