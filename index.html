@@ -74,6 +74,10 @@ header h1{
 .page{
     margin:25px auto;
     text-align:center;
+    padding:15px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    background:#fff;
 }
 
 .page-title{
@@ -86,7 +90,32 @@ header h1{
     max-width:750px;
     height:auto;
     border:1px solid #ddd;
-    box-shadow:0 2px 8px rgba(0,0,0,.12);
+}
+
+.page-controls{
+    margin-top:12px;
+}
+
+.page-controls button{
+    border:0;
+    padding:9px 15px;
+    margin:4px;
+    border-radius:6px;
+    cursor:pointer;
+    color:white;
+    font-size:14px;
+}
+
+.rotate-btn{
+    background:#0d6efd;
+}
+
+.delete-btn{
+    background:#dc3545;
+}
+
+.page.deleted{
+    display:none;
 }
 
 @media(max-width:600px){
@@ -97,6 +126,10 @@ header h1{
 
     header h1{
         font-size:24px;
+    }
+
+    .page{
+        padding:10px;
     }
 
     .page canvas{
@@ -117,6 +150,7 @@ header h1{
 
 </header>
 
+
 <div class="container">
 
 <div class="upload-box">
@@ -129,7 +163,9 @@ header h1{
 Choose PDF
 </label>
 
-<input type="file" id="pdfFile" accept="application/pdf">
+<input type="file"
+       id="pdfFile"
+       accept="application/pdf">
 
 <div class="file-name" id="fileName"></div>
 
@@ -151,17 +187,24 @@ Choose PDF
 
 <script>
 
-const pdfFile = document.getElementById("pdfFile");
+const pdfFile =
+document.getElementById("pdfFile");
 
-const fileName = document.getElementById("fileName");
+const fileName =
+document.getElementById("fileName");
 
-const preview = document.getElementById("preview");
+const preview =
+document.getElementById("preview");
 
-const pagesContainer = document.getElementById("pages");
+const pagesContainer =
+document.getElementById("pages");
 
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
 "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+
+let pageData = [];
 
 
 pdfFile.addEventListener("change", function(){
@@ -172,19 +215,15 @@ pdfFile.addEventListener("change", function(){
         return;
     }
 
-
     if(file.type !== "application/pdf"){
 
         alert("Please select a PDF file.");
 
         return;
-
     }
-
 
     fileName.textContent =
     "Selected: " + file.name;
-
 
     pagesContainer.innerHTML =
     "<p>Loading PDF...</p>";
@@ -201,21 +240,20 @@ pdfFile.addEventListener("change", function(){
         new Uint8Array(this.result);
 
 
-        pdfjsLib.getDocument(typedarray).promise
-
+        pdfjsLib.getDocument(typedarray)
+        .promise
         .then(function(pdf){
 
             pagesContainer.innerHTML = "";
 
-            console.log(
-                "Total Pages:",
-                pdf.numPages
-            );
+            pageData = [];
 
 
-            for(let pageNumber = 1;
+            for(
+                let pageNumber = 1;
                 pageNumber <= pdf.numPages;
-                pageNumber++){
+                pageNumber++
+            ){
 
                 renderPage(
                     pdf,
@@ -225,12 +263,9 @@ pdfFile.addEventListener("change", function(){
             }
 
         })
-
         .catch(function(error){
 
             console.error(error);
-
-            pagesContainer.innerHTML = "";
 
             alert(
                 "PDF could not be loaded."
@@ -249,7 +284,6 @@ pdfFile.addEventListener("change", function(){
 function renderPage(pdf,pageNumber){
 
     pdf.getPage(pageNumber)
-
     .then(function(page){
 
         const pageDiv =
@@ -273,41 +307,146 @@ function renderPage(pdf,pageNumber){
         document.createElement("canvas");
 
 
+        const controls =
+        document.createElement("div");
+
+        controls.className =
+        "page-controls";
+
+
+        const rotateButton =
+        document.createElement("button");
+
+        rotateButton.className =
+        "rotate-btn";
+
+        rotateButton.textContent =
+        "🔄 Rotate";
+
+
+        const deleteButton =
+        document.createElement("button");
+
+        deleteButton.className =
+        "delete-btn";
+
+        deleteButton.textContent =
+        "🗑️ Delete";
+
+
+        controls.appendChild(
+            rotateButton
+        );
+
+        controls.appendChild(
+            deleteButton
+        );
+
+
         pageDiv.appendChild(title);
 
         pageDiv.appendChild(canvas);
+
+        pageDiv.appendChild(controls);
 
         pagesContainer.appendChild(
             pageDiv
         );
 
 
-        const scale = 1.5;
+        const data = {
 
-        const viewport =
-        page.getViewport({
-            scale:scale
-        });
+            page: page,
 
+            canvas: canvas,
 
-        canvas.width =
-        viewport.width;
+            rotation: 0,
 
-        canvas.height =
-        viewport.height;
+            deleted: false
+
+        };
 
 
-        const context =
-        canvas.getContext("2d");
+        pageData.push(data);
 
 
-        page.render({
+        renderCanvas(data);
 
-            canvasContext:context,
 
-            viewport:viewport
+        rotateButton.onclick =
+        function(){
 
-        });
+            data.rotation =
+            (data.rotation + 90) % 360;
+
+            renderCanvas(data);
+
+        };
+
+
+        deleteButton.onclick =
+        function(){
+
+            if(
+                confirm(
+                    "Delete this page?"
+                )
+            ){
+
+                data.deleted = true;
+
+                pageDiv.classList.add(
+                    "deleted"
+                );
+
+            }
+
+        };
+
+    });
+
+}
+
+
+function renderCanvas(data){
+
+    const rotation =
+    data.rotation;
+
+    const viewport =
+    data.page.getViewport({
+
+        scale:1.5,
+
+        rotation:rotation
+
+    });
+
+
+    data.canvas.width =
+    viewport.width;
+
+    data.canvas.height =
+    viewport.height;
+
+
+    const context =
+    data.canvas.getContext("2d");
+
+
+    context.clearRect(
+        0,
+        0,
+        data.canvas.width,
+        data.canvas.height
+    );
+
+
+    data.page.render({
+
+        canvasContext:context,
+
+        viewport:viewport
 
     });
 
