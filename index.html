@@ -8,445 +8,331 @@
 <title>PDF Editor Tools Free</title>
 
 <style>
-*{
-    box-sizing:border-box;
+* {
+    box-sizing: border-box;
 }
 
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f4f6f9;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
 }
 
-header{
-    background:#0d6efd;
-    color:white;
-    text-align:center;
-    padding:25px 15px;
+header {
+    background: #0d6efd;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
 }
 
-header h1{
-    margin:0 0 8px;
+header h1 {
+    margin: 0 0 8px;
 }
 
-.container{
-    width:95%;
-    max-width:1000px;
-    margin:25px auto;
-    background:white;
-    padding:25px;
-    border-radius:12px;
-    box-shadow:0 3px 15px rgba(0,0,0,.1);
+.container {
+    width: 95%;
+    max-width: 1000px;
+    margin: 25px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0,0,0,.1);
 }
 
-.upload-box{
-    border:2px dashed #0d6efd;
-    padding:35px 15px;
-    text-align:center;
-    border-radius:10px;
-    background:#f8fbff;
+.upload-box {
+    border: 2px dashed #0d6efd;
+    padding: 35px 15px;
+    text-align: center;
+    border-radius: 10px;
+    background: #f8fbff;
 }
 
-.upload-box input{
-    display:none;
+input[type="file"] {
+    display: none;
 }
 
-.upload-btn{
-    display:inline-block;
-    background:#0d6efd;
-    color:white;
-    padding:13px 22px;
-    border-radius:6px;
-    cursor:pointer;
-    font-size:16px;
+.upload-btn {
+    display: inline-block;
+    background: #0d6efd;
+    color: white;
+    padding: 13px 22px;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
-.file-name{
-    margin-top:15px;
-    font-weight:bold;
+.file-name {
+    margin-top: 15px;
+    font-weight: bold;
 }
 
-#preview{
-    margin-top:25px;
-    display:none;
+#preview {
+    display: none;
+    margin-top: 30px;
 }
 
-.page{
-    margin:25px auto;
-    text-align:center;
-    padding:15px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    background:#fff;
+.page {
+    margin: 25px auto;
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: white;
 }
 
-.page-title{
-    font-weight:bold;
-    margin-bottom:10px;
+.page canvas {
+    display: block;
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    margin: auto;
+    border: 1px solid #ddd;
 }
 
-.page canvas{
-    width:100%;
-    max-width:750px;
-    height:auto;
-    border:1px solid #ddd;
+.page-number {
+    font-weight: bold;
+    margin-bottom: 12px;
 }
 
-.page-controls{
-    margin-top:12px;
+.buttons {
+    margin-top: 15px;
 }
 
-.page-controls button{
-    border:0;
-    padding:9px 15px;
-    margin:4px;
-    border-radius:6px;
-    cursor:pointer;
-    color:white;
-    font-size:14px;
+.buttons button {
+    border: none;
+    color: white;
+    padding: 10px 18px;
+    margin: 5px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
 }
 
-.rotate-btn{
-    background:#0d6efd;
+.rotate {
+    background: #0d6efd;
 }
 
-.delete-btn{
-    background:#dc3545;
+.delete {
+    background: #dc3545;
 }
 
-.page.deleted{
-    display:none;
+.hidden {
+    display: none;
 }
 
-@media(max-width:600px){
+@media(max-width:600px) {
 
-    .container{
-        padding:15px;
+    .container {
+        padding: 15px;
     }
 
-    header h1{
-        font-size:24px;
+    header h1 {
+        font-size: 24px;
     }
 
-    .page{
-        padding:10px;
+    .page {
+        padding: 10px;
     }
 
-    .page canvas{
-        max-width:100%;
+    .buttons button {
+        width: 45%;
     }
 }
 </style>
-
 </head>
 
 <body>
 
 <header>
-
-<h1>PDF Editor Tools Free</h1>
-
-<p>Edit PDF Online for Free</p>
-
+    <h1>PDF Editor Tools Free</h1>
+    <p>Edit PDF Online for Free</p>
 </header>
-
 
 <div class="container">
 
-<div class="upload-box">
+    <div class="upload-box">
 
-<h2>Upload Your PDF</h2>
+        <h2>Upload Your PDF</h2>
 
-<p>Select a PDF file from your device</p>
+        <p>Select a PDF file from your device</p>
 
-<label for="pdfFile" class="upload-btn">
-Choose PDF
-</label>
+        <label for="pdfFile" class="upload-btn">
+            Choose PDF
+        </label>
 
-<input type="file"
-       id="pdfFile"
-       accept="application/pdf">
+        <input
+            type="file"
+            id="pdfFile"
+            accept="application/pdf"
+        >
 
-<div class="file-name" id="fileName"></div>
+        <div id="fileName" class="file-name"></div>
+
+    </div>
+
+    <div id="preview">
+
+        <h2>PDF Preview</h2>
+
+        <div id="pages"></div>
+
+    </div>
 
 </div>
-
-
-<div id="preview">
-
-<h2>PDF Preview</h2>
-
-<div id="pages"></div>
-
-</div>
-
-</div>
-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 <script>
 
-const pdfFile =
-document.getElementById("pdfFile");
-
-const fileName =
-document.getElementById("fileName");
-
-const preview =
-document.getElementById("preview");
-
-const pagesContainer =
-document.getElementById("pages");
-
-
 pdfjsLib.GlobalWorkerOptions.workerSrc =
 "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
+const fileInput = document.getElementById("pdfFile");
+const fileName = document.getElementById("fileName");
+const preview = document.getElementById("preview");
+const pagesContainer = document.getElementById("pages");
 
-let pageData = [];
+let pagesData = [];
 
-
-pdfFile.addEventListener("change", function(){
+fileInput.addEventListener("change", function () {
 
     const file = this.files[0];
 
-    if(!file){
+    if (!file) {
         return;
     }
 
-    if(file.type !== "application/pdf"){
-
+    if (file.type !== "application/pdf") {
         alert("Please select a PDF file.");
-
         return;
     }
 
-    fileName.textContent =
-    "Selected: " + file.name;
+    fileName.textContent = "Selected: " + file.name;
 
-    pagesContainer.innerHTML =
-    "<p>Loading PDF...</p>";
-
+    pagesContainer.innerHTML = "";
     preview.style.display = "block";
-
 
     const reader = new FileReader();
 
+    reader.onload = function () {
 
-    reader.onload = function(){
+        const data = new Uint8Array(reader.result);
 
-        const typedarray =
-        new Uint8Array(this.result);
+        pdfjsLib.getDocument(data).promise.then(function (pdf) {
 
+            pagesData = [];
 
-        pdfjsLib.getDocument(typedarray)
-        .promise
-        .then(function(pdf){
+            for (let i = 1; i <= pdf.numPages; i++) {
 
-            pagesContainer.innerHTML = "";
-
-            pageData = [];
-
-
-            for(
-                let pageNumber = 1;
-                pageNumber <= pdf.numPages;
-                pageNumber++
-            ){
-
-                renderPage(
-                    pdf,
-                    pageNumber
-                );
+                createPage(pdf, i);
 
             }
 
-        })
-        .catch(function(error){
+        }).catch(function (error) {
 
-            console.error(error);
-
-            alert(
-                "PDF could not be loaded."
-            );
+            console.log(error);
+            alert("PDF could not be loaded.");
 
         });
 
     };
-
 
     reader.readAsArrayBuffer(file);
 
 });
 
 
-function renderPage(pdf,pageNumber){
+function createPage(pdf, pageNumber) {
 
-    pdf.getPage(pageNumber)
-    .then(function(page){
+    pdf.getPage(pageNumber).then(function (page) {
 
-        const pageDiv =
-        document.createElement("div");
+        const pageBox = document.createElement("div");
+        pageBox.className = "page";
 
-        pageDiv.className =
-        "page";
+        const number = document.createElement("div");
+        number.className = "page-number";
+        number.textContent = "Page " + pageNumber;
 
+        const canvas = document.createElement("canvas");
 
-        const title =
-        document.createElement("div");
+        const buttons = document.createElement("div");
+        buttons.className = "buttons";
 
-        title.className =
-        "page-title";
+        const rotateButton = document.createElement("button");
+        rotateButton.className = "rotate";
+        rotateButton.textContent = "🔄 Rotate";
 
-        title.textContent =
-        "Page " + pageNumber;
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "delete";
+        deleteButton.textContent = "🗑️ Delete";
 
+        buttons.appendChild(rotateButton);
+        buttons.appendChild(deleteButton);
 
-        const canvas =
-        document.createElement("canvas");
+        pageBox.appendChild(number);
+        pageBox.appendChild(canvas);
+        pageBox.appendChild(buttons);
 
+        pagesContainer.appendChild(pageBox);
 
-        const controls =
-        document.createElement("div");
-
-        controls.className =
-        "page-controls";
-
-
-        const rotateButton =
-        document.createElement("button");
-
-        rotateButton.className =
-        "rotate-btn";
-
-        rotateButton.textContent =
-        "🔄 Rotate";
-
-
-        const deleteButton =
-        document.createElement("button");
-
-        deleteButton.className =
-        "delete-btn";
-
-        deleteButton.textContent =
-        "🗑️ Delete";
-
-
-        controls.appendChild(
-            rotateButton
-        );
-
-        controls.appendChild(
-            deleteButton
-        );
-
-
-        pageDiv.appendChild(title);
-
-        pageDiv.appendChild(canvas);
-
-        pageDiv.appendChild(controls);
-
-        pagesContainer.appendChild(
-            pageDiv
-        );
-
-
-        const data = {
-
+        const pageInfo = {
             page: page,
-
             canvas: canvas,
-
             rotation: 0,
-
             deleted: false
-
         };
 
+        pagesData.push(pageInfo);
 
-        pageData.push(data);
-
-
-        renderCanvas(data);
+        drawPage(pageInfo);
 
 
-        rotateButton.onclick =
-        function(){
+        rotateButton.addEventListener("click", function () {
 
-            data.rotation =
-            (data.rotation + 90) % 360;
+            pageInfo.rotation =
+                (pageInfo.rotation + 90) % 360;
 
-            renderCanvas(data);
+            drawPage(pageInfo);
 
-        };
+        });
 
 
-        deleteButton.onclick =
-        function(){
+        deleteButton.addEventListener("click", function () {
 
-            if(
-                confirm(
-                    "Delete this page?"
-                )
-            ){
+            if (confirm("Delete this page?")) {
 
-                data.deleted = true;
-
-                pageDiv.classList.add(
-                    "deleted"
-                );
+                pageInfo.deleted = true;
+                pageBox.classList.add("hidden");
 
             }
 
-        };
+        });
 
     });
 
 }
 
 
-function renderCanvas(data){
+function drawPage(pageInfo) {
 
-    const rotation =
-    data.rotation;
+    const viewport = pageInfo.page.getViewport({
 
-    const viewport =
-    data.page.getViewport({
+        scale: 1.5,
 
-        scale:1.5,
-
-        rotation:rotation
+        rotation: pageInfo.rotation
 
     });
 
-
-    data.canvas.width =
-    viewport.width;
-
-    data.canvas.height =
-    viewport.height;
-
+    pageInfo.canvas.width = viewport.width;
+    pageInfo.canvas.height = viewport.height;
 
     const context =
-    data.canvas.getContext("2d");
+        pageInfo.canvas.getContext("2d");
 
+    pageInfo.page.render({
 
-    context.clearRect(
-        0,
-        0,
-        data.canvas.width,
-        data.canvas.height
-    );
+        canvasContext: context,
 
-
-    data.page.render({
-
-        canvasContext:context,
-
-        viewport:viewport
+        viewport: viewport
 
     });
 
