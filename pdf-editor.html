@@ -1,4 +1,739 @@
-async function downloadPDF(){
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PDF Editor - PDF Editor Tools Free</title>
+<meta name="description" content="Free online PDF editor. Add text to PDF, move text and download edited PDF.">
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f7f8fc;
+  color:#202124;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+/* HEADER */
+.pe-header{
+  background:#ffffff;
+  border-bottom:1px solid #e8e8ee;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.pe-nav{
+  max-width:1180px;
+  margin:auto;
+  min-height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 20px;
+}
+
+.pe-logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:22px;
+  font-weight:800;
+  color:#e53232;
+}
+
+.pe-logo-icon{
+  width:40px;
+  height:40px;
+  background:#e53232;
+  color:white;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+}
+
+.pe-menu{
+  display:flex;
+  gap:28px;
+  align-items:center;
+}
+
+.pe-menu a{
+  font-size:15px;
+  color:#444;
+  font-weight:600;
+}
+
+.pe-menu a:hover{
+  color:#e53232;
+}
+
+/* HERO */
+.pe-hero{
+  background:linear-gradient(135deg,#fff5f5,#ffffff);
+  padding:45px 20px 40px;
+  text-align:center;
+}
+
+.pe-hero h1{
+  font-size:40px;
+  line-height:1.15;
+  font-weight:800;
+}
+
+.pe-hero h1 span{
+  color:#e53232;
+}
+
+.pe-hero p{
+  max-width:680px;
+  margin:15px auto 0;
+  color:#666;
+  font-size:17px;
+  line-height:1.6;
+}
+
+/* EDITOR */
+.pe-editor-container{
+  max-width:1180px;
+  margin:auto;
+  padding:35px 20px 60px;
+}
+
+/* TOOLBAR */
+.pe-toolbar{
+  background:#fff;
+  border:1px solid #e8e8ee;
+  border-radius:16px;
+  padding:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  box-shadow:0 5px 20px rgba(0,0,0,.04);
+  margin-bottom:25px;
+}
+
+.pe-toolbar input[type="file"]{
+  display:none;
+}
+
+.pe-btn{
+  border:none;
+  padding:12px 20px;
+  border-radius:9px;
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s;
+  background:#e53232;
+  color:#fff;
+}
+
+.pe-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 15px rgba(0,0,0,.12);
+}
+
+.pe-btn.secondary{
+  background:#fff0f0;
+  color:#e53232;
+  border:1px solid #f0b5b5;
+}
+
+.pe-btn.dark{
+  background:#202124;
+  color:#fff;
+}
+
+.pe-btn:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+  transform:none;
+  box-shadow:none;
+}
+
+#fileName{
+  width:100%;
+  text-align:center;
+  color:#777;
+  font-size:14px;
+  min-height:20px;
+}
+
+/* PDF AREA */
+.pe-pdf-area{
+  background:#e9ebf1;
+  border:1px solid #e0e1e7;
+  border-radius:16px;
+  padding:25px 15px;
+  min-height:300px;
+  overflow:auto;
+}
+
+#pdf-container{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:25px;
+}
+
+/* PAGE */
+.pdf-page{
+  position:relative;
+  background:#fff;
+  box-shadow:0 5px 25px rgba(0,0,0,.15);
+  overflow:hidden;
+  flex-shrink:0;
+}
+
+.pdf-page canvas{
+  display:block;
+}
+
+/* PAGE NUMBER */
+.page-number{
+  position:absolute;
+  top:8px;
+  right:8px;
+  background:rgba(32,33,36,.75);
+  color:#fff;
+  padding:4px 8px;
+  border-radius:5px;
+  font-size:11px;
+  z-index:20;
+}
+
+/* TEXT */
+.pdf-text{
+  position:absolute;
+  left:50px;
+  top:50px;
+  color:#000;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:20px;
+  font-weight:normal;
+  line-height:1.2;
+  white-space:nowrap;
+  cursor:move;
+  user-select:none;
+  z-index:10;
+  padding:2px 4px;
+}
+
+.pdf-text:hover{
+  outline:1px dashed #e53232;
+}
+
+/* EMPTY */
+.pe-empty{
+  text-align:center;
+  padding:70px 20px;
+  color:#777;
+}
+
+.pe-empty-icon{
+  width:65px;
+  height:65px;
+  background:#fff0f0;
+  color:#e53232;
+  border-radius:15px;
+  margin:0 auto 15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+}
+
+.pe-empty h3{
+  color:#444;
+  margin-bottom:8px;
+}
+
+.pe-empty p{
+  font-size:14px;
+}
+
+/* INFO */
+.pe-info{
+  background:white;
+  border:1px solid #e8e8ee;
+  border-radius:16px;
+  padding:25px;
+  margin-top:25px;
+  text-align:center;
+}
+
+.pe-info h2{
+  font-size:22px;
+  margin-bottom:8px;
+}
+
+.pe-info p{
+  color:#777;
+  font-size:14px;
+  line-height:1.6;
+}
+
+/* FOOTER */
+.pe-footer{
+  background:#17181a;
+  color:#aaa;
+  padding:40px 20px;
+}
+
+.pe-footer-inner{
+  max-width:1180px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  gap:30px;
+}
+
+.pe-footer h3{
+  color:white;
+  margin-bottom:12px;
+}
+
+.pe-footer p{
+  font-size:14px;
+  line-height:1.6;
+}
+
+.pe-footer-links{
+  display:flex;
+  gap:25px;
+  flex-wrap:wrap;
+}
+
+.pe-footer-links a:hover{
+  color:white;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+
+  .pe-menu{
+    gap:15px;
+  }
+
+  .pe-menu a{
+    font-size:13px;
+  }
+
+  .pe-hero h1{
+    font-size:34px;
+  }
+}
+
+@media(max-width:600px){
+
+  .pe-nav{
+    min-height:62px;
+    padding:8px 15px;
+  }
+
+  .pe-logo{
+    font-size:18px;
+  }
+
+  .pe-logo-icon{
+    width:35px;
+    height:35px;
+    font-size:15px;
+  }
+
+  .pe-menu{
+    display:none;
+  }
+
+  .pe-hero{
+    padding:40px 15px 35px;
+  }
+
+  .pe-hero h1{
+    font-size:30px;
+  }
+
+  .pe-hero p{
+    font-size:15px;
+  }
+
+  .pe-editor-container{
+    padding:25px 10px 45px;
+  }
+
+  .pe-toolbar{
+    padding:15px 12px;
+    gap:9px;
+  }
+
+  .pe-btn{
+    width:100%;
+    padding:12px 15px;
+  }
+
+  .pe-pdf-area{
+    padding:15px 5px;
+  }
+
+  .pdf-page{
+    max-width:100%;
+  }
+
+  .pe-info{
+    padding:20px 15px;
+  }
+
+  .pe-footer-inner{
+    flex-direction:column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="pe-header">
+  <div class="pe-nav">
+
+    <a href="index.html" class="pe-logo">
+      <div class="pe-logo-icon">PDF</div>
+      PDF Editor Tools
+    </a>
+
+    <nav class="pe-menu">
+      <a href="index.html#pdf-tools">PDF Tools</a>
+      <a href="index.html#convert-tools">Convert</a>
+      <a href="index.html#image-tools">Image Tools</a>
+      <a href="index.html#about">About</a>
+    </nav>
+
+  </div>
+</header>
+
+
+<!-- HERO -->
+<section class="pe-hero">
+
+  <h1>
+    Edit your <span>PDF</span> online
+  </h1>
+
+  <p>
+    Upload your PDF, add text, move it anywhere on the page
+    and download your edited PDF.
+  </p>
+
+</section>
+
+
+<!-- EDITOR -->
+<main class="pe-editor-container">
+
+  <!-- TOOLBAR -->
+  <div class="pe-toolbar">
+
+    <label for="pdfFile" class="pe-btn">
+      Choose PDF
+    </label>
+
+    <input
+      type="file"
+      id="pdfFile"
+      accept="application/pdf"
+    >
+
+    <button
+      type="button"
+      class="pe-btn secondary"
+      id="addTextBtn"
+      disabled
+    >
+      ✎ Add Text
+    </button>
+
+    <button
+      type="button"
+      class="pe-btn secondary"
+      id="clearTextBtn"
+      disabled
+    >
+      🗑 Clear Text
+    </button>
+
+    <button
+      type="button"
+      class="pe-btn dark"
+      id="downloadBtn"
+      disabled
+    >
+      ⇩ Download PDF
+    </button>
+
+    <div id="fileName">
+      No PDF selected
+    </div>
+
+  </div>
+
+
+  <!-- PDF PREVIEW -->
+  <div class="pe-pdf-area">
+
+    <div id="emptyMessage" class="pe-empty">
+
+      <div class="pe-empty-icon">
+        PDF
+      </div>
+
+      <h3>Choose a PDF file</h3>
+
+      <p>
+        Upload your PDF to start editing.
+      </p>
+
+    </div>
+
+    <div id="pdf-container"></div>
+
+  </div>
+
+
+  <!-- INFO -->
+  <div class="pe-info">
+
+    <h2>Free Online PDF Editor</h2>
+
+    <p>
+      Upload your PDF and add text directly on the page.
+      You can drag the added text to the required position
+      and download the edited PDF.
+    </p>
+
+  </div>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer class="pe-footer">
+
+  <div class="pe-footer-inner">
+
+    <div>
+      <h3>PDF Editor Tools Free</h3>
+      <p>
+        Simple online PDF and image tools for everyone.
+      </p>
+    </div>
+
+    <div class="pe-footer-links">
+      <a href="index.html#pdf-tools">PDF Tools</a>
+      <a href="index.html#convert-tools">Convert</a>
+      <a href="index.html#image-tools">Image Tools</a>
+      <a href="index.html#about">About</a>
+    </div>
+
+  </div>
+
+</footer>
+
+
+<!-- PDF.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<!-- JSPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
+<script>
+
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+
+let pdfDocument = null;
+let uploadedFile = null;
+
+
+/* PDF SELECT */
+
+document.getElementById("pdfFile").addEventListener("change", function(event){
+
+  const file = event.target.files[0];
+
+  if(!file){
+    return;
+  }
+
+  if(file.type !== "application/pdf"){
+    alert("Please select a PDF file.");
+    return;
+  }
+
+  uploadedFile = file;
+
+  document.getElementById("fileName").innerText =
+    "Selected: " + file.name;
+
+  const reader = new FileReader();
+
+  reader.onload = function(){
+
+    const data = new Uint8Array(reader.result);
+
+    pdfjsLib.getDocument({
+      data:data
+    }).promise.then(function(pdf){
+
+      pdfDocument = pdf;
+
+      document.getElementById("emptyMessage").style.display =
+        "none";
+
+      document.getElementById("addTextBtn").disabled =
+        false;
+
+      document.getElementById("clearTextBtn").disabled =
+        false;
+
+      document.getElementById("downloadBtn").disabled =
+        false;
+
+      renderPDF();
+
+    }).catch(function(error){
+
+      console.error(error);
+
+      alert("PDF load nahi ho pa raha hai.");
+
+    });
+
+  };
+
+  reader.readAsArrayBuffer(file);
+
+});
+
+
+/* RENDER ALL PAGES */
+
+async function renderPDF(){
+
+  const container =
+    document.getElementById("pdf-container");
+
+  container.innerHTML = "";
+
+  for(
+    let pageNumber = 1;
+    pageNumber <= pdfDocument.numPages;
+    pageNumber++
+  ){
+
+    await renderPage(pageNumber);
+
+  }
+
+}
+
+
+/* RENDER ONE PAGE */
+
+function renderPage(pageNumber){
+
+  return pdfDocument.getPage(pageNumber).then(function(page){
+
+    const scale = 1.5;
+
+    const viewport =
+      page.getViewport({
+        scale:scale
+      });
+
+    const pageDiv =
+      document.createElement("div");
+
+    pageDiv.className = "pdf-page";
+
+    pageDiv.dataset.page =
+      pageNumber;
+
+    pageDiv.style.width =
+      viewport.width + "px";
+
+    pageDiv.style.height =
+      viewport.height + "px";
+
+
+    const canvas =
+      document.createElement("canvas");
+
+    const context =
+      canvas.getContext("2d");
+
+
+    canvas.width =
+      viewport.width;
+
+    canvas.height =
+      viewport.height;
+
+
+    pageDiv.appendChild(canvas);
+
+
+    const pageNumberLabel =
+      document.createElement("div");
+
+    pageNumberLabel.className =
+      "page-number";
+
+    pageNumberLabel.innerText =
+      "Page " + pageNumber;
+
+    pageDiv.appendChild(pageNumberLabel);
+
+
+    document
+      .getElementById("pdf-container")
+      .appendChild(pageDiv);
+
+
+    return page.render({
+
+      canvasContext:context,
+
+      viewport:viewport
+
+    }).promise;
+
+  });
+
+}
+
+
+/* ADD TEXT */
+
+document.getElementById("addTextBtn")
+.addEventListener("click", function(){
 
   if(!pdfDocument){
 
@@ -8,9 +743,25 @@ async function downloadPDF(){
 
   }
 
-  const { jsPDF } = window.jspdf;
 
-  const firstPage = document.querySelector(".page");
+  const text =
+    prompt("Jo text add karna hai woh likhiye:");
+
+  if(!text){
+
+    return;
+
+  }
+
+
+  /*
+  Text first page par add hoga.
+  Baad mein hum page selection feature bhi add kar sakte hain.
+  */
+
+  const firstPage =
+    document.querySelector(".pdf-page");
+
 
   if(!firstPage){
 
@@ -18,109 +769,384 @@ async function downloadPDF(){
 
   }
 
-  const canvas = firstPage.querySelector("canvas");
-  const originalCanvas = firstPage.querySelector("canvas");
-  if(!originalCanvas){
-    return;
-  }
 
-  const imgData = canvas.toDataURL("image/jpeg",0.95);
-  // Export canvas - same size as PDF preview
-  const exportCanvas = document.createElement("canvas");
-  exportCanvas.width = originalCanvas.width;
-  exportCanvas.height = originalCanvas.height;
+  const item =
+    document.createElement("div");
 
-  const pdf = new jsPDF({
-    orientation:"p",
-    unit:"px",
-    format:[canvas.width,canvas.height]
-  });
-  const ctx = exportCanvas.getContext("2d");
+  item.className =
+    "pdf-text";
 
-  pdf.addImage(
-    imgData,
-    "JPEG",
-  // Original PDF page
-  ctx.drawImage(
-    originalCanvas,
-    0,
-    0,
-    canvas.width,
-    canvas.height
-    exportCanvas.width,
-    exportCanvas.height
+  item.innerText =
+    text;
+
+
+  firstPage.appendChild(item);
+
+
+  makeDraggable(item);
+
+});
+
+
+/* DRAG TEXT */
+
+function makeDraggable(element){
+
+  let dragging = false;
+
+  let offsetX = 0;
+
+  let offsetY = 0;
+
+
+  element.addEventListener(
+    "mousedown",
+    function(event){
+
+      dragging = true;
+
+      const rect =
+        element.getBoundingClientRect();
+
+      offsetX =
+        event.clientX - rect.left;
+
+      offsetY =
+        event.clientY - rect.top;
+
+      event.preventDefault();
+
+    }
   );
 
-  const pageRect = firstPage.getBoundingClientRect();
 
-  // Add all text exactly where it appears in preview
-  document.querySelectorAll(".text-item").forEach(function(item){
+  document.addEventListener(
+    "mousemove",
+    function(event){
 
-    const x = parseFloat(item.style.left) || 0;
-    const y = parseFloat(item.style.top) || 0;
-    const itemRect = item.getBoundingClientRect();
-    const computed = window.getComputedStyle(item);
+      if(!dragging){
 
-    const scaleX = exportCanvas.width / pageRect.width;
-    const scaleY = exportCanvas.height / pageRect.height;
+        return;
 
-    const x = (itemRect.left - pageRect.left) * scaleX;
-    const y = (itemRect.top - pageRect.top) * scaleY;
+      }
 
-    pdf.setFontSize(16);
-    const fontSize =
-      parseFloat(computed.fontSize) * scaleY;
 
-    pdf.text(
-    ctx.font =
-      computed.fontWeight + " " +
-      fontSize + "px " +
-      computed.fontFamily;
+      const parent =
+        element.parentElement;
 
-    ctx.fillStyle = computed.color;
+      const parentRect =
+        parent.getBoundingClientRect();
 
-    ctx.textBaseline = "top";
 
-    ctx.fillText(
-      item.innerText,
-      x + 5,
-      y + 20
-      x,
-      y
-    );
+      let x =
+        event.clientX -
+        parentRect.left -
+        offsetX;
 
-  });
 
-  pdf.save("edited-pdf.pdf");
-  // Create PDF
-  const { jsPDF } = window.jspdf;
+      let y =
+        event.clientY -
+        parentRect.top -
+        offsetY;
+
+
+      x =
+        Math.max(
+          0,
+          Math.min(
+            x,
+            parent.clientWidth -
+            element.offsetWidth
+          )
+        );
+
+
+      y =
+        Math.max(
+          0,
+          Math.min(
+            y,
+            parent.clientHeight -
+            element.offsetHeight
+          )
+        );
+
+
+      element.style.left =
+        x + "px";
+
+      element.style.top =
+        y + "px";
+
+    }
+  );
+
+
+  document.addEventListener(
+    "mouseup",
+    function(){
+
+      dragging = false;
+
+    }
+  );
 
 }
-  const pdf = new jsPDF({
-    orientation: exportCanvas.width > exportCanvas.height ? "l" : "p",
-    unit: "px",
-    format: [
+
+
+/* CLEAR TEXT */
+
+document.getElementById("clearTextBtn")
+.addEventListener("click", function(){
+
+  document
+    .querySelectorAll(".pdf-text")
+    .forEach(function(item){
+
+      item.remove();
+
+    });
+
+});
+
+
+/* DOWNLOAD */
+
+document.getElementById("downloadBtn")
+.addEventListener("click", async function(){
+
+  if(!pdfDocument){
+
+    alert("Pehle PDF upload karein.");
+
+    return;
+
+  }
+
+
+  const { jsPDF } =
+    window.jspdf;
+
+
+  let outputPDF = null;
+
+
+  const pages =
+    document.querySelectorAll(".pdf-page");
+
+
+  if(pages.length === 0){
+
+    return;
+
+  }
+
+
+  for(
+    let pageIndex = 0;
+    pageIndex < pages.length;
+    pageIndex++
+  ){
+
+    const pageDiv =
+      pages[pageIndex];
+
+
+    const canvas =
+      pageDiv.querySelector("canvas");
+
+
+    if(!canvas){
+
+      continue;
+
+    }
+
+
+    const exportCanvas =
+      document.createElement("canvas");
+
+
+    exportCanvas.width =
+      canvas.width;
+
+    exportCanvas.height =
+      canvas.height;
+
+
+    const ctx =
+      exportCanvas.getContext("2d");
+
+
+    /*
+    White background
+    */
+
+    ctx.fillStyle =
+      "#ffffff";
+
+    ctx.fillRect(
+      0,
+      0,
       exportCanvas.width,
       exportCanvas.height
-    ]
-  });
+    );
+
+
+    /*
+    PDF page
+    */
+
+    ctx.drawImage(
+      canvas,
+      0,
+      0,
+      exportCanvas.width,
+      exportCanvas.height
+    );
+
+
+    /*
+    Added text
+    */
+
+    const pageRect =
+      pageDiv.getBoundingClientRect();
+
+
+    const textItems =
+      pageDiv.querySelectorAll(".pdf-text");
+
+
+    textItems.forEach(function(item){
+
+      const itemRect =
+        item.getBoundingClientRect();
+
+
+      const computed =
+        window.getComputedStyle(item);
+
+
+      const scaleX =
+        exportCanvas.width /
+        pageRect.width;
+
+
+      const scaleY =
+        exportCanvas.height /
+        pageRect.height;
+
+
+      const x =
+        (itemRect.left -
+        pageRect.left) *
+        scaleX;
+
+
+      const y =
+        (itemRect.top -
+        pageRect.top) *
+        scaleY;
+
+
+      const fontSize =
+        parseFloat(
+          computed.fontSize
+        ) * scaleY;
+
+
+      ctx.font =
+        computed.fontWeight +
+        " " +
+        fontSize +
+        "px " +
+        computed.fontFamily;
+
+
+      ctx.fillStyle =
+        computed.color;
+
+
+      ctx.textBaseline =
+        "top";
+
+
+      ctx.fillText(
+        item.innerText,
+        x,
+        y
+      );
+
+    });
+
+
+    const imgData =
+      exportCanvas.toDataURL(
+        "image/jpeg",
+        0.95
+      );
+
+
+    const orientation =
+      exportCanvas.width >
+      exportCanvas.height
+      ? "l"
+      : "p";
+
+
+    if(pageIndex === 0){
+
+      outputPDF =
+        new jsPDF({
+
+          orientation:orientation,
+
+          unit:"px",
+
+          format:[
+            exportCanvas.width,
+            exportCanvas.height
+          ]
+
+        });
+
+    }else{
+
+      outputPDF.addPage(
+        [
+          exportCanvas.width,
+          exportCanvas.height
+        ],
+        orientation
+      );
+
+    }
+
+
+    outputPDF.addImage(
+      imgData,
+      "JPEG",
+      0,
+      0,
+      exportCanvas.width,
+      exportCanvas.height
+    );
+
+  }
+
+
+  if(outputPDF){
+
+    outputPDF.save(
+      "edited-pdf.pdf"
+    );
+
+  }
+
+});
 
 </script>
-  const imgData = exportCanvas.toDataURL(
-    "image/jpeg",
-    0.95
-  );
 
 </body>
 </html>
-  pdf.addImage(
-    imgData,
-    "JPEG",
-    0,
-    0,
-    exportCanvas.width,
-    exportCanvas.height
-  );
-
-  pdf.save("edited-pdf.pdf");
-}
