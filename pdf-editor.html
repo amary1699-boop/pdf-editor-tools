@@ -10,7 +10,7 @@
 <title>PDF Editor - PDF Editor Tools Free</title>
 
 <meta name="description"
-      content="Free online PDF editor. Add text to PDF, move text and download your edited PDF.">
+      content="Free online PDF editor. Add, edit, style and move text in PDF.">
 
 <style>
 
@@ -167,6 +167,12 @@ body{
   color:#fff;
 }
 
+.pe-btn.gray{
+  background:#f1f3f5;
+  color:#333;
+  border:1px solid #ddd;
+}
+
 .pe-btn:disabled{
   opacity:.45;
   cursor:not-allowed;
@@ -188,6 +194,88 @@ body{
   font-size:13px;
   color:#666;
   min-height:18px;
+}
+
+/* TEXT TOOLBAR */
+
+.text-tools{
+  width:100%;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+  padding:12px;
+  margin-top:4px;
+  background:#fafafa;
+  border:1px solid #e5e7eb;
+  border-radius:10px;
+}
+
+.text-tools.show{
+  display:flex;
+}
+
+.text-tools select,
+.text-tools input[type="number"]{
+  height:38px;
+  border:1px solid #d8dbe0;
+  border-radius:7px;
+  padding:0 9px;
+  background:#fff;
+  font-size:13px;
+  outline:none;
+}
+
+.text-tools select{
+  min-width:145px;
+}
+
+.text-tools input[type="number"]{
+  width:80px;
+}
+
+.color-wrap{
+  height:38px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:0 8px;
+  background:#fff;
+  border:1px solid #d8dbe0;
+  border-radius:7px;
+  font-size:12px;
+  color:#555;
+}
+
+.color-wrap input{
+  width:30px;
+  height:28px;
+  border:none;
+  padding:0;
+  cursor:pointer;
+  background:none;
+}
+
+.style-btn{
+  height:38px;
+  min-width:40px;
+  border:1px solid #d8dbe0;
+  border-radius:7px;
+  background:#fff;
+  cursor:pointer;
+  font-size:15px;
+  font-weight:700;
+}
+
+.style-btn.active{
+  background:#e53232;
+  color:#fff;
+  border-color:#e53232;
+}
+
+.style-btn.delete{
+  color:#d92828;
 }
 
 /* PDF AREA */
@@ -251,7 +339,6 @@ body{
   box-shadow:0 6px 25px rgba(0,0,0,.18);
   overflow:hidden;
   flex-shrink:0;
-
   width:850px;
   max-width:100%;
 }
@@ -284,6 +371,7 @@ body{
   font-family:Arial,Helvetica,sans-serif;
   font-size:20px;
   font-weight:400;
+  font-style:normal;
   line-height:1.2;
   white-space:nowrap;
   cursor:move;
@@ -292,6 +380,7 @@ body{
   z-index:20;
   padding:2px 4px;
   border:1px solid transparent;
+  min-height:25px;
 }
 
 .pdf-text.selected{
@@ -448,6 +537,22 @@ body{
     width:100%;
   }
 
+  .text-tools{
+    padding:10px;
+  }
+
+  .text-tools select{
+    width:100%;
+  }
+
+  .text-tools input[type="number"]{
+    width:90px;
+  }
+
+  .style-btn{
+    flex:1;
+  }
+
   .pe-pdf-area{
     padding:12px 4px;
   }
@@ -526,7 +631,7 @@ body{
   </h1>
 
   <p>
-    Add text to your PDF, move it anywhere on the page
+    Add text to your PDF, style it, move it anywhere
     and download your edited PDF with high quality.
   </p>
 
@@ -583,6 +688,97 @@ body{
 
     </button>
 
+    <!-- TEXT CONTROLS -->
+
+    <div
+      class="text-tools"
+      id="textTools">
+
+      <select id="fontFamily">
+
+        <option value="Arial">
+          Arial
+        </option>
+
+        <option value="Helvetica">
+          Helvetica
+        </option>
+
+        <option value="Times New Roman">
+          Times New Roman
+        </option>
+
+        <option value="Courier New">
+          Courier New
+        </option>
+
+        <option value="Georgia">
+          Georgia
+        </option>
+
+      </select>
+
+      <input
+        type="number"
+        id="fontSize"
+        min="8"
+        max="100"
+        value="20"
+        title="Font Size">
+
+      <button
+        type="button"
+        class="style-btn"
+        id="boldBtn"
+        title="Bold">
+
+        B
+
+      </button>
+
+      <button
+        type="button"
+        class="style-btn"
+        id="italicBtn"
+        title="Italic">
+
+        I
+
+      </button>
+
+      <div class="color-wrap">
+
+        <span>Color</span>
+
+        <input
+          type="color"
+          id="textColor"
+          value="#000000">
+
+      </div>
+
+      <button
+        type="button"
+        class="style-btn"
+        id="editTextBtn"
+        title="Edit Text">
+
+        ✎
+
+      </button>
+
+      <button
+        type="button"
+        class="style-btn delete"
+        id="deleteTextBtn"
+        title="Delete Selected Text">
+
+        🗑
+
+      </button>
+
+    </div>
+
     <div id="fileName">
       No PDF selected
     </div>
@@ -626,9 +822,9 @@ body{
     </h2>
 
     <p>
-      Upload your PDF, add text, move the text to the
-      required position and download your edited PDF.
-      Your original PDF quality is preserved.
+      Upload your PDF, add text, change font,
+      size, color, style and position. Your original
+      PDF quality is preserved.
     </p>
 
   </div>
@@ -716,6 +912,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
 let pdfDocument = null;
 let uploadedFile = null;
 let textItems = [];
+let selectedText = null;
 
 
 /* ELEMENTS */
@@ -750,6 +947,30 @@ document.getElementById("loading");
 const loadingText =
 document.getElementById("loadingText");
 
+const textTools =
+document.getElementById("textTools");
+
+const fontFamily =
+document.getElementById("fontFamily");
+
+const fontSize =
+document.getElementById("fontSize");
+
+const boldBtn =
+document.getElementById("boldBtn");
+
+const italicBtn =
+document.getElementById("italicBtn");
+
+const textColor =
+document.getElementById("textColor");
+
+const editTextBtn =
+document.getElementById("editTextBtn");
+
+const deleteTextBtn =
+document.getElementById("deleteTextBtn");
+
 
 /* LOADING */
 
@@ -759,7 +980,6 @@ function showLoading(message){
   loading.style.display = "flex";
 
 }
-
 
 function hideLoading(){
 
@@ -782,7 +1002,9 @@ function setStatus(message){
 function formatFileSize(bytes){
 
   if(bytes < 1024){
+
     return bytes + " B";
+
   }
 
   if(bytes < 1024 * 1024){
@@ -830,6 +1052,10 @@ function(event){
   uploadedFile = file;
 
   textItems = [];
+
+  selectedText = null;
+
+  textTools.classList.remove("show");
 
   fileName.innerText =
     "Selected: " +
@@ -949,16 +1175,7 @@ function renderPage(pageNumber){
   .getPage(pageNumber)
   .then(function(page){
 
-    /*
-      Display scale.
-      This controls visible PDF size.
-    */
-
     const baseScale = 1.5;
-
-    /*
-      High resolution rendering.
-    */
 
     const viewport =
     page.getViewport({
@@ -979,11 +1196,6 @@ function renderPage(pageNumber){
 
     pageDiv.dataset.page =
       pageNumber;
-
-    /*
-      Keep PDF preview at maximum
-      850px on desktop.
-    */
 
     const maxWidth = 850;
 
@@ -1018,10 +1230,6 @@ function renderPage(pageNumber){
       }
     );
 
-    /*
-      Internal high-resolution canvas
-    */
-
     canvas.width =
       Math.floor(
         viewport.width *
@@ -1034,10 +1242,6 @@ function renderPage(pageNumber){
         outputScale
       );
 
-    /*
-      Visible canvas size
-    */
-
     canvas.style.width =
       "100%";
 
@@ -1047,10 +1251,6 @@ function renderPage(pageNumber){
     pageDiv.appendChild(
       canvas
     );
-
-    /*
-      PAGE NUMBER
-    */
 
     const pageNumberLabel =
     document.createElement("div");
@@ -1068,10 +1268,6 @@ function renderPage(pageNumber){
     pdfContainer.appendChild(
       pageDiv
     );
-
-    /*
-      Render high quality
-    */
 
     return page.render({
 
@@ -1131,24 +1327,11 @@ function(){
     return;
   }
 
-  const item =
-  document.createElement("div");
+  const pageWidth =
+  firstPage.clientWidth;
 
-  item.className =
-    "pdf-text selected";
-
-  item.innerText =
-    text;
-
-  item.style.left =
-    "50px";
-
-  item.style.top =
-    "50px";
-
-  firstPage.appendChild(
-    item
-  );
+  const pageHeight =
+  firstPage.clientHeight;
 
   const textData = {
 
@@ -1162,31 +1345,515 @@ function(){
     text:
       text,
 
-    x:
-      50,
+    xRatio:
+      Math.min(
+        50 / pageWidth,
+        0.8
+      ),
 
-    y:
-      50,
+    yRatio:
+      Math.min(
+        50 / pageHeight,
+        0.8
+      ),
 
     fontSize:
-      20
+      20,
+
+    fontFamily:
+      "Arial",
+
+    bold:
+      false,
+
+    italic:
+      false,
+
+    color:
+      "#000000"
 
   };
-
-  item.dataset.textId =
-    textData.id;
 
   textItems.push(
     textData
   );
 
-  makeDraggable(
-    item,
+  createTextElement(
     textData
   );
 
+  selectText(
+    textData.id
+  );
+
   setStatus(
-    "Text added. Drag it to the required position."
+    "Text added. You can move and style it."
+  );
+
+});
+
+
+/* CREATE TEXT ELEMENT */
+
+function createTextElement(data){
+
+  const page =
+  document.querySelector(
+    '.pdf-page[data-page="' +
+    data.page +
+    '"]'
+  );
+
+  if(!page){
+    return;
+  }
+
+  const item =
+  document.createElement("div");
+
+  item.className =
+    "pdf-text";
+
+  item.innerText =
+    data.text;
+
+  item.dataset.textId =
+    data.id;
+
+  applyTextStyle(
+    item,
+    data
+  );
+
+  page.appendChild(
+    item
+  );
+
+  positionText(
+    item,
+    data
+  );
+
+  makeDraggable(
+    item,
+    data
+  );
+
+  item.addEventListener(
+    "click",
+    function(event){
+
+      event.stopPropagation();
+
+      selectText(
+        data.id
+      );
+
+    }
+  );
+
+  item.addEventListener(
+    "dblclick",
+    function(event){
+
+      event.stopPropagation();
+
+      editText(
+        data
+      );
+
+    }
+  );
+
+}
+
+
+/* APPLY TEXT STYLE */
+
+function applyTextStyle(
+  element,
+  data
+){
+
+  element.style.fontSize =
+    data.fontSize + "px";
+
+  element.style.fontFamily =
+    data.fontFamily;
+
+  element.style.fontWeight =
+    data.bold
+      ? "700"
+      : "400";
+
+  element.style.fontStyle =
+    data.italic
+      ? "italic"
+      : "normal";
+
+  element.style.color =
+    data.color;
+
+}
+
+
+/* POSITION TEXT */
+
+function positionText(
+  element,
+  data
+){
+
+  const page =
+  element.parentElement;
+
+  if(!page){
+    return;
+  }
+
+  element.style.left =
+    (
+      data.xRatio *
+      page.clientWidth
+    ) + "px";
+
+  element.style.top =
+    (
+      data.yRatio *
+      page.clientHeight
+    ) + "px";
+
+}
+
+
+/* SELECT TEXT */
+
+function selectText(id){
+
+  document
+  .querySelectorAll(
+    ".pdf-text"
+  )
+  .forEach(
+    function(element){
+
+      element.classList.remove(
+        "selected"
+      );
+
+    }
+  );
+
+  const data =
+  textItems.find(
+    function(item){
+
+      return item.id === id;
+
+    }
+  );
+
+  if(!data){
+    return;
+  }
+
+  const element =
+  document.querySelector(
+    '[data-text-id="' +
+    id +
+    '"]'
+  );
+
+  if(!element){
+    return;
+  }
+
+  element.classList.add(
+    "selected"
+  );
+
+  selectedText =
+    data;
+
+  textTools.classList.add(
+    "show"
+  );
+
+  fontFamily.value =
+    data.fontFamily;
+
+  fontSize.value =
+    data.fontSize;
+
+  textColor.value =
+    data.color;
+
+  boldBtn.classList.toggle(
+    "active",
+    data.bold
+  );
+
+  italicBtn.classList.toggle(
+    "active",
+    data.italic
+  );
+
+}
+
+
+/* TEXT STYLE UPDATE */
+
+function updateSelectedStyle(){
+
+  if(!selectedText){
+    return;
+  }
+
+  const element =
+  document.querySelector(
+    '[data-text-id="' +
+    selectedText.id +
+    '"]'
+  );
+
+  if(!element){
+    return;
+  }
+
+  applyTextStyle(
+    element,
+    selectedText
+  );
+
+}
+
+
+/* FONT FAMILY */
+
+fontFamily.addEventListener(
+"change",
+function(){
+
+  if(!selectedText){
+    return;
+  }
+
+  selectedText.fontFamily =
+    fontFamily.value;
+
+  updateSelectedStyle();
+
+});
+
+
+/* FONT SIZE */
+
+fontSize.addEventListener(
+"input",
+function(){
+
+  if(!selectedText){
+    return;
+  }
+
+  let value =
+    parseInt(
+      fontSize.value
+    );
+
+  if(isNaN(value)){
+    return;
+  }
+
+  value =
+    Math.max(
+      8,
+      Math.min(
+        100,
+        value
+      )
+    );
+
+  selectedText.fontSize =
+    value;
+
+  updateSelectedStyle();
+
+});
+
+
+/* BOLD */
+
+boldBtn.addEventListener(
+"click",
+function(){
+
+  if(!selectedText){
+    return;
+  }
+
+  selectedText.bold =
+    !selectedText.bold;
+
+  boldBtn.classList.toggle(
+    "active",
+    selectedText.bold
+  );
+
+  updateSelectedStyle();
+
+});
+
+
+/* ITALIC */
+
+italicBtn.addEventListener(
+"click",
+function(){
+
+  if(!selectedText){
+    return;
+  }
+
+  selectedText.italic =
+    !selectedText.italic;
+
+  italicBtn.classList.toggle(
+    "active",
+    selectedText.italic
+  );
+
+  updateSelectedStyle();
+
+});
+
+
+/* COLOR */
+
+textColor.addEventListener(
+"input",
+function(){
+
+  if(!selectedText){
+    return;
+  }
+
+  selectedText.color =
+    textColor.value;
+
+  updateSelectedStyle();
+
+});
+
+
+/* EDIT TEXT */
+
+editTextBtn.addEventListener(
+"click",
+function(){
+
+  if(!selectedText){
+
+    alert(
+      "Pehle text select karein."
+    );
+
+    return;
+
+  }
+
+  editText(
+    selectedText
+  );
+
+});
+
+
+function editText(data){
+
+  const newText =
+  prompt(
+    "Text edit karein:",
+    data.text
+  );
+
+  if(
+    newText === null ||
+    newText === ""
+  ){
+
+    return;
+
+  }
+
+  data.text =
+    newText;
+
+  const element =
+  document.querySelector(
+    '[data-text-id="' +
+    data.id +
+    '"]'
+  );
+
+  if(element){
+
+    element.innerText =
+      newText;
+
+  }
+
+}
+
+
+/* DELETE SELECTED TEXT */
+
+deleteTextBtn.addEventListener(
+"click",
+function(){
+
+  if(!selectedText){
+
+    alert(
+      "Pehle text select karein."
+    );
+
+    return;
+
+  }
+
+  const id =
+    selectedText.id;
+
+  const element =
+  document.querySelector(
+    '[data-text-id="' +
+    id +
+    '"]'
+  );
+
+  if(element){
+    element.remove();
+  }
+
+  textItems =
+    textItems.filter(
+      function(item){
+
+        return item.id !== id;
+
+      }
+    );
+
+  selectedText =
+    null;
+
+  textTools.classList.remove(
+    "show"
+  );
+
+  setStatus(
+    "Selected text deleted."
   );
 
 });
@@ -1212,8 +1879,8 @@ function makeDraggable(
 
     dragging = true;
 
-    element.classList.add(
-      "selected"
+    selectText(
+      textData.id
     );
 
     const parent =
@@ -1315,11 +1982,13 @@ function makeDraggable(
     element.style.top =
       newY + "px";
 
-    textData.x =
-      newX;
+    textData.xRatio =
+      newX /
+      parent.clientWidth;
 
-    textData.y =
-      newY;
+    textData.yRatio =
+      newY /
+      parent.clientHeight;
 
   }
 
@@ -1331,16 +2000,6 @@ function makeDraggable(
     }
 
     dragging = false;
-
-    textData.x =
-      parseFloat(
-        element.style.left
-      ) || 0;
-
-    textData.y =
-      parseFloat(
-        element.style.top
-      ) || 0;
 
   }
 
@@ -1375,44 +2034,7 @@ function restoreTextItems(){
   textItems.forEach(
     function(data){
 
-      const page =
-      document.querySelector(
-        '.pdf-page[data-page="' +
-        data.page +
-        '"]'
-      );
-
-      if(!page){
-        return;
-      }
-
-      const item =
-      document.createElement("div");
-
-      item.className =
-        "pdf-text";
-
-      item.innerText =
-        data.text;
-
-      item.style.left =
-        data.x + "px";
-
-      item.style.top =
-        data.y + "px";
-
-      item.style.fontSize =
-        data.fontSize + "px";
-
-      item.dataset.textId =
-        data.id;
-
-      page.appendChild(
-        item
-      );
-
-      makeDraggable(
-        item,
+      createTextElement(
         data
       );
 
@@ -1434,17 +2056,141 @@ function(){
   )
   .forEach(
     function(item){
+
       item.remove();
+
     }
   );
 
   textItems = [];
+
+  selectedText = null;
+
+  textTools.classList.remove(
+    "show"
+  );
 
   setStatus(
     "Added text cleared."
   );
 
 });
+
+
+/* HEX COLOR TO PDF RGB */
+
+function hexToRgb(hex){
+
+  hex =
+    hex.replace(
+      "#",
+      ""
+    );
+
+  const r =
+    parseInt(
+      hex.substring(0,2),
+      16
+    );
+
+  const g =
+    parseInt(
+      hex.substring(2,4),
+      16
+    );
+
+  const b =
+    parseInt(
+      hex.substring(4,6),
+      16
+    );
+
+  return {
+    r:r / 255,
+    g:g / 255,
+    b:b / 255
+  };
+
+}
+
+
+/* PDF FONT */
+
+function getPdfFontName(
+  family,
+  bold,
+  italic
+){
+
+  if(
+    family ===
+    "Times New Roman"
+  ){
+
+    if(bold && italic)
+      return PDFLib.StandardFonts.TimesRomanBoldItalic;
+
+    if(bold)
+      return PDFLib.StandardFonts.TimesRomanBold;
+
+    if(italic)
+      return PDFLib.StandardFonts.TimesRomanItalic;
+
+    return PDFLib.StandardFonts.TimesRoman;
+
+  }
+
+
+  if(
+    family ===
+    "Courier New"
+  ){
+
+    if(bold && italic)
+      return PDFLib.StandardFonts.CourierBoldOblique;
+
+    if(bold)
+      return PDFLib.StandardFonts.CourierBold;
+
+    if(italic)
+      return PDFLib.StandardFonts.CourierOblique;
+
+    return PDFLib.StandardFonts.Courier;
+
+  }
+
+
+  if(
+    family ===
+    "Georgia"
+  ){
+
+    if(bold && italic)
+      return PDFLib.StandardFonts.TimesRomanBoldItalic;
+
+    if(bold)
+      return PDFLib.StandardFonts.TimesRomanBold;
+
+    if(italic)
+      return PDFLib.StandardFonts.TimesRomanItalic;
+
+    return PDFLib.StandardFonts.TimesRoman;
+
+  }
+
+
+  if(bold && italic)
+    return PDFLib.StandardFonts.HelveticaBoldOblique;
+
+  if(bold)
+    return PDFLib.StandardFonts.HelveticaBold;
+
+  if(italic)
+    return PDFLib.StandardFonts.HelveticaOblique;
+
+  return PDFLib.StandardFonts.Helvetica;
+
+}
 
 
 /* DOWNLOAD PDF */
@@ -1483,6 +2229,14 @@ async function(){
       originalBytes
     );
 
+    /*
+      Cache fonts so the same font
+      is not embedded repeatedly.
+    */
+
+    const fontCache = {};
+
+
     for(
       const item of textItems
     ){
@@ -1511,11 +2265,6 @@ async function(){
         continue;
       }
 
-      /*
-        IMPORTANT:
-        Use actual displayed page size.
-      */
-
       const previewRect =
       previewPage.getBoundingClientRect();
 
@@ -1525,6 +2274,10 @@ async function(){
       const pageHeight =
       page.getHeight();
 
+      /*
+        Use actual preview dimensions.
+      */
+
       const ratioX =
       pageWidth /
       previewRect.width;
@@ -1533,42 +2286,101 @@ async function(){
       pageHeight /
       previewRect.height;
 
+      /*
+        Position using normalized
+        coordinates.
+      */
+
       const x =
-      item.x *
-      ratioX;
+      item.xRatio *
+      pageWidth;
 
       const fontSize =
       item.fontSize *
       ratioY;
 
+      /*
+        PDF coordinates start
+        from bottom.
+      */
+
+      const fontName =
+      getPdfFontName(
+        item.fontFamily,
+        item.bold,
+        item.italic
+      );
+
+      const cacheKey =
+        fontName;
+
+      if(!fontCache[cacheKey]){
+
+        fontCache[cacheKey] =
+          await pdfDoc.embedFont(
+            fontName
+          );
+
+      }
+
+      const font =
+      fontCache[cacheKey];
+
+      const rgbColor =
+      hexToRgb(
+        item.color
+      );
+
+      /*
+        Small padding correction.
+      */
+
+      const finalX =
+      x +
+      (4 * ratioX);
+
+      const textHeight =
+      font.heightAtSize(
+        fontSize
+      );
+
       const y =
       pageHeight -
       (
-        item.y *
-        ratioY
+        item.yRatio *
+        pageHeight
       ) -
-      fontSize;
+      textHeight -
+      (2 * ratioY);
 
       page.drawText(
         item.text,
         {
 
-          x:x,
+          x:
+            finalX,
 
-          y:y,
+          y:
+            y,
 
-          size:fontSize,
+          size:
+            fontSize,
 
-          color:rgb(
-            0,
-            0,
-            0
-          )
+          font:
+            font,
+
+          color:
+            rgb(
+              rgbColor.r,
+              rgbColor.g,
+              rgbColor.b
+            )
 
         }
       );
 
     }
+
 
     /*
       Save original PDF.
@@ -1645,6 +2457,87 @@ async function(){
     hideLoading();
 
   }
+
+});
+
+
+/* PAGE CLICK */
+
+pdfContainer.addEventListener(
+"click",
+function(event){
+
+  if(
+    event.target.classList.contains(
+      "pdf-page"
+    ) ||
+    event.target.tagName === "CANVAS"
+  ){
+
+    document
+    .querySelectorAll(
+      ".pdf-text"
+    )
+    .forEach(
+      function(element){
+
+        element.classList.remove(
+          "selected"
+        );
+
+      }
+    );
+
+    selectedText =
+      null;
+
+    textTools.classList.remove(
+      "show"
+    );
+
+  }
+
+});
+
+
+/* RESPONSIVE POSITION */
+
+window.addEventListener(
+"resize",
+function(){
+
+  document
+  .querySelectorAll(
+    ".pdf-text"
+  )
+  .forEach(
+    function(element){
+
+      const id =
+      Number(
+        element.dataset.textId
+      );
+
+      const data =
+      textItems.find(
+        function(item){
+
+          return item.id == id;
+
+        }
+      );
+
+      if(data){
+
+        positionText(
+          element,
+          data
+        );
+
+      }
+
+    }
+  );
 
 });
 
