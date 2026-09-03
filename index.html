@@ -103,14 +103,22 @@ input[type="file"]{
 }
 
 .text-layer{
-    position:absolute;
+   position:absolute;
     left:0;
     top:0;
-    width:100%;
-    height:100%;
-    pointer-events:none;
+    right:0;
+    bottom:0;
+    overflow:hidden;
+    line-height:1.0;
+    pointer-events:auto;
+    user-select:text;
 }
-
+.text-layer span{
+    position:absolute;
+    white-space:pre;
+    transform-origin:0% 0%;
+    cursor:text;
+}
 .text-item{
     position:absolute;
     padding:3px 6px;
@@ -337,7 +345,8 @@ class="download-button">
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf_viewer.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf_viewer.min.js"></script>
 <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 
 
@@ -534,7 +543,19 @@ async function createPage(
 
     const canvas =
     document.createElement("canvas");
+const textLayer =
+document.createElement("div");
 
+textLayer.className =
+"text-layer";
+
+textLayer.style.position = "absolute";
+textLayer.style.left = "0";
+textLayer.style.top = "0";
+textLayer.style.width = "100%";
+textLayer.style.height = "100%";
+textLayer.style.pointerEvents = "auto";
+textLayer.style.userSelect = "text";
 
     const textLayer =
     document.createElement("div");
@@ -546,7 +567,9 @@ async function createPage(
     canvasWrap.appendChild(
         canvas
     );
-
+canvasWrap.appendChild(
+    textLayer
+);
     canvasWrap.appendChild(
         textLayer
     );
@@ -655,7 +678,22 @@ async function createPage(
             viewport
 
         }).promise;
+const textContent =
+    await page.getTextContent();
 
+textLayer.innerHTML = "";
+
+pdfjsLib.renderTextLayer({
+
+    textContent: textContent,
+
+    container: textLayer,
+
+    viewport: viewport,
+
+    textDivs: []
+
+});
 
         renderTexts();
 
