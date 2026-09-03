@@ -199,6 +199,13 @@ a{
   box-shadow:0 5px 25px rgba(0,0,0,.15);
   overflow:hidden;
   flex-shrink:0;
+  max-width:100%;
+}
+
+.pdf-page canvas{
+  display:block;
+  max-width:100%;
+  height:auto;
 }
 
 .pdf-page canvas{
@@ -661,7 +668,7 @@ function renderPage(pageNumber){
 
   return pdfDocument.getPage(pageNumber).then(function(page){
 
-    const scale = 1.5;
+    const scale = 1.2;
 
     const viewport =
       page.getViewport({
