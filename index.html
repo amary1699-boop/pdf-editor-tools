@@ -1,3322 +1,781 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PDF Editor Tools Free</title>
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf_viewer.min.css">
+<title>PDF Editor Tools Free - Free Online PDF & Image Tools</title>
+<meta name="description" content="Free online PDF editor, PDF converter, image resize and image tools. Fast, simple and secure online tools.">
 
 <style>
-
 *{
-    box-sizing:border-box;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f4f6f9;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f7f8fc;
+  color:#202124;
 }
 
-header{
-    background:#0d6efd;
-    color:white;
-    text-align:center;
-    padding:25px 15px;
+a{
+  text-decoration:none;
+  color:inherit;
 }
 
-header h1{
-    margin:0 0 8px;
+/* HEADER */
+.pe-header{
+  background:#ffffff;
+  border-bottom:1px solid #e8e8ee;
+  position:sticky;
+  top:0;
+  z-index:1000;
 }
 
-.container{
-    width:95%;
-    max-width:1100px;
-    margin:25px auto;
-    background:white;
-    padding:25px;
-    border-radius:12px;
-    box-shadow:0 3px 15px rgba(0,0,0,.1);
+.pe-nav{
+  max-width:1180px;
+  margin:auto;
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 20px;
 }
 
-.upload-box{
-    border:2px dashed #0d6efd;
-    padding:35px 15px;
-    text-align:center;
-    border-radius:10px;
-    background:#f8fbff;
+.pe-logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:22px;
+  font-weight:800;
+  color:#e53232;
 }
 
-input[type="file"]{
-    display:none;
+.pe-logo-icon{
+  width:40px;
+  height:40px;
+  background:#e53232;
+  color:white;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:21px;
 }
 
-.upload-btn{
-    display:inline-block;
-    background:#0d6efd;
-    color:white;
-    padding:13px 22px;
-    border-radius:6px;
-    cursor:pointer;
+.pe-menu{
+  display:flex;
+  gap:28px;
+  align-items:center;
 }
 
-.file-name{
-    margin-top:15px;
-    font-weight:bold;
-    word-break:break-word;
+.pe-menu a{
+  font-size:15px;
+  color:#444;
+  font-weight:600;
 }
 
-#preview{
-    display:none;
-    margin-top:30px;
+.pe-menu a:hover{
+  color:#e53232;
 }
 
-.page{
-    margin:30px auto;
-    padding:15px;
-    text-align:center;
-    border:1px solid #ddd;
-    border-radius:10px;
-    background:white;
+.pe-login{
+  border:1px solid #ddd;
+  padding:10px 18px;
+  border-radius:8px;
 }
 
-.page-number{
-    font-weight:bold;
-    margin-bottom:12px;
+/* HERO */
+.pe-hero{
+  background:linear-gradient(135deg,#fff5f5,#ffffff);
+  padding:70px 20px 65px;
+  text-align:center;
 }
 
-.canvas-wrap{
-    position:relative;
-    width:max-content;
-    max-width:100%;
-    margin:auto;
-    overflow:visible;
+.pe-hero h1{
+  font-size:46px;
+  line-height:1.15;
+  max-width:850px;
+  margin:auto;
+  font-weight:800;
 }
 
-.page canvas{
-    display:block;
-    max-width:100%;
-    height:auto;
-    border:1px solid #ddd;
+.pe-hero h1 span{
+  color:#e53232;
 }
 
-.text-layer{
-    position:absolute;
-    left:0;
-    top:0;
-    right:0;
-    bottom:0;
-    overflow:hidden;
-    line-height:1;
-    pointer-events:auto;
-    user-select:text;
+.pe-hero p{
+  max-width:680px;
+  margin:20px auto 30px;
+  color:#666;
+  font-size:18px;
+  line-height:1.6;
 }
 
-.pdf-text{
-    position:absolute;
-    transform-origin:0 0;
-    white-space:pre;
-    cursor:text;
-    color:transparent;
-    background:transparent;
-    border:1px solid transparent;
-    padding:0;
-    margin:0;
+.pe-search{
+  max-width:600px;
+  margin:auto;
+  position:relative;
 }
 
-.pdf-text:hover{
-    background:rgba(13,110,253,.08);
+.pe-search input{
+  width:100%;
+  height:56px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  padding:0 55px 0 20px;
+  font-size:16px;
+  outline:none;
+  background:white;
+  box-shadow:0 5px 20px rgba(0,0,0,.05);
 }
 
-.pdf-text.selected{
-    color:transparent;
-    background:rgba(13,110,253,.10);
-    border:1px dashed #0d6efd;
+.pe-search-icon{
+  position:absolute;
+  right:20px;
+  top:17px;
+  font-size:21px;
+  color:#777;
 }
 
-.editing-text{
-    color:#000 !important;
-    background:white !important;
-    border:1px solid #0d6efd !important;
-    outline:none;
-    min-width:4px;
+/* MAIN */
+.pe-container{
+  max-width:1180px;
+  margin:auto;
+  padding:55px 20px;
 }
 
-.floating-toolbar{
-    position:absolute;
-    z-index:99999;
-    display:none;
-    background:white;
-    border:1px solid #ccc;
-    border-radius:8px;
-    padding:7px;
-    box-shadow:0 5px 20px rgba(0,0,0,.20);
-    align-items:center;
-    gap:5px;
-    flex-wrap:wrap;
-    max-width:95vw;
+.pe-section{
+  margin-bottom:60px;
 }
 
-.floating-toolbar select,
-.floating-toolbar input,
-.floating-toolbar button{
-    height:32px;
-    border:1px solid #ccc;
-    border-radius:5px;
-    background:white;
-    padding:4px 7px;
-    cursor:pointer;
+.pe-section-title{
+  text-align:center;
+  margin-bottom:28px;
 }
 
-.floating-toolbar button{
-    font-weight:bold;
+.pe-section-title h2{
+  font-size:30px;
+  margin-bottom:8px;
 }
 
-.floating-toolbar .danger{
-    color:white;
-    background:#dc3545;
-    border-color:#dc3545;
+.pe-section-title p{
+  color:#777;
 }
 
-.color-input{
-    width:40px;
-    padding:2px !important;
+/* TOOL GRID */
+.pe-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
 }
 
-.added-text{
-    position:absolute;
-    z-index:20;
-    cursor:move;
-    white-space:nowrap;
-    padding:2px 4px;
-    border:1px dashed transparent;
+.pe-card{
+  background:#fff;
+  border:1px solid #e8e8ee;
+  border-radius:14px;
+  padding:25px 20px;
+  min-height:175px;
+  transition:.25s;
+  cursor:pointer;
 }
 
-.added-text.selected{
-    border:1px dashed #0d6efd;
-    background:rgba(13,110,253,.08);
+.pe-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+  border-color:#f0b5b5;
 }
 
-.add-text-input{
-    position:absolute;
-    z-index:9999;
-    min-width:180px;
-    padding:8px;
-    border:2px solid #0d6efd;
-    border-radius:5px;
-    outline:none;
-    font-size:16px;
+.pe-icon{
+  width:48px;
+  height:48px;
+  border-radius:12px;
+  background:#fff0f0;
+  color:#e53232;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+  margin-bottom:16px;
 }
 
-.page-buttons{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    margin-top:15px;
+.pe-card h3{
+  font-size:18px;
+  margin-bottom:8px;
 }
 
-.page-buttons button{
-    border:none;
-    color:white;
-    padding:10px 20px;
-    border-radius:6px;
-    cursor:pointer;
-    font-size:15px;
+.pe-card p{
+  font-size:14px;
+  line-height:1.5;
+  color:#777;
 }
 
-.rotate-button{
-    background:#0d6efd;
+/* POPULAR */
+.pe-popular{
+  background:white;
+  border-radius:20px;
+  padding:35px;
+  border:1px solid #e8e8ee;
 }
 
-.delete-button{
-    background:#dc3545;
+.pe-popular-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
 }
 
-.deleted{
-    display:none;
+.pe-popular-card{
+  border:1px solid #eee;
+  border-radius:12px;
+  padding:20px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  transition:.2s;
 }
 
-.download-box{
-    text-align:center;
-    margin:30px 0 10px;
+.pe-popular-card:hover{
+  box-shadow:0 8px 25px rgba(0,0,0,.07);
+  transform:translateY(-3px);
 }
 
-.action-button{
-    border:none;
-    color:white;
-    padding:14px 25px;
-    border-radius:7px;
-    cursor:pointer;
-    font-size:16px;
-    font-weight:bold;
-    margin:5px;
+.pe-popular-icon{
+  width:45px;
+  height:45px;
+  background:#fff0f0;
+  color:#e53232;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  flex-shrink:0;
 }
 
-.add-button{
-    background:#0d6efd;
+.pe-popular-card h3{
+  font-size:16px;
+  margin-bottom:4px;
 }
 
-.download-button{
-    background:#198754;
+.pe-popular-card p{
+  font-size:13px;
+  color:#777;
 }
 
-.status{
-    text-align:center;
-    margin-top:15px;
-    font-weight:bold;
+/* INFO */
+.pe-info{
+  background:#202124;
+  color:white;
+  border-radius:20px;
+  padding:45px;
+  text-align:center;
+}
+
+.pe-info h2{
+  font-size:30px;
+  margin-bottom:12px;
+}
+
+.pe-info p{
+  color:#ccc;
+  max-width:700px;
+  margin:auto;
+  line-height:1.6;
+}
+
+/* FOOTER */
+.pe-footer{
+  background:#17181a;
+  color:#aaa;
+  padding:40px 20px;
+  margin-top:20px;
+}
+
+.pe-footer-inner{
+  max-width:1180px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  gap:30px;
+}
+
+.pe-footer h3{
+  color:white;
+  margin-bottom:12px;
+}
+
+.pe-footer p{
+  font-size:14px;
+  line-height:1.6;
+}
+
+.pe-footer-links{
+  display:flex;
+  gap:25px;
+  flex-wrap:wrap;
+}
+
+.pe-footer-links a:hover{
+  color:white;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .pe-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .pe-popular-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .pe-hero h1{
+    font-size:38px;
+  }
 }
 
 @media(max-width:600px){
 
-    .container{
-        padding:12px;
-    }
+  .pe-nav{
+    height:62px;
+  }
 
-    header h1{
-        font-size:24px;
-    }
+  .pe-logo{
+    font-size:18px;
+  }
 
-    .page{
-        padding:7px;
-    }
+  .pe-logo-icon{
+    width:35px;
+    height:35px;
+  }
 
-    .page-buttons button{
-        flex:1;
-        padding:10px 8px;
-    }
+  .pe-menu{
+    display:none;
+  }
 
-    .floating-toolbar{
-        max-width:94vw;
-        justify-content:center;
-    }
+  .pe-hero{
+    padding:50px 15px;
+  }
 
-    .floating-toolbar select{
-        max-width:110px;
-    }
+  .pe-hero h1{
+    font-size:32px;
+  }
 
+  .pe-hero p{
+    font-size:16px;
+  }
+
+  .pe-container{
+    padding:40px 15px;
+  }
+
+  .pe-grid{
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+
+  .pe-card{
+    padding:18px 14px;
+    min-height:155px;
+  }
+
+  .pe-card h3{
+    font-size:16px;
+  }
+
+  .pe-card p{
+    font-size:13px;
+  }
+
+  .pe-popular{
+    padding:20px 15px;
+  }
+
+  .pe-popular-grid{
+    grid-template-columns:1fr;
+  }
+
+  .pe-info{
+    padding:30px 20px;
+  }
+
+  .pe-footer-inner{
+    flex-direction:column;
+  }
 }
-
 </style>
-
 </head>
 
 <body>
 
-<header>
+<!-- HEADER -->
+<header class="pe-header">
+  <div class="pe-nav">
 
-<h1>PDF Editor Tools Free</h1>
+    <a href="#" class="pe-logo">
+      <div class="pe-logo-icon">PDF</div>
+      PDF Editor Tools
+    </a>
 
-<p>Edit PDF Online for Free</p>
+    <nav class="pe-menu">
+      <a href="#pdf-tools">PDF Tools</a>
+      <a href="#convert-tools">Convert</a>
+      <a href="#image-tools">Image Tools</a>
+      <a href="#about">About</a>
+    </nav>
 
+  </div>
 </header>
 
-<div class="container">
 
-<div class="upload-box">
+<!-- HERO -->
+<section class="pe-hero">
 
-<h2>Upload Your PDF</h2>
+  <h1>
+    Every tool you need to work with
+    <span>PDF & Images</span>
+  </h1>
 
-<p>Select a PDF file from your device</p>
+  <p>
+    Edit, convert, compress, merge, split and manage your
+    PDF files and images online — quickly and easily.
+  </p>
 
-<label
-for="pdfFile"
-class="upload-btn">
+  <div class="pe-search">
+    <input
+      type="text"
+      id="toolSearch"
+      placeholder="Search for a tool..."
+      onkeyup="searchTools()"
+    >
+    <div class="pe-search-icon">⌕</div>
+  </div>
 
-Choose PDF
-
-</label>
-
-<input
-type="file"
-id="pdfFile"
-accept="application/pdf">
-
-<div
-id="fileName"
-class="file-name">
-</div>
-
-</div>
+</section>
 
 
-<div id="preview">
-
-<h2>PDF Preview</h2>
-
-<div id="pages"></div>
-
-<div class="download-box">
-
-<button
-id="addTextButton"
-class="action-button add-button">
-
-➕ Add Text
-
-</button>
-
-<button
-id="downloadButton"
-class="action-button download-button">
-
-💾 Download Edited PDF
-
-</button>
-
-</div>
-
-<div id="status" class="status"></div>
-
-</div>
-
-</div>
+<main class="pe-container">
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<!-- PDF TOOLS -->
+<section class="pe-section" id="pdf-tools">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf_viewer.min.js"></script>
+  <div class="pe-section-title">
+    <h2>PDF Tools</h2>
+    <p>Everything you need to manage your PDF files</p>
+  </div>
 
-<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <div class="pe-grid tool-grid">
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">✎</div>
+      <h3>PDF Editor</h3>
+      <p>Edit text, add text and modify your PDF.</p>
+    </a>
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">＋</div>
+      <h3>Merge PDF</h3>
+      <p>Combine multiple PDF files into one.</p>
+    </a>
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">✂</div>
+      <h3>Split PDF</h3>
+      <p>Split your PDF into separate files.</p>
+    </a>
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">−</div>
+      <h3>Compress PDF</h3>
+      <p>Reduce PDF file size easily.</p>
+    </a>
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">↻</div>
+      <h3>Rotate PDF</h3>
+      <p>Rotate PDF pages quickly.</p>
+    </a>
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">🗑</div>
+      <h3>Delete Pages</h3>
+      <p>Remove unwanted pages from PDF.</p>
+    </a>
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">⇩</div>
+      <h3>Extract Pages</h3>
+      <p>Extract selected pages from PDF.</p>
+    </a>
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">▣</div>
+      <h3>PDF to JPG</h3>
+      <p>Convert PDF pages into JPG images.</p>
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- CONVERT TOOLS -->
+<section class="pe-section" id="convert-tools">
+
+  <div class="pe-section-title">
+    <h2>PDF Converter</h2>
+    <p>Convert your files from one format to another</p>
+  </div>
+
+  <div class="pe-grid tool-grid">
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">W</div>
+      <h3>PDF to Word</h3>
+      <p>Convert PDF documents into Word files.</p>
+    </a>
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">X</div>
+      <h3>PDF to Excel</h3>
+      <p>Convert PDF tables into Excel.</p>
+    </a>
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">P</div>
+      <h3>PDF to PowerPoint</h3>
+      <p>Convert PDF files into presentations.</p>
+    </a>
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">J</div>
+      <h3>JPG to PDF</h3>
+      <p>Convert images into PDF documents.</p>
+    </a>
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">PNG</div>
+      <h3>PNG to PDF</h3>
+      <p>Convert PNG images into PDF files.</p>
+    </a>
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">TXT</div>
+      <h3>Text to PDF</h3>
+      <p>Turn text documents into PDF files.</p>
+    </a>
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">HTML</div>
+      <h3>HTML to PDF</h3>
+      <p>Convert web pages into PDF.</p>
+    </a>
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">PDF</div>
+      <h3>PDF to PNG</h3>
+      <p>Convert PDF pages into PNG images.</p>
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- IMAGE TOOLS -->
+<section class="pe-section" id="image-tools">
+
+  <div class="pe-section-title">
+    <h2>Image Tools</h2>
+    <p>Edit, resize and convert your images online</p>
+  </div>
+
+  <div class="pe-grid tool-grid">
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">↔</div>
+      <h3>Resize Image</h3>
+      <p>Resize JPG, PNG and other images.</p>
+    </a>
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">⇩</div>
+      <h3>Compress Image</h3>
+      <p>Reduce image size while keeping quality.</p>
+    </a>
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">JPG</div>
+      <h3>JPG to PNG</h3>
+      <p>Convert JPG images into PNG.</p>
+    </a>
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">PNG</div>
+      <h3>PNG to JPG</h3>
+      <p>Convert PNG images into JPG.</p>
+    </a>
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">✂</div>
+      <h3>Crop Image</h3>
+      <p>Crop your image to any required size.</p>
+    </a>
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">↻</div>
+      <h3>Rotate Image</h3>
+      <p>Rotate images quickly and easily.</p>
+    </a>
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">PDF</div>
+      <h3>Image to PDF</h3>
+      <p>Convert one or multiple images into PDF.</p>
+    </a>
+
+    <a class="pe-card tool-card" href="#">
+      <div class="pe-icon">🖼</div>
+      <h3>Image Converter</h3>
+      <p>Convert images between popular formats.</p>
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- POPULAR TOOLS -->
+<section class="pe-section">
+
+  <div class="pe-popular">
+
+    <div class="pe-section-title">
+      <h2>Popular Tools</h2>
+      <p>Our most useful PDF and image tools</p>
+    </div>
+
+    <div class="pe-popular-grid">
+
+      <a href="#" class="pe-popular-card">
+        <div class="pe-popular-icon">✎</div>
+        <div>
+          <h3>PDF Editor</h3>
+          <p>Edit PDF online</p>
+        </div>
+      </a>
+
+      <a href="#" class="pe-popular-card">
+        <div class="pe-popular-icon">＋</div>
+        <div>
+          <h3>Merge PDF</h3>
+          <p>Combine PDF files</p>
+        </div>
+      </a>
+
+      <a href="#" class="pe-popular-card">
+        <div class="pe-popular-icon">−</div>
+        <div>
+          <h3>Compress PDF</h3>
+          <p>Reduce PDF size</p>
+        </div>
+      </a>
+
+      <a href="#" class="pe-popular-card">
+        <div class="pe-popular-icon">↔</div>
+        <div>
+          <h3>Resize Image</h3>
+          <p>Change image dimensions</p>
+        </div>
+      </a>
+
+      <a href="#" class="pe-popular-card">
+        <div class="pe-popular-icon">J</div>
+        <div>
+          <h3>JPG to PDF</h3>
+          <p>Convert JPG to PDF</p>
+        </div>
+      </a>
+
+      <a href="#" class="pe-popular-card">
+        <div class="pe-popular-icon">W</div>
+        <div>
+          <h3>PDF to Word</h3>
+          <p>Convert PDF to Word</p>
+        </div>
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ABOUT -->
+<section class="pe-section" id="about">
+
+  <div class="pe-info">
+    <h2>Free Online PDF & Image Tools</h2>
+    <p>
+      PDF Editor Tools Free provides simple and useful online tools
+      for editing, converting, compressing and managing PDF files
+      and images. Our goal is to make everyday document work fast,
+      easy and accessible.
+    </p>
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer class="pe-footer">
+
+  <div class="pe-footer-inner">
+
+    <div>
+      <h3>PDF Editor Tools Free</h3>
+      <p>Simple online PDF and image tools for everyone.</p>
+    </div>
+
+    <div class="pe-footer-links">
+      <a href="#pdf-tools">PDF Tools</a>
+      <a href="#convert-tools">Convert</a>
+      <a href="#image-tools">Image Tools</a>
+      <a href="#about">About</a>
+    </div>
+
+  </div>
+
+</footer>
 
 
 <script>
+function searchTools(){
 
-pdfjsLib.GlobalWorkerOptions.workerSrc =
-"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  var input = document.getElementById("toolSearch");
+  var filter = input.value.toLowerCase();
 
+  var cards = document.querySelectorAll(".tool-card");
 
-const fileInput =
-document.getElementById("pdfFile");
+  cards.forEach(function(card){
 
-const fileName =
-document.getElementById("fileName");
+    var text = card.innerText.toLowerCase();
 
-const preview =
-document.getElementById("preview");
-
-const pagesContainer =
-document.getElementById("pages");
-
-const addTextButton =
-document.getElementById("addTextButton");
-
-const downloadButton =
-document.getElementById("downloadButton");
-
-const statusBox =
-document.getElementById("status");
-
-
-let originalPdfBytes = null;
-
-let pageSettings = [];
-
-let pagesData = [];
-
-let addTextMode = false;
-
-let selectedObject = null;
-
-
-/* =========================================
-   UPLOAD PDF
-========================================= */
-
-fileInput.addEventListener(
-"change",
-function(){
-
-    const file =
-    this.files[0];
-
-    if(!file){
-        return;
+    if(text.indexOf(filter) > -1){
+      card.style.display = "";
+    }else{
+      card.style.display = "none";
     }
 
-    if(file.type !== "application/pdf"){
-
-        alert(
-            "Please select a PDF file."
-        );
-
-        return;
-    }
-
-
-    fileName.textContent =
-    "Selected: " + file.name;
-
-
-    pagesContainer.innerHTML = "";
-
-    pageSettings = [];
-
-    pagesData = [];
-
-    selectedObject = null;
-
-    addTextMode = false;
-
-    addTextButton.textContent =
-    "➕ Add Text";
-
-
-    preview.style.display =
-    "block";
-
-
-    statusBox.textContent =
-    "Loading PDF...";
-
-
-    const reader =
-    new FileReader();
-
-
-    reader.onload =
-    async function(){
-
-        try{
-
-            originalPdfBytes =
-            new Uint8Array(
-                reader.result
-            ).slice(0);
-
-
-            const pdfData =
-            new Uint8Array(
-                originalPdfBytes
-            ).slice(0);
-
-
-            const pdf =
-            await pdfjsLib
-            .getDocument({
-                data:pdfData
-            })
-            .promise;
-
-
-            for(
-                let i=1;
-                i<=pdf.numPages;
-                i++
-            ){
-
-                pageSettings.push({
-
-                    rotation:0,
-
-                    deleted:false
-
-                });
-
-
-                pagesData.push({
-
-                    pageNumber:i,
-
-                    pdfPage:null,
-
-                    canvas:null,
-
-                    textLayer:null,
-
-                    textItems:[],
-
-                    addedTexts:[],
-
-                    viewport:null
-
-                });
-
-            }
-
-
-            for(
-                let i=1;
-                i<=pdf.numPages;
-                i++
-            ){
-
-                await createPage(
-                    pdf,
-                    i
-                );
-
-            }
-
-
-            statusBox.textContent =
-            "✅ PDF loaded. Existing text पर click करके edit करें.";
-
-        }
-
-        catch(error){
-
-            console.error(error);
-
-            alert(
-                "PDF could not be loaded.\n\n" +
-                error.message
-            );
-
-            statusBox.textContent =
-            "";
-
-        }
-
-    };
-
-
-    reader.readAsArrayBuffer(file);
-
-});
-
-
-/* =========================================
-   CREATE PDF PAGE
-========================================= */
-
-async function createPage(
-    pdf,
-    pageNumber
-){
-
-    const index =
-    pageNumber - 1;
-
-
-    const data =
-    pagesData[index];
-
-
-    const page =
-    await pdf.getPage(
-        pageNumber
-    );
-
-
-    data.pdfPage =
-    page;
-
-
-    const pageBox =
-    document.createElement("div");
-
-    pageBox.className =
-    "page";
-
-
-    pageBox.dataset.pageIndex =
-    index;
-
-
-    const number =
-    document.createElement("div");
-
-    number.className =
-    "page-number";
-
-    number.textContent =
-    "Page " + pageNumber;
-
-
-    const canvasWrap =
-    document.createElement("div");
-
-    canvasWrap.className =
-    "canvas-wrap";
-
-
-    const canvas =
-    document.createElement("canvas");
-
-
-    const textLayer =
-    document.createElement("div");
-
-    textLayer.className =
-    "text-layer";
-
-
-    const toolbar =
-    createToolbar(
-        canvasWrap
-    );
-
-
-    canvasWrap.appendChild(
-        canvas
-    );
-
-    canvasWrap.appendChild(
-        textLayer
-    );
-
-    canvasWrap.appendChild(
-        toolbar
-    );
-
-
-    data.canvas =
-    canvas;
-
-    data.textLayer =
-    textLayer;
-
-
-    const buttonBox =
-    document.createElement("div");
-
-    buttonBox.className =
-    "page-buttons";
-
-
-    const rotateButton =
-    document.createElement("button");
-
-    rotateButton.className =
-    "rotate-button";
-
-    rotateButton.textContent =
-    "🔄 Rotate";
-
-
-    const deleteButton =
-    document.createElement("button");
-
-    deleteButton.className =
-    "delete-button";
-
-    deleteButton.textContent =
-    "🗑️ Delete";
-
-
-    buttonBox.appendChild(
-        rotateButton
-    );
-
-    buttonBox.appendChild(
-        deleteButton
-    );
-
-
-    pageBox.appendChild(
-        number
-    );
-
-    pageBox.appendChild(
-        canvasWrap
-    );
-
-    pageBox.appendChild(
-        buttonBox
-    );
-
-
-    pagesContainer.appendChild(
-        pageBox
-    );
-
-
-    async function renderPage(){
-
-        const rotation =
-        pageSettings[index].rotation;
-
-
-        const viewport =
-        page.getViewport({
-
-            scale:1.5,
-
-            rotation:rotation
-
-        });
-
-
-        data.viewport =
-        viewport;
-
-
-        canvas.width =
-        Math.round(
-            viewport.width
-        );
-
-
-        canvas.height =
-        Math.round(
-            viewport.height
-        );
-
-
-        canvas.style.width =
-        Math.round(
-            viewport.width
-        ) + "px";
-
-
-        canvas.style.height =
-        Math.round(
-            viewport.height
-        ) + "px";
-
-
-        const context =
-        canvas.getContext("2d");
-
-
-        await page.render({
-
-            canvasContext:
-            context,
-
-            viewport:
-            viewport
-
-        }).promise;
-
-
-        await buildTextLayer();
-
-
-        renderAddedTexts();
-
-    }
-
-
-    async function buildTextLayer(){
-
-        textLayer.innerHTML =
-        "";
-
-
-        data.textItems =
-        [];
-
-
-        const textContent =
-        await page.getTextContent();
-
-
-        /*
-        PDF.js text items are converted
-        using the same viewport as canvas.
-        This keeps the text position aligned
-        with the PDF.
-        */
-
-
-        textContent.items.forEach(
-        function(item){
-
-            if(
-                !item.str ||
-                !item.str.trim()
-            ){
-
-                return;
-
-            }
-
-
-            const tx =
-            pdfjsLib.Util.transform(
-                viewportTransform(
-                    viewportForText(
-                        data.viewport
-                    )
-                ),
-                item.transform
-            );
-
-
-            const fontSize =
-            Math.sqrt(
-                tx[2] * tx[2] +
-                tx[3] * tx[3]
-            );
-
-
-            const angle =
-            Math.atan2(
-                tx[1],
-                tx[0]
-            );
-
-
-            /*
-            Approximate text height
-            */
-
-            const width =
-            Math.max(
-                1,
-                Math.abs(
-                    item.width *
-                    data.viewport.scale
-                )
-            );
-
-
-            const height =
-            Math.max(
-                1,
-                fontSize * 1.2
-            );
-
-
-            const span =
-            document.createElement("span");
-
-
-            span.className =
-            "pdf-text";
-
-
-            span.textContent =
-            item.str;
-
-
-            span.dataset.index =
-            data.textItems.length;
-
-
-            span.style.left =
-            tx[4] + "px";
-
-
-            span.style.top =
-            (
-                tx[5] -
-                fontSize
-            ) + "px";
-
-
-            span.style.fontSize =
-            fontSize + "px";
-
-
-            span.style.width =
-            width + "px";
-
-
-            span.style.height =
-            height + "px";
-
-
-            span.style.transform =
-            "rotate(" +
-            angle +
-            "rad)";
-
-
-            span.dataset.originalText =
-            item.str;
-
-
-            const pdfPoint =
-            viewportToPdfPoint(
-                data.viewport,
-                tx[4],
-                tx[5]
-            );
-
-
-            const textItem = {
-
-                originalText:
-                item.str,
-
-                text:
-                item.str,
-
-                x:
-                pdfPoint.x,
-
-                y:
-                pdfPoint.y,
-
-                width:
-                item.width,
-
-                height:
-                item.height || fontSize,
-
-                fontSize:
-                fontSize /
-                data.viewport.scale,
-
-                fontFamily:
-                "Helvetica",
-
-                bold:false,
-
-                italic:false,
-
-                underline:false,
-
-                color:"#000000",
-
-                align:"left",
-
-                edited:false,
-
-                deleted:false,
-
-                span:span
-
-            };
-
-
-            data.textItems.push(
-                textItem
-            );
-
-
-            span.addEventListener(
-            "click",
-            function(e){
-
-                e.stopPropagation();
-
-                selectExistingText(
-                    index,
-                    data.textItems[
-                        Number(
-                            span.dataset.index
-                        )
-                    ]
-                );
-
-            });
-
-
-            span.addEventListener(
-            "dblclick",
-            function(e){
-
-                e.stopPropagation();
-
-                startEditingExistingText(
-                    index,
-                    data.textItems[
-                        Number(
-                            span.dataset.index
-                        )
-                    ]
-                );
-
-            });
-
-
-            textLayer.appendChild(
-                span
-            );
-
-        });
-
-    }
-
-
-    rotateButton.addEventListener(
-    "click",
-    async function(){
-
-        pageSettings[index].rotation =
-        (
-            pageSettings[index].rotation +
-            90
-        ) % 360;
-
-
-        await renderPage();
-
-    });
-
-
-    deleteButton.addEventListener(
-    "click",
-    function(){
-
-        if(
-            confirm(
-                "Delete Page " +
-                pageNumber +
-                "?"
-            )
-        ){
-
-            pageSettings[index].deleted =
-            true;
-
-            pageBox.classList.add(
-                "deleted"
-            );
-
-        }
-
-    });
-
-
-    canvas.addEventListener(
-    "click",
-    function(e){
-
-        if(!addTextMode){
-            return;
-        }
-
-
-        e.stopPropagation();
-
-
-        const rect =
-        canvas.getBoundingClientRect();
-
-
-        const x =
-        e.clientX -
-        rect.left;
-
-
-        const y =
-        e.clientY -
-        rect.top;
-
-
-        createNewText(
-            index,
-            x,
-            y,
-            canvasWrap
-        );
-
-
-        addTextMode =
-        false;
-
-
-        addTextButton.textContent =
-        "➕ Add Text";
-
-    });
-
-
-    await renderPage();
+  });
 
 }
-
-
-/* =========================================
-   VIEWPORT HELPERS
-========================================= */
-
-function viewportForText(viewport){
-
-    return viewport;
-
-}
-
-
-function viewportTransform(viewport){
-
-    return [
-
-        1,
-        0,
-        0,
-        1,
-        0,
-        0
-
-    ];
-
-}
-
-
-function viewportToPdfPoint(
-    viewport,
-    x,
-    y
-){
-
-    const point =
-    viewport.convertToPdfPoint(
-        x,
-        y
-    );
-
-
-    return {
-
-        x:point[0],
-
-        y:point[1]
-
-    };
-
-}
-
-
-/* =========================================
-   TOOLBAR
-========================================= */
-
-function createToolbar(
-    container
-){
-
-    const toolbar =
-    document.createElement("div");
-
-
-    toolbar.className =
-    "floating-toolbar";
-
-
-    toolbar.addEventListener(
-    "click",
-    function(e){
-
-        e.stopPropagation();
-
-    });
-
-
-    return toolbar;
-
-}
-
-
-function showToolbar(
-    pageIndex,
-    item,
-    span
-){
-
-    hideAllToolbars();
-
-
-    const pageData =
-    pagesData[pageIndex];
-
-
-    const canvas =
-    pageData.canvas;
-
-
-    const toolbar =
-    pagesContainer
-    .children[pageIndex]
-    .querySelector(
-        ".floating-toolbar"
-    );
-
-
-    if(!toolbar){
-        return;
-    }
-
-
-    toolbar.innerHTML =
-    "";
-
-
-    const fontSelect =
-    document.createElement("select");
-
-
-    [
-        "Helvetica",
-        "Times",
-        "Courier"
-    ].forEach(
-    function(font){
-
-        const option =
-        document.createElement("option");
-
-        option.value =
-        font;
-
-        option.textContent =
-        font;
-
-        if(
-            font ===
-            item.fontFamily
-        ){
-
-            option.selected =
-            true;
-
-        }
-
-        fontSelect.appendChild(
-            option
-        );
-
-    });
-
-
-    const sizeInput =
-    document.createElement("input");
-
-    sizeInput.type =
-    "number";
-
-    sizeInput.min =
-    "6";
-
-    sizeInput.max =
-    "100";
-
-    sizeInput.value =
-    Math.round(
-        item.fontSize
-    );
-
-    sizeInput.style.width =
-    "58px";
-
-
-    const bold =
-    document.createElement("button");
-
-    bold.textContent =
-    "B";
-
-
-    const italic =
-    document.createElement("button");
-
-    italic.textContent =
-    "I";
-
-
-    const underline =
-    document.createElement("button");
-
-    underline.textContent =
-    "U";
-
-
-    const color =
-    document.createElement("input");
-
-    color.type =
-    "color";
-
-    color.className =
-    "color-input";
-
-    color.value =
-    item.color || "#000000";
-
-
-    const left =
-    document.createElement("button");
-
-    left.textContent =
-    "⬅";
-
-
-    const center =
-    document.createElement("button");
-
-    center.textContent =
-    "↔";
-
-
-    const right =
-    document.createElement("button");
-
-    right.textContent =
-    "➡";
-
-
-    const edit =
-    document.createElement("button");
-
-    edit.textContent =
-    "✏️ Edit";
-
-
-    const deleteButton =
-    document.createElement("button");
-
-    deleteButton.className =
-    "danger";
-
-    deleteButton.textContent =
-    "🗑️";
-
-
-    toolbar.appendChild(
-        fontSelect
-    );
-
-    toolbar.appendChild(
-        sizeInput
-    );
-
-    toolbar.appendChild(
-        bold
-    );
-
-    toolbar.appendChild(
-        italic
-    );
-
-    toolbar.appendChild(
-        underline
-    );
-
-    toolbar.appendChild(
-        color
-    );
-
-    toolbar.appendChild(
-        left
-    );
-
-    toolbar.appendChild(
-        center
-    );
-
-    toolbar.appendChild(
-        right
-    );
-
-    toolbar.appendChild(
-        edit
-    );
-
-    toolbar.appendChild(
-        deleteButton
-    );
-
-
-    toolbar.style.display =
-    "flex";
-
-
-    /*
-    Put toolbar near the selected text.
-    */
-
-    const spanRect =
-    span.getBoundingClientRect();
-
-
-    const containerRect =
-    span.parentElement
-    .parentElement
-    .getBoundingClientRect();
-
-
-    let toolbarLeft =
-    spanRect.left -
-    containerRect.left;
-
-
-    let toolbarTop =
-    spanRect.top -
-    containerRect.top -
-    45;
-
-
-    if(toolbarTop < 5){
-
-        toolbarTop =
-        spanRect.bottom -
-        containerRect.top +
-        8;
-
-    }
-
-
-    if(
-        toolbarLeft +
-        toolbar.offsetWidth >
-        containerRect.width
-    ){
-
-        toolbarLeft =
-        Math.max(
-            5,
-            containerRect.width -
-            toolbar.offsetWidth -
-            5
-        );
-
-    }
-
-
-    toolbar.style.left =
-    toolbarLeft + "px";
-
-
-    toolbar.style.top =
-    toolbarTop + "px";
-
-
-    fontSelect.addEventListener(
-    "change",
-    function(){
-
-        item.fontFamily =
-        this.value;
-
-        applyVisualStyle(
-            span,
-            item
-        );
-
-    });
-
-
-    sizeInput.addEventListener(
-    "change",
-    function(){
-
-        item.fontSize =
-        Number(this.value);
-
-        applyVisualStyle(
-            span,
-            item
-        );
-
-    });
-
-
-    bold.addEventListener(
-    "click",
-    function(){
-
-        item.bold =
-        !item.bold;
-
-        applyVisualStyle(
-            span,
-            item
-        );
-
-    });
-
-
-    italic.addEventListener(
-    "click",
-    function(){
-
-        item.italic =
-        !item.italic;
-
-        applyVisualStyle(
-            span,
-            item
-        );
-
-    });
-
-
-    underline.addEventListener(
-    "click",
-    function(){
-
-        item.underline =
-        !item.underline;
-
-        applyVisualStyle(
-            span,
-            item
-        );
-
-    });
-
-
-    color.addEventListener(
-    "input",
-    function(){
-
-        item.color =
-        this.value;
-
-        applyVisualStyle(
-            span,
-            item
-        );
-
-    });
-
-
-    left.addEventListener(
-    "click",
-    function(){
-
-        item.align =
-        "left";
-
-    });
-
-
-    center.addEventListener(
-    "click",
-    function(){
-
-        item.align =
-        "center";
-
-    });
-
-
-    right.addEventListener(
-    "click",
-    function(){
-
-        item.align =
-        "right";
-
-    });
-
-
-    edit.addEventListener(
-    "click",
-    function(){
-
-        startEditingExistingText(
-            pageIndex,
-            item
-        );
-
-    });
-
-
-    deleteButton.addEventListener(
-    "click",
-    function(){
-
-        if(
-            confirm(
-                "Delete this text?"
-            )
-        ){
-
-            item.deleted =
-            true;
-
-            span.style.display =
-            "none";
-
-            hideAllToolbars();
-
-            selectedObject =
-            null;
-
-        }
-
-    });
-
-}
-
-
-function applyVisualStyle(
-    span,
-    item
-){
-
-    span.style.fontFamily =
-    item.fontFamily;
-
-
-    span.style.fontSize =
-    (
-        item.fontSize *
-        pagesData[
-            selectedObject.pageIndex
-        ].viewport.scale
-    ) + "px";
-
-
-    span.style.fontWeight =
-    item.bold
-    ? "bold"
-    : "normal";
-
-
-    span.style.fontStyle =
-    item.italic
-    ? "italic"
-    : "normal";
-
-
-    span.style.textDecoration =
-    item.underline
-    ? "underline"
-    : "none";
-
-}
-
-
-function hideAllToolbars(){
-
-    document
-    .querySelectorAll(
-        ".floating-toolbar"
-    )
-    .forEach(
-    function(toolbar){
-
-        toolbar.style.display =
-        "none";
-
-    });
-
-}
-
-
-/* =========================================
-   SELECT EXISTING TEXT
-========================================= */
-
-function selectExistingText(
-    pageIndex,
-    item
-){
-
-    document
-    .querySelectorAll(
-        ".pdf-text.selected"
-    )
-    .forEach(
-    function(el){
-
-        el.classList.remove(
-            "selected"
-        );
-
-    });
-
-
-    if(
-        item.deleted
-    ){
-
-        return;
-
-    }
-
-
-    item.span.classList.add(
-        "selected"
-    );
-
-
-    selectedObject = {
-
-        pageIndex:
-        pageIndex,
-
-        type:
-        "existing",
-
-        item:
-        item
-
-    };
-
-
-    showToolbar(
-        pageIndex,
-        item,
-        item.span
-    );
-
-}
-
-
-/* =========================================
-   EDIT EXISTING TEXT
-========================================= */
-
-function startEditingExistingText(
-    pageIndex,
-    item
-){
-
-    if(item.deleted){
-        return;
-    }
-
-
-    const span =
-    item.span;
-
-
-    hideAllToolbars();
-
-
-    span.classList.add(
-        "editing-text"
-    );
-
-
-    span.contentEditable =
-    "true";
-
-
-    span.focus();
-
-
-    const range =
-    document.createRange();
-
-
-    range.selectNodeContents(
-        span
-    );
-
-
-    range.collapse(
-        false
-    );
-
-
-    const selection =
-    window.getSelection();
-
-
-    selection.removeAllRanges();
-
-    selection.addRange(
-        range
-    );
-
-
-    let finished =
-    false;
-
-
-    function finish(){
-
-        if(finished){
-            return;
-        }
-
-
-        finished =
-        true;
-
-
-        const newText =
-        span.textContent;
-
-
-        if(
-            newText.trim() === ""
-        ){
-
-            item.deleted =
-            true;
-
-            span.style.display =
-            "none";
-
-        }
-        else{
-
-            item.text =
-            newText;
-
-            item.edited =
-            true;
-
-        }
-
-
-        span.contentEditable =
-        "false";
-
-
-        span.classList.remove(
-            "editing-text"
-        );
-
-
-        document
-        .removeEventListener(
-            "mousedown",
-            outside
-        );
-
-
-        selectExistingText(
-            pageIndex,
-            item
-        );
-
-    }
-
-
-    function outside(e){
-
-        if(
-            !span.contains(e.target)
-        ){
-
-            finish();
-
-        }
-
-    }
-
-
-    /*
-    Enter is prevented so it never
-    creates a second text object.
-    */
-
-    span.addEventListener(
-    "keydown",
-    function(e){
-
-        if(e.key === "Enter"){
-
-            e.preventDefault();
-
-            finish();
-
-        }
-
-        if(e.key === "Escape"){
-
-            e.preventDefault();
-
-            span.textContent =
-            item.text;
-
-            finish();
-
-        }
-
-    });
-
-
-    setTimeout(
-    function(){
-
-        document.addEventListener(
-            "mousedown",
-            outside
-        );
-
-    },
-    0
-    );
-
-}
-
-
-/* =========================================
-   ADD NEW TEXT
-========================================= */
-
-function createNewText(
-    pageIndex,
-    screenX,
-    screenY,
-    canvasWrap
-){
-
-    const pageData =
-    pagesData[pageIndex];
-
-
-    const canvas =
-    pageData.canvas;
-
-
-    const input =
-    document.createElement("input");
-
-
-    input.className =
-    "add-text-input";
-
-
-    input.placeholder =
-    "Type text...";
-
-
-    input.style.left =
-    screenX + "px";
-
-
-    input.style.top =
-    screenY + "px";
-
-
-    canvasWrap.appendChild(
-        input
-    );
-
-
-    input.focus();
-
-
-    let saved =
-    false;
-
-
-    function save(){
-
-        if(saved){
-            return;
-        }
-
-
-        saved =
-        true;
-
-
-        const value =
-        input.value.trim();
-
-
-        if(value !== ""){
-
-            const pdfPoint =
-            viewportToPdfPoint(
-                pageData.viewport,
-                screenX,
-                screenY +
-                16
-            );
-
-
-            pageData.addedTexts.push({
-
-                text:value,
-
-                x:pdfPoint.x,
-
-                y:pdfPoint.y,
-
-                fontSize:16,
-
-                fontFamily:"Helvetica",
-
-                bold:false,
-
-                italic:false,
-
-                underline:false,
-
-                color:"#000000",
-
-                align:"left"
-
-            });
-
-        }
-
-
-        input.remove();
-
-
-        renderAddedTexts();
-
-    }
-
-
-    input.addEventListener(
-    "keydown",
-    function(e){
-
-        if(e.key === "Enter"){
-
-            e.preventDefault();
-
-            e.stopPropagation();
-
-            save();
-
-        }
-
-
-        if(e.key === "Escape"){
-
-            e.preventDefault();
-
-            saved =
-            true;
-
-            input.remove();
-
-        }
-
-    });
-
-
-    /*
-    Blur only saves once.
-    */
-
-    input.addEventListener(
-    "blur",
-    function(){
-
-        setTimeout(
-        function(){
-
-            if(
-                document.body.contains(
-                    input
-                )
-            ){
-
-                save();
-
-            }
-
-        },
-        100
-        );
-
-    });
-
-}
-
-
-/* =========================================
-   RENDER NEW TEXT
-========================================= */
-
-function renderAddedTexts(){
-
-    pagesData.forEach(
-    function(data,pageIndex){
-
-        if(!data.canvas){
-            return;
-        }
-
-
-        const wrap =
-        data.canvas.parentElement;
-
-
-        wrap.querySelectorAll(
-            ".added-text"
-        ).forEach(
-        function(el){
-
-            el.remove();
-
-        });
-
-
-        data.addedTexts.forEach(
-        function(item,index){
-
-            const div =
-            document.createElement("div");
-
-
-            div.className =
-            "added-text";
-
-
-            div.textContent =
-            item.text;
-
-
-            const point =
-            data.viewport
-            .convertToViewportPoint(
-                item.x,
-                item.y
-            );
-
-
-            div.style.left =
-            point[0] + "px";
-
-
-            div.style.top =
-            (
-                point[1] -
-                item.fontSize
-            ) + "px";
-
-
-            div.style.fontSize =
-            (
-                item.fontSize *
-                data.viewport.scale
-            ) + "px";
-
-
-            div.style.fontFamily =
-            item.fontFamily;
-
-
-            div.style.fontWeight =
-            item.bold
-            ? "bold"
-            : "normal";
-
-
-            div.style.fontStyle =
-            item.italic
-            ? "italic"
-            : "normal";
-
-
-            div.style.textDecoration =
-            item.underline
-            ? "underline"
-            : "none";
-
-
-            div.style.color =
-            item.color;
-
-
-            div.addEventListener(
-            "click",
-            function(e){
-
-                e.stopPropagation();
-
-                selectAddedText(
-                    pageIndex,
-                    index,
-                    div
-                );
-
-            });
-
-
-            div.addEventListener(
-            "dblclick",
-            function(e){
-
-                e.stopPropagation();
-
-                const newValue =
-                prompt(
-                    "Edit text:",
-                    item.text
-                );
-
-
-                if(
-                    newValue !== null
-                ){
-
-                    item.text =
-                    newValue;
-
-                    renderAddedTexts();
-
-                }
-
-            });
-
-
-            makeAddedTextDraggable(
-                div,
-                item,
-                data
-            );
-
-
-            wrap.appendChild(
-                div
-            );
-
-        });
-
-    });
-
-}
-
-
-/* =========================================
-   SELECT NEW TEXT
-========================================= */
-
-function selectAddedText(
-    pageIndex,
-    textIndex,
-    element
-){
-
-    document
-    .querySelectorAll(
-        ".added-text.selected"
-    )
-    .forEach(
-    function(el){
-
-        el.classList.remove(
-            "selected"
-        );
-
-    });
-
-
-    element.classList.add(
-        "selected"
-    );
-
-
-    selectedObject = {
-
-        pageIndex:
-        pageIndex,
-
-        type:
-        "added",
-
-        index:
-        textIndex
-
-    };
-
-
-    /*
-    Reuse toolbar by creating a
-    temporary reference.
-    */
-
-    const data =
-    pagesData[pageIndex];
-
-
-    showAddedToolbar(
-        pageIndex,
-        textIndex,
-        element
-    );
-
-}
-
-
-/* =========================================
-   TOOLBAR FOR NEW TEXT
-========================================= */
-
-function showAddedToolbar(
-    pageIndex,
-    textIndex,
-    element
-){
-
-    hideAllToolbars();
-
-
-    const pageBox =
-    pagesContainer
-    .children[pageIndex];
-
-
-    const toolbar =
-    pageBox.querySelector(
-        ".floating-toolbar"
-    );
-
-
-    const item =
-    pagesData[
-        pageIndex
-    ].addedTexts[
-        textIndex
-    ];
-
-
-    toolbar.innerHTML =
-    "";
-
-
-    const font =
-    document.createElement("select");
-
-
-    [
-        "Helvetica",
-        "Times",
-        "Courier"
-    ].forEach(
-    function(f){
-
-        const option =
-        document.createElement("option");
-
-        option.value =
-        f;
-
-        option.textContent =
-        f;
-
-        if(
-            f ===
-            item.fontFamily
-        ){
-
-            option.selected =
-            true;
-
-        }
-
-        font.appendChild(
-            option
-        );
-
-    });
-
-
-    const size =
-    document.createElement("input");
-
-    size.type =
-    "number";
-
-    size.value =
-    item.fontSize;
-
-    size.min =
-    "6";
-
-    size.max =
-    "100";
-
-    size.style.width =
-    "55px";
-
-
-    const bold =
-    document.createElement("button");
-
-    bold.textContent =
-    "B";
-
-
-    const italic =
-    document.createElement("button");
-
-    italic.textContent =
-    "I";
-
-
-    const underline =
-    document.createElement("button");
-
-    underline.textContent =
-    "U";
-
-
-    const color =
-    document.createElement("input");
-
-    color.type =
-    "color";
-
-    color.className =
-    "color-input";
-
-    color.value =
-    item.color;
-
-
-    const del =
-    document.createElement("button");
-
-    del.className =
-    "danger";
-
-    del.textContent =
-    "🗑️";
-
-
-    [
-        font,
-        size,
-        bold,
-        italic,
-        underline,
-        color,
-        del
-    ].forEach(
-    function(el){
-
-        toolbar.appendChild(
-            el
-        );
-
-    });
-
-
-    toolbar.style.display =
-    "flex";
-
-
-    const spanRect =
-    element.getBoundingClientRect();
-
-
-    const containerRect =
-    element.parentElement
-    .getBoundingClientRect();
-
-
-    toolbar.style.left =
-    Math.max(
-        5,
-        spanRect.left -
-        containerRect.left
-    ) + "px";
-
-
-    toolbar.style.top =
-    Math.max(
-        5,
-        spanRect.top -
-        containerRect.top -
-        45
-    ) + "px";
-
-
-    font.onchange =
-    function(){
-
-        item.fontFamily =
-        this.value;
-
-        renderAddedTexts();
-
-        selectAddedText(
-            pageIndex,
-            textIndex,
-            pagesData[
-                pageIndex
-            ].canvas.parentElement
-            .querySelectorAll(
-                ".added-text"
-            )[textIndex]
-        );
-
-    };
-
-
-    size.onchange =
-    function(){
-
-        item.fontSize =
-        Number(this.value);
-
-        renderAddedTexts();
-
-    };
-
-
-    bold.onclick =
-    function(){
-
-        item.bold =
-        !item.bold;
-
-        renderAddedTexts();
-
-    };
-
-
-    italic.onclick =
-    function(){
-
-        item.italic =
-        !item.italic;
-
-        renderAddedTexts();
-
-    };
-
-
-    underline.onclick =
-    function(){
-
-        item.underline =
-        !item.underline;
-
-        renderAddedTexts();
-
-    };
-
-
-    color.oninput =
-    function(){
-
-        item.color =
-        this.value;
-
-        renderAddedTexts();
-
-    };
-
-
-    del.onclick =
-    function(){
-
-        pagesData[
-            pageIndex
-        ].addedTexts.splice(
-            textIndex,
-            1
-        );
-
-
-        selectedObject =
-        null;
-
-        hideAllToolbars();
-
-        renderAddedTexts();
-
-    };
-
-}
-
-
-/* =========================================
-   DRAG NEW TEXT
-========================================= */
-
-function makeAddedTextDraggable(
-    element,
-    item,
-    data
-){
-
-    let dragging =
-    false;
-
-
-    let startX =
-    0;
-
-    let startY =
-    0;
-
-
-    let originalX =
-    item.x;
-
-    let originalY =
-    item.y;
-
-
-    element.addEventListener(
-    "pointerdown",
-    function(e){
-
-        e.preventDefault();
-
-        e.stopPropagation();
-
-
-        dragging =
-        true;
-
-
-        startX =
-        e.clientX;
-
-        startY =
-        e.clientY;
-
-
-        originalX =
-        item.x;
-
-        originalY =
-        item.y;
-
-
-        element.setPointerCapture(
-            e.pointerId
-        );
-
-    });
-
-
-    element.addEventListener(
-    "pointermove",
-    function(e){
-
-        if(!dragging){
-            return;
-        }
-
-
-        const dx =
-        e.clientX -
-        startX;
-
-
-        const dy =
-        e.clientY -
-        startY;
-
-
-        item.x =
-        originalX +
-        (
-            dx /
-            data.viewport.scale
-        );
-
-
-        item.y =
-        originalY -
-        (
-            dy /
-            data.viewport.scale
-        );
-
-
-        const point =
-        data.viewport
-        .convertToViewportPoint(
-            item.x,
-            item.y
-        );
-
-
-        element.style.left =
-        point[0] + "px";
-
-
-        element.style.top =
-        (
-            point[1] -
-            item.fontSize
-        ) + "px";
-
-    });
-
-
-    element.addEventListener(
-    "pointerup",
-    function(){
-
-        dragging =
-        false;
-
-    });
-
-}
-
-
-/* =========================================
-   ADD TEXT BUTTON
-========================================= */
-
-addTextButton.addEventListener(
-"click",
-function(){
-
-    if(!originalPdfBytes){
-
-        alert(
-            "Please upload a PDF first."
-        );
-
-        return;
-
-    }
-
-
-    addTextMode =
-    !addTextMode;
-
-
-    if(addTextMode){
-
-        addTextButton.textContent =
-        "✏️ Click on PDF";
-
-
-        statusBox.textContent =
-        "PDF पर जहाँ नया text डालना है वहाँ click करें.";
-
-    }
-    else{
-
-        addTextButton.textContent =
-        "➕ Add Text";
-
-
-        statusBox.textContent =
-        "";
-
-    }
-
-});
-
-
-/* =========================================
-   OUTSIDE CLICK
-========================================= */
-
-document.addEventListener(
-"click",
-function(e){
-
-    if(
-        e.target.closest(
-            ".floating-toolbar"
-        )
-    ){
-
-        return;
-
-    }
-
-
-    if(
-        e.target.closest(
-            ".pdf-text"
-        )
-    ){
-
-        return;
-
-    }
-
-
-    if(
-        e.target.closest(
-            ".added-text"
-        )
-    ){
-
-        return;
-
-    }
-
-
-    hideAllToolbars();
-
-
-    document
-    .querySelectorAll(
-        ".selected"
-    )
-    .forEach(
-    function(el){
-
-        el.classList.remove(
-            "selected"
-        );
-
-    });
-
-
-    selectedObject =
-    null;
-
-});
-
-
-/* =========================================
-   DOWNLOAD PDF
-========================================= */
-
-downloadButton.addEventListener(
-"click",
-async function(){
-
-    if(!originalPdfBytes){
-
-        alert(
-            "Please upload a PDF first."
-        );
-
-        return;
-
-    }
-
-
-    downloadButton.disabled =
-    true;
-
-
-    downloadButton.textContent =
-    "⏳ Creating PDF...";
-
-
-    statusBox.textContent =
-    "Creating edited PDF...";
-
-
-    try{
-
-        const pdfBytes =
-        new Uint8Array(
-            originalPdfBytes
-        ).slice(0);
-
-
-        const sourcePdf =
-        await PDFLib.PDFDocument.load(
-            pdfBytes
-        );
-
-
-        const newPdf =
-        await PDFLib.PDFDocument.create();
-
-
-        const fonts = {
-
-            Helvetica:
-            await newPdf.embedFont(
-                PDFLib.StandardFonts.Helvetica
-            ),
-
-            Times:
-            await newPdf.embedFont(
-                PDFLib.StandardFonts.TimesRoman
-            ),
-
-            Courier:
-            await newPdf.embedFont(
-                PDFLib.StandardFonts.Courier
-            )
-
-        };
-
-
-        for(
-            let i=0;
-            i<sourcePdf.getPageCount();
-            i++
-        ){
-
-            if(
-                pageSettings[i] &&
-                pageSettings[i].deleted
-            ){
-
-                continue;
-
-            }
-
-
-            const copied =
-            await newPdf.copyPages(
-                sourcePdf,
-                [i]
-            );
-
-
-            const newPage =
-            copied[0];
-
-
-            /*
-            Existing edited text
-            */
-
-            const data =
-            pagesData[i];
-
-
-            for(
-                const item
-                of data.textItems
-            ){
-
-                if(
-                    !item.edited &&
-                    !item.deleted
-                ){
-
-                    continue;
-
-                }
-
-
-                /*
-                White rectangle covers
-                original text.
-                */
-
-                const coverWidth =
-                Math.max(
-                    item.width + 4,
-                    10
-                );
-
-
-                const coverHeight =
-                Math.max(
-                    item.height + 5,
-                    item.fontSize + 5
-                );
-
-
-                newPage.drawRectangle({
-
-                    x:
-                    item.x - 2,
-
-                    y:
-                    item.y -
-                    item.fontSize,
-
-                    width:
-                    coverWidth,
-
-                    height:
-                    coverHeight,
-
-                    color:
-                    PDFLib.rgb(
-                        1,
-                        1,
-                        1
-                    )
-
-                });
-
-
-                if(
-                    item.deleted
-                ){
-
-                    continue;
-
-                }
-
-
-                const font =
-                fonts[
-                    item.fontFamily
-                ] ||
-                fonts.Helvetica;
-
-
-                const rgb =
-                hexToRgb(
-                    item.color ||
-                    "#000000"
-                );
-
-
-                newPage.drawText(
-                    item.text,
-                    {
-
-                        x:
-                        item.x,
-
-                        y:
-                        item.y -
-                        item.fontSize,
-
-                        size:
-                        item.fontSize,
-
-                        font:
-                        font,
-
-                        color:
-                        PDFLib.rgb(
-                            rgb.r,
-                            rgb.g,
-                            rgb.b
-                        )
-
-                    }
-                );
-
-            }
-
-
-            /*
-            Newly added text
-            */
-
-            for(
-                const item
-                of data.addedTexts
-            ){
-
-                const font =
-                fonts[
-                    item.fontFamily
-                ] ||
-                fonts.Helvetica;
-
-
-                const rgb =
-                hexToRgb(
-                    item.color ||
-                    "#000000"
-                );
-
-
-                let x =
-                item.x;
-
-
-                const textWidth =
-                font.widthOfTextAtSize(
-                    item.text,
-                    item.fontSize
-                );
-
-
-                if(
-                    item.align ===
-                    "center"
-                ){
-
-                    x -=
-                    textWidth / 2;
-
-                }
-
-
-                if(
-                    item.align ===
-                    "right"
-                ){
-
-                    x -=
-                    textWidth;
-
-                }
-
-
-                newPage.drawText(
-                    item.text,
-                    {
-
-                        x:x,
-
-                        y:
-                        item.y -
-                        item.fontSize,
-
-                        size:
-                        item.fontSize,
-
-                        font:
-                        font,
-
-                        color:
-                        PDFLib.rgb(
-                            rgb.r,
-                            rgb.g,
-                            rgb.b
-                        )
-
-                    }
-                );
-
-            }
-
-
-            if(
-                pageSettings[i] &&
-                pageSettings[i].rotation
-            ){
-
-                newPage.setRotation(
-                    PDFLib.degrees(
-                        pageSettings[i].rotation
-                    )
-                );
-
-            }
-
-
-            newPdf.addPage(
-                newPage
-            );
-
-        }
-
-
-        if(
-            newPdf.getPageCount() === 0
-        ){
-
-            alert(
-                "You cannot delete all pages."
-            );
-
-            return;
-
-        }
-
-
-        const result =
-        await newPdf.save();
-
-
-        const blob =
-        new Blob(
-            [result],
-            {
-                type:
-                "application/pdf"
-            }
-        );
-
-
-        const url =
-        URL.createObjectURL(
-            blob
-        );
-
-
-        const link =
-        document.createElement("a");
-
-
-        link.href =
-        url;
-
-
-        link.download =
-        "edited-pdf.pdf";
-
-
-        document.body.appendChild(
-            link
-        );
-
-
-        link.click();
-
-
-        link.remove();
-
-
-        setTimeout(
-        function(){
-
-            URL.revokeObjectURL(
-                url
-            );
-
-        },
-        1000
-        );
-
-
-        statusBox.textContent =
-        "✅ Edited PDF downloaded successfully.";
-
-    }
-
-    catch(error){
-
-        console.error(
-            "PDF ERROR:",
-            error
-        );
-
-
-        alert(
-            "Could not create edited PDF.\n\n" +
-            error.message
-        );
-
-
-        statusBox.textContent =
-        "";
-
-    }
-
-
-    downloadButton.disabled =
-    false;
-
-
-    downloadButton.textContent =
-    "💾 Download Edited PDF";
-
-});
-
-
-/* =========================================
-   COLOR CONVERTER
-========================================= */
-
-function hexToRgb(hex){
-
-    hex =
-    hex.replace(
-        "#",
-        ""
-    );
-
-
-    if(hex.length === 3){
-
-        hex =
-        hex
-        .split("")
-        .map(
-        function(x){
-
-            return x + x;
-
-        })
-        .join("");
-
-    }
-
-
-    const number =
-    parseInt(
-        hex,
-        16
-    );
-
-
-    return {
-
-        r:
-        ((number >> 16) & 255)
-        / 255,
-
-        g:
-        ((number >> 8) & 255)
-        / 255,
-
-        b:
-        (number & 255)
-        / 255
-
-    };
-
-}
-
 </script>
 
 </body>
