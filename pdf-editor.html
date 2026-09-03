@@ -14,7 +14,7 @@
 }
 
 body{
-  font-family:Arial, sans-serif;
+  font-family:Arial,sans-serif;
   background:#f4f7fb;
   color:#222;
 }
@@ -79,7 +79,7 @@ body{
 .upload-btn:hover,
 .tool-btn:hover,
 .clear-btn:hover{
-  opacity:0.9;
+  opacity:.9;
 }
 
 #fileName{
@@ -102,8 +102,9 @@ body{
 .page{
   position:relative;
   background:#fff;
-  box-shadow:0 3px 15px rgba(0,0,0,0.18);
+  box-shadow:0 3px 15px rgba(0,0,0,.18);
   overflow:hidden;
+  flex-shrink:0;
 }
 
 .page canvas{
@@ -118,7 +119,7 @@ body{
   top:50px;
   font-size:20px;
   color:#000;
-  font-family:Arial, sans-serif;
+  font-family:Arial,sans-serif;
   font-weight:normal;
   padding:0;
   margin:0;
@@ -158,6 +159,10 @@ body{
   #pdf-container{
     padding:5px;
   }
+
+  .page{
+    max-width:100%;
+  }
 }
 </style>
 </head>
@@ -184,24 +189,21 @@ body{
   <button
     class="tool-btn"
     type="button"
-    onclick="addText()"
-  >
+    onclick="addText()">
     ✎ Add Text
   </button>
 
   <button
     class="tool-btn clear-btn"
     type="button"
-    onclick="clearTexts()"
-  >
+    onclick="clearTexts()">
     ✕ Clear Text
   </button>
 
   <button
     class="tool-btn"
     type="button"
-    onclick="downloadPDF()"
-  >
+    onclick="downloadPDF()">
     ⬇ Download PDF
   </button>
 
@@ -219,10 +221,8 @@ body{
 </div>
 
 
-<!-- PDF.JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
-<!-- JSPDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 
@@ -230,6 +230,7 @@ body{
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
 "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
 
 let pdfDocument = null;
 let pages = [];
@@ -239,67 +240,75 @@ let pages = [];
    PDF SELECT
 ========================= */
 
-document
-.getElementById("pdfFile")
-.addEventListener("change", function(e){
+document.getElementById("pdfFile").addEventListener(
+  "change",
+  function(e){
 
-  const file = e.target.files[0];
+    const file = e.target.files[0];
 
-  if(!file){
-    return;
+    if(!file){
+      return;
+    }
+
+    if(file.type !== "application/pdf"){
+      alert("Kripya PDF file select karein.");
+      return;
+    }
+
+    document.getElementById("fileName").innerText =
+      "Selected: " + file.name;
+
+
+    const reader = new FileReader();
+
+
+    reader.onload = function(){
+
+      const typedarray =
+        new Uint8Array(reader.result);
+
+
+      pdfjsLib.getDocument({
+        data:typedarray
+      }).promise.then(function(pdf){
+
+        pdfDocument = pdf;
+
+        renderPDF();
+
+      }).catch(function(error){
+
+        console.error(error);
+
+        alert(
+          "PDF load nahi ho pa raha hai."
+        );
+
+      });
+
+    };
+
+
+    reader.readAsArrayBuffer(file);
+
   }
-
-  document.getElementById("fileName").innerText =
-    "Selected: " + file.name;
-
-  const reader = new FileReader();
-
-  reader.onload = function(){
-
-    const typedarray =
-      new Uint8Array(reader.result);
-
-    pdfjsLib
-    .getDocument({
-      data:typedarray
-    })
-    .promise
-    .then(function(pdf){
-
-      pdfDocument = pdf;
-
-      renderPDF();
-
-    })
-    .catch(function(error){
-
-      console.error(error);
-
-      alert(
-        "PDF load nahi ho pa raha hai. Kripya valid PDF select karein."
-      );
-
-    });
-
-  };
-
-  reader.readAsArrayBuffer(file);
-
-});
+);
 
 
 /* =========================
-   RENDER PDF
+   RENDER ALL PDF PAGES
 ========================= */
 
-function renderPDF(){
+async function renderPDF(){
 
   const container =
     document.getElementById("pdf-container");
 
+
   container.innerHTML = "";
 
   pages = [];
+
 
   for(
     let pageNumber = 1;
@@ -307,7 +316,7 @@ function renderPDF(){
     pageNumber++
   ){
 
-    renderPage(pageNumber);
+    await renderPage(pageNumber);
 
   }
 
@@ -315,13 +324,12 @@ function renderPDF(){
 
 
 /* =========================
-   RENDER EACH PAGE
+   RENDER ONE PAGE
 ========================= */
 
 function renderPage(pageNumber){
 
-  pdfDocument
-  .getPage(pageNumber)
+  return pdfDocument.getPage(pageNumber)
   .then(function(page){
 
     const viewport =
@@ -329,16 +337,22 @@ function renderPage(pageNumber){
         scale:1.3
       });
 
+
     const pageDiv =
       document.createElement("div");
 
-    pageDiv.className = "page";
+
+    pageDiv.className =
+      "page";
+
 
     pageDiv.dataset.page =
       pageNumber;
 
+
     pageDiv.style.width =
       viewport.width + "px";
+
 
     pageDiv.style.height =
       viewport.height + "px";
@@ -347,6 +361,7 @@ function renderPage(pageNumber){
     const canvas =
       document.createElement("canvas");
 
+
     const context =
       canvas.getContext("2d");
 
@@ -354,27 +369,29 @@ function renderPage(pageNumber){
     canvas.width =
       viewport.width;
 
+
     canvas.height =
       viewport.height;
 
 
     pageDiv.appendChild(canvas);
 
+
     document
       .getElementById("pdf-container")
       .appendChild(pageDiv);
 
 
-    page.render({
+    pages.push(pageDiv);
+
+
+    return page.render({
 
       canvasContext:context,
 
       viewport:viewport
 
-    });
-
-
-    pages.push(pageDiv);
+    }).promise;
 
   });
 
@@ -457,14 +474,18 @@ function makeDraggable(element){
 
       dragging = true;
 
+
       const rect =
         element.getBoundingClientRect();
+
 
       offsetX =
         e.clientX - rect.left;
 
+
       offsetY =
         e.clientY - rect.top;
+
 
       e.preventDefault();
 
@@ -477,9 +498,7 @@ function makeDraggable(element){
     function(e){
 
       if(!dragging){
-
         return;
-
       }
 
 
@@ -503,26 +522,24 @@ function makeDraggable(element){
         offsetY;
 
 
-      x =
-        Math.max(
-          0,
-          Math.min(
-            x,
-            parent.clientWidth -
-            element.offsetWidth
-          )
-        );
+      x = Math.max(
+        0,
+        Math.min(
+          x,
+          parent.clientWidth -
+          element.offsetWidth
+        )
+      );
 
 
-      y =
-        Math.max(
-          0,
-          Math.min(
-            y,
-            parent.clientHeight -
-            element.offsetHeight
-          )
-        );
+      y = Math.max(
+        0,
+        Math.min(
+          y,
+          parent.clientHeight -
+          element.offsetHeight
+        )
+      );
 
 
       element.style.left =
@@ -566,7 +583,7 @@ function clearTexts(){
 
 
 /* =========================
-   DOWNLOAD PDF
+   DOWNLOAD ALL PAGES
 ========================= */
 
 async function downloadPDF(){
@@ -580,203 +597,204 @@ async function downloadPDF(){
   }
 
 
-  const firstPage =
-    document.querySelector(".page");
-
-
-  if(!firstPage){
-
-    return;
-
-  }
-
-
-  const originalCanvas =
-    firstPage.querySelector("canvas");
-
-
-  if(!originalCanvas){
-
-    return;
-
-  }
-
-
-  /*
-    Create new canvas
-    same size as preview
-  */
-
-  const exportCanvas =
-    document.createElement("canvas");
-
-
-  exportCanvas.width =
-    originalCanvas.width;
-
-
-  exportCanvas.height =
-    originalCanvas.height;
-
-
-  const ctx =
-    exportCanvas.getContext("2d");
-
-
-  /*
-    Draw original PDF
-  */
-
-  ctx.drawImage(
-
-    originalCanvas,
-
-    0,
-
-    0,
-
-    exportCanvas.width,
-
-    exportCanvas.height
-
-  );
-
-
-  const pageRect =
-    firstPage.getBoundingClientRect();
-
-
-  /*
-    Draw added text
-  */
-
-  firstPage
-  .querySelectorAll(".text-item")
-  .forEach(function(item){
-
-    const itemRect =
-      item.getBoundingClientRect();
-
-
-    const computed =
-      window.getComputedStyle(item);
-
-
-    const scaleX =
-      exportCanvas.width /
-      pageRect.width;
-
-
-    const scaleY =
-      exportCanvas.height /
-      pageRect.height;
-
-
-    const x =
-      (itemRect.left -
-      pageRect.left) *
-      scaleX;
-
-
-    const y =
-      (itemRect.top -
-      pageRect.top) *
-      scaleY;
-
-
-    const fontSize =
-      parseFloat(
-        computed.fontSize
-      ) * scaleY;
-
-
-    ctx.font =
-      computed.fontWeight +
-      " " +
-      fontSize +
-      "px " +
-      computed.fontFamily;
-
-
-    ctx.fillStyle =
-      computed.color;
-
-
-    ctx.textBaseline =
-      "top";
-
-
-    ctx.fillText(
-
-      item.innerText,
-
-      x,
-
-      y
-
-    );
-
-  });
-
-
-  /*
-    Create PDF
-  */
-
   const {
     jsPDF
   } = window.jspdf;
 
 
-  const pdf =
-    new jsPDF({
-
-      orientation:
-        exportCanvas.width >
-        exportCanvas.height
-          ? "l"
-          : "p",
-
-      unit:"px",
-
-      format:[
-
-        exportCanvas.width,
-
-        exportCanvas.height
-
-      ]
-
-    });
+  let outputPDF = null;
 
 
-  const imgData =
-    exportCanvas.toDataURL(
-      "image/jpeg",
-      0.95
+  const allPages =
+    document.querySelectorAll(".page");
+
+
+  if(allPages.length === 0){
+
+    return;
+
+  }
+
+
+  for(
+    let pageIndex = 0;
+    pageIndex < allPages.length;
+    pageIndex++
+  ){
+
+    const pageDiv =
+      allPages[pageIndex];
+
+
+    const originalCanvas =
+      pageDiv.querySelector("canvas");
+
+
+    if(!originalCanvas){
+      continue;
+    }
+
+
+    const exportCanvas =
+      document.createElement("canvas");
+
+
+    exportCanvas.width =
+      originalCanvas.width;
+
+
+    exportCanvas.height =
+      originalCanvas.height;
+
+
+    const ctx =
+      exportCanvas.getContext("2d");
+
+
+    /* Draw original PDF */
+
+    ctx.drawImage(
+      originalCanvas,
+      0,
+      0,
+      exportCanvas.width,
+      exportCanvas.height
     );
 
 
-  pdf.addImage(
-
-    imgData,
-
-    "JPEG",
-
-    0,
-
-    0,
-
-    exportCanvas.width,
-
-    exportCanvas.height
-
-  );
+    const pageRect =
+      pageDiv.getBoundingClientRect();
 
 
-  pdf.save(
-    "edited-pdf.pdf"
-  );
+    /* Draw text */
+
+    pageDiv
+      .querySelectorAll(".text-item")
+      .forEach(function(item){
+
+        const itemRect =
+          item.getBoundingClientRect();
+
+
+        const computed =
+          window.getComputedStyle(item);
+
+
+        const scaleX =
+          exportCanvas.width /
+          pageRect.width;
+
+
+        const scaleY =
+          exportCanvas.height /
+          pageRect.height;
+
+
+        const x =
+          (itemRect.left -
+          pageRect.left) *
+          scaleX;
+
+
+        const y =
+          (itemRect.top -
+          pageRect.top) *
+          scaleY;
+
+
+        const fontSize =
+          parseFloat(
+            computed.fontSize
+          ) * scaleY;
+
+
+        ctx.font =
+          computed.fontWeight +
+          " " +
+          fontSize +
+          "px " +
+          computed.fontFamily;
+
+
+        ctx.fillStyle =
+          computed.color;
+
+
+        ctx.textBaseline =
+          "top";
+
+
+        ctx.fillText(
+          item.innerText,
+          x,
+          y
+        );
+
+      });
+
+
+    const imgData =
+      exportCanvas.toDataURL(
+        "image/jpeg",
+        0.95
+      );
+
+
+    const orientation =
+      exportCanvas.width >
+      exportCanvas.height
+        ? "l"
+        : "p";
+
+
+    if(pageIndex === 0){
+
+      outputPDF =
+        new jsPDF({
+
+          orientation:orientation,
+
+          unit:"px",
+
+          format:[
+            exportCanvas.width,
+            exportCanvas.height
+          ]
+
+        });
+
+    }else{
+
+      outputPDF.addPage(
+        [
+          exportCanvas.width,
+          exportCanvas.height
+        ],
+        orientation
+      );
+
+    }
+
+
+    outputPDF.addImage(
+      imgData,
+      "JPEG",
+      0,
+      0,
+      exportCanvas.width,
+      exportCanvas.height
+    );
+
+  }
+
+
+  if(outputPDF){
+
+    outputPDF.save(
+      "edited-pdf.pdf"
+    );
+
+  }
 
 }
 
