@@ -3,576 +3,675 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>PDF Editor - PDF Editor Tools Free</title>
 
 <meta name="description"
-      content="Free online PDF editor. Add, edit, style and move text in PDF.">
+content="Free online PDF editor. Edit existing text, add text, replace barcode and download PDF.">
 
 <style>
 
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#f5f6fa;
-  color:#202124;
+font-family:Arial,Helvetica,sans-serif;
+background:#f5f6fa;
+color:#202124;
 }
 
-/* HEADER */
-
 .pe-header{
-  background:#fff;
-  border-bottom:1px solid #e5e7eb;
-  position:sticky;
-  top:0;
-  z-index:1000;
+background:#fff;
+border-bottom:1px solid #e5e7eb;
+position:sticky;
+top:0;
+z-index:1000;
 }
 
 .pe-nav{
-  max-width:1200px;
-  margin:auto;
-  min-height:68px;
-  padding:0 20px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+max-width:1200px;
+margin:auto;
+min-height:68px;
+padding:0 20px;
+display:flex;
+align-items:center;
+justify-content:space-between;
 }
 
 .pe-logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-size:21px;
-  font-weight:800;
-  color:#e53232;
-  text-decoration:none;
+display:flex;
+align-items:center;
+gap:10px;
+font-size:21px;
+font-weight:800;
+color:#e53232;
+text-decoration:none;
 }
 
 .pe-logo-icon{
-  width:40px;
-  height:40px;
-  background:#e53232;
-  color:#fff;
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:14px;
-  font-weight:800;
+width:40px;
+height:40px;
+background:#e53232;
+color:#fff;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:14px;
+font-weight:800;
 }
 
 .pe-menu{
-  display:flex;
-  gap:25px;
+display:flex;
+gap:25px;
 }
 
 .pe-menu a{
-  color:#444;
-  text-decoration:none;
-  font-size:14px;
-  font-weight:600;
+color:#444;
+text-decoration:none;
+font-size:14px;
+font-weight:600;
 }
 
 .pe-menu a:hover{
-  color:#e53232;
+color:#e53232;
 }
 
-/* HERO */
-
 .pe-hero{
-  text-align:center;
-  padding:42px 20px 35px;
-  background:linear-gradient(135deg,#fff5f5,#fff);
+text-align:center;
+padding:42px 20px 35px;
+background:linear-gradient(135deg,#fff5f5,#fff);
 }
 
 .pe-hero h1{
-  font-size:40px;
-  font-weight:800;
-  line-height:1.2;
+font-size:40px;
+font-weight:800;
+line-height:1.2;
 }
 
 .pe-hero h1 span{
-  color:#e53232;
+color:#e53232;
 }
 
 .pe-hero p{
-  max-width:700px;
-  margin:13px auto 0;
-  color:#6b7280;
-  font-size:16px;
-  line-height:1.6;
+max-width:760px;
+margin:13px auto 0;
+color:#6b7280;
+font-size:16px;
+line-height:1.6;
 }
-
-/* MAIN */
 
 .pe-editor-container{
-  max-width:1200px;
-  margin:auto;
-  padding:30px 20px 60px;
+max-width:1200px;
+margin:auto;
+padding:30px 20px 60px;
 }
 
-/* TOOLBAR */
-
 .pe-toolbar{
-  background:#fff;
-  border:1px solid #e5e7eb;
-  border-radius:15px;
-  padding:16px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
-  box-shadow:0 5px 20px rgba(0,0,0,.05);
-  margin-bottom:18px;
+background:#fff;
+border:1px solid #e5e7eb;
+border-radius:15px;
+padding:16px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+box-shadow:0 5px 20px rgba(0,0,0,.05);
+margin-bottom:18px;
 }
 
 .pe-toolbar input[type="file"]{
-  display:none;
+display:none;
 }
 
 .pe-btn{
-  border:none;
-  background:#e53232;
-  color:#fff;
-  padding:11px 18px;
-  border-radius:8px;
-  font-size:14px;
-  font-weight:700;
-  cursor:pointer;
-  transition:.2s;
+border:none;
+background:#e53232;
+color:#fff;
+padding:11px 18px;
+border-radius:8px;
+font-size:14px;
+font-weight:700;
+cursor:pointer;
+transition:.2s;
 }
 
 .pe-btn:hover{
-  transform:translateY(-1px);
-  box-shadow:0 5px 12px rgba(0,0,0,.12);
+transform:translateY(-1px);
+box-shadow:0 5px 12px rgba(0,0,0,.12);
 }
 
 .pe-btn.secondary{
-  background:#fff0f0;
-  color:#d92828;
-  border:1px solid #f1b4b4;
-}
-
-.pe-btn.dark{
-  background:#e53232;
-  color:#fff;
+background:#fff0f0;
+color:#d92828;
+border:1px solid #f1b4b4;
 }
 
 .pe-btn.gray{
-  background:#f1f3f5;
-  color:#333;
-  border:1px solid #ddd;
+background:#f1f3f5;
+color:#333;
+border:1px solid #ddd;
 }
 
 .pe-btn:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-  transform:none;
-  box-shadow:none;
+opacity:.45;
+cursor:not-allowed;
+transform:none;
+box-shadow:none;
+}
+
+#fileName,
+#status{
+width:100%;
+text-align:center;
+font-size:13px;
+min-height:18px;
 }
 
 #fileName{
-  width:100%;
-  text-align:center;
-  color:#777;
-  font-size:13px;
-  min-height:18px;
+color:#777;
 }
 
 #status{
-  width:100%;
-  text-align:center;
-  font-size:13px;
-  color:#666;
-  min-height:18px;
+color:#666;
 }
 
-/* TEXT TOOLBAR */
-
 .text-tools{
-  width:100%;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  flex-wrap:wrap;
-  padding:12px;
-  margin-top:4px;
-  background:#fafafa;
-  border:1px solid #e5e7eb;
-  border-radius:10px;
+width:100%;
+display:none;
+align-items:center;
+justify-content:center;
+gap:8px;
+flex-wrap:wrap;
+padding:12px;
+margin-top:4px;
+background:#fafafa;
+border:1px solid #e5e7eb;
+border-radius:10px;
 }
 
 .text-tools.show{
-  display:flex;
+display:flex;
 }
 
 .text-tools select,
 .text-tools input[type="number"]{
-  height:38px;
-  border:1px solid #d8dbe0;
-  border-radius:7px;
-  padding:0 9px;
-  background:#fff;
-  font-size:13px;
-  outline:none;
+height:38px;
+border:1px solid #d8dbe0;
+border-radius:7px;
+padding:0 9px;
+background:#fff;
+font-size:13px;
+outline:none;
 }
 
 .text-tools select{
-  min-width:145px;
+min-width:145px;
 }
 
 .text-tools input[type="number"]{
-  width:80px;
+width:80px;
 }
 
 .color-wrap{
-  height:38px;
-  display:flex;
-  align-items:center;
-  gap:6px;
-  padding:0 8px;
-  background:#fff;
-  border:1px solid #d8dbe0;
-  border-radius:7px;
-  font-size:12px;
-  color:#555;
+height:38px;
+display:flex;
+align-items:center;
+gap:6px;
+padding:0 8px;
+background:#fff;
+border:1px solid #d8dbe0;
+border-radius:7px;
+font-size:12px;
+color:#555;
 }
 
 .color-wrap input{
-  width:30px;
-  height:28px;
-  border:none;
-  padding:0;
-  cursor:pointer;
-  background:none;
+width:30px;
+height:28px;
+border:none;
+padding:0;
+cursor:pointer;
+background:none;
 }
 
 .style-btn{
-  height:38px;
-  min-width:40px;
-  border:1px solid #d8dbe0;
-  border-radius:7px;
-  background:#fff;
-  cursor:pointer;
-  font-size:15px;
-  font-weight:700;
+height:38px;
+min-width:40px;
+border:1px solid #d8dbe0;
+border-radius:7px;
+background:#fff;
+cursor:pointer;
+font-size:15px;
+font-weight:700;
 }
 
 .style-btn.active{
-  background:#e53232;
-  color:#fff;
-  border-color:#e53232;
+background:#e53232;
+color:#fff;
+border-color:#e53232;
 }
 
 .style-btn.delete{
-  color:#d92828;
+color:#d92828;
 }
 
-/* PDF AREA */
-
 .pe-pdf-area{
-  background:#e7e9ef;
-  border:1px solid #dfe1e7;
-  border-radius:15px;
-  padding:25px 12px;
-  min-height:350px;
-  overflow:auto;
+background:#e7e9ef;
+border:1px solid #dfe1e7;
+border-radius:15px;
+padding:25px 12px;
+min-height:350px;
+overflow:auto;
 }
 
 #pdf-container{
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:28px;
+width:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:28px;
 }
 
-/* EMPTY */
-
 .pe-empty{
-  min-height:300px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  color:#777;
+min-height:300px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:#777;
 }
 
 .pe-empty-icon{
-  width:70px;
-  height:70px;
-  background:#fff0f0;
-  color:#e53232;
-  border-radius:16px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:800;
-  margin-bottom:15px;
+width:70px;
+height:70px;
+background:#fff0f0;
+color:#e53232;
+border-radius:16px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:800;
+margin-bottom:15px;
 }
 
 .pe-empty h3{
-  color:#444;
-  margin-bottom:7px;
+color:#444;
+margin-bottom:7px;
 }
 
 .pe-empty p{
-  font-size:14px;
+font-size:14px;
 }
-
-/* PDF PAGE */
 
 .pdf-page{
-  position:relative;
-  background:#fff;
-  box-shadow:0 6px 25px rgba(0,0,0,.18);
-  overflow:hidden;
-  flex-shrink:0;
-  width:850px;
-  max-width:100%;
+position:relative;
+background:#fff;
+box-shadow:0 6px 25px rgba(0,0,0,.18);
+overflow:hidden;
+flex-shrink:0;
+width:850px;
+max-width:100%;
 }
 
-.pdf-page canvas{
-  display:block;
-  width:100%;
-  height:auto;
+.pdf-page canvas.pdf-canvas{
+display:block;
+width:100%;
+height:auto;
 }
-
-/* PAGE NUMBER */
 
 .page-number{
-  position:absolute;
-  top:8px;
-  right:8px;
-  background:rgba(32,33,36,.78);
-  color:#fff;
-  padding:4px 8px;
-  border-radius:5px;
-  font-size:10px;
-  z-index:50;
+position:absolute;
+top:8px;
+right:8px;
+background:rgba(32,33,36,.78);
+color:#fff;
+padding:4px 8px;
+border-radius:5px;
+font-size:10px;
+z-index:100;
 }
 
-/* TEXT */
+/* NEW TEXT */
 
 .pdf-text{
-  position:absolute;
-  color:#000;
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:20px;
-  font-weight:400;
-  font-style:normal;
-  line-height:1.2;
-  white-space:nowrap;
-  cursor:move;
-  user-select:none;
-  touch-action:none;
-  z-index:20;
-  padding:2px 4px;
-  border:1px solid transparent;
-  min-height:25px;
+position:absolute;
+color:#000;
+font-family:Arial,Helvetica,sans-serif;
+font-size:20px;
+font-weight:400;
+font-style:normal;
+line-height:1.2;
+white-space:nowrap;
+cursor:move;
+user-select:none;
+touch-action:none;
+z-index:30;
+padding:2px 4px;
+border:1px solid transparent;
+min-height:25px;
 }
 
 .pdf-text.selected{
-  border:1px dashed #e53232;
-  background:rgba(255,255,255,.15);
+border:1px dashed #e53232;
+background:rgba(255,255,255,.25);
 }
 
 .pdf-text:hover{
-  border:1px dashed #e53232;
+border:1px dashed #e53232;
+}
+
+/* EXISTING PDF TEXT */
+
+.existing-text-layer{
+position:absolute;
+inset:0;
+z-index:25;
+pointer-events:none;
+}
+
+.existing-text{
+position:absolute;
+pointer-events:auto;
+cursor:pointer;
+white-space:pre;
+color:transparent;
+background:rgba(229,50,50,.02);
+border:1px solid transparent;
+line-height:1;
+}
+
+.existing-text:hover{
+border:1px dashed #e53232;
+background:rgba(229,50,50,.08);
+}
+
+.existing-text.selected{
+border:2px dashed #e53232;
+background:rgba(229,50,50,.12);
+}
+
+/* BARCODE */
+
+.barcode-object{
+position:absolute;
+z-index:40;
+background:#fff;
+border:1px dashed transparent;
+cursor:move;
+touch-action:none;
+user-select:none;
+}
+
+.barcode-object.selected{
+border:2px dashed #e53232;
+}
+
+.barcode-object canvas{
+display:block;
+width:100%;
+height:100%;
+pointer-events:none;
+}
+
+.barcode-label{
+position:absolute;
+top:-22px;
+left:0;
+background:#e53232;
+color:#fff;
+font-size:10px;
+padding:3px 6px;
+border-radius:4px;
+display:none;
+white-space:nowrap;
+}
+
+.barcode-object.selected .barcode-label{
+display:block;
+}
+
+.resize-handle{
+position:absolute;
+right:-6px;
+bottom:-6px;
+width:12px;
+height:12px;
+background:#e53232;
+border:2px solid #fff;
+border-radius:50%;
+cursor:nwse-resize;
+display:none;
+}
+
+.barcode-object.selected .resize-handle{
+display:block;
+}
+
+/* BARCODE TOOL PANEL */
+
+.barcode-tools{
+display:none;
+width:100%;
+align-items:center;
+justify-content:center;
+gap:8px;
+flex-wrap:wrap;
+padding:12px;
+background:#fafafa;
+border:1px solid #e5e7eb;
+border-radius:10px;
+}
+
+.barcode-tools.show{
+display:flex;
+}
+
+.barcode-tools input,
+.barcode-tools select{
+height:38px;
+border:1px solid #d8dbe0;
+border-radius:7px;
+padding:0 9px;
+background:#fff;
+font-size:13px;
+}
+
+.barcode-tools input{
+width:180px;
 }
 
 /* INFO */
 
 .pe-info{
-  background:#fff;
-  border:1px solid #e5e7eb;
-  border-radius:15px;
-  padding:25px;
-  margin-top:20px;
-  text-align:center;
+background:#fff;
+border:1px solid #e5e7eb;
+border-radius:15px;
+padding:25px;
+margin-top:20px;
+text-align:center;
 }
 
 .pe-info h2{
-  font-size:22px;
-  margin-bottom:8px;
+font-size:22px;
+margin-bottom:8px;
 }
 
 .pe-info p{
-  color:#777;
-  font-size:14px;
-  line-height:1.6;
+color:#777;
+font-size:14px;
+line-height:1.6;
 }
 
 /* FOOTER */
 
 .pe-footer{
-  background:#17181a;
-  color:#aaa;
-  padding:40px 20px;
+background:#17181a;
+color:#aaa;
+padding:40px 20px;
 }
 
 .pe-footer-inner{
-  max-width:1200px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  gap:30px;
+max-width:1200px;
+margin:auto;
+display:flex;
+justify-content:space-between;
+gap:30px;
 }
 
 .pe-footer h3{
-  color:#fff;
-  margin-bottom:10px;
+color:#fff;
+margin-bottom:10px;
 }
 
 .pe-footer p{
-  font-size:14px;
-  line-height:1.6;
+font-size:14px;
+line-height:1.6;
 }
 
 .pe-footer-links{
-  display:flex;
-  gap:20px;
-  flex-wrap:wrap;
+display:flex;
+gap:20px;
+flex-wrap:wrap;
 }
 
 .pe-footer-links a{
-  color:#aaa;
-  text-decoration:none;
+color:#aaa;
+text-decoration:none;
 }
 
 .pe-footer-links a:hover{
-  color:#fff;
+color:#fff;
 }
 
 /* LOADING */
 
 .loading{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(255,255,255,.75);
-  z-index:9999;
-  align-items:center;
-  justify-content:center;
+display:none;
+position:fixed;
+inset:0;
+background:rgba(255,255,255,.75);
+z-index:9999;
+align-items:center;
+justify-content:center;
 }
 
 .loading-box{
-  background:#fff;
-  padding:25px 30px;
-  border-radius:14px;
-  box-shadow:0 10px 40px rgba(0,0,0,.15);
-  text-align:center;
+background:#fff;
+padding:25px 30px;
+border-radius:14px;
+box-shadow:0 10px 40px rgba(0,0,0,.15);
+text-align:center;
 }
 
 .spinner{
-  width:38px;
-  height:38px;
-  border:4px solid #eee;
-  border-top-color:#e53232;
-  border-radius:50%;
-  animation:spin .8s linear infinite;
-  margin:0 auto 12px;
+width:38px;
+height:38px;
+border:4px solid #eee;
+border-top-color:#e53232;
+border-radius:50%;
+animation:spin .8s linear infinite;
+margin:0 auto 12px;
 }
 
 @keyframes spin{
-  to{
-    transform:rotate(360deg);
-  }
+to{transform:rotate(360deg);}
 }
 
-/* MOBILE */
+/* AREA SELECT */
+
+.area-selector{
+position:absolute;
+z-index:200;
+border:2px dashed #e53232;
+background:rgba(229,50,50,.08);
+display:none;
+pointer-events:none;
+}
 
 @media(max-width:700px){
 
-  .pe-nav{
-    min-height:60px;
-    padding:7px 12px;
-  }
+.pe-nav{
+min-height:60px;
+padding:7px 12px;
+}
 
-  .pe-logo{
-    font-size:17px;
-  }
+.pe-logo{
+font-size:17px;
+}
 
-  .pe-logo-icon{
-    width:35px;
-    height:35px;
-  }
+.pe-logo-icon{
+width:35px;
+height:35px;
+}
 
-  .pe-menu{
-    display:none;
-  }
+.pe-menu{
+display:none;
+}
 
-  .pe-hero{
-    padding:32px 15px 28px;
-  }
+.pe-hero{
+padding:32px 15px 28px;
+}
 
-  .pe-hero h1{
-    font-size:29px;
-  }
+.pe-hero h1{
+font-size:29px;
+}
 
-  .pe-hero p{
-    font-size:14px;
-  }
+.pe-hero p{
+font-size:14px;
+}
 
-  .pe-editor-container{
-    padding:20px 8px 40px;
-  }
+.pe-editor-container{
+padding:20px 8px 40px;
+}
 
-  .pe-toolbar{
-    padding:13px 10px;
-  }
+.pe-toolbar{
+padding:13px 10px;
+}
 
-  .pe-btn{
-    width:100%;
-  }
+.pe-btn{
+width:100%;
+}
 
-  .text-tools{
-    padding:10px;
-  }
+.text-tools,
+.barcode-tools{
+padding:10px;
+}
 
-  .text-tools select{
-    width:100%;
-  }
+.text-tools select{
+width:100%;
+}
 
-  .text-tools input[type="number"]{
-    width:90px;
-  }
+.style-btn{
+flex:1;
+}
 
-  .style-btn{
-    flex:1;
-  }
+.pe-pdf-area{
+padding:12px 4px;
+}
 
-  .pe-pdf-area{
-    padding:12px 4px;
-  }
+#pdf-container{
+gap:20px;
+}
 
-  #pdf-container{
-    gap:20px;
-  }
+.pdf-page{
+width:100%;
+max-width:850px;
+}
 
-  .pdf-page{
-    width:100%;
-    max-width:850px;
-  }
+.pe-info{
+padding:20px 14px;
+}
 
-  .pe-info{
-    padding:20px 14px;
-  }
-
-  .pe-footer-inner{
-    flex-direction:column;
-  }
+.pe-footer-inner{
+flex-direction:column;
+}
 
 }
 
@@ -582,340 +681,324 @@ body{
 
 <body>
 
-<!-- HEADER -->
-
 <header class="pe-header">
 
-  <div class="pe-nav">
+<div class="pe-nav">
 
-    <a href="index.html" class="pe-logo">
+<a href="index.html" class="pe-logo">
 
-      <div class="pe-logo-icon">
-        PDF
-      </div>
+<div class="pe-logo-icon">
+PDF
+</div>
 
-      PDF Editor Tools
+PDF Editor Tools
 
-    </a>
+</a>
 
-    <nav class="pe-menu">
+<nav class="pe-menu">
 
-      <a href="index.html#pdf-tools">
-        PDF Tools
-      </a>
+<a href="index.html#pdf-tools">PDF Tools</a>
+<a href="index.html#convert-tools">Convert</a>
+<a href="index.html#image-tools">Image Tools</a>
+<a href="index.html#about">About</a>
 
-      <a href="index.html#convert-tools">
-        Convert
-      </a>
-
-      <a href="index.html#image-tools">
-        Image Tools
-      </a>
-
-      <a href="index.html#about">
-        About
-      </a>
-
-    </nav>
-
-  </div>
-
-</header>
-
-<!-- HERO -->
-
-<section class="pe-hero">
-
-  <h1>
-    Edit your <span>PDF</span> online
-  </h1>
-
-  <p>
-    Add text to your PDF, style it, move it anywhere
-    and download your edited PDF with high quality.
-  </p>
-
-</section>
-
-<!-- EDITOR -->
-
-<main class="pe-editor-container">
-
-  <!-- TOOLBAR -->
-
-  <div class="pe-toolbar">
-
-    <label
-      for="pdfFile"
-      class="pe-btn">
-
-      Choose PDF
-
-    </label>
-
-    <input
-      type="file"
-      id="pdfFile"
-      accept="application/pdf">
-
-    <button
-      type="button"
-      class="pe-btn secondary"
-      id="addTextBtn"
-      disabled>
-
-      ✎ Add Text
-
-    </button>
-
-    <button
-      type="button"
-      class="pe-btn secondary"
-      id="clearTextBtn"
-      disabled>
-
-      🗑 Clear Text
-
-    </button>
-
-    <button
-      type="button"
-      class="pe-btn"
-      id="downloadBtn"
-      disabled>
-
-      ⇩ Download PDF
-
-    </button>
-
-    <!-- TEXT CONTROLS -->
-
-    <div
-      class="text-tools"
-      id="textTools">
-
-      <select id="fontFamily">
-
-        <option value="Arial">
-          Arial
-        </option>
-
-        <option value="Helvetica">
-          Helvetica
-        </option>
-
-        <option value="Times New Roman">
-          Times New Roman
-        </option>
-
-        <option value="Courier New">
-          Courier New
-        </option>
-
-        <option value="Georgia">
-          Georgia
-        </option>
-
-      </select>
-
-      <input
-        type="number"
-        id="fontSize"
-        min="8"
-        max="100"
-        value="20"
-        title="Font Size">
-
-      <button
-        type="button"
-        class="style-btn"
-        id="boldBtn"
-        title="Bold">
-
-        B
-
-      </button>
-
-      <button
-        type="button"
-        class="style-btn"
-        id="italicBtn"
-        title="Italic">
-
-        I
-
-      </button>
-
-      <div class="color-wrap">
-
-        <span>Color</span>
-
-        <input
-          type="color"
-          id="textColor"
-          value="#000000">
-
-      </div>
-
-      <button
-        type="button"
-        class="style-btn"
-        id="editTextBtn"
-        title="Edit Text">
-
-        ✎
-
-      </button>
-
-      <button
-        type="button"
-        class="style-btn delete"
-        id="deleteTextBtn"
-        title="Delete Selected Text">
-
-        🗑
-
-      </button>
-
-    </div>
-
-    <div id="fileName">
-      No PDF selected
-    </div>
-
-    <div id="status"></div>
-
-  </div>
-
-  <!-- PDF PREVIEW -->
-
-  <div class="pe-pdf-area">
-
-    <div
-      id="emptyMessage"
-      class="pe-empty">
-
-      <div class="pe-empty-icon">
-        PDF
-      </div>
-
-      <h3>
-        Choose a PDF file
-      </h3>
-
-      <p>
-        Upload your PDF to start editing.
-      </p>
-
-    </div>
-
-    <div id="pdf-container"></div>
-
-  </div>
-
-  <!-- INFO -->
-
-  <div class="pe-info">
-
-    <h2>
-      Free Online PDF Editor
-    </h2>
-
-    <p>
-      Upload your PDF, add text, change font,
-      size, color, style and position. Your original
-      PDF quality is preserved.
-    </p>
-
-  </div>
-
-</main>
-
-<!-- FOOTER -->
-
-<footer class="pe-footer">
-
-  <div class="pe-footer-inner">
-
-    <div>
-
-      <h3>
-        PDF Editor Tools Free
-      </h3>
-
-      <p>
-        Simple online PDF and image tools for everyone.
-      </p>
-
-    </div>
-
-    <div class="pe-footer-links">
-
-      <a href="index.html#pdf-tools">
-        PDF Tools
-      </a>
-
-      <a href="index.html#convert-tools">
-        Convert
-      </a>
-
-      <a href="index.html#image-tools">
-        Image Tools
-      </a>
-
-      <a href="index.html#about">
-        About
-      </a>
-
-    </div>
-
-  </div>
-
-</footer>
-
-<!-- LOADING -->
-
-<div
-  id="loading"
-  class="loading">
-
-  <div class="loading-box">
-
-    <div class="spinner"></div>
-
-    <div id="loadingText">
-      Processing PDF...
-    </div>
-
-  </div>
+</nav>
 
 </div>
 
-<!-- PDF.JS -->
+</header>
+
+<section class="pe-hero">
+
+<h1>
+Edit your <span>PDF</span> online
+</h1>
+
+<p>
+Edit existing text, delete text, add new text,
+replace barcode, move elements and download your PDF.
+</p>
+
+</section>
+
+<main class="pe-editor-container">
+
+<div class="pe-toolbar">
+
+<label for="pdfFile" class="pe-btn">
+Choose PDF
+</label>
+
+<input
+type="file"
+id="pdfFile"
+accept="application/pdf">
+
+<button
+type="button"
+class="pe-btn secondary"
+id="addTextBtn"
+disabled>
+✎ Add Text
+</button>
+
+<button
+type="button"
+class="pe-btn secondary"
+id="replaceBarcodeBtn"
+disabled>
+▣ Replace Barcode
+</button>
+
+<button
+type="button"
+class="pe-btn secondary"
+id="addBarcodeBtn"
+disabled>
+▦ Add Barcode
+</button>
+
+<button
+type="button"
+class="pe-btn gray"
+id="clearBtn"
+disabled>
+🗑 Clear Added
+</button>
+
+<button
+type="button"
+class="pe-btn"
+id="downloadBtn"
+disabled>
+⇩ Download PDF
+</button>
+
+<!-- TEXT TOOLS -->
+
+<div class="text-tools" id="textTools">
+
+<select id="fontFamily">
+
+<option value="Arial">Arial</option>
+<option value="Helvetica">Helvetica</option>
+<option value="Times New Roman">Times New Roman</option>
+<option value="Courier New">Courier New</option>
+<option value="Georgia">Georgia</option>
+
+</select>
+
+<input
+type="number"
+id="fontSize"
+min="8"
+max="100"
+value="20">
+
+<button
+type="button"
+class="style-btn"
+id="boldBtn">
+B
+</button>
+
+<button
+type="button"
+class="style-btn"
+id="italicBtn">
+I
+</button>
+
+<div class="color-wrap">
+
+<span>Color</span>
+
+<input
+type="color"
+id="textColor"
+value="#000000">
+
+</div>
+
+<button
+type="button"
+class="style-btn"
+id="editTextBtn">
+✎
+</button>
+
+<button
+type="button"
+class="style-btn delete"
+id="deleteTextBtn">
+🗑
+</button>
+
+</div>
+
+<!-- BARCODE TOOLS -->
+
+<div
+class="barcode-tools"
+id="barcodeTools">
+
+<select id="barcodeType">
+
+<option value="CODE128">CODE128</option>
+<option value="EAN13">EAN13</option>
+<option value="EAN8">EAN8</option>
+<option value="UPC">UPC</option>
+<option value="CODE39">CODE39</option>
+
+</select>
+
+<input
+type="text"
+id="barcodeValue"
+placeholder="Barcode value">
+
+<button
+type="button"
+class="pe-btn"
+id="updateBarcodeBtn">
+Update Barcode
+</button>
+
+<button
+type="button"
+class="style-btn delete"
+id="deleteBarcodeBtn">
+🗑
+</button>
+
+</div>
+
+<div id="fileName">
+No PDF selected
+</div>
+
+<div id="status"></div>
+
+</div>
+
+<div class="pe-pdf-area">
+
+<div id="emptyMessage" class="pe-empty">
+
+<div class="pe-empty-icon">
+PDF
+</div>
+
+<h3>
+Choose a PDF file
+</h3>
+
+<p>
+Upload your PDF to start editing.
+</p>
+
+</div>
+
+<div id="pdf-container"></div>
+
+</div>
+
+<div class="pe-info">
+
+<h2>
+Free Online PDF Editor
+</h2>
+
+<p>
+Select existing PDF text to edit or delete it.
+You can also add new text, add/replace barcode,
+move elements and download the edited PDF.
+</p>
+
+</div>
+
+</main>
+
+<footer class="pe-footer">
+
+<div class="pe-footer-inner">
+
+<div>
+
+<h3>
+PDF Editor Tools Free
+</h3>
+
+<p>
+Simple online PDF and image tools for everyone.
+</p>
+
+</div>
+
+<div class="pe-footer-links">
+
+<a href="index.html#pdf-tools">PDF Tools</a>
+<a href="index.html#convert-tools">Convert</a>
+<a href="index.html#image-tools">Image Tools</a>
+<a href="index.html#about">About</a>
+
+</div>
+
+</div>
+
+</footer>
+
+<div id="loading" class="loading">
+
+<div class="loading-box">
+
+<div class="spinner"></div>
+
+<div id="loadingText">
+Processing PDF...
+</div>
+
+</div>
+
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
-<!-- PDF-LIB -->
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
 
 <script>
 
-/* PDF.JS WORKER */
+/* =========================
+PDF.JS
+========================= */
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
 "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
 
-/* VARIABLES */
+/* =========================
+VARIABLES
+========================= */
 
 let pdfDocument = null;
 let uploadedFile = null;
+
 let textItems = [];
+let existingTextItems = [];
+let barcodeItems = [];
+
 let selectedText = null;
+let selectedExistingText = null;
+let selectedBarcode = null;
+
+let addingBarcode = false;
 
 
-/* ELEMENTS */
+/* =========================
+ELEMENTS
+========================= */
 
 const pdfFile =
 document.getElementById("pdfFile");
@@ -929,8 +1012,14 @@ document.getElementById("emptyMessage");
 const addTextBtn =
 document.getElementById("addTextBtn");
 
-const clearTextBtn =
-document.getElementById("clearTextBtn");
+const replaceBarcodeBtn =
+document.getElementById("replaceBarcodeBtn");
+
+const addBarcodeBtn =
+document.getElementById("addBarcodeBtn");
+
+const clearBtn =
+document.getElementById("clearBtn");
 
 const downloadBtn =
 document.getElementById("downloadBtn");
@@ -971,1575 +1060,3230 @@ document.getElementById("editTextBtn");
 const deleteTextBtn =
 document.getElementById("deleteTextBtn");
 
+const barcodeTools =
+document.getElementById("barcodeTools");
 
-/* LOADING */
+const barcodeType =
+document.getElementById("barcodeType");
+
+const barcodeValue =
+document.getElementById("barcodeValue");
+
+const updateBarcodeBtn =
+document.getElementById("updateBarcodeBtn");
+
+const deleteBarcodeBtn =
+document.getElementById("deleteBarcodeBtn");
+
+
+/* =========================
+LOADING
+========================= */
 
 function showLoading(message){
 
-  loadingText.innerText = message;
-  loading.style.display = "flex";
+loadingText.innerText = message;
+loading.style.display = "flex";
 
 }
 
 function hideLoading(){
 
-  loading.style.display = "none";
+loading.style.display = "none";
 
 }
 
 
-/* STATUS */
+/* =========================
+STATUS
+========================= */
 
 function setStatus(message){
 
-  status.innerText = message;
+status.innerText = message;
 
 }
 
 
-/* FILE SIZE */
+/* =========================
+FILE SIZE
+========================= */
 
 function formatFileSize(bytes){
 
-  if(bytes < 1024){
+if(bytes < 1024)
+return bytes + " B";
 
-    return bytes + " B";
+if(bytes < 1024 * 1024)
+return (bytes / 1024).toFixed(1) + " KB";
 
-  }
-
-  if(bytes < 1024 * 1024){
-
-    return (
-      (bytes / 1024).toFixed(1)
-      + " KB"
-    );
-
-  }
-
-  return (
-    (bytes / (1024 * 1024)).toFixed(1)
-    + " MB"
-  );
+return (bytes / (1024 * 1024)).toFixed(1) + " MB";
 
 }
 
 
-/* PDF SELECT */
+/* =========================
+PDF SELECT
+========================= */
 
 pdfFile.addEventListener(
 "change",
-function(event){
+async function(event){
 
-  const file =
-  event.target.files[0];
+const file =
+event.target.files[0];
 
-  if(!file){
-    return;
-  }
+if(!file)
+return;
 
-  if(file.type !== "application/pdf"){
+if(file.type !== "application/pdf"){
 
-    alert(
-      "Please select a PDF file."
-    );
+alert("Please select a PDF file.");
 
-    pdfFile.value = "";
+pdfFile.value = "";
 
-    return;
+return;
 
-  }
+}
 
-  uploadedFile = file;
+uploadedFile = file;
 
-  textItems = [];
+textItems = [];
+existingTextItems = [];
+barcodeItems = [];
 
-  selectedText = null;
+selectedText = null;
+selectedExistingText = null;
+selectedBarcode = null;
 
-  textTools.classList.remove("show");
+textTools.classList.remove("show");
+barcodeTools.classList.remove("show");
 
-  fileName.innerText =
-    "Selected: " +
-    file.name +
-    " • " +
-    formatFileSize(file.size);
+fileName.innerText =
+"Selected: " +
+file.name +
+" • " +
+formatFileSize(file.size);
 
-  loadPDF(file);
+await loadPDF(file);
 
 });
 
 
-/* LOAD PDF */
+/* =========================
+LOAD PDF
+========================= */
 
-function loadPDF(file){
+async function loadPDF(file){
 
-  showLoading(
-    "Loading PDF..."
-  );
+showLoading("Loading PDF...");
+setStatus("Loading...");
 
-  setStatus(
-    "Loading..."
-  );
+try{
 
-  const reader =
-  new FileReader();
+const buffer =
+await file.arrayBuffer();
 
-  reader.onload =
-  async function(){
+const data =
+new Uint8Array(buffer);
 
-    try{
+pdfDocument =
+await pdfjsLib
+.getDocument({data:data})
+.promise;
 
-      const data =
-      new Uint8Array(
-        reader.result
-      );
+emptyMessage.style.display = "none";
 
-      pdfDocument =
-      await pdfjsLib
-      .getDocument({
-        data:data
-      })
-      .promise;
+addTextBtn.disabled = false;
+replaceBarcodeBtn.disabled = false;
+addBarcodeBtn.disabled = false;
+clearBtn.disabled = false;
+downloadBtn.disabled = false;
 
-      emptyMessage.style.display =
-        "none";
+setStatus(
+pdfDocument.numPages +
+" page" +
+(pdfDocument.numPages > 1 ? "s" : "") +
+" loaded"
+);
 
-      addTextBtn.disabled =
-        false;
+await renderPDF();
 
-      clearTextBtn.disabled =
-        false;
+}catch(error){
 
-      downloadBtn.disabled =
-        false;
+console.error(error);
 
-      setStatus(
-        pdfDocument.numPages +
-        " page" +
-        (pdfDocument.numPages > 1 ? "s" : "") +
-        " loaded"
-      );
+alert("PDF load nahi ho pa raha hai.");
 
-      await renderPDF();
+setStatus("");
 
-    }catch(error){
+}finally{
 
-      console.error(error);
+hideLoading();
 
-      alert(
-        "PDF load nahi ho pa raha hai."
-      );
-
-      setStatus("");
-
-    }finally{
-
-      hideLoading();
-
-    }
-
-  };
-
-  reader.readAsArrayBuffer(file);
+}
 
 }
 
 
-/* RENDER ALL PAGES */
+/* =========================
+RENDER PDF
+========================= */
 
 async function renderPDF(){
 
-  pdfContainer.innerHTML = "";
+pdfContainer.innerHTML = "";
 
-  for(
-    let pageNumber = 1;
-    pageNumber <= pdfDocument.numPages;
-    pageNumber++
-  ){
+existingTextItems = [];
 
-    await renderPage(
-      pageNumber
-    );
+for(
+let pageNumber = 1;
+pageNumber <= pdfDocument.numPages;
+pageNumber++
+){
 
-  }
+await renderPage(pageNumber);
 
-  restoreTextItems();
+}
+
+restoreTextItems();
+restoreBarcodes();
 
 }
 
 
-/* RENDER PAGE */
+/* =========================
+RENDER PAGE
+========================= */
 
-function renderPage(pageNumber){
+async function renderPage(pageNumber){
 
-  return pdfDocument
-  .getPage(pageNumber)
-  .then(function(page){
+const page =
+await pdfDocument.getPage(pageNumber);
 
-    const baseScale = 1.5;
+const baseScale = 1.5;
 
-    const viewport =
-    page.getViewport({
-      scale:baseScale
-    });
+const viewport =
+page.getViewport({
+scale:baseScale
+});
 
-    const outputScale =
-    Math.min(
-      window.devicePixelRatio || 1,
-      2
-    );
+const outputScale =
+Math.min(
+window.devicePixelRatio || 1,
+2
+);
 
-    const pageDiv =
-    document.createElement("div");
+const pageDiv =
+document.createElement("div");
 
-    pageDiv.className =
-      "pdf-page";
+pageDiv.className = "pdf-page";
 
-    pageDiv.dataset.page =
-      pageNumber;
+pageDiv.dataset.page =
+pageNumber;
 
-    const maxWidth = 850;
+const maxWidth = 850;
 
-    let displayWidth =
-      viewport.width;
+let displayWidth =
+viewport.width;
 
-    if(displayWidth > maxWidth){
+if(displayWidth > maxWidth)
+displayWidth = maxWidth;
 
-      displayWidth =
-        maxWidth;
+pageDiv.style.width =
+displayWidth + "px";
 
-    }
+const displayScale =
+displayWidth / viewport.width;
 
-    pageDiv.style.width =
-      displayWidth + "px";
+pageDiv.dataset.displayScale =
+displayScale;
 
-    const displayScale =
-      displayWidth /
-      viewport.width;
+const canvas =
+document.createElement("canvas");
 
-    pageDiv.dataset.displayScale =
-      displayScale;
+canvas.className =
+"pdf-canvas";
 
-    const canvas =
-    document.createElement("canvas");
+const context =
+canvas.getContext(
+"2d",
+{alpha:false}
+);
 
-    const context =
-    canvas.getContext(
-      "2d",
-      {
-        alpha:false
-      }
-    );
+canvas.width =
+Math.floor(
+viewport.width *
+outputScale
+);
 
-    canvas.width =
-      Math.floor(
-        viewport.width *
-        outputScale
-      );
+canvas.height =
+Math.floor(
+viewport.height *
+outputScale
+);
 
-    canvas.height =
-      Math.floor(
-        viewport.height *
-        outputScale
-      );
+canvas.style.width = "100%";
+canvas.style.height = "auto";
 
-    canvas.style.width =
-      "100%";
+pageDiv.appendChild(canvas);
 
-    canvas.style.height =
-      "auto";
+const pageNumberLabel =
+document.createElement("div");
 
-    pageDiv.appendChild(
-      canvas
-    );
+pageNumberLabel.className =
+"page-number";
 
-    const pageNumberLabel =
-    document.createElement("div");
+pageNumberLabel.innerText =
+"Page " + pageNumber;
 
-    pageNumberLabel.className =
-      "page-number";
+pageDiv.appendChild(pageNumberLabel);
 
-    pageNumberLabel.innerText =
-      "Page " + pageNumber;
+const textLayer =
+document.createElement("div");
 
-    pageDiv.appendChild(
-      pageNumberLabel
-    );
+textLayer.className =
+"existing-text-layer";
 
-    pdfContainer.appendChild(
-      pageDiv
-    );
+pageDiv.appendChild(textLayer);
 
-    return page.render({
+pdfContainer.appendChild(pageDiv);
 
-      canvasContext:
-        context,
+await page.render({
 
-      viewport:
-        viewport,
+canvasContext:context,
+viewport:viewport,
 
-      transform:[
-        outputScale,
-        0,
-        0,
-        outputScale,
-        0,
-        0
-      ]
+transform:[
+outputScale,
+0,
+0,
+outputScale,
+0,
+0
+]
 
-    }).promise;
+}).promise;
 
-  });
+
+/* EXTRACT EXISTING TEXT */
+
+try{
+
+const textContent =
+await page.getTextContent();
+
+const styles =
+textContent.styles || {};
+
+textContent.items.forEach(
+function(item,index){
+
+if(!item.str || !item.str.trim())
+return;
+
+const transform =
+pdfjsLib.Util.transform(
+viewport.transform,
+item.transform
+);
+
+const x =
+transform[4];
+
+const y =
+transform[5];
+
+const fontSize =
+Math.sqrt(
+transform[2] * transform[2] +
+transform[3] * transform[3]
+);
+
+const width =
+item.width * baseScale;
+
+const height =
+Math.max(
+fontSize * 1.25,
+item.height || fontSize
+);
+
+const data = {
+
+id:
+"existing-" +
+pageNumber +
+"-" +
+index +
+"-" +
+Date.now() +
+Math.random(),
+
+page:
+pageNumber,
+
+originalText:
+item.str,
+
+text:
+item.str,
+
+pdfX:
+item.transform[4],
+
+pdfY:
+item.transform[5],
+
+pdfFontSize:
+fontSize / baseScale,
+
+pdfWidth:
+item.width,
+
+pdfHeight:
+Math.max(
+fontSize / baseScale * 1.25,
+1
+),
+
+displayX:
+x * displayScale,
+
+displayY:
+(y - fontSize) *
+displayScale,
+
+displayWidth:
+width * displayScale,
+
+displayHeight:
+height * displayScale,
+
+fontFamily:
+styles[item.fontName]
+?
+styles[item.fontName].fontFamily || "Arial"
+:
+"Arial",
+
+replaced:false,
+deleted:false
+
+};
+
+existingTextItems.push(data);
+
+createExistingTextElement(data);
+
+});
+
+}catch(error){
+
+console.log(
+"Text extraction error:",
+error
+);
+
+}
 
 }
 
 
-/* ADD TEXT */
+/* =========================
+EXISTING TEXT ELEMENT
+========================= */
+
+function createExistingTextElement(data){
+
+const page =
+document.querySelector(
+'.pdf-page[data-page="' +
+data.page +
+'"]'
+);
+
+if(!page)
+return;
+
+const layer =
+page.querySelector(
+".existing-text-layer"
+);
+
+if(!layer)
+return;
+
+const element =
+document.createElement("div");
+
+element.className =
+"existing-text";
+
+element.dataset.existingId =
+data.id;
+
+element.innerText =
+data.text;
+
+element.style.left =
+data.displayX + "px";
+
+element.style.top =
+data.displayY + "px";
+
+element.style.width =
+Math.max(
+data.displayWidth,
+8
+) + "px";
+
+element.style.height =
+Math.max(
+data.displayHeight,
+10
+) + "px";
+
+element.title =
+"Click to edit this PDF text";
+
+layer.appendChild(element);
+
+element.addEventListener(
+"click",
+function(event){
+
+event.stopPropagation();
+
+selectExistingText(data);
+
+});
+
+}
+
+
+/* =========================
+SELECT EXISTING TEXT
+========================= */
+
+function selectExistingText(data){
+
+clearSelections();
+
+selectedExistingText =
+data;
+
+const element =
+document.querySelector(
+'[data-existing-id="' +
+data.id +
+'"]'
+);
+
+if(element)
+element.classList.add("selected");
+
+textTools.classList.add("show");
+
+fontFamily.value =
+fontFamily.querySelector(
+'option[value="' +
+data.fontFamily +
+'"]'
+)
+?
+data.fontFamily
+:
+"Arial";
+
+fontSize.value =
+Math.round(data.pdfFontSize || 20);
+
+textColor.value =
+"#000000";
+
+boldBtn.classList.remove("active");
+italicBtn.classList.remove("active");
+
+setStatus(
+"Existing text selected. Edit, delete or replace it."
+);
+
+}
+
+
+/* =========================
+CLEAR SELECTIONS
+========================= */
+
+function clearSelections(){
+
+document
+.querySelectorAll(
+".pdf-text,.existing-text,.barcode-object"
+)
+.forEach(
+function(el){
+
+el.classList.remove("selected");
+
+});
+
+selectedText = null;
+selectedExistingText = null;
+selectedBarcode = null;
+
+textTools.classList.remove("show");
+barcodeTools.classList.remove("show");
+
+}
+
+
+/* =========================
+ADD NEW TEXT
+========================= */
 
 addTextBtn.addEventListener(
 "click",
 function(){
 
-  if(!pdfDocument){
+if(!pdfDocument){
 
-    alert(
-      "Pehle PDF upload karein."
-    );
+alert("Pehle PDF upload karein.");
+return;
 
-    return;
+}
 
-  }
+const text =
+prompt(
+"Jo text add karna hai woh likhiye:"
+);
 
-  const text =
-  prompt(
-    "Jo text add karna hai woh likhiye:"
-  );
+if(!text)
+return;
 
-  if(!text){
-    return;
-  }
+const firstPage =
+document.querySelector(
+'.pdf-page[data-page="1"]'
+);
 
-  const firstPage =
-  document.querySelector(
-    '.pdf-page[data-page="1"]'
-  );
+if(!firstPage)
+return;
 
-  if(!firstPage){
-    return;
-  }
+const textData = {
 
-  const pageWidth =
-  firstPage.clientWidth;
+id:
+Date.now() +
+Math.random(),
 
-  const pageHeight =
-  firstPage.clientHeight;
+page:1,
 
-  const textData = {
+text:text,
 
-    id:
-      Date.now() +
-      Math.random(),
+xRatio:
+50 /
+firstPage.clientWidth,
 
-    page:
-      1,
+yRatio:
+50 /
+firstPage.clientHeight,
 
-    text:
-      text,
+fontSize:20,
 
-    xRatio:
-      Math.min(
-        50 / pageWidth,
-        0.8
-      ),
+fontFamily:"Arial",
 
-    yRatio:
-      Math.min(
-        50 / pageHeight,
-        0.8
-      ),
+bold:false,
 
-    fontSize:
-      20,
+italic:false,
 
-    fontFamily:
-      "Arial",
+color:"#000000"
 
-    bold:
-      false,
+};
 
-    italic:
-      false,
+textItems.push(textData);
 
-    color:
-      "#000000"
+createTextElement(textData);
 
-  };
+selectText(textData.id);
 
-  textItems.push(
-    textData
-  );
-
-  createTextElement(
-    textData
-  );
-
-  selectText(
-    textData.id
-  );
-
-  setStatus(
-    "Text added. You can move and style it."
-  );
+setStatus(
+"New text added."
+);
 
 });
 
 
-/* CREATE TEXT ELEMENT */
+/* =========================
+CREATE NEW TEXT
+========================= */
 
 function createTextElement(data){
 
-  const page =
-  document.querySelector(
-    '.pdf-page[data-page="' +
-    data.page +
-    '"]'
-  );
+const page =
+document.querySelector(
+'.pdf-page[data-page="' +
+data.page +
+'"]'
+);
 
-  if(!page){
-    return;
-  }
+if(!page)
+return;
 
-  const item =
-  document.createElement("div");
+const item =
+document.createElement("div");
 
-  item.className =
-    "pdf-text";
+item.className =
+"pdf-text";
 
-  item.innerText =
-    data.text;
+item.innerText =
+data.text;
 
-  item.dataset.textId =
-    data.id;
+item.dataset.textId =
+data.id;
 
-  applyTextStyle(
-    item,
-    data
-  );
+applyTextStyle(item,data);
 
-  page.appendChild(
-    item
-  );
+page.appendChild(item);
 
-  positionText(
-    item,
-    data
-  );
+positionText(item,data);
 
-  makeDraggable(
-    item,
-    data
-  );
+makeDraggable(item,data);
 
-  item.addEventListener(
-    "click",
-    function(event){
+item.addEventListener(
+"click",
+function(event){
 
-      event.stopPropagation();
+event.stopPropagation();
 
-      selectText(
-        data.id
-      );
+selectText(data.id);
 
-    }
-  );
+});
 
-  item.addEventListener(
-    "dblclick",
-    function(event){
+item.addEventListener(
+"dblclick",
+function(event){
 
-      event.stopPropagation();
+event.stopPropagation();
 
-      editText(
-        data
-      );
+editText(data);
 
-    }
-  );
+});
 
 }
 
 
-/* APPLY TEXT STYLE */
+/* =========================
+TEXT STYLE
+========================= */
 
-function applyTextStyle(
-  element,
-  data
-){
+function applyTextStyle(element,data){
 
-  element.style.fontSize =
-    data.fontSize + "px";
+element.style.fontSize =
+data.fontSize + "px";
 
-  element.style.fontFamily =
-    data.fontFamily;
+element.style.fontFamily =
+data.fontFamily;
 
-  element.style.fontWeight =
-    data.bold
-      ? "700"
-      : "400";
+element.style.fontWeight =
+data.bold ? "700" : "400";
 
-  element.style.fontStyle =
-    data.italic
-      ? "italic"
-      : "normal";
+element.style.fontStyle =
+data.italic ? "italic" : "normal";
 
-  element.style.color =
-    data.color;
+element.style.color =
+data.color;
 
 }
 
 
-/* POSITION TEXT */
+/* =========================
+TEXT POSITION
+========================= */
 
-function positionText(
-  element,
-  data
-){
+function positionText(element,data){
 
-  const page =
-  element.parentElement;
+const page =
+element.parentElement;
 
-  if(!page){
-    return;
-  }
+if(!page)
+return;
 
-  element.style.left =
-    (
-      data.xRatio *
-      page.clientWidth
-    ) + "px";
+element.style.left =
+data.xRatio *
+page.clientWidth +
+"px";
 
-  element.style.top =
-    (
-      data.yRatio *
-      page.clientHeight
-    ) + "px";
+element.style.top =
+data.yRatio *
+page.clientHeight +
+"px";
 
 }
 
 
-/* SELECT TEXT */
+/* =========================
+SELECT NEW TEXT
+========================= */
 
 function selectText(id){
 
-  document
-  .querySelectorAll(
-    ".pdf-text"
-  )
-  .forEach(
-    function(element){
+clearSelections();
 
-      element.classList.remove(
-        "selected"
-      );
+const data =
+textItems.find(
+function(item){
+return item.id === id;
+}
+);
 
-    }
-  );
+if(!data)
+return;
 
-  const data =
-  textItems.find(
-    function(item){
+const element =
+document.querySelector(
+'[data-text-id="' +
+id +
+'"]'
+);
 
-      return item.id === id;
+if(!element)
+return;
 
-    }
-  );
+element.classList.add("selected");
 
-  if(!data){
-    return;
-  }
+selectedText = data;
 
-  const element =
-  document.querySelector(
-    '[data-text-id="' +
-    id +
-    '"]'
-  );
+textTools.classList.add("show");
 
-  if(!element){
-    return;
-  }
+fontFamily.value =
+data.fontFamily;
 
-  element.classList.add(
-    "selected"
-  );
+fontSize.value =
+data.fontSize;
 
-  selectedText =
-    data;
+textColor.value =
+data.color;
 
-  textTools.classList.add(
-    "show"
-  );
+boldBtn.classList.toggle(
+"active",
+data.bold
+);
 
-  fontFamily.value =
-    data.fontFamily;
-
-  fontSize.value =
-    data.fontSize;
-
-  textColor.value =
-    data.color;
-
-  boldBtn.classList.toggle(
-    "active",
-    data.bold
-  );
-
-  italicBtn.classList.toggle(
-    "active",
-    data.italic
-  );
+italicBtn.classList.toggle(
+"active",
+data.italic
+);
 
 }
 
 
-/* TEXT STYLE UPDATE */
+/* =========================
+EDIT NEW TEXT
+========================= */
 
-function updateSelectedStyle(){
+function editText(data){
 
-  if(!selectedText){
-    return;
-  }
+const newText =
+prompt(
+"Text edit karein:",
+data.text
+);
 
-  const element =
-  document.querySelector(
-    '[data-text-id="' +
-    selectedText.id +
-    '"]'
-  );
+if(newText === null)
+return;
 
-  if(!element){
-    return;
-  }
+if(newText === "")
+return;
 
-  applyTextStyle(
-    element,
-    selectedText
-  );
+data.text =
+newText;
+
+const element =
+document.querySelector(
+'[data-text-id="' +
+data.id +
+'"]'
+);
+
+if(element)
+element.innerText =
+newText;
 
 }
 
 
-/* FONT FAMILY */
+/* =========================
+EDIT EXISTING TEXT
+========================= */
 
-fontFamily.addEventListener(
-"change",
-function(){
+function editExistingText(){
 
-  if(!selectedText){
-    return;
-  }
+if(!selectedExistingText){
 
-  selectedText.fontFamily =
-    fontFamily.value;
+alert(
+"PDF ka existing text select karein."
+);
 
-  updateSelectedStyle();
+return;
 
-});
+}
 
+const data =
+selectedExistingText;
 
-/* FONT SIZE */
+const newText =
+prompt(
+"Existing PDF text ko replace karein:",
+data.text
+);
 
-fontSize.addEventListener(
-"input",
-function(){
+if(newText === null)
+return;
 
-  if(!selectedText){
-    return;
-  }
+if(newText === "")
+return;
 
-  let value =
-    parseInt(
-      fontSize.value
-    );
+data.text =
+newText;
 
-  if(isNaN(value)){
-    return;
-  }
+data.replaced = true;
 
-  value =
-    Math.max(
-      8,
-      Math.min(
-        100,
-        value
-      )
-    );
+const element =
+document.querySelector(
+'[data-existing-id="' +
+data.id +
+'"]'
+);
 
-  selectedText.fontSize =
-    value;
+if(element)
+element.innerText =
+newText;
 
-  updateSelectedStyle();
+setStatus(
+"Existing text replaced."
+);
 
-});
-
-
-/* BOLD */
-
-boldBtn.addEventListener(
-"click",
-function(){
-
-  if(!selectedText){
-    return;
-  }
-
-  selectedText.bold =
-    !selectedText.bold;
-
-  boldBtn.classList.toggle(
-    "active",
-    selectedText.bold
-  );
-
-  updateSelectedStyle();
-
-});
+}
 
 
-/* ITALIC */
-
-italicBtn.addEventListener(
-"click",
-function(){
-
-  if(!selectedText){
-    return;
-  }
-
-  selectedText.italic =
-    !selectedText.italic;
-
-  italicBtn.classList.toggle(
-    "active",
-    selectedText.italic
-  );
-
-  updateSelectedStyle();
-
-});
-
-
-/* COLOR */
-
-textColor.addEventListener(
-"input",
-function(){
-
-  if(!selectedText){
-    return;
-  }
-
-  selectedText.color =
-    textColor.value;
-
-  updateSelectedStyle();
-
-});
-
-
-/* EDIT TEXT */
+/* =========================
+EDIT BUTTON
+========================= */
 
 editTextBtn.addEventListener(
 "click",
 function(){
 
-  if(!selectedText){
+if(selectedExistingText){
 
-    alert(
-      "Pehle text select karein."
-    );
+editExistingText();
+return;
 
-    return;
+}
 
-  }
+if(selectedText){
 
-  editText(
-    selectedText
-  );
+editText(selectedText);
+return;
+
+}
+
+alert("Pehle text select karein.");
 
 });
 
 
-function editText(data){
+/* =========================
+FONT
+========================= */
 
-  const newText =
-  prompt(
-    "Text edit karein:",
-    data.text
-  );
+fontFamily.addEventListener(
+"change",
+function(){
 
-  if(
-    newText === null ||
-    newText === ""
-  ){
+if(selectedText){
 
-    return;
+selectedText.fontFamily =
+fontFamily.value;
 
-  }
+const el =
+document.querySelector(
+'[data-text-id="' +
+selectedText.id +
+'"]'
+);
 
-  data.text =
-    newText;
-
-  const element =
-  document.querySelector(
-    '[data-text-id="' +
-    data.id +
-    '"]'
-  );
-
-  if(element){
-
-    element.innerText =
-      newText;
-
-  }
+if(el)
+applyTextStyle(el,selectedText);
 
 }
 
+if(selectedExistingText){
 
-/* DELETE SELECTED TEXT */
+selectedExistingText.fontFamily =
+fontFamily.value;
+
+selectedExistingText.replaced =
+true;
+
+}
+
+});
+
+
+/* =========================
+FONT SIZE
+========================= */
+
+fontSize.addEventListener(
+"input",
+function(){
+
+let value =
+parseInt(fontSize.value);
+
+if(isNaN(value))
+return;
+
+value =
+Math.max(
+8,
+Math.min(
+100,
+value
+)
+);
+
+if(selectedText){
+
+selectedText.fontSize =
+value;
+
+const el =
+document.querySelector(
+'[data-text-id="' +
+selectedText.id +
+'"]'
+);
+
+if(el)
+applyTextStyle(el,selectedText);
+
+}
+
+if(selectedExistingText){
+
+selectedExistingText.pdfFontSize =
+value;
+
+selectedExistingText.replaced =
+true;
+
+}
+
+});
+
+
+/* =========================
+BOLD
+========================= */
+
+boldBtn.addEventListener(
+"click",
+function(){
+
+if(selectedText){
+
+selectedText.bold =
+!selectedText.bold;
+
+boldBtn.classList.toggle(
+"active",
+selectedText.bold
+);
+
+const el =
+document.querySelector(
+'[data-text-id="' +
+selectedText.id +
+'"]'
+);
+
+if(el)
+applyTextStyle(el,selectedText);
+
+}
+
+if(selectedExistingText){
+
+selectedExistingText.bold =
+!selectedExistingText.bold;
+
+selectedExistingText.replaced = true;
+
+boldBtn.classList.toggle(
+"active",
+selectedExistingText.bold
+);
+
+}
+
+});
+
+
+/* =========================
+ITALIC
+========================= */
+
+italicBtn.addEventListener(
+"click",
+function(){
+
+if(selectedText){
+
+selectedText.italic =
+!selectedText.italic;
+
+italicBtn.classList.toggle(
+"active",
+selectedText.italic
+);
+
+const el =
+document.querySelector(
+'[data-text-id="' +
+selectedText.id +
+'"]'
+);
+
+if(el)
+applyTextStyle(el,selectedText);
+
+}
+
+if(selectedExistingText){
+
+selectedExistingText.italic =
+!selectedExistingText.italic;
+
+selectedExistingText.replaced = true;
+
+italicBtn.classList.toggle(
+"active",
+selectedExistingText.italic
+);
+
+}
+
+});
+
+
+/* =========================
+COLOR
+========================= */
+
+textColor.addEventListener(
+"input",
+function(){
+
+if(selectedText){
+
+selectedText.color =
+textColor.value;
+
+const el =
+document.querySelector(
+'[data-text-id="' +
+selectedText.id +
+'"]'
+);
+
+if(el)
+applyTextStyle(el,selectedText);
+
+}
+
+if(selectedExistingText){
+
+selectedExistingText.color =
+textColor.value;
+
+selectedExistingText.replaced = true;
+
+}
+
+});
+
+
+/* =========================
+DELETE TEXT
+========================= */
 
 deleteTextBtn.addEventListener(
 "click",
 function(){
 
-  if(!selectedText){
+if(selectedExistingText){
 
-    alert(
-      "Pehle text select karein."
-    );
+selectedExistingText.deleted = true;
 
-    return;
+const el =
+document.querySelector(
+'[data-existing-id="' +
+selectedExistingText.id +
+'"]'
+);
 
-  }
+if(el)
+el.remove();
 
-  const id =
-    selectedText.id;
+setStatus(
+"Existing PDF text marked for deletion."
+);
 
-  const element =
-  document.querySelector(
-    '[data-text-id="' +
-    id +
-    '"]'
-  );
+selectedExistingText = null;
 
-  if(element){
-    element.remove();
-  }
+textTools.classList.remove("show");
 
-  textItems =
-    textItems.filter(
-      function(item){
+return;
 
-        return item.id !== id;
+}
 
-      }
-    );
+if(selectedText){
 
-  selectedText =
-    null;
+const id =
+selectedText.id;
 
-  textTools.classList.remove(
-    "show"
-  );
+const el =
+document.querySelector(
+'[data-text-id="' +
+id +
+'"]'
+);
 
-  setStatus(
-    "Selected text deleted."
-  );
+if(el)
+el.remove();
+
+textItems =
+textItems.filter(
+function(item){
+return item.id !== id;
+}
+);
+
+selectedText = null;
+
+textTools.classList.remove("show");
+
+setStatus(
+"Text deleted."
+);
+
+return;
+
+}
+
+alert(
+"Pehle text select karein."
+);
 
 });
 
 
-/* DRAG TEXT */
+/* =========================
+DRAG NEW TEXT
+========================= */
 
-function makeDraggable(
-  element,
-  textData
-){
+function makeDraggable(element,data){
 
-  let dragging = false;
+let dragging = false;
 
-  let startX = 0;
-  let startY = 0;
+let startX = 0;
+let startY = 0;
 
-  let originalX = 0;
-  let originalY = 0;
+let originalX = 0;
+let originalY = 0;
 
+function startDrag(event){
 
-  function startDrag(event){
+dragging = true;
 
-    dragging = true;
+selectText(data.id);
 
-    selectText(
-      textData.id
-    );
+const parent =
+element.parentElement;
 
-    const parent =
-    element.parentElement;
+const rect =
+parent.getBoundingClientRect();
 
-    const rect =
-    parent.getBoundingClientRect();
+startX =
+event.clientX -
+rect.left;
 
-    startX =
-      event.clientX -
-      rect.left;
+startY =
+event.clientY -
+rect.top;
 
-    startY =
-      event.clientY -
-      rect.top;
+originalX =
+parseFloat(
+element.style.left
+) || 0;
 
-    originalX =
-      parseFloat(
-        element.style.left
-      ) || 0;
+originalY =
+parseFloat(
+element.style.top
+) || 0;
 
-    originalY =
-      parseFloat(
-        element.style.top
-      ) || 0;
+event.preventDefault();
 
-    event.preventDefault();
+try{
+element.setPointerCapture(
+event.pointerId
+);
+}catch(e){}
 
-    try{
+}
 
-      element.setPointerCapture(
-        event.pointerId
-      );
+function moveDrag(event){
 
-    }catch(e){}
+if(!dragging)
+return;
 
-  }
+const parent =
+element.parentElement;
 
+const rect =
+parent.getBoundingClientRect();
 
-  function moveDrag(event){
+const currentX =
+event.clientX -
+rect.left;
 
-    if(!dragging){
-      return;
-    }
+const currentY =
+event.clientY -
+rect.top;
 
-    const parent =
-    element.parentElement;
+let newX =
+originalX +
+currentX -
+startX;
 
-    const rect =
-    parent.getBoundingClientRect();
+let newY =
+originalY +
+currentY -
+startY;
 
-    const currentX =
-      event.clientX -
-      rect.left;
+const maxX =
+parent.clientWidth -
+element.offsetWidth;
 
-    const currentY =
-      event.clientY -
-      rect.top;
+const maxY =
+parent.clientHeight -
+element.offsetHeight;
 
-    let newX =
-      originalX +
-      currentX -
-      startX;
+newX =
+Math.max(
+0,
+Math.min(
+newX,
+maxX
+)
+);
 
-    let newY =
-      originalY +
-      currentY -
-      startY;
+newY =
+Math.max(
+0,
+Math.min(
+newY,
+maxY
+)
+);
 
-    const maxX =
-      parent.clientWidth -
-      element.offsetWidth;
+element.style.left =
+newX + "px";
 
-    const maxY =
-      parent.clientHeight -
-      element.offsetHeight;
+element.style.top =
+newY + "px";
 
-    newX =
-      Math.max(
-        0,
-        Math.min(
-          newX,
-          maxX
-        )
-      );
+data.xRatio =
+newX /
+parent.clientWidth;
 
-    newY =
-      Math.max(
-        0,
-        Math.min(
-          newY,
-          maxY
-        )
-      );
+data.yRatio =
+newY /
+parent.clientHeight;
 
-    element.style.left =
-      newX + "px";
+}
 
-    element.style.top =
-      newY + "px";
+function stopDrag(){
 
-    textData.xRatio =
-      newX /
-      parent.clientWidth;
+dragging = false;
 
-    textData.yRatio =
-      newY /
-      parent.clientHeight;
+}
 
-  }
+element.addEventListener(
+"pointerdown",
+startDrag
+);
 
+element.addEventListener(
+"pointermove",
+moveDrag
+);
 
-  function stopDrag(){
+element.addEventListener(
+"pointerup",
+stopDrag
+);
 
-    if(!dragging){
-      return;
-    }
-
-    dragging = false;
-
-  }
-
-
-  element.addEventListener(
-    "pointerdown",
-    startDrag
-  );
-
-  element.addEventListener(
-    "pointermove",
-    moveDrag
-  );
-
-  element.addEventListener(
-    "pointerup",
-    stopDrag
-  );
-
-  element.addEventListener(
-    "pointercancel",
-    stopDrag
-  );
+element.addEventListener(
+"pointercancel",
+stopDrag
+);
 
 }
 
 
-/* RESTORE TEXT */
+/* =========================
+RESTORE NEW TEXT
+========================= */
 
 function restoreTextItems(){
 
-  textItems.forEach(
-    function(data){
+textItems.forEach(
+function(data){
 
-      createTextElement(
-        data
-      );
+createTextElement(data);
 
-    }
-  );
+});
 
 }
 
 
-/* CLEAR TEXT */
+/* =========================
+BARCODE AREA REPLACE
+========================= */
 
-clearTextBtn.addEventListener(
+replaceBarcodeBtn.addEventListener(
 "click",
 function(){
 
-  document
-  .querySelectorAll(
-    ".pdf-text"
-  )
-  .forEach(
-    function(item){
+if(!pdfDocument){
 
-      item.remove();
+alert("Pehle PDF upload karein.");
+return;
 
-    }
-  );
+}
 
-  textItems = [];
+addingBarcode = true;
 
-  selectedText = null;
+setStatus(
+"PDF ke existing barcode ke upar mouse/touch se area select karein."
+);
 
-  textTools.classList.remove(
-    "show"
-  );
-
-  setStatus(
-    "Added text cleared."
-  );
+alert(
+"Ab existing barcode ke upar mouse se drag karke area select karein."
+);
 
 });
 
 
-/* HEX COLOR TO PDF RGB */
+/* =========================
+PAGE AREA SELECTION
+========================= */
+
+pdfContainer.addEventListener(
+"pointerdown",
+function(event){
+
+if(!addingBarcode)
+return;
+
+const page =
+event.target.closest(".pdf-page");
+
+if(!page)
+return;
+
+if(
+event.target.closest(".pdf-text") ||
+event.target.closest(".existing-text") ||
+event.target.closest(".barcode-object")
+)
+return;
+
+const rect =
+page.getBoundingClientRect();
+
+const startX =
+event.clientX -
+rect.left;
+
+const startY =
+event.clientY -
+rect.top;
+
+const selector =
+document.createElement("div");
+
+selector.className =
+"area-selector";
+
+selector.style.left =
+startX + "px";
+
+selector.style.top =
+startY + "px";
+
+page.appendChild(selector);
+
+let currentX =
+startX;
+
+let currentY =
+startY;
+
+function move(e){
+
+currentX =
+Math.max(
+0,
+Math.min(
+page.clientWidth,
+e.clientX -
+rect.left
+)
+);
+
+currentY =
+Math.max(
+0,
+Math.min(
+page.clientHeight,
+e.clientY -
+rect.top
+)
+);
+
+const left =
+Math.min(
+startX,
+currentX
+);
+
+const top =
+Math.min(
+startY,
+currentY
+);
+
+const width =
+Math.abs(
+currentX -
+startX
+);
+
+const height =
+Math.abs(
+currentY -
+startY
+);
+
+selector.style.left =
+left + "px";
+
+selector.style.top =
+top + "px";
+
+selector.style.width =
+width + "px";
+
+selector.style.height =
+height + "px";
+
+}
+
+function end(){
+
+document.removeEventListener(
+"pointermove",
+move
+);
+
+document.removeEventListener(
+"pointerup",
+end
+);
+
+const left =
+parseFloat(selector.style.left);
+
+const top =
+parseFloat(selector.style.top);
+
+const width =
+parseFloat(selector.style.width);
+
+const height =
+parseFloat(selector.style.height);
+
+selector.remove();
+
+addingBarcode = false;
+
+if(width < 20 || height < 15){
+
+setStatus(
+"Barcode area too small."
+);
+
+return;
+
+}
+
+const value =
+prompt(
+"New barcode value likhiye:"
+);
+
+if(!value){
+
+setStatus(
+"Barcode replace cancelled."
+);
+
+return;
+
+}
+
+const barcodeData = {
+
+id:
+"barcode-" +
+Date.now() +
+Math.random(),
+
+page:
+parseInt(page.dataset.page),
+
+xRatio:
+left /
+page.clientWidth,
+
+yRatio:
+top /
+page.clientHeight,
+
+wRatio:
+width /
+page.clientWidth,
+
+hRatio:
+height /
+page.clientHeight,
+
+value:value,
+
+type:"CODE128",
+
+replacement:true
+
+};
+
+barcodeItems.push(
+barcodeData
+);
+
+createBarcodeElement(
+barcodeData
+);
+
+selectBarcode(
+barcodeData
+);
+
+setStatus(
+"Barcode added over selected area."
+);
+
+}
+
+document.addEventListener(
+"pointermove",
+move
+);
+
+document.addEventListener(
+"pointerup",
+end,
+{once:true}
+);
+
+});
+
+
+/* =========================
+ADD BARCODE
+========================= */
+
+addBarcodeBtn.addEventListener(
+"click",
+function(){
+
+if(!pdfDocument){
+
+alert("Pehle PDF upload karein.");
+return;
+
+}
+
+const value =
+prompt(
+"Barcode value likhiye:"
+);
+
+if(!value)
+return;
+
+const page =
+document.querySelector(
+'.pdf-page[data-page="1"]'
+);
+
+if(!page)
+return;
+
+const data = {
+
+id:
+"barcode-" +
+Date.now() +
+Math.random(),
+
+page:1,
+
+xRatio:
+100 /
+page.clientWidth,
+
+yRatio:
+100 /
+page.clientHeight,
+
+wRatio:
+220 /
+page.clientWidth,
+
+hRatio:
+90 /
+page.clientHeight,
+
+value:value,
+
+type:"CODE128",
+
+replacement:false
+
+};
+
+barcodeItems.push(data);
+
+createBarcodeElement(data);
+
+selectBarcode(data);
+
+setStatus(
+"New barcode added."
+);
+
+});
+
+
+/* =========================
+CREATE BARCODE
+========================= */
+
+function createBarcodeElement(data){
+
+const page =
+document.querySelector(
+'.pdf-page[data-page="' +
+data.page +
+'"]'
+);
+
+if(!page)
+return;
+
+const old =
+page.querySelector(
+'[data-barcode-id="' +
+data.id +
+'"]'
+);
+
+if(old)
+old.remove();
+
+const box =
+document.createElement("div");
+
+box.className =
+"barcode-object";
+
+box.dataset.barcodeId =
+data.id;
+
+const label =
+document.createElement("div");
+
+label.className =
+"barcode-label";
+
+label.innerText =
+"BARCODE";
+
+box.appendChild(label);
+
+const canvas =
+document.createElement("canvas");
+
+box.appendChild(canvas);
+
+const handle =
+document.createElement("div");
+
+handle.className =
+"resize-handle";
+
+box.appendChild(handle);
+
+page.appendChild(box);
+
+positionBarcode(
+box,
+data
+);
+
+drawBarcode(
+canvas,
+data
+);
+
+makeBarcodeDraggable(
+box,
+data
+);
+
+makeBarcodeResizable(
+box,
+data
+);
+
+box.addEventListener(
+"click",
+function(event){
+
+event.stopPropagation();
+
+selectBarcode(data);
+
+});
+
+}
+
+
+/* =========================
+DRAW BARCODE
+========================= */
+
+function drawBarcode(canvas,data){
+
+try{
+
+JsBarcode(
+canvas,
+data.value,
+{
+
+format:data.type,
+
+width:2,
+
+height:60,
+
+displayValue:true,
+
+fontSize:14,
+
+margin:5,
+
+background:"#ffffff",
+
+lineColor:"#000000"
+
+}
+);
+
+}catch(error){
+
+console.error(error);
+
+try{
+
+JsBarcode(
+canvas,
+data.value,
+{
+format:"CODE128",
+width:2,
+height:60,
+displayValue:true
+}
+);
+
+}catch(e){}
+
+}
+
+}
+
+
+/* =========================
+BARCODE POSITION
+========================= */
+
+function positionBarcode(element,data){
+
+const page =
+element.parentElement;
+
+if(!page)
+return;
+
+element.style.left =
+data.xRatio *
+page.clientWidth +
+"px";
+
+element.style.top =
+data.yRatio *
+page.clientHeight +
+"px";
+
+element.style.width =
+Math.max(
+80,
+data.wRatio *
+page.clientWidth
+) + "px";
+
+element.style.height =
+Math.max(
+50,
+data.hRatio *
+page.clientHeight
+) + "px";
+
+}
+
+
+/* =========================
+SELECT BARCODE
+========================= */
+
+function selectBarcode(data){
+
+clearSelections();
+
+selectedBarcode =
+data;
+
+const element =
+document.querySelector(
+'[data-barcode-id="' +
+data.id +
+'"]'
+);
+
+if(element)
+element.classList.add("selected");
+
+barcodeTools.classList.add("show");
+
+barcodeType.value =
+data.type;
+
+barcodeValue.value =
+data.value;
+
+setStatus(
+"Barcode selected. Change value/type or move it."
+);
+
+}
+
+
+/* =========================
+BARCODE DRAG
+========================= */
+
+function makeBarcodeDraggable(element,data){
+
+let dragging = false;
+
+let startX = 0;
+let startY = 0;
+
+let oldX = 0;
+let oldY = 0;
+
+element.addEventListener(
+"pointerdown",
+function(event){
+
+if(
+event.target.classList.contains(
+"resize-handle"
+)
+)
+return;
+
+dragging = true;
+
+selectBarcode(data);
+
+const page =
+element.parentElement;
+
+const rect =
+page.getBoundingClientRect();
+
+startX =
+event.clientX -
+rect.left;
+
+startY =
+event.clientY -
+rect.top;
+
+oldX =
+parseFloat(
+element.style.left
+) || 0;
+
+oldY =
+parseFloat(
+element.style.top
+) || 0;
+
+event.preventDefault();
+
+try{
+element.setPointerCapture(
+event.pointerId
+);
+}catch(e){}
+
+});
+
+element.addEventListener(
+"pointermove",
+function(event){
+
+if(!dragging)
+return;
+
+const page =
+element.parentElement;
+
+const rect =
+page.getBoundingClientRect();
+
+let x =
+oldX +
+event.clientX -
+rect.left -
+startX;
+
+let y =
+oldY +
+event.clientY -
+rect.top -
+startY;
+
+x =
+Math.max(
+0,
+Math.min(
+x,
+page.clientWidth -
+element.offsetWidth
+)
+);
+
+y =
+Math.max(
+0,
+Math.min(
+y,
+page.clientHeight -
+element.offsetHeight
+)
+);
+
+element.style.left =
+x + "px";
+
+element.style.top =
+y + "px";
+
+data.xRatio =
+x /
+page.clientWidth;
+
+data.yRatio =
+y /
+page.clientHeight;
+
+});
+
+element.addEventListener(
+"pointerup",
+function(){
+dragging = false;
+});
+
+element.addEventListener(
+"pointercancel",
+function(){
+dragging = false;
+});
+
+}
+
+
+/* =========================
+BARCODE RESIZE
+========================= */
+
+function makeBarcodeResizable(element,data){
+
+const handle =
+element.querySelector(
+".resize-handle"
+);
+
+if(!handle)
+return;
+
+let resizing = false;
+
+handle.addEventListener(
+"pointerdown",
+function(event){
+
+resizing = true;
+
+event.stopPropagation();
+event.preventDefault();
+
+try{
+handle.setPointerCapture(
+event.pointerId
+);
+}catch(e){}
+
+});
+
+handle.addEventListener(
+"pointermove",
+function(event){
+
+if(!resizing)
+return;
+
+const page =
+element.parentElement;
+
+const rect =
+page.getBoundingClientRect();
+
+const left =
+parseFloat(
+element.style.left
+) || 0;
+
+const top =
+parseFloat(
+element.style.top
+) || 0;
+
+let width =
+event.clientX -
+rect.left -
+left;
+
+let height =
+event.clientY -
+rect.top -
+top;
+
+width =
+Math.max(80,width);
+
+height =
+Math.max(50,height);
+
+width =
+Math.min(
+width,
+page.clientWidth -
+left
+);
+
+height =
+Math.min(
+height,
+page.clientHeight -
+top
+);
+
+element.style.width =
+width + "px";
+
+element.style.height =
+height + "px";
+
+data.wRatio =
+width /
+page.clientWidth;
+
+data.hRatio =
+height /
+page.clientHeight;
+
+});
+
+handle.addEventListener(
+"pointerup",
+function(){
+resizing = false;
+});
+
+handle.addEventListener(
+"pointercancel",
+function(){
+resizing = false;
+});
+
+}
+
+
+/* =========================
+BARCODE UPDATE
+========================= */
+
+updateBarcodeBtn.addEventListener(
+"click",
+function(){
+
+if(!selectedBarcode){
+
+alert(
+"Pehle barcode select karein."
+);
+
+return;
+
+}
+
+const value =
+barcodeValue.value.trim();
+
+if(!value){
+
+alert(
+"Barcode value likhiye."
+);
+
+return;
+
+}
+
+selectedBarcode.value =
+value;
+
+selectedBarcode.type =
+barcodeType.value;
+
+selectedBarcode.replacement =
+true;
+
+const element =
+document.querySelector(
+'[data-barcode-id="' +
+selectedBarcode.id +
+'"]'
+);
+
+if(element){
+
+const canvas =
+element.querySelector("canvas");
+
+drawBarcode(
+canvas,
+selectedBarcode
+);
+
+}
+
+setStatus(
+"Barcode updated."
+);
+
+});
+
+
+/* =========================
+DELETE BARCODE
+========================= */
+
+deleteBarcodeBtn.addEventListener(
+"click",
+function(){
+
+if(!selectedBarcode){
+
+alert(
+"Pehle barcode select karein."
+);
+
+return;
+
+}
+
+const id =
+selectedBarcode.id;
+
+const element =
+document.querySelector(
+'[data-barcode-id="' +
+id +
+'"]'
+);
+
+if(element)
+element.remove();
+
+barcodeItems =
+barcodeItems.filter(
+function(item){
+return item.id !== id;
+}
+);
+
+selectedBarcode = null;
+
+barcodeTools.classList.remove("show");
+
+setStatus(
+"Barcode deleted."
+);
+
+});
+
+
+/* =========================
+RESTORE BARCODE
+========================= */
+
+function restoreBarcodes(){
+
+barcodeItems.forEach(
+function(data){
+
+createBarcodeElement(data);
+
+});
+
+}
+
+
+/* =========================
+CLEAR ADDED
+========================= */
+
+clearBtn.addEventListener(
+"click",
+function(){
+
+document
+.querySelectorAll(
+".pdf-text,.barcode-object"
+)
+.forEach(
+function(el){
+el.remove();
+}
+);
+
+textItems = [];
+barcodeItems = [];
+
+selectedText = null;
+selectedBarcode = null;
+
+textTools.classList.remove("show");
+barcodeTools.classList.remove("show");
+
+setStatus(
+"Added text and barcode cleared. Existing PDF text remains."
+);
+
+});
+
+
+/* =========================
+HEX COLOR
+========================= */
 
 function hexToRgb(hex){
 
-  hex =
-    hex.replace(
-      "#",
-      ""
-    );
+hex =
+hex.replace("#","");
 
-  const r =
-    parseInt(
-      hex.substring(0,2),
-      16
-    );
+return {
 
-  const g =
-    parseInt(
-      hex.substring(2,4),
-      16
-    );
+r:
+parseInt(
+hex.substring(0,2),
+16
+) / 255,
 
-  const b =
-    parseInt(
-      hex.substring(4,6),
-      16
-    );
+g:
+parseInt(
+hex.substring(2,4),
+16
+) / 255,
 
-  return {
-    r:r / 255,
-    g:g / 255,
-    b:b / 255
-  };
+b:
+parseInt(
+hex.substring(4,6),
+16
+) / 255
+
+};
 
 }
 
 
-/* PDF FONT */
+/* =========================
+PDF FONT
+========================= */
 
 function getPdfFontName(
-  family,
-  bold,
-  italic
+family,
+bold,
+italic
 ){
 
-  if(
-    family ===
-    "Times New Roman"
-  ){
+if(
+family ===
+"Times New Roman" ||
+family ===
+"Georgia"
+){
 
-    if(bold && italic)
-      return PDFLib.StandardFonts.TimesRomanBoldItalic;
+if(bold && italic)
+return PDFLib.StandardFonts.TimesRomanBoldItalic;
 
-    if(bold)
-      return PDFLib.StandardFonts.TimesRomanBold;
+if(bold)
+return PDFLib.StandardFonts.TimesRomanBold;
 
-    if(italic)
-      return PDFLib.StandardFonts.TimesRomanItalic;
+if(italic)
+return PDFLib.StandardFonts.TimesRomanItalic;
 
-    return PDFLib.StandardFonts.TimesRoman;
+return PDFLib.StandardFonts.TimesRoman;
 
-  }
+}
 
+if(
+family ===
+"Courier New"
+){
 
-  if(
-    family ===
-    "Courier New"
-  ){
+if(bold && italic)
+return PDFLib.StandardFonts.CourierBoldOblique;
 
-    if(bold && italic)
-      return PDFLib.StandardFonts.CourierBoldOblique;
+if(bold)
+return PDFLib.StandardFonts.CourierBold;
 
-    if(bold)
-      return PDFLib.StandardFonts.CourierBold;
+if(italic)
+return PDFLib.StandardFonts.CourierOblique;
 
-    if(italic)
-      return PDFLib.StandardFonts.CourierOblique;
+return PDFLib.StandardFonts.Courier;
 
-    return PDFLib.StandardFonts.Courier;
+}
 
-  }
+if(bold && italic)
+return PDFLib.StandardFonts.HelveticaBoldOblique;
 
+if(bold)
+return PDFLib.StandardFonts.HelveticaBold;
 
-  if(
-    family ===
-    "Georgia"
-  ){
+if(italic)
+return PDFLib.StandardFonts.HelveticaOblique;
 
-    if(bold && italic)
-      return PDFLib.StandardFonts.TimesRomanBoldItalic;
-
-    if(bold)
-      return PDFLib.StandardFonts.TimesRomanBold;
-
-    if(italic)
-      return PDFLib.StandardFonts.TimesRomanItalic;
-
-    return PDFLib.StandardFonts.TimesRoman;
-
-  }
-
-
-  if(bold && italic)
-    return PDFLib.StandardFonts.HelveticaBoldOblique;
-
-  if(bold)
-    return PDFLib.StandardFonts.HelveticaBold;
-
-  if(italic)
-    return PDFLib.StandardFonts.HelveticaOblique;
-
-  return PDFLib.StandardFonts.Helvetica;
+return PDFLib.StandardFonts.Helvetica;
 
 }
 
 
-/* DOWNLOAD PDF */
+/* =========================
+DOWNLOAD PDF
+========================= */
 
 downloadBtn.addEventListener(
 "click",
 async function(){
 
-  if(!uploadedFile){
+if(!uploadedFile){
 
-    alert(
-      "Pehle PDF upload karein."
-    );
+alert(
+"Pehle PDF upload karein."
+);
 
-    return;
+return;
 
-  }
+}
 
-  try{
+try{
 
-    showLoading(
-      "Creating your PDF..."
-    );
+showLoading(
+"Creating your edited PDF..."
+);
 
-    const originalBytes =
-    await uploadedFile.arrayBuffer();
+const originalBytes =
+await uploadedFile.arrayBuffer();
 
-    const PDFDocument =
-    PDFLib.PDFDocument;
+const pdfDoc =
+await PDFLib.PDFDocument.load(
+originalBytes
+);
 
-    const rgb =
-    PDFLib.rgb;
+const rgb =
+PDFLib.rgb;
 
-    const pdfDoc =
-    await PDFDocument.load(
-      originalBytes
-    );
 
-    /*
-      Cache fonts so the same font
-      is not embedded repeatedly.
-    */
+/* FONT CACHE */
 
-    const fontCache = {};
+const fontCache = {};
 
 
-    for(
-      const item of textItems
-    ){
+/* =========================
+EXISTING TEXT
+========================= */
 
-      if(!item.text){
-        continue;
-      }
+for(
+const item of existingTextItems
+){
 
-      const page =
-      pdfDoc.getPage(
-        item.page - 1
-      );
+if(
+!item.replaced &&
+!item.deleted
+)
+continue;
 
-      if(!page){
-        continue;
-      }
+const page =
+pdfDoc.getPage(
+item.page - 1
+);
 
-      const previewPage =
-      document.querySelector(
-        '.pdf-page[data-page="' +
-        item.page +
-        '"]'
-      );
+if(!page)
+continue;
 
-      if(!previewPage){
-        continue;
-      }
+const pageWidth =
+page.getWidth();
 
-      const previewRect =
-      previewPage.getBoundingClientRect();
+const pageHeight =
+page.getHeight();
 
-      const pageWidth =
-      page.getWidth();
+const x =
+item.pdfX;
 
-      const pageHeight =
-      page.getHeight();
+const fontSize =
+item.pdfFontSize || 12;
 
-      /*
-        Use actual preview dimensions.
-      */
 
-      const ratioX =
-      pageWidth /
-      previewRect.width;
+/*
+PDF.js item.transform[5]
+is based on top-left viewport.
+Convert it to PDF bottom-left.
+*/
 
-      const ratioY =
-      pageHeight /
-      previewRect.height;
+const yBase =
+pageHeight -
+item.pdfY;
 
-      /*
-        Position using normalized
-        coordinates.
-      */
 
-      const x =
-      item.xRatio *
-      pageWidth;
+/* COVER ORIGINAL TEXT */
 
-      const fontSize =
-      item.fontSize *
-      ratioY;
+const coverWidth =
+Math.max(
+item.pdfWidth + 4,
+10
+);
 
-      /*
-        PDF coordinates start
-        from bottom.
-      */
-
-      const fontName =
-      getPdfFontName(
-        item.fontFamily,
-        item.bold,
-        item.italic
-      );
-
-      const cacheKey =
-        fontName;
-
-      if(!fontCache[cacheKey]){
-
-        fontCache[cacheKey] =
-          await pdfDoc.embedFont(
-            fontName
-          );
-
-      }
-
-      const font =
-      fontCache[cacheKey];
-
-      const rgbColor =
-      hexToRgb(
-        item.color
-      );
+const coverHeight =
+Math.max(
+fontSize * 1.35,
+10
+);
 
-      /*
-        Small padding correction.
-      */
+const coverY =
+yBase -
+fontSize * 0.25;
 
-      const finalX =
-      x +
-      (4 * ratioX);
 
-      const textHeight =
-      font.heightAtSize(
-        fontSize
-      );
-
-      const y =
-      pageHeight -
-      (
-        item.yRatio *
-        pageHeight
-      ) -
-      textHeight -
-      (2 * ratioY);
-
-      page.drawText(
-        item.text,
-        {
-
-          x:
-            finalX,
-
-          y:
-            y,
-
-          size:
-            fontSize,
-
-          font:
-            font,
-
-          color:
-            rgb(
-              rgbColor.r,
-              rgbColor.g,
-              rgbColor.b
-            )
-
-        }
-      );
-
-    }
-
-
-    /*
-      Save original PDF.
-      No screenshot/image conversion.
-    */
-
-    const finalBytes =
-    await pdfDoc.save();
-
-    const blob =
-    new Blob(
-      [finalBytes],
-      {
-        type:
-          "application/pdf"
-      }
-    );
-
-    const url =
-    URL.createObjectURL(
-      blob
-    );
-
-    const link =
-    document.createElement(
-      "a"
-    );
-
-    link.href =
-      url;
-
-    link.download =
-      "edited-pdf.pdf";
-
-    document.body.appendChild(
-      link
-    );
-
-    link.click();
-
-    link.remove();
-
-    setTimeout(
-      function(){
-
-        URL.revokeObjectURL(
-          url
-        );
-
-      },
-      1000
-    );
-
-    setStatus(
-      "PDF downloaded successfully."
-    );
-
-  }catch(error){
-
-    console.error(
-      error
-    );
-
-    alert(
-      "PDF download karte waqt error aa gaya."
-    );
-
-    setStatus(
-      "Download failed."
-    );
-
-  }finally{
-
-    hideLoading();
-
-  }
+/*
+White cover.
+This is suitable for
+normal white PDF backgrounds.
+*/
+
+page.drawRectangle({
+
+x:
+Math.max(
+0,
+x - 1
+),
+
+y:
+Math.max(
+0,
+coverY
+),
+
+width:
+coverWidth + 2,
+
+height:
+coverHeight,
+
+color:
+rgb(1,1,1),
+
+borderWidth:
+0
 
 });
 
 
-/* PAGE CLICK */
+/* IF DELETE ONLY */
+
+if(item.deleted)
+continue;
+
+
+/* REPLACEMENT FONT */
+
+const fontName =
+getPdfFontName(
+item.fontFamily || "Arial",
+item.bold || false,
+item.italic || false
+);
+
+if(!fontCache[fontName]){
+
+fontCache[fontName] =
+await pdfDoc.embedFont(
+fontName
+);
+
+}
+
+const font =
+fontCache[fontName];
+
+const color =
+hexToRgb(
+item.color || "#000000"
+);
+
+const textWidth =
+font.widthOfTextAtSize(
+item.text,
+fontSize
+);
+
+
+/*
+If replacement is longer,
+use smaller size automatically.
+*/
+
+let finalSize =
+fontSize;
+
+if(
+textWidth >
+coverWidth
+){
+
+finalSize =
+Math.max(
+6,
+fontSize *
+(
+coverWidth /
+textWidth
+)
+);
+
+}
+
+page.drawText(
+item.text,
+{
+
+x:x,
+
+y:
+Math.max(
+0,
+coverY +
+fontSize * 0.05
+),
+
+size:
+finalSize,
+
+font:font,
+
+color:
+rgb(
+color.r,
+color.g,
+color.b
+)
+
+}
+);
+
+}
+
+
+/* =========================
+NEW TEXT
+========================= */
+
+for(
+const item of textItems
+){
+
+const page =
+pdfDoc.getPage(
+item.page - 1
+);
+
+if(!page)
+continue;
+
+const pageWidth =
+page.getWidth();
+
+const pageHeight =
+page.getHeight();
+
+const previewPage =
+document.querySelector(
+'.pdf-page[data-page="' +
+item.page +
+'"]'
+);
+
+if(!previewPage)
+continue;
+
+const previewWidth =
+previewPage.clientWidth;
+
+const previewHeight =
+previewPage.clientHeight;
+
+const ratioX =
+pageWidth /
+previewWidth;
+
+const ratioY =
+pageHeight /
+previewHeight;
+
+const x =
+item.xRatio *
+pageWidth +
+4 *
+ratioX;
+
+const size =
+item.fontSize *
+ratioY;
+
+const fontName =
+getPdfFontName(
+item.fontFamily,
+item.bold,
+item.italic
+);
+
+if(!fontCache[fontName]){
+
+fontCache[fontName] =
+await pdfDoc.embedFont(
+fontName
+);
+
+}
+
+const font =
+fontCache[fontName];
+
+const color =
+hexToRgb(
+item.color
+);
+
+const textHeight =
+font.heightAtSize(
+size
+);
+
+const y =
+pageHeight -
+item.yRatio *
+pageHeight -
+textHeight -
+2 *
+ratioY;
+
+page.drawText(
+item.text,
+{
+
+x:x,
+
+y:y,
+
+size:size,
+
+font:font,
+
+color:
+rgb(
+color.r,
+color.g,
+color.b
+)
+
+}
+);
+
+}
+
+
+/* =========================
+BARCODES
+========================= */
+
+for(
+const item of barcodeItems
+){
+
+const page =
+pdfDoc.getPage(
+item.page - 1
+);
+
+if(!page)
+continue;
+
+const previewPage =
+document.querySelector(
+'.pdf-page[data-page="' +
+item.page +
+'"]'
+);
+
+if(!previewPage)
+continue;
+
+const pageWidth =
+page.getWidth();
+
+const pageHeight =
+page.getHeight();
+
+const x =
+item.xRatio *
+pageWidth;
+
+const y =
+pageHeight -
+(
+item.yRatio +
+item.hRatio
+) *
+pageHeight;
+
+const width =
+item.wRatio *
+pageWidth;
+
+const height =
+item.hRatio *
+pageHeight;
+
+
+/*
+If it is a replacement barcode,
+cover the old barcode area.
+*/
+
+if(item.replacement){
+
+page.drawRectangle({
+
+x:x,
+
+y:y,
+
+width:width,
+
+height:height,
+
+color:
+rgb(1,1,1),
+
+borderWidth:0
+
+});
+
+}
+
+
+/*
+Create barcode image
+inside browser.
+*/
+
+const tempCanvas =
+document.createElement(
+"canvas"
+);
+
+try{
+
+JsBarcode(
+tempCanvas,
+item.value,
+{
+
+format:item.type,
+
+width:2,
+
+height:Math.max(
+40,
+height * 0.65
+),
+
+displayValue:true,
+
+fontSize:14,
+
+margin:5,
+
+background:"#ffffff",
+
+lineColor:"#000000"
+
+}
+);
+
+}catch(error){
+
+JsBarcode(
+tempCanvas,
+item.value,
+{
+
+format:"CODE128",
+
+width:2,
+
+height:60,
+
+displayValue:true
+
+}
+);
+
+}
+
+const dataUrl =
+tempCanvas.toDataURL(
+"image/png"
+);
+
+const image =
+await pdfDoc.embedPng(
+dataUrl
+);
+
+page.drawImage(
+image,
+{
+
+x:x,
+
+y:y,
+
+width:width,
+
+height:height
+
+}
+);
+
+}
+
+
+/* =========================
+SAVE
+========================= */
+
+const finalBytes =
+await pdfDoc.save();
+
+const blob =
+new Blob(
+[finalBytes],
+{
+type:"application/pdf"
+}
+);
+
+const url =
+URL.createObjectURL(blob);
+
+const link =
+document.createElement("a");
+
+link.href =
+url;
+
+link.download =
+"edited-pdf.pdf";
+
+document.body.appendChild(link);
+
+link.click();
+
+link.remove();
+
+setTimeout(
+function(){
+
+URL.revokeObjectURL(url);
+
+},
+1000
+);
+
+setStatus(
+"PDF downloaded successfully."
+);
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"PDF download karte waqt error aa gaya."
+);
+
+setStatus(
+"Download failed."
+);
+
+}finally{
+
+hideLoading();
+
+}
+
+});
+
+
+/* =========================
+PAGE CLICK
+========================= */
 
 pdfContainer.addEventListener(
 "click",
 function(event){
 
-  if(
-    event.target.classList.contains(
-      "pdf-page"
-    ) ||
-    event.target.tagName === "CANVAS"
-  ){
+if(
+event.target.classList.contains(
+"pdf-page"
+) ||
+event.target.classList.contains(
+"pdf-canvas"
+)
+){
 
-    document
-    .querySelectorAll(
-      ".pdf-text"
-    )
-    .forEach(
-      function(element){
+clearSelections();
 
-        element.classList.remove(
-          "selected"
-        );
-
-      }
-    );
-
-    selectedText =
-      null;
-
-    textTools.classList.remove(
-      "show"
-    );
-
-  }
+}
 
 });
 
 
-/* RESPONSIVE POSITION */
+/* =========================
+RESPONSIVE
+========================= */
 
 window.addEventListener(
 "resize",
 function(){
 
-  document
-  .querySelectorAll(
-    ".pdf-text"
-  )
-  .forEach(
-    function(element){
+document
+.querySelectorAll(
+".pdf-text"
+)
+.forEach(
+function(element){
 
-      const id =
-      Number(
-        element.dataset.textId
-      );
+const id =
+Number(
+element.dataset.textId
+);
 
-      const data =
-      textItems.find(
-        function(item){
+const data =
+textItems.find(
+function(item){
 
-          return item.id == id;
+return item.id == id;
 
-        }
-      );
+}
+);
 
-      if(data){
-
-        positionText(
-          element,
-          data
-        );
-
-      }
-
-    }
-  );
+if(data)
+positionText(
+element,
+data
+);
 
 });
+
+
+document
+.querySelectorAll(
+".barcode-object"
+)
+.forEach(
+function(element){
+
+const id =
+element.dataset.barcodeId;
+
+const data =
+barcodeItems.find(
+function(item){
+
+return item.id === id;
+
+}
+);
+
+if(data)
+positionBarcode(
+element,
+data
+);
+
+});
+
+
+/*
+Existing text positions
+are recreated on resize.
+*/
+
+document
+.querySelectorAll(
+".existing-text"
+)
+.forEach(
+function(element){
+
+const id =
+element.dataset.existingId;
+
+const data =
+existingTextItems.find(
+function(item){
+
+return item.id === id;
+
+}
+);
+
+if(!data)
+return;
+
+const page =
+document.querySelector(
+'.pdf-page[data-page="' +
+data.page +
+'"]'
+);
+
+if(!page)
+return;
+
+const scale =
+parseFloat(
+page.dataset.displayScale
+) || 1;
+
+element.style.left =
+data.displayX * scale / data.displayX * data.displayX / data.displayX
++ "px";
+
+/*
+Recalculate from PDF coordinates.
+*/
+
+const displayScale =
+parseFloat(
+page.dataset.displayScale
+) || 1.0;
+
+element.style.left =
+data.pdfX *
+1.5 *
+displayScale +
+"px";
+
+});
+
+});
+
 
 </script>
 
