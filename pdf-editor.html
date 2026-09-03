@@ -81,6 +81,10 @@ body{
   font-weight:600;
 }
 
+.pe-menu a:hover{
+  color:#e53232;
+}
+
 /* HERO */
 
 .pe-hero{
@@ -145,8 +149,6 @@ body{
   font-weight:700;
   cursor:pointer;
   transition:.2s;
-      background:#e53232;
-  color:#fff;
 }
 
 .pe-btn:hover{
@@ -161,13 +163,8 @@ body{
 }
 
 .pe-btn.dark{
-  background:#202124;
+  background:#e53232;
   color:#fff;
-}
-
-.pe-btn.gray{
-  background:#f1f3f4;
-  color:#333;
 }
 
 .pe-btn:disabled{
@@ -184,8 +181,6 @@ body{
   font-size:13px;
   min-height:18px;
 }
-
-/* STATUS */
 
 #status{
   width:100%;
@@ -207,6 +202,7 @@ body{
 }
 
 #pdf-container{
+  width:100%;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -255,7 +251,8 @@ body{
   box-shadow:0 6px 25px rgba(0,0,0,.18);
   overflow:hidden;
   flex-shrink:0;
-  width:max-content;
+
+  width:850px;
   max-width:100%;
 }
 
@@ -299,7 +296,7 @@ body{
 
 .pdf-text.selected{
   border:1px dashed #e53232;
-  background:rgba(255,255,255,.12);
+  background:rgba(255,255,255,.15);
 }
 
 .pdf-text:hover{
@@ -363,6 +360,10 @@ body{
 .pe-footer-links a{
   color:#aaa;
   text-decoration:none;
+}
+
+.pe-footer-links a:hover{
+  color:#fff;
 }
 
 /* LOADING */
@@ -455,6 +456,11 @@ body{
     gap:20px;
   }
 
+  .pdf-page{
+    width:100%;
+    max-width:850px;
+  }
+
   .pe-info{
     padding:20px 14px;
   }
@@ -470,7 +476,6 @@ body{
 </head>
 
 <body>
-
 
 <!-- HEADER -->
 
@@ -512,7 +517,6 @@ body{
 
 </header>
 
-
 <!-- HERO -->
 
 <section class="pe-hero">
@@ -528,11 +532,9 @@ body{
 
 </section>
 
-
 <!-- EDITOR -->
 
 <main class="pe-editor-container">
-
 
   <!-- TOOLBAR -->
 
@@ -546,12 +548,10 @@ body{
 
     </label>
 
-
     <input
       type="file"
       id="pdfFile"
       accept="application/pdf">
-
 
     <button
       type="button"
@@ -563,7 +563,6 @@ body{
 
     </button>
 
-
     <button
       type="button"
       class="pe-btn secondary"
@@ -574,10 +573,9 @@ body{
 
     </button>
 
-
     <button
       type="button"
-      class="pe-btn dark"
+      class="pe-btn"
       id="downloadBtn"
       disabled>
 
@@ -585,21 +583,17 @@ body{
 
     </button>
 
-
     <div id="fileName">
       No PDF selected
     </div>
-
 
     <div id="status"></div>
 
   </div>
 
-
   <!-- PDF PREVIEW -->
 
   <div class="pe-pdf-area">
-
 
     <div
       id="emptyMessage"
@@ -619,12 +613,9 @@ body{
 
     </div>
 
-
     <div id="pdf-container"></div>
 
-
   </div>
-
 
   <!-- INFO -->
 
@@ -642,9 +633,7 @@ body{
 
   </div>
 
-
 </main>
-
 
 <!-- FOOTER -->
 
@@ -663,7 +652,6 @@ body{
       </p>
 
     </div>
-
 
     <div class="pe-footer-links">
 
@@ -689,7 +677,6 @@ body{
 
 </footer>
 
-
 <!-- LOADING -->
 
 <div
@@ -708,19 +695,15 @@ body{
 
 </div>
 
-
 <!-- PDF.JS -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-
 
 <!-- PDF-LIB -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 
-
 <script>
-
 
 /* PDF.JS WORKER */
 
@@ -731,17 +714,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
 /* VARIABLES */
 
 let pdfDocument = null;
-
 let uploadedFile = null;
-
-
-/* TEXT DATA
-
-   We store the text position relative to
-   the PDF page.
-
-*/
-
 let textItems = [];
 
 
@@ -783,7 +756,6 @@ document.getElementById("loadingText");
 function showLoading(message){
 
   loadingText.innerText = message;
-
   loading.style.display = "flex";
 
 }
@@ -803,50 +775,6 @@ function setStatus(message){
   status.innerText = message;
 
 }
-
-
-/* PDF SELECT */
-
-pdfFile.addEventListener(
-"change",
-function(event){
-
-  const file =
-  event.target.files[0];
-
-  if(!file){
-    return;
-  }
-
-
-  if(file.type !== "application/pdf"){
-
-    alert(
-      "Please select a PDF file."
-    );
-
-    pdfFile.value = "";
-
-    return;
-
-  }
-
-
-  uploadedFile = file;
-
-  textItems = [];
-
-
-  fileName.innerText =
-    "Selected: " +
-    file.name +
-    " • " +
-    formatFileSize(file.size);
-
-
-  loadPDF(file);
-
-});
 
 
 /* FILE SIZE */
@@ -874,6 +802,46 @@ function formatFileSize(bytes){
 }
 
 
+/* PDF SELECT */
+
+pdfFile.addEventListener(
+"change",
+function(event){
+
+  const file =
+  event.target.files[0];
+
+  if(!file){
+    return;
+  }
+
+  if(file.type !== "application/pdf"){
+
+    alert(
+      "Please select a PDF file."
+    );
+
+    pdfFile.value = "";
+
+    return;
+
+  }
+
+  uploadedFile = file;
+
+  textItems = [];
+
+  fileName.innerText =
+    "Selected: " +
+    file.name +
+    " • " +
+    formatFileSize(file.size);
+
+  loadPDF(file);
+
+});
+
+
 /* LOAD PDF */
 
 function loadPDF(file){
@@ -886,58 +854,48 @@ function loadPDF(file){
     "Loading..."
   );
 
-
   const reader =
   new FileReader();
 
-
   reader.onload =
-  function(){
+  async function(){
 
-    const data =
-    new Uint8Array(
-      reader.result
-    );
+    try{
 
+      const data =
+      new Uint8Array(
+        reader.result
+      );
 
-    pdfjsLib
-    .getDocument({
-      data:data
-    })
-    .promise
-    .then(function(pdf){
-
-      pdfDocument = pdf;
-
+      pdfDocument =
+      await pdfjsLib
+      .getDocument({
+        data:data
+      })
+      .promise;
 
       emptyMessage.style.display =
         "none";
 
-
       addTextBtn.disabled =
         false;
-
 
       clearTextBtn.disabled =
         false;
 
-
       downloadBtn.disabled =
         false;
 
-
       setStatus(
-        pdf.numPages +
+        pdfDocument.numPages +
         " page" +
-        (pdf.numPages > 1 ? "s" : "") +
+        (pdfDocument.numPages > 1 ? "s" : "") +
         " loaded"
       );
 
+      await renderPDF();
 
-      renderPDF();
-
-    })
-    .catch(function(error){
+    }catch(error){
 
       console.error(error);
 
@@ -947,15 +905,13 @@ function loadPDF(file){
 
       setStatus("");
 
-    })
-    .finally(function(){
+    }finally{
 
       hideLoading();
 
-    });
+    }
 
   };
-
 
   reader.readAsArrayBuffer(file);
 
@@ -968,7 +924,6 @@ async function renderPDF(){
 
   pdfContainer.innerHTML = "";
 
-
   for(
     let pageNumber = 1;
     pageNumber <= pdfDocument.numPages;
@@ -980,9 +935,6 @@ async function renderPDF(){
     );
 
   }
-
-
-  /* RESTORE TEXT */
 
   restoreTextItems();
 
@@ -997,21 +949,21 @@ function renderPage(pageNumber){
   .getPage(pageNumber)
   .then(function(page){
 
-
     /*
-      Base scale.
-      High quality is produced by
-      devicePixelRatio below.
+      Display scale.
+      This controls visible PDF size.
     */
 
-    const scale = 2.0;
+    const baseScale = 1.5;
 
+    /*
+      High resolution rendering.
+    */
 
     const viewport =
     page.getViewport({
       scale:baseScale
     });
-
 
     const outputScale =
     Math.min(
@@ -1019,34 +971,44 @@ function renderPage(pageNumber){
       2
     );
 
-
     const pageDiv =
     document.createElement("div");
-
 
     pageDiv.className =
       "pdf-page";
 
-
     pageDiv.dataset.page =
       pageNumber;
 
-
     /*
-      CSS display size
+      Keep PDF preview at maximum
+      850px on desktop.
     */
 
+    const maxWidth = 850;
+
+    let displayWidth =
+      viewport.width;
+
+    if(displayWidth > maxWidth){
+
+      displayWidth =
+        maxWidth;
+
+    }
+
     pageDiv.style.width =
-      viewport.width + "px";
+      displayWidth + "px";
 
+    const displayScale =
+      displayWidth /
+      viewport.width;
 
-    pageDiv.style.height =
-      viewport.height + "px";
-
+    pageDiv.dataset.displayScale =
+      displayScale;
 
     const canvas =
     document.createElement("canvas");
-
 
     const context =
     canvas.getContext(
@@ -1056,9 +1018,8 @@ function renderPage(pageNumber){
       }
     );
 
-
     /*
-      INTERNAL HIGH RESOLUTION
+      Internal high-resolution canvas
     */
 
     canvas.width =
@@ -1067,30 +1028,25 @@ function renderPage(pageNumber){
         outputScale
       );
 
-
     canvas.height =
       Math.floor(
         viewport.height *
         outputScale
       );
 
-
     /*
-      CSS DISPLAY SIZE
+      Visible canvas size
     */
 
     canvas.style.width =
-      viewport.width + "px";
-
+      "100%";
 
     canvas.style.height =
-      viewport.height + "px";
-
+      "auto";
 
     pageDiv.appendChild(
       canvas
     );
-
 
     /*
       PAGE NUMBER
@@ -1099,34 +1055,31 @@ function renderPage(pageNumber){
     const pageNumberLabel =
     document.createElement("div");
 
-
     pageNumberLabel.className =
       "page-number";
 
-
     pageNumberLabel.innerText =
       "Page " + pageNumber;
-
 
     pageDiv.appendChild(
       pageNumberLabel
     );
 
-
     pdfContainer.appendChild(
       pageDiv
     );
 
-
     /*
-      RENDER
+      Render high quality
     */
 
     return page.render({
 
-      canvasContext:context,
+      canvasContext:
+        context,
 
-      viewport:viewport,
+      viewport:
+        viewport,
 
       transform:[
         outputScale,
@@ -1160,61 +1113,42 @@ function(){
 
   }
 
-
   const text =
   prompt(
     "Jo text add karna hai woh likhiye:"
   );
 
-
   if(!text){
     return;
   }
-
-
-  /*
-    Add text to first page
-  */
 
   const firstPage =
   document.querySelector(
     '.pdf-page[data-page="1"]'
   );
 
-
   if(!firstPage){
     return;
   }
 
-
   const item =
   document.createElement("div");
-
 
   item.className =
     "pdf-text selected";
 
-
   item.innerText =
     text;
-
-
-  /*
-    Initial position
-  */
 
   item.style.left =
     "50px";
 
-
   item.style.top =
     "50px";
-
 
   firstPage.appendChild(
     item
   );
-
 
   const textData = {
 
@@ -1239,21 +1173,17 @@ function(){
 
   };
 
-
   item.dataset.textId =
     textData.id;
-
 
   textItems.push(
     textData
   );
 
-
   makeDraggable(
     item,
     textData
   );
-
 
   setStatus(
     "Text added. Drag it to the required position."
@@ -1272,11 +1202,9 @@ function makeDraggable(
   let dragging = false;
 
   let startX = 0;
-
   let startY = 0;
 
   let originalX = 0;
-
   let originalY = 0;
 
 
@@ -1284,54 +1212,43 @@ function makeDraggable(
 
     dragging = true;
 
-
     element.classList.add(
       "selected"
     );
 
+    const parent =
+    element.parentElement;
 
-    const point =
-      getPointerPosition(
-        event
-      );
-
+    const rect =
+    parent.getBoundingClientRect();
 
     startX =
-      point.x;
-
+      event.clientX -
+      rect.left;
 
     startY =
-      point.y;
-
+      event.clientY -
+      rect.top;
 
     originalX =
       parseFloat(
         element.style.left
       ) || 0;
 
-
     originalY =
       parseFloat(
         element.style.top
       ) || 0;
 
-
     event.preventDefault();
 
+    try{
 
-    if(
-      event.pointerId !== undefined
-    ){
+      element.setPointerCapture(
+        event.pointerId
+      );
 
-      try{
-
-        element.setPointerCapture(
-          event.pointerId
-        );
-
-      }catch(e){}
-
-    }
+    }catch(e){}
 
   }
 
@@ -1342,38 +1259,37 @@ function makeDraggable(
       return;
     }
 
+    const parent =
+    element.parentElement;
 
-    const point =
-      getPointerPosition(
-        event
-      );
+    const rect =
+    parent.getBoundingClientRect();
 
+    const currentX =
+      event.clientX -
+      rect.left;
+
+    const currentY =
+      event.clientY -
+      rect.top;
 
     let newX =
       originalX +
-      point.x -
+      currentX -
       startX;
-
 
     let newY =
       originalY +
-      point.y -
+      currentY -
       startY;
-
-
-    const parent =
-      element.parentElement;
-
 
     const maxX =
       parent.clientWidth -
       element.offsetWidth;
 
-
     const maxY =
       parent.clientHeight -
       element.offsetHeight;
-
 
     newX =
       Math.max(
@@ -1384,7 +1300,6 @@ function makeDraggable(
         )
       );
 
-
     newY =
       Math.max(
         0,
@@ -1394,22 +1309,14 @@ function makeDraggable(
         )
       );
 
-
     element.style.left =
       newX + "px";
-
 
     element.style.top =
       newY + "px";
 
-
-    /*
-      Save position continuously
-    */
-
     textData.x =
       newX;
-
 
     textData.y =
       newY;
@@ -1423,15 +1330,12 @@ function makeDraggable(
       return;
     }
 
-
     dragging = false;
-
 
     textData.x =
       parseFloat(
         element.style.left
       ) || 0;
-
 
     textData.y =
       parseFloat(
@@ -1446,53 +1350,20 @@ function makeDraggable(
     startDrag
   );
 
-
   element.addEventListener(
     "pointermove",
     moveDrag
   );
-
 
   element.addEventListener(
     "pointerup",
     stopDrag
   );
 
-
   element.addEventListener(
     "pointercancel",
     stopDrag
   );
-
-}
-
-
-/* POINTER POSITION */
-
-function getPointerPosition(
-  event
-){
-
-  const parent =
-    event.currentTarget
-    .parentElement;
-
-
-  const rect =
-    parent.getBoundingClientRect();
-
-
-  return {
-
-    x:
-      event.clientX -
-      rect.left,
-
-    y:
-      event.clientY -
-      rect.top
-
-  };
 
 }
 
@@ -1511,44 +1382,34 @@ function restoreTextItems(){
         '"]'
       );
 
-
       if(!page){
         return;
       }
 
-
       const item =
       document.createElement("div");
-
 
       item.className =
         "pdf-text";
 
-
       item.innerText =
         data.text;
-
 
       item.style.left =
         data.x + "px";
 
-
       item.style.top =
         data.y + "px";
-
 
       item.style.fontSize =
         data.fontSize + "px";
 
-
       item.dataset.textId =
         data.id;
-
 
       page.appendChild(
         item
       );
-
 
       makeDraggable(
         item,
@@ -1577,9 +1438,7 @@ function(){
     }
   );
 
-
   textItems = [];
-
 
   setStatus(
     "Added text cleared."
@@ -1604,74 +1463,42 @@ async function(){
 
   }
 
-
   try{
 
     showLoading(
       "Creating your PDF..."
     );
 
-
-    /*
-      Read ORIGINAL PDF.
-      We do NOT convert it into image.
-    */
-
     const originalBytes =
-      await uploadedFile.arrayBuffer();
-
+    await uploadedFile.arrayBuffer();
 
     const PDFDocument =
-      PDFLib.PDFDocument;
-
+    PDFLib.PDFDocument;
 
     const rgb =
-      PDFLib.rgb;
-
+    PDFLib.rgb;
 
     const pdfDoc =
-      await PDFDocument.load(
-        originalBytes
-      );
-
-
-    /*
-      Add every text item
-    */
+    await PDFDocument.load(
+      originalBytes
+    );
 
     for(
       const item of textItems
     ){
 
-      if(
-        !item.text
-      ){
+      if(!item.text){
         continue;
       }
-
 
       const page =
       pdfDoc.getPage(
         item.page - 1
       );
 
-
       if(!page){
         continue;
       }
-
-
-      const pageWidth =
-      page.getWidth();
-
-
-      const pageHeight =
-      page.getHeight();
-
-
-      /*
-        Find corresponding preview page
-      */
 
       const previewPage =
       document.querySelector(
@@ -1680,46 +1507,39 @@ async function(){
         '"]'
       );
 
-
       if(!previewPage){
         continue;
       }
 
+      /*
+        IMPORTANT:
+        Use actual displayed page size.
+      */
 
       const previewRect =
       previewPage.getBoundingClientRect();
 
+      const pageWidth =
+      page.getWidth();
 
-      /*
-        PDF.js base scale is 2.
-        Therefore convert CSS pixels
-        back to PDF points.
-      */
+      const pageHeight =
+      page.getHeight();
 
       const ratioX =
       pageWidth /
       previewRect.width;
 
-
       const ratioY =
       pageHeight /
       previewRect.height;
-
 
       const x =
       item.x *
       ratioX;
 
-
       const fontSize =
       item.fontSize *
       ratioY;
-
-
-      /*
-        Browser y starts from TOP.
-        PDF y starts from BOTTOM.
-      */
 
       const y =
       pageHeight -
@@ -1728,7 +1548,6 @@ async function(){
         ratioY
       ) -
       fontSize;
-
 
       page.drawText(
         item.text,
@@ -1751,59 +1570,46 @@ async function(){
 
     }
 
-
     /*
-      Save ORIGINAL PDF with
-      vector text.
+      Save original PDF.
+      No screenshot/image conversion.
     */
 
     const finalBytes =
     await pdfDoc.save();
 
-
-    /*
-      Download
-    */
-
     const blob =
     new Blob(
       [finalBytes],
       {
-        type:"application/pdf"
+        type:
+          "application/pdf"
       }
     );
-
 
     const url =
     URL.createObjectURL(
       blob
     );
 
-
     const link =
     document.createElement(
       "a"
     );
 
-
     link.href =
       url;
 
-
     link.download =
       "edited-pdf.pdf";
-
 
     document.body.appendChild(
       link
     );
 
-
     link.click();
 
-
     link.remove();
-
 
     setTimeout(
       function(){
@@ -1816,11 +1622,9 @@ async function(){
       1000
     );
 
-
     setStatus(
       "PDF downloaded successfully."
     );
-
 
   }catch(error){
 
@@ -1828,16 +1632,13 @@ async function(){
       error
     );
 
-
     alert(
       "PDF download karte waqt error aa gaya."
     );
 
-
     setStatus(
       "Download failed."
     );
-
 
   }finally{
 
@@ -1846,7 +1647,6 @@ async function(){
   }
 
 });
-
 
 </script>
 
