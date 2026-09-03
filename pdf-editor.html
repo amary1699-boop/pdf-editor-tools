@@ -410,64 +410,95 @@ function clearTexts(){
 
 
 async function downloadPDF(){
-
   if(!pdfDocument){
-
     alert("Pehle PDF upload karein.");
-
     return;
-
   }
-
-  const { jsPDF } = window.jspdf;
 
   const firstPage = document.querySelector(".page");
-
   if(!firstPage){
-
     return;
-
   }
 
-  const canvas = firstPage.querySelector("canvas");
+  const originalCanvas = firstPage.querySelector("canvas");
+  if(!originalCanvas){
+    return;
+  }
 
-  const imgData = canvas.toDataURL("image/jpeg",0.95);
+  // Export canvas - same size as PDF preview
+  const exportCanvas = document.createElement("canvas");
+  exportCanvas.width = originalCanvas.width;
+  exportCanvas.height = originalCanvas.height;
+
+  const ctx = exportCanvas.getContext("2d");
+
+  // Original PDF page
+  ctx.drawImage(
+    originalCanvas,
+    0,
+    0,
+    exportCanvas.width,
+    exportCanvas.height
+  );
+
+  const pageRect = firstPage.getBoundingClientRect();
+
+  // Add all text exactly where it appears in preview
+  document.querySelectorAll(".text-item").forEach(function(item){
+
+    const itemRect = item.getBoundingClientRect();
+    const computed = window.getComputedStyle(item);
+
+    const scaleX = exportCanvas.width / pageRect.width;
+    const scaleY = exportCanvas.height / pageRect.height;
+
+    const x = (itemRect.left - pageRect.left) * scaleX;
+    const y = (itemRect.top - pageRect.top) * scaleY;
+
+    const fontSize =
+      parseFloat(computed.fontSize) * scaleY;
+
+    ctx.font =
+      computed.fontWeight + " " +
+      fontSize + "px " +
+      computed.fontFamily;
+
+    ctx.fillStyle = computed.color;
+
+    ctx.textBaseline = "top";
+
+    ctx.fillText(
+      item.innerText,
+      x,
+      y
+    );
+  });
+
+  // Create PDF
+  const { jsPDF } = window.jspdf;
 
   const pdf = new jsPDF({
-    orientation:"p",
-    unit:"px",
-    format:[canvas.width,canvas.height]
+    orientation: exportCanvas.width > exportCanvas.height ? "l" : "p",
+    unit: "px",
+    format: [
+      exportCanvas.width,
+      exportCanvas.height
+    ]
   });
+
+  const imgData = exportCanvas.toDataURL(
+    "image/jpeg",
+    0.95
+  );
 
   pdf.addImage(
     imgData,
     "JPEG",
     0,
     0,
-    canvas.width,
-    canvas.height
+    exportCanvas.width,
+    exportCanvas.height
   );
 
-  document.querySelectorAll(".text-item").forEach(function(item){
-
-    const x = parseFloat(item.style.left) || 0;
-    const y = parseFloat(item.style.top) || 0;
-
-    pdf.setFontSize(16);
-
-    pdf.text(
-      item.innerText,
-      x + 5,
-      y + 20
-    );
-
-  });
-
   pdf.save("edited-pdf.pdf");
-
 }
-
-</script>
-
-</body>
-</html>
