@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>PDF Editor - PDF Editor Tools Free</title>
-<meta name="description" content="Free online PDF editor. Add text to PDF, move text and download edited PDF.">
+
+<meta name="description"
+      content="Free online PDF editor. Add text to PDF, move text and download your edited PDF.">
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -16,82 +22,77 @@
 
 body{
   font-family:Arial,Helvetica,sans-serif;
-  background:#f7f8fc;
+  background:#f5f6fa;
   color:#202124;
 }
 
-a{
-  text-decoration:none;
-  color:inherit;
-}
-
 /* HEADER */
+
 .pe-header{
-  background:#ffffff;
-  border-bottom:1px solid #e8e8ee;
+  background:#fff;
+  border-bottom:1px solid #e5e7eb;
   position:sticky;
   top:0;
   z-index:1000;
 }
 
 .pe-nav{
-  max-width:1180px;
+  max-width:1200px;
   margin:auto;
-  min-height:70px;
+  min-height:68px;
+  padding:0 20px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 20px;
 }
 
 .pe-logo{
   display:flex;
   align-items:center;
   gap:10px;
-  font-size:22px;
+  font-size:21px;
   font-weight:800;
   color:#e53232;
+  text-decoration:none;
 }
 
 .pe-logo-icon{
   width:40px;
   height:40px;
   background:#e53232;
-  color:white;
+  color:#fff;
   border-radius:10px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:18px;
+  font-size:14px;
+  font-weight:800;
 }
 
 .pe-menu{
   display:flex;
-  gap:28px;
-  align-items:center;
+  gap:25px;
 }
 
 .pe-menu a{
-  font-size:15px;
   color:#444;
+  text-decoration:none;
+  font-size:14px;
   font-weight:600;
 }
 
-.pe-menu a:hover{
-  color:#e53232;
-}
-
 /* HERO */
+
 .pe-hero{
-  background:linear-gradient(135deg,#fff5f5,#ffffff);
-  padding:45px 20px 40px;
   text-align:center;
+  padding:42px 20px 35px;
+  background:linear-gradient(135deg,#fff5f5,#fff);
 }
 
 .pe-hero h1{
   font-size:40px;
-  line-height:1.15;
   font-weight:800;
+  line-height:1.2;
 }
 
 .pe-hero h1 span{
@@ -99,33 +100,35 @@ a{
 }
 
 .pe-hero p{
-  max-width:680px;
-  margin:15px auto 0;
-  color:#666;
-  font-size:17px;
+  max-width:700px;
+  margin:13px auto 0;
+  color:#6b7280;
+  font-size:16px;
   line-height:1.6;
 }
 
-/* EDITOR */
+/* MAIN */
+
 .pe-editor-container{
-  max-width:1180px;
+  max-width:1200px;
   margin:auto;
-  padding:35px 20px 60px;
+  padding:30px 20px 60px;
 }
 
 /* TOOLBAR */
+
 .pe-toolbar{
   background:#fff;
-  border:1px solid #e8e8ee;
-  border-radius:16px;
-  padding:20px;
+  border:1px solid #e5e7eb;
+  border-radius:15px;
+  padding:16px;
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:12px;
+  gap:10px;
   flex-wrap:wrap;
-  box-shadow:0 5px 20px rgba(0,0,0,.04);
-  margin-bottom:25px;
+  box-shadow:0 5px 20px rgba(0,0,0,.05);
+  margin-bottom:18px;
 }
 
 .pe-toolbar input[type="file"]{
@@ -134,25 +137,25 @@ a{
 
 .pe-btn{
   border:none;
-  padding:12px 20px;
-  border-radius:9px;
-  font-size:15px;
+  background:#e53232;
+  color:#fff;
+  padding:11px 18px;
+  border-radius:8px;
+  font-size:14px;
   font-weight:700;
   cursor:pointer;
   transition:.2s;
-  background:#e53232;
-  color:#fff;
 }
 
 .pe-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 6px 15px rgba(0,0,0,.12);
+  transform:translateY(-1px);
+  box-shadow:0 5px 12px rgba(0,0,0,.12);
 }
 
 .pe-btn.secondary{
   background:#fff0f0;
-  color:#e53232;
-  border:1px solid #f0b5b5;
+  color:#d92828;
+  border:1px solid #f1b4b4;
 }
 
 .pe-btn.dark{
@@ -160,8 +163,13 @@ a{
   color:#fff;
 }
 
+.pe-btn.gray{
+  background:#f1f3f4;
+  color:#333;
+}
+
 .pe-btn:disabled{
-  opacity:.5;
+  opacity:.45;
   cursor:not-allowed;
   transform:none;
   box-shadow:none;
@@ -171,17 +179,28 @@ a{
   width:100%;
   text-align:center;
   color:#777;
-  font-size:14px;
-  min-height:20px;
+  font-size:13px;
+  min-height:18px;
+}
+
+/* STATUS */
+
+#status{
+  width:100%;
+  text-align:center;
+  font-size:13px;
+  color:#666;
+  min-height:18px;
 }
 
 /* PDF AREA */
+
 .pe-pdf-area{
-  background:#e9ebf1;
-  border:1px solid #e0e1e7;
-  border-radius:16px;
-  padding:25px 15px;
-  min-height:300px;
+  background:#e7e9ef;
+  border:1px solid #dfe1e7;
+  border-radius:15px;
+  padding:25px 12px;
+  min-height:350px;
   overflow:auto;
 }
 
@@ -189,99 +208,110 @@ a{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:25px;
-}
-
-/* PAGE */
-.pdf-page{
-  position:relative;
-  background:#fff;
-  box-shadow:0 5px 25px rgba(0,0,0,.15);
-  overflow:hidden;
-  flex-shrink:0;
-  max-width:100%;
-}
-
-.pdf-page canvas{
-  display:block;
-  max-width:100%;
-  height:auto;
-}
-
-.pdf-page canvas{
-  display:block;
-}
-
-/* PAGE NUMBER */
-.page-number{
-  position:absolute;
-  top:8px;
-  right:8px;
-  background:rgba(32,33,36,.75);
-  color:#fff;
-  padding:4px 8px;
-  border-radius:5px;
-  font-size:11px;
-  z-index:20;
-}
-
-/* TEXT */
-.pdf-text{
-  position:absolute;
-  left:50px;
-  top:50px;
-  color:#000;
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:20px;
-  font-weight:normal;
-  line-height:1.2;
-  white-space:nowrap;
-  cursor:move;
-  user-select:none;
-  z-index:10;
-  padding:2px 4px;
-}
-
-.pdf-text:hover{
-  outline:1px dashed #e53232;
+  gap:28px;
 }
 
 /* EMPTY */
+
 .pe-empty{
+  min-height:300px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
   text-align:center;
-  padding:70px 20px;
   color:#777;
 }
 
 .pe-empty-icon{
-  width:65px;
-  height:65px;
+  width:70px;
+  height:70px;
   background:#fff0f0;
   color:#e53232;
-  border-radius:15px;
-  margin:0 auto 15px;
+  border-radius:16px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:30px;
+  font-weight:800;
+  margin-bottom:15px;
 }
 
 .pe-empty h3{
   color:#444;
-  margin-bottom:8px;
+  margin-bottom:7px;
 }
 
 .pe-empty p{
   font-size:14px;
 }
 
+/* PDF PAGE */
+
+.pdf-page{
+  position:relative;
+  background:#fff;
+  box-shadow:0 6px 25px rgba(0,0,0,.18);
+  overflow:hidden;
+  flex-shrink:0;
+  width:max-content;
+  max-width:100%;
+}
+
+.pdf-page canvas{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* PAGE NUMBER */
+
+.page-number{
+  position:absolute;
+  top:8px;
+  right:8px;
+  background:rgba(32,33,36,.78);
+  color:#fff;
+  padding:4px 8px;
+  border-radius:5px;
+  font-size:10px;
+  z-index:50;
+}
+
+/* TEXT */
+
+.pdf-text{
+  position:absolute;
+  color:#000;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:20px;
+  font-weight:400;
+  line-height:1.2;
+  white-space:nowrap;
+  cursor:move;
+  user-select:none;
+  touch-action:none;
+  z-index:20;
+  padding:2px 4px;
+  border:1px solid transparent;
+}
+
+.pdf-text.selected{
+  border:1px dashed #e53232;
+  background:rgba(255,255,255,.12);
+}
+
+.pdf-text:hover{
+  border:1px dashed #e53232;
+}
+
 /* INFO */
+
 .pe-info{
-  background:white;
-  border:1px solid #e8e8ee;
-  border-radius:16px;
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:15px;
   padding:25px;
-  margin-top:25px;
+  margin-top:20px;
   text-align:center;
 }
 
@@ -297,6 +327,7 @@ a{
 }
 
 /* FOOTER */
+
 .pe-footer{
   background:#17181a;
   color:#aaa;
@@ -304,7 +335,7 @@ a{
 }
 
 .pe-footer-inner{
-  max-width:1180px;
+  max-width:1200px;
   margin:auto;
   display:flex;
   justify-content:space-between;
@@ -312,8 +343,8 @@ a{
 }
 
 .pe-footer h3{
-  color:white;
-  margin-bottom:12px;
+  color:#fff;
+  margin-bottom:10px;
 }
 
 .pe-footer p{
@@ -323,45 +354,67 @@ a{
 
 .pe-footer-links{
   display:flex;
-  gap:25px;
+  gap:20px;
   flex-wrap:wrap;
 }
 
-.pe-footer-links a:hover{
-  color:white;
+.pe-footer-links a{
+  color:#aaa;
+  text-decoration:none;
+}
+
+/* LOADING */
+
+.loading{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(255,255,255,.75);
+  z-index:9999;
+  align-items:center;
+  justify-content:center;
+}
+
+.loading-box{
+  background:#fff;
+  padding:25px 30px;
+  border-radius:14px;
+  box-shadow:0 10px 40px rgba(0,0,0,.15);
+  text-align:center;
+}
+
+.spinner{
+  width:38px;
+  height:38px;
+  border:4px solid #eee;
+  border-top-color:#e53232;
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+  margin:0 auto 12px;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
 }
 
 /* MOBILE */
-@media(max-width:900px){
 
-  .pe-menu{
-    gap:15px;
-  }
-
-  .pe-menu a{
-    font-size:13px;
-  }
-
-  .pe-hero h1{
-    font-size:34px;
-  }
-}
-
-@media(max-width:600px){
+@media(max-width:700px){
 
   .pe-nav{
-    min-height:62px;
-    padding:8px 15px;
+    min-height:60px;
+    padding:7px 12px;
   }
 
   .pe-logo{
-    font-size:18px;
+    font-size:17px;
   }
 
   .pe-logo-icon{
     width:35px;
     height:35px;
-    font-size:15px;
   }
 
   .pe-menu{
@@ -369,73 +422,97 @@ a{
   }
 
   .pe-hero{
-    padding:40px 15px 35px;
+    padding:32px 15px 28px;
   }
 
   .pe-hero h1{
-    font-size:30px;
+    font-size:29px;
   }
 
   .pe-hero p{
-    font-size:15px;
+    font-size:14px;
   }
 
   .pe-editor-container{
-    padding:25px 10px 45px;
+    padding:20px 8px 40px;
   }
 
   .pe-toolbar{
-    padding:15px 12px;
-    gap:9px;
+    padding:13px 10px;
   }
 
   .pe-btn{
     width:100%;
-    padding:12px 15px;
   }
 
   .pe-pdf-area{
-    padding:15px 5px;
+    padding:12px 4px;
   }
 
-  .pdf-page{
-    max-width:100%;
+  #pdf-container{
+    gap:20px;
   }
 
   .pe-info{
-    padding:20px 15px;
+    padding:20px 14px;
   }
 
   .pe-footer-inner{
     flex-direction:column;
   }
+
 }
+
 </style>
+
 </head>
 
 <body>
 
+
 <!-- HEADER -->
+
 <header class="pe-header">
+
   <div class="pe-nav">
 
     <a href="index.html" class="pe-logo">
-      <div class="pe-logo-icon">PDF</div>
+
+      <div class="pe-logo-icon">
+        PDF
+      </div>
+
       PDF Editor Tools
+
     </a>
 
     <nav class="pe-menu">
-      <a href="index.html#pdf-tools">PDF Tools</a>
-      <a href="index.html#convert-tools">Convert</a>
-      <a href="index.html#image-tools">Image Tools</a>
-      <a href="index.html#about">About</a>
+
+      <a href="index.html#pdf-tools">
+        PDF Tools
+      </a>
+
+      <a href="index.html#convert-tools">
+        Convert
+      </a>
+
+      <a href="index.html#image-tools">
+        Image Tools
+      </a>
+
+      <a href="index.html#about">
+        About
+      </a>
+
     </nav>
 
   </div>
+
 </header>
 
 
 <!-- HERO -->
+
 <section class="pe-hero">
 
   <h1>
@@ -443,74 +520,96 @@ a{
   </h1>
 
   <p>
-    Upload your PDF, add text, move it anywhere on the page
-    and download your edited PDF.
+    Add text to your PDF, move it anywhere on the page
+    and download your edited PDF with high quality.
   </p>
 
 </section>
 
 
 <!-- EDITOR -->
+
 <main class="pe-editor-container">
 
+
   <!-- TOOLBAR -->
+
   <div class="pe-toolbar">
 
-    <label for="pdfFile" class="pe-btn">
+    <label
+      for="pdfFile"
+      class="pe-btn">
+
       Choose PDF
+
     </label>
+
 
     <input
       type="file"
       id="pdfFile"
-      accept="application/pdf"
-    >
+      accept="application/pdf">
+
 
     <button
       type="button"
       class="pe-btn secondary"
       id="addTextBtn"
-      disabled
-    >
+      disabled>
+
       ✎ Add Text
+
     </button>
+
 
     <button
       type="button"
       class="pe-btn secondary"
       id="clearTextBtn"
-      disabled
-    >
+      disabled>
+
       🗑 Clear Text
+
     </button>
 
-   <button
-  type="button"
-  class="pe-btn red"
-  id="downloadBtn"
-  disabled
-  style="background:#e53232;color:white;border:none;"
->
-  ⇩ Download PDF
-</button>
+
+    <button
+      type="button"
+      class="pe-btn dark"
+      id="downloadBtn"
+      disabled>
+
+      ⇩ Download PDF
+
+    </button>
+
 
     <div id="fileName">
       No PDF selected
     </div>
 
+
+    <div id="status"></div>
+
   </div>
 
 
   <!-- PDF PREVIEW -->
+
   <div class="pe-pdf-area">
 
-    <div id="emptyMessage" class="pe-empty">
+
+    <div
+      id="emptyMessage"
+      class="pe-empty">
 
       <div class="pe-empty-icon">
         PDF
       </div>
 
-      <h3>Choose a PDF file</h3>
+      <h3>
+        Choose a PDF file
+      </h3>
 
       <p>
         Upload your PDF to start editing.
@@ -518,44 +617,70 @@ a{
 
     </div>
 
+
     <div id="pdf-container"></div>
+
 
   </div>
 
 
   <!-- INFO -->
+
   <div class="pe-info">
 
-    <h2>Free Online PDF Editor</h2>
+    <h2>
+      Free Online PDF Editor
+    </h2>
 
     <p>
-      Upload your PDF and add text directly on the page.
-      You can drag the added text to the required position
-      and download the edited PDF.
+      Upload your PDF, add text, move the text to the
+      required position and download your edited PDF.
+      Your original PDF quality is preserved.
     </p>
 
   </div>
+
 
 </main>
 
 
 <!-- FOOTER -->
+
 <footer class="pe-footer">
 
   <div class="pe-footer-inner">
 
     <div>
-      <h3>PDF Editor Tools Free</h3>
+
+      <h3>
+        PDF Editor Tools Free
+      </h3>
+
       <p>
         Simple online PDF and image tools for everyone.
       </p>
+
     </div>
 
+
     <div class="pe-footer-links">
-      <a href="index.html#pdf-tools">PDF Tools</a>
-      <a href="index.html#convert-tools">Convert</a>
-      <a href="index.html#image-tools">Image Tools</a>
-      <a href="index.html#about">About</a>
+
+      <a href="index.html#pdf-tools">
+        PDF Tools
+      </a>
+
+      <a href="index.html#convert-tools">
+        Convert
+      </a>
+
+      <a href="index.html#image-tools">
+        Image Tools
+      </a>
+
+      <a href="index.html#about">
+        About
+      </a>
+
     </div>
 
   </div>
@@ -563,92 +688,284 @@ a{
 </footer>
 
 
+<!-- LOADING -->
+
+<div
+  id="loading"
+  class="loading">
+
+  <div class="loading-box">
+
+    <div class="spinner"></div>
+
+    <div id="loadingText">
+      Processing PDF...
+    </div>
+
+  </div>
+
+</div>
+
+
 <!-- PDF.JS -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
-<!-- JSPDF -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<!-- PDF-LIB -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 
 
 <script>
+
+
+/* PDF.JS WORKER */
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
 "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
 
+/* VARIABLES */
+
 let pdfDocument = null;
+
 let uploadedFile = null;
+
+
+/* TEXT DATA
+
+   We store the text position relative to
+   the PDF page.
+
+*/
+
+let textItems = [];
+
+
+/* ELEMENTS */
+
+const pdfFile =
+document.getElementById("pdfFile");
+
+const pdfContainer =
+document.getElementById("pdf-container");
+
+const emptyMessage =
+document.getElementById("emptyMessage");
+
+const addTextBtn =
+document.getElementById("addTextBtn");
+
+const clearTextBtn =
+document.getElementById("clearTextBtn");
+
+const downloadBtn =
+document.getElementById("downloadBtn");
+
+const fileName =
+document.getElementById("fileName");
+
+const status =
+document.getElementById("status");
+
+const loading =
+document.getElementById("loading");
+
+const loadingText =
+document.getElementById("loadingText");
+
+
+/* LOADING */
+
+function showLoading(message){
+
+  loadingText.innerText = message;
+
+  loading.style.display = "flex";
+
+}
+
+
+function hideLoading(){
+
+  loading.style.display = "none";
+
+}
+
+
+/* STATUS */
+
+function setStatus(message){
+
+  status.innerText = message;
+
+}
 
 
 /* PDF SELECT */
 
-document.getElementById("pdfFile").addEventListener("change", function(event){
+pdfFile.addEventListener(
+"change",
+function(event){
 
-  const file = event.target.files[0];
+  const file =
+  event.target.files[0];
 
   if(!file){
     return;
   }
 
+
   if(file.type !== "application/pdf"){
-    alert("Please select a PDF file.");
+
+    alert(
+      "Please select a PDF file."
+    );
+
+    pdfFile.value = "";
+
     return;
+
   }
+
 
   uploadedFile = file;
 
-  document.getElementById("fileName").innerText =
-    "Selected: " + file.name;
+  textItems = [];
 
-  const reader = new FileReader();
 
-  reader.onload = function(){
+  fileName.innerText =
+    "Selected: " +
+    file.name +
+    " • " +
+    formatFileSize(file.size);
 
-    const data = new Uint8Array(reader.result);
 
-    pdfjsLib.getDocument({
+  loadPDF(file);
+
+});
+
+
+/* FILE SIZE */
+
+function formatFileSize(bytes){
+
+  if(bytes < 1024){
+    return bytes + " B";
+  }
+
+  if(bytes < 1024 * 1024){
+
+    return (
+      (bytes / 1024).toFixed(1)
+      + " KB"
+    );
+
+  }
+
+  return (
+    (bytes / (1024 * 1024)).toFixed(1)
+    + " MB"
+  );
+
+}
+
+
+/* LOAD PDF */
+
+function loadPDF(file){
+
+  showLoading(
+    "Loading PDF..."
+  );
+
+  setStatus(
+    "Loading..."
+  );
+
+
+  const reader =
+  new FileReader();
+
+
+  reader.onload =
+  function(){
+
+    const data =
+    new Uint8Array(
+      reader.result
+    );
+
+
+    pdfjsLib
+    .getDocument({
       data:data
-    }).promise.then(function(pdf){
+    })
+    .promise
+    .then(function(pdf){
 
       pdfDocument = pdf;
 
-      document.getElementById("emptyMessage").style.display =
+
+      emptyMessage.style.display =
         "none";
 
-      document.getElementById("addTextBtn").disabled =
+
+      addTextBtn.disabled =
         false;
 
-      document.getElementById("clearTextBtn").disabled =
+
+      clearTextBtn.disabled =
         false;
 
-      document.getElementById("downloadBtn").disabled =
+
+      downloadBtn.disabled =
         false;
+
+
+      setStatus(
+        pdf.numPages +
+        " page" +
+        (pdf.numPages > 1 ? "s" : "") +
+        " loaded"
+      );
+
 
       renderPDF();
 
-    }).catch(function(error){
+    })
+    .catch(function(error){
 
       console.error(error);
 
-      alert("PDF load nahi ho pa raha hai.");
+      alert(
+        "PDF load nahi ho pa raha hai."
+      );
+
+      setStatus("");
+
+    })
+    .finally(function(){
+
+      hideLoading();
 
     });
 
   };
 
+
   reader.readAsArrayBuffer(file);
 
-});
+}
 
 
 /* RENDER ALL PAGES */
 
 async function renderPDF(){
 
-  const container =
-    document.getElementById("pdf-container");
+  pdfContainer.innerHTML = "";
 
-  container.innerHTML = "";
 
   for(
     let pageNumber = 1;
@@ -656,80 +973,167 @@ async function renderPDF(){
     pageNumber++
   ){
 
-    await renderPage(pageNumber);
+    await renderPage(
+      pageNumber
+    );
 
   }
+
+
+  /* RESTORE TEXT */
+
+  restoreTextItems();
 
 }
 
 
-/* RENDER ONE PAGE */
+/* RENDER PAGE */
 
 function renderPage(pageNumber){
 
-  return pdfDocument.getPage(pageNumber).then(function(page){
+  return pdfDocument
+  .getPage(pageNumber)
+  .then(function(page){
 
-    const scale = 2.5;
+
+    /*
+      Base scale.
+      High quality is produced by
+      devicePixelRatio below.
+    */
+
+    const baseScale = 2;
+
 
     const viewport =
-      page.getViewport({
-        scale:scale
-      });
+    page.getViewport({
+      scale:baseScale
+    });
+
+
+    const outputScale =
+    Math.min(
+      window.devicePixelRatio || 1,
+      2
+    );
+
 
     const pageDiv =
-      document.createElement("div");
+    document.createElement("div");
 
-    pageDiv.className = "pdf-page";
+
+    pageDiv.className =
+      "pdf-page";
+
 
     pageDiv.dataset.page =
       pageNumber;
 
+
+    /*
+      CSS display size
+    */
+
     pageDiv.style.width =
       viewport.width + "px";
+
 
     pageDiv.style.height =
       viewport.height + "px";
 
 
     const canvas =
-      document.createElement("canvas");
+    document.createElement("canvas");
+
 
     const context =
-      canvas.getContext("2d");
+    canvas.getContext(
+      "2d",
+      {
+        alpha:false
+      }
+    );
 
+
+    /*
+      INTERNAL HIGH RESOLUTION
+    */
 
     canvas.width =
-      viewport.width;
+      Math.floor(
+        viewport.width *
+        outputScale
+      );
+
 
     canvas.height =
-      viewport.height;
+      Math.floor(
+        viewport.height *
+        outputScale
+      );
 
 
-    pageDiv.appendChild(canvas);
+    /*
+      CSS DISPLAY SIZE
+    */
 
+    canvas.style.width =
+      viewport.width + "px";
+
+
+    canvas.style.height =
+      viewport.height + "px";
+
+
+    pageDiv.appendChild(
+      canvas
+    );
+
+
+    /*
+      PAGE NUMBER
+    */
 
     const pageNumberLabel =
-      document.createElement("div");
+    document.createElement("div");
+
 
     pageNumberLabel.className =
       "page-number";
 
+
     pageNumberLabel.innerText =
       "Page " + pageNumber;
 
-    pageDiv.appendChild(pageNumberLabel);
+
+    pageDiv.appendChild(
+      pageNumberLabel
+    );
 
 
-    document
-      .getElementById("pdf-container")
-      .appendChild(pageDiv);
+    pdfContainer.appendChild(
+      pageDiv
+    );
 
+
+    /*
+      RENDER
+    */
 
     return page.render({
 
       canvasContext:context,
 
-      viewport:viewport
+      viewport:viewport,
+
+      transform:[
+        outputScale,
+        0,
+        0,
+        outputScale,
+        0,
+        0
+      ]
 
     }).promise;
 
@@ -740,12 +1144,15 @@ function renderPage(pageNumber){
 
 /* ADD TEXT */
 
-document.getElementById("addTextBtn")
-.addEventListener("click", function(){
+addTextBtn.addEventListener(
+"click",
+function(){
 
   if(!pdfDocument){
 
-    alert("Pehle PDF upload karein.");
+    alert(
+      "Pehle PDF upload karein."
+    );
 
     return;
 
@@ -753,148 +1160,398 @@ document.getElementById("addTextBtn")
 
 
   const text =
-    prompt("Jo text add karna hai woh likhiye:");
+  prompt(
+    "Jo text add karna hai woh likhiye:"
+  );
+
 
   if(!text){
-
     return;
-
   }
 
 
   /*
-  Text first page par add hoga.
-  Baad mein hum page selection feature bhi add kar sakte hain.
+    Add text to first page
   */
 
   const firstPage =
-    document.querySelector(".pdf-page");
+  document.querySelector(
+    '.pdf-page[data-page="1"]'
+  );
 
 
   if(!firstPage){
-
     return;
-
   }
 
 
   const item =
-    document.createElement("div");
+  document.createElement("div");
+
 
   item.className =
-    "pdf-text";
+    "pdf-text selected";
+
 
   item.innerText =
     text;
 
 
-  firstPage.appendChild(item);
+  /*
+    Initial position
+  */
+
+  item.style.left =
+    "50px";
 
 
-  makeDraggable(item);
+  item.style.top =
+    "50px";
+
+
+  firstPage.appendChild(
+    item
+  );
+
+
+  const textData = {
+
+    id:
+      Date.now() +
+      Math.random(),
+
+    page:
+      1,
+
+    text:
+      text,
+
+    x:
+      50,
+
+    y:
+      50,
+
+    fontSize:
+      20
+
+  };
+
+
+  item.dataset.textId =
+    textData.id;
+
+
+  textItems.push(
+    textData
+  );
+
+
+  makeDraggable(
+    item,
+    textData
+  );
+
+
+  setStatus(
+    "Text added. Drag it to the required position."
+  );
 
 });
 
 
 /* DRAG TEXT */
 
-function makeDraggable(element){
+function makeDraggable(
+  element,
+  textData
+){
 
   let dragging = false;
 
-  let offsetX = 0;
+  let startX = 0;
 
-  let offsetY = 0;
+  let startY = 0;
+
+  let originalX = 0;
+
+  let originalY = 0;
+
+
+  function startDrag(event){
+
+    dragging = true;
+
+
+    element.classList.add(
+      "selected"
+    );
+
+
+    const point =
+      getPointerPosition(
+        event
+      );
+
+
+    startX =
+      point.x;
+
+
+    startY =
+      point.y;
+
+
+    originalX =
+      parseFloat(
+        element.style.left
+      ) || 0;
+
+
+    originalY =
+      parseFloat(
+        element.style.top
+      ) || 0;
+
+
+    event.preventDefault();
+
+
+    if(
+      event.pointerId !== undefined
+    ){
+
+      try{
+
+        element.setPointerCapture(
+          event.pointerId
+        );
+
+      }catch(e){}
+
+    }
+
+  }
+
+
+  function moveDrag(event){
+
+    if(!dragging){
+      return;
+    }
+
+
+    const point =
+      getPointerPosition(
+        event
+      );
+
+
+    let newX =
+      originalX +
+      point.x -
+      startX;
+
+
+    let newY =
+      originalY +
+      point.y -
+      startY;
+
+
+    const parent =
+      element.parentElement;
+
+
+    const maxX =
+      parent.clientWidth -
+      element.offsetWidth;
+
+
+    const maxY =
+      parent.clientHeight -
+      element.offsetHeight;
+
+
+    newX =
+      Math.max(
+        0,
+        Math.min(
+          newX,
+          maxX
+        )
+      );
+
+
+    newY =
+      Math.max(
+        0,
+        Math.min(
+          newY,
+          maxY
+        )
+      );
+
+
+    element.style.left =
+      newX + "px";
+
+
+    element.style.top =
+      newY + "px";
+
+
+    /*
+      Save position continuously
+    */
+
+    textData.x =
+      newX;
+
+
+    textData.y =
+      newY;
+
+  }
+
+
+  function stopDrag(){
+
+    if(!dragging){
+      return;
+    }
+
+
+    dragging = false;
+
+
+    textData.x =
+      parseFloat(
+        element.style.left
+      ) || 0;
+
+
+    textData.y =
+      parseFloat(
+        element.style.top
+      ) || 0;
+
+  }
 
 
   element.addEventListener(
-    "mousedown",
-    function(event){
-
-      dragging = true;
-
-      const rect =
-        element.getBoundingClientRect();
-
-      offsetX =
-        event.clientX - rect.left;
-
-      offsetY =
-        event.clientY - rect.top;
-
-      event.preventDefault();
-
-    }
+    "pointerdown",
+    startDrag
   );
 
 
-  document.addEventListener(
-    "mousemove",
-    function(event){
+  element.addEventListener(
+    "pointermove",
+    moveDrag
+  );
 
-      if(!dragging){
 
+  element.addEventListener(
+    "pointerup",
+    stopDrag
+  );
+
+
+  element.addEventListener(
+    "pointercancel",
+    stopDrag
+  );
+
+}
+
+
+/* POINTER POSITION */
+
+function getPointerPosition(
+  event
+){
+
+  const parent =
+    event.currentTarget
+    .parentElement;
+
+
+  const rect =
+    parent.getBoundingClientRect();
+
+
+  return {
+
+    x:
+      event.clientX -
+      rect.left,
+
+    y:
+      event.clientY -
+      rect.top
+
+  };
+
+}
+
+
+/* RESTORE TEXT */
+
+function restoreTextItems(){
+
+  textItems.forEach(
+    function(data){
+
+      const page =
+      document.querySelector(
+        '.pdf-page[data-page="' +
+        data.page +
+        '"]'
+      );
+
+
+      if(!page){
         return;
-
       }
 
 
-      const parent =
-        element.parentElement;
-
-      const parentRect =
-        parent.getBoundingClientRect();
+      const item =
+      document.createElement("div");
 
 
-      let x =
-        event.clientX -
-        parentRect.left -
-        offsetX;
+      item.className =
+        "pdf-text";
 
 
-      let y =
-        event.clientY -
-        parentRect.top -
-        offsetY;
+      item.innerText =
+        data.text;
 
 
-      x =
-        Math.max(
-          0,
-          Math.min(
-            x,
-            parent.clientWidth -
-            element.offsetWidth
-          )
-        );
+      item.style.left =
+        data.x + "px";
 
 
-      y =
-        Math.max(
-          0,
-          Math.min(
-            y,
-            parent.clientHeight -
-            element.offsetHeight
-          )
-        );
+      item.style.top =
+        data.y + "px";
 
 
-      element.style.left =
-        x + "px";
-
-      element.style.top =
-        y + "px";
-
-    }
-  );
+      item.style.fontSize =
+        data.fontSize + "px";
 
 
-  document.addEventListener(
-    "mouseup",
-    function(){
+      item.dataset.textId =
+        data.id;
 
-      dragging = false;
+
+      page.appendChild(
+        item
+      );
+
+
+      makeDraggable(
+        item,
+        data
+      );
 
     }
   );
@@ -904,251 +1561,290 @@ function makeDraggable(element){
 
 /* CLEAR TEXT */
 
-document.getElementById("clearTextBtn")
-.addEventListener("click", function(){
+clearTextBtn.addEventListener(
+"click",
+function(){
 
   document
-    .querySelectorAll(".pdf-text")
-    .forEach(function(item){
-
+  .querySelectorAll(
+    ".pdf-text"
+  )
+  .forEach(
+    function(item){
       item.remove();
+    }
+  );
 
-    });
+
+  textItems = [];
+
+
+  setStatus(
+    "Added text cleared."
+  );
 
 });
 
 
-/* DOWNLOAD */
+/* DOWNLOAD PDF */
 
-document.getElementById("downloadBtn")
-.addEventListener("click", async function(){
+downloadBtn.addEventListener(
+"click",
+async function(){
 
-  if(!pdfDocument){
+  if(!uploadedFile){
 
-    alert("Pehle PDF upload karein.");
+    alert(
+      "Pehle PDF upload karein."
+    );
 
     return;
 
   }
 
 
-  const { jsPDF } =
-    window.jspdf;
+  try{
 
-
-  let outputPDF = null;
-
-
-  const pages =
-    document.querySelectorAll(".pdf-page");
-
-
-  if(pages.length === 0){
-
-    return;
-
-  }
-
-
-  for(
-    let pageIndex = 0;
-    pageIndex < pages.length;
-    pageIndex++
-  ){
-
-    const pageDiv =
-      pages[pageIndex];
-
-
-    const canvas =
-      pageDiv.querySelector("canvas");
-
-
-    if(!canvas){
-
-      continue;
-
-    }
-
-
-    const exportCanvas =
-      document.createElement("canvas");
-
-
-    exportCanvas.width =
-      canvas.width;
-
-    exportCanvas.height =
-      canvas.height;
-
-
-    const ctx =
-      exportCanvas.getContext("2d");
-
-
-    /*
-    White background
-    */
-
-    ctx.fillStyle =
-      "#ffffff";
-
-    ctx.fillRect(
-      0,
-      0,
-      exportCanvas.width,
-      exportCanvas.height
+    showLoading(
+      "Creating your PDF..."
     );
 
 
     /*
-    PDF page
+      Read ORIGINAL PDF.
+      We do NOT convert it into image.
     */
 
-    ctx.drawImage(
-      canvas,
-      0,
-      0,
-      exportCanvas.width,
-      exportCanvas.height
-    );
+    const originalBytes =
+      await uploadedFile.arrayBuffer();
+
+
+    const PDFDocument =
+      PDFLib.PDFDocument;
+
+
+    const rgb =
+      PDFLib.rgb;
+
+
+    const pdfDoc =
+      await PDFDocument.load(
+        originalBytes
+      );
 
 
     /*
-    Added text
+      Add every text item
     */
 
-    const pageRect =
-      pageDiv.getBoundingClientRect();
+    for(
+      const item of textItems
+    ){
+
+      if(
+        !item.text
+      ){
+        continue;
+      }
 
 
-    const textItems =
-      pageDiv.querySelectorAll(".pdf-text");
+      const page =
+      pdfDoc.getPage(
+        item.page - 1
+      );
 
 
-    textItems.forEach(function(item){
-
-      const itemRect =
-        item.getBoundingClientRect();
-
-
-      const computed =
-        window.getComputedStyle(item);
+      if(!page){
+        continue;
+      }
 
 
-      const scaleX =
-        exportCanvas.width /
-        pageRect.width;
+      const pageWidth =
+      page.getWidth();
 
 
-      const scaleY =
-        exportCanvas.height /
-        pageRect.height;
+      const pageHeight =
+      page.getHeight();
+
+
+      /*
+        Find corresponding preview page
+      */
+
+      const previewPage =
+      document.querySelector(
+        '.pdf-page[data-page="' +
+        item.page +
+        '"]'
+      );
+
+
+      if(!previewPage){
+        continue;
+      }
+
+
+      const previewRect =
+      previewPage.getBoundingClientRect();
+
+
+      /*
+        PDF.js base scale is 2.
+        Therefore convert CSS pixels
+        back to PDF points.
+      */
+
+      const ratioX =
+      pageWidth /
+      previewRect.width;
+
+
+      const ratioY =
+      pageHeight /
+      previewRect.height;
 
 
       const x =
-        (itemRect.left -
-        pageRect.left) *
-        scaleX;
-
-
-      const y =
-        (itemRect.top -
-        pageRect.top) *
-        scaleY;
+      item.x *
+      ratioX;
 
 
       const fontSize =
-        parseFloat(
-          computed.fontSize
-        ) * scaleY;
+      item.fontSize *
+      ratioY;
 
 
-      ctx.font =
-        computed.fontWeight +
-        " " +
-        fontSize +
-        "px " +
-        computed.fontFamily;
+      /*
+        Browser y starts from TOP.
+        PDF y starts from BOTTOM.
+      */
+
+      const y =
+      pageHeight -
+      (
+        item.y *
+        ratioY
+      ) -
+      fontSize;
 
 
-      ctx.fillStyle =
-        computed.color;
+      page.drawText(
+        item.text,
+        {
 
+          x:x,
 
-      ctx.textBaseline =
-        "top";
+          y:y,
 
+          size:fontSize,
 
-      ctx.fillText(
-        item.innerText,
-        x,
-        y
-      );
+          color:rgb(
+            0,
+            0,
+            0
+          )
 
-    });
-
-
-    const imgData =
-  exportCanvas.toDataURL("image/png");
-
-
-    const orientation =
-      exportCanvas.width >
-      exportCanvas.height
-      ? "l"
-      : "p";
-
-
-    if(pageIndex === 0){
-
-      outputPDF =
-        new jsPDF({
-
-          orientation:orientation,
-
-          unit:"px",
-
-          format:[
-            exportCanvas.width,
-            exportCanvas.height
-          ]
-
-        });
-
-    }else{
-
-      outputPDF.addPage(
-        [
-          exportCanvas.width,
-          exportCanvas.height
-        ],
-        orientation
+        }
       );
 
     }
 
 
-    outputPDF.addImage(
-  imgData,
-  "PNG",
-  0,
-  0,
-  exportCanvas.width,
-  exportCanvas.height
-);
-  }
+    /*
+      Save ORIGINAL PDF with
+      vector text.
+    */
+
+    const finalBytes =
+    await pdfDoc.save();
 
 
-  if(outputPDF){
+    /*
+      Download
+    */
 
-    outputPDF.save(
-      "edited-pdf.pdf"
+    const blob =
+    new Blob(
+      [finalBytes],
+      {
+        type:"application/pdf"
+      }
     );
+
+
+    const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
+    const link =
+    document.createElement(
+      "a"
+    );
+
+
+    link.href =
+      url;
+
+
+    link.download =
+      "edited-pdf.pdf";
+
+
+    document.body.appendChild(
+      link
+    );
+
+
+    link.click();
+
+
+    link.remove();
+
+
+    setTimeout(
+      function(){
+
+        URL.revokeObjectURL(
+          url
+        );
+
+      },
+      1000
+    );
+
+
+    setStatus(
+      "PDF downloaded successfully."
+    );
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+
+    alert(
+      "PDF download karte waqt error aa gaya."
+    );
+
+
+    setStatus(
+      "Download failed."
+    );
+
+
+  }finally{
+
+    hideLoading();
 
   }
 
 });
+
 
 </script>
 
