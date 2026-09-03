@@ -669,7 +669,7 @@ function renderPage(pageNumber){
 
   return pdfDocument.getPage(pageNumber).then(function(page){
 
-    const scale = 1.35;
+    const scale = 2.5;
 
     const viewport =
       page.getViewport({
@@ -1090,10 +1090,7 @@ document.getElementById("downloadBtn")
 
 
     const imgData =
-      exportCanvas.toDataURL(
-        "image/jpeg",
-        0.95
-      );
+  exportCanvas.toDataURL("image/png");
 
 
     const orientation =
@@ -1133,14 +1130,13 @@ document.getElementById("downloadBtn")
 
 
     outputPDF.addImage(
-      imgData,
-      "JPEG",
-      0,
-      0,
-      exportCanvas.width,
-      exportCanvas.height
-    );
-
+  imgData,
+  "PNG",
+  0,
+  0,
+  exportCanvas.width,
+  exportCanvas.height
+);
   }
 
 
