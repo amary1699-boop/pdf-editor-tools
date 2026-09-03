@@ -5,15 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Free PDF Editor - Edit PDF Online</title>
+<meta name="description" content="Free online PDF editor. Edit PDF text, add images and QR codes and download your edited PDF.">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 
 <style>
-
 *{
   box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
@@ -23,7 +27,7 @@ body{
   color:#222;
 }
 
-/* ================= HEADER ================= */
+/* HEADER */
 
 .header{
   position:sticky;
@@ -36,8 +40,8 @@ body{
 
 .header-inner{
   max-width:1180px;
-  margin:auto;
   min-height:68px;
+  margin:auto;
   padding:10px 18px;
   display:flex;
   align-items:center;
@@ -49,10 +53,10 @@ body{
   display:flex;
   align-items:center;
   gap:10px;
+  text-decoration:none;
+  color:#222;
   font-size:20px;
   font-weight:700;
-  color:#222;
-  text-decoration:none;
 }
 
 .logo-icon{
@@ -64,7 +68,7 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:16px;
+  font-size:15px;
   font-weight:800;
 }
 
@@ -82,7 +86,7 @@ body{
   background:#f5f5f5;
 }
 
-/* ================= HERO ================= */
+/* HERO */
 
 .hero{
   max-width:1180px;
@@ -103,13 +107,15 @@ body{
   color:#666;
 }
 
-/* ================= TOOLBAR ================= */
+/* WRAPPER */
 
 .editor-wrapper{
   max-width:1180px;
   margin:18px auto 50px;
   padding:0 15px;
 }
+
+/* TOOLBAR */
 
 .toolbar{
   position:sticky;
@@ -156,6 +162,8 @@ body{
   cursor:not-allowed;
 }
 
+/* FILE */
+
 .file-area{
   background:#fff;
   border:2px dashed #ddd;
@@ -163,6 +171,7 @@ body{
   padding:25px;
   text-align:center;
   margin-bottom:18px;
+  transition:.2s;
 }
 
 .file-area.drag{
@@ -180,6 +189,10 @@ body{
   font-weight:700;
 }
 
+.file-label:hover{
+  background:#c92727;
+}
+
 #pdfFile{
   display:none;
 }
@@ -188,9 +201,20 @@ body{
   margin-top:10px;
   color:#666;
   font-size:14px;
+  word-break:break-word;
 }
 
-/* ================= PDF AREA ================= */
+/* STATUS */
+
+.status{
+  margin:12px 0;
+  text-align:center;
+  color:#666;
+  font-size:14px;
+  min-height:20px;
+}
+
+/* PDF */
 
 .pdf-container{
   width:100%;
@@ -207,6 +231,12 @@ body{
   background:#fff;
   box-shadow:0 5px 25px rgba(0,0,0,.15);
   overflow:hidden;
+  border:2px solid transparent;
+  transition:border-color .15s;
+}
+
+.pdf-page.active-page{
+  border-color:rgba(229,50,50,.35);
 }
 
 .pdf-canvas{
@@ -214,6 +244,8 @@ body{
   width:100%;
   height:auto;
 }
+
+/* LAYERS */
 
 .existing-layer,
 .object-layer{
@@ -223,8 +255,16 @@ body{
 }
 
 .existing-layer{
+  z-index:5;
   pointer-events:none;
 }
+
+.object-layer{
+  z-index:10;
+  pointer-events:none;
+}
+
+/* EXISTING TEXT */
 
 .existing-text{
   position:absolute;
@@ -238,27 +278,48 @@ body{
   pointer-events:auto;
   line-height:1;
   user-select:none;
+  border:1px solid transparent;
 }
 
 .existing-text:hover{
   background:rgba(229,50,50,.10);
-  outline:1px solid rgba(229,50,50,.35);
+  border-color:rgba(229,50,50,.35);
 }
 
 .existing-text.selected{
   background:rgba(229,50,50,.14);
-  outline:2px solid #e53232;
+  border:2px solid #e53232;
 }
 
-.object-layer{
-  pointer-events:none;
+/*
+  Edited existing text becomes visible.
+*/
+
+.existing-text.edited-visible{
+  color:#111;
+  background:rgba(255,255,255,.96);
+  border:1px solid rgba(0,0,0,.08);
 }
+
+/*
+  Deleted existing text cover.
+*/
+
+.deleted-cover{
+  position:absolute;
+  background:#fff;
+  pointer-events:auto;
+  cursor:pointer;
+}
+
+/* ADDED OBJECTS */
 
 .editor-object{
   position:absolute;
   pointer-events:auto;
   user-select:none;
   cursor:move;
+  touch-action:none;
 }
 
 .text-object{
@@ -266,7 +327,14 @@ body{
   min-height:20px;
   padding:2px 4px;
   white-space:pre;
-  background:rgba(255,255,255,.01);
+  background:rgba(255,255,255,.04);
+  overflow:hidden;
+  line-height:1.15;
+}
+
+.image-object,
+.qr-object{
+  overflow:visible;
 }
 
 .text-object.selected,
@@ -286,26 +354,33 @@ body{
 
 .resize-handle{
   position:absolute;
-  width:12px;
-  height:12px;
-  right:-6px;
-  bottom:-6px;
+  width:13px;
+  height:13px;
+  right:-7px;
+  bottom:-7px;
   background:#e53232;
   border:2px solid #fff;
   border-radius:50%;
   cursor:nwse-resize;
+  z-index:20;
 }
+
+/* PAGE NUMBER */
 
 .page-number{
   position:absolute;
   bottom:5px;
   left:8px;
+  padding:2px 5px;
+  border-radius:4px;
+  background:rgba(255,255,255,.75);
   font-size:11px;
   color:#777;
   pointer-events:none;
+  z-index:30;
 }
 
-/* ================= EMPTY ================= */
+/* EMPTY */
 
 .empty-message{
   width:100%;
@@ -322,17 +397,7 @@ body{
   padding:30px;
 }
 
-/* ================= STATUS ================= */
-
-.status{
-  margin:12px 0;
-  text-align:center;
-  color:#666;
-  font-size:14px;
-  min-height:20px;
-}
-
-/* ================= MODAL ================= */
+/* MODAL */
 
 .modal{
   display:none;
@@ -359,7 +424,7 @@ body{
 }
 
 .modal-box h3{
-  margin-top:0;
+  margin:0 0 18px;
 }
 
 .form-group{
@@ -407,7 +472,7 @@ body{
   font-weight:700;
 }
 
-/* ================= MOBILE ================= */
+/* MOBILE */
 
 @media(max-width:900px){
 
@@ -439,6 +504,7 @@ body{
   .logo-icon{
     width:32px;
     height:32px;
+    font-size:12px;
   }
 
   .home-btn{
@@ -480,7 +546,7 @@ body{
 
 }
 
-/* ================= PRINT ================= */
+/* PRINT */
 
 @media print{
 
@@ -493,13 +559,10 @@ body{
   }
 
 }
-
 </style>
 </head>
 
 <body>
-
-<!-- ================= HEADER ================= -->
 
 <header class="header">
   <div class="header-inner">
@@ -516,9 +579,6 @@ body{
   </div>
 </header>
 
-
-<!-- ================= HERO ================= -->
-
 <section class="hero">
   <h1>Free PDF Editor</h1>
   <p>
@@ -526,12 +586,7 @@ body{
   </p>
 </section>
 
-
-<!-- ================= EDITOR ================= -->
-
 <main class="editor-wrapper">
-
-  <!-- FILE UPLOAD -->
 
   <div class="file-area" id="dropArea">
 
@@ -558,9 +613,6 @@ body{
     </div>
 
   </div>
-
-
-  <!-- TOOLBAR -->
 
   <div class="toolbar">
 
@@ -606,11 +658,7 @@ body{
 
   </div>
 
-
   <div class="status" id="status"></div>
-
-
-  <!-- PDF -->
 
   <div class="pdf-container" id="pdfContainer">
 
@@ -623,7 +671,7 @@ body{
 </main>
 
 
-<!-- ================= TEXT MODAL ================= -->
+<!-- TEXT MODAL -->
 
 <div class="modal" id="textModal">
 
@@ -696,13 +744,13 @@ body{
 </div>
 
 
-<!-- ================= QR MODAL ================= -->
+<!-- QR MODAL -->
 
 <div class="modal" id="qrModal">
 
   <div class="modal-box">
 
-    <h3>Add QR Code</h3>
+    <h3 id="qrTitle">Add QR Code</h3>
 
     <div class="form-group">
 
@@ -747,13 +795,14 @@ body{
 </div>
 
 
-<!-- ================= JAVASCRIPT ================= -->
-
 <script>
+
+/* =========================================================
+   PDF LIBRARIES
+========================================================= */
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
 "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-
 
 const {
   PDFDocument,
@@ -763,31 +812,25 @@ const {
 
 
 /* =========================================================
-   GLOBAL VARIABLES
+   GLOBAL
 ========================================================= */
 
 let pdfBytes = null;
 let pdfDocument = null;
-
 let currentFile = null;
 
-let pages = [];
-
 let existingTexts = [];
-
 let addedObjects = [];
 
 let selectedObject = null;
+
+let activePageNumber = 1;
 
 let history = [];
 let historyIndex = -1;
 
 let objectCounter = 1;
 
-let pendingTextMode = false;
-let pendingQRMode = false;
-
-let replaceImageMode = false;
 let replaceQRMode = false;
 
 const BASE_SCALE = 2;
@@ -818,20 +861,24 @@ document.getElementById("textModal");
 const qrModal =
 document.getElementById("qrModal");
 
+const qrTitle =
+document.getElementById("qrTitle");
+
+const qrOk =
+document.getElementById("qrOk");
+
 
 /* =========================================================
    STATUS
 ========================================================= */
 
 function setStatus(message){
-
   status.textContent = message;
-
 }
 
 
 /* =========================================================
-   FILE SELECT
+   PDF FILE
 ========================================================= */
 
 pdfFile.addEventListener("change",function(e){
@@ -875,9 +922,19 @@ dropArea.addEventListener("drop",function(e){
 
   if(
     file &&
-    file.type === "application/pdf"
+    (
+      file.type === "application/pdf" ||
+      file.name.toLowerCase().endsWith(".pdf")
+    )
   ){
+
     loadPDF(file);
+
+  }
+  else{
+
+    alert("Please select a PDF file.");
+
   }
 
 });
@@ -895,18 +952,21 @@ async function loadPDF(file){
 
     currentFile = file;
 
-    fileName.textContent =
-      file.name;
+    fileName.textContent = file.name;
 
-    pdfBytes =
-      await file.arrayBuffer();
+    pdfBytes = await file.arrayBuffer();
+
+    /*
+      PDF.js ko fresh Uint8Array dete hain.
+    */
+
+    const loadingData =
+      new Uint8Array(pdfBytes.slice(0));
 
     pdfDocument =
       await pdfjsLib.getDocument({
-        data:pdfBytes
+        data:loadingData
       }).promise;
-
-    pages = [];
 
     existingTexts = [];
 
@@ -914,9 +974,13 @@ async function loadPDF(file){
 
     selectedObject = null;
 
+    activePageNumber = 1;
+
     history = [];
 
     historyIndex = -1;
+
+    objectCounter = 1;
 
     pdfContainer.innerHTML = "";
 
@@ -930,11 +994,13 @@ async function loadPDF(file){
 
     }
 
+    markActivePage();
+
     saveHistory();
 
     setStatus(
       pdfDocument.numPages +
-      " page(s) loaded."
+      " page(s) loaded. Click a page to make it active."
     );
 
   }
@@ -942,12 +1008,12 @@ async function loadPDF(file){
 
     console.error(error);
 
-    setStatus(
-      "Unable to load PDF."
-    );
+    pdfDocument = null;
+
+    setStatus("Unable to load PDF.");
 
     alert(
-      "PDF load nahi ho saka. Please valid PDF file select karein."
+      "PDF load nahi ho saka. Please valid PDF select karein."
     );
 
   }
@@ -962,14 +1028,11 @@ async function loadPDF(file){
 async function renderPage(pageNumber){
 
   const page =
-    await pdfDocument.getPage(
-      pageNumber
-    );
+    await pdfDocument.getPage(pageNumber);
 
   /*
     IMPORTANT:
-    PDF ka actual size scale=1 se milega.
-    Isko hi page dimensions ke liye use karenge.
+    scale 1 = actual PDF points
   */
 
   const baseViewport =
@@ -978,7 +1041,7 @@ async function renderPage(pageNumber){
     });
 
   /*
-    Preview ke liye high quality scale.
+    Preview quality
   */
 
   const viewport =
@@ -986,18 +1049,16 @@ async function renderPage(pageNumber){
       scale:BASE_SCALE
     });
 
-
   const pageDiv =
     document.createElement("div");
 
-  pageDiv.className =
-    "pdf-page";
+  pageDiv.className = "pdf-page";
 
-  pageDiv.dataset.page =
-    pageNumber;
+  pageDiv.dataset.page = pageNumber;
 
   /*
-    REAL PDF DIMENSIONS
+    IMPORTANT:
+    Actual PDF dimensions only.
   */
 
   pageDiv.dataset.pdfWidth =
@@ -1019,10 +1080,12 @@ async function renderPage(pageNumber){
     "pdf-canvas";
 
   const context =
-    canvas.getContext("2d");
+    canvas.getContext("2d",{
+      alpha:false
+    });
 
 
-  const outputScale =
+  const deviceScale =
     Math.min(
       window.devicePixelRatio || 1,
       2
@@ -1032,13 +1095,13 @@ async function renderPage(pageNumber){
   canvas.width =
     Math.floor(
       viewport.width *
-      outputScale
+      deviceScale
     );
 
   canvas.height =
     Math.floor(
       viewport.height *
-      outputScale
+      deviceScale
     );
 
 
@@ -1054,9 +1117,7 @@ async function renderPage(pageNumber){
   pageNumberEl.textContent =
     "Page " + pageNumber;
 
-  pageDiv.appendChild(
-    pageNumberEl
-  );
+  pageDiv.appendChild(pageNumberEl);
 
 
   const existingLayer =
@@ -1065,9 +1126,7 @@ async function renderPage(pageNumber){
   existingLayer.className =
     "existing-layer";
 
-  pageDiv.appendChild(
-    existingLayer
-  );
+  pageDiv.appendChild(existingLayer);
 
 
   const objectLayer =
@@ -1076,35 +1135,30 @@ async function renderPage(pageNumber){
   objectLayer.className =
     "object-layer";
 
-  pageDiv.appendChild(
-    objectLayer
-  );
+  pageDiv.appendChild(objectLayer);
 
 
-  pdfContainer.appendChild(
-    pageDiv
-  );
+  pdfContainer.appendChild(pageDiv);
 
+
+  /*
+    High quality PDF.js render
+  */
 
   await page.render({
 
-    canvasContext:
-      context,
+    canvasContext:context,
 
-    viewport:
-      viewport,
+    viewport:viewport,
 
-    transform:
-      outputScale !== 1
-        ? [
-            outputScale,
-            0,
-            0,
-            outputScale,
-            0,
-            0
-          ]
-        : null
+    transform:[
+      deviceScale,
+      0,
+      0,
+      deviceScale,
+      0,
+      0
+    ]
 
   }).promise;
 
@@ -1124,11 +1178,24 @@ async function renderPage(pageNumber){
     pageNumber
   );
 
+
+  pageDiv.addEventListener(
+    "click",
+    function(){
+
+      activePageNumber =
+        pageNumber;
+
+      markActivePage();
+
+    }
+  );
+
 }
 
 
 /* =========================================================
-   EXISTING PDF TEXT
+   EXTRACT EXISTING TEXT
 ========================================================= */
 
 async function extractExistingText(
@@ -1143,17 +1210,6 @@ async function extractExistingText(
     await page.getTextContent();
 
 
-  /*
-    Display scale:
-    viewport = BASE_SCALE
-    pageDiv = actual screen width
-  */
-
-  const cssScale =
-    pageDiv.clientWidth /
-    viewport.width;
-
-
   textContent.items.forEach(
     function(item,index){
 
@@ -1162,24 +1218,13 @@ async function extractExistingText(
       }
 
 
-      const transform =
-        pdfjsLib.Util.transform(
-          viewport.transform,
-          item.transform
-        );
-
-
-      const fontHeight =
-        Math.sqrt(
-          transform[2] *
-          transform[2] +
-          transform[3] *
-          transform[3]
-        );
+      const rawTransform =
+        item.transform.slice();
 
 
       /*
-        Save original PDF text information.
+        Transform exactly as PDF.js uses it.
+        This is the important fix.
       */
 
       const textObject = {
@@ -1190,6 +1235,9 @@ async function extractExistingText(
           "_" +
           index,
 
+        type:
+          "existingText",
+
         page:
           pageNumber,
 
@@ -1199,22 +1247,43 @@ async function extractExistingText(
         originalText:
           item.str,
 
+        originalTransform:
+          rawTransform,
+
         x:
-          item.transform[4],
+          rawTransform[4],
 
         y:
-          item.transform[5],
+          rawTransform[5],
 
         width:
-          item.width,
+          Math.max(
+            1,
+            item.width || 1
+          ),
 
         height:
-          fontHeight /
-          BASE_SCALE,
+          Math.max(
+            1,
+            Math.abs(
+              rawTransform[3] ||
+              rawTransform[2] ||
+              10
+            )
+          ),
 
         fontSize:
-          fontHeight /
-          BASE_SCALE,
+          Math.max(
+            1,
+            Math.abs(
+              rawTransform[3] ||
+              rawTransform[2] ||
+              10
+            )
+          ),
+
+        fontName:
+          item.fontName || "",
 
         deleted:false,
 
@@ -1228,108 +1297,161 @@ async function extractExistingText(
       );
 
 
-      /*
-        Existing text overlay.
-        IMPORTANT:
-        Coordinates are converted to CSS
-        exactly ONCE.
-      */
-
-      const span =
-        document.createElement("div");
-
-      span.className =
-        "existing-text";
-
-      span.dataset.existingId =
-        textObject.id;
-
-      span.textContent =
-        textObject.text;
-
-
-      span.style.left =
-        (
-          transform[4] *
-          cssScale
-        ) + "px";
-
-
-      span.style.top =
-        (
-          (transform[5] -
-          fontHeight) *
-          cssScale
-        ) + "px";
-
-
-      span.style.width =
-        Math.max(
-          4,
-          item.width *
-          BASE_SCALE *
-          cssScale
-        ) + "px";
-
-
-      span.style.height =
-        Math.max(
-          8,
-          fontHeight *
-          1.3 *
-          cssScale
-        ) + "px";
-
-
-      span.style.fontSize =
-        Math.max(
-          6,
-          fontHeight *
-          cssScale
-        ) + "px";
-
-
-      /*
-        VERY IMPORTANT:
-        No second transform scale.
-      */
-
-      span.style.transform =
-        "none";
-
-
-      span.addEventListener(
-        "click",
-        function(e){
-
-          e.stopPropagation();
-
-          selectExistingText(
-            textObject
-          );
-
-        }
+      renderExistingTextItem(
+        textObject,
+        pageDiv,
+        layer,
+        viewport
       );
-
-
-      span.addEventListener(
-        "dblclick",
-        function(e){
-
-          e.stopPropagation();
-
-          editExistingText(
-            textObject
-          );
-
-        }
-      );
-
-
-      layer.appendChild(span);
 
     }
   );
+
+}
+
+
+/* =========================================================
+   RENDER ONE EXISTING TEXT
+========================================================= */
+
+function renderExistingTextItem(
+  item,
+  pageDiv,
+  layer,
+  viewport
+){
+
+  /*
+    PDF.js transform converts the original
+    PDF text matrix into viewport coordinates.
+  */
+
+  const tx =
+    pdfjsLib.Util.transform(
+      viewport.transform,
+      item.originalTransform
+    );
+
+
+  const fontHeight =
+    Math.sqrt(
+      tx[2] * tx[2] +
+      tx[3] * tx[3]
+    );
+
+
+  /*
+    CSS page width / rendered viewport width.
+    Convert ONCE.
+  */
+
+  const cssScale =
+    pageDiv.clientWidth /
+    viewport.width;
+
+
+  const span =
+    document.createElement("div");
+
+  span.className =
+    "existing-text";
+
+  span.dataset.existingId =
+    item.id;
+
+  span.textContent =
+    item.text;
+
+
+  /*
+    PDF.js gives the baseline.
+    We move upward by the font height.
+  */
+
+  span.style.left =
+    (
+      tx[4] *
+      cssScale
+    ) + "px";
+
+
+  span.style.top =
+    (
+      (
+        tx[5] -
+        fontHeight * .9
+      ) *
+      cssScale
+    ) + "px";
+
+
+  span.style.width =
+    Math.max(
+      5,
+      item.width *
+      BASE_SCALE *
+      cssScale
+    ) + "px";
+
+
+  span.style.height =
+    Math.max(
+      8,
+      fontHeight *
+      1.35 *
+      cssScale
+    ) + "px";
+
+
+  span.style.fontSize =
+    Math.max(
+      6,
+      fontHeight *
+      cssScale
+    ) + "px";
+
+
+  span.style.transform =
+    "none";
+
+
+  if(item.edited){
+
+    span.classList.add(
+      "edited-visible"
+    );
+
+  }
+
+
+  span.addEventListener(
+    "pointerdown",
+    function(e){
+
+      e.stopPropagation();
+
+      activePageNumber =
+        item.page;
+
+      selectExistingText(item);
+
+    }
+  );
+
+
+  span.addEventListener(
+    "dblclick",
+    function(e){
+
+      e.stopPropagation();
+
+      editExistingText(item);
+
+    }
+  );
+
+
+  layer.appendChild(span);
 
 }
 
@@ -1350,6 +1472,10 @@ function selectExistingText(obj){
 
   };
 
+  activePageNumber =
+    obj.page;
+
+  markActivePage();
 
   refreshSelection();
 
@@ -1386,6 +1512,8 @@ function editExistingText(obj){
 
       obj.edited = true;
 
+      selectedObject = null;
+
       refreshPageLayers();
 
       saveHistory();
@@ -1400,8 +1528,21 @@ function editExistingText(obj){
   obj.text =
     newText;
 
+  obj.deleted =
+    false;
+
   obj.edited =
     true;
+
+  selectedObject = {
+
+    type:
+      "existingText",
+
+    id:
+      obj.id
+
+  };
 
   refreshPageLayers();
 
@@ -1411,7 +1552,7 @@ function editExistingText(obj){
 
 
 /* =========================================================
-   REFRESH PAGE LAYERS
+   REFRESH LAYERS
 ========================================================= */
 
 async function refreshPageLayers(){
@@ -1424,24 +1565,27 @@ async function refreshPageLayers(){
   document
     .querySelectorAll(".existing-layer")
     .forEach(
-      layer => layer.innerHTML = ""
+      layer =>
+        layer.innerHTML = ""
     );
 
 
   document
     .querySelectorAll(".object-layer")
     .forEach(
-      layer => layer.innerHTML = ""
+      layer =>
+        layer.innerHTML = ""
     );
 
 
-  /*
-    Existing text ko dobara draw karna.
-  */
+  const pageDivs =
+    Array.from(
+      document.querySelectorAll(".pdf-page")
+    );
+
 
   for(
-    const pageDiv of
-    document.querySelectorAll(".pdf-page")
+    const pageDiv of pageDivs
   ){
 
     const pageNumber =
@@ -1474,12 +1618,41 @@ async function refreshPageLayers(){
       });
 
 
-    renderExistingTextsOnly(
-      pageDiv,
-      existingLayer,
-      viewport,
-      pageNumber
-    );
+    /*
+      Render edited/deleted existing text
+    */
+
+    existingTexts
+      .filter(
+        item =>
+          item.page === pageNumber
+      )
+      .forEach(
+        item => {
+
+          if(item.deleted){
+
+            renderDeletedCover(
+              item,
+              pageDiv,
+              existingLayer,
+              viewport
+            );
+
+          }
+          else{
+
+            renderExistingTextItem(
+              item,
+              pageDiv,
+              existingLayer,
+              viewport
+            );
+
+          }
+
+        }
+      );
 
 
     renderObjectsForPage(
@@ -1491,20 +1664,22 @@ async function refreshPageLayers(){
   }
 
 
+  markActivePage();
+
   refreshSelection();
 
 }
 
 
 /* =========================================================
-   RENDER EXISTING TEXTS
+   DELETED TEXT COVER
 ========================================================= */
 
-function renderExistingTextsOnly(
+function renderDeletedCover(
+  item,
   pageDiv,
   layer,
-  viewport,
-  pageNumber
+  viewport
 ){
 
   const cssScale =
@@ -1512,147 +1687,86 @@ function renderExistingTextsOnly(
     viewport.width;
 
 
-  existingTexts
-    .filter(
-      item =>
-        item.page === pageNumber &&
-        !item.deleted
-    )
-    .forEach(
-      function(item){
-
-        /*
-          Approximate transform based on
-          original PDF text coordinates.
-        */
-
-        const x =
-          item.x *
-          BASE_SCALE *
-          cssScale;
-
-
-        const fontSize =
-          item.fontSize *
-          BASE_SCALE *
-          cssScale;
-
-
-        /*
-          PDF Y coordinate bottom-up.
-          PDF.js preview is top-down.
-        */
-
-        const pageHeight =
-          viewport.height;
-
-
-        const y =
-          pageHeight -
-          (
-            item.y *
-            BASE_SCALE
-          ) -
-          fontSize;
-
-
-        const span =
-          document.createElement(
-            "div"
-          );
-
-
-        span.className =
-          "existing-text";
-
-
-        span.dataset.existingId =
-          item.id;
-
-
-        span.textContent =
-          item.text;
-
-
-        span.style.left =
-          x + "px";
-
-
-        span.style.top =
-          (
-            y *
-            cssScale
-          ) + "px";
-
-
-        span.style.width =
-          Math.max(
-            4,
-            item.width *
-            BASE_SCALE *
-            cssScale
-          ) + "px";
-
-
-        span.style.height =
-          Math.max(
-            8,
-            fontSize *
-            1.3
-          ) + "px";
-
-
-        span.style.fontSize =
-          Math.max(
-            6,
-            fontSize
-          ) + "px";
-
-
-        span.style.transform =
-          "none";
-
-
-        span.addEventListener(
-          "click",
-          function(e){
-
-            e.stopPropagation();
-
-            selectExistingText(
-              item
-            );
-
-          }
-        );
-
-
-        span.addEventListener(
-          "dblclick",
-          function(e){
-
-            e.stopPropagation();
-
-            editExistingText(
-              item
-            );
-
-          }
-        );
-
-
-        layer.appendChild(
-          span
-        );
-
-      }
+  const tx =
+    pdfjsLib.Util.transform(
+      viewport.transform,
+      item.originalTransform
     );
+
+
+  const fontHeight =
+    Math.sqrt(
+      tx[2] * tx[2] +
+      tx[3] * tx[3]
+    );
+
+
+  const cover =
+    document.createElement("div");
+
+  cover.className =
+    "deleted-cover";
+
+  cover.dataset.existingId =
+    item.id;
+
+
+  cover.style.left =
+    (
+      tx[4] *
+      cssScale
+    ) + "px";
+
+
+  cover.style.top =
+    (
+      (
+        tx[5] -
+        fontHeight * 1.05
+      ) *
+      cssScale
+    ) + "px";
+
+
+  cover.style.width =
+    Math.max(
+      6,
+      (
+        item.width +
+        item.fontSize * .2
+      ) *
+      BASE_SCALE *
+      cssScale
+    ) + "px";
+
+
+  cover.style.height =
+    (
+      fontHeight *
+      1.4 *
+      cssScale
+    ) + "px";
+
+
+  cover.addEventListener(
+    "click",
+    function(e){
+
+      e.stopPropagation();
+
+      selectExistingText(item);
+
+    }
+  );
+
+
+  layer.appendChild(cover);
 
 }
 
 
 /* =========================================================
-   ADD TEXT BUTTON
+   ADD TEXT
 ========================================================= */
 
 document
@@ -1672,14 +1786,10 @@ document
     }
 
 
-    textModal.classList.add(
-      "show"
-    );
+    textModal.classList.add("show");
 
     document
-      .getElementById(
-        "textInput"
-      )
+      .getElementById("textInput")
       .focus();
 
   }
@@ -1696,16 +1806,14 @@ document
   "click",
   function(){
 
-    textModal.classList.remove(
-      "show"
-    );
+    textModal.classList.remove("show");
 
   }
 );
 
 
 /* =========================================================
-   ADD TEXT
+   TEXT OK
 ========================================================= */
 
 document
@@ -1716,9 +1824,7 @@ document
 
     const text =
       document
-        .getElementById(
-          "textInput"
-        )
+        .getElementById("textInput")
         .value
         .trim();
 
@@ -1726,46 +1832,97 @@ document
     const fontSize =
       Number(
         document
-          .getElementById(
-            "fontSizeInput"
-          )
+          .getElementById("fontSizeInput")
           .value
       );
 
 
     const fontFamily =
       document
-        .getElementById(
-          "fontFamilyInput"
-        )
+        .getElementById("fontFamilyInput")
         .value;
 
 
     if(!text){
 
-      alert(
-        "Text enter karein."
-      );
+      alert("Text enter karein.");
 
       return;
 
     }
 
 
-    const firstPage =
+    if(
+      !Number.isFinite(fontSize) ||
+      fontSize < 6
+    ){
+
+      alert("Valid font size enter karein.");
+
+      return;
+
+    }
+
+
+    const pageDiv =
       document.querySelector(
-        ".pdf-page"
+        '.pdf-page[data-page="' +
+        activePageNumber +
+        '"]'
       );
 
 
-    if(!firstPage){
+    if(!pageDiv){
+
+      alert("PDF page available nahi hai.");
+
       return;
+
     }
 
 
-    const pageNumber =
+    const pdfWidth =
       Number(
-        firstPage.dataset.page
+        pageDiv.dataset.pdfWidth
+      );
+
+    const pdfHeight =
+      Number(
+        pageDiv.dataset.pdfHeight
+      );
+
+
+    /*
+      Width estimate.
+      Actual position is stored as ratios.
+    */
+
+    const estimatedWidth =
+      Math.max(
+        .12,
+        Math.min(
+          .75,
+          (
+            text.length *
+            fontSize *
+            .52
+          ) /
+          pdfWidth
+        )
+      );
+
+
+    const estimatedHeight =
+      Math.max(
+        .035,
+        Math.min(
+          .15,
+          (
+            fontSize *
+            1.5
+          ) /
+          pdfHeight
+        )
       );
 
 
@@ -1779,7 +1936,7 @@ document
         "text",
 
       page:
-        pageNumber,
+        activePageNumber,
 
       text:
         text,
@@ -1797,39 +1954,20 @@ document
         .08,
 
       widthRatio:
-        Math.min(
-          .8,
-          Math.max(
-            .08,
-            text.length *
-            fontSize /
-            1000
-          )
-        ),
+        estimatedWidth,
 
       heightRatio:
-        fontSize /
-        Number(
-          firstPage.dataset.pdfHeight
-        )
+        estimatedHeight
 
     };
 
 
-    addedObjects.push(
-      obj
-    );
+    addedObjects.push(obj);
 
-
-    textModal.classList.remove(
-      "show"
-    );
-
+    textModal.classList.remove("show");
 
     document
-      .getElementById(
-        "textInput"
-      )
+      .getElementById("textInput")
       .value = "";
 
 
@@ -1865,9 +2003,7 @@ document
 
 
     const input =
-      document.createElement(
-        "input"
-      );
+      document.createElement("input");
 
     input.type =
       "file";
@@ -1877,7 +2013,7 @@ document
 
 
     input.onchange =
-      async function(){
+      function(){
 
         const file =
           input.files[0];
@@ -1894,12 +2030,6 @@ document
         reader.onload =
           function(){
 
-            const firstPage =
-              document.querySelector(
-                ".pdf-page"
-              );
-
-
             const obj = {
 
               id:
@@ -1910,9 +2040,7 @@ document
                 "image",
 
               page:
-                Number(
-                  firstPage.dataset.page
-                ),
+                activePageNumber,
 
               src:
                 reader.result,
@@ -1932,10 +2060,7 @@ document
             };
 
 
-            addedObjects.push(
-              obj
-            );
-
+            addedObjects.push(obj);
 
             renderAllObjects();
 
@@ -1946,9 +2071,7 @@ document
           };
 
 
-        reader.readAsDataURL(
-          file
-        );
+        reader.readAsDataURL(file);
 
       };
 
@@ -1964,17 +2087,14 @@ document
 ========================================================= */
 
 document
-.getElementById(
-  "replaceImageBtn"
-)
+.getElementById("replaceImageBtn")
 .addEventListener(
   "click",
   function(){
 
     if(
       !selectedObject ||
-      selectedObject.type !==
-      "image"
+      selectedObject.type !== "image"
     ){
 
       alert(
@@ -1987,9 +2107,7 @@ document
 
 
     const input =
-      document.createElement(
-        "input"
-      );
+      document.createElement("input");
 
     input.type =
       "file";
@@ -2024,25 +2142,25 @@ document
               );
 
 
-            if(obj){
-
-              obj.src =
-                reader.result;
-
-              renderAllObjects();
-
-              selectObject(obj);
-
-              saveHistory();
-
+            if(!obj){
+              return;
             }
+
+
+            obj.src =
+              reader.result;
+
+
+            renderAllObjects();
+
+            selectObject(obj);
+
+            saveHistory();
 
           };
 
 
-        reader.readAsDataURL(
-          file
-        );
+        reader.readAsDataURL(file);
 
       };
 
@@ -2054,7 +2172,7 @@ document
 
 
 /* =========================================================
-   QR MODAL
+   ADD QR
 ========================================================= */
 
 document
@@ -2074,14 +2192,88 @@ document
     }
 
 
-    qrModal.classList.add(
-      "show"
-    );
+    replaceQRMode = false;
+
+    qrTitle.textContent =
+      "Add QR Code";
+
+    qrOk.textContent =
+      "Add QR";
 
     document
-      .getElementById(
-        "qrInput"
-      )
+      .getElementById("qrInput")
+      .value = "";
+
+    document
+      .getElementById("qrSizeInput")
+      .value = 120;
+
+
+    qrModal.classList.add("show");
+
+    document
+      .getElementById("qrInput")
+      .focus();
+
+  }
+);
+
+
+/* =========================================================
+   REPLACE QR
+========================================================= */
+
+document
+.getElementById("replaceQRBtn")
+.addEventListener(
+  "click",
+  function(){
+
+    if(
+      !selectedObject ||
+      selectedObject.type !== "qr"
+    ){
+
+      alert(
+        "Pehle QR select karein."
+      );
+
+      return;
+
+    }
+
+
+    const obj =
+      addedObjects.find(
+        x =>
+          x.id ===
+          selectedObject.id
+      );
+
+
+    if(!obj){
+      return;
+    }
+
+
+    replaceQRMode = true;
+
+    qrTitle.textContent =
+      "Replace QR Code";
+
+    qrOk.textContent =
+      "Replace QR";
+
+    document
+      .getElementById("qrInput")
+      .value =
+      obj.value || "";
+
+
+    qrModal.classList.add("show");
+
+    document
+      .getElementById("qrInput")
       .focus();
 
   }
@@ -2098,29 +2290,25 @@ document
   "click",
   function(){
 
-    qrModal.classList.remove(
-      "show"
-    );
+    replaceQRMode = false;
+
+    qrModal.classList.remove("show");
 
   }
 );
 
 
 /* =========================================================
-   ADD QR
+   QR OK
 ========================================================= */
 
-document
-.getElementById("qrOk")
-.addEventListener(
+qrOk.addEventListener(
   "click",
   async function(){
 
     const value =
       document
-        .getElementById(
-          "qrInput"
-        )
+        .getElementById("qrInput")
         .value
         .trim();
 
@@ -2128,9 +2316,7 @@ document
     const size =
       Number(
         document
-          .getElementById(
-            "qrSizeInput"
-          )
+          .getElementById("qrSizeInput")
           .value
       );
 
@@ -2146,12 +2332,24 @@ document
     }
 
 
+    if(
+      !Number.isFinite(size) ||
+      size < 40
+    ){
+
+      alert(
+        "Valid QR size enter karein."
+      );
+
+      return;
+
+    }
+
+
     try{
 
       const canvas =
-        document.createElement(
-          "canvas"
-        );
+        document.createElement("canvas");
 
 
       await QRCode.toCanvas(
@@ -2159,61 +2357,99 @@ document
         value,
         {
           width:size,
-          margin:1
+          margin:1,
+          errorCorrectionLevel:"M"
         }
       );
 
 
-      const obj = {
-
-        id:
-          "qr_" +
-          objectCounter++,
-
-        type:
-          "qr",
-
-        page:
-          1,
-
-        src:
-          canvas.toDataURL(
-            "image/png"
-          ),
-
-        value:
-          value,
-
-        xRatio:
-          .08,
-
-        yRatio:
-          .15,
-
-        widthRatio:
-          .20,
-
-        heightRatio:
-          .20
-
-      };
+      const src =
+        canvas.toDataURL(
+          "image/png"
+        );
 
 
-      addedObjects.push(
-        obj
-      );
+      /*
+        REAL QR REPLACEMENT
+      */
+
+      if(replaceQRMode){
+
+        const obj =
+          addedObjects.find(
+            x =>
+              x.id ===
+              selectedObject.id
+          );
 
 
-      qrModal.classList.remove(
-        "show"
-      );
+        if(obj){
+
+          obj.src =
+            src;
+
+          obj.value =
+            value;
+
+          renderAllObjects();
+
+          selectObject(obj);
+
+          saveHistory();
+
+        }
 
 
-      renderAllObjects();
+      }
+      else{
 
-      selectObject(obj);
+        const obj = {
 
-      saveHistory();
+          id:
+            "qr_" +
+            objectCounter++,
+
+          type:
+            "qr",
+
+          page:
+            activePageNumber,
+
+          src:
+            src,
+
+          value:
+            value,
+
+          xRatio:
+            .08,
+
+          yRatio:
+            .15,
+
+          widthRatio:
+            .20,
+
+          heightRatio:
+            .20
+
+        };
+
+
+        addedObjects.push(obj);
+
+        renderAllObjects();
+
+        selectObject(obj);
+
+        saveHistory();
+
+      }
+
+
+      replaceQRMode = false;
+
+      qrModal.classList.remove("show");
 
     }
     catch(error){
@@ -2231,50 +2467,13 @@ document
 
 
 /* =========================================================
-   REPLACE QR
-========================================================= */
-
-document
-.getElementById(
-  "replaceQRBtn"
-)
-.addEventListener(
-  "click",
-  function(){
-
-    if(
-      !selectedObject ||
-      selectedObject.type !==
-      "qr"
-    ){
-
-      alert(
-        "Pehle QR select karein."
-      );
-
-      return;
-
-    }
-
-
-    qrModal.classList.add(
-      "show"
-    );
-
-  }
-);
-
-
-/* =========================================================
    RENDER ALL OBJECTS
 ========================================================= */
 
 function renderAllObjects(){
 
   document
-    .querySelectorAll(
-      ".object-layer"
-    )
+    .querySelectorAll(".object-layer")
     .forEach(
       layer =>
         layer.innerHTML = ""
@@ -2312,11 +2511,14 @@ function renderAllObjects(){
     }
   );
 
+
+  refreshSelection();
+
 }
 
 
 /* =========================================================
-   RENDER OBJECTS FOR PAGE
+   RENDER OBJECTS PAGE
 ========================================================= */
 
 function renderObjectsForPage(
@@ -2328,8 +2530,7 @@ function renderObjectsForPage(
   addedObjects
     .filter(
       obj =>
-        obj.page ===
-        pageNumber
+        obj.page === pageNumber
     )
     .forEach(
       obj =>
@@ -2356,20 +2557,49 @@ function renderSingleObject(
   const width =
     pageDiv.clientWidth;
 
-
   const height =
     pageDiv.clientHeight;
 
 
-  const element =
-    document.createElement(
-      "div"
+  if(
+    width <= 0 ||
+    height <= 0
+  ){
+    return;
+  }
+
+
+  /*
+    Keep object inside page.
+  */
+
+  obj.xRatio =
+    clamp(
+      obj.xRatio,
+      0,
+      Math.max(
+        0,
+        1 - obj.widthRatio
+      )
     );
 
 
+  obj.yRatio =
+    clamp(
+      obj.yRatio,
+      0,
+      Math.max(
+        0,
+        1 - obj.heightRatio
+      )
+    );
+
+
+  const element =
+    document.createElement("div");
+
   element.className =
     "editor-object";
-
 
   element.dataset.id =
     obj.id;
@@ -2403,6 +2633,8 @@ function renderSingleObject(
     ) + "px";
 
 
+  /* TEXT */
+
   if(obj.type === "text"){
 
     element.classList.add(
@@ -2414,15 +2646,22 @@ function renderSingleObject(
       obj.text;
 
 
+    const pdfWidth =
+      Number(
+        pageDiv.dataset.pdfWidth
+      );
+
+
+    const cssScale =
+      width /
+      pdfWidth;
+
+
     element.style.fontSize =
-      (
+      Math.max(
+        6,
         obj.fontSize *
-        (
-          width /
-          Number(
-            pageDiv.dataset.pdfWidth
-          )
-        )
+        cssScale
       ) + "px";
 
 
@@ -2431,14 +2670,14 @@ function renderSingleObject(
         obj.fontFamily
       );
 
+
     element.style.color =
       "#000";
 
-    element.style.fontWeight =
-      "normal";
-
   }
 
+
+  /* IMAGE / QR */
 
   if(
     obj.type === "image" ||
@@ -2446,46 +2685,38 @@ function renderSingleObject(
   ){
 
     element.classList.add(
-      obj.type ===
-      "image"
+      obj.type === "image"
         ? "image-object"
         : "qr-object"
     );
 
 
     const img =
-      document.createElement(
-        "img"
-      );
-
+      document.createElement("img");
 
     img.src =
       obj.src;
 
+    img.alt =
+      obj.type === "qr"
+        ? "QR Code"
+        : "Added Image";
 
-    element.appendChild(
-      img
-    );
+
+    element.appendChild(img);
 
   }
 
 
   const handle =
-    document.createElement(
-      "div"
-    );
+    document.createElement("div");
 
   handle.className =
     "resize-handle";
 
-  element.appendChild(
-    handle
-  );
+  element.appendChild(handle);
 
-
-  layer.appendChild(
-    element
-  );
+  layer.appendChild(element);
 
 
   enableDrag(
@@ -2504,10 +2735,23 @@ function renderSingleObject(
 
 
   element.addEventListener(
-    "click",
+    "pointerdown",
     function(e){
 
+      if(
+        e.target.classList.contains(
+          "resize-handle"
+        )
+      ){
+        return;
+      }
+
       e.stopPropagation();
+
+      activePageNumber =
+        obj.page;
+
+      markActivePage();
 
       selectObject(obj);
 
@@ -2542,7 +2786,13 @@ function getCssFont(font){
 
 function selectObject(obj){
 
-  selectedObject = obj;
+  selectedObject =
+    obj;
+
+  activePageNumber =
+    obj.page;
+
+  markActivePage();
 
   refreshSelection();
 
@@ -2556,26 +2806,18 @@ function selectObject(obj){
 function refreshSelection(){
 
   document
-    .querySelectorAll(
-      ".editor-object"
-    )
+    .querySelectorAll(".editor-object")
     .forEach(
       el =>
-        el.classList.remove(
-          "selected"
-        )
+        el.classList.remove("selected")
     );
 
 
   document
-    .querySelectorAll(
-      ".existing-text"
-    )
+    .querySelectorAll(".existing-text")
     .forEach(
       el =>
-        el.classList.remove(
-          "selected"
-        )
+        el.classList.remove("selected")
     );
 
 
@@ -2598,11 +2840,7 @@ function refreshSelection(){
 
 
     if(el){
-
-      el.classList.add(
-        "selected"
-      );
-
+      el.classList.add("selected");
     }
 
     return;
@@ -2619,18 +2857,39 @@ function refreshSelection(){
 
 
   if(el){
-
-    el.classList.add(
-      "selected"
-    );
-
+    el.classList.add("selected");
   }
 
 }
 
 
 /* =========================================================
-   DRAG
+   ACTIVE PAGE
+========================================================= */
+
+function markActivePage(){
+
+  document
+    .querySelectorAll(".pdf-page")
+    .forEach(
+      page => {
+
+        page.classList.toggle(
+          "active-page",
+          Number(
+            page.dataset.page
+          ) ===
+          activePageNumber
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   DRAG OBJECT
 ========================================================= */
 
 function enableDrag(
@@ -2663,6 +2922,8 @@ function enableDrag(
 
       e.preventDefault();
 
+      e.stopPropagation();
+
       dragging = true;
 
       startX =
@@ -2678,9 +2939,12 @@ function enableDrag(
         obj.yRatio;
 
 
-      element.setPointerCapture(
-        e.pointerId
-      );
+      try{
+        element.setPointerCapture(
+          e.pointerId
+        );
+      }
+      catch(err){}
 
     }
   );
@@ -2718,23 +2982,23 @@ function enableDrag(
 
 
       obj.xRatio =
-        Math.max(
+        clamp(
+          obj.xRatio,
           0,
-          Math.min(
-            1 -
-            obj.widthRatio,
-            obj.xRatio
+          Math.max(
+            0,
+            1 - obj.widthRatio
           )
         );
 
 
       obj.yRatio =
-        Math.max(
+        clamp(
+          obj.yRatio,
           0,
-          Math.min(
-            1 -
-            obj.heightRatio,
-            obj.yRatio
+          Math.max(
+            0,
+            1 - obj.heightRatio
           )
         );
 
@@ -2756,26 +3020,34 @@ function enableDrag(
   );
 
 
+  function finishDrag(){
+
+    if(!dragging){
+      return;
+    }
+
+    dragging = false;
+
+    saveHistory();
+
+  }
+
+
   element.addEventListener(
     "pointerup",
-    function(){
+    finishDrag
+  );
 
-      if(dragging){
-
-        dragging = false;
-
-        saveHistory();
-
-      }
-
-    }
+  element.addEventListener(
+    "pointercancel",
+    finishDrag
   );
 
 }
 
 
 /* =========================================================
-   RESIZE
+   RESIZE OBJECT
 ========================================================= */
 
 function enableResize(
@@ -2817,9 +3089,12 @@ function enableResize(
         obj.heightRatio;
 
 
-      handle.setPointerCapture(
-        e.pointerId
-      );
+      try{
+        handle.setPointerCapture(
+          e.pointerId
+        );
+      }
+      catch(err){}
 
     }
   );
@@ -2865,16 +3140,14 @@ function enableResize(
       obj.widthRatio =
         Math.min(
           obj.widthRatio,
-          1 -
-          obj.xRatio
+          1 - obj.xRatio
         );
 
 
       obj.heightRatio =
         Math.min(
           obj.heightRatio,
-          1 -
-          obj.yRatio
+          1 - obj.yRatio
         );
 
 
@@ -2895,19 +3168,27 @@ function enableResize(
   );
 
 
+  function finishResize(){
+
+    if(!resizing){
+      return;
+    }
+
+    resizing = false;
+
+    saveHistory();
+
+  }
+
+
   handle.addEventListener(
     "pointerup",
-    function(){
+    finishResize
+  );
 
-      if(resizing){
-
-        resizing = false;
-
-        saveHistory();
-
-      }
-
-    }
+  handle.addEventListener(
+    "pointercancel",
+    finishResize
   );
 
 }
@@ -2926,7 +3207,7 @@ document
     if(!selectedObject){
 
       alert(
-        "Pehle koi text/image/QR select karein."
+        "Pehle koi text, image ya QR select karein."
       );
 
       return;
@@ -2949,7 +3230,11 @@ document
 
       if(obj){
 
-        obj.deleted = true;
+        obj.deleted =
+          true;
+
+        obj.edited =
+          true;
 
       }
 
@@ -2966,41 +3251,11 @@ document
     }
 
 
-    selectedObject =
-      null;
-
+    selectedObject = null;
 
     refreshPageLayers();
 
     saveHistory();
-
-  }
-);
-
-
-/* =========================================================
-   PAGE CLICK
-========================================================= */
-
-document.addEventListener(
-  "click",
-  function(e){
-
-    if(
-      e.target.closest(
-        ".editor-object"
-      ) ||
-      e.target.closest(
-        ".existing-text"
-      )
-    ){
-      return;
-    }
-
-    selectedObject =
-      null;
-
-    refreshSelection();
 
   }
 );
@@ -3049,6 +3304,33 @@ document
 
 
 /* =========================================================
+   OUTSIDE CLICK
+========================================================= */
+
+document.addEventListener(
+  "pointerdown",
+  function(e){
+
+    if(
+      e.target.closest(".editor-object") ||
+      e.target.closest(".existing-text") ||
+      e.target.closest(".deleted-cover") ||
+      e.target.closest(".toolbar") ||
+      e.target.closest(".modal")
+    ){
+      return;
+    }
+
+
+    selectedObject = null;
+
+    refreshSelection();
+
+  }
+);
+
+
+/* =========================================================
    HISTORY
 ========================================================= */
 
@@ -3069,23 +3351,30 @@ function createState(){
 
 function restoreState(state){
 
-  const data =
-    JSON.parse(state);
+  try{
+
+    const data =
+      JSON.parse(state);
 
 
-  existingTexts =
-    data.existingTexts || [];
+    existingTexts =
+      data.existingTexts || [];
 
 
-  addedObjects =
-    data.addedObjects || [];
+    addedObjects =
+      data.addedObjects || [];
 
 
-  selectedObject =
-    null;
+    selectedObject = null;
 
+    refreshPageLayers();
 
-  refreshPageLayers();
+  }
+  catch(error){
+
+    console.error(error);
+
+  }
 
 }
 
@@ -3096,6 +3385,18 @@ function saveHistory(){
     createState();
 
 
+  /*
+    Avoid duplicate history entries.
+  */
+
+  if(
+    historyIndex >= 0 &&
+    history[historyIndex] === state
+  ){
+    return;
+  }
+
+
   history =
     history.slice(
       0,
@@ -3103,9 +3404,7 @@ function saveHistory(){
     );
 
 
-  history.push(
-    state
-  );
+  history.push(state);
 
 
   historyIndex =
@@ -3129,9 +3428,7 @@ document
   "click",
   function(){
 
-    if(
-      historyIndex <= 0
-    ){
+    if(historyIndex <= 0){
       return;
     }
 
@@ -3200,32 +3497,80 @@ document
 
       const pdfDoc =
         await PDFDocument.load(
-          pdfBytes
+          new Uint8Array(
+            pdfBytes.slice(0)
+          )
         );
 
 
-      const pages =
+      const pdfPages =
         pdfDoc.getPages();
 
 
       /*
-        Existing text edits
+        Font cache.
       */
 
-      for(
-        const item of
-        existingTexts
-      ){
+      const fontCache = {};
+
+
+      async function getFont(fontFamily){
+
+        if(fontCache[fontFamily]){
+          return fontCache[fontFamily];
+        }
+
+
+        let standardFont =
+          StandardFonts.Helvetica;
+
 
         if(
-          !item.edited
+          fontFamily ===
+          "Times-Roman"
         ){
+
+          standardFont =
+            StandardFonts.TimesRoman;
+
+        }
+        else if(
+          fontFamily ===
+          "Courier"
+        ){
+
+          standardFont =
+            StandardFonts.Courier;
+
+        }
+
+
+        fontCache[fontFamily] =
+          await pdfDoc.embedFont(
+            standardFont
+          );
+
+
+        return fontCache[fontFamily];
+
+      }
+
+
+      /* ===============================================
+         EXISTING TEXT EDITS
+      =============================================== */
+
+      for(
+        const item of existingTexts
+      ){
+
+        if(!item.edited){
           continue;
         }
 
 
         const page =
-          pages[
+          pdfPages[
             item.page - 1
           ];
 
@@ -3235,29 +3580,52 @@ document
         }
 
 
-        const pageWidth =
-          page.getWidth();
-
-
         const pageHeight =
           page.getHeight();
 
+
+        const fontSize =
+          Math.max(
+            1,
+            item.fontSize
+          );
+
+
+        /*
+          item.x / item.y are kept from
+          the original PDF text transform.
+        */
 
         const x =
           item.x;
 
 
-        const fontSize =
-          item.fontSize;
+        const baselineY =
+          item.y;
+
+
+        /*
+          Cover original text area.
+          Slightly larger than original.
+        */
+
+        const estimatedNewWidth =
+          item.deleted
+            ? 0
+            : Math.max(
+                item.width,
+                item.text.length *
+                fontSize *
+                .48
+              );
 
 
         const coverWidth =
           Math.max(
             item.width,
-            item.text.length *
-            fontSize *
-            .45
-          );
+            estimatedNewWidth
+          ) +
+          fontSize * .35;
 
 
         const coverHeight =
@@ -3266,18 +3634,28 @@ document
 
 
         /*
-          White cover.
+          PDF coordinate system:
+          bottom-left.
         */
+
+        const coverY =
+          baselineY -
+          fontSize * .30;
+
 
         page.drawRectangle({
 
           x:
-            x,
+            Math.max(
+              0,
+              x - fontSize * .10
+            ),
 
           y:
-            pageHeight -
-            item.y -
-            coverHeight,
+            Math.max(
+              0,
+              coverY
+            ),
 
           width:
             coverWidth,
@@ -3296,51 +3674,25 @@ document
 
 
         /*
-          Deleted text:
-          only cover remains.
+          If deleted, only cover remains.
         */
 
-        if(
-          item.deleted
-        ){
+        if(item.deleted){
           continue;
         }
 
 
-        let font;
+        const font =
+          await getFont(
+            "Helvetica"
+          );
 
 
-        if(
-          item.fontFamily ===
-          "Times-Roman"
-        ){
-
-          font =
-            await pdfDoc.embedFont(
-              StandardFonts.TimesRoman
-            );
-
-        }
-        else if(
-          item.fontFamily ===
-          "Courier"
-        ){
-
-          font =
-            await pdfDoc.embedFont(
-              StandardFonts.Courier
-            );
-
-        }
-        else{
-
-          font =
-            await pdfDoc.embedFont(
-              StandardFonts.Helvetica
-            );
-
-        }
-
+        /*
+          IMPORTANT:
+          Draw at original PDF baseline Y.
+          Do NOT use pageHeight - item.y.
+        */
 
         page.drawText(
           item.text,
@@ -3350,9 +3702,7 @@ document
               x,
 
             y:
-              pageHeight -
-              item.y -
-              fontSize,
+              baselineY,
 
             size:
               fontSize,
@@ -3373,17 +3723,16 @@ document
       }
 
 
-      /*
-        Added objects
-      */
+      /* ===============================================
+         ADDED OBJECTS
+      =============================================== */
 
       for(
-        const obj of
-        addedObjects
+        const obj of addedObjects
       ){
 
         const page =
-          pages[
+          pdfPages[
             obj.page - 1
           ];
 
@@ -3396,79 +3745,83 @@ document
         const pageWidth =
           page.getWidth();
 
-
         const pageHeight =
           page.getHeight();
 
 
+        /*
+          Object position is stored
+          as normalized top-left ratios.
+        */
+
         const x =
-          obj.xRatio *
+          clamp(
+            obj.xRatio,
+            0,
+            1
+          ) *
           pageWidth;
 
 
         const width =
-          obj.widthRatio *
+          clamp(
+            obj.widthRatio,
+            .001,
+            1
+          ) *
           pageWidth;
 
 
         const height =
-          obj.heightRatio *
+          clamp(
+            obj.heightRatio,
+            .001,
+            1
+          ) *
+          pageHeight;
+
+
+        const top =
+          clamp(
+            obj.yRatio,
+            0,
+            1
+          ) *
           pageHeight;
 
 
         /*
-          Convert top-left
-          coordinate to PDF
-          bottom-left coordinate.
+          Convert top-left to PDF bottom-left.
         */
 
         const y =
           pageHeight -
-          (
-            obj.yRatio *
-            pageHeight
-          ) -
+          top -
           height;
 
+
+        /* ADDED TEXT */
 
         if(
           obj.type ===
           "text"
         ){
 
-          let font;
+          const font =
+            await getFont(
+              obj.fontFamily
+            );
 
 
-          if(
-            obj.fontFamily ===
-            "Times-Roman"
-          ){
+          /*
+            Text is drawn from its top-left
+            position using the font size.
+          */
 
-            font =
-              await pdfDoc.embedFont(
-                StandardFonts.TimesRoman
-              );
-
-          }
-          else if(
-            obj.fontFamily ===
-            "Courier"
-          ){
-
-            font =
-              await pdfDoc.embedFont(
-                StandardFonts.Courier
-              );
-
-          }
-          else{
-
-            font =
-              await pdfDoc.embedFont(
-                StandardFonts.Helvetica
-              );
-
-          }
+          const textY =
+            y +
+            height -
+            obj.fontSize;
 
 
           page.drawText(
@@ -3479,9 +3832,7 @@ document
                 x,
 
               y:
-                y +
-                height -
-                obj.fontSize,
+                textY,
 
               size:
                 obj.fontSize,
@@ -3502,11 +3853,11 @@ document
         }
 
 
+        /* IMAGE / QR */
+
         if(
-          obj.type ===
-          "image" ||
-          obj.type ===
-          "qr"
+          obj.type === "image" ||
+          obj.type === "qr"
         ){
 
           const imageBytes =
@@ -3519,9 +3870,16 @@ document
 
 
           if(
-            obj.src.includes(
-              "image/jpeg"
-            )
+            obj.src
+              .toLowerCase()
+              .startsWith(
+                "data:image/jpeg"
+              ) ||
+            obj.src
+              .toLowerCase()
+              .startsWith(
+                "data:image/jpg"
+              )
           ){
 
             image =
@@ -3579,15 +3937,11 @@ document
 
 
       const url =
-        URL.createObjectURL(
-          blob
-        );
+        URL.createObjectURL(blob);
 
 
       const a =
-        document.createElement(
-          "a"
-        );
+        document.createElement("a");
 
 
       a.href =
@@ -3604,13 +3958,9 @@ document
           : "edited-pdf.pdf";
 
 
-      document.body.appendChild(
-        a
-      );
-
+      document.body.appendChild(a);
 
       a.click();
-
 
       a.remove();
 
@@ -3618,12 +3968,10 @@ document
       setTimeout(
         function(){
 
-          URL.revokeObjectURL(
-            url
-          );
+          URL.revokeObjectURL(url);
 
         },
-        1000
+        1500
       );
 
 
@@ -3634,7 +3982,11 @@ document
     }
     catch(error){
 
-      console.error(error);
+      console.error(
+        "PDF DOWNLOAD ERROR:",
+        error
+      );
+
 
       setStatus(
         "PDF download failed."
@@ -3642,7 +3994,7 @@ document
 
 
       alert(
-        "PDF download karte waqt error aaya."
+        "PDF download karte waqt error aaya. Browser console mein error check kiya ja sakta hai."
       );
 
     }
@@ -3655,12 +4007,21 @@ document
    DATA URL
 ========================================================= */
 
-function dataURLToUint8Array(
-  dataURL
-){
+function dataURLToUint8Array(dataURL){
+
+  const parts =
+    dataURL.split(",");
+
+
+  if(parts.length < 2){
+    throw new Error(
+      "Invalid image data."
+    );
+  }
+
 
   const base64 =
-    dataURL.split(",")[1];
+    parts[1];
 
 
   const binary =
@@ -3691,10 +4052,31 @@ function dataURLToUint8Array(
 
 
 /* =========================================================
+   CLAMP
+========================================================= */
+
+function clamp(
+  value,
+  min,
+  max
+){
+
+  return Math.max(
+    min,
+    Math.min(
+      max,
+      value
+    )
+  );
+
+}
+
+
+/* =========================================================
    WINDOW RESIZE
 ========================================================= */
 
-let resizeTimer;
+let resizeTimer = null;
 
 
 window.addEventListener(
@@ -3708,15 +4090,20 @@ window.addEventListener(
 
     resizeTimer =
       setTimeout(
-        function(){
+        async function(){
 
-          if(pdfDocument){
-
-            renderAllObjects();
-
-            refreshPageLayers();
-
+          if(!pdfDocument){
+            return;
           }
+
+
+          /*
+            Canvas automatically scales with CSS.
+            Only overlay/object coordinates need
+            recalculation.
+          */
+
+          await refreshPageLayers();
 
         },
         250
@@ -3734,22 +4121,59 @@ document.addEventListener(
   "keydown",
   function(e){
 
+    /*
+      Don't delete while typing in modal input.
+    */
+
+    const tag =
+      document.activeElement
+        ? document.activeElement.tagName
+        : "";
+
+
     if(
-      e.key ===
-      "Delete"
+      tag === "INPUT" ||
+      tag === "SELECT" ||
+      tag === "TEXTAREA"
     ){
+      return;
+    }
+
+
+    if(e.key === "Delete"){
 
       if(selectedObject){
 
         document
-          .getElementById(
-            "deleteBtn"
-          )
+          .getElementById("deleteBtn")
           .click();
 
       }
 
     }
+
+  }
+);
+
+
+/* =========================================================
+   ESCAPE MODAL
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  function(e){
+
+    if(e.key !== "Escape"){
+      return;
+    }
+
+
+    textModal.classList.remove("show");
+
+    qrModal.classList.remove("show");
+
+    replaceQRMode = false;
 
   }
 );
