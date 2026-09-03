@@ -273,7 +273,7 @@ document.getElementById("downloadButton");
 let originalPdfBytes = null;
 
 let pageSettings = [];
-
+let addedTexts = [];
 
 fileInput.addEventListener(
 "change",
@@ -570,7 +570,115 @@ function createPage(
 
 }
 
+const addTextButton =
+document.getElementById("addTextButton");
 
+let textMode = false;
+
+addTextButton.addEventListener(
+"click",
+function(){
+
+    textMode = true;
+
+    addTextButton.textContent =
+    "✏️ Click on PDF to Add Text";
+
+    alert(
+        "अब PDF page पर जहाँ text डालना है वहाँ click करें."
+    );
+
+});
+document.addEventListener("click", function(e){
+
+    if(!textMode){
+        return;
+    }
+
+    if(!e.target.closest(".page canvas")){
+        return;
+    }
+
+    const canvas = e.target;
+
+    const rect = canvas.getBoundingClientRect();
+
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const input = document.createElement("input");
+
+    input.type = "text";
+    input.placeholder = "Type text";
+
+    input.style.position = "absolute";
+    input.style.left = (canvas.offsetLeft + x) + "px";
+    input.style.top = (canvas.offsetTop + y) + "px";
+
+    input.style.width = "180px";
+    input.style.padding = "8px";
+    input.style.border = "2px solid #0d6efd";
+    input.style.borderRadius = "5px";
+    input.style.fontSize = "16px";
+    input.style.zIndex = "1000";
+
+    canvas.parentElement.style.position = "relative";
+
+    canvas.parentElement.appendChild(input);
+
+    input.focus();
+input.addEventListener("keydown", function(e){
+
+    if(e.key === "Enter"){
+
+        const pageBox =
+        canvas.parentElement;
+
+        const pageIndex =
+        Array.from(
+            pagesContainer.children
+        ).indexOf(pageBox);
+
+        if(!addedTexts[pageIndex]){
+            addedTexts[pageIndex] = [];
+        }
+
+        const rect =
+        canvas.getBoundingClientRect();
+
+        const scaleX =
+        canvas.width / rect.width;
+
+        const scaleY =
+        canvas.height / rect.height;
+
+        addedTexts[pageIndex].push({
+
+            text: input.value,
+
+            x: (e.target.offsetLeft - canvas.offsetLeft)
+               * scaleX,
+
+            y: canvas.height -
+               ((e.target.offsetTop - canvas.offsetTop)
+               * scaleY) -
+               16
+
+        });
+
+        input.style.border =
+        "1px solid #198754";
+
+        input.readOnly = true;
+
+    }
+
+});
+    textMode = false;
+
+    addTextButton.textContent = "➕ Add Text";
+
+});    
 downloadButton.addEventListener(
 "click",
 async function(){
@@ -600,7 +708,10 @@ async function(){
 
         const newPdf =
         await PDFLib.PDFDocument.create();
-
+const helveticaFont =
+await newPdf.embedFont(
+    PDFLib.StandardFonts.Helvetica
+);
 
         for(
             let i=0;
@@ -635,7 +746,24 @@ async function(){
 
             const newPage =
             copiedPages[0];
+if (addedTexts[i]) {
 
+    addedTexts[i].forEach(function(textItem) {
+
+        newPage.drawText(
+            textItem.text,
+            {
+                x: textItem.x,
+                y: textItem.y,
+                size: 16,
+                font: helveticaFont,
+                color: PDFLib.rgb(0, 0, 0)
+            }
+        );
+
+    });
+
+}
 
             if(
                 settings &&
