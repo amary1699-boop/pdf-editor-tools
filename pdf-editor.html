@@ -364,7 +364,78 @@ body{
   cursor:nwse-resize;
   z-index:20;
 }
+.text-toolbar{
+  position:absolute;
+  display:flex;
+  align-items:center;
+  gap:5px;
+  padding:6px;
+  background:#fff;
+  border:1px solid #ddd;
+  border-radius:9px;
+  box-shadow:0 4px 15px rgba(0,0,0,.15);
+  z-index:100;
+  pointer-events:auto;
+  max-width:calc(100% - 10px);
+  flex-wrap:wrap;
+}
 
+.text-toolbar button,
+.text-toolbar select,
+.text-toolbar input{
+  height:30px;
+  border:1px solid #ddd;
+  background:#fff;
+  border-radius:6px;
+  font-size:12px;
+  cursor:pointer;
+}
+
+.text-toolbar button{
+  min-width:30px;
+  padding:0 7px;
+  font-weight:700;
+}
+
+.text-toolbar select{
+  padding:0 5px;
+  max-width:105px;
+}
+
+.text-toolbar input[type="number"]{
+  width:55px;
+  padding:0 5px;
+}
+
+.text-toolbar button:hover{
+  background:#f5f5f5;
+}
+
+.text-toolbar .delete-text-btn{
+  color:#e53232;
+}
+
+@media(max-width:600px){
+  .text-toolbar{
+    gap:4px;
+    padding:5px;
+  }
+
+  .text-toolbar button,
+  .text-toolbar select,
+  .text-toolbar input{
+    height:28px;
+    font-size:11px;
+  }
+
+  .text-toolbar select{
+    max-width:85px;
+  }
+
+  .text-toolbar input[type="number"]{
+    width:48px;
+  }
+}
 /* PAGE NUMBER */
 
 .page-number{
@@ -2732,7 +2803,19 @@ function renderSingleObject(
     obj,
     pageDiv
   );
+if(
+  obj.type === "text" &&
+  selectedObject &&
+  selectedObject.id === obj.id
+){
 
+  createTextToolbar(
+    obj,
+    pageDiv,
+    element
+  );
+
+}
 
   element.addEventListener(
     "pointerdown",
@@ -2764,7 +2847,376 @@ function renderSingleObject(
 /* =========================================================
    FONT
 ========================================================= */
+function removeTextToolbar(pageDiv){
 
+  const oldToolbar =
+    pageDiv.querySelector(".text-toolbar");
+
+  if(oldToolbar){
+    oldToolbar.remove();
+  }
+
+}
+
+
+function createTextToolbar(
+  obj,
+  pageDiv,
+  element
+){
+
+  removeTextToolbar(pageDiv);
+
+  const toolbar =
+    document.createElement("div");
+
+  toolbar.className =
+    "text-toolbar";
+
+
+  /* EDIT */
+
+  const editBtn =
+    document.createElement("button");
+
+  editBtn.type = "button";
+  editBtn.textContent = "Edit";
+
+
+  /* FONT SIZE */
+
+  const sizeInput =
+    document.createElement("input");
+
+  sizeInput.type = "number";
+  sizeInput.min = "6";
+  sizeInput.max = "100";
+  sizeInput.value = obj.fontSize;
+
+
+  /* FONT */
+
+  const fontSelect =
+    document.createElement("select");
+
+  fontSelect.innerHTML = `
+    <option value="Helvetica">Helvetica</option>
+    <option value="Times-Roman">Times</option>
+    <option value="Courier">Courier</option>
+  `;
+
+  fontSelect.value =
+    obj.fontFamily;
+
+
+  /* DELETE */
+
+  const deleteBtn =
+    document.createElement("button");
+
+  deleteBtn.type = "button";
+  deleteBtn.textContent = "Delete";
+  deleteBtn.className =
+    "delete-text-btn";
+
+
+  toolbar.appendChild(editBtn);
+  toolbar.appendChild(sizeInput);
+  toolbar.appendChild(fontSelect);
+  toolbar.appendChild(deleteBtn);
+
+
+  pageDiv
+    .querySelector(".object-layer")
+    .appendChild(toolbar);
+
+
+  /* =========================================
+     KEEP TOOLBAR INSIDE PDF PAGE
+  ========================================= */
+
+  function positionToolbar(){
+
+    const pageWidth =
+      pageDiv.clientWidth;
+
+    const pageHeight =
+      pageDiv.clientHeight;
+
+
+    const objectLeft =
+      obj.xRatio *
+      pageWidth;
+
+    const objectTop =
+      obj.yRatio *
+      pageHeight;
+
+    const objectBottom =
+      objectTop +
+      (
+        obj.heightRatio *
+        pageHeight
+      );
+
+
+    const toolbarWidth =
+      toolbar.offsetWidth;
+
+    const toolbarHeight =
+      toolbar.offsetHeight;
+
+
+    let left =
+      objectLeft;
+
+    let top =
+      objectTop -
+      toolbarHeight -
+      8;
+
+
+    /*
+      Agar object ke upar jagah nahi hai
+      to toolbar neeche aa jayega.
+    */
+
+    if(top < 5){
+
+      top =
+        objectBottom + 8;
+
+    }
+
+
+    /*
+      Right side se bahar nahi jayega.
+    */
+
+    if(
+      left +
+      toolbarWidth >
+      pageWidth - 5
+    ){
+
+      left =
+        pageWidth -
+        toolbarWidth -
+        5;
+
+    }
+
+
+    /*
+      Left side se bahar nahi jayega.
+    */
+
+    if(left < 5){
+
+      left = 5;
+
+    }
+
+
+    /*
+      Bottom se bahar nahi jayega.
+    */
+
+    if(
+      top +
+      toolbarHeight >
+      pageHeight - 5
+    ){
+
+      top =
+        pageHeight -
+        toolbarHeight -
+        5;
+
+    }
+
+
+    if(top < 5){
+
+      top = 5;
+
+    }
+
+
+    toolbar.style.left =
+      left + "px";
+
+    toolbar.style.top =
+      top + "px";
+
+  }
+
+
+  /* =========================================
+     EDIT TEXT
+  ========================================= */
+
+  editBtn.addEventListener(
+    "click",
+    function(e){
+
+      e.preventDefault();
+      e.stopPropagation();
+
+
+      const newText =
+        prompt(
+          "Edit text:",
+          obj.text
+        );
+
+
+      if(newText === null){
+        return;
+      }
+
+
+      if(!newText.trim()){
+
+        alert(
+          "Text empty nahi ho sakta."
+        );
+
+        return;
+
+      }
+
+
+      obj.text =
+        newText.trim();
+
+
+      renderAllObjects();
+
+      selectObject(obj);
+
+      saveHistory();
+
+    }
+  );
+
+
+  /* =========================================
+     FONT SIZE
+  ========================================= */
+
+  sizeInput.addEventListener(
+    "change",
+    function(e){
+
+      e.stopPropagation();
+
+
+      const value =
+        Number(this.value);
+
+
+      if(
+        !Number.isFinite(value) ||
+        value < 6
+      ){
+
+        this.value =
+          obj.fontSize;
+
+        return;
+
+      }
+
+
+      obj.fontSize =
+        Math.min(
+          100,
+          value
+        );
+
+
+      renderAllObjects();
+
+      selectObject(obj);
+
+      saveHistory();
+
+    }
+  );
+
+
+  /* =========================================
+     FONT
+  ========================================= */
+
+  fontSelect.addEventListener(
+    "change",
+    function(e){
+
+      e.stopPropagation();
+
+
+      obj.fontFamily =
+        this.value;
+
+
+      renderAllObjects();
+
+      selectObject(obj);
+
+      saveHistory();
+
+    }
+  );
+
+
+  /* =========================================
+     DELETE TEXT
+  ========================================= */
+
+  deleteBtn.addEventListener(
+    "click",
+    function(e){
+
+      e.preventDefault();
+      e.stopPropagation();
+
+
+      addedObjects =
+        addedObjects.filter(
+          x =>
+            x.id !== obj.id
+        );
+
+
+      selectedObject =
+        null;
+
+
+      renderAllObjects();
+
+      saveHistory();
+
+    }
+  );
+
+
+  /*
+    First position after browser renders toolbar.
+  */
+
+  requestAnimationFrame(
+    positionToolbar
+  );
+
+
+  return {
+    toolbar,
+    positionToolbar
+  };
+
+}
 function getCssFont(font){
 
   if(font === "Times-Roman"){
@@ -2796,8 +3248,55 @@ function selectObject(obj){
 
   refreshSelection();
 
-}
 
+  /*
+    Text toolbar ko object render hone ke
+    baad show karte hain.
+  */
+
+  if(obj.type === "text"){
+
+    requestAnimationFrame(
+      function(){
+
+        const pageDiv =
+          document.querySelector(
+            '.pdf-page[data-page="' +
+            obj.page +
+            '"]'
+          );
+
+
+        if(!pageDiv){
+          return;
+        }
+
+
+        const element =
+          pageDiv.querySelector(
+            '[data-id="' +
+            obj.id +
+            '"]'
+          );
+
+
+        if(!element){
+          return;
+        }
+
+
+        createTextToolbar(
+          obj,
+          pageDiv,
+          element
+        );
+
+      }
+    );
+
+  }
+
+}
 
 /* =========================================================
    REFRESH SELECTION
