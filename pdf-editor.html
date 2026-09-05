@@ -3886,242 +3886,158 @@ document
    QR OK
 ========================================================= */
 
-qrOk.addEventListener(
-  "click",
-  async function(){
+qrOk.addEventListener("click", function(){
 
-    const value =
-      document
-        .getElementById(
-          "qrInput"
-        )
-        .value
-        .trim();
+  const value = document.getElementById("qrInput").value.trim();
+  const size = Number(document.getElementById("qrSizeInput").value);
 
+  if(!value){
+    alert("QR text ya URL enter karein.");
+    return;
+  }
 
-    const size =
-      Number(
-        document
-          .getElementById(
-            "qrSizeInput"
-          )
-          .value
-      );
+  if(!Number.isFinite(size) || size < 40){
+    alert("Valid QR size enter karein.");
+    return;
+  }
 
+  try{
 
-    if(!value){
+    const temp = document.createElement("div");
 
-      alert(
-        "QR text ya URL enter karein."
-      );
+    temp.style.position = "fixed";
+    temp.style.left = "-10000px";
+    temp.style.top = "-10000px";
+    temp.style.width = size + "px";
+    temp.style.height = size + "px";
 
-      return;
+    document.body.appendChild(temp);
 
-    }
+    new QRCode(temp, {
+      text: value,
+      width: size,
+      height: size,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.M
+    });
 
+    setTimeout(function(){
 
-    if(
-      !Number.isFinite(size) ||
-      size < 40
-    ){
+      const canvas = temp.querySelector("canvas");
+      const img = temp.querySelector("img");
 
-      alert(
-        "Valid QR size enter karein."
-      );
+      let src = "";
 
-      return;
+      if(canvas){
+        src = canvas.toDataURL("image/png");
+      }
+      else if(img){
+        src = img.src;
+      }
 
-    }
-
-
-    try{
-
-      const src =
-await QRCode.toDataURL(
-value,
-{
-width:size,
-margin:1,
-errorCorrectionLevel:"M",
-type:"image/png"
-}
-);
-
-      /*
-        REPLACE EXISTING PDF IMAGE
-        WITH QR
-      */
+      if(!src){
+        document.body.removeChild(temp);
+        alert("QR create nahi ho saka.");
+        return;
+      }
 
       if(
         replaceQRMode &&
         selectedObject &&
-        selectedObject.type ===
-        "existingImage"
+        selectedObject.type === "existingImage"
       ){
 
-        const existing =
-          existingImages.find(
-            x =>
-              x.id ===
-              selectedObject.id
-          );
-
+        const existing = existingImages.find(
+          x => x.id === selectedObject.id
+        );
 
         if(existing){
 
-          existing.replaced =
-            true;
-
-
-          existing.deleted =
-            false;
-
-
-          existing.replacementSrc =
-            src;
-
-
-          existing.replacementType =
-            "qr";
-
-
-          existing.replacementQRValue =
-            value;
-
+          existing.replaced = true;
+          existing.deleted = false;
+          existing.replacementSrc = src;
+          existing.replacementType = "qr";
+          existing.replacementQRValue = value;
 
           selectedObject = {
-
-            type:
-              "existingImage",
-
-            id:
-              existing.id
-
+            type:"existingImage",
+            id:existing.id
           };
 
-
           refreshPageLayers();
-
           refreshSelection();
-
           saveHistory();
 
         }
 
       }
 
-
-      /*
-        REPLACE ADDED QR
-      */
-
       else if(
-        replaceQRMode
+        replaceQRMode &&
+        selectedObject
       ){
 
-        const obj =
-          addedObjects.find(
-            x =>
-              x.id ===
-              selectedObject.id
-          );
-
+        const obj = addedObjects.find(
+          x => x.id === selectedObject.id
+        );
 
         if(obj){
 
-          obj.src =
-            src;
-
-
-          obj.value =
-            value;
-
+          obj.src = src;
+          obj.value = value;
 
           renderAllObjects();
-
           selectObject(obj);
-
           saveHistory();
 
         }
 
       }
-
-
-      /*
-        ADD NEW QR
-      */
 
       else{
 
         const obj = {
 
-          id:
-            "qr-" +
-            objectCounter++,
+          id:"qr-" + objectCounter++,
+          type:"qr",
+          page:activePageNumber,
+          src:src,
+          value:value,
 
-          type:
-            "qr",
-
-          page:
-            activePageNumber,
-
-          src:
-            src,
-
-          value:
-            value,
-
-          xRatio:
-            .08,
-
-          yRatio:
-            .15,
-
-          widthRatio:
-            .20,
-
-          heightRatio:
-            .20
+          xRatio:.08,
+          yRatio:.15,
+          widthRatio:.20,
+          heightRatio:.20
 
         };
 
-
-        addedObjects.push(
-          obj
-        );
-
+        addedObjects.push(obj);
 
         renderAllObjects();
-
         selectObject(obj);
-
         saveHistory();
 
       }
 
+      replaceQRMode = false;
 
-      replaceQRMode =
-        false;
+      qrModal.classList.remove("show");
 
+      document.body.removeChild(temp);
 
-      qrModal.classList.remove(
-        "show"
-      );
-
-    }
-    catch(error){
-
-      console.error(error);
-
-      alert(
-        "QR create nahi ho saka."
-      );
-
-    }
+    }, 100);
 
   }
-);
+  catch(error){
+
+    console.error("QR ERROR:", error);
+
+    alert("QR create nahi ho saka.");
+
+  }
+
+});
 
 
 /* =========================================================
