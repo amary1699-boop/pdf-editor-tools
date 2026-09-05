@@ -508,7 +508,20 @@ body{
 
   cursor:pointer;
 }
+.existing-image .resize-handle{
+  display:none;
+}
 
+.existing-image.selected .resize-handle{
+  display:block;
+}
+
+.deleted-image.selected{
+  border:2px solid #e53232;
+  background:#fff;
+  box-shadow:0 0 0 1px rgba(229,50,50,.15);
+  box-sizing:border-box;
+}
 
 /* =========================================================
    ADDED OBJECTS
@@ -5087,11 +5100,11 @@ function refreshSelection(){
   ){
 
     const el =
-      document.querySelector(
-        '.existing-image[data-existing-id="' +
-        selectedObject.id +
-        '"]'
-      );
+  document.querySelector(
+    '[data-existing-id="' +
+    selectedObject.id +
+    '"]'
+  );
 
 
     if(el){
