@@ -972,7 +972,6 @@ body{
 }
 
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.4/qrcode.min.js"></script>
 </head>
 
 
@@ -3937,28 +3936,16 @@ qrOk.addEventListener(
 
     try{
 
-      const canvas =
-        document.createElement(
-          "canvas"
-        );
-
-
-      await QRCode.toCanvas(
-        canvas,
-        value,
-        {
-          width:size,
-          margin:1,
-          errorCorrectionLevel:"M"
-        }
-      );
-
-
       const src =
-        canvas.toDataURL(
-          "image/png"
-        );
-
+await QRCode.toDataURL(
+value,
+{
+width:size,
+margin:1,
+errorCorrectionLevel:"M",
+type:"image/png"
+}
+);
 
       /*
         REPLACE EXISTING PDF IMAGE
