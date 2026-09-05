@@ -891,6 +891,7 @@ let pdfDocument = null;
 let currentFile = null;
 
 let existingTexts = [];
+let existingImages = [];
 let addedObjects = [];
 
 let selectedObject = null;
@@ -1040,8 +1041,9 @@ async function loadPDF(file){
       }).promise;
 
     existingTexts = [];
+existingImages = [];
 
-    addedObjects = [];
+addedObjects = [];
 
     selectedObject = null;
 
@@ -1235,19 +1237,26 @@ async function renderPage(pageNumber){
 
 
   await extractExistingText(
-    page,
-    pageDiv,
-    existingLayer,
-    viewport,
-    pageNumber
-  );
+  page,
+  pageDiv,
+  existingLayer,
+  viewport,
+  pageNumber
+);
 
+await extractExistingImages(
+  page,
+  pageDiv,
+  existingLayer,
+  viewport,
+  pageNumber
+);
 
-  renderObjectsForPage(
-    pageDiv,
-    objectLayer,
-    pageNumber
-  );
+renderObjectsForPage(
+  pageDiv,
+  objectLayer,
+  pageNumber
+);
 
 
   pageDiv.addEventListener(
@@ -1276,7 +1285,253 @@ async function extractExistingText(
   viewport,
   pageNumber
 ){
+async function extractExistingImages(
+  page,
+  pageDiv,
+  layer,
+  viewport,
+  pageNumber
+){
 
+  const opList =
+    await page.getOperatorList();
+
+  let transform =
+    [1,0,0,1,0,0];
+
+  const transformStack = [];
+
+  for(
+    let i = 0;
+    i < opList.fnArray.length;
+    i++
+  ){
+
+    const fn =
+      opList.fnArray[i];
+
+    const args =
+      opList.argsArray[i];
+
+
+    if(
+      fn === pdfjsLib.OPS.save
+    ){
+
+      transformStack.push(
+        transform.slice()
+      );
+
+    }
+
+
+    else if(
+      fn === pdfjsLib.OPS.restore
+    ){
+
+      if(
+        transformStack.length
+      ){
+
+        transform =
+          transformStack.pop();
+
+      }
+
+    }
+
+
+    else if(
+      fn === pdfjsLib.OPS.transform
+    ){
+
+      transform =
+        multiplyMatrices(
+          transform,
+          args
+        );
+
+    }
+
+
+    else if(
+      fn === pdfjsLib.OPS.paintImageXObject ||
+      fn === pdfjsLib.OPS.paintJpegXObject ||
+      fn === pdfjsLib.OPS.paintInlineImageXObject ||
+      fn === pdfjsLib.OPS.paintImageMaskXObject
+    ){
+
+      const p1 =
+        transformPoint(
+          transform,
+          0,
+          0
+        );
+
+      const p2 =
+        transformPoint(
+          transform,
+          1,
+          0
+        );
+
+      const p3 =
+        transformPoint(
+          transform,
+          0,
+          1
+        );
+
+      const p4 =
+        transformPoint(
+          transform,
+          1,
+          1
+        );
+
+
+      const xs = [
+        p1[0],
+        p2[0],
+        p3[0],
+        p4[0]
+      ];
+
+
+      const ys = [
+        p1[1],
+        p2[1],
+        p3[1],
+        p4[1]
+      ];
+
+
+      const minX =
+        Math.min(...xs);
+
+      const maxX =
+        Math.max(...xs);
+
+      const minY =
+        Math.min(...ys);
+
+      const maxY =
+        Math.max(...ys);
+
+
+      existingImages.push({
+
+        id:
+          "existing-image-" +
+          pageNumber +
+          "-" +
+          i,
+
+        type:
+          "existingImage",
+
+        page:
+          pageNumber,
+
+        x:
+          minX *
+          viewport.scale,
+
+        y:
+          minY *
+          viewport.scale,
+
+        width:
+          (maxX - minX) *
+          viewport.scale,
+
+        height:
+          (maxY - minY) *
+          viewport.scale,
+
+        deleted:
+          false,
+
+        replaced:
+          false,
+
+        replacementSrc:
+          null,
+
+        imageName:
+          args &&
+          args[0]
+            ? String(args[0])
+            : ""
+
+      });
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================
+   MATRIX
+========================================================= */
+
+function multiplyMatrices(
+  m1,
+  m2
+){
+
+  return [
+
+    m1[0] * m2[0] +
+    m1[2] * m2[1],
+
+    m1[1] * m2[0] +
+    m1[3] * m2[1],
+
+    m1[0] * m2[2] +
+    m1[2] * m2[3],
+
+    m1[1] * m2[2] +
+    m1[3] * m2[3],
+
+    m1[0] * m2[4] +
+    m1[2] * m2[5] +
+    m1[4],
+
+    m1[1] * m2[4] +
+    m1[3] * m2[5] +
+    m1[5]
+
+  ];
+
+}
+
+
+/* =========================================================
+   TRANSFORM POINT
+========================================================= */
+
+function transformPoint(
+  matrix,
+  x,
+  y
+){
+
+  return [
+
+    matrix[0] * x +
+    matrix[2] * y +
+    matrix[4],
+
+    matrix[1] * x +
+    matrix[3] * y +
+    matrix[5]
+
+  ];
+
+}
   const textContent =
     await page.getTextContent();
 
@@ -1379,7 +1634,240 @@ async function extractExistingText(
   );
 
 }
+async function extractExistingImages(
+  page,
+  pageDiv,
+  layer,
+  viewport,
+  pageNumber
+){
 
+  const opList =
+    await page.getOperatorList();
+
+  let transform =
+    [1, 0, 0, 1, 0, 0];
+
+  const transformStack = [];
+
+  for(
+    let i = 0;
+    i < opList.fnArray.length;
+    i++
+  ){
+
+    const fn =
+      opList.fnArray[i];
+
+    const args =
+      opList.argsArray[i];
+
+    if(
+      fn ===
+      pdfjsLib.OPS.save
+    ){
+
+      transformStack.push(
+        transform.slice()
+      );
+
+    }
+
+    else if(
+      fn ===
+      pdfjsLib.OPS.restore
+    ){
+
+      if(
+        transformStack.length
+      ){
+        transform =
+          transformStack.pop();
+      }
+
+    }
+
+    else if(
+      fn ===
+      pdfjsLib.OPS.transform
+    ){
+
+      transform =
+        multiplyMatrices(
+          transform,
+          args
+        );
+
+    }
+
+    else if(
+      fn ===
+      pdfjsLib.OPS.paintImageXObject ||
+      fn ===
+      pdfjsLib.OPS.paintJpegXObject ||
+      fn ===
+      pdfjsLib.OPS.paintInlineImageXObject ||
+      fn ===
+      pdfjsLib.OPS.paintImageMaskXObject
+    ){
+
+      const p1 =
+        transformPoint(
+          transform,
+          0,
+          0
+        );
+
+      const p2 =
+        transformPoint(
+          transform,
+          1,
+          0
+        );
+
+      const p3 =
+        transformPoint(
+          transform,
+          0,
+          1
+        );
+
+      const p4 =
+        transformPoint(
+          transform,
+          1,
+          1
+        );
+
+      const xs = [
+        p1[0],
+        p2[0],
+        p3[0],
+        p4[0]
+      ];
+
+      const ys = [
+        p1[1],
+        p2[1],
+        p3[1],
+        p4[1]
+      ];
+
+      const minX =
+        Math.min(...xs);
+
+      const maxX =
+        Math.max(...xs);
+
+      const minY =
+        Math.min(...ys);
+
+      const maxY =
+        Math.max(...ys);
+
+      const image = {
+
+        id:
+          "existing-image-" +
+          Date.now() +
+          "-" +
+          i,
+
+        type:
+          "existingImage",
+
+        page:
+          pageNumber,
+
+        x:
+          minX *
+          viewport.scale,
+
+        y:
+          minY *
+          viewport.scale,
+
+        width:
+          (maxX - minX) *
+          viewport.scale,
+
+        height:
+          (maxY - minY) *
+          viewport.scale,
+
+        deleted:
+          false,
+
+        replaced:
+          false,
+
+        replacementSrc:
+          null,
+
+        imageName:
+          args &&
+          args[0]
+            ? String(args[0])
+            : ""
+      };
+
+      existingImages.push(
+        image
+      );
+    }
+  }
+}
+
+
+function multiplyMatrices(
+  m1,
+  m2
+){
+
+  return [
+
+    m1[0] * m2[0] +
+    m1[2] * m2[1],
+
+    m1[1] * m2[0] +
+    m1[3] * m2[1],
+
+    m1[0] * m2[2] +
+    m1[2] * m2[3],
+
+    m1[1] * m2[2] +
+    m1[3] * m2[3],
+
+    m1[0] * m2[4] +
+    m1[2] * m2[5] +
+    m1[4],
+
+    m1[1] * m2[4] +
+    m1[3] * m2[5] +
+    m1[5]
+
+  ];
+}
+
+
+function transformPoint(
+  matrix,
+  x,
+  y
+){
+
+  return [
+
+    matrix[0] * x +
+    matrix[2] * y +
+    matrix[4],
+
+    matrix[1] * x +
+    matrix[3] * y +
+    matrix[5]
+
+  ];
+}
 
 /* =========================================================
    RENDER ONE EXISTING TEXT
