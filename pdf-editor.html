@@ -1695,18 +1695,18 @@ function renderExistingTextItem(
   }
 
   span.addEventListener(
-    "pointerdown",
-    function(e){
+  "pointerdown",
+  function(e){
 
-      e.preventDefault();
-      e.stopPropagation();
+    e.preventDefault();
+    e.stopPropagation();
 
-      activePageNumber=item.page;
+    activePageNumber = item.page;
 
-      selectExistingText(item);
+    selectExistingText(item, span);
 
-    }
-  );
+  }
+);
 
   span.addEventListener(
     "dblclick",
@@ -2019,29 +2019,48 @@ function renderDeletedImageCover(
 /* =========================================================
    SELECT EXISTING TEXT
 ========================================================= */
+function selectExistingText(obj, el){
 
-function selectExistingText(obj){
+  if(!obj || !el){
+    return;
+  }
 
-  selectedObject={
+  selectedObject = {
     type:"existingText",
-    id:obj.id
+    id:obj.id,
+    page:obj.page
   };
 
-  activePageNumber=obj.page;
+  activePageNumber = obj.page;
 
   markActivePage();
 
-  refreshSelection();
+  document
+  .querySelectorAll(
+    ".editor-object.selected, " +
+    ".existing-text.selected, " +
+    ".existing-image.selected, " +
+    ".deleted-image.selected"
+  )
+  .forEach(function(node){
 
-  requestAnimationFrame(function(){
-
-    createExistingTextToolbar(obj);
+    node.classList.remove("selected");
 
   });
 
+  document
+  .querySelectorAll(".text-toolbar")
+  .forEach(function(toolbar){
+
+    toolbar.remove();
+
+  });
+
+  el.classList.add("selected");
+
+  createExistingTextToolbar(obj);
+
 }
-
-
 /* =========================================================
    EXISTING TEXT TOOLBAR
 ========================================================= */
@@ -2095,7 +2114,7 @@ function createExistingTextToolbar(obj){
       ".object-layer"
     );
 
-  objectLayer.appendChild(toolbar);
+  pageDiv.appendChild(toolbar);
 
 
   function position(){
