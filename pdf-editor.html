@@ -379,7 +379,7 @@ body{
 
 .existing-text{
   position:absolute;
-
+z-index:5;
   margin:0;
   padding:0;
 
@@ -500,13 +500,15 @@ body{
 .deleted-image{
   position:absolute;
 
-  z-index:9;
+  z-index:1;
 
   background:#fff;
 
   pointer-events:auto;
 
   cursor:pointer;
+
+  box-sizing:border-box;
 }
 .existing-image .resize-handle{
   display:none;
