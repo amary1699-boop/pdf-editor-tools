@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>Free PDF Editor - Edit PDF Online</title>
 
@@ -11,11 +11,8 @@
 content="Free online PDF editor. Edit PDF text, add images and QR codes and download your edited PDF.">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
 
 <style>
 
@@ -34,10 +31,7 @@ body{
   color:#222;
 }
 
-
-/* =========================================================
-   HEADER
-========================================================= */
+/* HEADER */
 
 .header{
   position:sticky;
@@ -53,7 +47,6 @@ body{
   min-height:68px;
   margin:auto;
   padding:10px 18px;
-
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -64,10 +57,8 @@ body{
   display:flex;
   align-items:center;
   gap:10px;
-
   text-decoration:none;
   color:#222;
-
   font-size:20px;
   font-weight:700;
 }
@@ -75,16 +66,12 @@ body{
 .logo-icon{
   width:38px;
   height:38px;
-
   border-radius:9px;
-
   background:#e53232;
   color:#fff;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   font-size:15px;
   font-weight:800;
 }
@@ -92,40 +79,21 @@ body{
 .home-btn{
   text-decoration:none;
   color:#333;
-
   padding:9px 14px;
-
   border-radius:8px;
   border:1px solid #ddd;
-
   background:#fff;
-
   font-weight:600;
 }
 
-.home-btn:hover{
-  background:#f5f5f5;
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
+/* HERO */
 
 .hero{
   max-width:1180px;
-
   margin:20px auto 0;
   padding:25px 20px;
-
   border-radius:16px;
-
-  background:linear-gradient(
-    135deg,
-    #fff,
-    #fff5f5
-  );
-
+  background:linear-gradient(135deg,#fff,#fff5f5);
   border:1px solid #f0dddd;
 }
 
@@ -139,66 +107,39 @@ body{
   color:#666;
 }
 
-
-/* =========================================================
-   WRAPPER
-========================================================= */
+/* WRAPPER */
 
 .editor-wrapper{
   max-width:1180px;
-
   margin:18px auto 50px;
-
   padding:0 15px;
 }
 
-
-/* =========================================================
-   TOOLBAR
-========================================================= */
+/* TOOLBAR */
 
 .toolbar{
   position:sticky;
-
   top:68px;
-
   z-index:900;
-
   background:#fff;
-
   border:1px solid #e5e5e5;
-
   border-radius:14px;
-
   padding:12px;
-
-  box-shadow:
-    0 4px 15px rgba(0,0,0,.06);
-
+  box-shadow:0 4px 15px rgba(0,0,0,.06);
   display:flex;
-
   flex-wrap:wrap;
-
   gap:8px;
-
   margin-bottom:15px;
 }
 
 .tool-btn{
   border:1px solid #ddd;
-
   background:#fff;
-
   color:#222;
-
   border-radius:8px;
-
   padding:9px 12px;
-
   cursor:pointer;
-
   font-weight:600;
-
   font-size:14px;
 }
 
@@ -208,9 +149,7 @@ body{
 
 .tool-btn.primary{
   background:#e53232;
-
   border-color:#e53232;
-
   color:#fff;
 }
 
@@ -218,30 +157,15 @@ body{
   background:#c92727;
 }
 
-.tool-btn:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-}
-
-
-/* =========================================================
-   FILE
-========================================================= */
+/* FILE */
 
 .file-area{
   background:#fff;
-
   border:2px dashed #ddd;
-
   border-radius:14px;
-
   padding:25px;
-
   text-align:center;
-
   margin-bottom:18px;
-
-  transition:.2s;
 }
 
 .file-area.drag{
@@ -251,22 +175,12 @@ body{
 
 .file-label{
   display:inline-block;
-
   background:#e53232;
-
   color:#fff;
-
   padding:11px 20px;
-
   border-radius:8px;
-
   cursor:pointer;
-
   font-weight:700;
-}
-
-.file-label:hover{
-  background:#c92727;
 }
 
 #pdfFile{
@@ -275,65 +189,39 @@ body{
 
 .file-name{
   margin-top:10px;
-
   color:#666;
-
   font-size:14px;
-
   word-break:break-word;
 }
 
-
-/* =========================================================
-   STATUS
-========================================================= */
+/* STATUS */
 
 .status{
   margin:12px 0;
-
   text-align:center;
-
   color:#666;
-
   font-size:14px;
-
   min-height:20px;
 }
 
-
-/* =========================================================
-   PDF
-========================================================= */
+/* PDF */
 
 .pdf-container{
   width:100%;
-
   display:flex;
-
   flex-direction:column;
-
   align-items:center;
-
   gap:25px;
 }
 
 .pdf-page{
   position:relative;
-
   width:100%;
-
   max-width:850px;
-
   background:#fff;
-
-  box-shadow:
-    0 5px 25px rgba(0,0,0,.15);
-
+  box-shadow:0 5px 25px rgba(0,0,0,.15);
   overflow:hidden;
-
   border:2px solid transparent;
-
-  transition:border-color .15s;
 }
 
 .pdf-page.active-page{
@@ -342,223 +230,152 @@ body{
 
 .pdf-canvas{
   display:block;
-
   width:100%;
-
   height:auto;
 }
 
-
-/* =========================================================
-   LAYERS
-========================================================= */
+/* LAYERS */
 
 .existing-layer,
 .object-layer{
   position:absolute;
-
   inset:0;
-
   overflow:hidden;
 }
 
 .existing-layer{
-  position:absolute;
-  inset:0;
   z-index:40;
   pointer-events:none;
-  overflow:hidden;
 }
 
 .object-layer{
-  position:absolute;
-  inset:0;
   z-index:50;
   pointer-events:none;
-  overflow:hidden;
 }
 
+/*
+  IMPORTANT LAYER ORDER
 
-/* =========================================================
-   EXISTING TEXT
-========================================================= */
+  deleted text       44
+  existing image     35
+  existing text      45
+  added object       50
+  toolbar            100
+*/
+
+/* EXISTING TEXT */
 
 .existing-text{
   position:absolute;
-z-index:5;
+  z-index:45;
   margin:0;
   padding:0;
-
   white-space:pre;
-
   overflow:hidden;
-
   color:transparent;
-
   background:transparent;
-
   cursor:text;
-
   pointer-events:auto;
-
   line-height:1;
-
   user-select:none;
-
   border:1px solid transparent;
 }
 
 .existing-text:hover{
   background:rgba(229,50,50,.10);
-
-  border-color:
-    rgba(229,50,50,.35);
+  border-color:rgba(229,50,50,.35);
 }
 
 .existing-text.selected{
+  z-index:46;
   background:rgba(229,50,50,.14);
-
   border:2px solid #e53232;
 }
 
 .existing-text.edited-visible{
   color:#111;
-
   background:rgba(255,255,255,.96);
-
   border:1px solid rgba(0,0,0,.08);
 }
-.existing-text.visible-over-image{
-  color:#111;
-  background:transparent;
-  border:1px solid transparent;
-  z-index:5;
-  pointer-events:auto;
-}
 
-/* =========================================================
-   DELETED TEXT
-========================================================= */
+/* DELETED TEXT */
 
 .deleted-cover{
   position:absolute;
-
+  z-index:44;
   background:#fff;
-
   pointer-events:auto;
-
   cursor:pointer;
-
-  z-index:4;
 }
 
-
-/* =========================================================
-   EXISTING PDF IMAGE
-========================================================= */
+/* EXISTING IMAGE */
 
 .existing-image{
   position:absolute;
-
   z-index:35;
-
   pointer-events:auto;
-
   cursor:pointer;
-
   border:2px solid transparent;
-
   background:transparent;
-
-  transition:.15s;
-
-  overflow:hidden;
-
-  box-sizing:border-box;
+  overflow:visible;
 }
 
 .existing-image:hover{
   background:rgba(229,50,50,.08);
-
-  border-color:
-    rgba(229,50,50,.35);
+  border-color:rgba(229,50,50,.35);
 }
 
 .existing-image.selected{
-  background:rgba(229,50,50,.10);
-
   border:2px solid #e53232;
-
-  box-shadow:
-    0 0 0 1px
-    rgba(229,50,50,.15);
+  background:rgba(229,50,50,.10);
+  box-shadow:0 0 0 1px rgba(229,50,50,.15);
 }
-
-
-/*
-  Replacement image / QR.
-  Pointer events disabled so the parent
-  existing-image remains the selector.
-*/
 
 .existing-image img{
   width:100%;
   height:100%;
-
   display:block;
-
   object-fit:fill;
-
   pointer-events:none;
 }
-
-
-/*
-  Existing image itself has no resize
-  handle. Only added objects are resizable.
-*/
 
 .existing-image .resize-handle{
   display:none;
 }
-/* =========================================================
-   DELETED EXISTING IMAGE
-========================================================= */
-.deleted-image.selected{
-  border:2px solid #e53232;
+
+/* DELETED IMAGE */
+
+.deleted-image{
+  position:absolute;
+  z-index:35;
   background:#fff;
-  box-shadow:0 0 0 1px rgba(229,50,50,.15);
-  box-sizing:border-box;
+  pointer-events:auto;
+  cursor:pointer;
+  border:2px solid transparent;
 }
 
-/* =========================================================
-   ADDED OBJECTS
-========================================================= */
+.deleted-image.selected{
+  border:2px solid #e53232;
+  box-shadow:0 0 0 1px rgba(229,50,50,.15);
+}
+
+/* ADDED OBJECTS */
 
 .editor-object{
   position:absolute;
-
   pointer-events:auto;
-
   user-select:none;
-
   cursor:move;
-
   touch-action:none;
 }
 
 .text-object{
   min-width:30px;
   min-height:20px;
-
   padding:2px 4px;
-
   white-space:pre;
-
   background:rgba(255,255,255,.04);
-
   overflow:hidden;
-
   line-height:1.15;
 }
 
@@ -576,71 +393,62 @@ z-index:5;
 .image-object img,
 .qr-object img{
   display:block;
-
   width:100%;
   height:100%;
-
   object-fit:contain;
-
   pointer-events:none;
 }
 
-
-/* =========================================================
-   RESIZE HANDLE
-========================================================= */
+/* RESIZE */
 
 .resize-handle{
   position:absolute;
-
   width:13px;
   height:13px;
-
   right:-7px;
   bottom:-7px;
-
   background:#e53232;
-
   border:2px solid #fff;
-
   border-radius:50%;
-
   cursor:nwse-resize;
-
   z-index:20;
 }
 
+/* EXISTING IMAGE RESIZE */
 
-/* =========================================================
-   TEXT TOOLBAR
-========================================================= */
+.existing-image .existing-resize-handle{
+  position:absolute;
+  width:13px;
+  height:13px;
+  right:-7px;
+  bottom:-7px;
+  background:#e53232;
+  border:2px solid #fff;
+  border-radius:50%;
+  cursor:nwse-resize;
+  z-index:100;
+  display:none;
+}
+
+.existing-image.selected .existing-resize-handle{
+  display:block;
+}
+
+/* TEXT TOOLBAR */
 
 .text-toolbar{
   position:absolute;
-
   display:flex;
-
   align-items:center;
-
   gap:5px;
-
   padding:6px;
-
   background:#fff;
-
   border:1px solid #ddd;
-
   border-radius:9px;
-
-  box-shadow:
-    0 4px 15px rgba(0,0,0,.15);
-
+  box-shadow:0 4px 15px rgba(0,0,0,.15);
   z-index:100;
-
   pointer-events:auto;
-
   max-width:calc(100% - 10px);
-
   flex-wrap:wrap;
 }
 
@@ -648,123 +456,75 @@ z-index:5;
 .text-toolbar select,
 .text-toolbar input{
   height:30px;
-
   border:1px solid #ddd;
-
   background:#fff;
-
   border-radius:6px;
-
   font-size:12px;
-
   cursor:pointer;
 }
 
 .text-toolbar button{
   min-width:30px;
-
   padding:0 7px;
-
   font-weight:700;
 }
 
 .text-toolbar select{
   padding:0 5px;
-
   max-width:105px;
 }
 
 .text-toolbar input[type="number"]{
   width:55px;
-
   padding:0 5px;
 }
 
-.text-toolbar button:hover{
-  background:#f5f5f5;
-}
-
-.text-toolbar .delete-text-btn{
+.delete-text-btn{
   color:#e53232;
 }
 
-
-/* =========================================================
-   PAGE NUMBER
-========================================================= */
+/* PAGE NUMBER */
 
 .page-number{
   position:absolute;
-
   bottom:5px;
   left:8px;
-
   padding:2px 5px;
-
   border-radius:4px;
-
   background:rgba(255,255,255,.75);
-
   font-size:11px;
-
   color:#777;
-
   pointer-events:none;
-
   z-index:30;
 }
 
-
-/* =========================================================
-   EMPTY
-========================================================= */
+/* EMPTY */
 
 .empty-message{
   width:100%;
-
   max-width:850px;
-
   min-height:250px;
-
   display:flex;
-
   align-items:center;
-
   justify-content:center;
-
   text-align:center;
-
   background:#fff;
-
   border:1px solid #ddd;
-
   border-radius:14px;
-
   color:#777;
-
   padding:30px;
 }
 
-
-/* =========================================================
-   MODAL
-========================================================= */
+/* MODAL */
 
 .modal{
   display:none;
-
   position:fixed;
-
   inset:0;
-
   z-index:3000;
-
   background:rgba(0,0,0,.55);
-
   align-items:center;
-
   justify-content:center;
-
   padding:15px;
 }
 
@@ -774,17 +534,11 @@ z-index:5;
 
 .modal-box{
   width:100%;
-
   max-width:430px;
-
   background:#fff;
-
   border-radius:15px;
-
   padding:20px;
-
-  box-shadow:
-    0 15px 50px rgba(0,0,0,.25);
+  box-shadow:0 15px 50px rgba(0,0,0,.25);
 }
 
 .modal-box h3{
@@ -797,69 +551,46 @@ z-index:5;
 
 .form-group label{
   display:block;
-
   font-size:13px;
-
   font-weight:700;
-
   margin-bottom:6px;
 }
 
 .form-group input,
 .form-group select{
   width:100%;
-
   padding:10px;
-
   border:1px solid #ddd;
-
   border-radius:8px;
-
   font-size:14px;
 }
 
 .modal-actions{
   display:flex;
-
   gap:8px;
-
   justify-content:flex-end;
-
   margin-top:18px;
 }
 
 .cancel-btn{
   background:#eee;
-
   border:0;
-
   padding:10px 15px;
-
   border-radius:8px;
-
   cursor:pointer;
 }
 
 .ok-btn{
   background:#e53232;
-
   color:#fff;
-
   border:0;
-
   padding:10px 18px;
-
   border-radius:8px;
-
   cursor:pointer;
-
   font-weight:700;
 }
 
-
-/* =========================================================
-   MOBILE
-========================================================= */
+/* MOBILE */
 
 @media(max-width:900px){
 
@@ -881,7 +612,6 @@ z-index:5;
 
   .header-inner{
     min-height:60px;
-
     padding:8px 12px;
   }
 
@@ -892,19 +622,16 @@ z-index:5;
   .logo-icon{
     width:32px;
     height:32px;
-
     font-size:12px;
   }
 
   .home-btn{
     padding:7px 10px;
-
     font-size:13px;
   }
 
   .hero{
     padding:18px 15px;
-
     border-radius:12px;
   }
 
@@ -922,15 +649,12 @@ z-index:5;
 
   .toolbar{
     top:58px;
-
     padding:8px;
-
     gap:6px;
   }
 
   .tool-btn{
     padding:8px 9px;
-
     font-size:12px;
   }
 
@@ -940,32 +664,12 @@ z-index:5;
 
   .text-toolbar{
     gap:4px;
-
     padding:5px;
-  }
-
-  .text-toolbar button,
-  .text-toolbar select,
-  .text-toolbar input{
-    height:28px;
-
-    font-size:11px;
-  }
-
-  .text-toolbar select{
-    max-width:85px;
-  }
-
-  .text-toolbar input[type="number"]{
-    width:48px;
   }
 
 }
 
-
-/* =========================================================
-   PRINT
-========================================================= */
+/* PRINT */
 
 @media print{
 
@@ -982,393 +686,236 @@ z-index:5;
 </style>
 </head>
 
-
 <body>
-
 
 <header class="header">
 
-  <div class="header-inner">
+<div class="header-inner">
 
-    <a href="index.html" class="logo">
+<a href="index.html" class="logo">
+<span class="logo-icon">PDF</span>
+<span>PDF Editor Tools</span>
+</a>
 
-      <span class="logo-icon">
-        PDF
-      </span>
+<a href="index.html" class="home-btn">
+Home
+</a>
 
-      <span>
-        PDF Editor Tools
-      </span>
-
-    </a>
-
-
-    <a href="index.html" class="home-btn">
-      Home
-    </a>
-
-  </div>
+</div>
 
 </header>
 
-
 <section class="hero">
 
-  <h1>
-    Free PDF Editor
-  </h1>
+<h1>Free PDF Editor</h1>
 
-  <p>
-    Edit text, add images and QR codes, replace existing images and download your PDF.
-  </p>
+<p>
+Edit text, add images and QR codes, replace existing images and download your PDF.
+</p>
 
 </section>
 
-
 <main class="editor-wrapper">
-
-
-<!-- =====================================================
-     FILE AREA
-===================================================== -->
 
 <div class="file-area" id="dropArea">
 
-  <div>
-    <strong>
-      Select your PDF file
-    </strong>
-  </div>
+<div>
+<strong>Select your PDF file</strong>
+</div>
 
-  <div style="margin-top:12px">
+<div style="margin-top:12px">
 
-    <label
-      for="pdfFile"
-      class="file-label">
+<label for="pdfFile" class="file-label">
+Choose PDF
+</label>
 
-      Choose PDF
-
-    </label>
-
-    <input
-      type="file"
-      id="pdfFile"
-      accept="application/pdf">
-
-  </div>
-
-  <div
-    class="file-name"
-    id="fileName">
-
-    No PDF selected
-
-  </div>
+<input
+type="file"
+id="pdfFile"
+accept="application/pdf">
 
 </div>
 
+<div class="file-name" id="fileName">
+No PDF selected
+</div>
 
-<!-- =====================================================
-     TOOLBAR
-===================================================== -->
+</div>
 
 <div class="toolbar">
 
-  <button
-    class="tool-btn primary"
-    id="addTextBtn">
+<button class="tool-btn primary" id="addTextBtn">
++ Text
+</button>
 
-    + Text
+<button class="tool-btn" id="addImageBtn">
++ Image
+</button>
 
-  </button>
+<button class="tool-btn" id="replaceImageBtn">
+Replace Image
+</button>
 
+<button class="tool-btn" id="addQRBtn">
++ QR
+</button>
 
-  <button
-    class="tool-btn"
-    id="addImageBtn">
+<button class="tool-btn" id="replaceQRBtn">
+Replace QR
+</button>
 
-    + Image
+<button class="tool-btn" id="deleteBtn">
+Delete
+</button>
 
-  </button>
+<button class="tool-btn" id="undoBtn">
+Undo
+</button>
 
+<button class="tool-btn" id="redoBtn">
+Redo
+</button>
 
-  <button
-    class="tool-btn"
-    id="replaceImageBtn">
+<button class="tool-btn" id="clearBtn">
+Clear Added
+</button>
 
-    Replace Image
-
-  </button>
-
-
-  <button
-    class="tool-btn"
-    id="addQRBtn">
-
-    + QR
-
-  </button>
-
-
-  <button
-    class="tool-btn"
-    id="replaceQRBtn">
-
-    Replace QR
-
-  </button>
-
-
-  <button
-    class="tool-btn"
-    id="deleteBtn">
-
-    Delete
-
-  </button>
-
-
-  <button
-    class="tool-btn"
-    id="undoBtn">
-
-    Undo
-
-  </button>
-
-
-  <button
-    class="tool-btn"
-    id="redoBtn">
-
-    Redo
-
-  </button>
-
-
-  <button
-    class="tool-btn"
-    id="clearBtn">
-
-    Clear Added
-
-  </button>
-
-
-  <button
-    class="tool-btn primary"
-    id="downloadBtn">
-
-    Download PDF
-
-  </button>
+<button class="tool-btn primary" id="downloadBtn">
+Download PDF
+</button>
 
 </div>
 
+<div class="status" id="status"></div>
 
-<div
-  class="status"
-  id="status">
+<div class="pdf-container" id="pdfContainer">
+
+<div class="empty-message">
+Upload a PDF to start editing.
 </div>
 
-
-<!-- =====================================================
-     PDF CONTAINER
-===================================================== -->
-
-<div
-  class="pdf-container"
-  id="pdfContainer">
-
-  <div class="empty-message">
-
-    Upload a PDF to start editing.
-
-  </div>
-
 </div>
-
 
 </main>
 
+<!-- TEXT MODAL -->
 
-<!-- =====================================================
-     TEXT MODAL
-===================================================== -->
+<div class="modal" id="textModal">
 
-<div
-  class="modal"
-  id="textModal">
+<div class="modal-box">
 
-  <div class="modal-box">
+<h3>Add Text</h3>
 
-    <h3>
-      Add Text
-    </h3>
+<div class="form-group">
 
+<label>Text</label>
 
-    <div class="form-group">
-
-      <label>
-        Text
-      </label>
-
-      <input
-        type="text"
-        id="textInput"
-        placeholder="Enter text">
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Font Size
-      </label>
-
-      <input
-        type="number"
-        id="fontSizeInput"
-        value="16"
-        min="6"
-        max="100">
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Font
-      </label>
-
-      <select id="fontFamilyInput">
-
-        <option value="Helvetica">
-          Helvetica
-        </option>
-
-        <option value="Times-Roman">
-          Times
-        </option>
-
-        <option value="Courier">
-          Courier
-        </option>
-
-      </select>
-
-    </div>
-
-
-    <div class="modal-actions">
-
-      <button
-        class="cancel-btn"
-        id="textCancel">
-
-        Cancel
-
-      </button>
-
-
-      <button
-        class="ok-btn"
-        id="textOk">
-
-        Add Text
-
-      </button>
-
-    </div>
-
-  </div>
+<input
+type="text"
+id="textInput"
+placeholder="Enter text">
 
 </div>
 
+<div class="form-group">
 
-<!-- =====================================================
-     QR MODAL
-===================================================== -->
+<label>Font Size</label>
 
-<div
-  class="modal"
-  id="qrModal">
-
-  <div class="modal-box">
-
-    <h3 id="qrTitle">
-      Add QR Code
-    </h3>
-
-
-    <div class="form-group">
-
-      <label>
-        QR Text / URL
-      </label>
-
-      <input
-        type="text"
-        id="qrInput"
-        placeholder="Enter text or URL">
-
-    </div>
-
-
-    <div class="form-group">
-
-      <label>
-        Size
-      </label>
-
-      <input
-        type="number"
-        id="qrSizeInput"
-        value="120"
-        min="40"
-        max="500">
-
-    </div>
-
-
-    <div class="modal-actions">
-
-      <button
-        class="cancel-btn"
-        id="qrCancel">
-
-        Cancel
-
-      </button>
-
-
-      <button
-        class="ok-btn"
-        id="qrOk">
-
-        Add QR
-
-      </button>
-
-    </div>
-
-  </div>
+<input
+type="number"
+id="fontSizeInput"
+value="16"
+min="6"
+max="100">
 
 </div>
 
+<div class="form-group">
+
+<label>Font</label>
+
+<select id="fontFamilyInput">
+
+<option value="Helvetica">Helvetica</option>
+<option value="Times-Roman">Times</option>
+<option value="Courier">Courier</option>
+
+</select>
+
+</div>
+
+<div class="modal-actions">
+
+<button class="cancel-btn" id="textCancel">
+Cancel
+</button>
+
+<button class="ok-btn" id="textOk">
+Add Text
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- QR MODAL -->
+
+<div class="modal" id="qrModal">
+
+<div class="modal-box">
+
+<h3 id="qrTitle">Add QR Code</h3>
+
+<div class="form-group">
+
+<label>QR Text / URL</label>
+
+<input
+type="text"
+id="qrInput"
+placeholder="Enter text or URL">
+
+</div>
+
+<div class="form-group">
+
+<label>Size</label>
+
+<input
+type="number"
+id="qrSizeInput"
+value="120"
+min="40"
+max="500">
+
+</div>
+
+<div class="modal-actions">
+
+<button class="cancel-btn" id="qrCancel">
+Cancel
+</button>
+
+<button class="ok-btn" id="qrOk">
+Add QR
+</button>
+
+</div>
+
+</div>
+
+</div>
 
 <script>
 
-
 /* =========================================================
-   PDF LIBRARIES
+   LIBRARIES
 ========================================================= */
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
 "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-
 
 const {
   PDFDocument,
@@ -1382,38 +929,22 @@ const {
 ========================================================= */
 
 let pdfBytes = null;
-
 let pdfDocument = null;
-
 let currentFile = null;
 
-
 let existingTexts = [];
-
 let existingImages = [];
-
 let addedObjects = [];
 
-
 let selectedObject = null;
-
 let activePageNumber = 1;
 
-
 let history = [];
-
 let historyIndex = -1;
-
 
 let objectCounter = 1;
 
-
 let replaceQRMode = false;
-
-
-/*
-  PDF preview is rendered at 2x.
-*/
 
 const BASE_SCALE = 2;
 
@@ -1425,34 +956,26 @@ const BASE_SCALE = 2;
 const pdfFile =
 document.getElementById("pdfFile");
 
-
 const dropArea =
 document.getElementById("dropArea");
-
 
 const fileName =
 document.getElementById("fileName");
 
-
 const pdfContainer =
 document.getElementById("pdfContainer");
-
 
 const status =
 document.getElementById("status");
 
-
 const textModal =
 document.getElementById("textModal");
-
 
 const qrModal =
 document.getElementById("qrModal");
 
-
 const qrTitle =
 document.getElementById("qrTitle");
-
 
 const qrOk =
 document.getElementById("qrOk");
@@ -1463,191 +986,119 @@ document.getElementById("qrOk");
 ========================================================= */
 
 function setStatus(message){
-
-  status.textContent =
-    message;
-
+  status.textContent = message;
 }
-
-
-/* =========================================================
-   PDF FILE
-========================================================= */
-
-pdfFile.addEventListener(
-  "change",
-  function(e){
-
-    const file =
-      e.target.files[0];
-
-    if(file){
-
-      loadPDF(file);
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   DRAG PDF
-========================================================= */
-
-dropArea.addEventListener(
-  "dragover",
-  function(e){
-
-    e.preventDefault();
-
-    dropArea.classList.add(
-      "drag"
-    );
-
-  }
-);
-
-
-dropArea.addEventListener(
-  "dragleave",
-  function(){
-
-    dropArea.classList.remove(
-      "drag"
-    );
-
-  }
-);
-
-
-dropArea.addEventListener(
-  "drop",
-  function(e){
-
-    e.preventDefault();
-
-    dropArea.classList.remove(
-      "drag"
-    );
-
-
-    const file =
-      e.dataTransfer.files[0];
-
-
-    if(
-      file &&
-      (
-        file.type ===
-        "application/pdf" ||
-        file.name
-          .toLowerCase()
-          .endsWith(".pdf")
-      )
-    ){
-
-      loadPDF(file);
-
-    }
-    else{
-
-      alert(
-        "Please select a PDF file."
-      );
-
-    }
-
-  }
-);
 
 
 /* =========================================================
    LOAD PDF
 ========================================================= */
 
+pdfFile.addEventListener("change",function(e){
+
+  const file = e.target.files[0];
+
+  if(file){
+    loadPDF(file);
+  }
+
+});
+
+
+dropArea.addEventListener("dragover",function(e){
+
+  e.preventDefault();
+  dropArea.classList.add("drag");
+
+});
+
+
+dropArea.addEventListener("dragleave",function(){
+
+  dropArea.classList.remove("drag");
+
+});
+
+
+dropArea.addEventListener("drop",function(e){
+
+  e.preventDefault();
+
+  dropArea.classList.remove("drag");
+
+  const file = e.dataTransfer.files[0];
+
+  if(
+    file &&
+    (
+      file.type === "application/pdf" ||
+      file.name.toLowerCase().endsWith(".pdf")
+    )
+  ){
+
+    loadPDF(file);
+
+  }
+  else{
+
+    alert("Please select a PDF file.");
+
+  }
+
+});
+
+
 async function loadPDF(file){
 
   try{
 
-    setStatus(
-      "Loading PDF..."
-    );
+    setStatus("Loading PDF...");
 
+    currentFile = file;
 
-    currentFile =
-      file;
+    fileName.textContent = file.name;
 
-
-    fileName.textContent =
-      file.name;
-
-
-    pdfBytes =
-      await file.arrayBuffer();
-
+    pdfBytes = await file.arrayBuffer();
 
     const loadingData =
-      new Uint8Array(
-        pdfBytes.slice(0)
-      );
-
+      new Uint8Array(pdfBytes.slice(0));
 
     pdfDocument =
-      await pdfjsLib
-        .getDocument({
-          data:loadingData
-        })
-        .promise;
-
+      await pdfjsLib.getDocument({
+        data:loadingData
+      }).promise;
 
     existingTexts = [];
-
     existingImages = [];
-
     addedObjects = [];
 
-
     selectedObject = null;
-
     activePageNumber = 1;
 
-
     history = [];
-
     historyIndex = -1;
-
 
     objectCounter = 1;
 
-
-    pdfContainer.innerHTML =
-      "";
-
+    pdfContainer.innerHTML = "";
 
     for(
-      let pageNumber = 1;
-      pageNumber <=
-      pdfDocument.numPages;
+      let pageNumber=1;
+      pageNumber<=pdfDocument.numPages;
       pageNumber++
     ){
 
-      await renderPage(
-        pageNumber
-      );
+      await renderPage(pageNumber);
 
     }
 
-
     markActivePage();
-
 
     saveHistory();
 
-
     setStatus(
       pdfDocument.numPages +
-      " page(s) loaded. Existing images can now be selected."
+      " page(s) loaded successfully."
     );
 
   }
@@ -1657,9 +1108,7 @@ async function loadPDF(file){
 
     pdfDocument = null;
 
-    setStatus(
-      "Unable to load PDF."
-    );
+    setStatus("Unable to load PDF.");
 
     alert(
       "PDF load nahi ho saka. Please valid PDF select karein."
@@ -1674,74 +1123,43 @@ async function loadPDF(file){
    RENDER PAGE
 ========================================================= */
 
-async function renderPage(
-  pageNumber
-){
+async function renderPage(pageNumber){
 
   const page =
-    await pdfDocument.getPage(
-      pageNumber
-    );
-
+    await pdfDocument.getPage(pageNumber);
 
   const baseViewport =
-    page.getViewport({
-      scale:1
-    });
-
+    page.getViewport({scale:1});
 
   const viewport =
     page.getViewport({
       scale:BASE_SCALE
     });
 
-
   const pageDiv =
-    document.createElement(
-      "div"
-    );
+    document.createElement("div");
 
+  pageDiv.className = "pdf-page";
 
-  pageDiv.className =
-    "pdf-page";
-
-
-  pageDiv.dataset.page =
-    pageNumber;
-
+  pageDiv.dataset.page = pageNumber;
 
   pageDiv.dataset.pdfWidth =
     baseViewport.width;
 
-
   pageDiv.dataset.pdfHeight =
     baseViewport.height;
 
-
   pageDiv.style.aspectRatio =
-    baseViewport.width +
-    "/" +
+    baseViewport.width + "/" +
     baseViewport.height;
 
-
   const canvas =
-    document.createElement(
-      "canvas"
-    );
+    document.createElement("canvas");
 
-
-  canvas.className =
-    "pdf-canvas";
-
+  canvas.className = "pdf-canvas";
 
   const context =
-    canvas.getContext(
-      "2d",
-      {
-        alpha:false
-      }
-    );
-
+    canvas.getContext("2d",{alpha:false});
 
   const deviceScale =
     Math.min(
@@ -1749,88 +1167,47 @@ async function renderPage(
       2
     );
 
-
   canvas.width =
     Math.floor(
-      viewport.width *
-      deviceScale
+      viewport.width * deviceScale
     );
-
 
   canvas.height =
     Math.floor(
-      viewport.height *
-      deviceScale
+      viewport.height * deviceScale
     );
 
-
-  pageDiv.appendChild(
-    canvas
-  );
-
+  pageDiv.appendChild(canvas);
 
   const pageNumberEl =
-    document.createElement(
-      "div"
-    );
+    document.createElement("div");
 
+  pageNumberEl.className = "page-number";
+  pageNumberEl.textContent = "Page " + pageNumber;
 
-  pageNumberEl.className =
-    "page-number";
-
-
-  pageNumberEl.textContent =
-    "Page " +
-    pageNumber;
-
-
-  pageDiv.appendChild(
-    pageNumberEl
-  );
-
+  pageDiv.appendChild(pageNumberEl);
 
   const existingLayer =
-    document.createElement(
-      "div"
-    );
+    document.createElement("div");
 
+  existingLayer.className = "existing-layer";
 
-  existingLayer.className =
-    "existing-layer";
-
-
-  pageDiv.appendChild(
-    existingLayer
-  );
-
+  pageDiv.appendChild(existingLayer);
 
   const objectLayer =
-    document.createElement(
-      "div"
-    );
+    document.createElement("div");
 
+  objectLayer.className = "object-layer";
 
-  objectLayer.className =
-    "object-layer";
+  pageDiv.appendChild(objectLayer);
 
-
-  pageDiv.appendChild(
-    objectLayer
-  );
-
-
-  pdfContainer.appendChild(
-    pageDiv
-  );
-
+  pdfContainer.appendChild(pageDiv);
 
   await page.render({
 
-    canvasContext:
-      context,
+    canvasContext:context,
 
-    viewport:
-      viewport,
+    viewport:viewport,
 
     transform:[
       deviceScale,
@@ -1854,26 +1231,1168 @@ async function renderPage(
 
 
   await extractExistingImages(
+    page,
+    pageDiv,
+    existingLayer,
+    viewport,
+    pageNumber
+  );
+
+
+  existingImages
+  .filter(item => item.page === pageNumber)
+  .forEach(item => {
+
+    if(item.deleted){
+
+      renderDeletedImageCover(
+        item,
+        pageDiv,
+        existingLayer,
+        viewport
+      );
+
+    }
+    else{
+
+      renderExistingImage(
+        item,
+        pageDiv,
+        existingLayer,
+        viewport
+      );
+
+    }
+
+  });
+
+
+  renderObjectsForPage(
+    pageDiv,
+    objectLayer,
+    pageNumber
+  );
+
+
+  pageDiv.addEventListener(
+    "click",
+    function(){
+
+      activePageNumber = pageNumber;
+      markActivePage();
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   EXTRACT TEXT
+========================================================= */
+
+async function extractExistingText(
   page,
   pageDiv,
-  existingLayer,
+  layer,
   viewport,
   pageNumber
-);
+){
+
+  const textContent =
+    await page.getTextContent();
+
+  textContent.items.forEach(
+    function(item,index){
+
+      if(!item.str){
+        return;
+      }
+
+      const rawTransform =
+        item.transform.slice();
+
+      const textObject = {
+
+        id:
+          "existing-text-" +
+          pageNumber +
+          "-" +
+          index,
+
+        type:"existingText",
+
+        page:pageNumber,
+
+        text:item.str,
+
+        originalText:item.str,
+
+        originalTransform:rawTransform,
+
+        x:rawTransform[4],
+
+        y:rawTransform[5],
+
+        width:Math.max(
+          1,
+          item.width || 1
+        ),
+
+        height:Math.max(
+          1,
+          Math.abs(
+            rawTransform[3] ||
+            rawTransform[2] ||
+            10
+          )
+        ),
+
+        fontSize:Math.max(
+          1,
+          Math.abs(
+            rawTransform[3] ||
+            rawTransform[2] ||
+            10
+          )
+        ),
+
+        fontName:item.fontName || "",
+
+        deleted:false,
+
+        edited:false
+
+      };
+
+      existingTexts.push(textObject);
+
+      renderExistingTextItem(
+        textObject,
+        pageDiv,
+        layer,
+        viewport
+      );
+
+    }
+  );
+
+}
 
 
-/* =====================================================
-   RENDER EXISTING PDF IMAGES
-   This creates the clickable image overlay
-===================================================== */
+/* =========================================================
+   EXTRACT IMAGES
+========================================================= */
 
-existingImages
-  .filter(
-    item =>
-      item.page === pageNumber
-  )
+async function extractExistingImages(
+  page,
+  pageDiv,
+  layer,
+  viewport,
+  pageNumber
+){
+
+  try{
+
+    const opList =
+      await page.getOperatorList();
+
+    let transform =
+      [1,0,0,1,0,0];
+
+    const transformStack = [];
+
+    for(
+      let i=0;
+      i<opList.fnArray.length;
+      i++
+    ){
+
+      const fn =
+        opList.fnArray[i];
+
+      const args =
+        opList.argsArray[i];
+
+
+      if(fn === pdfjsLib.OPS.save){
+
+        transformStack.push(
+          transform.slice()
+        );
+
+      }
+
+      else if(fn === pdfjsLib.OPS.restore){
+
+        if(transformStack.length){
+
+          transform =
+            transformStack.pop();
+
+        }
+
+      }
+
+      else if(fn === pdfjsLib.OPS.transform){
+
+        transform =
+          multiplyMatrices(
+            transform,
+            args
+          );
+
+      }
+
+      else if(
+
+        fn === pdfjsLib.OPS.paintImageXObject ||
+        fn === pdfjsLib.OPS.paintJpegXObject ||
+        fn === pdfjsLib.OPS.paintInlineImageXObject ||
+        fn === pdfjsLib.OPS.paintImageMaskXObject
+
+      ){
+
+        const finalMatrix =
+          multiplyMatrices(
+            viewport.transform,
+            transform
+          );
+
+        const p1 =
+          transformPoint(
+            finalMatrix,
+            0,
+            0
+          );
+
+        const p2 =
+          transformPoint(
+            finalMatrix,
+            1,
+            0
+          );
+
+        const p3 =
+          transformPoint(
+            finalMatrix,
+            0,
+            1
+          );
+
+        const p4 =
+          transformPoint(
+            finalMatrix,
+            1,
+            1
+          );
+
+        const xs=[
+          p1[0],
+          p2[0],
+          p3[0],
+          p4[0]
+        ];
+
+        const ys=[
+          p1[1],
+          p2[1],
+          p3[1],
+          p4[1]
+        ];
+
+        const minX=Math.min(...xs);
+        const maxX=Math.max(...xs);
+        const minY=Math.min(...ys);
+        const maxY=Math.max(...ys);
+
+        const width=maxX-minX;
+        const height=maxY-minY;
+
+        if(width<2 || height<2){
+          continue;
+        }
+
+        existingImages.push({
+
+          id:
+            "existing-image-" +
+            pageNumber +
+            "-" +
+            i +
+            "-" +
+            Date.now(),
+
+          type:"existingImage",
+
+          page:pageNumber,
+
+          x:minX,
+          y:minY,
+          width:width,
+          height:height,
+
+          originalX:minX,
+          originalY:minY,
+          originalWidth:width,
+          originalHeight:height,
+
+          deleted:false,
+          replaced:false,
+
+          replacementSrc:null,
+          replacementType:"image",
+          replacementQRValue:"",
+
+          imageName:
+            args && args[0]
+              ? String(args[0])
+              : ""
+
+        });
+
+      }
+
+    }
+
+  }
+  catch(error){
+
+    console.error(
+      "Existing image extraction error:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   MATRIX
+========================================================= */
+
+function multiplyMatrices(m1,m2){
+
+  return [
+
+    m1[0]*m2[0]+m1[2]*m2[1],
+
+    m1[1]*m2[0]+m1[3]*m2[1],
+
+    m1[0]*m2[2]+m1[2]*m2[3],
+
+    m1[1]*m2[2]+m1[3]*m2[3],
+
+    m1[0]*m2[4]+
+    m1[2]*m2[5]+
+    m1[4],
+
+    m1[1]*m2[4]+
+    m1[3]*m2[5]+
+    m1[5]
+
+  ];
+
+}
+
+
+function transformPoint(matrix,x,y){
+
+  return [
+
+    matrix[0]*x+
+    matrix[2]*y+
+    matrix[4],
+
+    matrix[1]*x+
+    matrix[3]*y+
+    matrix[5]
+
+  ];
+
+}
+
+
+/* =========================================================
+   EXISTING TEXT RENDER
+========================================================= */
+
+function renderExistingTextItem(
+  item,
+  pageDiv,
+  layer,
+  viewport
+){
+
+  if(!item || item.deleted){
+    return;
+  }
+
+  const tx =
+    pdfjsLib.Util.transform(
+      viewport.transform,
+      item.originalTransform
+    );
+
+  const fontHeight =
+    Math.sqrt(
+      tx[2]*tx[2]+
+      tx[3]*tx[3]
+    );
+
+  const cssScale =
+    pageDiv.clientWidth /
+    viewport.width;
+
+  const span =
+    document.createElement("div");
+
+  span.className = "existing-text";
+
+  span.dataset.existingId = item.id;
+
+  span.textContent = item.text;
+
+  span.style.left =
+    (tx[4]*cssScale)+"px";
+
+  span.style.top =
+    (
+      (tx[5]-fontHeight*.9)*
+      cssScale
+    )+"px";
+
+  span.style.width =
+    Math.max(
+      5,
+      item.width*
+      BASE_SCALE*
+      cssScale
+    )+"px";
+
+  span.style.height =
+    Math.max(
+      8,
+      fontHeight*
+      1.35*
+      cssScale
+    )+"px";
+
+  span.style.fontSize =
+    Math.max(
+      6,
+      fontHeight*
+      cssScale
+    )+"px";
+
+  if(item.edited){
+
+    span.classList.add(
+      "edited-visible"
+    );
+
+  }
+
+  span.addEventListener(
+    "pointerdown",
+    function(e){
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      activePageNumber=item.page;
+
+      selectExistingText(item);
+
+    }
+  );
+
+  span.addEventListener(
+    "dblclick",
+    function(e){
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      editExistingText(item);
+
+    }
+  );
+
+  layer.appendChild(span);
+
+}
+
+
+/* =========================================================
+   EXISTING IMAGE RENDER
+========================================================= */
+
+function renderExistingImage(
+  item,
+  pageDiv,
+  layer,
+  viewport
+){
+
+  if(!item || item.deleted){
+    return;
+  }
+
+  const cssScale =
+    pageDiv.clientWidth /
+    viewport.width;
+
+  const el =
+    document.createElement("div");
+
+  el.className = "existing-image";
+
+  el.dataset.existingId = item.id;
+
+  el.style.left =
+    item.x*cssScale+"px";
+
+  el.style.top =
+    item.y*cssScale+"px";
+
+  el.style.width =
+    Math.max(
+      4,
+      item.width*cssScale
+    )+"px";
+
+  el.style.height =
+    Math.max(
+      4,
+      item.height*cssScale
+    )+"px";
+
+
+  if(item.replacementSrc){
+
+    el.style.background="#fff";
+
+    const img =
+      document.createElement("img");
+
+    img.src=item.replacementSrc;
+
+    img.alt =
+      item.replacementType==="qr"
+        ? "Replacement QR"
+        : "Replacement Image";
+
+    el.appendChild(img);
+
+  }
+
+
+  const handle =
+    document.createElement("div");
+
+  handle.className =
+    "existing-resize-handle";
+
+  el.appendChild(handle);
+
+
+  el.addEventListener(
+    "pointerdown",
+    function(e){
+
+      if(
+        e.target.classList.contains(
+          "existing-resize-handle"
+        )
+      ){
+        return;
+      }
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      activePageNumber=item.page;
+
+      selectExistingImage(item);
+
+    }
+  );
+
+
+  enableExistingImageResize(
+    handle,
+    el,
+    item,
+    pageDiv
+  );
+
+
+  layer.appendChild(el);
+
+}
+
+
+/* =========================================================
+   EXISTING IMAGE RESIZE
+========================================================= */
+
+function enableExistingImageResize(
+  handle,
+  element,
+  item,
+  pageDiv
+){
+
+  let resizing=false;
+
+  let startX=0;
+  let startY=0;
+
+  let oldWidth=0;
+  let oldHeight=0;
+
+  handle.addEventListener(
+    "pointerdown",
+    function(e){
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      resizing=true;
+
+      startX=e.clientX;
+      startY=e.clientY;
+
+      oldWidth=item.width;
+      oldHeight=item.height;
+
+      try{
+        handle.setPointerCapture(
+          e.pointerId
+        );
+      }
+      catch(err){}
+
+    }
+  );
+
+
+  handle.addEventListener(
+    "pointermove",
+    function(e){
+
+      if(!resizing){
+        return;
+      }
+
+      const cssScale =
+        pageDiv.clientWidth /
+        (pageDiv.dataset.pdfWidth*BASE_SCALE);
+
+      const dx =
+        (e.clientX-startX)/
+        cssScale;
+
+      const dy =
+        (e.clientY-startY)/
+        cssScale;
+
+      item.width =
+        Math.max(
+          5,
+          oldWidth+dx
+        );
+
+      item.height =
+        Math.max(
+          5,
+          oldHeight+dy
+        );
+
+      element.style.width =
+        item.width*cssScale+"px";
+
+      element.style.height =
+        item.height*cssScale+"px";
+
+    }
+  );
+
+
+  function finish(){
+
+    if(!resizing){
+      return;
+    }
+
+    resizing=false;
+
+    saveHistory();
+
+  }
+
+
+  handle.addEventListener(
+    "pointerup",
+    finish
+  );
+
+  handle.addEventListener(
+    "pointercancel",
+    finish
+  );
+
+}
+
+
+/* =========================================================
+   DELETED IMAGE
+========================================================= */
+
+function renderDeletedImageCover(
+  item,
+  pageDiv,
+  layer,
+  viewport
+){
+
+  if(!item){
+    return;
+  }
+
+  const cssScale =
+    pageDiv.clientWidth/
+    viewport.width;
+
+  const cover =
+    document.createElement("div");
+
+  cover.className =
+    "deleted-image";
+
+  cover.dataset.existingId =
+    item.id;
+
+  const extra=2;
+
+  cover.style.left =
+    Math.max(
+      0,
+      (item.x-extra)*cssScale
+    )+"px";
+
+  cover.style.top =
+    Math.max(
+      0,
+      (item.y-extra)*cssScale
+    )+"px";
+
+  cover.style.width =
+    (item.width+extra*2)*
+    cssScale+"px";
+
+  cover.style.height =
+    (item.height+extra*2)*
+    cssScale+"px";
+
+  cover.addEventListener(
+    "pointerdown",
+    function(e){
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      activePageNumber=item.page;
+
+      selectExistingImage(item);
+
+    }
+  );
+
+  layer.appendChild(cover);
+
+}
+
+
+/* =========================================================
+   SELECT EXISTING TEXT
+========================================================= */
+
+function selectExistingText(obj){
+
+  selectedObject={
+    type:"existingText",
+    id:obj.id
+  };
+
+  activePageNumber=obj.page;
+
+  markActivePage();
+
+  refreshSelection();
+
+  requestAnimationFrame(function(){
+
+    createExistingTextToolbar(obj);
+
+  });
+
+}
+
+
+/* =========================================================
+   EXISTING TEXT TOOLBAR
+========================================================= */
+
+function createExistingTextToolbar(obj){
+
+  const pageDiv =
+    document.querySelector(
+      '.pdf-page[data-page="'+obj.page+'"]'
+    );
+
+  if(!pageDiv){
+    return;
+  }
+
+  removeTextToolbar(pageDiv);
+
+  const toolbar =
+    document.createElement("div");
+
+  toolbar.className="text-toolbar";
+
+  const editBtn =
+    document.createElement("button");
+
+  editBtn.type="button";
+  editBtn.textContent="Edit";
+
+  const sizeInput =
+    document.createElement("input");
+
+  sizeInput.type="number";
+  sizeInput.min="6";
+  sizeInput.max="100";
+  sizeInput.value=
+    Math.round(obj.fontSize);
+
+  const deleteBtn =
+    document.createElement("button");
+
+  deleteBtn.type="button";
+  deleteBtn.textContent="Delete";
+  deleteBtn.className="delete-text-btn";
+
+  toolbar.appendChild(editBtn);
+  toolbar.appendChild(sizeInput);
+  toolbar.appendChild(deleteBtn);
+
+  const objectLayer =
+    pageDiv.querySelector(
+      ".object-layer"
+    );
+
+  objectLayer.appendChild(toolbar);
+
+
+  function position(){
+
+    const cssScale =
+      pageDiv.clientWidth/
+      (pageDiv.dataset.pdfWidth*BASE_SCALE);
+
+    const x =
+      obj.x*BASE_SCALE*cssScale;
+
+    const y =
+      pageDiv.clientHeight-
+      obj.y*cssScale;
+
+    const tw =
+      toolbar.offsetWidth;
+
+    const th =
+      toolbar.offsetHeight;
+
+    let left=x;
+
+    let top=y-th-8;
+
+    if(top<5){
+      top=y+8;
+    }
+
+    if(left+tw>
+       pageDiv.clientWidth-5){
+
+      left=
+        pageDiv.clientWidth-
+        tw-5;
+
+    }
+
+    if(left<5){
+      left=5;
+    }
+
+    if(top<5){
+      top=5;
+    }
+
+    toolbar.style.left=left+"px";
+    toolbar.style.top=top+"px";
+
+  }
+
+
+  editBtn.addEventListener(
+    "click",
+    function(e){
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      editExistingText(obj);
+
+    }
+  );
+
+
+  sizeInput.addEventListener(
+    "change",
+    function(e){
+
+      e.stopPropagation();
+
+      const value =
+        Number(this.value);
+
+      if(
+        !Number.isFinite(value) ||
+        value<6
+      ){
+
+        this.value=obj.fontSize;
+        return;
+
+      }
+
+      obj.fontSize=
+        Math.min(
+          100,
+          value
+        );
+
+      obj.edited=true;
+
+      refreshPageLayers();
+
+      saveHistory();
+
+      requestAnimationFrame(function(){
+        createExistingTextToolbar(obj);
+      });
+
+    }
+  );
+
+
+  deleteBtn.addEventListener(
+    "click",
+    function(e){
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      obj.deleted=true;
+      obj.edited=true;
+
+      selectedObject=null;
+
+      refreshPageLayers();
+
+      saveHistory();
+
+    }
+  );
+
+
+  requestAnimationFrame(position);
+
+}
+
+
+/* =========================================================
+   SELECT EXISTING IMAGE
+========================================================= */
+
+function selectExistingImage(obj){
+
+  selectedObject={
+    type:"existingImage",
+    id:obj.id
+  };
+
+  activePageNumber=obj.page;
+
+  markActivePage();
+
+  refreshSelection();
+
+}
+
+
+/* =========================================================
+   EDIT EXISTING TEXT
+========================================================= */
+
+function editExistingText(obj){
+
+  const newText =
+    prompt(
+      "Edit text:",
+      obj.text
+    );
+
+  if(newText===null){
+    return;
+  }
+
+  if(newText===""){
+
+    if(confirm("Text delete karna hai?")){
+
+      obj.deleted=true;
+      obj.edited=true;
+
+      selectedObject=null;
+
+      refreshPageLayers();
+
+      saveHistory();
+
+    }
+
+    return;
+
+  }
+
+  obj.text=newText;
+
+  obj.deleted=false;
+  obj.edited=true;
+
+  selectedObject={
+    type:"existingText",
+    id:obj.id
+  };
+
+  refreshPageLayers();
+
+  saveHistory();
+
+  requestAnimationFrame(function(){
+    createExistingTextToolbar(obj);
+  });
+
+}
+
+
+/* =========================================================
+   REFRESH PAGE LAYERS
+========================================================= */
+
+async function refreshPageLayers(){
+
+  if(!pdfDocument){
+    return;
+  }
+
+  document
+  .querySelectorAll(".existing-layer")
   .forEach(
-    item => {
+    layer=>layer.innerHTML=""
+  );
+
+  document
+  .querySelectorAll(".object-layer")
+  .forEach(
+    layer=>layer.innerHTML=""
+  );
+
+
+  const pageDivs =
+    Array.from(
+      document.querySelectorAll(
+        ".pdf-page"
+      )
+    );
+
+
+  for(const pageDiv of pageDivs){
+
+    const pageNumber =
+      Number(pageDiv.dataset.page);
+
+    const existingLayer =
+      pageDiv.querySelector(
+        ".existing-layer"
+      );
+
+    const objectLayer =
+      pageDiv.querySelector(
+        ".object-layer"
+      );
+
+    const page =
+      await pdfDocument.getPage(
+        pageNumber
+      );
+
+    const viewport =
+      page.getViewport({
+        scale:BASE_SCALE
+      });
+
+
+    existingTexts
+    .filter(
+      item=>item.page===pageNumber
+    )
+    .forEach(item=>{
+
+      if(item.deleted){
+
+        renderDeletedCover(
+          item,
+          pageDiv,
+          existingLayer,
+          viewport
+        );
+
+      }
+      else{
+
+        renderExistingTextItem(
+          item,
+          pageDiv,
+          existingLayer,
+          viewport
+        );
+
+      }
+
+    });
+
+
+    existingImages
+    .filter(
+      item=>item.page===pageNumber
+    )
+    .forEach(item=>{
 
       if(item.deleted){
 
@@ -1896,1155 +2415,8 @@ existingImages
 
       }
 
-    }
-  );
+    });
 
-
-renderObjectsForPage(
-  pageDiv,
-  objectLayer,
-  pageNumber
-);
-
-
-  pageDiv.addEventListener(
-    "click",
-    function(){
-
-      activePageNumber =
-        pageNumber;
-
-      markActivePage();
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   EXTRACT EXISTING TEXT
-========================================================= */
-
-async function extractExistingText(
-  page,
-  pageDiv,
-  layer,
-  viewport,
-  pageNumber
-){
-
-  const textContent =
-    await page.getTextContent();
-
-
-  textContent.items.forEach(
-    function(item,index){
-
-      if(!item.str){
-        return;
-      }
-
-
-      const rawTransform =
-        item.transform.slice();
-
-
-      const textObject = {
-
-        id:
-          "existing-text-" +
-          pageNumber +
-          "-" +
-          index,
-
-        type:
-          "existingText",
-
-        page:
-          pageNumber,
-
-        text:
-          item.str,
-
-        originalText:
-          item.str,
-
-        originalTransform:
-          rawTransform,
-
-        x:
-          rawTransform[4],
-
-        y:
-          rawTransform[5],
-
-        width:
-          Math.max(
-            1,
-            item.width || 1
-          ),
-
-        height:
-          Math.max(
-            1,
-            Math.abs(
-              rawTransform[3] ||
-              rawTransform[2] ||
-              10
-            )
-          ),
-
-        fontSize:
-          Math.max(
-            1,
-            Math.abs(
-              rawTransform[3] ||
-              rawTransform[2] ||
-              10
-            )
-          ),
-
-        fontName:
-          item.fontName || "",
-
-        deleted:
-          false,
-
-        edited:
-          false
-
-      };
-
-
-      existingTexts.push(
-        textObject
-      );
-
-
-      renderExistingTextItem(
-        textObject,
-        pageDiv,
-        layer,
-        viewport
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   EXTRACT EXISTING PDF IMAGES
-========================================================= */
-
-async function extractExistingImages(
-  page,
-  pageDiv,
-  layer,
-  viewport,
-  pageNumber
-){
-
-  try{
-
-    const opList =
-      await page.getOperatorList();
-
-
-    let transform =
-      [1,0,0,1,0,0];
-
-
-    const transformStack =
-      [];
-
-
-    for(
-      let i = 0;
-      i < opList.fnArray.length;
-      i++
-    ){
-
-      const fn =
-        opList.fnArray[i];
-
-
-      const args =
-        opList.argsArray[i];
-
-
-      if(
-        fn ===
-        pdfjsLib.OPS.save
-      ){
-
-        transformStack.push(
-          transform.slice()
-        );
-
-      }
-
-
-      else if(
-        fn ===
-        pdfjsLib.OPS.restore
-      ){
-
-        if(
-          transformStack.length
-        ){
-
-          transform =
-            transformStack.pop();
-
-        }
-
-      }
-
-
-      else if(
-        fn ===
-        pdfjsLib.OPS.transform
-      ){
-
-        transform =
-          multiplyMatrices(
-            transform,
-            args
-          );
-
-      }
-
-
-      else if(
-        fn ===
-        pdfjsLib.OPS.paintImageXObject ||
-        fn ===
-        pdfjsLib.OPS.paintJpegXObject ||
-        fn ===
-        pdfjsLib.OPS.paintInlineImageXObject ||
-        fn ===
-        pdfjsLib.OPS.paintImageMaskXObject
-      ){
-
-        /*
-          IMPORTANT:
-
-          PDF coordinates are bottom-left.
-
-          viewport.transform converts them
-          into PDF.js top-left viewport
-          coordinates.
-
-          This fixes the old image Y-position
-          problem.
-        */
-
-        const finalMatrix =
-          multiplyMatrices(
-            viewport.transform,
-            transform
-          );
-
-
-        const p1 =
-          transformPoint(
-            finalMatrix,
-            0,
-            0
-          );
-
-
-        const p2 =
-          transformPoint(
-            finalMatrix,
-            1,
-            0
-          );
-
-
-        const p3 =
-          transformPoint(
-            finalMatrix,
-            0,
-            1
-          );
-
-
-        const p4 =
-          transformPoint(
-            finalMatrix,
-            1,
-            1
-          );
-
-
-        const xs = [
-          p1[0],
-          p2[0],
-          p3[0],
-          p4[0]
-        ];
-
-
-        const ys = [
-          p1[1],
-          p2[1],
-          p3[1],
-          p4[1]
-        ];
-
-
-        const minX =
-          Math.min(
-            ...xs
-          );
-
-
-        const maxX =
-          Math.max(
-            ...xs
-          );
-
-
-        const minY =
-          Math.min(
-            ...ys
-          );
-
-
-        const maxY =
-          Math.max(
-            ...ys
-          );
-
-
-        const width =
-          maxX - minX;
-
-
-        const height =
-          maxY - minY;
-
-
-        /*
-          Ignore tiny invalid image objects.
-        */
-
-        if(
-          width < 2 ||
-          height < 2
-        ){
-          continue;
-        }
-
-
-        const image = {
-
-          id:
-            "existing-image-" +
-            pageNumber +
-            "-" +
-            Date.now() +
-            "-" +
-            i,
-
-          type:
-            "existingImage",
-
-          page:
-            pageNumber,
-
-          /*
-            These values are stored
-            in BASE_SCALE viewport pixels.
-          */
-
-          x:
-            minX,
-
-          y:
-            minY,
-
-          width:
-            width,
-
-          height:
-            height,
-
-          deleted:
-            false,
-
-          replaced:
-            false,
-
-          replacementSrc:
-            null,
-
-          replacementType:
-            "image",
-
-          replacementQRValue:
-            "",
-
-          imageName:
-            args &&
-            args[0]
-              ? String(args[0])
-              : ""
-
-        };
-
-
-        existingImages.push(
-          image
-        );
-
-      }
-
-    }
-
-  }
-  catch(error){
-
-    console.error(
-      "Existing image extraction error:",
-      error
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   MATRIX MULTIPLICATION
-========================================================= */
-
-function multiplyMatrices(
-  m1,
-  m2
-){
-
-  return [
-
-    m1[0] * m2[0] +
-    m1[2] * m2[1],
-
-    m1[1] * m2[0] +
-    m1[3] * m2[1],
-
-    m1[0] * m2[2] +
-    m1[2] * m2[3],
-
-    m1[1] * m2[2] +
-    m1[3] * m2[3],
-
-    m1[0] * m2[4] +
-    m1[2] * m2[5] +
-    m1[4],
-
-    m1[1] * m2[4] +
-    m1[3] * m2[5] +
-    m1[5]
-
-  ];
-
-}
-
-
-/* =========================================================
-   TRANSFORM POINT
-========================================================= */
-
-function transformPoint(
-  matrix,
-  x,
-  y
-){
-
-  return [
-
-    matrix[0] * x +
-    matrix[2] * y +
-    matrix[4],
-
-    matrix[1] * x +
-    matrix[3] * y +
-    matrix[5]
-
-  ];
-
-}
-/* =========================================================
-   RENDER EXISTING TEXT
-========================================================= */
-
-function renderExistingTextItem(
-  item,
-  pageDiv,
-  layer,
-  viewport
-){
-
-  if(
-    !item ||
-    item.deleted
-  ){
-    return;
-  }
-
-
-  const tx =
-    pdfjsLib.Util.transform(
-      viewport.transform,
-      item.originalTransform
-    );
-
-
-  const fontHeight =
-    Math.sqrt(
-      tx[2] * tx[2] +
-      tx[3] * tx[3]
-    );
-
-
-  const cssScale =
-    pageDiv.clientWidth /
-    viewport.width;
-
-
-  const span =
-    document.createElement(
-      "div"
-    );
-
-
-  span.className =
-    "existing-text";
-
-
-  span.dataset.existingId =
-    item.id;
-
-
-  span.textContent =
-    item.text;
-
-
-  span.style.left =
-    (
-      tx[4] *
-      cssScale
-    ) + "px";
-
-
-  span.style.top =
-    (
-      (
-        tx[5] -
-        fontHeight * .9
-      ) *
-      cssScale
-    ) + "px";
-
-
-  span.style.width =
-    Math.max(
-      5,
-      item.width *
-      BASE_SCALE *
-      cssScale
-    ) + "px";
-
-
-  span.style.height =
-    Math.max(
-      8,
-      fontHeight *
-      1.35 *
-      cssScale
-    ) + "px";
-
-
-  span.style.fontSize =
-    Math.max(
-      6,
-      fontHeight *
-      cssScale
-    ) + "px";
-
-
-  /*
-    IMPORTANT:
-    Sirf edited text ko visible rakhen.
-    Original PDF ka normal text canvas
-    se already visible hai.
-
-    Isse duplicate/overlap nahi hoga.
-  */
-
-  if(
-    item.edited
-  ){
-
-    span.classList.add(
-      "edited-visible"
-    );
-
-  }
-
-
-  span.addEventListener(
-    "pointerdown",
-    function(e){
-
-      e.preventDefault();
-      e.stopPropagation();
-
-
-      activePageNumber =
-        item.page;
-
-
-      selectExistingText(
-        item
-      );
-
-    }
-  );
-
-
-  span.addEventListener(
-    "dblclick",
-    function(e){
-
-      e.preventDefault();
-      e.stopPropagation();
-
-
-      editExistingText(
-        item
-      );
-
-    }
-  );
-
-
-  layer.appendChild(
-    span
-  );
-
-}
-/* =========================================================
-   RENDER EXISTING IMAGE
-========================================================= */
-
-function renderExistingImage(
-  item,
-  pageDiv,
-  layer,
-  viewport
-){
-
-  if(
-    !item ||
-    item.deleted
-  ){
-    return;
-  }
-
-  const cssScale =
-    pageDiv.clientWidth /
-    viewport.width;
-
-  const el =
-    document.createElement("div");
-
-  el.className =
-    "existing-image";
-
-  el.dataset.existingId =
-    item.id;
-
-  el.style.left =
-    (item.x * cssScale) + "px";
-
-  el.style.top =
-    (item.y * cssScale) + "px";
-
-  el.style.width =
-    Math.max(
-      4,
-      item.width * cssScale
-    ) + "px";
-
-  el.style.height =
-    Math.max(
-      4,
-      item.height * cssScale
-    ) + "px";
-
-  /*
-    Replacement Image / QR
-  */
-
-  if(item.replacementSrc){
-
-    el.style.background =
-      "#fff";
-
-    const img =
-      document.createElement("img");
-
-    img.src =
-      item.replacementSrc;
-
-    img.alt =
-      item.replacementType === "qr"
-        ? "Replacement QR"
-        : "Replacement Image";
-
-    img.style.width =
-      "100%";
-
-    img.style.height =
-      "100%";
-
-    img.style.display =
-      "block";
-
-    img.style.objectFit =
-      "fill";
-
-    img.style.pointerEvents =
-      "none";
-
-    el.appendChild(img);
-
-  }
-
-  el.addEventListener(
-    "pointerdown",
-    function(e){
-
-      e.preventDefault();
-      e.stopPropagation();
-
-      activePageNumber =
-        item.page;
-
-      selectExistingImage(item);
-
-    }
-  );
-
-  layer.appendChild(el);
-
-}
-
-/* =========================================================
-   RENDER DELETED EXISTING IMAGE
-========================================================= */
-
-function renderDeletedImageCover(
-  item,
-  pageDiv,
-  layer,
-  viewport
-){
-
-  if(!item){
-    return;
-  }
-
-  const cssScale =
-    pageDiv.clientWidth /
-    viewport.width;
-
-  const cover =
-    document.createElement("div");
-
-  cover.className =
-    "deleted-image";
-
-  cover.dataset.existingId =
-    item.id;
-
-  /*
-    Small extra coverage is intentional.
-    It prevents a thin strip of the
-    original PDF image from remaining visible.
-  */
-
-  const extra =
-    2;
-
-  cover.style.left =
-    Math.max(
-      0,
-      (item.x - extra) * cssScale
-    ) + "px";
-
-  cover.style.top =
-    Math.max(
-      0,
-      (item.y - extra) * cssScale
-    ) + "px";
-
-  cover.style.width =
-    (
-      (item.width + extra * 2) *
-      cssScale
-    ) + "px";
-
-  cover.style.height =
-    (
-      (item.height + extra * 2) *
-      cssScale
-    ) + "px";
-
-  cover.style.background =
-    "#fff";
-
-  cover.style.border =
-    "0";
-
-  cover.style.pointerEvents =
-    "auto";
-
-  cover.addEventListener(
-    "pointerdown",
-    function(e){
-
-      e.preventDefault();
-      e.stopPropagation();
-
-      activePageNumber =
-        item.page;
-
-      selectExistingImage(
-        item
-      );
-
-    }
-  );
-
-  layer.appendChild(
-    cover
-  );
-
-}
-
-
-/* =========================================================
-   SELECT EXISTING TEXT
-========================================================= */
-
-function selectExistingText(
-  obj
-){
-
-  selectedObject = {
-
-    type:
-      "existingText",
-
-    id:
-      obj.id
-
-  };
-
-
-  activePageNumber =
-    obj.page;
-
-
-  markActivePage();
-
-  refreshSelection();
-
-}
-
-
-/* =========================================================
-   SELECT EXISTING IMAGE
-========================================================= */
-
-function selectExistingImage(
-  obj
-){
-
-  selectedObject = {
-
-    type:
-      "existingImage",
-
-    id:
-      obj.id
-
-  };
-
-
-  activePageNumber =
-    obj.page;
-
-
-  markActivePage();
-
-  refreshSelection();
-
-}
-
-
-/* =========================================================
-   EDIT EXISTING TEXT
-========================================================= */
-
-function editExistingText(
-  obj
-){
-
-  const newText =
-    prompt(
-      "Edit text:",
-      obj.text
-    );
-
-
-  if(
-    newText === null
-  ){
-
-    return;
-
-  }
-
-
-  if(
-    newText === ""
-  ){
-
-    if(
-      confirm(
-        "Text delete karna hai?"
-      )
-    ){
-
-      obj.deleted =
-        true;
-
-      obj.edited =
-        true;
-
-
-      selectedObject =
-        null;
-
-
-      refreshPageLayers();
-
-      saveHistory();
-
-    }
-
-    return;
-
-  }
-
-
-  obj.text =
-    newText;
-
-
-  obj.deleted =
-    false;
-
-
-  obj.edited =
-    true;
-
-
-  selectedObject = {
-
-    type:
-      "existingText",
-
-    id:
-      obj.id
-
-  };
-
-
-  refreshPageLayers();
-
-  saveHistory();
-
-}
-
-
-/* =========================================================
-   REFRESH PAGE LAYERS
-========================================================= */
-
-async function refreshPageLayers(){
-
-  if(
-    !pdfDocument
-  ){
-
-    return;
-
-  }
-
-
-  document
-    .querySelectorAll(
-      ".existing-layer"
-    )
-    .forEach(
-      layer =>
-        layer.innerHTML = ""
-    );
-
-
-  document
-    .querySelectorAll(
-      ".object-layer"
-    )
-    .forEach(
-      layer =>
-        layer.innerHTML = ""
-    );
-
-
-  const pageDivs =
-    Array.from(
-      document.querySelectorAll(
-        ".pdf-page"
-      )
-    );
-
-
-  for(
-    const pageDiv of pageDivs
-  ){
-
-    const pageNumber =
-      Number(
-        pageDiv.dataset.page
-      );
-
-
-    const existingLayer =
-      pageDiv.querySelector(
-        ".existing-layer"
-      );
-
-
-    const objectLayer =
-      pageDiv.querySelector(
-        ".object-layer"
-      );
-
-
-    const page =
-      await pdfDocument.getPage(
-        pageNumber
-      );
-
-
-    const viewport =
-      page.getViewport({
-        scale:BASE_SCALE
-      });
-
-
-    /*
-      EXISTING TEXT
-    */
-
-    existingTexts
-      .filter(
-        item =>
-          item.page ===
-          pageNumber
-      )
-      .forEach(
-        item => {
-
-          if(
-            item.deleted
-          ){
-
-            renderDeletedCover(
-              item,
-              pageDiv,
-              existingLayer,
-              viewport
-            );
-
-          }
-          else{
-
-            renderExistingTextItem(
-              item,
-              pageDiv,
-              existingLayer,
-              viewport
-            );
-
-          }
-
-        }
-      );
-
-
-    /*
-      EXISTING IMAGES
-    */
-
-    existingImages
-      .filter(
-        item =>
-          item.page ===
-          pageNumber
-      )
-      .forEach(
-        item => {
-
-          if(
-            item.deleted
-          ){
-
-            renderDeletedImageCover(
-              item,
-              pageDiv,
-              existingLayer,
-              viewport
-            );
-
-          }
-          else{
-
-            renderExistingImage(
-              item,
-              pageDiv,
-              existingLayer,
-              viewport
-            );
-
-          }
-
-        }
-      );
-
-
-    /*
-      ADDED OBJECTS
-    */
 
     renderObjectsForPage(
       pageDiv,
@@ -3058,6 +2430,27 @@ async function refreshPageLayers(){
   markActivePage();
 
   refreshSelection();
+
+
+  if(
+    selectedObject &&
+    selectedObject.type==="existingText"
+  ){
+
+    const obj =
+      existingTexts.find(
+        x=>x.id===selectedObject.id
+      );
+
+    if(obj && !obj.deleted){
+
+      requestAnimationFrame(function(){
+        createExistingTextToolbar(obj);
+      });
+
+    }
+
+  }
 
 }
 
@@ -3074,9 +2467,8 @@ function renderDeletedCover(
 ){
 
   const cssScale =
-    pageDiv.clientWidth /
+    pageDiv.clientWidth/
     viewport.width;
-
 
   const tx =
     pdfjsLib.Util.transform(
@@ -3084,82 +2476,55 @@ function renderDeletedCover(
       item.originalTransform
     );
 
-
   const fontHeight =
     Math.sqrt(
-      tx[2] * tx[2] +
-      tx[3] * tx[3]
+      tx[2]*tx[2]+
+      tx[3]*tx[3]
     );
-
 
   const cover =
-    document.createElement(
-      "div"
-    );
+    document.createElement("div");
 
+  cover.className="deleted-cover";
 
-  cover.className =
-    "deleted-cover";
-
-
-  cover.dataset.existingId =
+  cover.dataset.existingId=
     item.id;
 
+  cover.style.left=
+    tx[4]*cssScale+"px";
 
-  cover.style.left =
+  cover.style.top=
     (
-      tx[4] *
-      cssScale
-    ) + "px";
+      tx[5]-fontHeight*1.05
+    )*cssScale+"px";
 
-
-  cover.style.top =
-    (
-      (
-        tx[5] -
-        fontHeight * 1.05
-      ) *
-      cssScale
-    ) + "px";
-
-
-  cover.style.width =
+  cover.style.width=
     Math.max(
       6,
       (
-        item.width +
-        item.fontSize * .2
-      ) *
-      BASE_SCALE *
+        item.width+
+        item.fontSize*.2
+      )*
+      BASE_SCALE*
       cssScale
-    ) + "px";
+    )+"px";
 
-
-  cover.style.height =
-    (
-      fontHeight *
-      1.4 *
-      cssScale
-    ) + "px";
-
+  cover.style.height=
+    fontHeight*1.4*cssScale+"px";
 
   cover.addEventListener(
-    "click",
+    "pointerdown",
     function(e){
 
+      e.preventDefault();
       e.stopPropagation();
 
-      selectExistingText(
-        item
-      );
+      selectExistingText(item);
 
     }
   );
 
-
-  layer.appendChild(
-    cover
-  );
+  layer.appendChild(cover);
 
 }
 
@@ -3174,37 +2539,22 @@ document
   "click",
   function(){
 
-    if(
-      !pdfDocument
-    ){
+    if(!pdfDocument){
 
-      alert(
-        "Pehle PDF upload karein."
-      );
-
+      alert("Pehle PDF upload karein.");
       return;
 
     }
 
-
-    textModal.classList.add(
-      "show"
-    );
-
+    textModal.classList.add("show");
 
     document
-      .getElementById(
-        "textInput"
-      )
-      .focus();
+    .getElementById("textInput")
+    .focus();
 
   }
 );
 
-
-/* =========================================================
-   TEXT CANCEL
-========================================================= */
 
 document
 .getElementById("textCancel")
@@ -3212,17 +2562,11 @@ document
   "click",
   function(){
 
-    textModal.classList.remove(
-      "show"
-    );
+    textModal.classList.remove("show");
 
   }
 );
 
-
-/* =========================================================
-   TEXT OK
-========================================================= */
 
 document
 .getElementById("textOk")
@@ -3232,170 +2576,109 @@ document
 
     const text =
       document
-        .getElementById(
-          "textInput"
-        )
-        .value
-        .trim();
-
+      .getElementById("textInput")
+      .value.trim();
 
     const fontSize =
       Number(
         document
-          .getElementById(
-            "fontSizeInput"
-          )
-          .value
+        .getElementById("fontSizeInput")
+        .value
       );
-
 
     const fontFamily =
       document
-        .getElementById(
-          "fontFamilyInput"
-        )
-        .value;
-
+      .getElementById("fontFamilyInput")
+      .value;
 
     if(!text){
 
-      alert(
-        "Text enter karein."
-      );
-
+      alert("Text enter karein.");
       return;
 
     }
-
 
     if(
-      !Number.isFinite(
-        fontSize
-      ) ||
-      fontSize < 6
+      !Number.isFinite(fontSize) ||
+      fontSize<6
     ){
 
-      alert(
-        "Valid font size enter karein."
-      );
-
+      alert("Valid font size enter karein.");
       return;
 
     }
-
 
     const pageDiv =
       document.querySelector(
-        '.pdf-page[data-page="' +
-        activePageNumber +
+        '.pdf-page[data-page="'+
+        activePageNumber+
         '"]'
       );
 
-
     if(!pageDiv){
 
-      alert(
-        "PDF page available nahi hai."
-      );
-
+      alert("PDF page available nahi hai.");
       return;
 
     }
 
-
     const pdfWidth =
-      Number(
-        pageDiv.dataset.pdfWidth
-      );
-
+      Number(pageDiv.dataset.pdfWidth);
 
     const pdfHeight =
-      Number(
-        pageDiv.dataset.pdfHeight
-      );
-
+      Number(pageDiv.dataset.pdfHeight);
 
     const estimatedWidth =
       Math.max(
         .12,
         Math.min(
           .75,
-          (
-            text.length *
-            fontSize *
-            .52
-          ) /
+          text.length*
+          fontSize*
+          .52/
           pdfWidth
         )
       );
-
 
     const estimatedHeight =
       Math.max(
         .035,
         Math.min(
           .15,
-          (
-            fontSize *
-            1.5
-          ) /
+          fontSize*1.5/
           pdfHeight
         )
       );
 
+    const obj={
 
-    const obj = {
+      id:"text-"+objectCounter++,
 
-      id:
-        "text-" +
-        objectCounter++,
+      type:"text",
 
-      type:
-        "text",
+      page:activePageNumber,
 
-      page:
-        activePageNumber,
+      text:text,
 
-      text:
-        text,
+      fontSize:fontSize,
 
-      fontSize:
-        fontSize,
+      fontFamily:fontFamily,
 
-      fontFamily:
-        fontFamily,
+      xRatio:.08,
+      yRatio:.08,
 
-      xRatio:
-        .08,
-
-      yRatio:
-        .08,
-
-      widthRatio:
-        estimatedWidth,
-
-      heightRatio:
-        estimatedHeight
+      widthRatio:estimatedWidth,
+      heightRatio:estimatedHeight
 
     };
 
+    addedObjects.push(obj);
 
-    addedObjects.push(
-      obj
-    );
-
-
-    textModal.classList.remove(
-      "show"
-    );
-
+    textModal.classList.remove("show");
 
     document
-      .getElementById(
-        "textInput"
-      )
-      .value = "";
-
+    .getElementById("textInput")
+    .value="";
 
     renderAllObjects();
 
@@ -3417,102 +2700,65 @@ document
   "click",
   function(){
 
-    if(
-      !pdfDocument
-    ){
+    if(!pdfDocument){
 
-      alert(
-        "Pehle PDF upload karein."
-      );
-
+      alert("Pehle PDF upload karein.");
       return;
 
     }
 
-
     const input =
-      document.createElement(
-        "input"
-      );
+      document.createElement("input");
 
+    input.type="file";
 
-    input.type =
-      "file";
-
-
-    input.accept =
+    input.accept=
       "image/png,image/jpeg,image/jpg";
 
+    input.onchange=function(){
 
-    input.onchange =
-      function(){
+      const file=input.files[0];
 
-        const file =
-          input.files[0];
+      if(!file){
+        return;
+      }
 
+      const reader =
+        new FileReader();
 
-        if(!file){
-          return;
-        }
+      reader.onload=function(){
 
+        const obj={
 
-        const reader =
-          new FileReader();
+          id:"image-"+objectCounter++,
 
+          type:"image",
 
-        reader.onload =
-          function(){
+          page:activePageNumber,
 
-            const obj = {
+          src:reader.result,
 
-              id:
-                "image-" +
-                objectCounter++,
+          xRatio:.08,
+          yRatio:.15,
 
-              type:
-                "image",
+          widthRatio:.25,
+          heightRatio:.20
 
-              page:
-                activePageNumber,
+        };
 
-              src:
-                reader.result,
+        addedObjects.push(obj);
 
-              xRatio:
-                .08,
+        renderAllObjects();
 
-              yRatio:
-                .15,
+        selectObject(obj);
 
-              widthRatio:
-                .25,
-
-              heightRatio:
-                .20
-
-            };
-
-
-            addedObjects.push(
-              obj
-            );
-
-
-            renderAllObjects();
-
-            selectObject(obj);
-
-            saveHistory();
-
-          };
-
-
-        reader.readAsDataURL(
-          file
-        );
+        saveHistory();
 
       };
 
+      reader.readAsDataURL(file);
+
+    };
 
     input.click();
 
@@ -3533,164 +2779,98 @@ document
     if(
       !selectedObject ||
       (
-        selectedObject.type !==
-        "image" &&
-        selectedObject.type !==
-        "existingImage"
+        selectedObject.type!=="image" &&
+        selectedObject.type!=="existingImage"
       )
     ){
 
-      alert(
-        "Pehle image select karein."
-      );
-
+      alert("Pehle image select karein.");
       return;
 
     }
 
-
     const input =
-      document.createElement(
-        "input"
-      );
+      document.createElement("input");
 
+    input.type="file";
 
-    input.type =
-      "file";
-
-
-    input.accept =
+    input.accept=
       "image/png,image/jpeg,image/jpg";
 
+    input.onchange=function(){
 
-    input.onchange =
-      function(){
+      const file=input.files[0];
 
-        const file =
-          input.files[0];
+      if(!file){
+        return;
+      }
 
+      const reader =
+        new FileReader();
 
-        if(!file){
+      reader.onload=function(){
+
+        if(
+          selectedObject.type===
+          "existingImage"
+        ){
+
+          const existing =
+            existingImages.find(
+              x=>x.id===selectedObject.id
+            );
+
+          if(!existing){
+            return;
+          }
+
+          existing.replaced=true;
+          existing.deleted=false;
+
+          existing.replacementSrc=
+            reader.result;
+
+          existing.replacementType=
+            "image";
+
+          existing.replacementQRValue="";
+
+          selectedObject={
+            type:"existingImage",
+            id:existing.id
+          };
+
+          refreshPageLayers();
+
+          saveHistory();
+
           return;
+
         }
 
 
-        const reader =
-          new FileReader();
+        const obj =
+          addedObjects.find(
+            x=>x.id===selectedObject.id
+          );
 
+        if(!obj){
+          return;
+        }
 
-        reader.onload =
-          function(){
+        obj.src=reader.result;
 
-            /*
-              EXISTING PDF IMAGE
-            */
+        renderAllObjects();
 
-            if(
-              selectedObject.type ===
-              "existingImage"
-            ){
+        selectObject(obj);
 
-              const existing =
-                existingImages.find(
-                  x =>
-                    x.id ===
-                    selectedObject.id
-                );
-
-
-              if(!existing){
-
-                return;
-
-              }
-
-
-              existing.replaced =
-                true;
-
-
-              /*
-                Keep original image
-                covered by replacement.
-              */
-
-              existing.deleted =
-                false;
-
-
-              existing.replacementSrc =
-                reader.result;
-
-
-              existing.replacementType =
-                "image";
-
-
-              existing.replacementQRValue =
-                "";
-
-
-              selectedObject = {
-
-                type:
-                  "existingImage",
-
-                id:
-                  existing.id
-
-              };
-
-
-              refreshPageLayers();
-
-              refreshSelection();
-
-              saveHistory();
-
-              return;
-
-            }
-
-
-            /*
-              ADDED IMAGE
-            */
-
-            const obj =
-              addedObjects.find(
-                x =>
-                  x.id ===
-                  selectedObject.id
-              );
-
-
-            if(!obj){
-
-              return;
-
-            }
-
-
-            obj.src =
-              reader.result;
-
-
-            renderAllObjects();
-
-            selectObject(obj);
-
-            saveHistory();
-
-          };
-
-
-        reader.readAsDataURL(
-          file
-        );
+        saveHistory();
 
       };
 
+      reader.readAsDataURL(file);
+
+    };
 
     input.click();
 
@@ -3708,55 +2888,32 @@ document
   "click",
   function(){
 
-    if(
-      !pdfDocument
-    ){
+    if(!pdfDocument){
 
-      alert(
-        "Pehle PDF upload karein."
-      );
-
+      alert("Pehle PDF upload karein.");
       return;
 
     }
 
+    replaceQRMode=false;
 
-    replaceQRMode =
-      false;
+    qrTitle.textContent="Add QR Code";
 
-
-    qrTitle.textContent =
-      "Add QR Code";
-
-
-    qrOk.textContent =
-      "Add QR";
-
+    qrOk.textContent="Add QR";
 
     document
-      .getElementById(
-        "qrInput"
-      )
-      .value = "";
-
+    .getElementById("qrInput")
+    .value="";
 
     document
-      .getElementById(
-        "qrSizeInput"
-      )
-      .value = 120;
+    .getElementById("qrSizeInput")
+    .value=120;
 
-
-    qrModal.classList.add(
-      "show"
-    );
-
+    qrModal.classList.add("show");
 
     document
-      .getElementById(
-        "qrInput"
-      )
-      .focus();
+    .getElementById("qrInput")
+    .focus();
 
   }
 );
@@ -3775,10 +2932,8 @@ document
     if(
       !selectedObject ||
       (
-        selectedObject.type !==
-        "qr" &&
-        selectedObject.type !==
-        "existingImage"
+        selectedObject.type!=="qr" &&
+        selectedObject.type!=="existingImage"
       )
     ){
 
@@ -3790,84 +2945,52 @@ document
 
     }
 
+    replaceQRMode=true;
 
-    replaceQRMode =
-      true;
+    qrTitle.textContent="Replace QR Code";
 
-
-    qrTitle.textContent =
-      "Replace QR Code";
-
-
-    qrOk.textContent =
-      "Replace QR";
-
-
-    /*
-      Existing image:
-      QR value is not automatically
-      detectable from PDF image.
-
-      User can enter new QR value.
-    */
+    qrOk.textContent="Replace QR";
 
     if(
-      selectedObject.type ===
+      selectedObject.type===
       "existingImage"
     ){
 
       const existing =
         existingImages.find(
-          x =>
-            x.id ===
-            selectedObject.id
+          x=>x.id===selectedObject.id
         );
 
-
       document
-        .getElementById(
-          "qrInput"
-        )
-        .value =
-          existing &&
-          existing.replacementQRValue
-            ? existing.replacementQRValue
-            : "";
+      .getElementById("qrInput")
+      .value=
+        existing &&
+        existing.replacementQRValue
+          ? existing.replacementQRValue
+          : "";
 
     }
     else{
 
       const obj =
         addedObjects.find(
-          x =>
-            x.id ===
-            selectedObject.id
+          x=>x.id===selectedObject.id
         );
 
-
       document
-        .getElementById(
-          "qrInput"
-        )
-        .value =
-          obj &&
-          obj.value
-            ? obj.value
-            : "";
+      .getElementById("qrInput")
+      .value=
+        obj && obj.value
+          ? obj.value
+          : "";
 
     }
 
-
-    qrModal.classList.add(
-      "show"
-    );
-
+    qrModal.classList.add("show");
 
     document
-      .getElementById(
-        "qrInput"
-      )
-      .focus();
+    .getElementById("qrInput")
+    .focus();
 
   }
 );
@@ -3883,174 +3006,224 @@ document
   "click",
   function(){
 
-    replaceQRMode =
-      false;
+    replaceQRMode=false;
 
-
-    qrModal.classList.remove(
-      "show"
-    );
+    qrModal.classList.remove("show");
 
   }
 );
 
 
 /* =========================================================
-   QR OK
+   QR CREATE
 ========================================================= */
 
-qrOk.addEventListener("click", function(){
+qrOk.addEventListener(
+  "click",
+  function(){
 
-  const value = document.getElementById("qrInput").value.trim();
-  const size = Number(document.getElementById("qrSizeInput").value);
+    const value =
+      document
+      .getElementById("qrInput")
+      .value.trim();
 
-  if(!value){
-    alert("QR text ya URL enter karein.");
-    return;
-  }
+    const size =
+      Number(
+        document
+        .getElementById("qrSizeInput")
+        .value
+      );
 
-  if(!Number.isFinite(size) || size < 40){
-    alert("Valid QR size enter karein.");
-    return;
-  }
+    if(!value){
 
-  try{
+      alert("QR text ya URL enter karein.");
+      return;
 
-    const temp = document.createElement("div");
+    }
 
-    temp.style.position = "fixed";
-    temp.style.left = "-10000px";
-    temp.style.top = "-10000px";
-    temp.style.width = size + "px";
-    temp.style.height = size + "px";
+    if(
+      !Number.isFinite(size) ||
+      size<40
+    ){
 
-    document.body.appendChild(temp);
+      alert("Valid QR size enter karein.");
+      return;
 
-    new QRCode(temp, {
-      text: value,
-      width: size,
-      height: size,
-      colorDark: "#000000",
-      colorLight: "#ffffff",
-      correctLevel: QRCode.CorrectLevel.M
-    });
+    }
 
-    setTimeout(function(){
+    try{
 
-      const canvas = temp.querySelector("canvas");
-      const img = temp.querySelector("img");
+      const temp =
+        document.createElement("div");
 
-      let src = "";
+      temp.style.position="fixed";
+      temp.style.left="-10000px";
+      temp.style.top="-10000px";
+      temp.style.width=size+"px";
+      temp.style.height=size+"px";
 
-      if(canvas){
-        src = canvas.toDataURL("image/png");
-      }
-      else if(img){
-        src = img.src;
-      }
+      document.body.appendChild(temp);
 
-      if(!src){
-        document.body.removeChild(temp);
-        alert("QR create nahi ho saka.");
-        return;
-      }
+      new QRCode(
+        temp,
+        {
+          text:value,
+          width:size,
+          height:size,
+          colorDark:"#000000",
+          colorLight:"#ffffff",
+          correctLevel:QRCode.CorrectLevel.M
+        }
+      );
 
-      if(
-        replaceQRMode &&
-        selectedObject &&
-        selectedObject.type === "existingImage"
-      ){
 
-        const existing = existingImages.find(
-          x => x.id === selectedObject.id
-        );
+      setTimeout(function(){
 
-        if(existing){
+        const canvas =
+          temp.querySelector("canvas");
 
-          existing.replaced = true;
-          existing.deleted = false;
-          existing.replacementSrc = src;
-          existing.replacementType = "qr";
-          existing.replacementQRValue = value;
+        const img =
+          temp.querySelector("img");
 
-          selectedObject = {
-            type:"existingImage",
-            id:existing.id
+        let src="";
+
+        if(canvas){
+
+          src=
+            canvas.toDataURL(
+              "image/png"
+            );
+
+        }
+        else if(img){
+
+          src=img.src;
+
+        }
+
+        if(!src){
+
+          temp.remove();
+
+          alert("QR create nahi ho saka.");
+
+          return;
+
+        }
+
+
+        if(
+          replaceQRMode &&
+          selectedObject &&
+          selectedObject.type===
+          "existingImage"
+        ){
+
+          const existing =
+            existingImages.find(
+              x=>x.id===selectedObject.id
+            );
+
+          if(existing){
+
+            existing.replaced=true;
+            existing.deleted=false;
+
+            existing.replacementSrc=src;
+
+            existing.replacementType="qr";
+
+            existing.replacementQRValue=value;
+
+            selectedObject={
+              type:"existingImage",
+              id:existing.id
+            };
+
+            refreshPageLayers();
+
+            saveHistory();
+
+          }
+
+        }
+
+        else if(
+          replaceQRMode &&
+          selectedObject
+        ){
+
+          const obj =
+            addedObjects.find(
+              x=>x.id===selectedObject.id
+            );
+
+          if(obj){
+
+            obj.src=src;
+            obj.value=value;
+
+            renderAllObjects();
+
+            selectObject(obj);
+
+            saveHistory();
+
+          }
+
+        }
+
+        else{
+
+          const obj={
+
+            id:"qr-"+objectCounter++,
+
+            type:"qr",
+
+            page:activePageNumber,
+
+            src:src,
+
+            value:value,
+
+            xRatio:.08,
+            yRatio:.15,
+
+            widthRatio:.20,
+            heightRatio:.20
+
           };
 
-          refreshPageLayers();
-          refreshSelection();
-          saveHistory();
-
-        }
-
-      }
-
-      else if(
-        replaceQRMode &&
-        selectedObject
-      ){
-
-        const obj = addedObjects.find(
-          x => x.id === selectedObject.id
-        );
-
-        if(obj){
-
-          obj.src = src;
-          obj.value = value;
+          addedObjects.push(obj);
 
           renderAllObjects();
+
           selectObject(obj);
+
           saveHistory();
 
         }
 
-      }
+        replaceQRMode=false;
 
-      else{
+        qrModal.classList.remove("show");
 
-        const obj = {
+        temp.remove();
 
-          id:"qr-" + objectCounter++,
-          type:"qr",
-          page:activePageNumber,
-          src:src,
-          value:value,
+      },100);
 
-          xRatio:.08,
-          yRatio:.15,
-          widthRatio:.20,
-          heightRatio:.20
+    }
+    catch(error){
 
-        };
+      console.error(error);
 
-        addedObjects.push(obj);
+      alert("QR create nahi ho saka.");
 
-        renderAllObjects();
-        selectObject(obj);
-        saveHistory();
-
-      }
-
-      replaceQRMode = false;
-
-      qrModal.classList.remove("show");
-
-      document.body.removeChild(temp);
-
-    }, 100);
+    }
 
   }
-  catch(error){
-
-    console.error("QR ERROR:", error);
-
-    alert("QR create nahi ho saka.");
-
-  }
-
-});
+);
 
 
 /* =========================================================
@@ -4060,36 +3233,29 @@ qrOk.addEventListener("click", function(){
 function renderAllObjects(){
 
   document
-    .querySelectorAll(
-      ".object-layer"
-    )
-    .forEach(
-      layer =>
-        layer.innerHTML = ""
-    );
-
+  .querySelectorAll(".object-layer")
+  .forEach(
+    layer=>layer.innerHTML=""
+  );
 
   addedObjects.forEach(
     function(obj){
 
       const page =
         document.querySelector(
-          '.pdf-page[data-page="' +
-          obj.page +
+          '.pdf-page[data-page="'+
+          obj.page+
           '"]'
         );
-
 
       if(!page){
         return;
       }
 
-
       const layer =
         page.querySelector(
           ".object-layer"
         );
-
 
       renderSingleObject(
         obj,
@@ -4100,14 +3266,13 @@ function renderAllObjects(){
     }
   );
 
-
   refreshSelection();
 
 }
 
 
 /* =========================================================
-   RENDER OBJECTS FOR PAGE
+   RENDER OBJECTS PAGE
 ========================================================= */
 
 function renderObjectsForPage(
@@ -4117,25 +3282,23 @@ function renderObjectsForPage(
 ){
 
   addedObjects
-    .filter(
-      obj =>
-        obj.page ===
-        pageNumber
-    )
-    .forEach(
-      obj =>
-        renderSingleObject(
-          obj,
-          pageDiv,
-          layer
-        )
-    );
+  .filter(
+    obj=>obj.page===pageNumber
+  )
+  .forEach(
+    obj=>
+      renderSingleObject(
+        obj,
+        pageDiv,
+        layer
+      )
+  );
 
 }
 
 
 /* =========================================================
-   RENDER SINGLE OBJECT
+   SINGLE OBJECT
 ========================================================= */
 
 function renderSingleObject(
@@ -4144,194 +3307,114 @@ function renderSingleObject(
   layer
 ){
 
-  const width =
-    pageDiv.clientWidth;
+  const width=pageDiv.clientWidth;
+  const height=pageDiv.clientHeight;
 
-
-  const height =
-    pageDiv.clientHeight;
-
-
-  if(
-    width <= 0 ||
-    height <= 0
-  ){
-
+  if(width<=0 || height<=0){
     return;
-
   }
 
-
-  obj.xRatio =
+  obj.xRatio=
     clamp(
       obj.xRatio,
       0,
       Math.max(
         0,
-        1 - obj.widthRatio
+        1-obj.widthRatio
       )
     );
 
-
-  obj.yRatio =
+  obj.yRatio=
     clamp(
       obj.yRatio,
       0,
       Math.max(
         0,
-        1 - obj.heightRatio
+        1-obj.heightRatio
       )
     );
 
 
   const element =
-    document.createElement(
-      "div"
-    );
+    document.createElement("div");
+
+  element.className="editor-object";
+
+  element.dataset.id=obj.id;
+
+  element.style.left=
+    obj.xRatio*width+"px";
+
+  element.style.top=
+    obj.yRatio*height+"px";
+
+  element.style.width=
+    obj.widthRatio*width+"px";
+
+  element.style.height=
+    obj.heightRatio*height+"px";
 
 
-  element.className =
-    "editor-object";
+  if(obj.type==="text"){
 
+    element.classList.add("text-object");
 
-  element.dataset.id =
-    obj.id;
-
-
-  element.style.left =
-    (
-      obj.xRatio *
-      width
-    ) + "px";
-
-
-  element.style.top =
-    (
-      obj.yRatio *
-      height
-    ) + "px";
-
-
-  element.style.width =
-    (
-      obj.widthRatio *
-      width
-    ) + "px";
-
-
-  element.style.height =
-    (
-      obj.heightRatio *
-      height
-    ) + "px";
-
-
-  /*
-    TEXT
-  */
-
-  if(
-    obj.type ===
-    "text"
-  ){
-
-    element.classList.add(
-      "text-object"
-    );
-
-
-    element.textContent =
-      obj.text;
-
+    element.textContent=obj.text;
 
     const pdfWidth =
-      Number(
-        pageDiv.dataset.pdfWidth
-      );
+      Number(pageDiv.dataset.pdfWidth);
 
+    const cssScale=
+      width/pdfWidth;
 
-    const cssScale =
-      width /
-      pdfWidth;
-
-
-    element.style.fontSize =
+    element.style.fontSize=
       Math.max(
         6,
-        obj.fontSize *
-        cssScale
-      ) + "px";
+        obj.fontSize*cssScale
+      )+"px";
 
+    element.style.fontFamily=
+      getCssFont(obj.fontFamily);
 
-    element.style.fontFamily =
-      getCssFont(
-        obj.fontFamily
-      );
-
-
-    element.style.color =
-      "#000";
+    element.style.color="#000";
 
   }
 
 
-  /*
-    IMAGE / QR
-  */
-
   if(
-    obj.type === "image" ||
-    obj.type === "qr"
+    obj.type==="image" ||
+    obj.type==="qr"
   ){
 
     element.classList.add(
-      obj.type === "image"
-        ? "image-object"
-        : "qr-object"
+      obj.type==="image"
+        ?"image-object"
+        :"qr-object"
     );
-
 
     const img =
-      document.createElement(
-        "img"
-      );
+      document.createElement("img");
 
+    img.src=obj.src;
 
-    img.src =
-      obj.src;
+    img.alt=
+      obj.type==="qr"
+        ?"QR Code"
+        :"Added Image";
 
-
-    img.alt =
-      obj.type === "qr"
-        ? "QR Code"
-        : "Added Image";
-
-
-    element.appendChild(
-      img
-    );
+    element.appendChild(img);
 
   }
 
 
   const handle =
-    document.createElement(
-      "div"
-    );
+    document.createElement("div");
 
+  handle.className="resize-handle";
 
-  handle.className =
-    "resize-handle";
+  element.appendChild(handle);
 
-
-  element.appendChild(
-    handle
-  );
-
-
-  layer.appendChild(
-    element
-  );
+  layer.appendChild(element);
 
 
   enableDrag(
@@ -4339,7 +3422,6 @@ function renderSingleObject(
     obj,
     pageDiv
   );
-
 
   enableResize(
     handle,
@@ -4358,25 +3440,17 @@ function renderSingleObject(
           "resize-handle"
         )
       ){
-
         return;
-
       }
 
-
+      e.preventDefault();
       e.stopPropagation();
 
-
-      activePageNumber =
-        obj.page;
-
+      activePageNumber=obj.page;
 
       markActivePage();
 
-
-      selectObject(
-        obj
-      );
+      selectObject(obj);
 
     }
   );
@@ -4388,29 +3462,15 @@ function renderSingleObject(
    FONT
 ========================================================= */
 
-function getCssFont(
-  font
-){
+function getCssFont(font){
 
-  if(
-    font ===
-    "Times-Roman"
-  ){
-
+  if(font==="Times-Roman"){
     return "Times New Roman";
-
   }
 
-
-  if(
-    font ===
-    "Courier"
-  ){
-
+  if(font==="Courier"){
     return "Courier New";
-
   }
-
 
   return "Arial";
 
@@ -4418,92 +3478,54 @@ function getCssFont(
 
 
 /* =========================================================
-   TEXT TOOLBAR
+   REMOVE TOOLBAR
 ========================================================= */
 
-function removeTextToolbar(
+function removeTextToolbar(pageDiv){
+
   pageDiv
-){
-
-  const oldToolbar =
-    pageDiv.querySelector(
-      ".text-toolbar"
-    );
-
-
-  if(oldToolbar){
-
-    oldToolbar.remove();
-
-  }
+  .querySelectorAll(".text-toolbar")
+  .forEach(
+    x=>x.remove()
+  );
 
 }
 
 
+/* =========================================================
+   ADDED TEXT TOOLBAR
+========================================================= */
+
 function createTextToolbar(
   obj,
-  pageDiv,
-  element
+  pageDiv
 ){
 
-  removeTextToolbar(
-    pageDiv
-  );
-
+  removeTextToolbar(pageDiv);
 
   const toolbar =
-    document.createElement(
-      "div"
-    );
+    document.createElement("div");
 
-
-  toolbar.className =
-    "text-toolbar";
-
+  toolbar.className="text-toolbar";
 
   const editBtn =
-    document.createElement(
-      "button"
-    );
+    document.createElement("button");
 
-
-  editBtn.type =
-    "button";
-
-
-  editBtn.textContent =
-    "Edit";
-
+  editBtn.type="button";
+  editBtn.textContent="Edit";
 
   const sizeInput =
-    document.createElement(
-      "input"
-    );
+    document.createElement("input");
 
-
-  sizeInput.type =
-    "number";
-
-
-  sizeInput.min =
-    "6";
-
-
-  sizeInput.max =
-    "100";
-
-
-  sizeInput.value =
-    obj.fontSize;
-
+  sizeInput.type="number";
+  sizeInput.min="6";
+  sizeInput.max="100";
+  sizeInput.value=obj.fontSize;
 
   const fontSelect =
-    document.createElement(
-      "select"
-    );
+    document.createElement("select");
 
-
-  fontSelect.innerHTML = `
+  fontSelect.innerHTML=`
 
     <option value="Helvetica">
       Helvetica
@@ -4519,167 +3541,91 @@ function createTextToolbar(
 
   `;
 
-
-  fontSelect.value =
-    obj.fontFamily;
-
+  fontSelect.value=obj.fontFamily;
 
   const deleteBtn =
-    document.createElement(
-      "button"
-    );
+    document.createElement("button");
 
+  deleteBtn.type="button";
+  deleteBtn.textContent="Delete";
+  deleteBtn.className="delete-text-btn";
 
-  deleteBtn.type =
-    "button";
-
-
-  deleteBtn.textContent =
-    "Delete";
-
-
-  deleteBtn.className =
-    "delete-text-btn";
-
-
-  toolbar.appendChild(
-    editBtn
-  );
-
-
-  toolbar.appendChild(
-    sizeInput
-  );
-
-
-  toolbar.appendChild(
-    fontSelect
-  );
-
-
-  toolbar.appendChild(
-    deleteBtn
-  );
-
+  toolbar.appendChild(editBtn);
+  toolbar.appendChild(sizeInput);
+  toolbar.appendChild(fontSelect);
+  toolbar.appendChild(deleteBtn);
 
   pageDiv
-    .querySelector(
-      ".object-layer"
-    )
-    .appendChild(
-      toolbar
-    );
+  .querySelector(".object-layer")
+  .appendChild(toolbar);
 
 
   function positionToolbar(){
 
-    const pageWidth =
-      pageDiv.clientWidth;
+    const pageWidth=pageDiv.clientWidth;
+    const pageHeight=pageDiv.clientHeight;
 
+    const objectLeft=
+      obj.xRatio*pageWidth;
 
-    const pageHeight =
-      pageDiv.clientHeight;
+    const objectTop=
+      obj.yRatio*pageHeight;
 
+    const objectBottom=
+      objectTop+
+      obj.heightRatio*pageHeight;
 
-    const objectLeft =
-      obj.xRatio *
-      pageWidth;
-
-
-    const objectTop =
-      obj.yRatio *
-      pageHeight;
-
-
-    const objectBottom =
-      objectTop +
-      (
-        obj.heightRatio *
-        pageHeight
-      );
-
-
-    const toolbarWidth =
+    const toolbarWidth=
       toolbar.offsetWidth;
 
-
-    const toolbarHeight =
+    const toolbarHeight=
       toolbar.offsetHeight;
 
+    let left=objectLeft;
 
-    let left =
-      objectLeft;
-
-
-    let top =
-      objectTop -
-      toolbarHeight -
+    let top=
+      objectTop-
+      toolbarHeight-
       8;
 
-
-    if(
-      top < 5
-    ){
-
-      top =
-        objectBottom +
-        8;
-
+    if(top<5){
+      top=objectBottom+8;
     }
 
-
     if(
-      left +
-      toolbarWidth >
-      pageWidth - 5
+      left+toolbarWidth>
+      pageWidth-5
     ){
 
-      left =
-        pageWidth -
-        toolbarWidth -
+      left=
+        pageWidth-
+        toolbarWidth-
         5;
 
     }
 
-
-    if(
-      left < 5
-    ){
-
-      left = 5;
-
+    if(left<5){
+      left=5;
     }
 
-
     if(
-      top +
-      toolbarHeight >
-      pageHeight - 5
+      top+toolbarHeight>
+      pageHeight-5
     ){
 
-      top =
-        pageHeight -
-        toolbarHeight -
+      top=
+        pageHeight-
+        toolbarHeight-
         5;
 
     }
 
-
-    if(
-      top < 5
-    ){
-
-      top = 5;
-
+    if(top<5){
+      top=5;
     }
 
-
-    toolbar.style.left =
-      left + "px";
-
-
-    toolbar.style.top =
-      top + "px";
+    toolbar.style.left=left+"px";
+    toolbar.style.top=top+"px";
 
   }
 
@@ -4689,9 +3635,7 @@ function createTextToolbar(
     function(e){
 
       e.preventDefault();
-
       e.stopPropagation();
-
 
       const newText =
         prompt(
@@ -4699,32 +3643,18 @@ function createTextToolbar(
           obj.text
         );
 
+      if(newText===null){
+        return;
+      }
 
-      if(
-        newText === null
-      ){
+      if(!newText.trim()){
 
+        alert("Text empty nahi ho sakta.");
         return;
 
       }
 
-
-      if(
-        !newText.trim()
-      ){
-
-        alert(
-          "Text empty nahi ho sakta."
-        );
-
-        return;
-
-      }
-
-
-      obj.text =
-        newText.trim();
-
+      obj.text=newText.trim();
 
       renderAllObjects();
 
@@ -4742,32 +3672,20 @@ function createTextToolbar(
 
       e.stopPropagation();
 
-
-      const value =
-        Number(
-          this.value
-        );
-
+      const value=Number(this.value);
 
       if(
         !Number.isFinite(value) ||
-        value < 6
+        value<6
       ){
 
-        this.value =
-          obj.fontSize;
-
+        this.value=obj.fontSize;
         return;
 
       }
 
-
-      obj.fontSize =
-        Math.min(
-          100,
-          value
-        );
-
+      obj.fontSize=
+        Math.min(100,value);
 
       renderAllObjects();
 
@@ -4785,10 +3703,7 @@ function createTextToolbar(
 
       e.stopPropagation();
 
-
-      obj.fontFamily =
-        this.value;
-
+      obj.fontFamily=this.value;
 
       renderAllObjects();
 
@@ -4805,21 +3720,14 @@ function createTextToolbar(
     function(e){
 
       e.preventDefault();
-
       e.stopPropagation();
 
-
-      addedObjects =
+      addedObjects=
         addedObjects.filter(
-          x =>
-            x.id !==
-            obj.id
+          x=>x.id!==obj.id
         );
 
-
-      selectedObject =
-        null;
-
+      selectedObject=null;
 
       renderAllObjects();
 
@@ -4833,76 +3741,42 @@ function createTextToolbar(
     positionToolbar
   );
 
-
-  return {
-
-    toolbar,
-    positionToolbar
-
-  };
-
 }
 
 
 /* =========================================================
-   SELECT ADDED OBJECT
+   SELECT ADDED
 ========================================================= */
 
-function selectObject(
-  obj
-){
+function selectObject(obj){
 
-  selectedObject =
-    obj;
+  selectedObject=obj;
 
-
-  activePageNumber =
-    obj.page;
-
+  activePageNumber=obj.page;
 
   markActivePage();
 
   refreshSelection();
 
-
-  if(
-    obj.type ===
-    "text"
-  ){
+  if(obj.type==="text"){
 
     requestAnimationFrame(
       function(){
 
-        const pageDiv =
+        const pageDiv=
           document.querySelector(
-            '.pdf-page[data-page="' +
-            obj.page +
+            '.pdf-page[data-page="'+
+            obj.page+
             '"]'
           );
-
 
         if(!pageDiv){
           return;
         }
 
-
-        const element =
-          pageDiv.querySelector(
-            '[data-id="' +
-            obj.id +
-            '"]'
-          );
-
-
-        if(!element){
-          return;
-        }
-
-
         createTextToolbar(
           obj,
-          pageDiv,
-          element
+          pageDiv
         );
 
       }
@@ -4920,142 +3794,105 @@ function selectObject(
 function refreshSelection(){
 
   document
-    .querySelectorAll(
-      ".editor-object"
-    )
-    .forEach(
-      el =>
-        el.classList.remove(
-          "selected"
-        )
-    );
-
+  .querySelectorAll(
+    ".editor-object"
+  )
+  .forEach(
+    el=>el.classList.remove("selected")
+  );
 
   document
-    .querySelectorAll(
-      ".existing-text"
-    )
-    .forEach(
-      el =>
-        el.classList.remove(
-          "selected"
-        )
-    );
-
+  .querySelectorAll(
+    ".existing-text"
+  )
+  .forEach(
+    el=>el.classList.remove("selected")
+  );
 
   document
-    .querySelectorAll(
-      ".existing-image"
-    )
-    .forEach(
-      el =>
-        el.classList.remove(
-          "selected"
-        )
-    );
-
+  .querySelectorAll(
+    ".existing-image"
+  )
+  .forEach(
+    el=>el.classList.remove("selected")
+  );
 
   document
-    .querySelectorAll(
-      ".deleted-image"
-    )
-    .forEach(
-      el =>
-        el.classList.remove(
-          "selected"
-        )
-    );
+  .querySelectorAll(
+    ".deleted-image"
+  )
+  .forEach(
+    el=>el.classList.remove("selected")
+  );
 
 
-  if(
-    !selectedObject
-  ){
-
+  if(!selectedObject){
     return;
-
   }
 
 
-  /*
-    EXISTING TEXT
-  */
-
   if(
-    selectedObject.type ===
+    selectedObject.type===
     "existingText"
   ){
 
     const el =
       document.querySelector(
-        '[data-existing-id="' +
-        selectedObject.id +
+        '.existing-text[data-existing-id="'+
+        selectedObject.id+
         '"]'
       );
 
-
     if(el){
-
-      el.classList.add(
-        "selected"
-      );
-
+      el.classList.add("selected");
     }
-
 
     return;
 
   }
 
 
-  /*
-    EXISTING IMAGE
-  */
-
   if(
-    selectedObject.type ===
+    selectedObject.type===
     "existingImage"
   ){
 
-    const el =
-  document.querySelector(
-    '[data-existing-id="' +
-    selectedObject.id +
-    '"]'
-  );
-
-
-    if(el){
-
-      el.classList.add(
-        "selected"
+    const normal =
+      document.querySelector(
+        '.existing-image[data-existing-id="'+
+        selectedObject.id+
+        '"]'
       );
 
+    const deleted =
+      document.querySelector(
+        '.deleted-image[data-existing-id="'+
+        selectedObject.id+
+        '"]'
+      );
+
+    if(normal){
+      normal.classList.add("selected");
     }
 
+    if(deleted){
+      deleted.classList.add("selected");
+    }
 
     return;
 
   }
 
 
-  /*
-    ADDED OBJECT
-  */
-
   const el =
     document.querySelector(
-      '[data-id="' +
-      selectedObject.id +
+      '.editor-object[data-id="'+
+      selectedObject.id+
       '"]'
     );
 
-
   if(el){
-
-    el.classList.add(
-      "selected"
-    );
-
+    el.classList.add("selected");
   }
 
 }
@@ -5068,28 +3905,24 @@ function refreshSelection(){
 function markActivePage(){
 
   document
-    .querySelectorAll(
-      ".pdf-page"
-    )
-    .forEach(
-      page => {
+  .querySelectorAll(".pdf-page")
+  .forEach(
+    page=>{
 
-        page.classList.toggle(
-          "active-page",
-          Number(
-            page.dataset.page
-          ) ===
-          activePageNumber
-        );
+      page.classList.toggle(
+        "active-page",
+        Number(page.dataset.page)===
+        activePageNumber
+      );
 
-      }
-    );
+    }
+  );
 
 }
 
 
 /* =========================================================
-   DRAG OBJECT
+   DRAG ADDED OBJECT
 ========================================================= */
 
 function enableDrag(
@@ -5098,24 +3931,13 @@ function enableDrag(
   pageDiv
 ){
 
-  let dragging =
-    false;
+  let dragging=false;
 
+  let startX=0;
+  let startY=0;
 
-  let startX =
-    0;
-
-
-  let startY =
-    0;
-
-
-  let originalX =
-    0;
-
-
-  let originalY =
-    0;
+  let originalX=0;
+  let originalY=0;
 
 
   element.addEventListener(
@@ -5127,43 +3949,24 @@ function enableDrag(
           "resize-handle"
         )
       ){
-
         return;
-
       }
 
-
       e.preventDefault();
-
       e.stopPropagation();
 
+      dragging=true;
 
-      dragging =
-        true;
+      startX=e.clientX;
+      startY=e.clientY;
 
-
-      startX =
-        e.clientX;
-
-
-      startY =
-        e.clientY;
-
-
-      originalX =
-        obj.xRatio;
-
-
-      originalY =
-        obj.yRatio;
-
+      originalX=obj.xRatio;
+      originalY=obj.yRatio;
 
       try{
-
         element.setPointerCapture(
           e.pointerId
         );
-
       }
       catch(err){}
 
@@ -5179,82 +3982,55 @@ function enableDrag(
         return;
       }
 
+      const dx=
+        e.clientX-startX;
 
-      const dx =
-        e.clientX -
-        startX;
+      const dy=
+        e.clientY-startY;
 
-
-      const dy =
-        e.clientY -
-        startY;
-
-
-      obj.xRatio =
-        originalX +
-        dx /
-        pageDiv.clientWidth;
-
-
-      obj.yRatio =
-        originalY +
-        dy /
-        pageDiv.clientHeight;
-
-
-      obj.xRatio =
+      obj.xRatio=
         clamp(
-          obj.xRatio,
+          originalX+
+          dx/pageDiv.clientWidth,
           0,
           Math.max(
             0,
-            1 -
-            obj.widthRatio
+            1-obj.widthRatio
           )
         );
 
-
-      obj.yRatio =
+      obj.yRatio=
         clamp(
-          obj.yRatio,
+          originalY+
+          dy/pageDiv.clientHeight,
           0,
           Math.max(
             0,
-            1 -
-            obj.heightRatio
+            1-obj.heightRatio
           )
         );
 
+      element.style.left=
+        obj.xRatio*
+        pageDiv.clientWidth+
+        "px";
 
-      element.style.left =
-        (
-          obj.xRatio *
-          pageDiv.clientWidth
-        ) + "px";
-
-
-      element.style.top =
-        (
-          obj.yRatio *
-          pageDiv.clientHeight
-        ) + "px";
+      element.style.top=
+        obj.yRatio*
+        pageDiv.clientHeight+
+        "px";
 
     }
   );
 
 
-  function finishDrag(){
+  function finish(){
 
     if(!dragging){
-
       return;
-
     }
 
-
-    dragging =
-      false;
-
+    dragging=false;
 
     saveHistory();
 
@@ -5263,20 +4039,19 @@ function enableDrag(
 
   element.addEventListener(
     "pointerup",
-    finishDrag
+    finish
   );
-
 
   element.addEventListener(
     "pointercancel",
-    finishDrag
+    finish
   );
 
 }
 
 
 /* =========================================================
-   RESIZE OBJECT
+   RESIZE ADDED
 ========================================================= */
 
 function enableResize(
@@ -5286,24 +4061,13 @@ function enableResize(
   pageDiv
 ){
 
-  let resizing =
-    false;
+  let resizing=false;
 
+  let startX=0;
+  let startY=0;
 
-  let startX =
-    0;
-
-
-  let startY =
-    0;
-
-
-  let originalWidth =
-    0;
-
-
-  let originalHeight =
-    0;
+  let originalWidth=0;
+  let originalHeight=0;
 
 
   handle.addEventListener(
@@ -5311,36 +4075,20 @@ function enableResize(
     function(e){
 
       e.preventDefault();
-
       e.stopPropagation();
 
+      resizing=true;
 
-      resizing =
-        true;
+      startX=e.clientX;
+      startY=e.clientY;
 
-
-      startX =
-        e.clientX;
-
-
-      startY =
-        e.clientY;
-
-
-      originalWidth =
-        obj.widthRatio;
-
-
-      originalHeight =
-        obj.heightRatio;
-
+      originalWidth=obj.widthRatio;
+      originalHeight=obj.heightRatio;
 
       try{
-
         handle.setPointerCapture(
           e.pointerId
         );
-
       }
       catch(err){}
 
@@ -5356,78 +4104,56 @@ function enableResize(
         return;
       }
 
+      const dx=e.clientX-startX;
+      const dy=e.clientY-startY;
 
-      const dx =
-        e.clientX -
-        startX;
-
-
-      const dy =
-        e.clientY -
-        startY;
-
-
-      obj.widthRatio =
+      obj.widthRatio=
         Math.max(
           .02,
-          originalWidth +
-          dx /
-          pageDiv.clientWidth
+          originalWidth+
+          dx/pageDiv.clientWidth
         );
 
-
-      obj.heightRatio =
+      obj.heightRatio=
         Math.max(
           .02,
-          originalHeight +
-          dy /
-          pageDiv.clientHeight
+          originalHeight+
+          dy/pageDiv.clientHeight
         );
 
-
-      obj.widthRatio =
+      obj.widthRatio=
         Math.min(
           obj.widthRatio,
-          1 -
-          obj.xRatio
+          1-obj.xRatio
         );
 
-
-      obj.heightRatio =
+      obj.heightRatio=
         Math.min(
           obj.heightRatio,
-          1 -
-          obj.yRatio
+          1-obj.yRatio
         );
 
+      element.style.width=
+        obj.widthRatio*
+        pageDiv.clientWidth+
+        "px";
 
-      element.style.width =
-        (
-          obj.widthRatio *
-          pageDiv.clientWidth
-        ) + "px";
-
-
-      element.style.height =
-        (
-          obj.heightRatio *
-          pageDiv.clientHeight
-        ) + "px";
+      element.style.height=
+        obj.heightRatio*
+        pageDiv.clientHeight+
+        "px";
 
     }
   );
 
 
-  function finishResize(){
+  function finish(){
 
     if(!resizing){
       return;
     }
 
-
-    resizing =
-      false;
-
+    resizing=false;
 
     saveHistory();
 
@@ -5436,13 +4162,12 @@ function enableResize(
 
   handle.addEventListener(
     "pointerup",
-    finishResize
+    finish
   );
-
 
   handle.addEventListener(
     "pointercancel",
-    finishResize
+    finish
   );
 
 }
@@ -5458,9 +4183,7 @@ document
   "click",
   function(){
 
-    if(
-      !selectedObject
-    ){
+    if(!selectedObject){
 
       alert(
         "Pehle koi text, image ya QR select karein."
@@ -5471,98 +4194,64 @@ document
     }
 
 
-    /*
-      EXISTING TEXT
-    */
-
     if(
-      selectedObject.type ===
+      selectedObject.type===
       "existingText"
     ){
 
-      const obj =
+      const obj=
         existingTexts.find(
-          x =>
-            x.id ===
-            selectedObject.id
+          x=>x.id===selectedObject.id
         );
-
 
       if(obj){
 
-        obj.deleted =
-          true;
-
-        obj.edited =
-          true;
+        obj.deleted=true;
+        obj.edited=true;
 
       }
 
     }
 
 
-    /*
-      EXISTING IMAGE / QR
-    */
-
     else if(
-      selectedObject.type ===
+      selectedObject.type===
       "existingImage"
     ){
 
-      const obj =
+      const obj=
         existingImages.find(
-          x =>
-            x.id ===
-            selectedObject.id
+          x=>x.id===selectedObject.id
         );
-
 
       if(obj){
 
-        obj.deleted =
-          true;
+        obj.deleted=true;
 
+        obj.replaced=false;
 
-        obj.replaced =
-          false;
+        obj.replacementSrc=null;
 
+        obj.replacementType="image";
 
-        obj.replacementSrc =
-          null;
-
-
-        obj.replacementType =
-          "image";
-
-
-        obj.replacementQRValue =
-          "";
+        obj.replacementQRValue="";
 
       }
 
     }
 
 
-    /*
-      ADDED IMAGE / QR / TEXT
-    */
-
     else{
 
-      addedObjects =
+      addedObjects=
         addedObjects.filter(
-          x =>
-            x.id !==
-            selectedObject.id
+          x=>x.id!==selectedObject.id
         );
 
     }
 
 
-    selectedObject =
-      null;
-
+    selectedObject=null;
 
     refreshPageLayers();
 
@@ -5582,37 +4271,24 @@ document
   "click",
   function(){
 
-    if(
-      !addedObjects.length
-    ){
+    if(!addedObjects.length){
 
-      alert(
-        "Koi added object nahi hai."
-      );
-
+      alert("Koi added object nahi hai.");
       return;
 
     }
-
 
     if(
       !confirm(
         "Added text, image aur QR sab clear karna hai?"
       )
     ){
-
       return;
-
     }
 
+    addedObjects=[];
 
-    addedObjects =
-      [];
-
-
-    selectedObject =
-      null;
-
+    selectedObject=null;
 
     refreshPageLayers();
 
@@ -5631,47 +4307,25 @@ document.addEventListener(
   function(e){
 
     if(
-      e.target.closest(
-        ".editor-object"
-      ) ||
-
-      e.target.closest(
-        ".existing-text"
-      ) ||
-
-      e.target.closest(
-        ".existing-image"
-      ) ||
-
-      e.target.closest(
-        ".deleted-image"
-      ) ||
-
-      e.target.closest(
-        ".deleted-cover"
-      ) ||
-
-      e.target.closest(
-        ".toolbar"
-      ) ||
-
-      e.target.closest(
-        ".text-toolbar"
-      ) ||
-
-      e.target.closest(
-        ".modal"
-      )
+      e.target.closest(".editor-object") ||
+      e.target.closest(".existing-text") ||
+      e.target.closest(".existing-image") ||
+      e.target.closest(".deleted-image") ||
+      e.target.closest(".deleted-cover") ||
+      e.target.closest(".toolbar") ||
+      e.target.closest(".text-toolbar") ||
+      e.target.closest(".modal")
     ){
-
       return;
-
     }
 
+    selectedObject=null;
 
-    selectedObject =
-      null;
-
+    document
+    .querySelectorAll(".text-toolbar")
+    .forEach(
+      x=>x.remove()
+    );
 
     refreshSelection();
 
@@ -5701,45 +4355,30 @@ function createState(){
 }
 
 
-function restoreState(
-  state
-){
+function restoreState(state){
 
   try{
 
-    const data =
-      JSON.parse(
-        state
-      );
+    const data=
+      JSON.parse(state);
 
+    existingTexts=
+      data.existingTexts || [];
 
-    existingTexts =
-      data.existingTexts ||
-      [];
+    existingImages=
+      data.existingImages || [];
 
+    addedObjects=
+      data.addedObjects || [];
 
-    existingImages =
-      data.existingImages ||
-      [];
-
-
-    addedObjects =
-      data.addedObjects ||
-      [];
-
-
-    selectedObject =
-      null;
-
+    selectedObject=null;
 
     refreshPageLayers();
 
   }
   catch(error){
 
-    console.error(
-      error
-    );
+    console.error(error);
 
   }
 
@@ -5748,41 +4387,27 @@ function restoreState(
 
 function saveHistory(){
 
-  const state =
-    createState();
-
+  const state=createState();
 
   if(
-    historyIndex >= 0 &&
-    history[
-      historyIndex
-    ] === state
+    historyIndex>=0 &&
+    history[historyIndex]===state
   ){
-
     return;
-
   }
 
-
-  history =
+  history=
     history.slice(
       0,
-      historyIndex + 1
+      historyIndex+1
     );
 
+  history.push(state);
 
-  history.push(
-    state
-  );
+  historyIndex=
+    history.length-1;
 
-
-  historyIndex =
-    history.length - 1;
-
-
-  if(
-    history.length > 30
-  ){
+  if(history.length>30){
 
     history.shift();
 
@@ -5803,22 +4428,14 @@ document
   "click",
   function(){
 
-    if(
-      historyIndex <= 0
-    ){
-
+    if(historyIndex<=0){
       return;
-
     }
-
 
     historyIndex--;
 
-
     restoreState(
-      history[
-        historyIndex
-      ]
+      history[historyIndex]
     );
 
   }
@@ -5836,22 +4453,16 @@ document
   function(){
 
     if(
-      historyIndex >=
-      history.length - 1
+      historyIndex>=
+      history.length-1
     ){
-
       return;
-
     }
-
 
     historyIndex++;
 
-
     restoreState(
-      history[
-        historyIndex
-      ]
+      history[historyIndex]
     );
 
   }
@@ -5859,7 +4470,7 @@ document
 
 
 /* =========================================================
-   DOWNLOAD PDF
+   DOWNLOAD
 ========================================================= */
 
 document
@@ -5868,25 +4479,16 @@ document
   "click",
   async function(){
 
-    if(
-      !pdfBytes
-    ){
+    if(!pdfBytes){
 
-      alert(
-        "Pehle PDF upload karein."
-      );
-
+      alert("Pehle PDF upload karein.");
       return;
 
     }
 
-
     try{
 
-      setStatus(
-        "Creating PDF..."
-      );
-
+      setStatus("Creating PDF...");
 
       const pdfDoc =
         await PDFDocument.load(
@@ -5895,210 +4497,140 @@ document
           )
         );
 
-
       const pdfPages =
         pdfDoc.getPages();
 
-
-      const fontCache =
-        {};
+      const fontCache={};
 
 
-      async function getFont(
-        fontFamily
-      ){
+      async function getFont(fontFamily){
 
-        if(
-          fontCache[
-            fontFamily
-          ]
-        ){
-
-          return fontCache[
-            fontFamily
-          ];
-
+        if(fontCache[fontFamily]){
+          return fontCache[fontFamily];
         }
 
-
-        let standardFont =
+        let standardFont=
           StandardFonts.Helvetica;
 
+        if(fontFamily==="Times-Roman"){
 
-        if(
-          fontFamily ===
-          "Times-Roman"
-        ){
-
-          standardFont =
+          standardFont=
             StandardFonts.TimesRoman;
 
         }
-        else if(
-          fontFamily ===
-          "Courier"
-        ){
+        else if(fontFamily==="Courier"){
 
-          standardFont =
+          standardFont=
             StandardFonts.Courier;
 
         }
 
-
-        fontCache[
-          fontFamily
-        ] =
+        fontCache[fontFamily]=
           await pdfDoc.embedFont(
             standardFont
           );
 
-
-        return fontCache[
-          fontFamily
-        ];
+        return fontCache[fontFamily];
 
       }
 
 
-      /* =================================================
-         EXISTING TEXT EDITS
-      ================================================= */
+      /* =====================================================
+         STEP 1
+         EXISTING TEXT EDIT / DELETE
+      ===================================================== */
 
-      for(
-        const item of existingTexts
-      ){
+      for(const item of existingTexts){
 
-        if(
-          !item.edited
-        ){
-
+        if(!item.edited){
           continue;
-
         }
 
-
-        const page =
-          pdfPages[
-            item.page - 1
-          ];
-
+        const page=
+          pdfPages[item.page-1];
 
         if(!page){
           continue;
         }
 
-
-        const fontSize =
+        const fontSize=
           Math.max(
             1,
             item.fontSize
           );
 
+        const x=item.x;
 
-        const x =
-          item.x;
+        const baselineY=item.y;
 
-
-        const baselineY =
-          item.y;
-
-
-        const estimatedNewWidth =
+        const estimatedNewWidth=
           item.deleted
             ? 0
             : Math.max(
                 item.width,
-                item.text.length *
-                fontSize *
+                item.text.length*
+                fontSize*
                 .48
               );
 
-
-        const coverWidth =
+        const coverWidth=
           Math.max(
             item.width,
             estimatedNewWidth
-          ) +
-          fontSize * .35;
+          )+
+          fontSize*.35;
 
+        const coverHeight=
+          fontSize*1.35;
 
-        const coverHeight =
-          fontSize * 1.35;
-
-
-        const coverY =
-          baselineY -
-          fontSize * .30;
-
+        const coverY=
+          baselineY-
+          fontSize*.30;
 
         page.drawRectangle({
 
-          x:
-            Math.max(
-              0,
-              x -
-              fontSize * .10
-            ),
+          x:Math.max(
+            0,
+            x-fontSize*.10
+          ),
 
-          y:
-            Math.max(
-              0,
-              coverY
-            ),
+          y:Math.max(
+            0,
+            coverY
+          ),
 
-          width:
-            coverWidth,
+          width:coverWidth,
 
-          height:
-            coverHeight,
+          height:coverHeight,
 
-          color:
-            rgb(
-              1,
-              1,
-              1
-            )
+          color:rgb(1,1,1)
 
         });
 
-
-        if(
-          item.deleted
-        ){
-
+        if(item.deleted){
           continue;
-
         }
 
-
-        const font =
+        const font=
           await getFont(
-            "Helvetica"
+            detectExistingFont(
+              item.fontName
+            )
           );
-
 
         page.drawText(
           item.text,
           {
 
-            x:
-              x,
+            x:x,
 
-            y:
-              baselineY,
+            y:baselineY,
 
-            size:
-              fontSize,
+            size:fontSize,
 
-            font:
-              font,
+            font:font,
 
-            color:
-              rgb(
-                0,
-                0,
-                0
-              )
+            color:rgb(0,0,0)
 
           }
         );
@@ -6106,163 +4638,135 @@ document
       }
 
 
-      /* =================================================
+      /* =====================================================
+         STEP 2
          EXISTING IMAGE DELETE / REPLACE
-      ================================================= */
+      ===================================================== */
 
-      for(
-        const item of existingImages
-      ){
+      const deletedImageAreas=[];
+
+
+      for(const item of existingImages){
 
         if(
           !item.deleted &&
-          !item.replacementSrc
+          !item.replacementSrc &&
+          !item.replaced
         ){
-
           continue;
-
         }
 
-
-        const page =
-          pdfPages[
-            item.page - 1
-          ];
-
+        const page=
+          pdfPages[item.page-1];
 
         if(!page){
           continue;
         }
 
-
-        const pageWidth =
+        const pageWidth=
           page.getWidth();
 
-
-        const pageHeight =
+        const pageHeight=
           page.getHeight();
 
 
-        /*
-          Stored in BASE_SCALE viewport pixels.
+        const pdfX=
+          item.x/BASE_SCALE;
 
-          Convert back to PDF points.
-        */
+        const pdfWidth=
+          item.width/BASE_SCALE;
 
-        const pdfX =
-          item.x /
-          BASE_SCALE;
+        const pdfHeight=
+          item.height/BASE_SCALE;
 
-
-        const pdfWidth =
-          item.width /
-          BASE_SCALE;
-
-
-        const pdfHeight =
-          item.height /
-          BASE_SCALE;
-
-
-        /*
-          Convert top-left viewport
-          to bottom-left PDF coordinates.
-        */
-
-        const pdfY =
-          pageHeight -
-          (
-            item.y /
-            BASE_SCALE
-          ) -
+        const pdfY=
+          pageHeight-
+          item.y/BASE_SCALE-
           pdfHeight;
 
 
         /*
-          Cover original image.
+          Remember deleted image area.
+          This is used later to restore edited text
+          that was underneath a deleted image.
         */
+
+        if(item.deleted){
+
+          deletedImageAreas.push({
+
+            page:item.page,
+
+            x:pdfX,
+            y:pdfY,
+
+            width:pdfWidth,
+            height:pdfHeight
+
+          });
+
+        }
+
 
         page.drawRectangle({
 
-          x:
-            Math.max(
-              0,
-              Math.min(
-                pdfX,
-                pageWidth
-              )
-            ),
-
-          y:
-            Math.max(
-              0,
-              Math.min(
-                pdfY,
-                pageHeight
-              )
-            ),
-
-          width:
+          x:Math.max(
+            0,
             Math.min(
-              pdfWidth,
-              pageWidth -
-              Math.max(
-                0,
-                pdfX
-              )
-            ),
-
-          height:
-            Math.min(
-              pdfHeight,
-              pageHeight -
-              Math.max(
-                0,
-                pdfY
-              )
-            ),
-
-          color:
-            rgb(
-              1,
-              1,
-              1
+              pdfX,
+              pageWidth
             )
+          ),
+
+          y:Math.max(
+            0,
+            Math.min(
+              pdfY,
+              pageHeight
+            )
+          ),
+
+          width:Math.min(
+            pdfWidth,
+            Math.max(
+              0,
+              pageWidth-
+              Math.max(0,pdfX)
+            )
+          ),
+
+          height:Math.min(
+            pdfHeight,
+            Math.max(
+              0,
+              pageHeight-
+              Math.max(0,pdfY)
+            )
+          ),
+
+          color:rgb(1,1,1)
 
         });
 
-
-        /*
-          If deleted only:
-          white cover remains.
-        */
 
         if(
           item.deleted ||
           !item.replacementSrc
         ){
-
           continue;
-
         }
 
 
-        /*
-          Draw replacement image.
-        */
-
-        const imageBytes =
+        const imageBytes=
           dataURLToUint8Array(
             item.replacementSrc
           );
 
-
         let image;
 
-
-        const lowerSrc =
+        const lowerSrc=
           item.replacementSrc
-            .toLowerCase();
+          .toLowerCase();
 
 
         if(
@@ -6274,7 +4778,7 @@ document
           )
         ){
 
-          image =
+          image=
             await pdfDoc.embedJpg(
               imageBytes
             );
@@ -6282,7 +4786,7 @@ document
         }
         else{
 
-          image =
+          image=
             await pdfDoc.embedPng(
               imageBytes
             );
@@ -6294,139 +4798,200 @@ document
           image,
           {
 
-            x:
-              pdfX,
+            x:pdfX,
+            y:pdfY,
 
-            y:
-              pdfY,
-
-            width:
-              pdfWidth,
-
-            height:
-              pdfHeight
+            width:pdfWidth,
+            height:pdfHeight
 
           }
         );
 
       }
 
-/* =================================================
-   REDRAW TEXT OVER DELETED IMAGES
-========================================================= */
 
-      /* =================================================
-         ADDED OBJECTS
-      ================================================= */
+      /* =====================================================
+         STEP 3
+         IMPORTANT:
+         REDRAW EDITED TEXT ONLY OVER DELETED IMAGES
 
-      for(
-        const obj of addedObjects
-      ){
+         This fixes:
+         image delete karne par text disappear hona.
+      ===================================================== */
 
-        const page =
-          pdfPages[
-            obj.page - 1
-          ];
+      for(const area of deletedImageAreas){
 
+        const page=
+          pdfPages[area.page-1];
 
         if(!page){
           continue;
         }
 
 
-        const pageWidth =
+        for(const item of existingTexts){
+
+          if(
+            item.page!==area.page ||
+            !item.edited ||
+            item.deleted
+          ){
+            continue;
+          }
+
+
+          const textX=item.x;
+
+          const textY=item.y;
+
+          const textWidth=
+            Math.max(
+              item.width,
+              item.text.length*
+              item.fontSize*
+              .48
+            );
+
+          const textHeight=
+            item.fontSize*1.2;
+
+          const overlap=
+            rectanglesOverlap(
+
+              textX,
+              textY-textHeight*.3,
+              textWidth,
+              textHeight,
+
+              area.x,
+              area.y,
+              area.width,
+              area.height
+
+            );
+
+
+          if(!overlap){
+            continue;
+          }
+
+
+          const font=
+            await getFont(
+              detectExistingFont(
+                item.fontName
+              )
+            );
+
+
+          page.drawText(
+            item.text,
+            {
+
+              x:item.x,
+
+              y:item.y,
+
+              size:Math.max(
+                1,
+                item.fontSize
+              ),
+
+              font:font,
+
+              color:rgb(0,0,0)
+
+            }
+          );
+
+        }
+
+      }
+
+
+      /* =====================================================
+         STEP 4
+         ADDED OBJECTS
+      ===================================================== */
+
+      for(const obj of addedObjects){
+
+        const page=
+          pdfPages[obj.page-1];
+
+        if(!page){
+          continue;
+        }
+
+        const pageWidth=
           page.getWidth();
 
-
-        const pageHeight =
+        const pageHeight=
           page.getHeight();
 
-
-        const x =
+        const x=
           clamp(
             obj.xRatio,
             0,
             1
-          ) *
+          )*
           pageWidth;
 
-
-        const width =
+        const width=
           clamp(
             obj.widthRatio,
             .001,
             1
-          ) *
+          )*
           pageWidth;
 
-
-        const height =
+        const height=
           clamp(
             obj.heightRatio,
             .001,
             1
-          ) *
+          )*
           pageHeight;
 
-
-        const top =
+        const top=
           clamp(
             obj.yRatio,
             0,
             1
-          ) *
+          )*
           pageHeight;
 
-
-        const y =
-          pageHeight -
-          top -
+        const y=
+          pageHeight-
+          top-
           height;
 
 
-        /*
-          ADDED TEXT
-        */
+        if(obj.type==="text"){
 
-        if(
-          obj.type ===
-          "text"
-        ){
-
-          const font =
+          const font=
             await getFont(
               obj.fontFamily
             );
 
-
-          const textY =
-            y +
-            height -
+          const textY=
+            y+
+            height-
             obj.fontSize;
-
 
           page.drawText(
             obj.text,
             {
 
-              x:
-                x,
+              x:x,
 
-              y:
-                textY,
+              y:textY,
 
-              size:
-                obj.fontSize,
+              size:obj.fontSize,
 
-              font:
-                font,
+              font:font,
 
-              color:
-                rgb(
-                  0,
-                  0,
-                  0
-                )
+              color:rgb(0,0,0)
 
             }
           );
@@ -6434,25 +4999,19 @@ document
         }
 
 
-        /*
-          ADDED IMAGE / QR
-        */
-
         if(
-          obj.type === "image" ||
-          obj.type === "qr"
+          obj.type==="image" ||
+          obj.type==="qr"
         ){
 
-          const imageBytes =
+          const imageBytes=
             dataURLToUint8Array(
               obj.src
             );
 
-
           let image;
 
-
-          const lowerSrc =
+          const lowerSrc=
             obj.src.toLowerCase();
 
 
@@ -6465,7 +5024,7 @@ document
             )
           ){
 
-            image =
+            image=
               await pdfDoc.embedJpg(
                 imageBytes
               );
@@ -6473,7 +5032,7 @@ document
           }
           else{
 
-            image =
+            image=
               await pdfDoc.embedPng(
                 imageBytes
               );
@@ -6485,17 +5044,11 @@ document
             image,
             {
 
-              x:
-                x,
+              x:x,
+              y:y,
 
-              y:
-                y,
-
-              width:
-                width,
-
-              height:
-                height
+              width:width,
+              height:height
 
             }
           );
@@ -6505,68 +5058,50 @@ document
       }
 
 
-      const output =
+      /* =====================================================
+         SAVE
+      ===================================================== */
+
+      const output=
         await pdfDoc.save();
 
-
-      const blob =
+      const blob=
         new Blob(
           [output],
           {
-            type:
-              "application/pdf"
+            type:"application/pdf"
           }
         );
 
+      const url=
+        URL.createObjectURL(blob);
 
-      const url =
-        URL.createObjectURL(
-          blob
-        );
+      const a=
+        document.createElement("a");
 
+      a.href=url;
 
-      const a =
-        document.createElement(
-          "a"
-        );
-
-
-      a.href =
-        url;
-
-
-      a.download =
+      a.download=
         currentFile
           ? currentFile.name.replace(
               /\.pdf$/i,
               ""
-            ) +
+            )+
             "-edited.pdf"
           : "edited-pdf.pdf";
 
-
-      document.body.appendChild(
-        a
-      );
-
+      document.body.appendChild(a);
 
       a.click();
 
-
       a.remove();
-
 
       setTimeout(
         function(){
-
-          URL.revokeObjectURL(
-            url
-          );
-
+          URL.revokeObjectURL(url);
         },
         1500
       );
-
 
       setStatus(
         "PDF downloaded successfully."
@@ -6580,14 +5115,12 @@ document
         error
       );
 
-
       setStatus(
         "PDF download failed."
       );
 
-
       alert(
-        "PDF download karte waqt error aaya. Console mein error check kiya ja sakta hai."
+        "PDF download karte waqt error aaya. Console check karein."
       );
 
     }
@@ -6597,20 +5130,75 @@ document
 
 
 /* =========================================================
+   EXISTING FONT DETECTION
+========================================================= */
+
+function detectExistingFont(fontName){
+
+  const name=
+    String(fontName || "")
+    .toLowerCase();
+
+  if(
+    name.includes("times") ||
+    name.includes("serif")
+  ){
+
+    return "Times-Roman";
+
+  }
+
+  if(
+    name.includes("courier") ||
+    name.includes("mono")
+  ){
+
+    return "Courier";
+
+  }
+
+  return "Helvetica";
+
+}
+
+
+/* =========================================================
+   RECTANGLE OVERLAP
+========================================================= */
+
+function rectanglesOverlap(
+  ax,
+  ay,
+  aw,
+  ah,
+  bx,
+  by,
+  bw,
+  bh
+){
+
+  return (
+
+    ax < bx+bw &&
+    ax+aw > bx &&
+    ay < by+bh &&
+    ay+ah > by
+
+  );
+
+}
+
+
+/* =========================================================
    DATA URL
 ========================================================= */
 
-function dataURLToUint8Array(
-  dataURL
-){
+function dataURLToUint8Array(dataURL){
 
-  const parts =
+  const parts=
     dataURL.split(",");
 
-
-  if(
-    parts.length < 2
-  ){
+  if(parts.length<2){
 
     throw new Error(
       "Invalid image data."
@@ -6618,32 +5206,24 @@ function dataURLToUint8Array(
 
   }
 
+  const binary=
+    atob(parts[1]);
 
-  const base64 =
-    parts[1];
-
-
-  const binary =
-    atob(base64);
-
-
-  const bytes =
+  const bytes=
     new Uint8Array(
       binary.length
     );
 
-
   for(
-    let i = 0;
-    i < binary.length;
+    let i=0;
+    i<binary.length;
     i++
   ){
 
-    bytes[i] =
+    bytes[i]=
       binary.charCodeAt(i);
 
   }
-
 
   return bytes;
 
@@ -6675,31 +5255,21 @@ function clamp(
    WINDOW RESIZE
 ========================================================= */
 
-let resizeTimer =
-  null;
-
+let resizeTimer=null;
 
 window.addEventListener(
   "resize",
   function(){
 
-    clearTimeout(
-      resizeTimer
-    );
+    clearTimeout(resizeTimer);
 
-
-    resizeTimer =
+    resizeTimer=
       setTimeout(
         async function(){
 
-          if(
-            !pdfDocument
-          ){
-
+          if(!pdfDocument){
             return;
-
           }
-
 
           await refreshPageLayers();
 
@@ -6719,36 +5289,26 @@ document.addEventListener(
   "keydown",
   function(e){
 
-    const tag =
+    const tag=
       document.activeElement
         ? document.activeElement.tagName
         : "";
 
-
     if(
-      tag === "INPUT" ||
-      tag === "SELECT" ||
-      tag === "TEXTAREA"
+      tag==="INPUT" ||
+      tag==="SELECT" ||
+      tag==="TEXTAREA"
     ){
-
       return;
-
     }
 
+    if(e.key==="Delete"){
 
-    if(
-      e.key === "Delete"
-    ){
-
-      if(
-        selectedObject
-      ){
+      if(selectedObject){
 
         document
-          .getElementById(
-            "deleteBtn"
-          )
-          .click();
+        .getElementById("deleteBtn")
+        .click();
 
       }
 
@@ -6759,34 +5319,22 @@ document.addEventListener(
 
 
 /* =========================================================
-   ESCAPE MODAL
+   ESCAPE
 ========================================================= */
 
 document.addEventListener(
   "keydown",
   function(e){
 
-    if(
-      e.key !== "Escape"
-    ){
-
+    if(e.key!=="Escape"){
       return;
-
     }
 
+    textModal.classList.remove("show");
 
-    textModal.classList.remove(
-      "show"
-    );
+    qrModal.classList.remove("show");
 
-
-    qrModal.classList.remove(
-      "show"
-    );
-
-
-    replaceQRMode =
-      false;
+    replaceQRMode=false;
 
   }
 );
