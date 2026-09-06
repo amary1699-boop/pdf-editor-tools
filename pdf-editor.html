@@ -454,17 +454,27 @@ z-index:5;
 
 
 /* =========================================================
-   EXISTING PDF IMAGES
+   EXISTING PDF IMAGE
 ========================================================= */
-.existing-image:hover{
-  background:rgba(229,50,50,.08);
-  border-color:rgba(229,50,50,.35);
-}
 
-.existing-image.selected{
-  background:rgba(229,50,50,.10);
-  border:2px solid #e53232;
-  box-shadow:0 0 0 1px rgba(229,50,50,.15);
+.existing-image{
+  position:absolute;
+
+  z-index:35;
+
+  pointer-events:auto;
+
+  cursor:pointer;
+
+  border:2px solid transparent;
+
+  background:transparent;
+
+  transition:.15s;
+
+  overflow:hidden;
+
+  box-sizing:border-box;
 }
 
 .existing-image:hover{
@@ -478,7 +488,18 @@ z-index:5;
   background:rgba(229,50,50,.10);
 
   border:2px solid #e53232;
+
+  box-shadow:
+    0 0 0 1px
+    rgba(229,50,50,.15);
 }
+
+
+/*
+  Replacement image / QR.
+  Pointer events disabled so the parent
+  existing-image remains the selector.
+*/
 
 .existing-image img{
   width:100%;
@@ -486,35 +507,23 @@ z-index:5;
 
   display:block;
 
-  object-fit:contain;
+  object-fit:fill;
 
   pointer-events:none;
 }
 
 
-/* =========================================================
-   DELETED EXISTING IMAGE
-========================================================= */
+/*
+  Existing image itself has no resize
+  handle. Only added objects are resizable.
+*/
 
-.existing-image{
-  position:absolute;
-  z-index:35;
-  pointer-events:auto;
-  cursor:pointer;
-  border:2px solid transparent;
-  background:transparent;
-  transition:.15s;
-  overflow:hidden;
-  box-sizing:border-box;
-}
 .existing-image .resize-handle{
   display:none;
 }
-
-.existing-image.selected .resize-handle{
-  display:block;
-}
-
+/* =========================================================
+   DELETED EXISTING IMAGE
+========================================================= */
 .deleted-image.selected{
   border:2px solid #e53232;
   background:#fff;
