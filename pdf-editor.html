@@ -6398,17 +6398,21 @@ for(
     continue;
   }
 
+
   const page =
     pdfPages[
       item.page - 1
     ];
 
+
   if(!page){
     continue;
   }
 
+
   const pageHeight =
     page.getHeight();
+
 
   const relatedImage =
     existingImages.some(
@@ -6421,17 +6425,21 @@ for(
           return false;
         }
 
+
         const imageX =
           image.x /
           BASE_SCALE;
+
 
         const imageWidth =
           image.width /
           BASE_SCALE;
 
+
         const imageHeight =
           image.height /
           BASE_SCALE;
+
 
         const imageY =
           pageHeight -
@@ -6441,12 +6449,25 @@ for(
           ) -
           imageHeight;
 
+
+        const imageRight =
+          imageX +
+          imageWidth;
+
+
+        const imageTop =
+          imageY +
+          imageHeight;
+
+
         const textX =
           item.x;
+
 
         const textY =
           item.y -
           item.fontSize * .30;
+
 
         const textWidth =
           Math.max(
@@ -6454,64 +6475,137 @@ for(
             item.width
           );
 
+
         const textHeight =
           item.fontSize *
           1.35;
+
 
         const textRight =
           textX +
           textWidth;
 
+
         const textTop =
           textY +
           textHeight;
 
-        const imageRight =
-          imageX +
-          imageWidth;
-
-        const imageTop =
-          imageY +
-          imageHeight;
 
         return !(
-          textRight < imageX ||
-          textX > imageRight ||
-          textTop < imageY ||
-          textY > imageTop
+          textRight <= imageX ||
+          textX >= imageRight ||
+          textTop <= imageY ||
+          textY >= imageTop
         );
 
       }
     );
 
+
   if(!relatedImage){
     continue;
   }
+
+
+  /*
+    IMPORTANT:
+
+    First cover the complete text area
+    so the original PDF text does not
+    remain underneath and create overlap.
+  */
+
+  const coverX =
+    Math.max(
+      0,
+      item.x -
+      item.fontSize * .10
+    );
+
+
+  const coverY =
+    Math.max(
+      0,
+      item.y -
+      item.fontSize * .35
+    );
+
+
+  const coverWidth =
+    Math.max(
+      1,
+      item.width +
+      item.fontSize * .25
+    );
+
+
+  const coverHeight =
+    Math.max(
+      1,
+      item.fontSize * 1.45
+    );
+
+
+  page.drawRectangle({
+
+    x:
+      coverX,
+
+    y:
+      coverY,
+
+    width:
+      coverWidth,
+
+    height:
+      coverHeight,
+
+    color:
+      rgb(
+        1,
+        1,
+        1
+      )
+
+  });
+
+
+  /*
+    Draw clean text again.
+  */
 
   const font =
     await getFont(
       "Helvetica"
     );
 
+
   page.drawText(
     item.text,
     {
-      x:item.x,
 
-      y:item.y,
+      x:
+        item.x,
 
-      size:Math.max(
-        1,
-        item.fontSize
-      ),
+      y:
+        item.y,
 
-      font:font,
+      size:
+        Math.max(
+          1,
+          item.fontSize
+        ),
 
-      color:rgb(
-        0,
-        0,
-        0
-      )
+      font:
+        font,
+
+      color:
+        rgb(
+          0,
+          0,
+          0
+        )
+
     }
   );
 
