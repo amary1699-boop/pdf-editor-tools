@@ -422,7 +422,13 @@ z-index:5;
 
   border:1px solid rgba(0,0,0,.08);
 }
-
+.existing-text.visible-over-image{
+  color:#111;
+  background:transparent;
+  border:1px solid transparent;
+  z-index:5;
+  pointer-events:auto;
+}
 
 /* =========================================================
    DELETED TEXT
@@ -2377,7 +2383,73 @@ function transformPoint(
 /* =========================================================
    RENDER EXISTING TEXT
 ========================================================= */
+function textOverlapsDeletedImage(item, viewport){
 
+  if(!item){
+    return false;
+  }
+
+  const tx =
+    pdfjsLib.Util.transform(
+      viewport.transform,
+      item.originalTransform
+    );
+
+  const fontHeight =
+    Math.sqrt(
+      tx[2] * tx[2] +
+      tx[3] * tx[3]
+    );
+
+  const textLeft =
+    tx[4];
+
+  const textTop =
+    tx[5] -
+    fontHeight * .9;
+
+  const textRight =
+    textLeft +
+    item.width * BASE_SCALE;
+
+  const textBottom =
+    textTop +
+    fontHeight * 1.35;
+
+  const deletedImages =
+    existingImages.filter(
+      image =>
+        image.page === item.page &&
+        image.deleted
+    );
+
+  return deletedImages.some(
+    image => {
+
+      const imageLeft =
+        image.x;
+
+      const imageTop =
+        image.y;
+
+      const imageRight =
+        image.x +
+        image.width;
+
+      const imageBottom =
+        image.y +
+        image.height;
+
+      return !(
+        textRight < imageLeft ||
+        textLeft > imageRight ||
+        textBottom < imageTop ||
+        textTop > imageBottom
+      );
+
+    }
+  );
+}
 function renderExistingTextItem(
   item,
   pageDiv,
@@ -2465,13 +2537,25 @@ function renderExistingTextItem(
     ) + "px";
 
 
-  if(item.edited){
+ if(item.edited){
 
-    span.classList.add(
-      "edited-visible"
-    );
+  span.classList.add(
+    "edited-visible"
+  );
 
-  }
+}
+else if(
+  textOverlapsDeletedImage(
+    item,
+    viewport
+  )
+){
+
+  span.classList.add(
+    "visible-over-image"
+  );
+
+}
 
 
   span.addEventListener(
@@ -6300,7 +6384,138 @@ document
 
       }
 
+/* =================================================
+   REDRAW TEXT OVER DELETED IMAGES
+========================================================= */
 
+for(
+  const item of existingTexts
+){
+
+  if(
+    item.deleted
+  ){
+    continue;
+  }
+
+  const page =
+    pdfPages[
+      item.page - 1
+    ];
+
+  if(!page){
+    continue;
+  }
+
+  const pageHeight =
+    page.getHeight();
+
+  const relatedImage =
+    existingImages.some(
+      image => {
+
+        if(
+          image.page !== item.page ||
+          !image.deleted
+        ){
+          return false;
+        }
+
+        const imageX =
+          image.x /
+          BASE_SCALE;
+
+        const imageWidth =
+          image.width /
+          BASE_SCALE;
+
+        const imageHeight =
+          image.height /
+          BASE_SCALE;
+
+        const imageY =
+          pageHeight -
+          (
+            image.y /
+            BASE_SCALE
+          ) -
+          imageHeight;
+
+        const textX =
+          item.x;
+
+        const textY =
+          item.y -
+          item.fontSize * .30;
+
+        const textWidth =
+          Math.max(
+            1,
+            item.width
+          );
+
+        const textHeight =
+          item.fontSize *
+          1.35;
+
+        const textRight =
+          textX +
+          textWidth;
+
+        const textTop =
+          textY +
+          textHeight;
+
+        const imageRight =
+          imageX +
+          imageWidth;
+
+        const imageTop =
+          imageY +
+          imageHeight;
+
+        return !(
+          textRight < imageX ||
+          textX > imageRight ||
+          textTop < imageY ||
+          textY > imageTop
+        );
+
+      }
+    );
+
+  if(!relatedImage){
+    continue;
+  }
+
+  const font =
+    await getFont(
+      "Helvetica"
+    );
+
+  page.drawText(
+    item.text,
+    {
+      x:item.x,
+
+      y:item.y,
+
+      size:Math.max(
+        1,
+        item.fontSize
+      ),
+
+      font:font,
+
+      color:rgb(
+        0,
+        0,
+        0
+      )
+    }
+  );
+
+}
       /* =================================================
          ADDED OBJECTS
       ================================================= */
