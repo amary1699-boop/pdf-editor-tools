@@ -449,7 +449,7 @@ z-index:5;
 
   cursor:pointer;
 
-  z-index:7;
+  z-index:4;
 }
 
 
@@ -2369,84 +2369,24 @@ function transformPoint(
   ];
 
 }
-
-
 /* =========================================================
    RENDER EXISTING TEXT
 ========================================================= */
-function textOverlapsDeletedImage(item, viewport){
 
-  if(!item){
-    return false;
-  }
-
-  const tx =
-    pdfjsLib.Util.transform(
-      viewport.transform,
-      item.originalTransform
-    );
-
-  const fontHeight =
-    Math.sqrt(
-      tx[2] * tx[2] +
-      tx[3] * tx[3]
-    );
-
-  const textLeft =
-    tx[4];
-
-  const textTop =
-    tx[5] -
-    fontHeight * .9;
-
-  const textRight =
-    textLeft +
-    item.width * BASE_SCALE;
-
-  const textBottom =
-    textTop +
-    fontHeight * 1.35;
-
-  const deletedImages =
-    existingImages.filter(
-      image =>
-        image.page === item.page &&
-        image.deleted
-    );
-
-  return deletedImages.some(
-    image => {
-
-      const imageLeft =
-        image.x;
-
-      const imageTop =
-        image.y;
-
-      const imageRight =
-        image.x +
-        image.width;
-
-      const imageBottom =
-        image.y +
-        image.height;
-
-      return !(
-        textRight < imageLeft ||
-        textLeft > imageRight ||
-        textBottom < imageTop ||
-        textTop > imageBottom
-      );
-
-    }
-  );
-}
 function renderExistingTextItem(
   item,
   pageDiv,
   layer,
   viewport
 ){
+
+  if(
+    !item ||
+    item.deleted
+  ){
+    return;
+  }
+
 
   const tx =
     pdfjsLib.Util.transform(
@@ -2528,25 +2468,24 @@ function renderExistingTextItem(
     ) + "px";
 
 
- if(item.edited){
+  /*
+    IMPORTANT:
+    Sirf edited text ko visible rakhen.
+    Original PDF ka normal text canvas
+    se already visible hai.
 
-  span.classList.add(
-    "edited-visible"
-  );
+    Isse duplicate/overlap nahi hoga.
+  */
 
-}
-else if(
-  textOverlapsDeletedImage(
-    item,
-    viewport
-  )
-){
+  if(
+    item.edited
+  ){
 
-  span.classList.add(
-    "visible-over-image"
-  );
+    span.classList.add(
+      "edited-visible"
+    );
 
-}
+  }
 
 
   span.addEventListener(
@@ -2554,11 +2493,12 @@ else if(
     function(e){
 
       e.preventDefault();
-
       e.stopPropagation();
+
 
       activePageNumber =
         item.page;
+
 
       selectExistingText(
         item
@@ -2573,8 +2513,8 @@ else if(
     function(e){
 
       e.preventDefault();
-
       e.stopPropagation();
+
 
       editExistingText(
         item
@@ -2589,8 +2529,6 @@ else if(
   );
 
 }
-
-
 /* =========================================================
    RENDER EXISTING IMAGE
 ========================================================= */
