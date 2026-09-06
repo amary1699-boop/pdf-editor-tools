@@ -363,13 +363,19 @@ body{
 }
 
 .existing-layer{
-  z-index:15;
+  position:absolute;
+  inset:0;
+  z-index:40;
   pointer-events:none;
+  overflow:hidden;
 }
 
 .object-layer{
-  z-index:10;
+  position:absolute;
+  inset:0;
+  z-index:50;
   pointer-events:none;
+  overflow:hidden;
 }
 
 
@@ -450,19 +456,6 @@ z-index:5;
 /* =========================================================
    EXISTING PDF IMAGES
 ========================================================= */
-
-.existing-image{
-  position:absolute;
-  z-index:20;
-  pointer-events:auto;
-  cursor:pointer;
-  border:2px solid transparent;
-  background:transparent;
-  transition:.15s;
-  overflow:hidden;
-  box-sizing:border-box;
-}
-
 .existing-image:hover{
   background:rgba(229,50,50,.08);
   border-color:rgba(229,50,50,.35);
@@ -503,17 +496,15 @@ z-index:5;
    DELETED EXISTING IMAGE
 ========================================================= */
 
-.deleted-image{
+.existing-image{
   position:absolute;
-
-  z-index:1;
-
-  background:#fff;
-
+  z-index:35;
   pointer-events:auto;
-
   cursor:pointer;
-
+  border:2px solid transparent;
+  background:transparent;
+  transition:.15s;
+  overflow:hidden;
   box-sizing:border-box;
 }
 .existing-image .resize-handle{
@@ -2615,119 +2606,97 @@ function renderExistingImage(
     !item ||
     item.deleted
   ){
-
     return;
-
   }
-
 
   const cssScale =
     pageDiv.clientWidth /
     viewport.width;
 
-
   const el =
-    document.createElement(
-      "div"
-    );
-
+    document.createElement("div");
 
   el.className =
     "existing-image";
 
-
   el.dataset.existingId =
     item.id;
 
-
   el.style.left =
-    (
-      item.x *
-      cssScale
-    ) + "px";
-
+    (item.x * cssScale) + "px";
 
   el.style.top =
-    (
-      item.y *
-      cssScale
-    ) + "px";
-
+    (item.y * cssScale) + "px";
 
   el.style.width =
     Math.max(
       4,
-      item.width *
-      cssScale
+      item.width * cssScale
     ) + "px";
-
 
   el.style.height =
     Math.max(
       4,
-      item.height *
-      cssScale
+      item.height * cssScale
     ) + "px";
 
-
   /*
-    If replacement exists,
-    show replacement image.
-
-    Otherwise keep original PDF canvas
-    visible underneath.
+    Replacement Image / QR
   */
 
-  if(
-    item.replacementSrc
-  ){
+  if(item.replacementSrc){
+
+    el.style.background =
+      "#fff";
 
     const img =
-      document.createElement(
-        "img"
-      );
-
+      document.createElement("img");
 
     img.src =
       item.replacementSrc;
 
-
     img.alt =
-      "Replacement Image";
+      item.replacementType === "qr"
+        ? "Replacement QR"
+        : "Replacement Image";
 
+    img.style.width =
+      "100%";
 
-    el.appendChild(
-      img
-    );
+    img.style.height =
+      "100%";
+
+    img.style.display =
+      "block";
+
+    img.style.objectFit =
+      "fill";
+
+    img.style.pointerEvents =
+      "none";
+
+    el.appendChild(img);
 
   }
-
 
   el.addEventListener(
     "pointerdown",
     function(e){
 
       e.preventDefault();
-
       e.stopPropagation();
 
       activePageNumber =
         item.page;
 
-      selectExistingImage(
-        item
-      );
+      selectExistingImage(item);
 
     }
   );
 
-
-  layer.appendChild(
-    el
-  );
+  layer.appendChild(el);
 
 }
-
 
 /* =========================================================
    RENDER DELETED EXISTING IMAGE
@@ -2740,62 +2709,74 @@ function renderDeletedImageCover(
   viewport
 ){
 
+  if(!item){
+    return;
+  }
+
   const cssScale =
     pageDiv.clientWidth /
     viewport.width;
 
-
   const cover =
-    document.createElement(
-      "div"
-    );
-
+    document.createElement("div");
 
   cover.className =
     "deleted-image";
 
-
   cover.dataset.existingId =
     item.id;
 
+  /*
+    Small extra coverage is intentional.
+    It prevents a thin strip of the
+    original PDF image from remaining visible.
+  */
+
+  const extra =
+    2;
 
   cover.style.left =
-    (
-      item.x *
-      cssScale
+    Math.max(
+      0,
+      (item.x - extra) * cssScale
     ) + "px";
-
 
   cover.style.top =
-    (
-      item.y *
-      cssScale
+    Math.max(
+      0,
+      (item.y - extra) * cssScale
     ) + "px";
-
 
   cover.style.width =
-    Math.max(
-      4,
-      item.width *
+    (
+      (item.width + extra * 2) *
       cssScale
     ) + "px";
-
 
   cover.style.height =
-    Math.max(
-      4,
-      item.height *
+    (
+      (item.height + extra * 2) *
       cssScale
     ) + "px";
 
+  cover.style.background =
+    "#fff";
+
+  cover.style.border =
+    "0";
+
+  cover.style.pointerEvents =
+    "auto";
 
   cover.addEventListener(
     "pointerdown",
     function(e){
 
       e.preventDefault();
-
       e.stopPropagation();
+
+      activePageNumber =
+        item.page;
 
       selectExistingImage(
         item
@@ -2803,7 +2784,6 @@ function renderDeletedImageCover(
 
     }
   );
-
 
   layer.appendChild(
     cover
@@ -6388,228 +6368,6 @@ document
    REDRAW TEXT OVER DELETED IMAGES
 ========================================================= */
 
-for(
-  const item of existingTexts
-){
-
-  if(
-    item.deleted
-  ){
-    continue;
-  }
-
-
-  const page =
-    pdfPages[
-      item.page - 1
-    ];
-
-
-  if(!page){
-    continue;
-  }
-
-
-  const pageHeight =
-    page.getHeight();
-
-
-  const relatedImage =
-    existingImages.some(
-      image => {
-
-        if(
-          image.page !== item.page ||
-          !image.deleted
-        ){
-          return false;
-        }
-
-
-        const imageX =
-          image.x /
-          BASE_SCALE;
-
-
-        const imageWidth =
-          image.width /
-          BASE_SCALE;
-
-
-        const imageHeight =
-          image.height /
-          BASE_SCALE;
-
-
-        const imageY =
-          pageHeight -
-          (
-            image.y /
-            BASE_SCALE
-          ) -
-          imageHeight;
-
-
-        const imageRight =
-          imageX +
-          imageWidth;
-
-
-        const imageTop =
-          imageY +
-          imageHeight;
-
-
-        const textX =
-          item.x;
-
-
-        const textY =
-          item.y -
-          item.fontSize * .30;
-
-
-        const textWidth =
-          Math.max(
-            1,
-            item.width
-          );
-
-
-        const textHeight =
-          item.fontSize *
-          1.35;
-
-
-        const textRight =
-          textX +
-          textWidth;
-
-
-        const textTop =
-          textY +
-          textHeight;
-
-
-        return !(
-          textRight <= imageX ||
-          textX >= imageRight ||
-          textTop <= imageY ||
-          textY >= imageTop
-        );
-
-      }
-    );
-
-
-  if(!relatedImage){
-    continue;
-  }
-
-
-  /*
-    IMPORTANT:
-
-    First cover the complete text area
-    so the original PDF text does not
-    remain underneath and create overlap.
-  */
-
-  const coverX =
-    Math.max(
-      0,
-      item.x -
-      item.fontSize * .10
-    );
-
-
-  const coverY =
-    Math.max(
-      0,
-      item.y -
-      item.fontSize * .35
-    );
-
-
-  const coverWidth =
-    Math.max(
-      1,
-      item.width +
-      item.fontSize * .25
-    );
-
-
-  const coverHeight =
-    Math.max(
-      1,
-      item.fontSize * 1.45
-    );
-
-
-  page.drawRectangle({
-
-    x:
-      coverX,
-
-    y:
-      coverY,
-
-    width:
-      coverWidth,
-
-    height:
-      coverHeight,
-
-    color:
-      rgb(
-        1,
-        1,
-        1
-      )
-
-  });
-
-
-  /*
-    Draw clean text again.
-  */
-
-  const font =
-    await getFont(
-      "Helvetica"
-    );
-
-
-  page.drawText(
-    item.text,
-    {
-
-      x:
-        item.x,
-
-      y:
-        item.y,
-
-      size:
-        Math.max(
-          1,
-          item.fontSize
-        ),
-
-      font:
-        font,
-
-      color:
-        rgb(
-          0,
-          0,
-          0
-        )
-
-    }
-  );
-
-}
       /* =================================================
          ADDED OBJECTS
       ================================================= */
