@@ -5,19 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>PDF Editor Tools Free - Free Online PDF & Image Tools</title>
-<meta name="description" content="Free online PDF editor, PDF converter, image resize and image tools. Fast, simple and secure online tools.">
+
+<meta name="description"
+content="Free online PDF and image tools. Edit, merge, split, compress, convert, secure and manage PDF files and images online.">
 
 <style>
+
+/* =========================
+   RESET
+========================= */
+
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   font-family:Arial,Helvetica,sans-serif;
   background:#f7f8fc;
   color:#202124;
+  line-height:1.5;
 }
 
 a{
@@ -25,7 +37,10 @@ a{
   color:inherit;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
+
 .pe-header{
   background:#ffffff;
   border-bottom:1px solid #e8e8ee;
@@ -37,7 +52,7 @@ a{
 .pe-nav{
   max-width:1180px;
   margin:auto;
-  height:70px;
+  min-height:70px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -48,9 +63,10 @@ a{
   display:flex;
   align-items:center;
   gap:10px;
-  font-size:22px;
+  font-size:21px;
   font-weight:800;
   color:#e53232;
+  white-space:nowrap;
 }
 
 .pe-logo-icon{
@@ -62,35 +78,36 @@ a{
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:21px;
+  font-size:13px;
+  font-weight:800;
 }
 
 .pe-menu{
   display:flex;
-  gap:28px;
+  gap:25px;
   align-items:center;
 }
 
 .pe-menu a{
-  font-size:15px;
+  font-size:14px;
   color:#444;
   font-weight:600;
+  transition:.2s;
 }
 
 .pe-menu a:hover{
   color:#e53232;
 }
 
-.pe-login{
-  border:1px solid #ddd;
-  padding:10px 18px;
-  border-radius:8px;
-}
+/* =========================
+   HERO
+========================= */
 
-/* HERO */
 .pe-hero{
-  background:linear-gradient(135deg,#fff5f5,#ffffff);
-  padding:70px 20px 65px;
+  background:
+    radial-gradient(circle at top left,#ffe7e7 0,transparent 35%),
+    linear-gradient(135deg,#fff5f5,#ffffff);
+  padding:75px 20px 70px;
   text-align:center;
 }
 
@@ -100,6 +117,7 @@ a{
   max-width:850px;
   margin:auto;
   font-weight:800;
+  letter-spacing:-1px;
 }
 
 .pe-hero h1 span{
@@ -107,40 +125,51 @@ a{
 }
 
 .pe-hero p{
-  max-width:680px;
+  max-width:700px;
   margin:20px auto 30px;
   color:#666;
   font-size:18px;
-  line-height:1.6;
+  line-height:1.7;
 }
 
+/* SEARCH */
+
 .pe-search{
-  max-width:600px;
+  max-width:620px;
   margin:auto;
   position:relative;
 }
 
 .pe-search input{
   width:100%;
-  height:56px;
+  height:58px;
   border:1px solid #ddd;
-  border-radius:12px;
+  border-radius:13px;
   padding:0 55px 0 20px;
   font-size:16px;
   outline:none;
-  background:white;
-  box-shadow:0 5px 20px rgba(0,0,0,.05);
+  background:#fff;
+  box-shadow:0 7px 25px rgba(0,0,0,.06);
+  transition:.2s;
+}
+
+.pe-search input:focus{
+  border-color:#e53232;
+  box-shadow:0 7px 25px rgba(229,50,50,.12);
 }
 
 .pe-search-icon{
   position:absolute;
   right:20px;
-  top:17px;
-  font-size:21px;
+  top:16px;
+  font-size:22px;
   color:#777;
 }
 
-/* MAIN */
+/* =========================
+   MAIN
+========================= */
+
 .pe-container{
   max-width:1180px;
   margin:auto;
@@ -148,24 +177,30 @@ a{
 }
 
 .pe-section{
-  margin-bottom:60px;
+  margin-bottom:65px;
+  scroll-margin-top:90px;
 }
 
 .pe-section-title{
   text-align:center;
-  margin-bottom:28px;
+  margin-bottom:30px;
 }
 
 .pe-section-title h2{
   font-size:30px;
-  margin-bottom:8px;
+  margin-bottom:7px;
+  font-weight:800;
 }
 
 .pe-section-title p{
   color:#777;
+  font-size:15px;
 }
 
-/* TOOL GRID */
+/* =========================
+   TOOL GRID
+========================= */
+
 .pe-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -175,11 +210,12 @@ a{
 .pe-card{
   background:#fff;
   border:1px solid #e8e8ee;
-  border-radius:14px;
-  padding:25px 20px;
-  min-height:175px;
-  transition:.25s;
+  border-radius:15px;
+  padding:23px 20px;
+  min-height:180px;
+  transition:.25s ease;
   cursor:pointer;
+  display:block;
 }
 
 .pe-card:hover{
@@ -189,34 +225,54 @@ a{
 }
 
 .pe-icon{
-  width:48px;
-  height:48px;
+  width:49px;
+  height:49px;
   border-radius:12px;
   background:#fff0f0;
   color:#e53232;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:24px;
-  margin-bottom:16px;
+  font-size:22px;
+  font-weight:700;
+  margin-bottom:15px;
 }
 
 .pe-card h3{
-  font-size:18px;
-  margin-bottom:8px;
+  font-size:17px;
+  margin-bottom:7px;
+  font-weight:750;
 }
 
 .pe-card p{
-  font-size:14px;
+  font-size:13.5px;
   line-height:1.5;
   color:#777;
 }
 
-/* POPULAR */
+/* =========================
+   CATEGORY BADGE
+========================= */
+
+.category-badge{
+  display:inline-block;
+  margin-bottom:10px;
+  padding:4px 9px;
+  border-radius:20px;
+  background:#f3f3f5;
+  color:#777;
+  font-size:11px;
+  font-weight:600;
+}
+
+/* =========================
+   POPULAR
+========================= */
+
 .pe-popular{
   background:white;
   border-radius:20px;
-  padding:35px;
+  padding:38px;
   border:1px solid #e8e8ee;
 }
 
@@ -228,17 +284,19 @@ a{
 
 .pe-popular-card{
   border:1px solid #eee;
-  border-radius:12px;
+  border-radius:13px;
   padding:20px;
   display:flex;
   align-items:center;
   gap:15px;
   transition:.2s;
+  background:#fff;
 }
 
 .pe-popular-card:hover{
   box-shadow:0 8px 25px rgba(0,0,0,.07);
   transform:translateY(-3px);
+  border-color:#f0b5b5;
 }
 
 .pe-popular-icon{
@@ -250,7 +308,8 @@ a{
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:22px;
+  font-size:20px;
+  font-weight:700;
   flex-shrink:0;
 }
 
@@ -264,12 +323,15 @@ a{
   color:#777;
 }
 
-/* INFO */
+/* =========================
+   INFO
+========================= */
+
 .pe-info{
   background:#202124;
   color:white;
   border-radius:20px;
-  padding:45px;
+  padding:48px 35px;
   text-align:center;
 }
 
@@ -280,16 +342,20 @@ a{
 
 .pe-info p{
   color:#ccc;
-  max-width:700px;
+  max-width:750px;
   margin:auto;
-  line-height:1.6;
+  line-height:1.7;
+  font-size:15px;
 }
 
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
+
 .pe-footer{
   background:#17181a;
   color:#aaa;
-  padding:40px 20px;
+  padding:45px 20px;
   margin-top:20px;
 }
 
@@ -303,7 +369,7 @@ a{
 
 .pe-footer h3{
   color:white;
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 
 .pe-footer p{
@@ -313,16 +379,62 @@ a{
 
 .pe-footer-links{
   display:flex;
-  gap:25px;
+  gap:22px;
   flex-wrap:wrap;
+  align-items:flex-start;
+}
+
+.pe-footer-links a{
+  font-size:14px;
 }
 
 .pe-footer-links a:hover{
   color:white;
 }
 
-/* MOBILE */
-@media(max-width:900px){
+/* =========================
+   NO SEARCH RESULT
+========================= */
+
+.no-results{
+  display:none;
+  text-align:center;
+  padding:35px 15px;
+  color:#777;
+  background:white;
+  border:1px solid #eee;
+  border-radius:15px;
+  margin-top:20px;
+}
+
+.no-results strong{
+  display:block;
+  color:#333;
+  font-size:18px;
+  margin-bottom:5px;
+}
+
+/* =========================
+   MOBILE / TABLET
+========================= */
+
+@media(max-width:1000px){
+
+  .pe-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .pe-menu{
+    gap:15px;
+  }
+
+  .pe-menu a{
+    font-size:13px;
+  }
+}
+
+@media(max-width:800px){
+
   .pe-grid{
     grid-template-columns:repeat(2,1fr);
   }
@@ -334,12 +446,17 @@ a{
   .pe-hero h1{
     font-size:38px;
   }
+
+  .pe-menu{
+    display:none;
+  }
 }
 
 @media(max-width:600px){
 
   .pe-nav{
-    height:62px;
+    min-height:62px;
+    padding:0 15px;
   }
 
   .pe-logo{
@@ -351,46 +468,69 @@ a{
     height:35px;
   }
 
-  .pe-menu{
-    display:none;
-  }
-
   .pe-hero{
     padding:50px 15px;
   }
 
   .pe-hero h1{
-    font-size:32px;
+    font-size:31px;
+    letter-spacing:-.5px;
   }
 
   .pe-hero p{
-    font-size:16px;
+    font-size:15px;
+    margin-top:17px;
+  }
+
+  .pe-search input{
+    height:54px;
+    font-size:15px;
   }
 
   .pe-container{
     padding:40px 15px;
   }
 
+  .pe-section{
+    margin-bottom:50px;
+  }
+
+  .pe-section-title{
+    margin-bottom:22px;
+  }
+
+  .pe-section-title h2{
+    font-size:25px;
+  }
+
   .pe-grid{
     grid-template-columns:1fr 1fr;
-    gap:12px;
+    gap:11px;
   }
 
   .pe-card{
-    padding:18px 14px;
-    min-height:155px;
+    padding:17px 13px;
+    min-height:160px;
+    border-radius:12px;
+  }
+
+  .pe-icon{
+    width:43px;
+    height:43px;
+    font-size:18px;
+    margin-bottom:12px;
   }
 
   .pe-card h3{
-    font-size:16px;
+    font-size:15px;
   }
 
   .pe-card p{
-    font-size:13px;
+    font-size:12px;
   }
 
   .pe-popular{
-    padding:20px 15px;
+    padding:22px 14px;
   }
 
   .pe-popular-grid{
@@ -398,39 +538,90 @@ a{
   }
 
   .pe-info{
-    padding:30px 20px;
+    padding:32px 20px;
+  }
+
+  .pe-info h2{
+    font-size:25px;
   }
 
   .pe-footer-inner{
     flex-direction:column;
   }
+
+  .pe-footer-links{
+    gap:14px;
+  }
 }
+
 </style>
 </head>
 
+
 <body>
 
-<!-- HEADER -->
+
+<!-- ==========================================
+     HEADER
+========================================== -->
+
 <header class="pe-header">
+
   <div class="pe-nav">
 
     <a href="#" class="pe-logo">
-      <div class="pe-logo-icon">PDF</div>
+
+      <div class="pe-logo-icon">
+        PDF
+      </div>
+
       PDF Editor Tools
+
     </a>
 
+
     <nav class="pe-menu">
-      <a href="#pdf-tools">PDF Tools</a>
-      <a href="#convert-tools">Convert</a>
-      <a href="#image-tools">Image Tools</a>
-      <a href="#about">About</a>
+
+      <a href="#pdf-tools">
+        PDF Tools
+      </a>
+
+      <a href="#optimize-tools">
+        Optimize
+      </a>
+
+      <a href="#convert-tools">
+        Convert
+      </a>
+
+      <a href="#edit-tools">
+        Edit PDF
+      </a>
+
+      <a href="#security-tools">
+        Security
+      </a>
+
+      <a href="#image-tools">
+        Image Tools
+      </a>
+
+      <a href="#about">
+        About
+      </a>
+
     </nav>
 
   </div>
+
 </header>
 
 
-<!-- HERO -->
+
+<!-- ==========================================
+     HERO
+========================================== -->
+
 <section class="pe-hero">
 
   <h1>
@@ -439,274 +630,928 @@ a{
   </h1>
 
   <p>
-    Edit, convert, compress, merge, split and manage your
-    PDF files and images online — quickly and easily.
+    Edit, convert, compress, merge, split and manage
+    your PDF files and images online — quickly and easily.
   </p>
 
+
   <div class="pe-search">
+
     <input
       type="text"
       id="toolSearch"
       placeholder="Search for a tool..."
+      autocomplete="off"
       onkeyup="searchTools()"
     >
-    <div class="pe-search-icon">⌕</div>
+
+    <div class="pe-search-icon">
+      ⌕
+    </div>
+
   </div>
 
 </section>
 
+
+
+<!-- ==========================================
+     MAIN
+========================================== -->
 
 <main class="pe-container">
 
 
-<!-- PDF TOOLS -->
+
+<!-- ==========================================
+     PDF TOOLS
+========================================== -->
+
 <section class="pe-section" id="pdf-tools">
 
   <div class="pe-section-title">
+
     <h2>PDF Tools</h2>
-    <p>Everything you need to manage your PDF files</p>
+
+    <p>
+      Manage and organize your PDF files easily
+    </p>
+
   </div>
+
 
   <div class="pe-grid tool-grid">
 
+
     <a class="pe-card tool-card" href="pdf-editor.html">
+
       <div class="pe-icon">✎</div>
+
       <h3>PDF Editor</h3>
-      <p>Edit text, add text and modify your PDF.</p>
+
+      <p>
+        Edit text, add text, images and QR codes to your PDF.
+      </p>
+
     </a>
 
+
     <a class="pe-card tool-card" href="#">
+
       <div class="pe-icon">＋</div>
+
       <h3>Merge PDF</h3>
-      <p>Combine multiple PDF files into one.</p>
+
+      <p>
+        Combine multiple PDF files into one document.
+      </p>
+
     </a>
 
+
     <a class="pe-card tool-card" href="#">
+
       <div class="pe-icon">✂</div>
+
       <h3>Split PDF</h3>
-      <p>Split your PDF into separate files.</p>
+
+      <p>
+        Split a PDF into separate files or page ranges.
+      </p>
+
     </a>
 
-    <a class="pe-card tool-card" href="#">
-      <div class="pe-icon">−</div>
-      <h3>Compress PDF</h3>
-      <p>Reduce PDF file size easily.</p>
-    </a>
 
     <a class="pe-card tool-card" href="#">
-      <div class="pe-icon">↻</div>
-      <h3>Rotate PDF</h3>
-      <p>Rotate PDF pages quickly.</p>
-    </a>
 
-    <a class="pe-card tool-card" href="#">
       <div class="pe-icon">🗑</div>
-      <h3>Delete Pages</h3>
-      <p>Remove unwanted pages from PDF.</p>
+
+      <h3>Remove Pages</h3>
+
+      <p>
+        Delete unwanted pages from your PDF.
+      </p>
+
     </a>
 
+
     <a class="pe-card tool-card" href="#">
+
       <div class="pe-icon">⇩</div>
+
       <h3>Extract Pages</h3>
-      <p>Extract selected pages from PDF.</p>
+
+      <p>
+        Extract selected pages from your PDF.
+      </p>
+
     </a>
 
+
     <a class="pe-card tool-card" href="#">
+
       <div class="pe-icon">▣</div>
-      <h3>PDF to JPG</h3>
-      <p>Convert PDF pages into JPG images.</p>
+
+      <h3>Organize PDF</h3>
+
+      <p>
+        Rearrange, rotate and organize PDF pages.
+      </p>
+
     </a>
+
+
+    <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">▤</div>
+
+      <h3>Scan to PDF</h3>
+
+      <p>
+        Create PDF documents from scanned pages.
+      </p>
+
+    </a>
+
 
   </div>
 
 </section>
 
 
-<!-- CONVERT TOOLS -->
+
+<!-- ==========================================
+     OPTIMIZE PDF
+========================================== -->
+
+<section class="pe-section" id="optimize-tools">
+
+  <div class="pe-section-title">
+
+    <h2>Optimize PDF</h2>
+
+    <p>
+      Improve PDF size, quality and usability
+    </p>
+
+  </div>
+
+
+  <div class="pe-grid tool-grid">
+
+
+    <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">−</div>
+
+      <h3>Compress PDF</h3>
+
+      <p>
+        Reduce PDF file size while maintaining quality.
+      </p>
+
+    </a>
+
+
+    <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">✓</div>
+
+      <h3>Repair PDF</h3>
+
+      <p>
+        Try to repair damaged or corrupted PDF files.
+      </p>
+
+    </a>
+
+
+    <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">OCR</div>
+
+      <h3>OCR PDF</h3>
+
+      <p>
+        Convert scanned PDF text into searchable text.
+      </p>
+
+    </a>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- ==========================================
+     CONVERT TO PDF
+========================================== -->
+
+<section class="pe-section" id="convert-to-pdf">
+
+  <div class="pe-section-title">
+
+    <h2>Convert to PDF</h2>
+
+    <p>
+      Convert different file formats into PDF
+    </p>
+
+  </div>
+
+
+  <div class="pe-grid tool-grid">
+
+
+    <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">J</div>
+
+      <h3>JPG to PDF</h3>
+
+      <p>
+        Convert JPG images into PDF documents.
+      </p>
+
+    </a>
+
+
+    <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">W</div>
+
+      <h3>Word to PDF</h3>
+
+      <p>
+        Convert Word documents into PDF files.
+      </p>
+
+    </a>
+
+
+    <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">P</div>
+
+      <h3>PowerPoint to PDF</h3>
+
+      <p>
+        Convert PowerPoint presentations into PDF.
+      </p>
+
+    </a>
+
+
+    <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">X</div>
+
+      <h3>Excel to PDF</h3>
+
+      <p>
+        Convert Excel spreadsheets into PDF.
+      </p>
+
+    </a>
+
+
+    <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">HTML</div>
+
+      <h3>HTML to PDF</h3>
+
+      <p>
+        Convert HTML pages into PDF documents.
+      </p>
+
+    </a>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- ==========================================
+     CONVERT FROM PDF
+========================================== -->
+
 <section class="pe-section" id="convert-tools">
 
   <div class="pe-section-title">
-    <h2>PDF Converter</h2>
-    <p>Convert your files from one format to another</p>
+
+    <h2>Convert from PDF</h2>
+
+    <p>
+      Convert PDF files into popular formats
+    </p>
+
   </div>
+
 
   <div class="pe-grid tool-grid">
 
+
     <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">JPG</div>
+
+      <h3>PDF to JPG</h3>
+
+      <p>
+        Convert PDF pages into JPG images.
+      </p>
+
+    </a>
+
+
+    <a class="pe-card tool-card" href="#">
+
       <div class="pe-icon">W</div>
+
       <h3>PDF to Word</h3>
-      <p>Convert PDF documents into Word files.</p>
+
+      <p>
+        Convert PDF documents into editable Word files.
+      </p>
+
     </a>
 
-    <a class="pe-card tool-card" href="#">
-      <div class="pe-icon">X</div>
-      <h3>PDF to Excel</h3>
-      <p>Convert PDF tables into Excel.</p>
-    </a>
 
     <a class="pe-card tool-card" href="#">
+
       <div class="pe-icon">P</div>
+
       <h3>PDF to PowerPoint</h3>
-      <p>Convert PDF files into presentations.</p>
+
+      <p>
+        Convert PDF files into PowerPoint presentations.
+      </p>
+
     </a>
 
-    <a class="pe-card tool-card" href="#">
-      <div class="pe-icon">J</div>
-      <h3>JPG to PDF</h3>
-      <p>Convert images into PDF documents.</p>
-    </a>
 
     <a class="pe-card tool-card" href="#">
-      <div class="pe-icon">PNG</div>
-      <h3>PNG to PDF</h3>
-      <p>Convert PNG images into PDF files.</p>
+
+      <div class="pe-icon">X</div>
+
+      <h3>PDF to Excel</h3>
+
+      <p>
+        Convert PDF tables and data into Excel.
+      </p>
+
     </a>
 
-    <a class="pe-card tool-card" href="#">
-      <div class="pe-icon">TXT</div>
-      <h3>Text to PDF</h3>
-      <p>Turn text documents into PDF files.</p>
-    </a>
 
     <a class="pe-card tool-card" href="#">
-      <div class="pe-icon">HTML</div>
-      <h3>HTML to PDF</h3>
-      <p>Convert web pages into PDF.</p>
+
+      <div class="pe-icon">A</div>
+
+      <h3>PDF to PDF/A</h3>
+
+      <p>
+        Convert PDF documents to archival PDF/A format.
+      </p>
+
     </a>
 
-    <a class="pe-card tool-card" href="#">
-      <div class="pe-icon">PDF</div>
-      <h3>PDF to PNG</h3>
-      <p>Convert PDF pages into PNG images.</p>
-    </a>
 
   </div>
 
 </section>
 
 
-<!-- IMAGE TOOLS -->
+
+<!-- ==========================================
+     EDIT PDF
+========================================== -->
+
+<section class="pe-section" id="edit-tools">
+
+  <div class="pe-section-title">
+
+    <h2>Edit PDF</h2>
+
+    <p>
+      Make changes and add useful elements to your PDF
+    </p>
+
+  </div>
+
+
+  <div class="pe-grid tool-grid">
+
+
+    <a class="pe-card tool-card" href="pdf-editor.html">
+
+      <div class="pe-icon">✎</div>
+
+      <h3>Edit PDF</h3>
+
+      <p>
+        Edit PDF text and add images, QR codes and more.
+      </p>
+
+    </a>
+
+
+    <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">↻</div>
+
+      <h3>Rotate PDF</h3>
+
+      <p>
+        Rotate PDF pages to the correct orientation.
+      </p>
+
+    </a>
+
+
+    <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">123</div>
+
+      <h3>Add Page Numbers</h3>
+
+      <p>
+        Add page numbers to your PDF documents.
+      </p>
+
+    </a>
+
+
+    <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">W</div>
+
+      <h3>Add Watermark</h3>
+
+      <p>
+        Add text or image watermarks to PDF files.
+      </p>
+
+    </a>
+
+
+    <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">✂</div>
+
+      <h3>Crop PDF</h3>
+
+      <p>
+        Crop PDF pages to the required area.
+      </p>
+
+    </a>
+
+
+    <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">☑</div>
+
+      <h3>PDF Forms</h3>
+
+      <p>
+        Work with forms and fillable PDF documents.
+      </p>
+
+    </a>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- ==========================================
+     PDF SECURITY
+========================================== -->
+
+<section class="pe-section" id="security-tools">
+
+  <div class="pe-section-title">
+
+    <h2>PDF Security</h2>
+
+    <p>
+      Protect, unlock, sign and manage PDF security
+    </p>
+
+  </div>
+
+
+  <div class="pe-grid tool-grid">
+
+
+    <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">🔓</div>
+
+      <h3>Unlock PDF</h3>
+
+      <p>
+        Remove restrictions from supported PDF files.
+      </p>
+
+    </a>
+
+
+    <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">🔒</div>
+
+      <h3>Protect PDF</h3>
+
+      <p>
+        Protect your PDF with a password.
+      </p>
+
+    </a>
+
+
+    <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">✓</div>
+
+      <h3>Sign PDF</h3>
+
+      <p>
+        Add your electronic signature to PDF documents.
+      </p>
+
+    </a>
+
+
+    <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">▰</div>
+
+      <h3>Redact PDF</h3>
+
+      <p>
+        Permanently hide sensitive information in PDFs.
+      </p>
+
+    </a>
+
+
+    <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">⇄</div>
+
+      <h3>Compare PDF</h3>
+
+      <p>
+        Compare two PDF documents and identify differences.
+      </p>
+
+    </a>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- ==========================================
+     PDF INTELLIGENCE
+========================================== -->
+
+<section class="pe-section" id="ai-tools">
+
+  <div class="pe-section-title">
+
+    <h2>PDF Intelligence</h2>
+
+    <p>
+      Smart tools for working with PDF content
+    </p>
+
+  </div>
+
+
+  <div class="pe-grid tool-grid">
+
+
+    <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">AI</div>
+
+      <h3>AI Summarizer</h3>
+
+      <p>
+        Create a simple summary from your PDF content.
+      </p>
+
+    </a>
+
+
+    <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">文</div>
+
+      <h3>Translate PDF</h3>
+
+      <p>
+        Translate PDF content into another language.
+      </p>
+
+    </a>
+
+
+    <a class="pe-card tool-card" href="#">
+
+      <div class="pe-icon">MD</div>
+
+      <h3>PDF to Markdown</h3>
+
+      <p>
+        Convert PDF content into Markdown format.
+      </p>
+
+    </a>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- ==========================================
+     IMAGE TOOLS
+========================================== -->
+
 <section class="pe-section" id="image-tools">
 
   <div class="pe-section-title">
+
     <h2>Image Tools</h2>
-    <p>Edit, resize and convert your images online</p>
+
+    <p>
+      Resize, compress, crop and convert your images
+    </p>
+
   </div>
+
 
   <div class="pe-grid tool-grid">
 
+
     <a class="pe-card tool-card" href="#">
+
       <div class="pe-icon">↔</div>
+
       <h3>Resize Image</h3>
-      <p>Resize JPG, PNG and other images.</p>
+
+      <p>
+        Resize JPG, PNG and other image formats.
+      </p>
+
     </a>
 
+
     <a class="pe-card tool-card" href="#">
+
       <div class="pe-icon">⇩</div>
+
       <h3>Compress Image</h3>
-      <p>Reduce image size while keeping quality.</p>
+
+      <p>
+        Reduce image size while maintaining good quality.
+      </p>
+
     </a>
 
+
     <a class="pe-card tool-card" href="#">
+
       <div class="pe-icon">JPG</div>
+
       <h3>JPG to PNG</h3>
-      <p>Convert JPG images into PNG.</p>
+
+      <p>
+        Convert JPG images into PNG format.
+      </p>
+
     </a>
 
+
     <a class="pe-card tool-card" href="#">
+
       <div class="pe-icon">PNG</div>
+
       <h3>PNG to JPG</h3>
-      <p>Convert PNG images into JPG.</p>
+
+      <p>
+        Convert PNG images into JPG format.
+      </p>
+
     </a>
 
+
     <a class="pe-card tool-card" href="#">
+
       <div class="pe-icon">✂</div>
+
       <h3>Crop Image</h3>
-      <p>Crop your image to any required size.</p>
+
+      <p>
+        Crop images to any required size or ratio.
+      </p>
+
     </a>
 
+
     <a class="pe-card tool-card" href="#">
+
       <div class="pe-icon">↻</div>
+
       <h3>Rotate Image</h3>
-      <p>Rotate images quickly and easily.</p>
+
+      <p>
+        Rotate images quickly and easily.
+      </p>
+
     </a>
 
+
     <a class="pe-card tool-card" href="#">
+
       <div class="pe-icon">PDF</div>
+
       <h3>Image to PDF</h3>
-      <p>Convert one or multiple images into PDF.</p>
+
+      <p>
+        Convert one or multiple images into PDF.
+      </p>
+
     </a>
 
+
     <a class="pe-card tool-card" href="#">
+
       <div class="pe-icon">🖼</div>
+
       <h3>Image Converter</h3>
-      <p>Convert images between popular formats.</p>
+
+      <p>
+        Convert images between popular formats.
+      </p>
+
     </a>
+
 
   </div>
 
 </section>
 
 
-<!-- POPULAR TOOLS -->
+
+<!-- ==========================================
+     POPULAR TOOLS
+========================================== -->
+
 <section class="pe-section">
 
   <div class="pe-popular">
 
     <div class="pe-section-title">
+
       <h2>Popular Tools</h2>
-      <p>Our most useful PDF and image tools</p>
+
+      <p>
+        Quick access to frequently used tools
+      </p>
+
     </div>
+
 
     <div class="pe-popular-grid">
 
-      <a href="#" class="pe-popular-card">
-        <div class="pe-popular-icon">✎</div>
+
+      <a href="pdf-editor.html" class="pe-popular-card">
+
+        <div class="pe-popular-icon">
+          ✎
+        </div>
+
         <div>
+
           <h3>PDF Editor</h3>
-          <p>Edit PDF online</p>
+
+          <p>
+            Edit PDF online
+          </p>
+
         </div>
+
       </a>
 
-      <a href="#" class="pe-popular-card">
-        <div class="pe-popular-icon">＋</div>
+
+      <a href="#pdf-tools" class="pe-popular-card">
+
+        <div class="pe-popular-icon">
+          ＋
+        </div>
+
         <div>
+
           <h3>Merge PDF</h3>
-          <p>Combine PDF files</p>
+
+          <p>
+            Combine PDF files
+          </p>
+
         </div>
+
       </a>
 
-      <a href="#" class="pe-popular-card">
-        <div class="pe-popular-icon">−</div>
+
+      <a href="#optimize-tools" class="pe-popular-card">
+
+        <div class="pe-popular-icon">
+          −
+        </div>
+
         <div>
+
           <h3>Compress PDF</h3>
-          <p>Reduce PDF size</p>
+
+          <p>
+            Reduce PDF size
+          </p>
+
         </div>
+
       </a>
 
-      <a href="#" class="pe-popular-card">
-        <div class="pe-popular-icon">↔</div>
+
+      <a href="#image-tools" class="pe-popular-card">
+
+        <div class="pe-popular-icon">
+          ↔
+        </div>
+
         <div>
+
           <h3>Resize Image</h3>
-          <p>Change image dimensions</p>
+
+          <p>
+            Change image dimensions
+          </p>
+
         </div>
+
       </a>
 
-      <a href="#" class="pe-popular-card">
-        <div class="pe-popular-icon">J</div>
+
+      <a href="#convert-to-pdf" class="pe-popular-card">
+
+        <div class="pe-popular-icon">
+          J
+        </div>
+
         <div>
+
           <h3>JPG to PDF</h3>
-          <p>Convert JPG to PDF</p>
+
+          <p>
+            Convert JPG to PDF
+          </p>
+
         </div>
+
       </a>
 
-      <a href="#" class="pe-popular-card">
-        <div class="pe-popular-icon">W</div>
-        <div>
-          <h3>PDF to Word</h3>
-          <p>Convert PDF to Word</p>
+
+      <a href="#convert-tools" class="pe-popular-card">
+
+        <div class="pe-popular-icon">
+          W
         </div>
+
+        <div>
+
+          <h3>PDF to Word</h3>
+
+          <p>
+            Convert PDF to Word
+          </p>
+
+        </div>
+
       </a>
+
 
     </div>
 
@@ -715,39 +1560,107 @@ a{
 </section>
 
 
-<!-- ABOUT -->
+
+<!-- ==========================================
+     ABOUT
+========================================== -->
+
 <section class="pe-section" id="about">
 
   <div class="pe-info">
-    <h2>Free Online PDF & Image Tools</h2>
+
+    <h2>
+      Free Online PDF & Image Tools
+    </h2>
+
     <p>
-      PDF Editor Tools Free provides simple and useful online tools
-      for editing, converting, compressing and managing PDF files
-      and images. Our goal is to make everyday document work fast,
-      easy and accessible.
+
+      PDF Editor Tools provides simple and useful online
+      tools for editing, converting, compressing, organizing,
+      securing and managing PDF files and images.
+
+      Our goal is to make everyday document work
+      fast, simple and accessible.
+
     </p>
+
   </div>
 
 </section>
+
+
+
+<!-- SEARCH NO RESULT -->
+
+<div class="no-results" id="noResults">
+
+  <strong>No tool found</strong>
+
+  Try searching with another tool name.
+
+</div>
+
 
 </main>
 
 
-<!-- FOOTER -->
+
+<!-- ==========================================
+     FOOTER
+========================================== -->
+
 <footer class="pe-footer">
 
   <div class="pe-footer-inner">
 
+
     <div>
-      <h3>PDF Editor Tools Free</h3>
-      <p>Simple online PDF and image tools for everyone.</p>
+
+      <h3>
+        PDF Editor Tools Free
+      </h3>
+
+      <p>
+        Simple online PDF and image tools for everyone.
+      </p>
+
     </div>
 
+
     <div class="pe-footer-links">
-      <a href="#pdf-tools">PDF Tools</a>
-      <a href="#convert-tools">Convert</a>
-      <a href="#image-tools">Image Tools</a>
-      <a href="#about">About</a>
+
+      <a href="#pdf-tools">
+        PDF Tools
+      </a>
+
+      <a href="#optimize-tools">
+        Optimize
+      </a>
+
+      <a href="#convert-tools">
+        Convert
+      </a>
+
+      <a href="#edit-tools">
+        Edit PDF
+      </a>
+
+      <a href="#security-tools">
+        Security
+      </a>
+
+      <a href="#ai-tools">
+        PDF Intelligence
+      </a>
+
+      <a href="#image-tools">
+        Image Tools
+      </a>
+
+      <a href="#about">
+        About
+      </a>
+
     </div>
 
   </div>
@@ -755,28 +1668,126 @@ a{
 </footer>
 
 
+
+<!-- ==========================================
+     SEARCH SCRIPT
+========================================== -->
+
 <script>
+
 function searchTools(){
 
   var input = document.getElementById("toolSearch");
-  var filter = input.value.toLowerCase();
+
+  var filter = input.value.toLowerCase().trim();
 
   var cards = document.querySelectorAll(".tool-card");
+
+  var visibleCount = 0;
+
 
   cards.forEach(function(card){
 
     var text = card.innerText.toLowerCase();
 
-    if(text.indexOf(filter) > -1){
+
+    if(filter === "" || text.indexOf(filter) !== -1){
+
       card.style.display = "";
-    }else{
+
+      visibleCount++;
+
+    }
+
+    else{
+
       card.style.display = "none";
+
     }
 
   });
 
+
+  var sections = document.querySelectorAll(".pe-section");
+
+  sections.forEach(function(section){
+
+    var sectionCards =
+      section.querySelectorAll(".tool-card");
+
+    if(sectionCards.length === 0){
+
+      return;
+
+    }
+
+
+    var visibleInSection = 0;
+
+
+    sectionCards.forEach(function(card){
+
+      if(card.style.display !== "none"){
+
+        visibleInSection++;
+
+      }
+
+    });
+
+
+    if(filter !== "" && visibleInSection === 0){
+
+      section.style.display = "none";
+
+    }
+
+    else{
+
+      section.style.display = "";
+
+    }
+
+  });
+
+
+  var noResults =
+    document.getElementById("noResults");
+
+
+  if(filter !== "" && visibleCount === 0){
+
+    noResults.style.display = "block";
+
+  }
+
+  else{
+
+    noResults.style.display = "none";
+
+  }
+
 }
+
+
+/* ENTER KEY */
+
+document
+.getElementById("toolSearch")
+.addEventListener("keydown",function(event){
+
+  if(event.key === "Escape"){
+
+    this.value = "";
+
+    searchTools();
+
+  }
+
+});
+
 </script>
+
 
 </body>
 </html>
