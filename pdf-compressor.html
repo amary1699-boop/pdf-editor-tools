@@ -990,19 +990,30 @@ compressionOptions.forEach(
 
 function getSettings(){
 
-    if(
-        selectedLevel === "low"
-    ){
+    if(selectedLevel === "low"){
 
         return {
-
-            scale:1.35,
-
-            quality:0.72
-
+            scale:1.75,
+            quality:0.90
         };
 
     }
+
+    if(selectedLevel === "high"){
+
+        return {
+            scale:1.15,
+            quality:0.70
+        };
+
+    }
+
+    return {
+        scale:1.45,
+        quality:0.82
+    };
+
+}
 
 
     if(
@@ -1335,18 +1346,17 @@ compressBtn.addEventListener(
 
                 const strongerSettings = {
 
-                    scale:
-                        selectedLevel === "high"
-                        ? 0.60
-                        : 0.75,
+    scale:
+        selectedLevel === "high"
+        ? 0.95
+        : 1.20,
 
-                    quality:
-                        selectedLevel === "high"
-                        ? 0.30
-                        : 0.40
+    quality:
+        selectedLevel === "high"
+        ? 0.62
+        : 0.72
 
-                };
-
+};
 
                 const strongerBlob =
                     await buildCompressedPDF(
