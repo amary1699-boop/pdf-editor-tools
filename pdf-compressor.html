@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +9,7 @@
 
 <meta
     name="description"
-    content="Compress PDF online for free. Reduce PDF file size with low, medium and high compression."
+    content="Compress PDF online for free. Reduce PDF file size while maintaining good visual quality."
 >
 
 <!-- PDF.js -->
@@ -405,7 +406,6 @@ footer{
 </style>
 </head>
 
-
 <body>
 
 <!-- HEADER -->
@@ -437,7 +437,6 @@ footer{
 
 <main class="container">
 
-
     <!-- HERO -->
 
     <section class="hero">
@@ -457,7 +456,6 @@ footer{
 
     <section class="tool-box">
 
-
         <!-- UPLOAD -->
 
         <div class="upload-area">
@@ -474,17 +472,12 @@ footer{
                 Upload your PDF to compress
             </p>
 
-
-            <!-- IMPORTANT:
-                 Native label opens file picker -->
-
             <label
                 for="fileInput"
                 class="select-btn"
             >
                 Choose PDF
             </label>
-
 
             <input
                 type="file"
@@ -526,9 +519,7 @@ footer{
                 Choose Compression Level
             </h3>
 
-
             <div class="compression-options">
-
 
                 <div
                     class="option"
@@ -540,7 +531,7 @@ footer{
                     </strong>
 
                     <span>
-                        Better Quality
+                        Best Quality
                     </span>
 
                 </div>
@@ -576,7 +567,6 @@ footer{
                     </span>
 
                 </div>
-
 
             </div>
 
@@ -626,9 +616,7 @@ footer{
                 ✓ Compression Complete
             </h3>
 
-
             <div class="size-result">
-
 
                 <div class="size-item">
 
@@ -668,7 +656,6 @@ footer{
 
                 </div>
 
-
             </div>
 
 
@@ -700,13 +687,13 @@ footer{
                 Important:
             </strong>
 
-            This compressor rebuilds each PDF page as an optimized
-            image. It is especially useful for scanned and
-            image-heavy PDFs. Text in the resulting PDF may not
-            remain selectable.
+            This browser-based compressor rebuilds PDF pages
+            as optimized images. It works especially well for
+            scanned and image-heavy PDFs. Text selection,
+            forms, links and some original PDF features may not
+            remain available after compression.
 
         </div>
-
 
     </section>
 
@@ -721,21 +708,21 @@ footer{
 
         <p>
             Compress PDF files directly in your browser.
-            Your selected PDF is processed locally by this page.
+            Your selected PDF is processed locally on your device.
         </p>
 
         <p>
             Choose Low, Medium or High compression depending
-            on whether you prefer better quality or smaller size.
+            on whether you prefer better quality or a smaller
+            file size.
         </p>
 
         <p>
-            Scanned documents and image-heavy PDFs usually have
-            more scope for size reduction.
+            Scanned documents and image-heavy PDFs generally
+            provide better compression results.
         </p>
 
     </section>
-
 
 </main>
 
@@ -751,13 +738,17 @@ footer{
 
 <script>
 
-/* PDF.JS WORKER */
+/* =========================================================
+   PDF.JS WORKER
+========================================================= */
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
 "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
 
-/* ELEMENTS */
+/* =========================================================
+   ELEMENTS
+========================================================= */
 
 const fileInput =
 document.getElementById("fileInput");
@@ -808,7 +799,9 @@ const resetBtn =
 document.getElementById("resetBtn");
 
 
-/* VARIABLES */
+/* =========================================================
+   VARIABLES
+========================================================= */
 
 let selectedFile = null;
 
@@ -819,14 +812,14 @@ let outputBlob = null;
 let outputName = "compressed.pdf";
 
 
-/* FORMAT FILE SIZE */
+/* =========================================================
+   FORMAT FILE SIZE
+========================================================= */
 
 function formatBytes(bytes){
 
     if(bytes === 0){
-
         return "0 Bytes";
-
     }
 
     const units = [
@@ -850,15 +843,15 @@ function formatBytes(bytes){
             ).toFixed(2)
         )
         +
-        " "
-        +
+        " " +
         units[i]
     );
-
 }
 
 
-/* PROGRESS */
+/* =========================================================
+   UPDATE PROGRESS
+========================================================= */
 
 function updateProgress(
     value,
@@ -866,15 +859,16 @@ function updateProgress(
 ){
 
     progress.style.width =
-        value + "%";
+        Math.min(100,Math.max(0,value)) + "%";
 
     progressText.textContent =
         message;
-
 }
 
 
-/* FILE SELECT */
+/* =========================================================
+   FILE SELECT
+========================================================= */
 
 fileInput.addEventListener(
     "change",
@@ -883,15 +877,10 @@ fileInput.addEventListener(
         const file =
             this.files[0];
 
-
         if(!file){
-
             return;
-
         }
 
-
-        /* PDF CHECK */
 
         const isPDF =
             file.type === "application/pdf" ||
@@ -909,17 +898,11 @@ fileInput.addEventListener(
             this.value = "";
 
             return;
-
         }
 
 
-        /* STORE FILE */
-
         selectedFile =
             file;
-
-
-        /* SHOW INFORMATION */
 
         fileName.textContent =
             file.name;
@@ -928,28 +911,31 @@ fileInput.addEventListener(
             "Original size: " +
             formatBytes(file.size);
 
-
         fileInfo.style.display =
             "block";
-
 
         options.style.display =
             "block";
 
-
         result.style.display =
             "none";
 
+        progressBox.style.display =
+            "none";
+
+        progress.style.width =
+            "0%";
 
         outputBlob =
             null;
-
 
     }
 );
 
 
-/* COMPRESSION LEVEL */
+/* =========================================================
+   COMPRESSION LEVEL
+========================================================= */
 
 compressionOptions.forEach(
     function(option){
@@ -958,17 +944,15 @@ compressionOptions.forEach(
             "click",
             function(){
 
-                compressionOptions
-                    .forEach(
-                        function(item){
+                compressionOptions.forEach(
+                    function(item){
 
-                            item.classList
-                                .remove(
-                                    "active"
-                                );
+                        item.classList.remove(
+                            "active"
+                        );
 
-                        }
-                    );
+                    }
+                );
 
 
                 this.classList.add(
@@ -986,45 +970,89 @@ compressionOptions.forEach(
 );
 
 
-/* SETTINGS */
+/* =========================================================
+   COMPRESSION SETTINGS
+========================================================= */
+
+/*
+    scale = rendering resolution
+
+    quality = JPEG quality
+
+    Higher values:
+    - better visual quality
+    - larger output
+
+    Lower values:
+    - smaller output
+    - lower quality
+*/
 
 function getSettings(){
 
     if(selectedLevel === "low"){
 
         return {
-            scale:1.75,
-            quality:0.90
+
+            scale:1.85,
+
+            quality:0.92
+
         };
 
     }
+
 
     if(selectedLevel === "high"){
 
         return {
-            scale:1.15,
-            quality:0.70
+
+            scale:1.25,
+
+            quality:0.74
+
         };
 
     }
 
+
     return {
-        scale:1.45,
-        quality:0.82
+
+        scale:1.60,
+
+        quality:0.86
+
     };
 
 }
 
 
-    if(
-        selectedLevel === "high"
-    ){
+/* =========================================================
+   STRONGER FALLBACK SETTINGS
+========================================================= */
+
+function getStrongerSettings(){
+
+    if(selectedLevel === "high"){
 
         return {
 
-            scale:0.80,
+            scale:1.05,
 
-            quality:0.42
+            quality:0.66
+
+        };
+
+    }
+
+
+    if(selectedLevel === "medium"){
+
+        return {
+
+            scale:1.30,
+
+            quality:0.76
 
         };
 
@@ -1033,16 +1061,18 @@ function getSettings(){
 
     return {
 
-        scale:1.05,
+        scale:1.55,
 
-        quality:0.58
+        quality:0.84
 
     };
 
 }
 
 
-/* RENDER PAGE */
+/* =========================================================
+   RENDER PAGE TO JPEG
+========================================================= */
 
 async function renderPageToJPEG(
     page,
@@ -1063,7 +1093,10 @@ async function renderPageToJPEG(
 
     const context =
         canvas.getContext(
-            "2d"
+            "2d",
+            {
+                alpha:false
+            }
         );
 
 
@@ -1090,7 +1123,6 @@ async function renderPageToJPEG(
     context.fillStyle =
         "#ffffff";
 
-
     context.fillRect(
         0,
         0,
@@ -1107,7 +1139,10 @@ async function renderPageToJPEG(
             context,
 
         viewport:
-            viewport
+            viewport,
+
+        background:
+            "#ffffff"
 
     }).promise;
 
@@ -1131,7 +1166,7 @@ async function renderPageToJPEG(
     if(!blob){
 
         throw new Error(
-            "Unable to create compressed image."
+            "Unable to create optimized image."
         );
 
     }
@@ -1142,7 +1177,9 @@ async function renderPageToJPEG(
 }
 
 
-/* BUILD PDF */
+/* =========================================================
+   BUILD COMPRESSED PDF
+========================================================= */
 
 async function buildCompressedPDF(
     pdf,
@@ -1164,12 +1201,12 @@ async function buildCompressedPDF(
     ){
 
         const percentage =
-            10 +
+            8 +
             Math.round(
                 (
                     (pageNumber - 1) /
                     totalPages
-                ) * 82
+                ) * 84
             );
 
 
@@ -1223,10 +1260,17 @@ async function buildCompressedPDF(
         newPage.drawImage(
             jpg,
             {
+
                 x:0,
+
                 y:0,
-                width:originalViewport.width,
-                height:originalViewport.height
+
+                width:
+                    originalViewport.width,
+
+                height:
+                    originalViewport.height
+
             }
         );
 
@@ -1253,7 +1297,9 @@ async function buildCompressedPDF(
 }
 
 
-/* COMPRESS */
+/* =========================================================
+   COMPRESS PDF
+========================================================= */
 
 compressBtn.addEventListener(
     "click",
@@ -1282,10 +1328,14 @@ compressBtn.addEventListener(
             "block";
 
 
+        outputBlob =
+            null;
+
+
         try{
 
             updateProgress(
-                5,
+                3,
                 "Reading PDF..."
             );
 
@@ -1329,9 +1379,9 @@ compressBtn.addEventListener(
 
 
             /*
-             * If first result is not smaller,
-             * create a stronger compressed version.
-             */
+                If first result is not smaller,
+                try a stronger setting.
+            */
 
             if(
                 outputBlob.size >=
@@ -1340,23 +1390,13 @@ compressBtn.addEventListener(
 
                 updateProgress(
                     94,
-                    "Trying stronger compression..."
+                    "Optimizing file size..."
                 );
 
 
-                const strongerSettings = {
+                const strongerSettings =
+                    getStrongerSettings();
 
-    scale:
-        selectedLevel === "high"
-        ? 0.95
-        : 1.20,
-
-    quality:
-        selectedLevel === "high"
-        ? 0.62
-        : 0.72
-
-};
 
                 const strongerBlob =
                     await buildCompressedPDF(
@@ -1420,7 +1460,7 @@ compressBtn.addEventListener(
                 );
 
 
-            /* NAME */
+            /* OUTPUT NAME */
 
             const baseName =
                 selectedFile.name
@@ -1446,7 +1486,7 @@ compressBtn.addEventListener(
                         "none";
 
                 },
-                600
+                700
             );
 
         }
@@ -1460,6 +1500,10 @@ compressBtn.addEventListener(
 
             progressBox.style.display =
                 "none";
+
+
+            outputBlob =
+                null;
 
 
             alert(
@@ -1482,7 +1526,9 @@ compressBtn.addEventListener(
 );
 
 
-/* DOWNLOAD */
+/* =========================================================
+   DOWNLOAD
+========================================================= */
 
 downloadBtn.addEventListener(
     "click",
@@ -1514,6 +1560,7 @@ downloadBtn.addEventListener(
         link.href =
             url;
 
+
         link.download =
             outputName;
 
@@ -1544,7 +1591,9 @@ downloadBtn.addEventListener(
 );
 
 
-/* RESET */
+/* =========================================================
+   RESET
+========================================================= */
 
 resetBtn.addEventListener(
     "click",
@@ -1553,26 +1602,68 @@ resetBtn.addEventListener(
         selectedFile =
             null;
 
+
         outputBlob =
             null;
+
 
         fileInput.value =
             "";
 
+
         fileInfo.style.display =
             "none";
+
 
         options.style.display =
             "none";
 
+
         progressBox.style.display =
             "none";
+
 
         result.style.display =
             "none";
 
+
         progress.style.width =
             "0%";
+
+
+        progressText.textContent =
+            "Preparing PDF...";
+
+
+        selectedLevel =
+            "medium";
+
+
+        compressionOptions.forEach(
+            function(item){
+
+                item.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+        const mediumOption =
+            document.querySelector(
+                '.option[data-level="medium"]'
+            );
+
+
+        if(mediumOption){
+
+            mediumOption.classList.add(
+                "active"
+            );
+
+        }
+
 
         compressBtn.disabled =
             false;
