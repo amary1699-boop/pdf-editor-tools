@@ -744,14 +744,20 @@ function updateProgress(value,text){
 }
 
 
-uploadArea.addEventListener(
-    "click",
-    function(){
+uploadArea.addEventListener("click", function(e){
 
+    if(e.target.tagName !== "BUTTON"){
         fileInput.click();
-
     }
-);
+
+});
+
+document.querySelector(".select-btn").addEventListener("click", function(e){
+
+    e.stopPropagation();
+    fileInput.click();
+
+});
 
 
 fileInput.addEventListener(
