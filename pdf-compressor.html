@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Compress PDF Online Free - PDF Editor Tools</title>
-<meta name="description" content="Compress PDF online for free. Reduce PDF file size with low, medium and high compression.">
+
+<meta
+    name="description"
+    content="Compress PDF online for free. Reduce PDF file size with low, medium and high compression."
+>
 
 <!-- PDF.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -14,6 +19,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -26,8 +32,10 @@ body{
     color:#222;
 }
 
+/* HEADER */
+
 header{
-    background:#fff;
+    background:#ffffff;
     border-bottom:1px solid #e5e7eb;
     padding:16px 20px;
 }
@@ -41,23 +49,25 @@ header{
 }
 
 .logo{
-    color:#e53232;
     text-decoration:none;
+    color:#e53232;
     font-size:24px;
     font-weight:800;
 }
 
 .home-btn{
-    color:#333;
     text-decoration:none;
-    padding:9px 15px;
-    border-radius:8px;
+    color:#333;
     font-weight:600;
+    padding:9px 16px;
+    border-radius:8px;
 }
 
 .home-btn:hover{
     background:#f3f4f6;
 }
+
+/* MAIN */
 
 .container{
     max-width:900px;
@@ -81,19 +91,22 @@ header{
     font-size:17px;
 }
 
+/* TOOL */
+
 .tool-box{
-    background:#fff;
+    background:#ffffff;
     padding:35px;
     border-radius:18px;
     box-shadow:0 8px 30px rgba(0,0,0,.08);
 }
+
+/* UPLOAD */
 
 .upload-area{
     border:2px dashed #d1d5db;
     border-radius:15px;
     padding:45px 20px;
     text-align:center;
-    cursor:pointer;
     transition:.2s;
 }
 
@@ -103,8 +116,8 @@ header{
 }
 
 .upload-icon{
-    font-size:52px;
-    margin-bottom:12px;
+    font-size:55px;
+    margin-bottom:14px;
 }
 
 .upload-area h2{
@@ -113,47 +126,37 @@ header{
 
 .upload-area p{
     color:#6b7280;
-    margin-bottom:20px;
-}
-
-.select-btn,
-.compress-btn,
-.download-btn,
-.reset-btn{
-    border:0;
-    border-radius:9px;
-    padding:12px 22px;
-    font-size:15px;
-    font-weight:700;
-    cursor:pointer;
-}
-
-.select-btn,
-.compress-btn{
-    background:#e53232;
-    color:#fff;
-}
-
-.select-btn:hover,
-.compress-btn:hover{
-    background:#c92525;
-}
-
-.compress-btn:disabled{
-    background:#999;
-    cursor:not-allowed;
+    margin-bottom:22px;
 }
 
 #fileInput{
     display:none;
 }
 
+.select-btn{
+    display:inline-block;
+    background:#e53232;
+    color:#ffffff;
+    padding:12px 24px;
+    border-radius:9px;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    user-select:none;
+}
+
+.select-btn:hover{
+    background:#c92525;
+}
+
+/* FILE INFO */
+
 .file-info{
     display:none;
     margin-top:25px;
     padding:18px;
-    border:1px solid #e5e7eb;
     background:#f9fafb;
+    border:1px solid #e5e7eb;
     border-radius:12px;
 }
 
@@ -166,6 +169,8 @@ header{
     color:#6b7280;
     margin-top:6px;
 }
+
+/* OPTIONS */
 
 .options{
     display:none;
@@ -210,11 +215,32 @@ header{
     font-size:13px;
 }
 
+/* COMPRESS BUTTON */
+
 .compress-btn{
     display:block;
     min-width:220px;
     margin:25px auto 0;
+    border:0;
+    border-radius:9px;
+    padding:13px 22px;
+    background:#e53232;
+    color:#ffffff;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
 }
+
+.compress-btn:hover{
+    background:#c92525;
+}
+
+.compress-btn:disabled{
+    background:#999999;
+    cursor:not-allowed;
+}
+
+/* PROGRESS */
 
 .progress-box{
     display:none;
@@ -237,6 +263,8 @@ header{
     background:#e53232;
     transition:width .25s;
 }
+
+/* RESULT */
 
 .result{
     display:none;
@@ -262,7 +290,7 @@ header{
 }
 
 .size-item{
-    background:#fff;
+    background:#ffffff;
     padding:12px 20px;
     border:1px solid #dcfce7;
     border-radius:10px;
@@ -279,9 +307,19 @@ header{
     font-size:18px;
 }
 
+.download-btn,
+.reset-btn{
+    border:0;
+    border-radius:9px;
+    padding:12px 22px;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+}
+
 .download-btn{
     background:#16a34a;
-    color:#fff;
+    color:#ffffff;
     margin-right:8px;
 }
 
@@ -291,12 +329,14 @@ header{
 
 .reset-btn{
     background:#374151;
-    color:#fff;
+    color:#ffffff;
 }
 
 .reset-btn:hover{
     background:#1f2937;
 }
+
+/* NOTE */
 
 .note{
     margin-top:28px;
@@ -309,9 +349,11 @@ header{
     font-size:14px;
 }
 
+/* INFO */
+
 .info-section{
     margin-top:35px;
-    background:#fff;
+    background:#ffffff;
     padding:30px;
     border-radius:15px;
 }
@@ -326,6 +368,8 @@ header{
     margin-bottom:12px;
 }
 
+/* FOOTER */
+
 footer{
     margin-top:50px;
     padding:25px;
@@ -334,6 +378,8 @@ footer{
     border-top:1px solid #e5e7eb;
     font-size:14px;
 }
+
+/* MOBILE */
 
 @media(max-width:700px){
 
@@ -354,295 +400,365 @@ footer{
         width:100%;
         margin:5px 0;
     }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
+<!-- HEADER -->
+
 <header>
+
     <div class="header-inner">
-        <a href="index.html" class="logo">
+
+        <a
+            href="index.html"
+            class="logo"
+        >
             PDF Editor Tools
         </a>
 
-        <a href="index.html" class="home-btn">
+        <a
+            href="index.html"
+            class="home-btn"
+        >
             ← Home
         </a>
+
     </div>
+
 </header>
 
 
+<!-- MAIN -->
+
 <main class="container">
 
-<section class="hero">
 
-    <h1>Compress PDF</h1>
+    <!-- HERO -->
 
-    <p>
-        Reduce PDF file size while keeping good visual quality.
-    </p>
+    <section class="hero">
 
-</section>
-
-
-<section class="tool-box">
-
-    <div class="upload-area" id="uploadArea">
-
-        <div class="upload-icon">📄</div>
-
-        <h2>Select PDF File</h2>
+        <h1>
+            Compress PDF
+        </h1>
 
         <p>
-            Upload your PDF to compress
+            Reduce PDF file size while keeping good visual quality.
         </p>
 
-        <button
-            class="select-btn"
-            type="button">
-            Choose PDF
-        </button>
-
-        <input
-            type="file"
-            id="fileInput"
-            accept=".pdf,application/pdf">
-
-    </div>
+    </section>
 
 
-    <div class="file-info" id="fileInfo">
+    <!-- TOOL -->
+
+    <section class="tool-box">
+
+
+        <!-- UPLOAD -->
+
+        <div class="upload-area">
+
+            <div class="upload-icon">
+                📄
+            </div>
+
+            <h2>
+                Select PDF File
+            </h2>
+
+            <p>
+                Upload your PDF to compress
+            </p>
+
+
+            <!-- IMPORTANT:
+                 Native label opens file picker -->
+
+            <label
+                for="fileInput"
+                class="select-btn"
+            >
+                Choose PDF
+            </label>
+
+
+            <input
+                type="file"
+                id="fileInput"
+                accept="application/pdf,.pdf"
+            >
+
+        </div>
+
+
+        <!-- FILE INFORMATION -->
 
         <div
-            class="file-name"
-            id="fileName">
+            class="file-info"
+            id="fileInfo"
+        >
+
+            <div
+                class="file-name"
+                id="fileName"
+            ></div>
+
+            <div
+                class="file-size"
+                id="fileSize"
+            ></div>
+
         </div>
+
+
+        <!-- COMPRESSION OPTIONS -->
 
         <div
-            class="file-size"
-            id="fileSize">
-        </div>
+            class="options"
+            id="options"
+        >
 
-    </div>
+            <h3>
+                Choose Compression Level
+            </h3>
 
 
-    <div class="options" id="options">
+            <div class="compression-options">
 
-        <h3>
-            Choose Compression Level
-        </h3>
 
-        <div class="compression-options">
+                <div
+                    class="option"
+                    data-level="low"
+                >
 
-            <div
-                class="option"
-                data-level="low">
+                    <strong>
+                        Low Compression
+                    </strong>
 
-                <strong>
-                    Low Compression
-                </strong>
+                    <span>
+                        Better Quality
+                    </span>
 
-                <span>
-                    Better Quality
-                </span>
+                </div>
+
+
+                <div
+                    class="option active"
+                    data-level="medium"
+                >
+
+                    <strong>
+                        Medium Compression
+                    </strong>
+
+                    <span>
+                        Recommended
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="option"
+                    data-level="high"
+                >
+
+                    <strong>
+                        High Compression
+                    </strong>
+
+                    <span>
+                        Smallest Size
+                    </span>
+
+                </div>
+
 
             </div>
 
 
-            <div
-                class="option active"
-                data-level="medium">
-
-                <strong>
-                    Medium Compression
-                </strong>
-
-                <span>
-                    Recommended
-                </span>
-
-            </div>
-
-
-            <div
-                class="option"
-                data-level="high">
-
-                <strong>
-                    High Compression
-                </strong>
-
-                <span>
-                    Smallest Size
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <button
-            class="compress-btn"
-            id="compressBtn"
-            type="button">
-
-            Compress PDF
-
-        </button>
-
-    </div>
-
-
-    <div
-        class="progress-box"
-        id="progressBox">
-
-        <div id="progressText">
-            Preparing PDF...
-        </div>
-
-        <div class="progress-bar">
-
-            <div
-                class="progress"
-                id="progress">
-            </div>
+            <button
+                class="compress-btn"
+                id="compressBtn"
+                type="button"
+            >
+                Compress PDF
+            </button>
 
         </div>
 
-    </div>
 
+        <!-- PROGRESS -->
 
-    <div
-        class="result"
-        id="result">
+        <div
+            class="progress-box"
+            id="progressBox"
+        >
 
-        <h3>
-            ✓ Compression Complete
-        </h3>
-
-
-        <div class="size-result">
-
-            <div class="size-item">
-
-                <span>
-                    Original Size
-                </span>
-
-                <strong
-                    id="originalSize">
-                    -
-                </strong>
-
+            <div id="progressText">
+                Preparing PDF...
             </div>
 
+            <div class="progress-bar">
 
-            <div class="size-item">
-
-                <span>
-                    New Size
-                </span>
-
-                <strong
-                    id="newSize">
-                    -
-                </strong>
-
-            </div>
-
-
-            <div class="size-item">
-
-                <span>
-                    Reduction
-                </span>
-
-                <strong
-                    id="reduction">
-                    -
-                </strong>
+                <div
+                    class="progress"
+                    id="progress"
+                ></div>
 
             </div>
 
         </div>
 
 
-        <button
-            class="download-btn"
-            id="downloadBtn"
-            type="button">
+        <!-- RESULT -->
 
-            Download PDF
+        <div
+            class="result"
+            id="result"
+        >
 
-        </button>
-
-
-        <button
-            class="reset-btn"
-            id="resetBtn"
-            type="button">
-
-            Compress Another
-
-        </button>
-
-    </div>
+            <h3>
+                ✓ Compression Complete
+            </h3>
 
 
-    <div class="note">
-
-        <strong>Important:</strong>
-        This compressor rebuilds each PDF page as an optimized image.
-        It is especially useful for scanned and image-heavy PDFs.
-        Text in the resulting PDF may not remain selectable.
-
-    </div>
-
-</section>
+            <div class="size-result">
 
 
-<section class="info-section">
+                <div class="size-item">
 
-    <h2>
-        Free PDF Compressor
-    </h2>
+                    <span>
+                        Original Size
+                    </span>
 
-    <p>
-        Compress PDF files directly in your browser.
-        No upload to our server is required by this tool.
-    </p>
+                    <strong id="originalSize">
+                        -
+                    </strong>
 
-    <p>
-        Choose Low, Medium or High compression depending
-        on whether you prefer better quality or smaller size.
-    </p>
+                </div>
 
-    <p>
-        For scanned documents and image-heavy PDFs,
-        reducing image resolution and JPEG quality can
-        substantially reduce the resulting file size.
-    </p>
 
-</section>
+                <div class="size-item">
+
+                    <span>
+                        New Size
+                    </span>
+
+                    <strong id="newSize">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="size-item">
+
+                    <span>
+                        Reduction
+                    </span>
+
+                    <strong id="reduction">
+                        -
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                class="download-btn"
+                id="downloadBtn"
+                type="button"
+            >
+                Download PDF
+            </button>
+
+
+            <button
+                class="reset-btn"
+                id="resetBtn"
+                type="button"
+            >
+                Compress Another
+            </button>
+
+        </div>
+
+
+        <!-- NOTE -->
+
+        <div class="note">
+
+            <strong>
+                Important:
+            </strong>
+
+            This compressor rebuilds each PDF page as an optimized
+            image. It is especially useful for scanned and
+            image-heavy PDFs. Text in the resulting PDF may not
+            remain selectable.
+
+        </div>
+
+
+    </section>
+
+
+    <!-- INFORMATION -->
+
+    <section class="info-section">
+
+        <h2>
+            Free PDF Compressor
+        </h2>
+
+        <p>
+            Compress PDF files directly in your browser.
+            Your selected PDF is processed locally by this page.
+        </p>
+
+        <p>
+            Choose Low, Medium or High compression depending
+            on whether you prefer better quality or smaller size.
+        </p>
+
+        <p>
+            Scanned documents and image-heavy PDFs usually have
+            more scope for size reduction.
+        </p>
+
+    </section>
+
 
 </main>
 
 
+<!-- FOOTER -->
+
 <footer>
+
     © 2026 PDF Editor Tools. All rights reserved.
+
 </footer>
 
 
 <script>
 
+/* PDF.JS WORKER */
+
 pdfjsLib.GlobalWorkerOptions.workerSrc =
 "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
 
-const uploadArea =
-document.getElementById("uploadArea");
+/* ELEMENTS */
 
 const fileInput =
 document.getElementById("fileInput");
@@ -693,6 +809,8 @@ const resetBtn =
 document.getElementById("resetBtn");
 
 
+/* VARIABLES */
+
 let selectedFile = null;
 
 let selectedLevel = "medium";
@@ -702,10 +820,14 @@ let outputBlob = null;
 let outputName = "compressed.pdf";
 
 
+/* FORMAT FILE SIZE */
+
 function formatBytes(bytes){
 
     if(bytes === 0){
+
         return "0 Bytes";
+
     }
 
     const units = [
@@ -728,68 +850,77 @@ function formatBytes(bytes){
                 Math.pow(1024,i)
             ).toFixed(2)
         )
-        + " "
-        + units[i];
+        +
+        " "
+        +
+        units[i]
     );
+
 }
 
 
-function updateProgress(value,text){
+/* PROGRESS */
+
+function updateProgress(
+    value,
+    message
+){
 
     progress.style.width =
         value + "%";
 
     progressText.textContent =
-        text;
+        message;
+
 }
 
 
-uploadArea.addEventListener("click", function(e){
-
-    if(e.target.tagName !== "BUTTON"){
-        fileInput.click();
-    }
-
-});
-
-document.querySelector(".select-btn").addEventListener("click", function(e){
-
-    e.stopPropagation();
-    fileInput.click();
-
-});
-
+/* FILE SELECT */
 
 fileInput.addEventListener(
     "change",
     function(){
 
         const file =
-            fileInput.files[0];
+            this.files[0];
+
 
         if(!file){
+
             return;
+
         }
 
 
-        if(
-            file.type !== "application/pdf" &&
-            !file.name
+        /* PDF CHECK */
+
+        const isPDF =
+            file.type === "application/pdf" ||
+            file.name
                 .toLowerCase()
-                .endsWith(".pdf")
-        ){
+                .endsWith(".pdf");
+
+
+        if(!isPDF){
 
             alert(
                 "Please select a PDF file."
             );
 
-            fileInput.value = "";
+            this.value = "";
 
             return;
+
         }
 
 
-        selectedFile = file;
+        /* STORE FILE */
+
+        selectedFile =
+            file;
+
+
+        /* SHOW INFORMATION */
 
         fileName.textContent =
             file.name;
@@ -798,21 +929,31 @@ fileInput.addEventListener(
             "Original size: " +
             formatBytes(file.size);
 
+
         fileInfo.style.display =
             "block";
+
 
         options.style.display =
             "block";
 
+
         result.style.display =
             "none";
+
+
+        outputBlob =
+            null;
+
 
     }
 );
 
 
+/* COMPRESSION LEVEL */
+
 compressionOptions.forEach(
-    option => {
+    function(option){
 
         option.addEventListener(
             "click",
@@ -820,13 +961,21 @@ compressionOptions.forEach(
 
                 compressionOptions
                     .forEach(
-                        item =>
+                        function(item){
+
                             item.classList
-                                .remove("active")
+                                .remove(
+                                    "active"
+                                );
+
+                        }
                     );
 
-                this.classList
-                    .add("active");
+
+                this.classList.add(
+                    "active"
+                );
+
 
                 selectedLevel =
                     this.dataset.level;
@@ -838,36 +987,54 @@ compressionOptions.forEach(
 );
 
 
+/* SETTINGS */
+
 function getSettings(){
 
-    if(selectedLevel === "low"){
+    if(
+        selectedLevel === "low"
+    ){
 
         return {
+
             scale:1.35,
+
             quality:0.72
+
         };
 
     }
 
 
-    if(selectedLevel === "high"){
+    if(
+        selectedLevel === "high"
+    ){
 
         return {
+
             scale:0.80,
+
             quality:0.42
+
         };
 
     }
 
 
     return {
+
         scale:1.05,
+
         quality:0.58
+
     };
+
 }
 
 
-async function renderPageToJpeg(
+/* RENDER PAGE */
+
+async function renderPageToJPEG(
     page,
     settings
 ){
@@ -879,16 +1046,14 @@ async function renderPageToJpeg(
 
 
     const canvas =
-        document.createElement("canvas");
+        document.createElement(
+            "canvas"
+        );
 
 
     const context =
         canvas.getContext(
-            "2d",
-            {
-                alpha:false,
-                willReadFrequently:false
-            }
+            "2d"
         );
 
 
@@ -910,8 +1075,11 @@ async function renderPageToJpeg(
         );
 
 
+    /* WHITE BACKGROUND */
+
     context.fillStyle =
         "#ffffff";
+
 
     context.fillRect(
         0,
@@ -921,30 +1089,39 @@ async function renderPageToJpeg(
     );
 
 
+    /* RENDER PDF PAGE */
+
     await page.render({
 
-        canvasContext:context,
+        canvasContext:
+            context,
 
-        viewport:viewport
+        viewport:
+            viewport
 
     }).promise;
 
 
+    /* JPEG */
+
     const blob =
         await new Promise(
-            resolve =>
+            function(resolve){
+
                 canvas.toBlob(
                     resolve,
                     "image/jpeg",
                     settings.quality
-                )
+                );
+
+            }
         );
 
 
     if(!blob){
 
         throw new Error(
-            "Unable to create JPEG image."
+            "Unable to create compressed image."
         );
 
     }
@@ -955,425 +1132,348 @@ async function renderPageToJpeg(
 }
 
 
-async function compressPDF(){
+/* BUILD PDF */
 
-    if(!selectedFile){
+async function buildCompressedPDF(
+    pdf,
+    settings
+){
 
-        alert(
-            "Please select a PDF first."
-        );
+    const newPdf =
+        await PDFLib.PDFDocument.create();
 
-        return;
 
-    }
+    const totalPages =
+        pdf.numPages;
 
 
-    compressBtn.disabled =
-        true;
+    for(
+        let pageNumber = 1;
+        pageNumber <= totalPages;
+        pageNumber++
+    ){
 
-    result.style.display =
-        "none";
-
-    progressBox.style.display =
-        "block";
-
-
-    try{
-
-        const settings =
-            getSettings();
-
-
-        updateProgress(
-            5,
-            "Reading PDF..."
-        );
-
-
-        const sourceBytes =
-            new Uint8Array(
-                await selectedFile.arrayBuffer()
-            );
-
-
-        const loadingTask =
-            pdfjsLib.getDocument({
-                data:sourceBytes
-            });
-
-
-        const pdf =
-            await loadingTask.promise;
-
-
-        const pageCount =
-            pdf.numPages;
-
-
-        if(pageCount < 1){
-
-            throw new Error(
-                "PDF has no pages."
-            );
-
-        }
-
-
-        updateProgress(
-            10,
-            "Creating compressed PDF..."
-        );
-
-
-        const newPdf =
-            await PDFLib.PDFDocument.create();
-
-
-        newPdf.setTitle(
-            selectedFile.name
-                .replace(/\.pdf$/i,"")
-                + " - Compressed"
-        );
-
-
-        for(
-            let pageNumber = 1;
-            pageNumber <= pageCount;
-            pageNumber++
-        ){
-
-            const percent =
-                10 +
-                Math.round(
-                    (
-                        (pageNumber - 1) /
-                        pageCount
-                    ) * 80
-                );
-
-
-            updateProgress(
-                percent,
-                "Compressing page " +
-                pageNumber +
-                " of " +
-                pageCount
-            );
-
-
-            const page =
-                await pdf.getPage(
-                    pageNumber
-                );
-
-
-            const imageBlob =
-                await renderPageToJpeg(
-                    page,
-                    settings
-                );
-
-
-            const imageBytes =
-                new Uint8Array(
-                    await imageBlob.arrayBuffer()
-                );
-
-
-            const jpgImage =
-                await newPdf.embedJpg(
-                    imageBytes
-                );
-
-
-            const originalViewport =
-                page.getViewport({
-                    scale:1
-                });
-
-
-            const newPage =
-                newPdf.addPage([
-                    originalViewport.width,
-                    originalViewport.height
-                ]);
-
-
-            newPage.drawImage(
-                jpgImage,
-                {
-                    x:0,
-                    y:0,
-                    width:originalViewport.width,
-                    height:originalViewport.height
-                }
-            );
-
-
-            page.cleanup();
-
-        }
-
-
-        updateProgress(
-            93,
-            "Finalizing PDF..."
-        );
-
-
-        const outputBytes =
-            await newPdf.save({
-                useObjectStreams:true,
-                addDefaultPage:false
-            });
-
-
-        outputBlob =
-            new Blob(
-                [outputBytes],
-                {
-                    type:"application/pdf"
-                }
-            );
-
-
-        /*
-         * If the generated file is larger than
-         * the original, try one stronger pass.
-         */
-
-        if(
-            outputBlob.size >=
-            selectedFile.size
-        ){
-
-            updateProgress(
-                95,
-                "Trying stronger compression..."
-            );
-
-
-            const strongerSettings = {
-
-                scale:
-                    selectedLevel === "high"
-                    ? 0.65
-                    : 0.75,
-
-                quality:
-                    selectedLevel === "high"
-                    ? 0.30
-                    : 0.40
-
-            };
-
-
-            const secondPdf =
-                await PDFLib.PDFDocument.create();
-
-
-            for(
-                let pageNumber = 1;
-                pageNumber <= pageCount;
-                pageNumber++
-            ){
-
-                updateProgress(
-                    95,
-                    "Optimizing page " +
-                    pageNumber +
-                    " of " +
-                    pageCount
-                );
-
-
-                const page =
-                    await pdf.getPage(
-                        pageNumber
-                    );
-
-
-                const imageBlob =
-                    await renderPageToJpeg(
-                        page,
-                        strongerSettings
-                    );
-
-
-                const imageBytes =
-                    new Uint8Array(
-                        await imageBlob.arrayBuffer()
-                    );
-
-
-                const jpgImage =
-                    await secondPdf.embedJpg(
-                        imageBytes
-                    );
-
-
-                const viewport =
-                    page.getViewport({
-                        scale:1
-                    });
-
-
-                const newPage =
-                    secondPdf.addPage([
-                        viewport.width,
-                        viewport.height
-                    ]);
-
-
-                newPage.drawImage(
-                    jpgImage,
-                    {
-                        x:0,
-                        y:0,
-                        width:viewport.width,
-                        height:viewport.height
-                    }
-                );
-
-            }
-
-
-            const secondBytes =
-                await secondPdf.save({
-                    useObjectStreams:true,
-                    addDefaultPage:false
-                });
-
-
-            const secondBlob =
-                new Blob(
-                    [secondBytes],
-                    {
-                        type:"application/pdf"
-                    }
-                );
-
-
-            if(
-                secondBlob.size <
-                outputBlob.size
-            ){
-
-                outputBlob =
-                    secondBlob;
-
-            }
-
-        }
-
-
-        updateProgress(
-            100,
-            "Compression complete!"
-        );
-
-
-        originalSize.textContent =
-            formatBytes(
-                selectedFile.size
-            );
-
-
-        newSize.textContent =
-            formatBytes(
-                outputBlob.size
-            );
-
-
-        const reductionPercent =
-            (
+        const percentage =
+            10 +
+            Math.round(
                 (
-                    selectedFile.size -
-                    outputBlob.size
-                )
-                /
-                selectedFile.size
-            ) * 100;
+                    (pageNumber - 1) /
+                    totalPages
+                ) * 82
+            );
 
 
-        if(
-            reductionPercent > 0
-        ){
+        updateProgress(
+            percentage,
+            "Compressing page " +
+            pageNumber +
+            " of " +
+            totalPages
+        );
 
-            reduction.textContent =
-                reductionPercent
-                    .toFixed(1)
-                    + "%";
 
-        }else{
+        const page =
+            await pdf.getPage(
+                pageNumber
+            );
 
-            reduction.textContent =
-                "0%";
 
+        const imageBlob =
+            await renderPageToJPEG(
+                page,
+                settings
+            );
+
+
+        const imageBytes =
+            new Uint8Array(
+                await imageBlob.arrayBuffer()
+            );
+
+
+        const jpg =
+            await newPdf.embedJpg(
+                imageBytes
+            );
+
+
+        const originalViewport =
+            page.getViewport({
+                scale:1
+            });
+
+
+        const newPage =
+            newPdf.addPage([
+                originalViewport.width,
+                originalViewport.height
+            ]);
+
+
+        newPage.drawImage(
+            jpg,
+            {
+                x:0,
+                y:0,
+                width:originalViewport.width,
+                height:originalViewport.height
+            }
+        );
+
+
+        page.cleanup();
+
+    }
+
+
+    const bytes =
+        await newPdf.save({
+            useObjectStreams:true,
+            addDefaultPage:false
+        });
+
+
+    return new Blob(
+        [bytes],
+        {
+            type:"application/pdf"
         }
-
-
-        const baseName =
-            selectedFile.name
-                .replace(
-                    /\.pdf$/i,
-                    ""
-                );
-
-
-        outputName =
-            baseName +
-            "-compressed.pdf";
-
-
-        result.style.display =
-            "block";
-
-
-        setTimeout(
-            function(){
-
-                progressBox.style.display =
-                    "none";
-
-            },
-            500
-        );
-
-
-    }
-    catch(error){
-
-        console.error(error);
-
-        progressBox.style.display =
-            "none";
-
-        alert(
-            "Compression failed.\n\n" +
-            "Reason: " +
-            (
-                error.message ||
-                "Unknown error"
-            )
-        );
-
-    }
-    finally{
-
-        compressBtn.disabled =
-            false;
-
-    }
+    );
 
 }
 
 
+/* COMPRESS */
+
 compressBtn.addEventListener(
     "click",
-    compressPDF
+    async function(){
+
+        if(!selectedFile){
+
+            alert(
+                "Please select a PDF first."
+            );
+
+            return;
+
+        }
+
+
+        compressBtn.disabled =
+            true;
+
+
+        result.style.display =
+            "none";
+
+
+        progressBox.style.display =
+            "block";
+
+
+        try{
+
+            updateProgress(
+                5,
+                "Reading PDF..."
+            );
+
+
+            const bytes =
+                new Uint8Array(
+                    await selectedFile.arrayBuffer()
+                );
+
+
+            const loadingTask =
+                pdfjsLib.getDocument({
+                    data:bytes
+                });
+
+
+            const pdf =
+                await loadingTask.promise;
+
+
+            if(pdf.numPages < 1){
+
+                throw new Error(
+                    "PDF contains no pages."
+                );
+
+            }
+
+
+            const settings =
+                getSettings();
+
+
+            /* FIRST PASS */
+
+            outputBlob =
+                await buildCompressedPDF(
+                    pdf,
+                    settings
+                );
+
+
+            /*
+             * If first result is not smaller,
+             * create a stronger compressed version.
+             */
+
+            if(
+                outputBlob.size >=
+                selectedFile.size
+            ){
+
+                updateProgress(
+                    94,
+                    "Trying stronger compression..."
+                );
+
+
+                const strongerSettings = {
+
+                    scale:
+                        selectedLevel === "high"
+                        ? 0.60
+                        : 0.75,
+
+                    quality:
+                        selectedLevel === "high"
+                        ? 0.30
+                        : 0.40
+
+                };
+
+
+                const strongerBlob =
+                    await buildCompressedPDF(
+                        pdf,
+                        strongerSettings
+                    );
+
+
+                if(
+                    strongerBlob.size <
+                    outputBlob.size
+                ){
+
+                    outputBlob =
+                        strongerBlob;
+
+                }
+
+            }
+
+
+            updateProgress(
+                100,
+                "Compression complete!"
+            );
+
+
+            /* SIZE */
+
+            originalSize.textContent =
+                formatBytes(
+                    selectedFile.size
+                );
+
+
+            newSize.textContent =
+                formatBytes(
+                    outputBlob.size
+                );
+
+
+            const percentage =
+                (
+                    (
+                        selectedFile.size -
+                        outputBlob.size
+                    )
+                    /
+                    selectedFile.size
+                ) * 100;
+
+
+            reduction.textContent =
+                (
+                    Math.max(
+                        0,
+                        percentage
+                    ).toFixed(1)
+                    +
+                    "%"
+                );
+
+
+            /* NAME */
+
+            const baseName =
+                selectedFile.name
+                    .replace(
+                        /\.pdf$/i,
+                        ""
+                    );
+
+
+            outputName =
+                baseName +
+                "-compressed.pdf";
+
+
+            result.style.display =
+                "block";
+
+
+            setTimeout(
+                function(){
+
+                    progressBox.style.display =
+                        "none";
+
+                },
+                600
+            );
+
+        }
+        catch(error){
+
+            console.error(
+                "PDF compression error:",
+                error
+            );
+
+
+            progressBox.style.display =
+                "none";
+
+
+            alert(
+                "PDF compression failed.\n\n" +
+                (
+                    error.message ||
+                    "Unknown error"
+                )
+            );
+
+        }
+        finally{
+
+            compressBtn.disabled =
+                false;
+
+        }
+
+    }
 );
 
+
+/* DOWNLOAD */
 
 downloadBtn.addEventListener(
     "click",
@@ -1397,7 +1497,9 @@ downloadBtn.addEventListener(
 
 
         const link =
-            document.createElement("a");
+            document.createElement(
+                "a"
+            );
 
 
         link.href =
@@ -1413,6 +1515,7 @@ downloadBtn.addEventListener(
 
 
         link.click();
+
 
         link.remove();
 
@@ -1431,6 +1534,8 @@ downloadBtn.addEventListener(
     }
 );
 
+
+/* RESET */
 
 resetBtn.addEventListener(
     "click",
@@ -1470,3 +1575,4 @@ resetBtn.addEventListener(
 
 </body>
 </html>
+```
