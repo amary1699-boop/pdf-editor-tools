@@ -2656,136 +2656,114 @@ function createPageCard(
     "✂ Crop";
 
 
- /* =========================
-ROTATE PAGE FUNCTION
+/* =========================
+ROTATE BUTTONS
+FINAL FIX
 ========================= */
 
-async function rotatePage(
-  pageIndex,
-  direction,
-  thumbnailStage
-){
+rotateLeft.dataset.action = "rotate-left";
+rotateLeft.dataset.pageIndex = index;
 
-  const pageData =
-    pages[pageIndex];
-
-
-  if(!pageData){
-
-    return;
-
-  }
-
-
-  /* =====================
-  ROTATE RIGHT
-  ===================== */
-
-  if(direction === "right"){
-
-    pageData.rotation =
-      (
-        Number(pageData.rotation || 0) +
-        90
-      ) % 360;
-
-  }
-
-
-  /* =====================
-  ROTATE LEFT
-  ===================== */
-
-  if(direction === "left"){
-
-    pageData.rotation =
-      (
-        Number(pageData.rotation || 0) -
-        90 +
-        360
-      ) % 360;
-
-  }
-
-
-  /* =====================
-  REFRESH THUMBNAIL
-  ===================== */
-
-  await renderThumbnail(
-    pageData,
-    thumbnailStage
-  );
-
-
-  /* =====================
-  REFRESH MAIN PREVIEW
-  ===================== */
-
-  if(
-    currentMainIndex === pageIndex
-  ){
-
-    await renderMainPreview();
-
-  }
-
-}
+rotateRight.dataset.action = "rotate-right";
+rotateRight.dataset.pageIndex = index;
 
 
 /* =========================
-ROTATE LEFT BUTTON
+ROTATE LEFT
 ========================= */
 
-rotateLeft.type =
-"button";
+rotateLeft.addEventListener(
+  "click",
+  function(event){
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const pageIndex =
+      Number(
+        rotateLeft.dataset.pageIndex
+      );
+
+    if(
+      !pages[pageIndex]
+    ){
+      return;
+    }
+
+    pages[pageIndex].rotation =
+      (
+        Number(
+          pages[pageIndex].rotation || 0
+        ) - 90 + 360
+      ) % 360;
 
 
-rotateLeft.onclick =
-async function(event){
+    /* Rebuild all page cards */
+    renderPages();
 
-  event.preventDefault();
-
-  event.stopPropagation();
-
-  event.stopImmediatePropagation();
+    updateSelection();
 
 
-  await rotatePage(
-    index,
-    "left",
-    thumbnailStage
-  );
+    /* Refresh main preview */
+    if(
+      currentMainIndex === pageIndex
+    ){
 
-};
+      renderMainPreview();
+
+    }
+
+  }
+);
 
 
 /* =========================
-ROTATE RIGHT BUTTON
+ROTATE RIGHT
 ========================= */
 
-rotateRight.type =
-"button";
+rotateRight.addEventListener(
+  "click",
+  function(event){
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const pageIndex =
+      Number(
+        rotateRight.dataset.pageIndex
+      );
+
+    if(
+      !pages[pageIndex]
+    ){
+      return;
+    }
+
+    pages[pageIndex].rotation =
+      (
+        Number(
+          pages[pageIndex].rotation || 0
+        ) + 90
+      ) % 360;
 
 
-rotateRight.onclick =
-async function(event){
+    /* Rebuild all page cards */
+    renderPages();
 
-  event.preventDefault();
-
-  event.stopPropagation();
-
-  event.stopImmediatePropagation();
+    updateSelection();
 
 
-  await rotatePage(
-    index,
-    "right",
-    thumbnailStage
-  );
+    /* Refresh main preview */
+    if(
+      currentMainIndex === pageIndex
+    ){
 
-};
+      renderMainPreview();
 
+    }
+
+  }
+);
   /* =========================
   CROP
   ========================= */
