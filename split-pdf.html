@@ -31,11 +31,6 @@ input{
   font-family:inherit;
 }
 
-
-/* =========================
-HEADER
-========================= */
-
 .header{
   height:70px;
   background:#fff;
@@ -50,7 +45,6 @@ HEADER
   height:100%;
   margin:auto;
   padding:0 20px;
-
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -59,11 +53,9 @@ HEADER
 .logo{
   text-decoration:none;
   color:#e53232;
-
   display:flex;
   align-items:center;
   gap:10px;
-
   font-size:21px;
   font-weight:800;
 }
@@ -71,16 +63,12 @@ HEADER
 .logo-icon{
   width:40px;
   height:40px;
-
   border-radius:10px;
-
   background:#e53232;
   color:#fff;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   font-size:11px;
   font-weight:800;
 }
@@ -95,11 +83,6 @@ HEADER
 .back-home:hover{
   color:#e53232;
 }
-
-
-/* =========================
-MAIN
-========================= */
 
 .container{
   max-width:1250px;
@@ -125,11 +108,6 @@ MAIN
   color:#777;
   font-size:15px;
 }
-
-
-/* =========================
-UPLOAD
-========================= */
 
 .upload-box{
   background:#fff;
@@ -189,11 +167,6 @@ UPLOAD
   display:none;
 }
 
-
-/* =========================
-FILE INFO
-========================= */
-
 .file-info{
   display:none;
   margin-top:18px;
@@ -234,20 +207,10 @@ FILE INFO
   border-color:#e53232;
 }
 
-
-/* =========================
-WORKSPACE
-========================= */
-
 .workspace{
   display:none;
   margin-top:25px;
 }
-
-
-/* =========================
-MAIN PREVIEW
-========================= */
 
 .main-preview-box{
   background:#fff;
@@ -322,11 +285,6 @@ MAIN PREVIEW
   box-shadow:0 5px 22px rgba(0,0,0,.16);
 }
 
-
-/* =========================
-PAGES PANEL
-========================= */
-
 .pages-panel{
   background:#fff;
   border:1px solid #e4e4e9;
@@ -361,22 +319,11 @@ PAGES PANEL
   font-size:13px;
 }
 
-
-/* =========================
-PAGE GRID
-========================= */
-
 .page-grid{
   display:grid;
-  grid-template-columns:
-  repeat(auto-fill,minmax(205px,1fr));
+  grid-template-columns:repeat(auto-fill,minmax(205px,1fr));
   gap:20px;
 }
-
-
-/* =========================
-PAGE CARD
-========================= */
 
 .page-card{
   background:#fff;
@@ -390,8 +337,7 @@ PAGE CARD
 
 .page-card:hover{
   border-color:#f1b5b5;
-  box-shadow:
-  0 7px 20px rgba(0,0,0,.07);
+  box-shadow:0 7px 20px rgba(0,0,0,.07);
 }
 
 .page-card.selected{
@@ -407,11 +353,6 @@ PAGE CARD
   border-color:#e53232;
   transform:scale(1.025);
 }
-
-
-/* =========================
-PAGE HEADER
-========================= */
 
 .page-top{
   display:flex;
@@ -434,11 +375,6 @@ PAGE HEADER
   accent-color:#e53232;
   cursor:pointer;
 }
-
-
-/* =========================
-THUMBNAIL VIEWPORT
-========================= */
 
 .thumbnail-wrap{
   width:100%;
@@ -463,14 +399,8 @@ THUMBNAIL VIEWPORT
 .thumbnail-stage canvas{
   display:block;
   background:#fff;
-  box-shadow:
-  0 3px 12px rgba(0,0,0,.13);
+  box-shadow:0 3px 12px rgba(0,0,0,.13);
 }
-
-
-/* =========================
-CROP OVERLAY
-========================= */
 
 .crop-overlay{
   position:absolute;
@@ -478,13 +408,6 @@ CROP OVERLAY
   background:rgba(229,50,50,.08);
   pointer-events:none;
   z-index:5;
-}
-
-.crop-dim{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  z-index:4;
 }
 
 .crop-badge{
@@ -500,10 +423,18 @@ CROP OVERLAY
   font-weight:700;
 }
 
-
-/* =========================
-PAGE ZOOM
-========================= */
+.rotation-badge{
+  position:absolute;
+  bottom:6px;
+  left:6px;
+  z-index:9;
+  background:#333;
+  color:#fff;
+  padding:4px 7px;
+  border-radius:6px;
+  font-size:10px;
+  font-weight:700;
+}
 
 .page-zoom-controls{
   display:flex;
@@ -534,15 +465,9 @@ PAGE ZOOM
   color:#777;
 }
 
-
-/* =========================
-ROTATE / CROP
-========================= */
-
 .page-action-row{
   display:grid;
-  grid-template-columns:
-  repeat(3,1fr);
+  grid-template-columns:repeat(3,1fr);
   gap:5px;
   margin-top:9px;
 }
@@ -566,11 +491,6 @@ ROTATE / CROP
   color:#e53232;
 }
 
-
-/* =========================
-ORDER
-========================= */
-
 .order-row{
   display:flex;
   justify-content:center;
@@ -592,11 +512,6 @@ ORDER
   color:#e53232;
   border-color:#e53232;
 }
-
-
-/* =========================
-ACTION BAR
-========================= */
 
 .action-bar{
   display:flex;
@@ -639,11 +554,6 @@ ACTION BAR
   cursor:not-allowed;
 }
 
-
-/* =========================
-STATUS
-========================= */
-
 .status{
   display:none;
   margin-top:17px;
@@ -658,11 +568,6 @@ STATUS
 .status.show{
   display:block;
 }
-
-
-/* =========================
-DOWNLOAD
-========================= */
 
 .download-area{
   display:none;
@@ -695,11 +600,6 @@ DOWNLOAD
   font-weight:700;
   font-size:14px;
 }
-
-
-/* =========================
-CROP MODAL
-========================= */
 
 .modal{
   position:fixed;
@@ -752,11 +652,6 @@ CROP MODAL
   border-color:#e53232;
 }
 
-
-/* =========================
-CROP WORK AREA
-========================= */
-
 .crop-work-area{
   width:100%;
   height:500px;
@@ -782,11 +677,6 @@ CROP WORK AREA
 .crop-surface canvas{
   display:block;
 }
-
-
-/* =========================
-CROP RECTANGLE
-========================= */
 
 .crop-rectangle{
   position:absolute;
@@ -887,29 +777,6 @@ CROP RECTANGLE
   background:#c92727;
 }
 
-
-/* =========================
-ROTATION BADGE
-========================= */
-
-.rotation-badge{
-  position:absolute;
-  bottom:6px;
-  left:6px;
-  z-index:9;
-  background:#333;
-  color:#fff;
-  padding:4px 7px;
-  border-radius:6px;
-  font-size:10px;
-  font-weight:700;
-}
-
-
-/* =========================
-MOBILE
-========================= */
-
 @media(max-width:700px){
 
   .container{
@@ -930,9 +797,7 @@ MOBILE
   }
 
   .page-grid{
-    grid-template-columns:
-    repeat(2,minmax(0,1fr));
-
+    grid-template-columns:repeat(2,minmax(0,1fr));
     gap:10px;
   }
 
@@ -982,21 +847,14 @@ MOBILE
 </style>
 </head>
 
-
 <body>
 
 <header class="header">
-
   <div class="header-inner">
 
     <a href="index.html" class="logo">
-
-      <div class="logo-icon">
-        PDF
-      </div>
-
+      <div class="logo-icon">PDF</div>
       PDF Editor Tools
-
     </a>
 
     <a href="index.html" class="back-home">
@@ -1004,9 +862,7 @@ MOBILE
     </a>
 
   </div>
-
 </header>
-
 
 <main class="container">
 
@@ -1022,16 +878,11 @@ MOBILE
 
   </div>
 
-
   <div class="upload-box" id="uploadBox">
 
-    <div class="upload-icon">
-      📄
-    </div>
+    <div class="upload-icon">📄</div>
 
-    <h2>
-      Select a PDF file
-    </h2>
+    <h2>Select a PDF file</h2>
 
     <p>
       Drag & drop your PDF here or choose a PDF from your device.
@@ -1041,9 +892,7 @@ MOBILE
       type="button"
       class="upload-btn"
       id="uploadButton">
-
       Choose PDF
-
     </button>
 
     <input
@@ -1053,20 +902,15 @@ MOBILE
 
   </div>
 
-
   <div class="file-info" id="fileInfo">
 
     <div>
 
-      <div
-        class="file-name"
-        id="fileName">
+      <div class="file-name" id="fileName">
         PDF
       </div>
 
-      <div
-        class="file-pages"
-        id="filePages">
+      <div class="file-pages" id="filePages">
         0 pages
       </div>
 
@@ -1076,18 +920,12 @@ MOBILE
       type="button"
       class="clear-file"
       id="clearFile">
-
       Remove PDF
-
     </button>
 
   </div>
 
-
-  <div
-    class="workspace"
-    id="workspace">
-
+  <div class="workspace" id="workspace">
 
     <div class="main-preview-box">
 
@@ -1120,17 +958,18 @@ MOBILE
             +
           </button>
 
+          <!-- MAIN PREVIEW ROTATE -->
           <button
             type="button"
             class="zoom-btn"
-            id="mainZoomReset">
+            id="mainZoomReset"
+            title="Rotate main preview 90°">
             ↺
           </button>
 
         </div>
 
       </div>
-
 
       <div class="main-preview-wrap">
 
@@ -1143,16 +982,13 @@ MOBILE
 
     </div>
 
-
     <div class="pages-panel">
 
       <div class="pages-heading">
 
         <div>
 
-          <h2>
-            PDF Pages
-          </h2>
+          <h2>PDF Pages</h2>
 
           <p>
             Select pages and use Rotate, Crop or drag to change order.
@@ -1163,19 +999,15 @@ MOBILE
         <div
           class="selection-count"
           id="selectionCount">
-
           0 selected
-
         </div>
 
       </div>
-
 
       <div
         class="page-grid"
         id="pageGrid">
       </div>
-
 
       <div class="action-bar">
 
@@ -1183,18 +1015,14 @@ MOBILE
           type="button"
           class="action-btn select-all"
           id="selectAll">
-
           Select All
-
         </button>
 
         <button
           type="button"
           class="action-btn clear-selection"
           id="clearSelection">
-
           Clear Selection
-
         </button>
 
         <button
@@ -1202,27 +1030,21 @@ MOBILE
           class="action-btn split-btn"
           id="splitButton"
           disabled>
-
           Split & Download PDF
-
         </button>
 
       </div>
-
 
       <div
         class="status"
         id="status">
       </div>
 
-
       <div
         class="download-area"
         id="downloadArea">
 
-        <h3>
-          PDF Ready
-        </h3>
+        <h3>PDF Ready</h3>
 
         <p>
           Your selected PDF pages are ready.
@@ -1233,9 +1055,7 @@ MOBILE
           id="downloadButton"
           href="#"
           download="split-pdf.pdf">
-
           Download PDF
-
         </a>
 
       </div>
@@ -1245,7 +1065,6 @@ MOBILE
   </div>
 
 </main>
-
 
 <div
   class="modal"
@@ -1263,24 +1082,19 @@ MOBILE
         type="button"
         class="close-crop"
         id="closeCrop">
-
         ×
-
       </button>
 
     </div>
-
 
     <div class="crop-work-area">
 
       <div
         class="crop-surface"
         id="cropSurface">
-
       </div>
 
     </div>
-
 
     <div class="crop-instruction">
 
@@ -1288,7 +1102,6 @@ MOBILE
       Corner points se crop area resize bhi kar sakte hain.
 
     </div>
-
 
     <div class="crop-buttons">
 
@@ -1298,22 +1111,17 @@ MOBILE
           type="button"
           class="modal-btn reset-crop"
           id="resetCrop">
-
           Full Page
-
         </button>
 
         <button
           type="button"
           class="modal-btn clear-crop"
           id="clearCrop">
-
           Clear Crop
-
         </button>
 
       </div>
-
 
       <div class="crop-right-buttons">
 
@@ -1321,18 +1129,14 @@ MOBILE
           type="button"
           class="modal-btn cancel-crop"
           id="cancelCrop">
-
           Cancel
-
         </button>
 
         <button
           type="button"
           class="modal-btn apply-crop"
           id="applyCrop">
-
           Apply Crop
-
         </button>
 
       </div>
@@ -1343,13 +1147,7 @@ MOBILE
 
 </div>
 
-
 <script>
-
-
-/* =====================================================
-PDF.JS
-===================================================== */
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
 "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
@@ -1367,6 +1165,7 @@ let downloadUrl = null;
 let draggedIndex = null;
 let currentMainIndex = 0;
 let mainRenderVersion = 0;
+
 
 /* =====================================================
 CROP VARIABLES
@@ -1436,122 +1235,14 @@ document.getElementById("mainZoomLabel");
 const mainPageNumber =
 document.getElementById("mainPageNumber");
 
+const mainZoomReset =
+document.getElementById("mainZoomReset");
+
 const cropModal =
 document.getElementById("cropModal");
 
 const cropSurface =
 document.getElementById("cropSurface");
-
-
-/* =====================================================
-ROTATE BUTTON - MAIN PREVIEW + THUMBNAIL
-===================================================== */
-
-pageGrid.addEventListener(
-"click",
-async function(event){
-
-  const button =
-    event.target.closest(
-      'button[data-action="rotate-left"], button[data-action="rotate-right"]'
-    );
-
-
-  if(
-    !button ||
-    !pageGrid.contains(button)
-  ){
-
-    return;
-
-  }
-
-
-  event.preventDefault();
-  event.stopPropagation();
-
-
-  const index =
-    Number(
-      button.dataset.pageIndex
-    );
-
-
-  if(
-    !Number.isInteger(index) ||
-    !pages[index]
-  ){
-
-    return;
-
-  }
-
-
-  /* =========================
-  SELECT SAME PAGE
-  FOR MAIN PREVIEW
-  ========================= */
-
-  currentMainIndex =
-    index;
-
-
-  const pageData =
-    pages[index];
-
-
-  /* =========================
-  ROTATE
-  ========================= */
-
-  if(
-    button.dataset.action ===
-    "rotate-left"
-  ){
-
-    pageData.rotation =
-      (
-        Number(
-          pageData.rotation || 0
-        ) +
-        270
-      ) % 360;
-
-  }
-  else{
-
-    pageData.rotation =
-      (
-        Number(
-          pageData.rotation || 0
-        ) +
-        90
-      ) % 360;
-
-  }
-
-
-  /* =========================
-  UPDATE MAIN PREVIEW FIRST
-  ========================= */
-
-  await renderMainPreview();
-
-
-  /* =========================
-  UPDATE THUMBNAILS
-  ========================= */
-
-  renderPages();
-
-
-  /* =========================
-  UPDATE SELECTION
-  ========================= */
-
-  updateSelection();
-
-});
 
 
 /* =====================================================
@@ -1597,7 +1288,7 @@ function(){
 
 
 /* =====================================================
-DRAG DROP UPLOAD
+DRAG DROP
 ===================================================== */
 
 [
@@ -1651,7 +1342,6 @@ function(event){
   const files =
     event.dataTransfer.files;
 
-
   if(
     files &&
     files.length
@@ -1659,7 +1349,6 @@ function(event){
 
     const file =
       files[0];
-
 
     if(
       file.type ===
@@ -1701,21 +1390,17 @@ async function loadPDF(file){
 
   }
 
-
   currentFile =
     file;
-
 
   showStatus(
     "Loading PDF..."
   );
 
-
   try{
 
     const buffer =
       await file.arrayBuffer();
-
 
     pdfJsDocument =
       await pdfjsLib
@@ -1724,9 +1409,7 @@ async function loadPDF(file){
       })
       .promise;
 
-
     pages = [];
-
 
     for(
       let i = 0;
@@ -1750,13 +1433,12 @@ async function loadPDF(file){
 
     }
 
-
     currentMainIndex = 0;
 
+    mainZoom = 1;
 
     fileName.textContent =
       file.name;
-
 
     filePages.textContent =
       pdfJsDocument.numPages +
@@ -1766,34 +1448,24 @@ async function loadPDF(file){
         : " pages"
       );
 
-
     fileInfo.style.display =
       "flex";
-
 
     workspace.style.display =
       "block";
 
-
     downloadArea.style.display =
       "none";
 
-
-    mainZoom = 1;
-
     updateMainZoom();
-
 
     renderPages();
 
     updateSelection();
 
-
     await renderMainPreview();
 
-
     hideStatus();
-
 
   }
   catch(error){
@@ -1827,7 +1499,10 @@ document
 .getElementById("mainZoomIn")
 .addEventListener(
 "click",
-async function(){
+async function(event){
+
+  event.preventDefault();
+  event.stopPropagation();
 
   mainZoom =
     Math.min(
@@ -1846,7 +1521,10 @@ document
 .getElementById("mainZoomOut")
 .addEventListener(
 "click",
-async function(){
+async function(event){
+
+  event.preventDefault();
+  event.stopPropagation();
 
   mainZoom =
     Math.max(
@@ -1861,10 +1539,13 @@ async function(){
 });
 
 
-document
-.getElementById("mainZoomReset")
-.addEventListener(
-"click",
+/* =====================================================
+MAIN PREVIEW ROTATE
+IMPORTANT:
+DIRECT ONCLICK - NO addEventListener
+===================================================== */
+
+mainZoomReset.onclick =
 async function(event){
 
   event.preventDefault();
@@ -1880,13 +1561,9 @@ async function(event){
 
   }
 
-
-  /* CURRENT MAIN PREVIEW PAGE */
   const pageData =
     pages[currentMainIndex];
 
-
-  /* ROTATE 90 DEGREE RIGHT */
   pageData.rotation =
     (
       Number(
@@ -1894,22 +1571,17 @@ async function(event){
       ) + 90
     ) % 360;
 
-
-  /* RENDER MAIN PREVIEW */
   await renderMainPreview();
 
-
-  /* UPDATE THUMBNAIL */
   renderPages();
 
-
-  /* UPDATE SELECTION */
   updateSelection();
 
-});
+};
+
 
 /* =====================================================
-CALCULATE FIT SCALE
+FIT SCALE
 ===================================================== */
 
 function calculateFitScale(
@@ -1932,16 +1604,13 @@ function calculateFitScale(
       containerHeight - padding
     );
 
-
   const scaleX =
     availableWidth /
     pageWidth;
 
-
   const scaleY =
     availableHeight /
     pageHeight;
-
 
   return Math.min(
     scaleX,
@@ -1953,6 +1622,7 @@ function calculateFitScale(
 
 /* =====================================================
 MAIN PREVIEW
+VISUAL CANVAS ROTATION
 ===================================================== */
 
 async function renderMainPreview(){
@@ -1966,18 +1636,8 @@ async function renderMainPreview(){
 
   }
 
-
-  /* =================================
-  CREATE NEW RENDER VERSION
-  ================================= */
-
   const renderVersion =
     ++mainRenderVersion;
-
-
-  /* =================================
-  KEEP INDEX SAFE
-  ================================= */
 
   currentMainIndex =
     Math.max(
@@ -1988,23 +1648,15 @@ async function renderMainPreview(){
       )
     );
 
-
   const pageData =
     pages[currentMainIndex];
-
 
   try{
 
     const page =
-      await pdfJsDocument
-      .getPage(
+      await pdfJsDocument.getPage(
         pageData.originalIndex + 1
       );
-
-
-    /* =================================
-    OLD RENDER CHECK
-    ================================= */
 
     if(
       renderVersion !== mainRenderVersion
@@ -2013,11 +1665,6 @@ async function renderMainPreview(){
       return;
 
     }
-
-
-    /* =================================
-    GET ROTATION
-    ================================= */
 
     const rotation =
       (
@@ -2026,26 +1673,21 @@ async function renderMainPreview(){
         ) % 360 + 360
       ) % 360;
 
+    /*
+      Always render original page
+      at 0 degree.
+    */
 
-    /* =================================
-    BASE VIEWPORT
-    ================================= */
-
-    const baseViewport =
+    const originalViewport =
       page.getViewport({
-
         scale:1,
-
-        rotation:rotation
-
+        rotation:0
       });
-
 
     const wrap =
       document.querySelector(
         ".main-preview-wrap"
       );
-
 
     if(!wrap){
 
@@ -2053,84 +1695,81 @@ async function renderMainPreview(){
 
     }
 
+    /*
+      For 90/270 degree rotation,
+      fit calculation uses swapped dimensions.
+    */
 
-    /* =================================
-    FIT PAGE TO PREVIEW AREA
-    ================================= */
+    let fitWidth =
+      originalViewport.width;
+
+    let fitHeight =
+      originalViewport.height;
+
+    if(
+      rotation === 90 ||
+      rotation === 270
+    ){
+
+      fitWidth =
+        originalViewport.height;
+
+      fitHeight =
+        originalViewport.width;
+
+    }
 
     const fitScale =
       calculateFitScale(
-
         wrap.clientWidth,
-
         wrap.clientHeight,
-
-        baseViewport.width,
-
-        baseViewport.height,
-
+        fitWidth,
+        fitHeight,
         45
-
       );
-
 
     const scale =
       fitScale * mainZoom;
 
-
-    /* =================================
-    FINAL VIEWPORT
-    ================================= */
-
-    const viewport =
+    const sourceViewport =
       page.getViewport({
-
         scale:scale,
-
-        rotation:rotation
-
+        rotation:0
       });
 
+    /*
+      Render original page to source canvas.
+    */
 
-    /* =================================
-    CREATE CANVAS
-    ================================= */
-
-    const canvas =
+    const sourceCanvas =
       document.createElement(
         "canvas"
       );
 
-
-    const context =
-      canvas.getContext(
+    const sourceContext =
+      sourceCanvas.getContext(
         "2d"
       );
 
-
-    canvas.width =
+    sourceCanvas.width =
       Math.ceil(
-        viewport.width
+        sourceViewport.width
       );
 
-
-    canvas.height =
+    sourceCanvas.height =
       Math.ceil(
-        viewport.height
+        sourceViewport.height
       );
 
+    await page.render({
 
-    canvas.style.width =
-      viewport.width + "px";
+      canvasContext:
+        sourceContext,
 
+      viewport:
+        sourceViewport
 
-    canvas.style.height =
-      viewport.height + "px";
-
-
-    /* =================================
-    CHECK AGAIN BEFORE DOM UPDATE
-    ================================= */
+    }).promise;
 
     if(
       renderVersion !== mainRenderVersion
@@ -2140,52 +1779,109 @@ async function renderMainPreview(){
 
     }
 
+    /*
+      Create final rotated canvas.
+    */
+
+    const finalCanvas =
+      document.createElement(
+        "canvas"
+      );
+
+    const finalContext =
+      finalCanvas.getContext(
+        "2d"
+      );
+
+    if(
+      rotation === 90 ||
+      rotation === 270
+    ){
+
+      finalCanvas.width =
+        sourceCanvas.height;
+
+      finalCanvas.height =
+        sourceCanvas.width;
+
+    }
+    else{
+
+      finalCanvas.width =
+        sourceCanvas.width;
+
+      finalCanvas.height =
+        sourceCanvas.height;
+
+    }
+
+    /*
+      Rotate around center.
+    */
+
+    finalContext.save();
+
+    finalContext.translate(
+      finalCanvas.width / 2,
+      finalCanvas.height / 2
+    );
+
+    finalContext.rotate(
+      rotation *
+      Math.PI /
+      180
+    );
+
+    finalContext.drawImage(
+      sourceCanvas,
+      -sourceCanvas.width / 2,
+      -sourceCanvas.height / 2
+    );
+
+    finalContext.restore();
+
+    if(
+      renderVersion !== mainRenderVersion
+    ){
+
+      return;
+
+    }
+
+    /*
+      Update main preview.
+    */
 
     mainStage.innerHTML =
       "";
 
-
     mainStage.style.width =
-      viewport.width + "px";
-
+      finalCanvas.width + "px";
 
     mainStage.style.height =
-      viewport.height + "px";
+      finalCanvas.height + "px";
 
+    finalCanvas.style.width =
+      finalCanvas.width + "px";
+
+    finalCanvas.style.height =
+      finalCanvas.height + "px";
+
+    finalCanvas.style.display =
+      "block";
+
+    finalCanvas.style.background =
+      "#fff";
+
+    finalCanvas.style.boxShadow =
+      "0 5px 22px rgba(0,0,0,.16)";
 
     mainStage.appendChild(
-      canvas
+      finalCanvas
     );
-
 
     mainPageNumber.textContent =
       currentMainIndex + 1;
-
-
-    /* =================================
-    RENDER PDF PAGE
-    ================================= */
-
-    await page.render({
-
-      canvasContext:context,
-
-      viewport:viewport
-
-    }).promise;
-
-
-    /* =================================
-    FINAL OLD-RENDER PROTECTION
-    ================================= */
-
-    if(
-      renderVersion !== mainRenderVersion
-    ){
-
-      return;
-
-    }
 
   }
   catch(error){
@@ -2199,14 +1895,93 @@ async function renderMainPreview(){
 
 }
 
+
 /* =====================================================
-RENDER ALL PAGE CARDS
+THUMBNAIL ROTATE
+===================================================== */
+
+pageGrid.addEventListener(
+"click",
+async function(event){
+
+  const button =
+    event.target.closest(
+      'button[data-action="rotate-left"], button[data-action="rotate-right"]'
+    );
+
+  if(
+    !button ||
+    !pageGrid.contains(button)
+  ){
+
+    return;
+
+  }
+
+  event.preventDefault();
+  event.stopPropagation();
+
+  const index =
+    Number(
+      button.dataset.pageIndex
+    );
+
+  if(
+    !Number.isInteger(index) ||
+    !pages[index]
+  ){
+
+    return;
+
+  }
+
+  currentMainIndex =
+    index;
+
+  const pageData =
+    pages[index];
+
+  if(
+    button.dataset.action ===
+    "rotate-left"
+  ){
+
+    pageData.rotation =
+      (
+        Number(
+          pageData.rotation || 0
+        ) + 270
+      ) % 360;
+
+  }
+  else{
+
+    pageData.rotation =
+      (
+        Number(
+          pageData.rotation || 0
+        ) + 90
+      ) % 360;
+
+  }
+
+  await renderMainPreview();
+
+  renderPages();
+
+  updateSelection();
+
+});
+
+
+/* =====================================================
+RENDER PAGE CARDS
 ===================================================== */
 
 function renderPages(){
 
-  pageGrid.innerHTML = "";
-
+  pageGrid.innerHTML =
+    "";
 
   pages.forEach(
     function(pageData,index){
@@ -2216,7 +1991,6 @@ function renderPages(){
           pageData,
           index
         );
-
 
       pageGrid.appendChild(
         card
@@ -2242,10 +2016,8 @@ function createPageCard(
       "div"
     );
 
-
   card.className =
     "page-card";
-
 
   if(pageData.selected){
 
@@ -2255,55 +2027,44 @@ function createPageCard(
 
   }
 
+  card.draggable =
+    true;
 
-  card.draggable = true;
 
-
-  /* =========================
-  TOP
-  ========================= */
+  /* TOP */
 
   const top =
     document.createElement(
       "div"
     );
 
-
   top.className =
     "page-top";
-
 
   const number =
     document.createElement(
       "div"
     );
 
-
   number.className =
     "page-number";
 
-
   number.textContent =
     "Page " + (index + 1);
-
 
   const checkbox =
     document.createElement(
       "input"
     );
 
-
   checkbox.type =
     "checkbox";
-
 
   checkbox.className =
     "page-checkbox";
 
-
   checkbox.checked =
     pageData.selected;
-
 
   checkbox.addEventListener(
     "click",
@@ -2314,7 +2075,6 @@ function createPageCard(
     }
   );
 
-
   checkbox.addEventListener(
     "change",
     function(){
@@ -2322,77 +2082,57 @@ function createPageCard(
       pageData.selected =
         this.checked;
 
-
       card.classList.toggle(
         "selected",
         pageData.selected
       );
-
 
       updateSelection();
 
     }
   );
 
-
-  top.appendChild(
-    number
-  );
+  top.appendChild(number);
+  top.appendChild(checkbox);
 
 
-  top.appendChild(
-    checkbox
-  );
-
-
-  /* =========================
-  THUMBNAIL
-  ========================= */
+  /* THUMBNAIL */
 
   const thumbnailWrap =
     document.createElement(
       "div"
     );
 
-
   thumbnailWrap.className =
     "thumbnail-wrap";
-
 
   const thumbnailStage =
     document.createElement(
       "div"
     );
 
-
   thumbnailStage.className =
     "thumbnail-stage";
-
 
   thumbnailWrap.appendChild(
     thumbnailStage
   );
 
 
-  /* =========================
-  ZOOM
-  ========================= */
+  /* ZOOM */
 
   const zoomControls =
     document.createElement(
       "div"
     );
 
-
   zoomControls.className =
     "page-zoom-controls";
-
 
   const zoomMinus =
     document.createElement(
       "button"
     );
-
 
   zoomMinus.type =
     "button";
@@ -2403,28 +2143,23 @@ function createPageCard(
   zoomMinus.textContent =
     "−";
 
-
   const zoomText =
     document.createElement(
       "span"
     );
 
-
   zoomText.className =
     "page-zoom-text";
-
 
   zoomText.textContent =
     Math.round(
       pageData.zoom * 100
     ) + "%";
 
-
   const zoomPlus =
     document.createElement(
       "button"
     );
-
 
   zoomPlus.type =
     "button";
@@ -2435,12 +2170,10 @@ function createPageCard(
   zoomPlus.textContent =
     "+";
 
-
   const zoomReset =
     document.createElement(
       "button"
     );
-
 
   zoomReset.type =
     "button";
@@ -2450,7 +2183,6 @@ function createPageCard(
 
   zoomReset.textContent =
     "↺";
-
 
   zoomMinus.addEventListener(
     "click",
@@ -2464,12 +2196,10 @@ function createPageCard(
           pageData.zoom - .25
         );
 
-
       zoomText.textContent =
         Math.round(
           pageData.zoom * 100
         ) + "%";
-
 
       await renderThumbnail(
         pageData,
@@ -2478,7 +2208,6 @@ function createPageCard(
 
     }
   );
-
 
   zoomPlus.addEventListener(
     "click",
@@ -2492,12 +2221,10 @@ function createPageCard(
           pageData.zoom + .25
         );
 
-
       zoomText.textContent =
         Math.round(
           pageData.zoom * 100
         ) + "%";
-
 
       await renderThumbnail(
         pageData,
@@ -2506,7 +2233,6 @@ function createPageCard(
 
     }
   );
-
 
   zoomReset.addEventListener(
     "click",
@@ -2514,11 +2240,11 @@ function createPageCard(
 
       event.stopPropagation();
 
-      pageData.zoom = 1;
+      pageData.zoom =
+        1;
 
       zoomText.textContent =
         "100%";
-
 
       await renderThumbnail(
         pageData,
@@ -2527,7 +2253,6 @@ function createPageCard(
 
     }
   );
-
 
   zoomControls.appendChild(
     zoomMinus
@@ -2546,25 +2271,20 @@ function createPageCard(
   );
 
 
-  /* =========================
-  ROTATE / CROP
-  ========================= */
+  /* ACTION ROW */
 
   const actionRow =
     document.createElement(
       "div"
     );
 
-
   actionRow.className =
     "page-action-row";
-
 
   const rotateLeft =
     document.createElement(
       "button"
     );
-
 
   rotateLeft.type =
     "button";
@@ -2575,12 +2295,20 @@ function createPageCard(
   rotateLeft.textContent =
     "↶ Rotate";
 
+  rotateLeft.dataset.action =
+    "rotate-left";
+
+  rotateLeft.dataset.pageIndex =
+    String(index);
+
+  rotateLeft.draggable =
+    false;
+
 
   const rotateRight =
     document.createElement(
       "button"
     );
-
 
   rotateRight.type =
     "button";
@@ -2591,28 +2319,11 @@ function createPageCard(
   rotateRight.textContent =
     "Rotate ↷";
 
-
-  /* =================================================
-  ONLY CHANGE:
-  ROTATE BUTTON DATA
-  ================================================= */
-
-  rotateLeft.dataset.action =
-    "rotate-left";
-
-  rotateLeft.dataset.pageIndex =
-    String(index);
-
-
   rotateRight.dataset.action =
     "rotate-right";
 
   rotateRight.dataset.pageIndex =
     String(index);
-
-
-  rotateLeft.draggable =
-    false;
 
   rotateRight.draggable =
     false;
@@ -2623,7 +2334,6 @@ function createPageCard(
       "button"
     );
 
-
   cropButton.type =
     "button";
 
@@ -2633,19 +2343,12 @@ function createPageCard(
   cropButton.textContent =
     "✂ Crop";
 
-
-  /* =========================
-  CROP
-  ========================= */
-
   cropButton.addEventListener(
     "click",
     function(event){
 
       event.preventDefault();
-
       event.stopPropagation();
-
 
       openCropEditor(
         pageData,
@@ -2654,7 +2357,6 @@ function createPageCard(
 
     }
   );
-
 
   actionRow.appendChild(
     rotateLeft
@@ -2669,25 +2371,20 @@ function createPageCard(
   );
 
 
-  /* =========================
-  ORDER
-  ========================= */
+  /* ORDER */
 
   const orderRow =
     document.createElement(
       "div"
     );
 
-
   orderRow.className =
     "order-row";
-
 
   const upButton =
     document.createElement(
       "button"
     );
-
 
   upButton.type =
     "button";
@@ -2701,12 +2398,10 @@ function createPageCard(
   upButton.title =
     "Move Up";
 
-
   const downButton =
     document.createElement(
       "button"
     );
-
 
   downButton.type =
     "button";
@@ -2719,7 +2414,6 @@ function createPageCard(
 
   downButton.title =
     "Move Down";
-
 
   upButton.addEventListener(
     "click",
@@ -2735,7 +2429,6 @@ function createPageCard(
     }
   );
 
-
   downButton.addEventListener(
     "click",
     function(event){
@@ -2750,7 +2443,6 @@ function createPageCard(
     }
   );
 
-
   orderRow.appendChild(
     upButton
   );
@@ -2760,9 +2452,7 @@ function createPageCard(
   );
 
 
-  /* =========================
-  CARD CLICK
-  ========================= */
+  /* CARD CLICK */
 
   card.addEventListener(
     "click",
@@ -2781,10 +2471,8 @@ function createPageCard(
 
       }
 
-
       currentMainIndex =
         index;
-
 
       renderMainPreview();
 
@@ -2792,9 +2480,7 @@ function createPageCard(
   );
 
 
-  /* =========================
-  DRAG START
-  ========================= */
+  /* DRAG START */
 
   card.addEventListener(
     "dragstart",
@@ -2815,10 +2501,8 @@ function createPageCard(
 
       }
 
-
       draggedIndex =
         index;
-
 
       card.classList.add(
         "dragging"
@@ -2828,9 +2512,7 @@ function createPageCard(
   );
 
 
-  /* =========================
-  DRAG END
-  ========================= */
+  /* DRAG END */
 
   card.addEventListener(
     "dragend",
@@ -2839,11 +2521,9 @@ function createPageCard(
       draggedIndex =
         null;
 
-
       card.classList.remove(
         "dragging"
       );
-
 
       document
       .querySelectorAll(
@@ -2863,16 +2543,13 @@ function createPageCard(
   );
 
 
-  /* =========================
-  DRAG OVER
-  ========================= */
+  /* DRAG OVER */
 
   card.addEventListener(
     "dragover",
     function(event){
 
       event.preventDefault();
-
 
       if(
         draggedIndex !== null &&
@@ -2901,9 +2578,7 @@ function createPageCard(
   );
 
 
-  /* =========================
-  DROP
-  ========================= */
+  /* DROP */
 
   card.addEventListener(
     "drop",
@@ -2915,7 +2590,6 @@ function createPageCard(
         "drag-over"
       );
 
-
       if(
         draggedIndex === null ||
         draggedIndex === index
@@ -2924,7 +2598,6 @@ function createPageCard(
         return;
 
       }
-
 
       movePage(
         draggedIndex,
@@ -2935,13 +2608,9 @@ function createPageCard(
   );
 
 
-  /* =========================
-  APPEND
-  ========================= */
+  /* APPEND */
 
-  card.appendChild(
-    top
-  );
+  card.appendChild(top);
 
   card.appendChild(
     thumbnailWrap
@@ -2959,16 +2628,10 @@ function createPageCard(
     orderRow
   );
 
-
-  /* =========================
-  INITIAL RENDER
-  ========================= */
-
   renderThumbnail(
     pageData,
     thumbnailStage
   );
-
 
   return card;
 
@@ -2976,7 +2639,7 @@ function createPageCard(
 
 
 /* =====================================================
-RENDER THUMBNAIL
+THUMBNAIL RENDER
 ===================================================== */
 
 async function renderThumbnail(
@@ -2990,140 +2653,110 @@ async function renderThumbnail(
 
   }
 
-
   try{
 
     const page =
-      await pdfJsDocument
-      .getPage(
+      await pdfJsDocument.getPage(
         pageData.originalIndex + 1
       );
-
 
     const wrap =
       stage.parentElement;
 
+    const rotation =
+      (
+        Number(
+          pageData.rotation || 0
+        ) % 360 + 360
+      ) % 360;
 
     const baseViewport =
       page.getViewport({
-
         scale:1,
-
-        rotation:pageData.rotation
-
+        rotation:rotation
       });
-
 
     const fitScale =
       calculateFitScale(
-
         wrap.clientWidth,
-
         wrap.clientHeight,
-
         baseViewport.width,
-
         baseViewport.height,
-
         16
-
       );
-
 
     const scale =
       fitScale *
       pageData.zoom;
 
-
     const viewport =
       page.getViewport({
-
         scale:scale,
-
-        rotation:pageData.rotation
-
+        rotation:rotation
       });
-
 
     const canvas =
       document.createElement(
         "canvas"
       );
 
-
     const context =
       canvas.getContext(
         "2d"
       );
-
 
     canvas.width =
       Math.ceil(
         viewport.width
       );
 
-
     canvas.height =
       Math.ceil(
         viewport.height
       );
 
-
     canvas.style.width =
       viewport.width + "px";
-
 
     canvas.style.height =
       viewport.height + "px";
 
-
     stage.innerHTML =
       "";
-
 
     stage.style.width =
       viewport.width + "px";
 
-
     stage.style.height =
       viewport.height + "px";
-
 
     stage.appendChild(
       canvas
     );
 
-
     await page.render({
 
-      canvasContext:context,
+      canvasContext:
+        context,
 
-      viewport:viewport
+      viewport:
+        viewport
 
     }).promise;
 
 
-    /* =====================
-    ROTATION BADGE
-    ===================== */
-
-    if(
-      pageData.rotation !== 0
-    ){
+    if(rotation !== 0){
 
       const badge =
         document.createElement(
           "div"
         );
 
-
       badge.className =
         "rotation-badge";
 
-
       badge.textContent =
-        pageData.rotation + "°";
-
+        rotation + "°";
 
       stage.appendChild(
         badge
@@ -3132,10 +2765,6 @@ async function renderThumbnail(
     }
 
 
-    /* =====================
-    CROP BADGE
-    ===================== */
-
     if(pageData.crop){
 
       const badge =
@@ -3143,19 +2772,15 @@ async function renderThumbnail(
           "div"
         );
 
-
       badge.className =
         "crop-badge";
-
 
       badge.textContent =
         "Cropped";
 
-
       stage.appendChild(
         badge
       );
-
 
       drawThumbnailCrop(
         stage,
@@ -3168,7 +2793,10 @@ async function renderThumbnail(
   }
   catch(error){
 
-    console.error(error);
+    console.error(
+      "Thumbnail error:",
+      error
+    );
 
   }
 
@@ -3176,7 +2804,7 @@ async function renderThumbnail(
 
 
 /* =====================================================
-DRAW CROP ON THUMBNAIL
+THUMBNAIL CROP
 ===================================================== */
 
 function drawThumbnailCrop(
@@ -3191,64 +2819,44 @@ function drawThumbnailCrop(
 
   }
 
-
   const crop =
     pageData.crop;
 
-
-  const fullW =
-    viewport.width;
-
-
-  const fullH =
-    viewport.height;
-
-
   const left =
     crop.x *
-    fullW;
-
+    viewport.width;
 
   const top =
     crop.y *
-    fullH;
-
+    viewport.height;
 
   const width =
     crop.width *
-    fullW;
-
+    viewport.width;
 
   const height =
     crop.height *
-    fullH;
-
+    viewport.height;
 
   const overlay =
     document.createElement(
       "div"
     );
 
-
   overlay.className =
     "crop-overlay";
-
 
   overlay.style.left =
     left + "px";
 
-
   overlay.style.top =
     top + "px";
-
 
   overlay.style.width =
     width + "px";
 
-
   overlay.style.height =
     height + "px";
-
 
   stage.appendChild(
     overlay
@@ -3275,20 +2883,17 @@ function movePage(
 
   }
 
-
   const moved =
     pages.splice(
       from,
       1
     )[0];
 
-
   pages.splice(
     to,
     0,
     moved
   );
-
 
   if(
     currentMainIndex === from
@@ -3314,7 +2919,6 @@ function movePage(
     currentMainIndex++;
 
   }
-
 
   renderPages();
 
@@ -3344,7 +2948,6 @@ function(){
     }
   );
 
-
   renderPages();
 
   updateSelection();
@@ -3371,7 +2974,6 @@ function(){
     }
   );
 
-
   renderPages();
 
   updateSelection();
@@ -3380,7 +2982,7 @@ function(){
 
 
 /* =====================================================
-UPDATE SELECTION
+SELECTION
 ===================================================== */
 
 function updateSelection(){
@@ -3394,7 +2996,6 @@ function updateSelection(){
       }
     ).length;
 
-
   selectionCount.textContent =
     count +
     (
@@ -3403,7 +3004,6 @@ function updateSelection(){
       : " pages selected"
     );
 
-
   splitButton.disabled =
     count === 0;
 
@@ -3411,7 +3011,7 @@ function updateSelection(){
 
 
 /* =====================================================
-OPEN CROP EDITOR
+CROP EDITOR
 ===================================================== */
 
 async function openCropEditor(
@@ -3422,23 +3022,18 @@ async function openCropEditor(
   cropPageIndex =
     index;
 
-
   document.getElementById(
     "cropPageNumber"
   ).textContent =
     index + 1;
 
-
   cropModal.classList.add(
     "show"
   );
 
-
   cropTempRect =
     pageData.crop
-      ? {
-          ...pageData.crop
-        }
+      ? {...pageData.crop}
       : {
           x:0,
           y:0,
@@ -3446,11 +3041,9 @@ async function openCropEditor(
           height:1
         };
 
-
   await renderCropSurface(
     pageData
   );
-
 
   setTimeout(
     function(){
@@ -3465,7 +3058,7 @@ async function openCropEditor(
 
 
 /* =====================================================
-RENDER CROP SURFACE
+CROP SURFACE
 ===================================================== */
 
 async function renderCropSurface(
@@ -3475,119 +3068,101 @@ async function renderCropSurface(
   try{
 
     const page =
-      await pdfJsDocument
-      .getPage(
+      await pdfJsDocument.getPage(
         pageData.originalIndex + 1
       );
 
+    const rotation =
+      (
+        Number(
+          pageData.rotation || 0
+        ) % 360 + 360
+      ) % 360;
 
     const baseViewport =
       page.getViewport({
-
         scale:1,
-
-        rotation:pageData.rotation
-
+        rotation:rotation
       });
-
 
     const area =
       document.querySelector(
         ".crop-work-area"
       );
 
-
     cropDisplayScale =
       calculateFitScale(
-
         area.clientWidth,
-
         area.clientHeight,
-
         baseViewport.width,
-
         baseViewport.height,
-
         50
-
       );
-
 
     const viewport =
       page.getViewport({
-
         scale:cropDisplayScale,
-
-        rotation:pageData.rotation
-
+        rotation:rotation
       });
-
 
     const canvas =
       document.createElement(
         "canvas"
       );
 
-
     const context =
       canvas.getContext(
         "2d"
       );
-
 
     canvas.width =
       Math.ceil(
         viewport.width
       );
 
-
     canvas.height =
       Math.ceil(
         viewport.height
       );
 
-
     canvas.style.width =
       viewport.width + "px";
-
 
     canvas.style.height =
       viewport.height + "px";
 
-
     cropSurface.innerHTML =
       "";
-
 
     cropSurface.style.width =
       viewport.width + "px";
 
-
     cropSurface.style.height =
       viewport.height + "px";
-
 
     cropSurface.appendChild(
       canvas
     );
 
-
     await page.render({
 
-      canvasContext:context,
+      canvasContext:
+        context,
 
-      viewport:viewport
+      viewport:
+        viewport
 
     }).promise;
 
-
     createCropRectangle();
-
 
   }
   catch(error){
 
-    console.error(error);
+    console.error(
+      "Crop error:",
+      error
+    );
 
   }
 
@@ -3605,43 +3180,32 @@ function createCropRectangle(){
       ".crop-rectangle"
     );
 
-
   if(old){
 
     old.remove();
 
   }
 
-
   const rect =
     document.createElement(
       "div"
     );
 
-
   rect.className =
     "crop-rectangle";
-
 
   rect.id =
     "cropRectangle";
 
-
   rect.innerHTML =
-
     '<div class="crop-handle handle-tl"></div>' +
-
     '<div class="crop-handle handle-tr"></div>' +
-
     '<div class="crop-handle handle-bl"></div>' +
-
     '<div class="crop-handle handle-br"></div>';
-
 
   cropSurface.appendChild(
     rect
   );
-
 
   attachCropEvents(
     rect
@@ -3661,7 +3225,6 @@ function displayCropRectangle(){
       "cropRectangle"
     );
 
-
   if(
     !rect ||
     !cropTempRect
@@ -3671,13 +3234,11 @@ function displayCropRectangle(){
 
   }
 
-
   rect.style.left =
     (
       cropTempRect.x *
       cropSurface.clientWidth
     ) + "px";
-
 
   rect.style.top =
     (
@@ -3685,20 +3246,17 @@ function displayCropRectangle(){
       cropSurface.clientHeight
     ) + "px";
 
-
   rect.style.width =
     (
       cropTempRect.width *
       cropSurface.clientWidth
     ) + "px";
 
-
   rect.style.height =
     (
       cropTempRect.height *
       cropSurface.clientHeight
     ) + "px";
-
 
   rect.classList.add(
     "active"
@@ -3708,7 +3266,7 @@ function displayCropRectangle(){
 
 
 /* =====================================================
-CROP POINTER EVENTS
+CROP EVENTS
 ===================================================== */
 
 function attachCropEvents(
@@ -3727,7 +3285,6 @@ function attachCropEvents(
         return;
 
       }
-
 
       if(
         event.target === rect ||
@@ -3748,44 +3305,31 @@ function attachCropEvents(
         cropResizing = false;
 
         const point =
-          getCropPoint(
-            event
-          );
-
+          getCropPoint(event);
 
         cropStartX =
           point.x;
 
-
         cropStartY =
           point.y;
-
 
         cropTempRect = {
 
           x:point.x,
-
           y:point.y,
-
           width:0,
-
           height:0
 
         };
 
       }
 
-
       cropStartRect =
-        {
-          ...cropTempRect
-        };
-
+        {...cropTempRect};
 
       cropSurface.setPointerCapture(
         event.pointerId
       );
-
 
       event.preventDefault();
 
@@ -3803,14 +3347,10 @@ function attachCropEvents(
           ".crop-handle"
         );
 
-
       if(handle){
 
         cropResizeHandle =
-          getHandleName(
-            handle
-          );
-
+          getHandleName(handle);
 
         cropResizing = true;
         cropMoving = false;
@@ -3825,31 +3365,21 @@ function attachCropEvents(
 
       }
 
-
       const point =
-        getCropPoint(
-          event
-        );
-
+        getCropPoint(event);
 
       cropStartX =
         point.x;
 
-
       cropStartY =
         point.y;
 
-
       cropStartRect =
-        {
-          ...cropTempRect
-        };
-
+        {...cropTempRect};
 
       cropSurface.setPointerCapture(
         event.pointerId
       );
-
 
       event.preventDefault();
 
@@ -3872,22 +3402,16 @@ function attachCropEvents(
 
       }
 
-
       const point =
-        getCropPoint(
-          event
-        );
-
+        getCropPoint(event);
 
       const dx =
         point.x -
         cropStartX;
 
-
       const dy =
         point.y -
         cropStartY;
-
 
       if(cropDragging){
 
@@ -3895,17 +3419,13 @@ function attachCropEvents(
           normalizeRect({
 
             x:cropStartRect.x,
-
             y:cropStartRect.y,
-
             width:dx,
-
             height:dy
 
           });
 
       }
-
 
       if(cropMoving){
 
@@ -3913,11 +3433,9 @@ function attachCropEvents(
           cropStartRect.x +
           dx;
 
-
         let y =
           cropStartRect.y +
           dy;
-
 
         x =
           Math.max(
@@ -3929,7 +3447,6 @@ function attachCropEvents(
             )
           );
 
-
         y =
           Math.max(
             0,
@@ -3940,23 +3457,18 @@ function attachCropEvents(
             )
           );
 
-
         cropTempRect = {
 
           x:x,
-
           y:y,
-
           width:
             cropStartRect.width,
-
           height:
             cropStartRect.height
 
         };
 
       }
-
 
       if(cropResizing){
 
@@ -3966,7 +3478,6 @@ function attachCropEvents(
         );
 
       }
-
 
       displayCropRectangle();
 
@@ -3980,7 +3491,6 @@ function attachCropEvents(
       cropMoving = false;
       cropResizing = false;
       cropResizeHandle = null;
-
 
       try{
 
@@ -4000,13 +3510,10 @@ function attachCropEvents(
 GET CROP POINT
 ===================================================== */
 
-function getCropPoint(
-  event
-){
+function getCropPoint(event){
 
   const rect =
     cropSurface.getBoundingClientRect();
-
 
   let x =
     (
@@ -4015,14 +3522,12 @@ function getCropPoint(
     ) /
     rect.width;
 
-
   let y =
     (
       event.clientY -
       rect.top
     ) /
     rect.height;
-
 
   x =
     Math.max(
@@ -4033,7 +3538,6 @@ function getCropPoint(
       )
     );
 
-
   y =
     Math.max(
       0,
@@ -4042,7 +3546,6 @@ function getCropPoint(
         y
       )
     );
-
 
   return {
     x:x,
@@ -4053,12 +3556,10 @@ function getCropPoint(
 
 
 /* =====================================================
-NORMALIZE RECT
+NORMALIZE
 ===================================================== */
 
-function normalizeRect(
-  rect
-){
+function normalizeRect(rect){
 
   let x =
     rect.x;
@@ -4072,26 +3573,19 @@ function normalizeRect(
   let height =
     rect.height;
 
-
   if(width < 0){
 
     x += width;
-
-    width =
-      Math.abs(width);
+    width = Math.abs(width);
 
   }
-
 
   if(height < 0){
 
     y += height;
-
-    height =
-      Math.abs(height);
+    height = Math.abs(height);
 
   }
-
 
   x =
     Math.max(
@@ -4102,7 +3596,6 @@ function normalizeRect(
       )
     );
 
-
   y =
     Math.max(
       0,
@@ -4112,13 +3605,11 @@ function normalizeRect(
       )
     );
 
-
   width =
     Math.min(
       width,
       1 - x
     );
-
 
   height =
     Math.min(
@@ -4126,15 +3617,11 @@ function normalizeRect(
       1 - y
     );
 
-
   return {
 
     x:x,
-
     y:y,
-
     width:width,
-
     height:height
 
   };
@@ -4143,12 +3630,10 @@ function normalizeRect(
 
 
 /* =====================================================
-GET HANDLE NAME
+HANDLE
 ===================================================== */
 
-function getHandleName(
-  handle
-){
+function getHandleName(handle){
 
   if(
     handle.classList.contains(
@@ -4160,7 +3645,6 @@ function getHandleName(
 
   }
 
-
   if(
     handle.classList.contains(
       "handle-tr"
@@ -4171,7 +3655,6 @@ function getHandleName(
 
   }
 
-
   if(
     handle.classList.contains(
       "handle-bl"
@@ -4181,7 +3664,6 @@ function getHandleName(
     return "bl";
 
   }
-
 
   return "br";
 
@@ -4200,7 +3682,6 @@ function resizeCropRect(
   const r =
     cropStartRect;
 
-
   let left =
     r.x;
 
@@ -4215,7 +3696,6 @@ function resizeCropRect(
     r.y +
     r.height;
 
-
   if(
     cropResizeHandle === "tl"
   ){
@@ -4229,7 +3709,6 @@ function resizeCropRect(
         )
       );
 
-
     top =
       Math.max(
         0,
@@ -4240,7 +3719,6 @@ function resizeCropRect(
       );
 
   }
-
 
   if(
     cropResizeHandle === "tr"
@@ -4255,7 +3733,6 @@ function resizeCropRect(
         )
       );
 
-
     top =
       Math.max(
         0,
@@ -4266,7 +3743,6 @@ function resizeCropRect(
       );
 
   }
-
 
   if(
     cropResizeHandle === "bl"
@@ -4281,7 +3757,6 @@ function resizeCropRect(
         )
       );
 
-
     bottom =
       Math.min(
         1,
@@ -4292,7 +3767,6 @@ function resizeCropRect(
       );
 
   }
-
 
   if(
     cropResizeHandle === "br"
@@ -4307,7 +3781,6 @@ function resizeCropRect(
         )
       );
 
-
     bottom =
       Math.min(
         1,
@@ -4319,16 +3792,12 @@ function resizeCropRect(
 
   }
 
-
   cropTempRect = {
 
     x:left,
-
     y:top,
-
     width:
       right - left,
-
     height:
       bottom - top
 
@@ -4350,15 +3819,11 @@ function(){
   cropTempRect = {
 
     x:0,
-
     y:0,
-
     width:1,
-
     height:1
 
   };
-
 
   displayCropRectangle();
 
@@ -4378,15 +3843,11 @@ function(){
   cropTempRect = {
 
     x:0,
-
     y:0,
-
     width:1,
-
     height:1
 
   };
-
 
   displayCropRectangle();
 
@@ -4412,12 +3873,10 @@ function(){
 
   }
 
-
   const r =
     normalizeRect(
       cropTempRect
     );
-
 
   if(
     r.width >= .995 &&
@@ -4437,18 +3896,14 @@ function(){
 
   }
 
-
   const index =
     cropPageIndex;
 
-
   closeCrop();
-
 
   renderPages();
 
   updateSelection();
-
 
   if(
     index === currentMainIndex
@@ -4471,10 +3926,8 @@ function closeCrop(){
     "show"
   );
 
-
   cropPageIndex =
     null;
-
 
   cropTempRect =
     null;
@@ -4515,7 +3968,7 @@ function(event){
 
 
 /* =====================================================
-KEYBOARD ESC
+ESC
 ===================================================== */
 
 document.addEventListener(
@@ -4550,7 +4003,6 @@ async function(){
 
   }
 
-
   const selected =
     pages.filter(
       function(page){
@@ -4559,7 +4011,6 @@ async function(){
 
       }
     );
-
 
   if(
     selected.length === 0
@@ -4573,25 +4024,20 @@ async function(){
 
   }
 
-
   splitButton.disabled =
     true;
 
-
   splitButton.textContent =
     "Creating PDF...";
-
 
   showStatus(
     "Creating your PDF..."
   );
 
-
   try{
 
     const buffer =
       await currentFile.arrayBuffer();
-
 
     const sourcePdf =
       await PDFLib
@@ -4600,16 +4046,10 @@ async function(){
         buffer
       );
 
-
     const outputPdf =
       await PDFLib
       .PDFDocument
       .create();
-
-
-    /* =========================
-    PROCESS CURRENT ORDER
-    ========================= */
 
     for(
       const pageData of selected
@@ -4617,23 +4057,18 @@ async function(){
 
       const copied =
         await outputPdf.copyPages(
-
           sourcePdf,
-
           [
             pageData.originalIndex
           ]
-
         );
-
 
       const newPage =
         copied[0];
 
-
-      /* =====================
-      ROTATION
-      ===================== */
+      /*
+        PDF rotation
+      */
 
       newPage.setRotation(
         PDFLib.degrees(
@@ -4641,46 +4076,38 @@ async function(){
         )
       );
 
-
-      /* =====================
-      CROP
-      ===================== */
+      /*
+        Crop
+      */
 
       if(pageData.crop){
 
         const pageWidth =
           newPage.getWidth();
 
-
         const pageHeight =
           newPage.getHeight();
-
 
         const x =
           pageData.crop.x *
           pageWidth;
 
-
         const cropWidth =
           pageData.crop.width *
           pageWidth;
-
 
         const cropHeight =
           pageData.crop.height *
           pageHeight;
 
-
         const top =
           pageData.crop.y *
           pageHeight;
-
 
         const bottomY =
           pageHeight -
           top -
           cropHeight;
-
 
         if(
           cropWidth > 1 &&
@@ -4690,11 +4117,8 @@ async function(){
           newPage.setCropBox(
 
             x,
-
             bottomY,
-
             cropWidth,
-
             cropHeight
 
           );
@@ -4703,21 +4127,14 @@ async function(){
 
       }
 
-
       outputPdf.addPage(
         newPage
       );
 
     }
 
-
-    /* =========================
-    SAVE
-    ========================= */
-
     const bytes =
       await outputPdf.save();
-
 
     if(downloadUrl){
 
@@ -4726,7 +4143,6 @@ async function(){
       );
 
     }
-
 
     const blob =
       new Blob(
@@ -4737,37 +4153,29 @@ async function(){
         }
       );
 
-
     downloadUrl =
       URL.createObjectURL(
         blob
       );
 
-
     downloadButton.href =
       downloadUrl;
-
 
     downloadButton.download =
       createDownloadName(
         currentFile.name
       );
 
-
     downloadArea.style.display =
       "block";
 
-
     hideStatus();
-
 
     splitButton.disabled =
       false;
 
-
     splitButton.textContent =
       "Split & Download PDF";
-
 
     downloadArea.scrollIntoView({
       behavior:"smooth",
@@ -4779,15 +4187,12 @@ async function(){
 
     console.error(error);
 
-
     showStatus(
       "PDF creation failed. Please try again."
     );
 
-
     splitButton.disabled =
       false;
-
 
     splitButton.textContent =
       "Split & Download PDF";
@@ -4801,9 +4206,7 @@ async function(){
 DOWNLOAD NAME
 ===================================================== */
 
-function createDownloadName(
-  name
-){
+function createDownloadName(name){
 
   return name.replace(
     /\.pdf$/i,
@@ -4814,7 +4217,7 @@ function createDownloadName(
 
 
 /* =====================================================
-REMOVE FILE
+REMOVE PDF
 ===================================================== */
 
 document
@@ -4835,6 +4238,7 @@ function(){
   currentMainIndex =
     0;
 
+  mainRenderVersion++;
 
   if(downloadUrl){
 
@@ -4847,33 +4251,25 @@ function(){
 
   }
 
-
   fileInput.value =
     "";
-
 
   fileInfo.style.display =
     "none";
 
-
   workspace.style.display =
     "none";
-
 
   pageGrid.innerHTML =
     "";
 
-
   mainStage.innerHTML =
     "";
-
 
   downloadArea.style.display =
     "none";
 
-
   hideStatus();
-
 
   window.scrollTo({
 
@@ -4890,9 +4286,7 @@ function(){
 STATUS
 ===================================================== */
 
-function showStatus(
-  message
-){
+function showStatus(message){
 
   statusBox.textContent =
     message;
@@ -4914,11 +4308,10 @@ function hideStatus(){
 
 
 /* =====================================================
-WINDOW RESIZE
+RESIZE
 ===================================================== */
 
 let resizeTimer = null;
-
 
 window.addEventListener(
 "resize",
@@ -4927,7 +4320,6 @@ function(){
   clearTimeout(
     resizeTimer
   );
-
 
   resizeTimer =
     setTimeout(
