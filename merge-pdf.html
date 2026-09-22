@@ -108,7 +108,10 @@ input[type="file"]{
   display:none;
 }
 
-/* PDF LIST */
+
+/* =========================================
+   FILE LIST
+========================================= */
 
 .file-list{
   margin-top:30px;
@@ -120,7 +123,10 @@ input[type="file"]{
   margin-bottom:18px;
 }
 
-/* PDF CARD */
+
+/* =========================================
+   PDF CARD
+========================================= */
 
 .file-item{
   background:#fafafa;
@@ -150,12 +156,19 @@ input[type="file"]{
   font-size:16px;
 }
 
-/* BIG PDF PREVIEW */
+
+/* =========================================
+   PDF PREVIEW AREA
+========================================= */
+
+.preview-wrapper{
+  width:155px;
+  min-width:155px;
+}
 
 .preview{
-  width:125px;
-  height:165px;
-  min-width:125px;
+  width:155px;
+  height:205px;
   background:#eee;
   border:1px solid #d7d7d7;
   border-radius:8px;
@@ -165,10 +178,17 @@ input[type="file"]{
   overflow:hidden;
 }
 
+.preview-inner{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform-origin:center center;
+}
+
 .preview canvas{
-  width:100%;
-  height:100%;
-  object-fit:contain;
+  display:block;
+  max-width:none;
+  max-height:none;
 }
 
 .preview-loading{
@@ -177,6 +197,52 @@ input[type="file"]{
   text-align:center;
   padding:8px;
 }
+
+
+/* =========================================
+   ZOOM CONTROLS
+========================================= */
+
+.zoom-controls{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:5px;
+  margin-top:7px;
+}
+
+.zoom-btn{
+  width:32px;
+  height:28px;
+  border:1px solid #d8d8d8;
+  background:#fff;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:700;
+  font-size:16px;
+}
+
+.zoom-btn:hover{
+  background:#f0f0f0;
+}
+
+.zoom-value{
+  min-width:48px;
+  text-align:center;
+  font-size:11px;
+  color:#666;
+}
+
+.reset-zoom{
+  font-size:10px;
+  padding:0 7px;
+  height:28px;
+}
+
+
+/* =========================================
+   FILE INFO
+========================================= */
 
 .file-info{
   flex:1;
@@ -193,10 +259,13 @@ input[type="file"]{
 .file-pages{
   font-size:14px;
   color:#777;
-  margin-bottom:10px;
+  margin-bottom:8px;
 }
 
-/* PDF ORDER BUTTONS */
+
+/* =========================================
+   PDF CONTROLS
+========================================= */
 
 .file-controls{
   display:flex;
@@ -239,7 +308,10 @@ input[type="file"]{
   background:#ffd1d1;
 }
 
-/* PAGE AREA */
+
+/* =========================================
+   PAGE SECTION
+========================================= */
 
 .page-section{
   margin-top:20px;
@@ -250,7 +322,7 @@ input[type="file"]{
 .page-section-title{
   font-size:15px;
   font-weight:700;
-  margin-bottom:12px;
+  margin-bottom:6px;
 }
 
 .page-help{
@@ -259,17 +331,23 @@ input[type="file"]{
   margin-bottom:15px;
 }
 
-/* PAGES */
+
+/* =========================================
+   PAGES CONTAINER
+========================================= */
 
 .pages-container{
   display:flex;
   flex-wrap:wrap;
-  gap:12px;
-  min-height:145px;
+  gap:8px;
+  min-height:150px;
   padding:10px 4px;
 }
 
-/* PAGE CARD */
+
+/* =========================================
+   PAGE CARD
+========================================= */
 
 .page-card{
   width:118px;
@@ -318,7 +396,10 @@ input[type="file"]{
   margin-top:6px;
 }
 
-/* SMALL PAGE CONTROLS */
+
+/* =========================================
+   PAGE BUTTONS
+========================================= */
 
 .page-buttons{
   display:flex;
@@ -363,7 +444,10 @@ input[type="file"]{
   background:#ffe0e0;
 }
 
-/* DROP ZONE */
+
+/* =========================================
+   DROP ZONE
+========================================= */
 
 .drop-zone{
   width:18px;
@@ -396,7 +480,10 @@ input[type="file"]{
   display:block;
 }
 
-/* EMPTY PAGES */
+
+/* =========================================
+   EMPTY PAGES
+========================================= */
 
 .empty-pages{
   width:100%;
@@ -412,7 +499,16 @@ input[type="file"]{
   padding:20px;
 }
 
-/* ACTIONS */
+.empty-pages.active{
+  border-color:#e53232;
+  background:#fff5f5;
+  color:#e53232;
+}
+
+
+/* =========================================
+   ACTIONS
+========================================= */
 
 .actions{
   margin-top:30px;
@@ -455,7 +551,10 @@ input[type="file"]{
   background:#ddd;
 }
 
-/* STATUS */
+
+/* =========================================
+   STATUS
+========================================= */
 
 .status{
   margin-top:22px;
@@ -465,7 +564,10 @@ input[type="file"]{
   line-height:1.5;
 }
 
-/* RESULT */
+
+/* =========================================
+   RESULT
+========================================= */
 
 .result{
   margin-top:25px;
@@ -492,6 +594,11 @@ input[type="file"]{
   background:#146c43;
 }
 
+
+/* =========================================
+   EMPTY
+========================================= */
+
 .empty{
   text-align:center;
   padding:30px;
@@ -499,6 +606,11 @@ input[type="file"]{
   border:1px dashed #ddd;
   border-radius:10px;
 }
+
+
+/* =========================================
+   NOTE
+========================================= */
 
 .note{
   margin-top:25px;
@@ -508,7 +620,10 @@ input[type="file"]{
   text-align:center;
 }
 
-/* MOBILE */
+
+/* =========================================
+   MOBILE
+========================================= */
 
 @media(max-width:700px){
 
@@ -536,10 +651,14 @@ input[type="file"]{
     font-size:13px;
   }
 
+  .preview-wrapper{
+    width:100px;
+    min-width:100px;
+  }
+
   .preview{
-    width:90px;
-    min-width:90px;
-    height:120px;
+    width:100px;
+    height:135px;
   }
 
   .file-name{
@@ -559,6 +678,15 @@ input[type="file"]{
   .remove-btn{
     padding:6px 7px;
     font-size:11px;
+  }
+
+  .zoom-btn{
+    width:28px;
+    height:25px;
+  }
+
+  .zoom-value{
+    min-width:40px;
   }
 
   .pages-container{
@@ -639,7 +767,10 @@ input[type="file"]{
   Select two or more PDF files
 </p>
 
-<label for="fileInput" class="select-btn">
+<label
+  for="fileInput"
+  class="select-btn"
+>
   Choose PDF Files
 </label>
 
@@ -655,7 +786,10 @@ input[type="file"]{
 
   <!-- FILE LIST -->
 
-  <div id="fileList" class="file-list">
+  <div
+    id="fileList"
+    class="file-list"
+  >
 
 ```
 <div class="empty">
@@ -690,11 +824,17 @@ input[type="file"]{
 
   <!-- STATUS -->
 
-  <div id="status" class="status"></div>
+  <div
+    id="status"
+    class="status"
+  ></div>
 
   <!-- RESULT -->
 
-  <div id="result" class="result">
+  <div
+    id="result"
+    class="result"
+  >
 
 ```
 <strong>
@@ -726,9 +866,18 @@ input[type="file"]{
 
 <script>
 
+
+/* =========================================
+   PDF.JS WORKER
+========================================= */
+
 pdfjsLib.GlobalWorkerOptions.workerSrc =
   "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
+
+/* =========================================
+   ELEMENTS
+========================================= */
 
 const fileInput =
   document.getElementById("fileInput");
@@ -752,11 +901,34 @@ const downloadBtn =
   document.getElementById("downloadBtn");
 
 
+/* =========================================
+   DATA
+========================================= */
+
 let selectedFiles = [];
 
 let downloadUrl = null;
 
 let draggedPage = null;
+
+
+/*
+  Each PDF object:
+
+  {
+    file: File,
+    pageOrder: [
+      {
+        source: same PDF object,
+        pageIndex: original zero-based page index
+      }
+    ],
+    pageCount: number,
+    zoom: number
+  }
+
+  This is important for cross-PDF drag.
+*/
 
 
 /* =========================================
@@ -770,37 +942,55 @@ fileInput.addEventListener(
     const newFiles =
       Array.from(fileInput.files);
 
-    newFiles.forEach(file => {
 
-      if(
-        file.type !== "application/pdf" &&
-        !file.name.toLowerCase().endsWith(".pdf")
-      ){
-        return;
+    newFiles.forEach(
+      file => {
+
+        if(
+          file.type !== "application/pdf" &&
+          !file.name.toLowerCase().endsWith(".pdf")
+        ){
+
+          return;
+
+        }
+
+
+        const exists =
+          selectedFiles.some(
+            item =>
+
+              item.file.name === file.name &&
+              item.file.size === file.size &&
+              item.file.lastModified === file.lastModified
+
+          );
+
+
+        if(!exists){
+
+          const fileData = {
+
+            file:file,
+
+            pageOrder:[],
+
+            pageCount:0,
+
+            zoom:1
+
+          };
+
+
+          selectedFiles.push(
+            fileData
+          );
+
+        }
+
       }
+    );
 
-      const exists =
-        selectedFiles.some(item =>
-          item.file.name === file.name &&
-          item.file.size === file.size &&
-          item.file.lastModified === file.lastModified
-        );
-
-      if(!exists){
-
-        selectedFiles.push({
-
-          file:file,
-
-          pageOrder:null,
-
-          pageCount:0
-
-        });
-
-      }
-
-    });
 
     fileInput.value = "";
 
@@ -820,6 +1010,7 @@ function renderFileList(){
 
   fileList.innerHTML = "";
 
+
   if(selectedFiles.length === 0){
 
     fileList.innerHTML =
@@ -835,10 +1026,14 @@ function renderFileList(){
   const title =
     document.createElement("div");
 
-  title.className = "list-title";
+  title.className =
+    "list-title";
 
   title.textContent =
-    "PDF Order (" + selectedFiles.length + ")";
+    "PDF Order (" +
+    selectedFiles.length +
+    ")";
+
 
   fileList.appendChild(title);
 
@@ -870,10 +1065,6 @@ function createFileItem(
   index
 ){
 
-  const file =
-    fileData.file;
-
-
   const item =
     document.createElement("div");
 
@@ -890,7 +1081,7 @@ function createFileItem(
     "file-top";
 
 
-  /* ORDER */
+  /* ORDER NUMBER */
 
   const order =
     document.createElement("div");
@@ -902,7 +1093,14 @@ function createFileItem(
     index + 1;
 
 
-  /* PREVIEW */
+  /* PREVIEW WRAPPER */
+
+  const previewWrapper =
+    document.createElement("div");
+
+  previewWrapper.className =
+    "preview-wrapper";
+
 
   const preview =
     document.createElement("div");
@@ -914,7 +1112,93 @@ function createFileItem(
     '<div class="preview-loading">Loading...</div>';
 
 
-  /* INFO */
+  /* ZOOM */
+
+  const zoomControls =
+    document.createElement("div");
+
+  zoomControls.className =
+    "zoom-controls";
+
+
+  const zoomOut =
+    document.createElement("button");
+
+  zoomOut.className =
+    "zoom-btn";
+
+  zoomOut.textContent =
+    "−";
+
+  zoomOut.title =
+    "Zoom Out";
+
+
+  const zoomValue =
+    document.createElement("span");
+
+  zoomValue.className =
+    "zoom-value";
+
+  zoomValue.textContent =
+    Math.round(
+      fileData.zoom * 100
+    ) + "%";
+
+
+  const zoomIn =
+    document.createElement("button");
+
+  zoomIn.className =
+    "zoom-btn";
+
+  zoomIn.textContent =
+    "+";
+
+  zoomIn.title =
+    "Zoom In";
+
+
+  const resetZoom =
+    document.createElement("button");
+
+  resetZoom.className =
+    "zoom-btn reset-zoom";
+
+  resetZoom.textContent =
+    "Reset";
+
+  resetZoom.title =
+    "Reset Zoom";
+
+
+  zoomControls.appendChild(
+    zoomOut
+  );
+
+  zoomControls.appendChild(
+    zoomValue
+  );
+
+  zoomControls.appendChild(
+    zoomIn
+  );
+
+  zoomControls.appendChild(
+    resetZoom
+  );
+
+
+  previewWrapper.appendChild(
+    preview
+  );
+
+  previewWrapper.appendChild(
+    zoomControls
+  );
+
+
+  /* FILE INFO */
 
   const info =
     document.createElement("div");
@@ -930,7 +1214,7 @@ function createFileItem(
     "file-name";
 
   name.textContent =
-    file.name;
+    fileData.file.name;
 
 
   const pages =
@@ -972,6 +1256,7 @@ function createFileItem(
   upBtn.disabled =
     index === 0;
 
+
   upBtn.onclick =
     function(){
 
@@ -996,7 +1281,9 @@ function createFileItem(
     "Move PDF Down";
 
   downBtn.disabled =
-    index === selectedFiles.length - 1;
+    index ===
+    selectedFiles.length - 1;
+
 
   downBtn.onclick =
     function(){
@@ -1018,6 +1305,7 @@ function createFileItem(
   removeBtn.textContent =
     "Remove";
 
+
   removeBtn.onclick =
     function(){
 
@@ -1035,7 +1323,7 @@ function createFileItem(
 
   top.appendChild(order);
 
-  top.appendChild(preview);
+  top.appendChild(previewWrapper);
 
   top.appendChild(info);
 
@@ -1085,16 +1373,89 @@ function createFileItem(
     '<div class="preview-loading">Loading pages...</div>';
 
 
-  pageSection.appendChild(pageTitle);
+  pageSection.appendChild(
+    pageTitle
+  );
 
-  pageSection.appendChild(pageHelp);
+  pageSection.appendChild(
+    pageHelp
+  );
 
-  pageSection.appendChild(pagesContainer);
+  pageSection.appendChild(
+    pagesContainer
+  );
 
-  item.appendChild(pageSection);
+
+  item.appendChild(
+    pageSection
+  );
 
 
-  fileList.appendChild(item);
+  fileList.appendChild(
+    item
+  );
+
+
+  /* ZOOM EVENTS */
+
+  zoomOut.onclick =
+    function(){
+
+      fileData.zoom =
+        Math.max(
+          0.5,
+          +(fileData.zoom - 0.1).toFixed(1)
+        );
+
+      zoomValue.textContent =
+        Math.round(
+          fileData.zoom * 100
+        ) + "%";
+
+      renderMainPreview(
+        fileData,
+        preview
+      );
+
+    };
+
+
+  zoomIn.onclick =
+    function(){
+
+      fileData.zoom =
+        Math.min(
+          2,
+          +(fileData.zoom + 0.1).toFixed(1)
+        );
+
+      zoomValue.textContent =
+        Math.round(
+          fileData.zoom * 100
+        ) + "%";
+
+      renderMainPreview(
+        fileData,
+        preview
+      );
+
+    };
+
+
+  resetZoom.onclick =
+    function(){
+
+      fileData.zoom = 1;
+
+      zoomValue.textContent =
+        "100%";
+
+      renderMainPreview(
+        fileData,
+        preview
+      );
+
+    };
 
 
   loadPdfData(
@@ -1108,7 +1469,7 @@ function createFileItem(
 
 
 /* =========================================
-   LOAD PDF
+   LOAD PDF DATA
 ========================================= */
 
 async function loadPdfData(
@@ -1134,12 +1495,25 @@ async function loadPdfData(
       pdf.numPages;
 
 
-    if(!fileData.pageOrder){
+    /*
+      Create page objects only once.
+    */
+
+    if(
+      !fileData.pageOrder ||
+      fileData.pageOrder.length === 0
+    ){
 
       fileData.pageOrder =
         Array.from(
           {length:pdf.numPages},
-          (_,i)=>i
+          (_,i) => ({
+
+            source:fileData,
+
+            pageIndex:i
+
+          })
         );
 
     }
@@ -1154,56 +1528,16 @@ async function loadPdfData(
       );
 
 
-    /* FIRST PAGE PREVIEW */
-
-    if(pdf.numPages > 0){
-
-      const firstPage =
-        await pdf.getPage(1);
-
-
-      const viewport =
-        firstPage.getViewport({
-          scale:1
-        });
-
-
-      const canvas =
-        document.createElement("canvas");
-
-
-      const context =
-        canvas.getContext("2d");
-
-
-      canvas.width =
-        viewport.width;
-
-      canvas.height =
-        viewport.height;
-
-
-      preview.innerHTML = "";
-
-      preview.appendChild(canvas);
-
-
-      await firstPage.render({
-
-        canvasContext:context,
-
-        viewport:viewport
-
-      }).promise;
-
-    }
-
-
-    /* ALL PAGES */
-
-    renderPages(
-      pdf,
+    await renderMainPreview(
       fileData,
+      preview,
+      pdf
+    );
+
+
+    await renderPages(
+      fileData,
+      pdf,
       pagesContainer
     );
 
@@ -1215,11 +1549,14 @@ async function loadPdfData(
       error
     );
 
+
     preview.innerHTML =
       '<div class="preview-loading">Preview unavailable</div>';
 
+
     pagesElement.textContent =
       "PDF file";
+
 
     pagesContainer.innerHTML =
       '<div class="preview-loading">Pages unavailable</div>';
@@ -1230,12 +1567,138 @@ async function loadPdfData(
 
 
 /* =========================================
-   RENDER ALL PAGES
+   MAIN PREVIEW
+========================================= */
+
+async function renderMainPreview(
+  fileData,
+  preview,
+  existingPdf=null
+){
+
+  try{
+
+    let pdf = existingPdf;
+
+
+    if(!pdf){
+
+      const arrayBuffer =
+        await fileData.file.arrayBuffer();
+
+
+      pdf =
+        await pdfjsLib.getDocument({
+          data:arrayBuffer
+        }).promise;
+
+    }
+
+
+    if(pdf.numPages < 1){
+      return;
+    }
+
+
+    const page =
+      await pdf.getPage(1);
+
+
+    const baseViewport =
+      page.getViewport({
+        scale:1
+      });
+
+
+    const availableWidth =
+      preview.clientWidth - 8;
+
+    const availableHeight =
+      preview.clientHeight - 8;
+
+
+    const fitScale =
+      Math.min(
+        availableWidth / baseViewport.width,
+        availableHeight / baseViewport.height
+      );
+
+
+    const scale =
+      Math.max(
+        0.1,
+        fitScale * fileData.zoom
+      );
+
+
+    const viewport =
+      page.getViewport({
+        scale:scale
+      });
+
+
+    const canvas =
+      document.createElement("canvas");
+
+
+    const context =
+      canvas.getContext("2d");
+
+
+    canvas.width =
+      viewport.width;
+
+    canvas.height =
+      viewport.height;
+
+
+    const inner =
+      document.createElement("div");
+
+    inner.className =
+      "preview-inner";
+
+
+    inner.appendChild(
+      canvas
+    );
+
+
+    preview.innerHTML = "";
+
+    preview.appendChild(
+      inner
+    );
+
+
+    await page.render({
+
+      canvasContext:context,
+
+      viewport:viewport
+
+    }).promise;
+
+  }
+  catch(error){
+
+    console.error(
+      "Main preview error:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   RENDER PAGES
 ========================================= */
 
 async function renderPages(
-  pdf,
   fileData,
+  pdf,
   container
 ){
 
@@ -1253,19 +1716,23 @@ async function renderPages(
     empty.textContent =
       "No pages. Drag a page here from another PDF.";
 
+
     setupEmptyDropZone(
       empty,
       fileData
     );
 
-    container.appendChild(empty);
+
+    container.appendChild(
+      empty
+    );
 
     return;
 
   }
 
 
-  /* LEFT DROP ZONE */
+  /* FIRST DROP ZONE */
 
   container.appendChild(
     createDropZone(
@@ -1281,20 +1748,16 @@ async function renderPages(
     position++
   ){
 
-    const originalPageIndex =
+    const pageData =
       fileData.pageOrder[position];
 
 
     await createPageCard(
-      pdf,
-      fileData,
+      pageData,
       container,
-      originalPageIndex,
       position
     );
 
-
-    /* DROP ZONE AFTER PAGE */
 
     container.appendChild(
       createDropZone(
@@ -1313,10 +1776,8 @@ async function renderPages(
 ========================================= */
 
 async function createPageCard(
-  pdf,
-  fileData,
+  pageData,
   container,
-  originalPageIndex,
   position
 ){
 
@@ -1350,7 +1811,8 @@ async function createPageCard(
     "page-number";
 
   number.textContent =
-    "Page " + (position + 1);
+    "Page " +
+    (position + 1);
 
 
   /* BUTTONS */
@@ -1377,13 +1839,14 @@ async function createPageCard(
   up.disabled =
     position === 0;
 
+
   up.onclick =
     function(e){
 
       e.stopPropagation();
 
       movePageWithinPdf(
-        fileData,
+        pageData.source,
         position,
         position - 1
       );
@@ -1404,7 +1867,9 @@ async function createPageCard(
     "Move page down";
 
   down.disabled =
-    position === fileData.pageOrder.length - 1;
+    position ===
+    pageData.source.pageOrder.length - 1;
+
 
   down.onclick =
     function(e){
@@ -1412,7 +1877,7 @@ async function createPageCard(
       e.stopPropagation();
 
       movePageWithinPdf(
-        fileData,
+        pageData.source,
         position,
         position + 1
       );
@@ -1436,13 +1901,14 @@ async function createPageCard(
   remove.textContent =
     "Remove";
 
+
   remove.onclick =
     function(e){
 
       e.stopPropagation();
 
       removePage(
-        fileData,
+        pageData.source,
         position
       );
 
@@ -1466,11 +1932,14 @@ async function createPageCard(
 
       draggedPage = {
 
-        fileData:fileData,
+        pageData:pageData,
 
-        position:position
+        sourceFile:pageData.source,
+
+        sourcePosition:position
 
       };
+
 
       card.classList.add(
         "dragging"
@@ -1498,16 +1967,24 @@ async function createPageCard(
   );
 
 
-  container.appendChild(card);
+  container.appendChild(
+    card
+  );
 
 
-  /* RENDER PAGE */
+  /* RENDER ACTUAL SOURCE PAGE */
 
   try{
 
+    const sourcePdf =
+      await getPdfDocument(
+        pageData.source
+      );
+
+
     const page =
-      await pdf.getPage(
-        originalPageIndex + 1
+      await sourcePdf.getPage(
+        pageData.pageIndex + 1
       );
 
 
@@ -1534,7 +2011,9 @@ async function createPageCard(
 
     preview.innerHTML = "";
 
-    preview.appendChild(canvas);
+    preview.appendChild(
+      canvas
+    );
 
 
     await page.render({
@@ -1548,6 +2027,12 @@ async function createPageCard(
   }
   catch(error){
 
+    console.error(
+      "Page preview error:",
+      error
+    );
+
+
     preview.innerHTML =
       '<div class="preview-loading">Error</div>';
 
@@ -1557,11 +2042,59 @@ async function createPageCard(
 
 
 /* =========================================
+   PDF CACHE
+========================================= */
+
+const pdfCache =
+  new WeakMap();
+
+
+async function getPdfDocument(
+  fileData
+){
+
+  if(
+    pdfCache.has(fileData)
+  ){
+
+    return pdfCache.get(
+      fileData
+    );
+
+  }
+
+
+  const arrayBuffer =
+    await fileData.file.arrayBuffer();
+
+
+  const loadingTask =
+    pdfjsLib.getDocument({
+      data:arrayBuffer
+    });
+
+
+  const pdf =
+    await loadingTask.promise;
+
+
+  pdfCache.set(
+    fileData,
+    pdf
+  );
+
+
+  return pdf;
+
+}
+
+
+/* =========================================
    DROP ZONE
 ========================================= */
 
 function createDropZone(
-  targetFileData,
+  targetFile,
   targetPosition
 ){
 
@@ -1582,7 +2115,9 @@ function createDropZone(
     "Drop page here";
 
 
-  zone.appendChild(text);
+  zone.appendChild(
+    text
+  );
 
 
   zone.addEventListener(
@@ -1591,9 +2126,11 @@ function createDropZone(
 
       e.preventDefault();
 
+
       if(!draggedPage){
         return;
       }
+
 
       zone.classList.add(
         "active"
@@ -1621,6 +2158,7 @@ function createDropZone(
 
       e.preventDefault();
 
+
       zone.classList.remove(
         "active"
       );
@@ -1632,9 +2170,9 @@ function createDropZone(
 
 
       moveDraggedPage(
-        draggedPage.fileData,
-        draggedPage.position,
-        targetFileData,
+        draggedPage.sourceFile,
+        draggedPage.sourcePosition,
+        targetFile,
         targetPosition
       );
 
@@ -1651,12 +2189,12 @@ function createDropZone(
 
 
 /* =========================================
-   EMPTY PDF DROP
+   EMPTY DROP ZONE
 ========================================= */
 
 function setupEmptyDropZone(
   element,
-  targetFileData
+  targetFile
 ){
 
   element.addEventListener(
@@ -1665,11 +2203,15 @@ function setupEmptyDropZone(
 
       e.preventDefault();
 
-      element.style.borderColor =
-        "#e53232";
 
-      element.style.background =
-        "#fff5f5";
+      if(!draggedPage){
+        return;
+      }
+
+
+      element.classList.add(
+        "active"
+      );
 
     }
   );
@@ -1679,11 +2221,9 @@ function setupEmptyDropZone(
     "dragleave",
     function(){
 
-      element.style.borderColor =
-        "#ddd";
-
-      element.style.background =
-        "";
+      element.classList.remove(
+        "active"
+      );
 
     }
   );
@@ -1696,22 +2236,20 @@ function setupEmptyDropZone(
       e.preventDefault();
 
 
+      element.classList.remove(
+        "active"
+      );
+
+
       if(!draggedPage){
         return;
       }
 
 
-      element.style.borderColor =
-        "#ddd";
-
-      element.style.background =
-        "";
-
-
       moveDraggedPage(
-        draggedPage.fileData,
-        draggedPage.position,
-        targetFileData,
+        draggedPage.sourceFile,
+        draggedPage.sourcePosition,
+        targetFile,
         0
       );
 
@@ -1725,7 +2263,7 @@ function setupEmptyDropZone(
 
 
 /* =========================================
-   MOVE PAGE
+   MOVE DRAGGED PAGE
 ========================================= */
 
 function moveDraggedPage(
@@ -1735,48 +2273,31 @@ function moveDraggedPage(
   targetPosition
 ){
 
-  if(!sourceFile || !targetFile){
+  if(
+    !sourceFile ||
+    !targetFile
+  ){
+
     return;
+
   }
 
 
-  /* SAME PDF */
+  /*
+    SAME PDF
+  */
 
-  if(sourceFile === targetFile){
-
-    let adjustedTarget =
-      targetPosition;
-
-
-    if(sourcePosition < targetPosition){
-
-      adjustedTarget--;
-
-    }
-
+  if(
+    sourceFile === targetFile
+  ){
 
     if(
-      adjustedTarget < 0
-    ){
-      adjustedTarget = 0;
-    }
-
-
-    if(
-      adjustedTarget >
-      sourceFile.pageOrder.length - 1
+      sourcePosition === targetPosition ||
+      sourcePosition + 1 === targetPosition
     ){
 
-      adjustedTarget =
-        sourceFile.pageOrder.length - 1;
-
-    }
-
-
-    if(
-      sourcePosition === adjustedTarget
-    ){
       return;
+
     }
 
 
@@ -1787,17 +2308,58 @@ function moveDraggedPage(
       )[0];
 
 
+    let finalPosition =
+      targetPosition;
+
+
+    if(
+      sourcePosition <
+      targetPosition
+    ){
+
+      finalPosition--;
+
+    }
+
+
+    if(finalPosition < 0){
+
+      finalPosition = 0;
+
+    }
+
+
+    if(
+      finalPosition >
+      sourceFile.pageOrder.length
+    ){
+
+      finalPosition =
+        sourceFile.pageOrder.length;
+
+    }
+
+
     sourceFile.pageOrder.splice(
-      adjustedTarget,
+      finalPosition,
       0,
       page
     );
 
   }
 
-  /* DIFFERENT PDF */
+  /*
+    DIFFERENT PDF
+  */
 
   else{
+
+    /*
+      IMPORTANT:
+      We move the complete pageData object.
+      This keeps the original source PDF
+      and original page index.
+    */
 
     const page =
       sourceFile.pageOrder.splice(
@@ -1809,7 +2371,9 @@ function moveDraggedPage(
     if(
       targetPosition < 0
     ){
+
       targetPosition = 0;
+
     }
 
 
@@ -1856,20 +2420,30 @@ function movePageWithinPdf(
     newPosition < 0 ||
     newPosition >= fileData.pageOrder.length
   ){
+
     return;
+
   }
 
 
-  const page =
-    fileData.pageOrder[oldPosition];
+  const temp =
+    fileData.pageOrder[
+      oldPosition
+    ];
 
 
-  fileData.pageOrder[oldPosition] =
-    fileData.pageOrder[newPosition];
+  fileData.pageOrder[
+    oldPosition
+  ] =
+    fileData.pageOrder[
+      newPosition
+    ];
 
 
-  fileData.pageOrder[newPosition] =
-    page;
+  fileData.pageOrder[
+    newPosition
+  ] =
+    temp;
 
 
   result.style.display =
@@ -1901,7 +2475,9 @@ function removePage(
 
 
     if(!confirmRemove){
+
       return;
+
     }
 
   }
@@ -1935,7 +2511,9 @@ function moveFile(
     newIndex < 0 ||
     newIndex >= selectedFiles.length
   ){
+
     return;
+
   }
 
 
@@ -1964,7 +2542,9 @@ function moveFile(
    REMOVE PDF
 ========================================= */
 
-function removeFile(index){
+function removeFile(
+  index
+){
 
   selectedFiles.splice(
     index,
@@ -1989,13 +2569,15 @@ function clearDropZones(){
 
   document
     .querySelectorAll(".drop-zone")
-    .forEach(zone => {
+    .forEach(
+      zone => {
 
-      zone.classList.remove(
-        "active"
-      );
+        zone.classList.remove(
+          "active"
+        );
 
-    });
+      }
+    );
 
 }
 
@@ -2047,7 +2629,9 @@ mergeBtn.addEventListener(
   "click",
   async function(){
 
-    if(selectedFiles.length < 2){
+    if(
+      selectedFiles.length < 2
+    ){
 
       status.textContent =
         "Please select at least 2 PDF files.";
@@ -2074,13 +2658,18 @@ mergeBtn.addEventListener(
       let totalPages = 0;
 
 
+      /*
+        Process PDFs in their current
+        PDF order.
+      */
+
       for(
         let i=0;
         i<selectedFiles.length;
         i++
       ){
 
-        const fileData =
+        const targetFile =
           selectedFiles[i];
 
 
@@ -2092,43 +2681,51 @@ mergeBtn.addEventListener(
           "...";
 
 
-        /* SKIP EMPTY PDF */
+        /*
+          Pages can now belong to ANY
+          source PDF because of cross drag.
+        */
 
-        if(
-          fileData.pageOrder.length === 0
+        for(
+          let p=0;
+          p<targetFile.pageOrder.length;
+          p++
         ){
-          continue;
-        }
+
+          const pageData =
+            targetFile.pageOrder[p];
 
 
-        const arrayBuffer =
-          await fileData.file.arrayBuffer();
+          const sourceFile =
+            pageData.source;
 
 
-        const sourcePdf =
-          await PDFLib.PDFDocument.load(
-            arrayBuffer
-          );
+          const sourcePdf =
+            await PDFLib.PDFDocument.load(
+              await sourceFile.file.arrayBuffer()
+            );
 
 
-        const copiedPages =
-          await mergedPdf.copyPages(
-            sourcePdf,
-            fileData.pageOrder
-          );
+          const copiedPages =
+            await mergedPdf.copyPages(
+              sourcePdf,
+              [pageData.pageIndex]
+            );
 
 
-        copiedPages.forEach(
-          page => {
+          if(
+            copiedPages.length > 0
+          ){
 
             mergedPdf.addPage(
-              page
+              copiedPages[0]
             );
 
             totalPages++;
 
           }
-        );
+
+        }
 
       }
 
