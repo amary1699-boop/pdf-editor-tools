@@ -1366,7 +1366,7 @@ let mainZoom = 1;
 let downloadUrl = null;
 let draggedIndex = null;
 let currentMainIndex = 0;
-
+let mainRenderVersion = 0;
 
 /* =====================================================
 CROP VARIABLES
@@ -1967,16 +1967,30 @@ async function renderMainPreview(){
   }
 
 
-  const pageData =
-    pages[
-      Math.max(
-        0,
-        Math.min(
-          currentMainIndex,
-          pages.length - 1
-        )
+  /* =================================
+  CREATE NEW RENDER VERSION
+  ================================= */
+
+  const renderVersion =
+    ++mainRenderVersion;
+
+
+  /* =================================
+  KEEP INDEX SAFE
+  ================================= */
+
+  currentMainIndex =
+    Math.max(
+      0,
+      Math.min(
+        currentMainIndex,
+        pages.length - 1
       )
-    ];
+    );
+
+
+  const pageData =
+    pages[currentMainIndex];
 
 
   try{
@@ -1988,10 +2002,42 @@ async function renderMainPreview(){
       );
 
 
+    /* =================================
+    OLD RENDER CHECK
+    ================================= */
+
+    if(
+      renderVersion !== mainRenderVersion
+    ){
+
+      return;
+
+    }
+
+
+    /* =================================
+    GET ROTATION
+    ================================= */
+
+    const rotation =
+      (
+        Number(
+          pageData.rotation || 0
+        ) % 360 + 360
+      ) % 360;
+
+
+    /* =================================
+    BASE VIEWPORT
+    ================================= */
+
     const baseViewport =
       page.getViewport({
+
         scale:1,
-        rotation:pageData.rotation
+
+        rotation:rotation
+
       });
 
 
@@ -2000,6 +2046,17 @@ async function renderMainPreview(){
         ".main-preview-wrap"
       );
 
+
+    if(!wrap){
+
+      return;
+
+    }
+
+
+    /* =================================
+    FIT PAGE TO PREVIEW AREA
+    ================================= */
 
     const fitScale =
       calculateFitScale(
@@ -2021,15 +2078,23 @@ async function renderMainPreview(){
       fitScale * mainZoom;
 
 
+    /* =================================
+    FINAL VIEWPORT
+    ================================= */
+
     const viewport =
       page.getViewport({
 
         scale:scale,
 
-        rotation:pageData.rotation
+        rotation:rotation
 
       });
 
+
+    /* =================================
+    CREATE CANVAS
+    ================================= */
 
     const canvas =
       document.createElement(
@@ -2063,6 +2128,19 @@ async function renderMainPreview(){
       viewport.height + "px";
 
 
+    /* =================================
+    CHECK AGAIN BEFORE DOM UPDATE
+    ================================= */
+
+    if(
+      renderVersion !== mainRenderVersion
+    ){
+
+      return;
+
+    }
+
+
     mainStage.innerHTML =
       "";
 
@@ -2084,6 +2162,10 @@ async function renderMainPreview(){
       currentMainIndex + 1;
 
 
+    /* =================================
+    RENDER PDF PAGE
+    ================================= */
+
     await page.render({
 
       canvasContext:context,
@@ -2093,15 +2175,29 @@ async function renderMainPreview(){
     }).promise;
 
 
+    /* =================================
+    FINAL OLD-RENDER PROTECTION
+    ================================= */
+
+    if(
+      renderVersion !== mainRenderVersion
+    ){
+
+      return;
+
+    }
+
   }
   catch(error){
 
-    console.error(error);
+    console.error(
+      "Main preview render error:",
+      error
+    );
 
   }
 
 }
-
 
 /* =====================================================
 RENDER ALL PAGE CARDS
