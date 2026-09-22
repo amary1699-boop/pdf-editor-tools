@@ -7,7 +7,7 @@
 <title>Split PDF Online - Free PDF Splitter</title>
 
 <meta name="description"
-content="Free online Split PDF tool. Select, reorder, rotate, crop and extract PDF pages easily.">
+content="Free online PDF splitter with page selection, reorder, rotate, crop and preview.">
 
 <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -23,8 +23,7 @@ content="Free online Split PDF tool. Select, reorder, rotate, crop and extract P
 body{
   font-family:Arial,Helvetica,sans-serif;
   background:#f7f8fc;
-  color:#202124;
-  min-height:100vh;
+  color:#222;
 }
 
 button,
@@ -34,20 +33,21 @@ input{
 
 
 /* =========================
-   HEADER
+HEADER
 ========================= */
 
 .header{
+  height:70px;
   background:#fff;
-  border-bottom:1px solid #e5e5eb;
+  border-bottom:1px solid #e5e5ea;
   position:sticky;
   top:0;
   z-index:1000;
 }
 
 .header-inner{
-  max-width:1200px;
-  min-height:70px;
+  max-width:1250px;
+  height:100%;
   margin:auto;
   padding:0 20px;
 
@@ -57,20 +57,23 @@ input{
 }
 
 .logo{
+  text-decoration:none;
+  color:#e53232;
+
   display:flex;
   align-items:center;
   gap:10px;
 
-  color:#e53232;
   font-size:21px;
   font-weight:800;
-  text-decoration:none;
 }
 
 .logo-icon{
   width:40px;
   height:40px;
+
   border-radius:10px;
+
   background:#e53232;
   color:#fff;
 
@@ -78,15 +81,15 @@ input{
   align-items:center;
   justify-content:center;
 
-  font-size:12px;
+  font-size:11px;
   font-weight:800;
 }
 
 .back-home{
   color:#555;
+  text-decoration:none;
   font-size:14px;
   font-weight:600;
-  text-decoration:none;
 }
 
 .back-home:hover{
@@ -95,63 +98,69 @@ input{
 
 
 /* =========================
-   MAIN
+MAIN
 ========================= */
 
 .container{
-  max-width:1200px;
+  max-width:1250px;
   margin:auto;
-  padding:45px 20px 70px;
+  padding:40px 20px 70px;
 }
 
-.title{
+.page-title{
   text-align:center;
-  margin-bottom:30px;
+  margin-bottom:28px;
 }
 
-.title h1{
+.page-title h1{
   font-size:38px;
-  margin-bottom:10px;
+  margin-bottom:8px;
 }
 
-.title h1 span{
+.page-title h1 span{
   color:#e53232;
 }
 
-.title p{
+.page-title p{
   color:#777;
-  font-size:16px;
+  font-size:15px;
 }
 
 
 /* =========================
-   UPLOAD
+UPLOAD
 ========================= */
 
 .upload-box{
   background:#fff;
+
   border:2px dashed #ddd;
+
   border-radius:18px;
 
   padding:35px 20px;
+
   text-align:center;
 
-  transition:.2s;
   cursor:pointer;
+
+  transition:.2s;
 }
 
 .upload-box:hover,
 .upload-box.dragover{
   border-color:#e53232;
-  background:#fff8f8;
+  background:#fff9f9;
 }
 
 .upload-icon{
   width:65px;
   height:65px;
-  margin:0 auto 15px;
+
+  margin:0 auto 14px;
 
   border-radius:16px;
+
   background:#fff0f0;
   color:#e53232;
 
@@ -174,19 +183,14 @@ input{
 }
 
 .upload-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-
+  border:0;
   background:#e53232;
   color:#fff;
 
-  border:0;
-  border-radius:10px;
-
   padding:12px 25px;
 
-  font-size:15px;
+  border-radius:9px;
+
   font-weight:700;
 
   cursor:pointer;
@@ -202,62 +206,64 @@ input{
 
 
 /* =========================
-   FILE INFO
+FILE INFO
 ========================= */
 
 .file-info{
   display:none;
 
-  margin-top:20px;
+  margin-top:18px;
 
   background:#fff;
-  border:1px solid #e5e5eb;
-  border-radius:14px;
 
-  padding:16px 18px;
+  border:1px solid #e4e4e9;
+
+  border-radius:13px;
+
+  padding:15px 18px;
 
   align-items:center;
   justify-content:space-between;
+
   gap:15px;
 }
 
-.file-details{
-  min-width:0;
-}
-
 .file-name{
+  font-size:15px;
   font-weight:700;
+
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 }
 
 .file-pages{
+  margin-top:4px;
   color:#777;
   font-size:13px;
-  margin-top:4px;
 }
 
-.clear-btn{
+.clear-file{
+  flex-shrink:0;
+
   border:1px solid #ddd;
   background:#fff;
-  color:#555;
+
+  padding:9px 14px;
 
   border-radius:8px;
-  padding:9px 15px;
 
   cursor:pointer;
-  flex-shrink:0;
 }
 
-.clear-btn:hover{
-  border-color:#e53232;
+.clear-file:hover{
   color:#e53232;
+  border-color:#e53232;
 }
 
 
 /* =========================
-   WORKSPACE
+WORKSPACE
 ========================= */
 
 .workspace{
@@ -267,38 +273,39 @@ input{
 
 
 /* =========================
-   MAIN PREVIEW
+MAIN PREVIEW
 ========================= */
 
 .main-preview-box{
   background:#fff;
-  border:1px solid #e5e5eb;
-  border-radius:18px;
+
+  border:1px solid #e4e4e9;
+
+  border-radius:17px;
 
   padding:20px;
-  margin-bottom:25px;
 
-  text-align:center;
+  margin-bottom:25px;
 }
 
-.preview-heading{
+.main-heading{
   display:flex;
   align-items:center;
   justify-content:space-between;
+
   gap:15px;
 
-  margin-bottom:18px;
+  margin-bottom:15px;
 }
 
-.preview-heading h2{
+.main-heading h2{
   font-size:20px;
-  text-align:left;
 }
 
-.main-zoom{
+.main-tools{
   display:flex;
   align-items:center;
-  gap:7px;
+  gap:6px;
 }
 
 .zoom-btn{
@@ -306,11 +313,13 @@ input{
   height:34px;
 
   border:1px solid #ddd;
+
   background:#fff;
 
   border-radius:8px;
 
   cursor:pointer;
+
   font-size:17px;
 }
 
@@ -319,157 +328,182 @@ input{
   color:#e53232;
 }
 
-.zoom-value{
-  min-width:55px;
+.zoom-label{
+  width:52px;
   text-align:center;
-  font-size:13px;
+
+  font-size:12px;
   color:#666;
 }
 
 .main-preview-wrap{
-  min-height:390px;
+  width:100%;
+  height:450px;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  background:#eef0f3;
+
+  border-radius:12px;
 
   overflow:auto;
 
-  background:#f1f2f5;
-  border-radius:12px;
-  padding:25px;
-}
-
-.main-preview{
-  background:#fff;
-
-  box-shadow:0 5px 20px rgba(0,0,0,.12);
-
   display:flex;
   align-items:center;
   justify-content:center;
 
-  overflow:visible;
+  padding:20px;
 }
 
-.main-preview canvas{
+.main-stage{
+  flex:0 0 auto;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.main-stage canvas{
   display:block;
+
+  background:#fff;
+
+  box-shadow:0 5px 22px rgba(0,0,0,.16);
 }
 
 
 /* =========================
-   PAGES PANEL
+PAGES PANEL
 ========================= */
 
 .pages-panel{
   background:#fff;
-  border:1px solid #e5e5eb;
-  border-radius:18px;
+
+  border:1px solid #e4e4e9;
+
+  border-radius:17px;
+
   padding:22px;
 }
 
-.pages-header{
+.pages-heading{
   display:flex;
   align-items:flex-start;
   justify-content:space-between;
+
   gap:20px;
 
   margin-bottom:20px;
 }
 
-.pages-title h2{
+.pages-heading h2{
   font-size:21px;
   margin-bottom:5px;
 }
 
-.pages-title p{
-  font-size:13px;
+.pages-heading p{
   color:#777;
+  font-size:13px;
 }
 
-.selection-info{
-  font-size:13px;
-  color:#555;
-  background:#f5f5f7;
+.selection-count{
+  flex-shrink:0;
+
+  background:#f2f2f5;
+
   padding:8px 12px;
+
   border-radius:8px;
-  white-space:nowrap;
+
+  color:#555;
+
+  font-size:13px;
 }
 
 
 /* =========================
-   PAGE GRID
+PAGE GRID
 ========================= */
 
 .page-grid{
   display:grid;
+
   grid-template-columns:
-    repeat(auto-fill,minmax(180px,1fr));
-  gap:18px;
+  repeat(auto-fill,minmax(205px,1fr));
+
+  gap:20px;
 }
 
 
 /* =========================
-   PAGE CARD
+PAGE CARD
 ========================= */
 
 .page-card{
-  position:relative;
-
   background:#fff;
 
-  border:2px solid #e6e6eb;
+  border:2px solid #e3e3e8;
+
   border-radius:14px;
 
   padding:10px;
 
+  cursor:grab;
+
   transition:.2s;
 
-  cursor:grab;
+  min-width:0;
 }
 
 .page-card:hover{
-  border-color:#f0b5b5;
-  box-shadow:0 8px 22px rgba(0,0,0,.07);
+  border-color:#f1b5b5;
+
+  box-shadow:
+  0 7px 20px rgba(0,0,0,.07);
 }
 
 .page-card.selected{
   border-color:#e53232;
-  background:#fff8f8;
+
+  background:#fffafa;
 }
 
 .page-card.dragging{
-  opacity:.45;
+  opacity:.35;
 }
 
 .page-card.drag-over{
   border-color:#e53232;
-  transform:scale(1.02);
+
+  transform:scale(1.025);
 }
 
 
 /* =========================
-   PAGE TOP
+PAGE HEADER
 ========================= */
 
 .page-top{
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
 
   margin-bottom:9px;
 }
 
 .page-number{
-  font-size:13px;
-  font-weight:700;
+  background:#f1f1f4;
 
-  background:#f3f3f5;
   padding:5px 9px;
+
   border-radius:7px;
+
+  font-size:12px;
+
+  font-weight:700;
 }
 
-.select-box{
+.page-checkbox{
   width:19px;
   height:19px;
 
@@ -480,172 +514,240 @@ input{
 
 
 /* =========================
-   PAGE PREVIEW
+THUMBNAIL VIEWPORT
 ========================= */
 
-.page-preview-wrap{
+.thumbnail-wrap{
   width:100%;
-  height:245px;
 
-  background:#f1f2f5;
+  height:255px;
+
+  background:#eef0f3;
+
   border-radius:10px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
 
   overflow:auto;
 
-  padding:12px;
-}
-
-.page-preview{
-  background:#fff;
+  padding:8px;
 
   display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+}
+
+.thumbnail-stage{
+  flex:0 0 auto;
+
+  display:flex;
+
   align-items:center;
   justify-content:center;
 
-  box-shadow:0 4px 14px rgba(0,0,0,.12);
-
-  flex-shrink:0;
+  position:relative;
 }
 
-.page-preview canvas{
+.thumbnail-stage canvas{
   display:block;
 
-  max-width:none;
-  max-height:none;
-}
-
-
-/* =========================
-   PAGE ZOOM
-========================= */
-
-.page-controls{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:5px;
-
-  margin-top:10px;
-}
-
-.small-zoom{
-  width:29px;
-  height:29px;
-
-  border:1px solid #ddd;
   background:#fff;
 
-  border-radius:7px;
-
-  cursor:pointer;
-  font-size:14px;
-}
-
-.small-zoom:hover{
-  border-color:#e53232;
-  color:#e53232;
-}
-
-.page-zoom-value{
-  width:42px;
-  text-align:center;
-  font-size:11px;
-  color:#777;
+  box-shadow:
+  0 3px 12px rgba(0,0,0,.13);
 }
 
 
 /* =========================
-   ROTATE / CROP CONTROLS
+CROP OVERLAY
 ========================= */
 
-.page-action-controls{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
+.crop-overlay{
+  position:absolute;
+
+  border:2px dashed #e53232;
+
+  background:rgba(229,50,50,.08);
+
+  pointer-events:none;
+
+  z-index:5;
+}
+
+.crop-dim{
+  position:absolute;
+
+  inset:0;
+
+  pointer-events:none;
+
+  z-index:4;
+}
+
+.crop-badge{
+  position:absolute;
+
+  top:6px;
+  left:6px;
+
+  z-index:8;
+
+  background:#e53232;
+  color:#fff;
+
+  border-radius:6px;
+
+  padding:4px 7px;
+
+  font-size:10px;
+
+  font-weight:700;
+}
+
+
+/* =========================
+PAGE ZOOM
+========================= */
+
+.page-zoom-controls{
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
   gap:5px;
 
   margin-top:9px;
 }
 
-.page-action-btn{
+.small-zoom{
+  width:30px;
+  height:29px;
+
   border:1px solid #ddd;
+
   background:#fff;
 
   border-radius:7px;
 
-  min-height:31px;
+  cursor:pointer;
+}
+
+.small-zoom:hover{
+  color:#e53232;
+  border-color:#e53232;
+}
+
+.page-zoom-text{
+  width:45px;
+
+  text-align:center;
+
+  font-size:11px;
+
+  color:#777;
+}
+
+
+/* =========================
+ROTATE / CROP
+========================= */
+
+.page-action-row{
+  display:grid;
+
+  grid-template-columns:
+  repeat(3,1fr);
+
+  gap:5px;
+
+  margin-top:9px;
+}
+
+.page-action{
+  height:33px;
+
+  border:1px solid #ddd;
+
+  background:#fff;
+
+  border-radius:7px;
 
   cursor:pointer;
 
-  font-size:12px;
+  font-size:11px;
+
   font-weight:600;
 }
 
-.page-action-btn:hover{
+.page-action:hover{
   border-color:#e53232;
   color:#e53232;
 }
 
-.crop-page-btn{
+.crop-btn{
   color:#e53232;
 }
 
 
 /* =========================
-   ORDER CONTROLS
+ORDER
 ========================= */
 
-.order-controls{
+.order-row{
   display:flex;
+
   justify-content:center;
-  gap:6px;
+
+  gap:7px;
 
   margin-top:8px;
 }
 
 .order-btn{
+  width:38px;
+  height:30px;
+
   border:1px solid #ddd;
+
   background:#fff;
 
   border-radius:7px;
 
-  width:34px;
-  height:31px;
-
   cursor:pointer;
+
   font-size:15px;
 }
 
 .order-btn:hover{
-  border-color:#e53232;
   color:#e53232;
+  border-color:#e53232;
 }
 
 
 /* =========================
-   ACTION BAR
+ACTION BAR
 ========================= */
 
 .action-bar{
-  margin-top:25px;
-
   display:flex;
-  flex-wrap:wrap;
 
   justify-content:center;
+
+  flex-wrap:wrap;
+
   gap:10px;
+
+  margin-top:25px;
 }
 
 .action-btn{
   border:0;
-  border-radius:10px;
+
+  border-radius:9px;
 
   padding:12px 20px;
 
-  font-size:14px;
   font-weight:700;
 
   cursor:pointer;
@@ -662,10 +764,10 @@ input{
 }
 
 .split-btn{
+  min-width:190px;
+
   background:#e53232;
   color:#fff;
-
-  min-width:180px;
 }
 
 .split-btn:hover{
@@ -679,22 +781,24 @@ input{
 
 
 /* =========================
-   STATUS
+STATUS
 ========================= */
 
 .status{
   display:none;
 
-  margin-top:18px;
+  margin-top:17px;
 
-  padding:12px 15px;
+  padding:12px;
 
-  border-radius:10px;
+  background:#f2f3f5;
 
-  background:#f4f5f7;
-  color:#555;
+  border-radius:9px;
 
   text-align:center;
+
+  color:#555;
+
   font-size:13px;
 }
 
@@ -704,126 +808,120 @@ input{
 
 
 /* =========================
-   DOWNLOAD
+DOWNLOAD
 ========================= */
 
 .download-area{
   display:none;
 
-  margin-top:20px;
+  margin-top:18px;
 
   padding:20px;
 
-  border:1px solid #dcefdc;
-  background:#f5fff5;
-
-  border-radius:14px;
-
   text-align:center;
+
+  background:#f4fff4;
+
+  border:1px solid #d7ecd7;
+
+  border-radius:13px;
 }
 
 .download-area h3{
-  margin-bottom:7px;
   font-size:18px;
+
+  margin-bottom:7px;
 }
 
 .download-area p{
   color:#666;
+
   font-size:13px;
+
   margin-bottom:15px;
 }
 
 .download-btn{
-  display:inline-flex;
+  display:inline-block;
 
-  background:#e53232;
-  color:#fff;
-
-  padding:12px 25px;
+  padding:12px 24px;
 
   border-radius:9px;
 
+  background:#e53232;
+
+  color:#fff;
+
   text-decoration:none;
 
-  font-size:14px;
   font-weight:700;
-}
 
-.download-btn:hover{
-  background:#c92727;
-}
-
-
-/* =========================
-   DRAG INFO
-========================= */
-
-.drag-info{
-  text-align:center;
-  color:#888;
-
-  font-size:12px;
-
-  margin-top:15px;
+  font-size:14px;
 }
 
 
 /* =========================
-   CROP MODAL
+CROP MODAL
 ========================= */
 
 .modal{
-  display:none;
-
   position:fixed;
+
   inset:0;
 
   z-index:5000;
 
-  background:rgba(0,0,0,.55);
+  background:rgba(0,0,0,.65);
 
-  padding:20px;
+  display:none;
 
   align-items:center;
+
   justify-content:center;
+
+  padding:15px;
 }
 
 .modal.show{
   display:flex;
 }
 
-.modal-box{
+.crop-modal-box{
   width:100%;
-  max-width:560px;
 
-  max-height:90vh;
+  max-width:850px;
+
+  max-height:94vh;
 
   overflow:auto;
 
   background:#fff;
 
-  border-radius:18px;
+  border-radius:17px;
 
-  padding:22px;
+  padding:20px;
 }
 
-.modal-header{
+.crop-modal-header{
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
 
-  margin-bottom:18px;
+  margin-bottom:15px;
 }
 
-.modal-header h2{
-  font-size:21px;
+.crop-modal-header h2{
+  font-size:20px;
 }
 
-.close-modal{
-  width:34px;
-  height:34px;
+.close-crop{
+  width:35px;
+  height:35px;
 
   border:1px solid #ddd;
+
   background:#fff;
 
   border-radius:8px;
@@ -833,141 +931,179 @@ input{
   font-size:20px;
 }
 
-.close-modal:hover{
+.close-crop:hover{
   color:#e53232;
+
   border-color:#e53232;
 }
 
 
 /* =========================
-   CROP PREVIEW
+CROP WORK AREA
 ========================= */
 
-.crop-preview-wrap{
+.crop-work-area{
   width:100%;
 
-  height:300px;
+  height:500px;
 
-  background:#eef0f3;
+  background:#e9ebee;
 
   border-radius:12px;
 
+  overflow:auto;
+
   display:flex;
+
   align-items:center;
+
   justify-content:center;
 
-  overflow:hidden;
-
-  margin-bottom:18px;
+  padding:20px;
 }
 
-.crop-preview{
+.crop-surface{
   position:relative;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  flex:0 0 auto;
+
+  cursor:crosshair;
+
+  user-select:none;
+
+  touch-action:none;
+
+  box-shadow:0 4px 20px rgba(0,0,0,.16);
 
   background:#fff;
-
-  box-shadow:0 4px 18px rgba(0,0,0,.12);
-
-  max-width:90%;
-  max-height:90%;
 }
 
-.crop-preview canvas{
+.crop-surface canvas{
   display:block;
-  max-width:100%;
-  max-height:260px;
 }
 
 
 /* =========================
-   CROP FORM
+CROP RECTANGLE
 ========================= */
 
-.crop-help{
-  font-size:13px;
-  color:#777;
+.crop-rectangle{
+  position:absolute;
 
-  margin-bottom:15px;
+  border:2px solid #e53232;
 
-  line-height:1.5;
+  background:rgba(229,50,50,.10);
+
+  display:none;
+
+  cursor:move;
+
+  z-index:20;
 }
 
-.crop-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-}
-
-.crop-field label{
+.crop-rectangle.active{
   display:block;
-
-  font-size:12px;
-  color:#555;
-
-  margin-bottom:5px;
 }
 
-.crop-field input{
-  width:100%;
-  height:40px;
+.crop-handle{
+  position:absolute;
 
-  border:1px solid #ddd;
-  border-radius:8px;
+  width:12px;
+  height:12px;
 
-  padding:0 10px;
+  background:#fff;
 
-  outline:none;
+  border:2px solid #e53232;
+
+  border-radius:50%;
+
+  z-index:30;
 }
 
-.crop-field input:focus{
-  border-color:#e53232;
+.handle-tl{
+  left:-7px;
+  top:-7px;
+  cursor:nwse-resize;
 }
 
-.crop-note{
-  margin-top:12px;
+.handle-tr{
+  right:-7px;
+  top:-7px;
+  cursor:nesw-resize;
+}
 
-  padding:10px 12px;
+.handle-bl{
+  left:-7px;
+  bottom:-7px;
+  cursor:nesw-resize;
+}
 
-  background:#f8f8fa;
+.handle-br{
+  right:-7px;
+  bottom:-7px;
+  cursor:nwse-resize;
+}
 
-  border-radius:8px;
+.crop-instruction{
+  text-align:center;
 
   color:#777;
 
-  font-size:12px;
+  font-size:13px;
+
+  margin-top:12px;
 }
 
-.modal-actions{
+.crop-buttons{
   display:flex;
-  justify-content:flex-end;
+
+  justify-content:space-between;
+
   gap:10px;
 
-  margin-top:20px;
+  margin-top:18px;
+}
+
+.crop-left-buttons,
+.crop-right-buttons{
+  display:flex;
+
+  gap:8px;
 }
 
 .modal-btn{
   border:0;
-  border-radius:9px;
 
-  padding:11px 18px;
+  border-radius:8px;
 
-  font-size:14px;
-  font-weight:700;
+  padding:11px 17px;
 
   cursor:pointer;
+
+  font-weight:700;
+}
+
+.reset-crop{
+  background:#f0f0f3;
+
+  color:#555;
+}
+
+.clear-crop{
+  background:#fff0f0;
+
+  color:#e53232;
 }
 
 .cancel-crop{
-  background:#f0f0f3;
+  background:#eee;
+
   color:#333;
 }
 
 .apply-crop{
   background:#e53232;
+
   color:#fff;
 }
 
@@ -977,55 +1113,58 @@ input{
 
 
 /* =========================
-   MOBILE
+ROTATION BADGE
+========================= */
+
+.rotation-badge{
+  position:absolute;
+
+  bottom:6px;
+  left:6px;
+
+  z-index:9;
+
+  background:#333;
+
+  color:#fff;
+
+  padding:4px 7px;
+
+  border-radius:6px;
+
+  font-size:10px;
+
+  font-weight:700;
+}
+
+
+/* =========================
+MOBILE
 ========================= */
 
 @media(max-width:700px){
-
-  .header-inner{
-    min-height:62px;
-    padding:0 15px;
-  }
-
-  .logo{
-    font-size:18px;
-  }
-
-  .logo-icon{
-    width:35px;
-    height:35px;
-  }
-
-  .back-home{
-    font-size:13px;
-  }
 
   .container{
     padding:30px 12px 50px;
   }
 
-  .title h1{
+  .page-title h1{
     font-size:30px;
   }
 
-  .title p{
-    font-size:14px;
-  }
-
-  .file-info{
+  .main-heading{
+    flex-direction:column;
     align-items:flex-start;
   }
 
-  .pages-header{
-    flex-direction:column;
-  }
-
-  .selection-info{
-    align-self:flex-start;
+  .main-preview-wrap{
+    height:360px;
   }
 
   .page-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
     gap:10px;
   }
 
@@ -1033,69 +1172,41 @@ input{
     padding:7px;
   }
 
-  .page-preview-wrap{
-    height:205px;
-    padding:7px;
+  .thumbnail-wrap{
+    height:210px;
   }
 
-  .page-action-controls{
-    gap:3px;
+  .page-action{
+    font-size:9px;
   }
 
-  .page-action-btn{
-    font-size:10px;
+  .pages-heading{
+    flex-direction:column;
   }
 
-  .order-btn{
-    width:30px;
-    height:28px;
+  .selection-count{
+    align-self:flex-start;
   }
 
   .action-btn{
     width:100%;
   }
 
-  .main-preview-wrap{
-    min-height:330px;
-    padding:15px;
+  .crop-work-area{
+    height:380px;
   }
 
-  .preview-heading{
-    align-items:flex-start;
+  .crop-buttons{
     flex-direction:column;
   }
 
-  .crop-grid{
-    grid-template-columns:1fr 1fr;
+  .crop-left-buttons,
+  .crop-right-buttons{
+    width:100%;
   }
 
-  .modal{
-    padding:10px;
-  }
-
-  .modal-box{
-    padding:16px;
-  }
-
-}
-
-
-/* =========================
-   VERY SMALL SCREEN
-========================= */
-
-@media(max-width:400px){
-
-  .page-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .page-preview-wrap{
-    height:190px;
-  }
-
-  .page-action-btn{
-    font-size:9px;
+  .modal-btn{
+    flex:1;
   }
 
 }
@@ -1108,7 +1219,7 @@ input{
 
 
 <!-- =========================
-     HEADER
+HEADER
 ========================= -->
 
 <header class="header">
@@ -1135,27 +1246,27 @@ input{
 
 
 <!-- =========================
-     MAIN
+MAIN
 ========================= -->
 
 <main class="container">
 
 
-  <div class="title">
+  <div class="page-title">
 
     <h1>
       Split <span>PDF</span>
     </h1>
 
     <p>
-      Select, reorder, rotate, crop and extract the pages you need.
+      Select, reorder, rotate and crop PDF pages before downloading.
     </p>
 
   </div>
 
 
   <!-- =========================
-       UPLOAD
+  UPLOAD
   ========================= -->
 
   <div class="upload-box" id="uploadBox">
@@ -1169,14 +1280,16 @@ input{
     </h2>
 
     <p>
-      Drag & drop your PDF here or select it from your device.
+      Drag & drop your PDF here or choose a PDF from your device.
     </p>
 
     <button
       type="button"
       class="upload-btn"
       id="uploadButton">
+
       Choose PDF
+
     </button>
 
     <input
@@ -1188,18 +1301,22 @@ input{
 
 
   <!-- =========================
-       FILE INFO
+  FILE INFO
   ========================= -->
 
   <div class="file-info" id="fileInfo">
 
-    <div class="file-details">
+    <div>
 
-      <div class="file-name" id="fileName">
+      <div
+        class="file-name"
+        id="fileName">
         PDF
       </div>
 
-      <div class="file-pages" id="filePages">
+      <div
+        class="file-pages"
+        id="filePages">
         0 pages
       </div>
 
@@ -1207,32 +1324,39 @@ input{
 
     <button
       type="button"
-      class="clear-btn"
+      class="clear-file"
       id="clearFile">
+
       Remove PDF
+
     </button>
 
   </div>
 
 
   <!-- =========================
-       WORKSPACE
+  WORKSPACE
   ========================= -->
 
-  <div class="workspace" id="workspace">
+  <div
+    class="workspace"
+    id="workspace">
 
 
-    <!-- MAIN PREVIEW -->
+    <!-- =========================
+    MAIN PREVIEW
+    ========================= -->
 
     <div class="main-preview-box">
 
-      <div class="preview-heading">
+      <div class="main-heading">
 
         <h2>
-          PDF Preview — Page <span id="mainPageNumber">1</span>
+          PDF Preview — Page
+          <span id="mainPageNumber">1</span>
         </h2>
 
-        <div class="main-zoom">
+        <div class="main-tools">
 
           <button
             type="button"
@@ -1242,8 +1366,8 @@ input{
           </button>
 
           <span
-            class="zoom-value"
-            id="mainZoomValue">
+            class="zoom-label"
+            id="mainZoomLabel">
             100%
           </span>
 
@@ -1269,8 +1393,8 @@ input{
       <div class="main-preview-wrap">
 
         <div
-          class="main-preview"
-          id="mainPreview">
+          class="main-stage"
+          id="mainStage">
         </div>
 
       </div>
@@ -1279,29 +1403,31 @@ input{
 
 
     <!-- =========================
-         PAGES
+    PAGES
     ========================= -->
 
     <div class="pages-panel">
 
-      <div class="pages-header">
+      <div class="pages-heading">
 
-        <div class="pages-title">
+        <div>
 
           <h2>
-            Select PDF Pages
+            PDF Pages
           </h2>
 
           <p>
-            Select pages, change their order, rotate or crop them.
+            Select pages and use Rotate, Crop or drag to change order.
           </p>
 
         </div>
 
         <div
-          class="selection-info"
-          id="selectionInfo">
+          class="selection-count"
+          id="selectionCount">
+
           0 selected
+
         </div>
 
       </div>
@@ -1313,27 +1439,24 @@ input{
       </div>
 
 
-      <div class="drag-info">
-        🖱️ Drag and drop pages to change their order
-      </div>
-
-
-      <!-- ACTIONS -->
-
       <div class="action-bar">
 
         <button
           type="button"
           class="action-btn select-all"
           id="selectAll">
+
           Select All
+
         </button>
 
         <button
           type="button"
           class="action-btn clear-selection"
           id="clearSelection">
+
           Clear Selection
+
         </button>
 
         <button
@@ -1341,7 +1464,9 @@ input{
           class="action-btn split-btn"
           id="splitButton"
           disabled>
+
           Split & Download PDF
+
         </button>
 
       </div>
@@ -1362,15 +1487,17 @@ input{
         </h3>
 
         <p>
-          Your selected pages have been extracted successfully.
+          Your selected PDF pages are ready.
         </p>
 
         <a
-          href="#"
           class="download-btn"
           id="downloadButton"
+          href="#"
           download="split-pdf.pdf">
+
           Download PDF
+
         </a>
 
       </div>
@@ -1383,16 +1510,16 @@ input{
 
 
 <!-- =========================
-     CROP MODAL
+CROP MODAL
 ========================= -->
 
 <div
   class="modal"
   id="cropModal">
 
-  <div class="modal-box">
+  <div class="crop-modal-box">
 
-    <div class="modal-header">
+    <div class="crop-modal-header">
 
       <h2>
         Crop Page <span id="cropPageNumber">1</span>
@@ -1400,126 +1527,81 @@ input{
 
       <button
         type="button"
-        class="close-modal"
+        class="close-crop"
         id="closeCrop">
+
         ×
+
       </button>
 
     </div>
 
 
-    <div class="crop-preview-wrap">
+    <div class="crop-work-area">
 
       <div
-        class="crop-preview"
-        id="cropPreview">
-      </div>
-
-    </div>
-
-
-    <div class="crop-help">
-
-      Enter how much you want to remove from each side.
-      Values are in percentage of the page size.
-
-    </div>
-
-
-    <div class="crop-grid">
-
-      <div class="crop-field">
-
-        <label>
-          Top %
-        </label>
-
-        <input
-          type="number"
-          id="cropTop"
-          min="0"
-          max="49"
-          step="1"
-          value="0">
-
-      </div>
-
-
-      <div class="crop-field">
-
-        <label>
-          Right %
-        </label>
-
-        <input
-          type="number"
-          id="cropRight"
-          min="0"
-          max="49"
-          step="1"
-          value="0">
-
-      </div>
-
-
-      <div class="crop-field">
-
-        <label>
-          Bottom %
-        </label>
-
-        <input
-          type="number"
-          id="cropBottom"
-          min="0"
-          max="49"
-          step="1"
-          value="0">
-
-      </div>
-
-
-      <div class="crop-field">
-
-        <label>
-          Left %
-        </label>
-
-        <input
-          type="number"
-          id="cropLeft"
-          min="0"
-          max="49"
-          step="1"
-          value="0">
+        class="crop-surface"
+        id="cropSurface">
 
       </div>
 
     </div>
 
 
-    <div class="crop-note">
+    <div class="crop-instruction">
 
-      Example: Top 10% means 10% of the page height will be removed from the top.
+      Mouse se page ke upar crop area drag karein.
+      Corner points se crop area resize bhi kar sakte hain.
 
     </div>
 
 
-    <div class="modal-actions">
+    <div class="crop-buttons">
 
-      <button
-        type="button"
-        class="modal-btn cancel-crop"
-        id="cancelCrop">
-        Cancel
-      </button>
+      <div class="crop-left-buttons">
 
-      <button
-        type="button"
-        class="modal-btn apply-crop"
-        id="applyCrop">
-        Apply Crop
-      </button>
+        <button
+          type="button"
+          class="modal-btn reset-crop"
+          id="resetCrop">
+
+          Full Page
+
+        </button>
+
+        <button
+          type="button"
+          class="modal-btn clear-crop"
+          id="clearCrop">
+
+          Clear Crop
+
+        </button>
+
+      </div>
+
+
+      <div class="crop-right-buttons">
+
+        <button
+          type="button"
+          class="modal-btn cancel-crop"
+          id="cancelCrop">
+
+          Cancel
+
+        </button>
+
+        <button
+          type="button"
+          class="modal-btn apply-crop"
+          id="applyCrop">
+
+          Apply Crop
+
+        </button>
+
+      </div>
 
     </div>
 
@@ -1530,17 +1612,18 @@ input{
 
 <script>
 
-/* =========================
-   PDF.JS
-========================= */
+
+/* =====================================================
+PDF.JS
+===================================================== */
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
 "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
 
-/* =========================
-   VARIABLES
-========================= */
+/* =====================================================
+VARIABLES
+===================================================== */
 
 let currentFile = null;
 
@@ -1554,12 +1637,37 @@ let downloadUrl = null;
 
 let draggedIndex = null;
 
+let currentMainIndex = 0;
+
+
+/* =====================================================
+CROP VARIABLES
+===================================================== */
+
 let cropPageIndex = null;
 
+let cropTempRect = null;
 
-/* =========================
-   DOM
-========================= */
+let cropDragging = false;
+
+let cropResizing = false;
+
+let cropMoving = false;
+
+let cropResizeHandle = null;
+
+let cropStartX = 0;
+
+let cropStartY = 0;
+
+let cropStartRect = null;
+
+let cropDisplayScale = 1;
+
+
+/* =====================================================
+DOM
+===================================================== */
 
 const fileInput =
 document.getElementById("fileInput");
@@ -1582,20 +1690,11 @@ document.getElementById("filePages");
 const workspace =
 document.getElementById("workspace");
 
-const mainPreview =
-document.getElementById("mainPreview");
-
-const mainPageNumber =
-document.getElementById("mainPageNumber");
-
-const mainZoomValue =
-document.getElementById("mainZoomValue");
-
 const pageGrid =
 document.getElementById("pageGrid");
 
-const selectionInfo =
-document.getElementById("selectionInfo");
+const selectionCount =
+document.getElementById("selectionCount");
 
 const splitButton =
 document.getElementById("splitButton");
@@ -1609,16 +1708,25 @@ document.getElementById("downloadArea");
 const downloadButton =
 document.getElementById("downloadButton");
 
+const mainStage =
+document.getElementById("mainStage");
+
+const mainZoomLabel =
+document.getElementById("mainZoomLabel");
+
+const mainPageNumber =
+document.getElementById("mainPageNumber");
+
 const cropModal =
 document.getElementById("cropModal");
 
-const cropPreview =
-document.getElementById("cropPreview");
+const cropSurface =
+document.getElementById("cropSurface");
 
 
-/* =========================
-   OPEN FILE PICKER
-========================= */
+/* =====================================================
+UPLOAD
+===================================================== */
 
 uploadButton.addEventListener(
 "click",
@@ -1640,31 +1748,33 @@ function(){
 });
 
 
-/* =========================
-   FILE CHANGE
-========================= */
-
 fileInput.addEventListener(
 "change",
 function(){
 
-  if(this.files && this.files.length){
+  if(
+    this.files &&
+    this.files.length
+  ){
 
-    loadPDF(this.files[0]);
+    loadPDF(
+      this.files[0]
+    );
 
   }
 
 });
 
 
-/* =========================
-   DRAG DROP UPLOAD
-========================= */
+/* =====================================================
+DRAG DROP UPLOAD
+===================================================== */
 
 [
 "dragenter",
 "dragover"
-].forEach(function(eventName){
+].forEach(
+function(eventName){
 
   uploadBox.addEventListener(
     eventName,
@@ -1672,7 +1782,9 @@ function(){
 
       event.preventDefault();
 
-      uploadBox.classList.add("dragover");
+      uploadBox.classList.add(
+        "dragover"
+      );
 
     }
   );
@@ -1683,7 +1795,8 @@ function(){
 [
 "dragleave",
 "drop"
-].forEach(function(eventName){
+].forEach(
+function(eventName){
 
   uploadBox.addEventListener(
     eventName,
@@ -1691,7 +1804,9 @@ function(){
 
       event.preventDefault();
 
-      uploadBox.classList.remove("dragover");
+      uploadBox.classList.remove(
+        "dragover"
+      );
 
     }
   );
@@ -1706,16 +1821,24 @@ function(event){
   const files =
     event.dataTransfer.files;
 
-  if(files && files.length){
 
-    const file = files[0];
+  if(
+    files &&
+    files.length
+  ){
 
-    if(file.type === "application/pdf"){
+    const file =
+      files[0];
+
+
+    if(
+      file.type ===
+      "application/pdf"
+    ){
 
       loadPDF(file);
 
     }
-
     else{
 
       showStatus(
@@ -1729,13 +1852,16 @@ function(event){
 });
 
 
-/* =========================
-   LOAD PDF
-========================= */
+/* =====================================================
+LOAD PDF
+===================================================== */
 
 async function loadPDF(file){
 
-  if(file.type !== "application/pdf"){
+  if(
+    file.type !==
+    "application/pdf"
+  ){
 
     showStatus(
       "Please select a valid PDF file."
@@ -1746,7 +1872,8 @@ async function loadPDF(file){
   }
 
 
-  currentFile = file;
+  currentFile =
+    file;
 
 
   showStatus(
@@ -1756,14 +1883,16 @@ async function loadPDF(file){
 
   try{
 
-    const arrayBuffer =
+    const buffer =
       await file.arrayBuffer();
 
 
     pdfJsDocument =
-      await pdfjsLib.getDocument({
-        data:arrayBuffer
-      }).promise;
+      await pdfjsLib
+      .getDocument({
+        data:buffer
+      })
+      .promise;
 
 
     pages = [];
@@ -1785,16 +1914,14 @@ async function loadPDF(file){
 
         rotation:0,
 
-        crop:{
-          top:0,
-          right:0,
-          bottom:0,
-          left:0
-        }
+        crop:null
 
       });
 
     }
+
+
+    currentMainIndex = 0;
 
 
     fileName.textContent =
@@ -1827,28 +1954,24 @@ async function loadPDF(file){
     updateMainZoom();
 
 
-    await renderMainPreview();
-
     renderPages();
 
     updateSelection();
 
+
+    await renderMainPreview();
+
+
     hideStatus();
 
 
-    workspace.scrollIntoView({
-      behavior:"smooth",
-      block:"start"
-    });
-
   }
-
   catch(error){
 
     console.error(error);
 
     showStatus(
-      "Unable to open this PDF. Please try another PDF file."
+      "Unable to open this PDF."
     );
 
   }
@@ -1856,136 +1979,16 @@ async function loadPDF(file){
 }
 
 
-/* =========================
-   GET PAGE VIEWPORT
-========================= */
-
-async function getPageViewport(
-  pageData,
-  zoom
-){
-
-  const page =
-    await pdfJsDocument.getPage(
-      pageData.originalIndex + 1
-    );
-
-
-  return page.getViewport({
-    scale:zoom,
-    rotation:pageData.rotation
-  });
-
-}
-
-
-/* =========================
-   MAIN PREVIEW
-========================= */
-
-async function renderMainPreview(){
-
-  if(!pdfJsDocument || pages.length === 0){
-
-    return;
-
-  }
-
-
-  try{
-
-    const pageData =
-      pages[0];
-
-
-    const page =
-      await pdfJsDocument.getPage(
-        pageData.originalIndex + 1
-      );
-
-
-    const viewport =
-      page.getViewport({
-
-        scale:mainZoom,
-
-        rotation:pageData.rotation
-
-      });
-
-
-    const canvas =
-      document.createElement("canvas");
-
-
-    const context =
-      canvas.getContext("2d");
-
-
-    canvas.width =
-      viewport.width;
-
-
-    canvas.height =
-      viewport.height;
-
-
-    canvas.style.width =
-      viewport.width + "px";
-
-
-    canvas.style.height =
-      viewport.height + "px";
-
-
-    mainPreview.innerHTML =
-      "";
-
-
-    mainPreview.style.width =
-      viewport.width + "px";
-
-
-    mainPreview.style.minHeight =
-      viewport.height + "px";
-
-
-    mainPreview.appendChild(
-      canvas
-    );
-
-
-    mainPageNumber.textContent =
-      1;
-
-
-    await page.render({
-
-      canvasContext:context,
-
-      viewport:viewport
-
-    }).promise;
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-  }
-
-}
-
-
-/* =========================
-   MAIN ZOOM
-========================= */
+/* =====================================================
+MAIN ZOOM
+===================================================== */
 
 function updateMainZoom(){
 
-  mainZoomValue.textContent =
-    Math.round(mainZoom * 100) + "%";
+  mainZoomLabel.textContent =
+    Math.round(
+      mainZoom * 100
+    ) + "%";
 
 }
 
@@ -2043,9 +2046,210 @@ async function(){
 });
 
 
-/* =========================
-   RENDER PAGES
-========================= */
+/* =====================================================
+CALCULATE FIT SCALE
+===================================================== */
+
+function calculateFitScale(
+  containerWidth,
+  containerHeight,
+  pageWidth,
+  pageHeight,
+  padding
+){
+
+  const availableWidth =
+    Math.max(
+      50,
+      containerWidth - padding
+    );
+
+  const availableHeight =
+    Math.max(
+      50,
+      containerHeight - padding
+    );
+
+
+  const scaleX =
+    availableWidth /
+    pageWidth;
+
+
+  const scaleY =
+    availableHeight /
+    pageHeight;
+
+
+  return Math.min(
+    scaleX,
+    scaleY
+  );
+
+}
+
+
+/* =====================================================
+MAIN PREVIEW
+===================================================== */
+
+async function renderMainPreview(){
+
+  if(
+    !pdfJsDocument ||
+    pages.length === 0
+  ){
+
+    return;
+
+  }
+
+
+  const pageData =
+    pages[
+      Math.max(
+        0,
+        Math.min(
+          currentMainIndex,
+          pages.length - 1
+        )
+      )
+    ];
+
+
+  try{
+
+    const page =
+      await pdfJsDocument
+      .getPage(
+        pageData.originalIndex + 1
+      );
+
+
+    const baseViewport =
+      page.getViewport({
+        scale:1,
+        rotation:pageData.rotation
+      });
+
+
+    const wrap =
+      document.querySelector(
+        ".main-preview-wrap"
+      );
+
+
+    const fitScale =
+      calculateFitScale(
+
+        wrap.clientWidth,
+
+        wrap.clientHeight,
+
+        baseViewport.width,
+
+        baseViewport.height,
+
+        45
+
+      );
+
+
+    const scale =
+      fitScale * mainZoom;
+
+
+    const viewport =
+      page.getViewport({
+
+        scale:scale,
+
+        rotation:pageData.rotation
+
+      });
+
+
+    const canvas =
+      document.createElement(
+        "canvas"
+      );
+
+
+    const context =
+      canvas.getContext(
+        "2d"
+      );
+
+
+    canvas.width =
+      Math.ceil(
+        viewport.width
+      );
+
+
+    canvas.height =
+      Math.ceil(
+        viewport.height
+      );
+
+
+    canvas.style.width =
+      viewport.width + "px";
+
+
+    canvas.style.height =
+      viewport.height + "px";
+
+
+    mainStage.innerHTML =
+      "";
+
+
+    mainStage.style.width =
+      Math.max(
+        wrap.clientWidth - 40,
+        viewport.width
+      ) + "px";
+
+
+    mainStage.style.height =
+      Math.max(
+        wrap.clientHeight - 40,
+        viewport.height
+      ) + "px";
+
+
+    mainStage.appendChild(
+      canvas
+    );
+
+
+    mainPageNumber.textContent =
+      currentMainIndex + 1;
+
+
+    await page.render({
+
+      canvasContext:context,
+
+      viewport:viewport
+
+    }).promise;
+
+
+  }
+  catch(error){
+
+    console.error(error);
+
+  }
+
+}
+
+
+/* =====================================================
+RENDER ALL PAGE CARDS
+===================================================== */
 
 function renderPages(){
 
@@ -2062,7 +2266,9 @@ function renderPages(){
         );
 
 
-      pageGrid.appendChild(card);
+      pageGrid.appendChild(
+        card
+      );
 
     }
   );
@@ -2070,9 +2276,9 @@ function renderPages(){
 }
 
 
-/* =========================
-   CREATE PAGE CARD
-========================= */
+/* =====================================================
+CREATE PAGE CARD
+===================================================== */
 
 function createPageCard(
   pageData,
@@ -2080,7 +2286,9 @@ function createPageCard(
 ){
 
   const card =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
 
   card.className =
@@ -2099,12 +2307,14 @@ function createPageCard(
   card.draggable = true;
 
 
-  /* =====================
-     TOP
-  ===================== */
+  /* =========================
+  TOP
+  ========================= */
 
   const top =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
 
   top.className =
@@ -2112,7 +2322,9 @@ function createPageCard(
 
 
   const number =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
 
   number.className =
@@ -2124,7 +2336,9 @@ function createPageCard(
 
 
   const checkbox =
-    document.createElement("input");
+    document.createElement(
+      "input"
+    );
 
 
   checkbox.type =
@@ -2132,7 +2346,7 @@ function createPageCard(
 
 
   checkbox.className =
-    "select-box";
+    "page-checkbox";
 
 
   checkbox.checked =
@@ -2169,68 +2383,83 @@ function createPageCard(
   );
 
 
-  top.appendChild(number);
-
-  top.appendChild(checkbox);
-
-
-  /* =====================
-     PREVIEW
-  ===================== */
-
-  const previewWrap =
-    document.createElement("div");
-
-
-  previewWrap.className =
-    "page-preview-wrap";
-
-
-  const preview =
-    document.createElement("div");
-
-
-  preview.className =
-    "page-preview";
-
-
-  previewWrap.appendChild(
-    preview
+  top.appendChild(
+    number
   );
 
 
-  /* =====================
-     ZOOM
-  ===================== */
-
-  const pageControls =
-    document.createElement("div");
+  top.appendChild(
+    checkbox
+  );
 
 
-  pageControls.className =
-    "page-controls";
+  /* =========================
+  THUMBNAIL
+  ========================= */
+
+  const thumbnailWrap =
+    document.createElement(
+      "div"
+    );
 
 
-  const minus =
-    document.createElement("button");
+  thumbnailWrap.className =
+    "thumbnail-wrap";
 
 
-  minus.type =
+  const thumbnailStage =
+    document.createElement(
+      "div"
+    );
+
+
+  thumbnailStage.className =
+    "thumbnail-stage";
+
+
+  thumbnailWrap.appendChild(
+    thumbnailStage
+  );
+
+
+  /* =========================
+  ZOOM
+  ========================= */
+
+  const zoomControls =
+    document.createElement(
+      "div"
+    );
+
+
+  zoomControls.className =
+    "page-zoom-controls";
+
+
+  const zoomMinus =
+    document.createElement(
+      "button"
+    );
+
+
+  zoomMinus.type =
     "button";
 
-  minus.className =
+  zoomMinus.className =
     "small-zoom";
 
-  minus.textContent =
+  zoomMinus.textContent =
     "−";
 
 
   const zoomText =
-    document.createElement("span");
+    document.createElement(
+      "span"
+    );
 
 
   zoomText.className =
-    "page-zoom-value";
+    "page-zoom-text";
 
 
   zoomText.textContent =
@@ -2239,35 +2468,39 @@ function createPageCard(
     ) + "%";
 
 
-  const plus =
-    document.createElement("button");
+  const zoomPlus =
+    document.createElement(
+      "button"
+    );
 
 
-  plus.type =
+  zoomPlus.type =
     "button";
 
-  plus.className =
+  zoomPlus.className =
     "small-zoom";
 
-  plus.textContent =
+  zoomPlus.textContent =
     "+";
 
 
-  const reset =
-    document.createElement("button");
+  const zoomReset =
+    document.createElement(
+      "button"
+    );
 
 
-  reset.type =
+  zoomReset.type =
     "button";
 
-  reset.className =
+  zoomReset.className =
     "small-zoom";
 
-  reset.textContent =
+  zoomReset.textContent =
     "↺";
 
 
-  minus.addEventListener(
+  zoomMinus.addEventListener(
     "click",
     async function(event){
 
@@ -2286,16 +2519,16 @@ function createPageCard(
         ) + "%";
 
 
-      await renderPagePreview(
+      await renderThumbnail(
         pageData,
-        preview
+        thumbnailStage
       );
 
     }
   );
 
 
-  plus.addEventListener(
+  zoomPlus.addEventListener(
     "click",
     async function(event){
 
@@ -2314,16 +2547,16 @@ function createPageCard(
         ) + "%";
 
 
-      await renderPagePreview(
+      await renderThumbnail(
         pageData,
-        preview
+        thumbnailStage
       );
 
     }
   );
 
 
-  reset.addEventListener(
+  zoomReset.addEventListener(
     "click",
     async function(event){
 
@@ -2335,96 +2568,124 @@ function createPageCard(
         "100%";
 
 
-      await renderPagePreview(
+      await renderThumbnail(
         pageData,
-        preview
+        thumbnailStage
       );
 
     }
   );
 
 
-  pageControls.appendChild(minus);
+  zoomControls.appendChild(
+    zoomMinus
+  );
 
-  pageControls.appendChild(zoomText);
+  zoomControls.appendChild(
+    zoomText
+  );
 
-  pageControls.appendChild(plus);
+  zoomControls.appendChild(
+    zoomPlus
+  );
 
-  pageControls.appendChild(reset);
-
-
-  /* =====================
-     ROTATE / CROP
-  ===================== */
-
-  const actionControls =
-    document.createElement("div");
+  zoomControls.appendChild(
+    zoomReset
+  );
 
 
-  actionControls.className =
-    "page-action-controls";
+  /* =========================
+  ROTATE / CROP
+  ========================= */
+
+  const actionRow =
+    document.createElement(
+      "div"
+    );
+
+
+  actionRow.className =
+    "page-action-row";
 
 
   const rotateLeft =
-    document.createElement("button");
+    document.createElement(
+      "button"
+    );
 
 
   rotateLeft.type =
     "button";
 
   rotateLeft.className =
-    "page-action-btn";
+    "page-action";
 
   rotateLeft.textContent =
     "↶ Rotate";
 
 
   const rotateRight =
-    document.createElement("button");
+    document.createElement(
+      "button"
+    );
 
 
   rotateRight.type =
     "button";
 
   rotateRight.className =
-    "page-action-btn";
+    "page-action";
 
   rotateRight.textContent =
     "Rotate ↷";
 
 
   const cropButton =
-    document.createElement("button");
+    document.createElement(
+      "button"
+    );
 
 
   cropButton.type =
     "button";
 
   cropButton.className =
-    "page-action-btn crop-page-btn";
+    "page-action crop-btn";
 
   cropButton.textContent =
-    "Crop";
+    "✂ Crop";
 
+
+  /* =========================
+  ROTATE LEFT
+  ========================= */
 
   rotateLeft.addEventListener(
     "click",
     async function(event){
 
+      event.preventDefault();
+
       event.stopPropagation();
+
 
       pageData.rotation =
         (
-          pageData.rotation - 90 + 360
+          pageData.rotation -
+          90 +
+          360
         ) % 360;
 
 
-      await renderPagePreview(
+      await renderThumbnail(
         pageData,
-        preview
+        thumbnailStage
       );
 
-      if(index === 0){
+
+      if(
+        currentMainIndex === index
+      ){
 
         await renderMainPreview();
 
@@ -2433,25 +2694,36 @@ function createPageCard(
     }
   );
 
+
+  /* =========================
+  ROTATE RIGHT
+  ========================= */
 
   rotateRight.addEventListener(
     "click",
     async function(event){
 
+      event.preventDefault();
+
       event.stopPropagation();
+
 
       pageData.rotation =
         (
-          pageData.rotation + 90
+          pageData.rotation +
+          90
         ) % 360;
 
 
-      await renderPagePreview(
+      await renderThumbnail(
         pageData,
-        preview
+        thumbnailStage
       );
 
-      if(index === 0){
+
+      if(
+        currentMainIndex === index
+      ){
 
         await renderMainPreview();
 
@@ -2461,13 +2733,20 @@ function createPageCard(
   );
 
 
+  /* =========================
+  CROP
+  ========================= */
+
   cropButton.addEventListener(
     "click",
     function(event){
 
+      event.preventDefault();
+
       event.stopPropagation();
 
-      openCropModal(
+
+      openCropEditor(
         pageData,
         index
       );
@@ -2476,66 +2755,72 @@ function createPageCard(
   );
 
 
-  actionControls.appendChild(
+  actionRow.appendChild(
     rotateLeft
   );
 
-  actionControls.appendChild(
+  actionRow.appendChild(
     rotateRight
   );
 
-  actionControls.appendChild(
+  actionRow.appendChild(
     cropButton
   );
 
 
-  /* =====================
-     ORDER
-  ===================== */
+  /* =========================
+  ORDER
+  ========================= */
 
-  const orderControls =
-    document.createElement("div");
-
-
-  orderControls.className =
-    "order-controls";
+  const orderRow =
+    document.createElement(
+      "div"
+    );
 
 
-  const up =
-    document.createElement("button");
+  orderRow.className =
+    "order-row";
 
 
-  up.type =
+  const upButton =
+    document.createElement(
+      "button"
+    );
+
+
+  upButton.type =
     "button";
 
-  up.className =
+  upButton.className =
     "order-btn";
 
-  up.textContent =
+  upButton.textContent =
     "↑";
 
-  up.title =
-    "Move page up";
+  upButton.title =
+    "Move Up";
 
 
-  const down =
-    document.createElement("button");
+  const downButton =
+    document.createElement(
+      "button"
+    );
 
 
-  down.type =
+  downButton.type =
     "button";
 
-  down.className =
+  downButton.className =
     "order-btn";
 
-  down.textContent =
+  downButton.textContent =
     "↓";
 
-  down.title =
-    "Move page down";
+  downButton.title =
+    "Move Down";
 
 
-  up.addEventListener(
+  upButton.addEventListener(
     "click",
     function(event){
 
@@ -2550,7 +2835,7 @@ function createPageCard(
   );
 
 
-  down.addEventListener(
+  downButton.addEventListener(
     "click",
     function(event){
 
@@ -2565,29 +2850,50 @@ function createPageCard(
   );
 
 
-  orderControls.appendChild(up);
+  orderRow.appendChild(
+    upButton
+  );
 
-  orderControls.appendChild(down);
-
-
-  /* =====================
-     APPEND
-  ===================== */
-
-  card.appendChild(top);
-
-  card.appendChild(previewWrap);
-
-  card.appendChild(pageControls);
-
-  card.appendChild(actionControls);
-
-  card.appendChild(orderControls);
+  orderRow.appendChild(
+    downButton
+  );
 
 
-  /* =====================
-     DRAG
-  ===================== */
+  /* =========================
+  CARD CLICK
+  ========================= */
+
+  card.addEventListener(
+    "click",
+    function(event){
+
+      if(
+        event.target.closest(
+          "button"
+        ) ||
+        event.target.closest(
+          "input"
+        )
+      ){
+
+        return;
+
+      }
+
+
+      currentMainIndex =
+        index;
+
+
+      renderMainPreview();
+
+    }
+  );
+
+
+  /* =========================
+  DRAG START
+  ========================= */
 
   card.addEventListener(
     "dragstart",
@@ -2595,6 +2901,7 @@ function createPageCard(
 
       draggedIndex =
         index;
+
 
       card.classList.add(
         "dragging"
@@ -2604,35 +2911,51 @@ function createPageCard(
   );
 
 
+  /* =========================
+  DRAG END
+  ========================= */
+
   card.addEventListener(
     "dragend",
     function(){
 
-      draggedIndex = null;
+      draggedIndex =
+        null;
+
 
       card.classList.remove(
         "dragging"
       );
 
-      document
-        .querySelectorAll(".page-card")
-        .forEach(function(c){
 
-          c.classList.remove(
+      document
+      .querySelectorAll(
+        ".page-card"
+      )
+      .forEach(
+        function(item){
+
+          item.classList.remove(
             "drag-over"
           );
 
-        });
+        }
+      );
 
     }
   );
 
+
+  /* =========================
+  DRAG OVER
+  ========================= */
 
   card.addEventListener(
     "dragover",
     function(event){
 
       event.preventDefault();
+
 
       if(
         draggedIndex !== null &&
@@ -2660,6 +2983,10 @@ function createPageCard(
     }
   );
 
+
+  /* =========================
+  DROP
+  ========================= */
 
   card.addEventListener(
     "drop",
@@ -2691,9 +3018,38 @@ function createPageCard(
   );
 
 
-  renderPagePreview(
+  /* =========================
+  APPEND
+  ========================= */
+
+  card.appendChild(
+    top
+  );
+
+  card.appendChild(
+    thumbnailWrap
+  );
+
+  card.appendChild(
+    zoomControls
+  );
+
+  card.appendChild(
+    actionRow
+  );
+
+  card.appendChild(
+    orderRow
+  );
+
+
+  /* =========================
+  INITIAL RENDER
+  ========================= */
+
+  renderThumbnail(
     pageData,
-    preview
+    thumbnailStage
   );
 
 
@@ -2702,27 +3058,70 @@ function createPageCard(
 }
 
 
-/* =========================
-   PAGE PREVIEW
-========================= */
+/* =====================================================
+RENDER THUMBNAIL
+===================================================== */
 
-async function renderPagePreview(
+async function renderThumbnail(
   pageData,
-  preview
+  stage
 ){
+
+  if(!pdfJsDocument){
+
+    return;
+
+  }
+
 
   try{
 
     const page =
-      await pdfJsDocument.getPage(
+      await pdfJsDocument
+      .getPage(
         pageData.originalIndex + 1
       );
+
+
+    const wrap =
+      stage.parentElement;
+
+
+    const baseViewport =
+      page.getViewport({
+
+        scale:1,
+
+        rotation:pageData.rotation
+
+      });
+
+
+    const fitScale =
+      calculateFitScale(
+
+        wrap.clientWidth,
+
+        wrap.clientHeight,
+
+        baseViewport.width,
+
+        baseViewport.height,
+
+        16
+
+      );
+
+
+    const scale =
+      fitScale *
+      pageData.zoom;
 
 
     const viewport =
       page.getViewport({
 
-        scale:pageData.zoom,
+        scale:scale,
 
         rotation:pageData.rotation
 
@@ -2730,19 +3129,27 @@ async function renderPagePreview(
 
 
     const canvas =
-      document.createElement("canvas");
+      document.createElement(
+        "canvas"
+      );
 
 
     const context =
-      canvas.getContext("2d");
+      canvas.getContext(
+        "2d"
+      );
 
 
     canvas.width =
-      viewport.width;
+      Math.ceil(
+        viewport.width
+      );
 
 
     canvas.height =
-      viewport.height;
+      Math.ceil(
+        viewport.height
+      );
 
 
     canvas.style.width =
@@ -2753,19 +3160,19 @@ async function renderPagePreview(
       viewport.height + "px";
 
 
-    preview.innerHTML =
+    stage.innerHTML =
       "";
 
 
-    preview.style.width =
+    stage.style.width =
       viewport.width + "px";
 
 
-    preview.style.height =
+    stage.style.height =
       viewport.height + "px";
 
 
-    preview.appendChild(
+    stage.appendChild(
       canvas
     );
 
@@ -2778,8 +3185,70 @@ async function renderPagePreview(
 
     }).promise;
 
-  }
 
+    /* =====================
+    ROTATION BADGE
+    ===================== */
+
+    if(
+      pageData.rotation !== 0
+    ){
+
+      const badge =
+        document.createElement(
+          "div"
+        );
+
+
+      badge.className =
+        "rotation-badge";
+
+
+      badge.textContent =
+        pageData.rotation + "°";
+
+
+      stage.appendChild(
+        badge
+      );
+
+    }
+
+
+    /* =====================
+    CROP BADGE
+    ===================== */
+
+    if(pageData.crop){
+
+      const badge =
+        document.createElement(
+          "div"
+        );
+
+
+      badge.className =
+        "crop-badge";
+
+
+      badge.textContent =
+        "Cropped";
+
+
+      stage.appendChild(
+        badge
+      );
+
+
+      drawThumbnailCrop(
+        stage,
+        pageData,
+        viewport
+      );
+
+    }
+
+  }
   catch(error){
 
     console.error(error);
@@ -2789,9 +3258,91 @@ async function renderPagePreview(
 }
 
 
-/* =========================
-   MOVE PAGE
-========================= */
+/* =====================================================
+DRAW CROP ON THUMBNAIL
+===================================================== */
+
+function drawThumbnailCrop(
+  stage,
+  pageData,
+  viewport
+){
+
+  if(!pageData.crop){
+
+    return;
+
+  }
+
+
+  const crop =
+    pageData.crop;
+
+
+  const fullW =
+    viewport.width;
+
+
+  const fullH =
+    viewport.height;
+
+
+  const left =
+    crop.x *
+    fullW;
+
+
+  const top =
+    crop.y *
+    fullH;
+
+
+  const width =
+    crop.width *
+    fullW;
+
+
+  const height =
+    crop.height *
+    fullH;
+
+
+  const overlay =
+    document.createElement(
+      "div"
+    );
+
+
+  overlay.className =
+    "crop-overlay";
+
+
+  overlay.style.left =
+    left + "px";
+
+
+  overlay.style.top =
+    top + "px";
+
+
+  overlay.style.width =
+    width + "px";
+
+
+  overlay.style.height =
+    height + "px";
+
+
+  stage.appendChild(
+    overlay
+  );
+
+}
+
+
+/* =====================================================
+MOVE PAGE
+===================================================== */
 
 function movePage(
   from,
@@ -2822,16 +3373,44 @@ function movePage(
   );
 
 
+  if(
+    currentMainIndex === from
+  ){
+
+    currentMainIndex =
+      to;
+
+  }
+  else if(
+    from < currentMainIndex &&
+    to >= currentMainIndex
+  ){
+
+    currentMainIndex--;
+
+  }
+  else if(
+    from > currentMainIndex &&
+    to <= currentMainIndex
+  ){
+
+    currentMainIndex++;
+
+  }
+
+
   renderPages();
 
   updateSelection();
 
+  renderMainPreview();
+
 }
 
 
-/* =========================
-   SELECT ALL
-========================= */
+/* =====================================================
+SELECT ALL
+===================================================== */
 
 document
 .getElementById("selectAll")
@@ -2842,7 +3421,8 @@ function(){
   pages.forEach(
     function(page){
 
-      page.selected = true;
+      page.selected =
+        true;
 
     }
   );
@@ -2855,9 +3435,9 @@ function(){
 });
 
 
-/* =========================
-   CLEAR SELECTION
-========================= */
+/* =====================================================
+CLEAR SELECTION
+===================================================== */
 
 document
 .getElementById("clearSelection")
@@ -2868,7 +3448,8 @@ function(){
   pages.forEach(
     function(page){
 
-      page.selected = false;
+      page.selected =
+        false;
 
     }
   );
@@ -2881,13 +3462,13 @@ function(){
 });
 
 
-/* =========================
-   SELECTION
-========================= */
+/* =====================================================
+UPDATE SELECTION
+===================================================== */
 
 function updateSelection(){
 
-  const selectedCount =
+  const count =
     pages.filter(
       function(page){
 
@@ -2897,26 +3478,26 @@ function updateSelection(){
     ).length;
 
 
-  selectionInfo.textContent =
-    selectedCount +
+  selectionCount.textContent =
+    count +
     (
-      selectedCount === 1
+      count === 1
       ? " page selected"
       : " pages selected"
     );
 
 
   splitButton.disabled =
-    selectedCount === 0;
+    count === 0;
 
 }
 
 
-/* =========================
-   CROP MODAL
-========================= */
+/* =====================================================
+OPEN CROP EDITOR
+===================================================== */
 
-function openCropModal(
+async function openCropEditor(
   pageData,
   index
 ){
@@ -2931,62 +3512,94 @@ function openCropModal(
     index + 1;
 
 
-  document.getElementById(
-    "cropTop"
-  ).value =
-    pageData.crop.top;
-
-
-  document.getElementById(
-    "cropRight"
-  ).value =
-    pageData.crop.right;
-
-
-  document.getElementById(
-    "cropBottom"
-  ).value =
-    pageData.crop.bottom;
-
-
-  document.getElementById(
-    "cropLeft"
-  ).value =
-    pageData.crop.left;
-
-
   cropModal.classList.add(
     "show"
   );
 
 
-  renderCropModalPreview(
+  cropTempRect =
+    pageData.crop
+      ? {
+          ...pageData.crop
+        }
+      : {
+          x:0,
+          y:0,
+          width:1,
+          height:1
+        };
+
+
+  await renderCropSurface(
     pageData
+  );
+
+
+  setTimeout(
+    function(){
+
+      displayCropRectangle();
+
+    },
+    50
   );
 
 }
 
 
-/* =========================
-   CROP PREVIEW
-========================= */
+/* =====================================================
+RENDER CROP SURFACE
+===================================================== */
 
-async function renderCropModalPreview(
+async function renderCropSurface(
   pageData
 ){
 
   try{
 
     const page =
-      await pdfJsDocument.getPage(
+      await pdfJsDocument
+      .getPage(
         pageData.originalIndex + 1
+      );
+
+
+    const baseViewport =
+      page.getViewport({
+
+        scale:1,
+
+        rotation:pageData.rotation
+
+      });
+
+
+    const area =
+      document.querySelector(
+        ".crop-work-area"
+      );
+
+
+    cropDisplayScale =
+      calculateFitScale(
+
+        area.clientWidth,
+
+        area.clientHeight,
+
+        baseViewport.width,
+
+        baseViewport.height,
+
+        50
+
       );
 
 
     const viewport =
       page.getViewport({
 
-        scale:.7,
+        scale:cropDisplayScale,
 
         rotation:pageData.rotation
 
@@ -2994,19 +3607,27 @@ async function renderCropModalPreview(
 
 
     const canvas =
-      document.createElement("canvas");
+      document.createElement(
+        "canvas"
+      );
 
 
     const context =
-      canvas.getContext("2d");
+      canvas.getContext(
+        "2d"
+      );
 
 
     canvas.width =
-      viewport.width;
+      Math.ceil(
+        viewport.width
+      );
 
 
     canvas.height =
-      viewport.height;
+      Math.ceil(
+        viewport.height
+      );
 
 
     canvas.style.width =
@@ -3017,11 +3638,19 @@ async function renderCropModalPreview(
       viewport.height + "px";
 
 
-    cropPreview.innerHTML =
+    cropSurface.innerHTML =
       "";
 
 
-    cropPreview.appendChild(
+    cropSurface.style.width =
+      viewport.width + "px";
+
+
+    cropSurface.style.height =
+      viewport.height + "px";
+
+
+    cropSurface.appendChild(
       canvas
     );
 
@@ -3034,8 +3663,11 @@ async function renderCropModalPreview(
 
     }).promise;
 
-  }
 
+    createCropRectangle();
+
+
+  }
   catch(error){
 
     console.error(error);
@@ -3045,59 +3677,837 @@ async function renderCropModalPreview(
 }
 
 
-/* =========================
-   CLOSE CROP
-========================= */
+/* =====================================================
+CREATE CROP RECTANGLE
+===================================================== */
 
-function closeCropModal(){
+function createCropRectangle(){
 
-  cropModal.classList.remove(
-    "show"
+  const old =
+    cropSurface.querySelector(
+      ".crop-rectangle"
+    );
+
+
+  if(old){
+
+    old.remove();
+
+  }
+
+
+  const rect =
+    document.createElement(
+      "div"
+    );
+
+
+  rect.className =
+    "crop-rectangle";
+
+
+  rect.id =
+    "cropRectangle";
+
+
+  rect.innerHTML =
+
+    '<div class="crop-handle handle-tl"></div>' +
+
+    '<div class="crop-handle handle-tr"></div>' +
+
+    '<div class="crop-handle handle-bl"></div>' +
+
+    '<div class="crop-handle handle-br"></div>';
+
+
+  cropSurface.appendChild(
+    rect
   );
 
-  cropPageIndex = null;
+
+  attachCropEvents(
+    rect
+  );
 
 }
 
 
-document
-.getElementById("closeCrop")
-.addEventListener(
-"click",
-closeCropModal
-);
+/* =====================================================
+DISPLAY CROP RECTANGLE
+===================================================== */
+
+function displayCropRectangle(){
+
+  const rect =
+    document.getElementById(
+      "cropRectangle"
+    );
 
 
-document
-.getElementById("cancelCrop")
-.addEventListener(
-"click",
-closeCropModal
-);
+  if(
+    !rect ||
+    !cropTempRect
+  ){
 
-
-cropModal.addEventListener(
-"click",
-function(event){
-
-  if(event.target === cropModal){
-
-    closeCropModal();
+    return;
 
   }
+
+
+  rect.style.left =
+    (
+      cropTempRect.x *
+      cropSurface.clientWidth
+    ) + "px";
+
+
+  rect.style.top =
+    (
+      cropTempRect.y *
+      cropSurface.clientHeight
+    ) + "px";
+
+
+  rect.style.width =
+    (
+      cropTempRect.width *
+      cropSurface.clientWidth
+    ) + "px";
+
+
+  rect.style.height =
+    (
+      cropTempRect.height *
+      cropSurface.clientHeight
+    ) + "px";
+
+
+  rect.classList.add(
+    "active"
+  );
+
+}
+
+
+/* =====================================================
+CROP POINTER EVENTS
+===================================================== */
+
+function attachCropEvents(
+  rect
+){
+
+  cropSurface.onpointerdown =
+    function(event){
+
+      if(
+        event.target.closest(
+          ".crop-handle"
+        )
+      ){
+
+        return;
+
+      }
+
+
+      if(
+        event.target === rect ||
+        rect.contains(
+          event.target
+        )
+      ){
+
+        cropMoving = true;
+
+        cropResizing = false;
+
+        cropDragging = false;
+
+      }
+      else{
+
+        cropDragging = true;
+
+        cropMoving = false;
+
+        cropResizing = false;
+
+        const point =
+          getCropPoint(
+            event
+          );
+
+
+        cropStartX =
+          point.x;
+
+
+        cropStartY =
+          point.y;
+
+
+        cropTempRect = {
+
+          x:point.x,
+
+          y:point.y,
+
+          width:0,
+
+          height:0
+
+        };
+
+      }
+
+
+      cropStartRect =
+        {
+          ...cropTempRect
+        };
+
+
+      cropSurface.setPointerCapture(
+        event.pointerId
+      );
+
+
+      event.preventDefault();
+
+      displayCropRectangle();
+
+    };
+
+
+  rect.addEventListener(
+    "pointerdown",
+    function(event){
+
+      const handle =
+        event.target.closest(
+          ".crop-handle"
+        );
+
+
+      if(handle){
+
+        cropResizeHandle =
+          getHandleName(
+            handle
+          );
+
+
+        cropResizing =
+          true;
+
+        cropMoving =
+          false;
+
+        cropDragging =
+          false;
+
+      }
+      else{
+
+        cropMoving =
+          true;
+
+        cropResizing =
+          false;
+
+        cropDragging =
+          false;
+
+      }
+
+
+      const point =
+        getCropPoint(
+          event
+        );
+
+
+      cropStartX =
+        point.x;
+
+
+      cropStartY =
+        point.y;
+
+
+      cropStartRect =
+        {
+          ...cropTempRect
+        };
+
+
+      cropSurface.setPointerCapture(
+        event.pointerId
+      );
+
+
+      event.preventDefault();
+
+      event.stopPropagation();
+
+    }
+  );
+
+
+  cropSurface.onpointermove =
+    function(event){
+
+      if(
+        !cropDragging &&
+        !cropMoving &&
+        !cropResizing
+      ){
+
+        return;
+
+      }
+
+
+      const point =
+        getCropPoint(
+          event
+        );
+
+
+      const dx =
+        point.x -
+        cropStartX;
+
+
+      const dy =
+        point.y -
+        cropStartY;
+
+
+      if(cropDragging){
+
+        cropTempRect =
+          normalizeRect({
+
+            x:cropStartRect.x,
+
+            y:cropStartRect.y,
+
+            width:
+              dx,
+
+            height:
+              dy
+
+          });
+
+      }
+
+
+      if(cropMoving){
+
+        let x =
+          cropStartRect.x +
+          dx;
+
+
+        let y =
+          cropStartRect.y +
+          dy;
+
+
+        x =
+          Math.max(
+            0,
+            Math.min(
+              x,
+              1 -
+              cropStartRect.width
+            )
+          );
+
+
+        y =
+          Math.max(
+            0,
+            Math.min(
+              y,
+              1 -
+              cropStartRect.height
+            )
+          );
+
+
+        cropTempRect = {
+
+          x:x,
+
+          y:y,
+
+          width:
+            cropStartRect.width,
+
+          height:
+            cropStartRect.height
+
+        };
+
+      }
+
+
+      if(cropResizing){
+
+        resizeCropRect(
+          point.x,
+          point.y
+        );
+
+      }
+
+
+      displayCropRectangle();
+
+    };
+
+
+  cropSurface.onpointerup =
+    function(event){
+
+      cropDragging =
+        false;
+
+      cropMoving =
+        false;
+
+      cropResizing =
+        false;
+
+      cropResizeHandle =
+        null;
+
+
+      try{
+
+        cropSurface.releasePointerCapture(
+          event.pointerId
+        );
+
+      }
+      catch(e){}
+
+    };
+
+}
+
+
+/* =====================================================
+GET CROP POINT
+===================================================== */
+
+function getCropPoint(
+  event
+){
+
+  const rect =
+    cropSurface.getBoundingClientRect();
+
+
+  let x =
+    (
+      event.clientX -
+      rect.left
+    ) /
+    rect.width;
+
+
+  let y =
+    (
+      event.clientY -
+      rect.top
+    ) /
+    rect.height;
+
+
+  x =
+    Math.max(
+      0,
+      Math.min(
+        1,
+        x
+      )
+    );
+
+
+  y =
+    Math.max(
+      0,
+      Math.min(
+        1,
+        y
+      )
+    );
+
+
+  return {
+    x:x,
+    y:y
+  };
+
+}
+
+
+/* =====================================================
+NORMALIZE RECT
+===================================================== */
+
+function normalizeRect(
+  rect
+){
+
+  let x =
+    rect.x;
+
+  let y =
+    rect.y;
+
+  let width =
+    rect.width;
+
+  let height =
+    rect.height;
+
+
+  if(width < 0){
+
+    x += width;
+
+    width =
+      Math.abs(width);
+
+  }
+
+
+  if(height < 0){
+
+    y += height;
+
+    height =
+      Math.abs(height);
+
+  }
+
+
+  x =
+    Math.max(
+      0,
+      Math.min(
+        1,
+        x
+      )
+    );
+
+
+  y =
+    Math.max(
+      0,
+      Math.min(
+        1,
+        y
+      )
+    );
+
+
+  width =
+    Math.min(
+      width,
+      1 - x
+    );
+
+
+  height =
+    Math.min(
+      height,
+      1 - y
+    );
+
+
+  return {
+
+    x:x,
+
+    y:y,
+
+    width:width,
+
+    height:height
+
+  };
+
+}
+
+
+/* =====================================================
+GET HANDLE NAME
+===================================================== */
+
+function getHandleName(
+  handle
+){
+
+  if(
+    handle.classList.contains(
+      "handle-tl"
+    )
+  ){
+
+    return "tl";
+
+  }
+
+
+  if(
+    handle.classList.contains(
+      "handle-tr"
+    )
+  ){
+
+    return "tr";
+
+  }
+
+
+  if(
+    handle.classList.contains(
+      "handle-bl"
+    )
+  ){
+
+    return "bl";
+
+  }
+
+
+  return "br";
+
+}
+
+
+/* =====================================================
+RESIZE CROP
+===================================================== */
+
+function resizeCropRect(
+  mouseX,
+  mouseY
+){
+
+  const r =
+    cropStartRect;
+
+
+  let left =
+    r.x;
+
+  let top =
+    r.y;
+
+  let right =
+    r.x +
+    r.width;
+
+  let bottom =
+    r.y +
+    r.height;
+
+
+  if(
+    cropResizeHandle === "tl"
+  ){
+
+    left =
+      Math.max(
+        0,
+        Math.min(
+          mouseX,
+          right - .03
+        )
+      );
+
+
+    top =
+      Math.max(
+        0,
+        Math.min(
+          mouseY,
+          bottom - .03
+        )
+      );
+
+  }
+
+
+  if(
+    cropResizeHandle === "tr"
+  ){
+
+    right =
+      Math.min(
+        1,
+        Math.max(
+          mouseX,
+          left + .03
+        )
+      );
+
+
+    top =
+      Math.max(
+        0,
+        Math.min(
+          mouseY,
+          bottom - .03
+        )
+      );
+
+  }
+
+
+  if(
+    cropResizeHandle === "bl"
+  ){
+
+    left =
+      Math.max(
+        0,
+        Math.min(
+          mouseX,
+          right - .03
+        )
+      );
+
+
+    bottom =
+      Math.min(
+        1,
+        Math.max(
+          mouseY,
+          top + .03
+        )
+      );
+
+  }
+
+
+  if(
+    cropResizeHandle === "br"
+  ){
+
+    right =
+      Math.min(
+        1,
+        Math.max(
+          mouseX,
+          left + .03
+        )
+      );
+
+
+    bottom =
+      Math.min(
+        1,
+        Math.max(
+          mouseY,
+          top + .03
+        )
+      );
+
+  }
+
+
+  cropTempRect = {
+
+    x:left,
+
+    y:top,
+
+    width:
+      right - left,
+
+    height:
+      bottom - top
+
+  };
+
+}
+
+
+/* =====================================================
+FULL PAGE
+===================================================== */
+
+document
+.getElementById("resetCrop")
+.addEventListener(
+"click",
+function(){
+
+  cropTempRect = {
+
+    x:0,
+
+    y:0,
+
+    width:1,
+
+    height:1
+
+  };
+
+
+  displayCropRectangle();
 
 });
 
 
-/* =========================
-   APPLY CROP
-========================= */
+/* =====================================================
+CLEAR CROP
+===================================================== */
+
+document
+.getElementById("clearCrop")
+.addEventListener(
+"click",
+function(){
+
+  cropTempRect = {
+
+    x:0,
+
+    y:0,
+
+    width:1,
+
+    height:1
+
+  };
+
+
+  displayCropRectangle();
+
+});
+
+
+/* =====================================================
+APPLY CROP
+===================================================== */
 
 document
 .getElementById("applyCrop")
 .addEventListener(
 "click",
-async function(){
+function(){
 
   if(
     cropPageIndex === null ||
@@ -3109,58 +4519,36 @@ async function(){
   }
 
 
-  const top =
-    getCropValue(
-      "cropTop"
-    );
-
-
-  const right =
-    getCropValue(
-      "cropRight"
-    );
-
-
-  const bottom =
-    getCropValue(
-      "cropBottom"
-    );
-
-
-  const left =
-    getCropValue(
-      "cropLeft"
+  const r =
+    normalizeRect(
+      cropTempRect
     );
 
 
   if(
-    top + bottom >= 100 ||
-    left + right >= 100
+    r.width >= .995 &&
+    r.height >= .995 &&
+    r.x <= .005 &&
+    r.y <= .005
   ){
 
-    alert(
-      "Crop values are too large."
-    );
+    pages[cropPageIndex].crop =
+      null;
 
-    return;
+  }
+  else{
+
+    pages[cropPageIndex].crop =
+      r;
 
   }
 
 
-  pages[cropPageIndex].crop = {
-
-    top:top,
-
-    right:right,
-
-    bottom:bottom,
-
-    left:left
-
-  };
+  const index =
+    cropPageIndex;
 
 
-  closeCropModal();
+  closeCrop();
 
 
   renderPages();
@@ -3168,54 +4556,95 @@ async function(){
   updateSelection();
 
 
-  if(cropPageIndex === 0){
+  if(
+    index === currentMainIndex
+  ){
 
-    await renderMainPreview();
+    renderMainPreview();
 
   }
 
 });
 
 
-/* =========================
-   CROP VALUE
-========================= */
+/* =====================================================
+CLOSE CROP
+===================================================== */
 
-function getCropValue(
-  id
-){
+function closeCrop(){
 
-  let value =
-    parseFloat(
-      document.getElementById(id).value
-    );
+  cropModal.classList.remove(
+    "show"
+  );
 
 
-  if(
-    isNaN(value) ||
-    value < 0
-  ){
-
-    value = 0;
-
-  }
+  cropPageIndex =
+    null;
 
 
-  if(value > 49){
-
-    value = 49;
-
-  }
-
-
-  return value;
+  cropTempRect =
+    null;
 
 }
 
 
-/* =========================
-   SPLIT PDF
-========================= */
+document
+.getElementById("closeCrop")
+.addEventListener(
+"click",
+closeCrop
+);
+
+
+document
+.getElementById("cancelCrop")
+.addEventListener(
+"click",
+closeCrop
+);
+
+
+cropModal.addEventListener(
+"click",
+function(event){
+
+  if(
+    event.target ===
+    cropModal
+  ){
+
+    closeCrop();
+
+  }
+
+});
+
+
+/* =====================================================
+KEYBOARD ESC
+===================================================== */
+
+document.addEventListener(
+"keydown",
+function(event){
+
+  if(
+    event.key === "Escape" &&
+    cropModal.classList.contains(
+      "show"
+    )
+  ){
+
+    closeCrop();
+
+  }
+
+});
+
+
+/* =====================================================
+SPLIT PDF
+===================================================== */
 
 splitButton.addEventListener(
 "click",
@@ -3228,7 +4657,7 @@ async function(){
   }
 
 
-  const selectedPages =
+  const selected =
     pages.filter(
       function(page){
 
@@ -3238,7 +4667,9 @@ async function(){
     );
 
 
-  if(selectedPages.length === 0){
+  if(
+    selected.length === 0
+  ){
 
     showStatus(
       "Please select at least one page."
@@ -3258,147 +4689,145 @@ async function(){
 
 
   showStatus(
-    "Creating your new PDF..."
+    "Creating your PDF..."
   );
 
 
   try{
 
-    const arrayBuffer =
+    const buffer =
       await currentFile.arrayBuffer();
 
 
     const sourcePdf =
-      await PDFLib.PDFDocument.load(
-        arrayBuffer
+      await PDFLib
+      .PDFDocument
+      .load(
+        buffer
       );
 
 
-    const newPdf =
-      await PDFLib.PDFDocument.create();
+    const outputPdf =
+      await PDFLib
+      .PDFDocument
+      .create();
 
 
-    /*
-      Process pages in CURRENT order.
-    */
+    /* =========================
+    PROCESS CURRENT ORDER
+    ========================= */
 
     for(
-      const pageData of selectedPages
+      const pageData of selected
     ){
 
-      const copiedPages =
-        await newPdf.copyPages(
+      const copied =
+        await outputPdf.copyPages(
+
           sourcePdf,
-          [pageData.originalIndex]
+
+          [
+            pageData.originalIndex
+          ]
+
         );
 
 
       const newPage =
-        copiedPages[0];
+        copied[0];
 
 
       /* =====================
-         ROTATION
+      ROTATION
       ===================== */
 
-      if(pageData.rotation){
-
-        newPage.setRotation(
-          PDFLib.degrees(
-            pageData.rotation
-          )
-        );
-
-      }
-
-
-      /* =====================
-         CROP
-      ===================== */
-
-      const pageWidth =
-        newPage.getWidth();
-
-
-      const pageHeight =
-        newPage.getHeight();
-
-
-      const cropLeft =
-        pageWidth *
-        (
-          pageData.crop.left / 100
-        );
-
-
-      const cropRight =
-        pageWidth *
-        (
-          pageData.crop.right / 100
-        );
-
-
-      const cropTop =
-        pageHeight *
-        (
-          pageData.crop.top / 100
-        );
-
-
-      const cropBottom =
-        pageHeight *
-        (
-          pageData.crop.bottom / 100
-        );
-
-
-      const cropWidth =
-        pageWidth -
-        cropLeft -
-        cropRight;
-
-
-      const cropHeight =
-        pageHeight -
-        cropTop -
-        cropBottom;
-
-
-      if(
-        cropWidth > 1 &&
-        cropHeight > 1 &&
-        (
-          cropLeft > 0 ||
-          cropRight > 0 ||
-          cropTop > 0 ||
-          cropBottom > 0
+      newPage.setRotation(
+        PDFLib.degrees(
+          pageData.rotation
         )
-      ){
+      );
 
-        newPage.setCropBox(
 
-          cropLeft,
+      /* =====================
+      CROP
+      ===================== */
 
-          cropBottom,
+      if(pageData.crop){
 
-          cropWidth,
+        const pageWidth =
+          newPage.getWidth();
 
-          cropHeight
 
-        );
+        const pageHeight =
+          newPage.getHeight();
+
+
+        /*
+          crop is stored as
+          top-left normalized values
+        */
+
+        const x =
+          pageData.crop.x *
+          pageWidth;
+
+
+        const cropWidth =
+          pageData.crop.width *
+          pageWidth;
+
+
+        const cropHeight =
+          pageData.crop.height *
+          pageHeight;
+
+
+        const top =
+          pageData.crop.y *
+          pageHeight;
+
+
+        const bottomY =
+          pageHeight -
+          top -
+          cropHeight;
+
+
+        if(
+          cropWidth > 1 &&
+          cropHeight > 1
+        ){
+
+          newPage.setCropBox(
+
+            x,
+
+            bottomY,
+
+            cropWidth,
+
+            cropHeight
+
+          );
+
+        }
 
       }
 
 
-      newPdf.addPage(
+      outputPdf.addPage(
         newPage
       );
 
     }
 
 
-    const pdfBytes =
-      await newPdf.save();
+    /* =========================
+    SAVE
+    ========================= */
+
+    const bytes =
+      await outputPdf.save();
 
 
     if(downloadUrl){
@@ -3412,9 +4841,10 @@ async function(){
 
     const blob =
       new Blob(
-        [pdfBytes],
+        [bytes],
         {
-          type:"application/pdf"
+          type:
+          "application/pdf"
         }
       );
 
@@ -3442,12 +4872,12 @@ async function(){
     hideStatus();
 
 
-    splitButton.textContent =
-      "Split & Download PDF";
-
-
     splitButton.disabled =
       false;
+
+
+    splitButton.textContent =
+      "Split & Download PDF";
 
 
     downloadArea.scrollIntoView({
@@ -3456,53 +4886,47 @@ async function(){
     });
 
   }
-
   catch(error){
 
     console.error(error);
 
 
     showStatus(
-      "Unable to create PDF. Please try again."
+      "PDF creation failed. Please try again."
     );
-
-
-    splitButton.textContent =
-      "Split & Download PDF";
 
 
     splitButton.disabled =
       false;
+
+
+    splitButton.textContent =
+      "Split & Download PDF";
 
   }
 
 });
 
 
-/* =========================
-   DOWNLOAD NAME
-========================= */
+/* =====================================================
+DOWNLOAD NAME
+===================================================== */
 
 function createDownloadName(
   name
 ){
 
-  const cleanName =
-    name.replace(
-      /\.pdf$/i,
-      ""
-    );
-
-
-  return cleanName +
-    "-split.pdf";
+  return name.replace(
+    /\.pdf$/i,
+    ""
+  ) + "-split.pdf";
 
 }
 
 
-/* =========================
-   REMOVE FILE
-========================= */
+/* =====================================================
+REMOVE FILE
+===================================================== */
 
 document
 .getElementById("clearFile")
@@ -3510,13 +4934,17 @@ document
 "click",
 function(){
 
-  currentFile = null;
+  currentFile =
+    null;
 
-  pdfJsDocument = null;
+  pdfJsDocument =
+    null;
 
-  pages = [];
+  pages =
+    [];
 
-  cropPageIndex = null;
+  currentMainIndex =
+    0;
 
 
   if(downloadUrl){
@@ -3525,7 +4953,8 @@ function(){
       downloadUrl
     );
 
-    downloadUrl = null;
+    downloadUrl =
+      null;
 
   }
 
@@ -3542,11 +4971,11 @@ function(){
     "none";
 
 
-  mainPreview.innerHTML =
+  pageGrid.innerHTML =
     "";
 
 
-  pageGrid.innerHTML =
+  mainStage.innerHTML =
     "";
 
 
@@ -3568,9 +4997,9 @@ function(){
 });
 
 
-/* =========================
-   STATUS
-========================= */
+/* =====================================================
+STATUS
+===================================================== */
 
 function showStatus(
   message
@@ -3593,6 +5022,44 @@ function hideStatus(){
   );
 
 }
+
+
+/* =====================================================
+WINDOW RESIZE
+===================================================== */
+
+let resizeTimer = null;
+
+
+window.addEventListener(
+"resize",
+function(){
+
+  clearTimeout(
+    resizeTimer
+  );
+
+
+  resizeTimer =
+    setTimeout(
+      function(){
+
+        if(
+          pdfJsDocument &&
+          pages.length
+        ){
+
+          renderPages();
+
+          renderMainPreview();
+
+        }
+
+      },
+      250
+    );
+
+});
 
 </script>
 
