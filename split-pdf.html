@@ -2656,82 +2656,135 @@ function createPageCard(
     "✂ Crop";
 
 
-  /* =========================
-  ROTATE LEFT
-  ========================= */
+ /* =========================
+ROTATE PAGE FUNCTION
+========================= */
 
-  rotateLeft.addEventListener(
-    "click",
-    async function(event){
+async function rotatePage(
+  pageIndex,
+  direction,
+  thumbnailStage
+){
 
-      event.preventDefault();
-
-      event.stopPropagation();
-
-
-      pageData.rotation =
-        (
-          pageData.rotation -
-          90 +
-          360
-        ) % 360;
+  const pageData =
+    pages[pageIndex];
 
 
-      await renderThumbnail(
-        pageData,
-        thumbnailStage
-      );
+  if(!pageData){
+
+    return;
+
+  }
 
 
-      if(
-        currentMainIndex === index
-      ){
-
-        await renderMainPreview();
-
-      }
-
-    }
-  );
-
-
-  /* =========================
+  /* =====================
   ROTATE RIGHT
-  ========================= */
+  ===================== */
 
-  rotateRight.addEventListener(
-    "click",
-    async function(event){
+  if(direction === "right"){
 
-      event.preventDefault();
+    pageData.rotation =
+      (
+        Number(pageData.rotation || 0) +
+        90
+      ) % 360;
 
-      event.stopPropagation();
-
-
-      pageData.rotation =
-        (
-          pageData.rotation +
-          90
-        ) % 360;
+  }
 
 
-      await renderThumbnail(
-        pageData,
-        thumbnailStage
-      );
+  /* =====================
+  ROTATE LEFT
+  ===================== */
+
+  if(direction === "left"){
+
+    pageData.rotation =
+      (
+        Number(pageData.rotation || 0) -
+        90 +
+        360
+      ) % 360;
+
+  }
 
 
-      if(
-        currentMainIndex === index
-      ){
+  /* =====================
+  REFRESH THUMBNAIL
+  ===================== */
 
-        await renderMainPreview();
-
-      }
-
-    }
+  await renderThumbnail(
+    pageData,
+    thumbnailStage
   );
 
+
+  /* =====================
+  REFRESH MAIN PREVIEW
+  ===================== */
+
+  if(
+    currentMainIndex === pageIndex
+  ){
+
+    await renderMainPreview();
+
+  }
+
+}
+
+
+/* =========================
+ROTATE LEFT BUTTON
+========================= */
+
+rotateLeft.type =
+"button";
+
+
+rotateLeft.onclick =
+async function(event){
+
+  event.preventDefault();
+
+  event.stopPropagation();
+
+  event.stopImmediatePropagation();
+
+
+  await rotatePage(
+    index,
+    "left",
+    thumbnailStage
+  );
+
+};
+
+
+/* =========================
+ROTATE RIGHT BUTTON
+========================= */
+
+rotateRight.type =
+"button";
+
+
+rotateRight.onclick =
+async function(event){
+
+  event.preventDefault();
+
+  event.stopPropagation();
+
+  event.stopImmediatePropagation();
+
+
+  await rotatePage(
+    index,
+    "right",
+    thumbnailStage
+  );
+
+};
 
   /* =========================
   CROP
