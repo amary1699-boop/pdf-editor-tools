@@ -6,762 +6,1336 @@
 
 <title>Split PDF Online - Free PDF Splitter</title>
 
+<meta name="description"
+content="Free online PDF splitter with page selection, reorder, rotate, crop and preview.">
+
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
 <style>
+
 *{
   box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body{
-  margin:0;
   font-family:Arial,Helvetica,sans-serif;
-  background:#f5f6f8;
+  background:#f7f8fc;
   color:#222;
 }
 
-header{
-  background:#e53232;
-  color:#fff;
-  padding:16px 24px;
+button,
+input{
+  font-family:inherit;
+}
+
+
+/* =========================
+HEADER
+========================= */
+
+.header{
+  height:70px;
+  background:#fff;
+  border-bottom:1px solid #e5e5ea;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.header-inner{
+  max-width:1250px;
+  height:100%;
+  margin:auto;
+  padding:0 20px;
+
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  flex-wrap:wrap;
-  gap:10px;
+  justify-content:space-between;
 }
 
 .logo{
-  font-size:24px;
-  font-weight:700;
+  text-decoration:none;
+  color:#e53232;
+
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  font-size:21px;
+  font-weight:800;
+}
+
+.logo-icon{
+  width:40px;
+  height:40px;
+
+  border-radius:10px;
+
+  background:#e53232;
+  color:#fff;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:11px;
+  font-weight:800;
 }
 
 .back-home{
-  color:#fff;
+  color:#555;
   text-decoration:none;
+  font-size:14px;
   font-weight:600;
-  border:1px solid rgba(255,255,255,.7);
-  padding:8px 14px;
-  border-radius:7px;
 }
 
 .back-home:hover{
-  background:rgba(255,255,255,.12);
+  color:#e53232;
 }
+
+
+/* =========================
+MAIN
+========================= */
 
 .container{
-  max-width:1400px;
+  max-width:1250px;
   margin:auto;
-  padding:24px 18px 50px;
+  padding:40px 20px 70px;
 }
 
-h1{
+.page-title{
   text-align:center;
-  margin:5px 0 8px;
-  font-size:34px;
+  margin-bottom:28px;
 }
 
-.subtitle{
-  text-align:center;
-  color:#666;
-  margin-bottom:25px;
+.page-title h1{
+  font-size:38px;
+  margin-bottom:8px;
 }
+
+.page-title h1 span{
+  color:#e53232;
+}
+
+.page-title p{
+  color:#777;
+  font-size:15px;
+}
+
+
+/* =========================
+UPLOAD
+========================= */
 
 .upload-box{
   background:#fff;
-  border:2px dashed #d7d7d7;
-  border-radius:14px;
-  padding:30px 20px;
+  border:2px dashed #ddd;
+  border-radius:18px;
+  padding:35px 20px;
   text-align:center;
   cursor:pointer;
   transition:.2s;
 }
 
 .upload-box:hover,
-.upload-box.drag-over{
+.upload-box.dragover{
   border-color:#e53232;
-  background:#fffafa;
+  background:#fff9f9;
+}
+
+.upload-icon{
+  width:65px;
+  height:65px;
+  margin:0 auto 14px;
+  border-radius:16px;
+  background:#fff0f0;
+  color:#e53232;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
 }
 
 .upload-box h2{
-  margin:0 0 8px;
-  font-size:23px;
+  font-size:21px;
+  margin-bottom:7px;
 }
 
 .upload-box p{
-  margin:6px 0;
   color:#777;
+  font-size:14px;
+  margin-bottom:18px;
+}
+
+.upload-btn{
+  border:0;
+  background:#e53232;
+  color:#fff;
+  padding:12px 25px;
+  border-radius:9px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.upload-btn:hover{
+  background:#c92727;
 }
 
 #fileInput{
   display:none;
 }
 
-.primary-btn,
-.secondary-btn,
-.danger-btn{
-  border:0;
-  border-radius:7px;
-  padding:11px 18px;
-  font-size:15px;
-  font-weight:600;
-  cursor:pointer;
-  transition:.2s;
-}
 
-.primary-btn{
-  background:#e53232;
-  color:#fff;
-}
-
-.primary-btn:hover{
-  background:#c92525;
-}
-
-.secondary-btn{
-  background:#eee;
-  color:#222;
-}
-
-.secondary-btn:hover{
-  background:#ddd;
-}
-
-.danger-btn{
-  background:#ffe5e5;
-  color:#c00;
-}
-
-.danger-btn:hover{
-  background:#ffd1d1;
-}
+/* =========================
+FILE INFO
+========================= */
 
 .file-info{
   display:none;
   margin-top:18px;
   background:#fff;
-  border-radius:10px;
-  padding:14px 18px;
-  box-shadow:0 2px 8px rgba(0,0,0,.06);
-  justify-content:space-between;
+  border:1px solid #e4e4e9;
+  border-radius:13px;
+  padding:15px 18px;
   align-items:center;
+  justify-content:space-between;
   gap:15px;
-  flex-wrap:wrap;
 }
 
 .file-name{
+  font-size:15px;
   font-weight:700;
-  word-break:break-all;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
+
+.file-pages{
+  margin-top:4px;
+  color:#777;
+  font-size:13px;
+}
+
+.clear-file{
+  flex-shrink:0;
+  border:1px solid #ddd;
+  background:#fff;
+  padding:9px 14px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.clear-file:hover{
+  color:#e53232;
+  border-color:#e53232;
+}
+
+
+/* =========================
+WORKSPACE
+========================= */
 
 .workspace{
   display:none;
-  margin-top:22px;
-  gap:20px;
-  align-items:flex-start;
+  margin-top:25px;
 }
 
-.preview-panel{
-  flex:0 0 390px;
+
+/* =========================
+MAIN PREVIEW
+========================= */
+
+.main-preview-box{
   background:#fff;
-  border-radius:12px;
-  padding:18px;
-  box-shadow:0 2px 10px rgba(0,0,0,.07);
-  position:sticky;
-  top:15px;
+  border:1px solid #e4e4e9;
+  border-radius:17px;
+  padding:20px;
+  margin-bottom:25px;
 }
 
-.pages-panel{
-  flex:1;
-  min-width:0;
+.main-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:15px;
+}
+
+.main-heading h2{
+  font-size:20px;
+}
+
+.main-tools{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.zoom-btn{
+  width:34px;
+  height:34px;
+  border:1px solid #ddd;
   background:#fff;
-  border-radius:12px;
-  padding:18px;
-  box-shadow:0 2px 10px rgba(0,0,0,.07);
+  border-radius:8px;
+  cursor:pointer;
+  font-size:17px;
 }
 
-.panel-title{
-  font-size:19px;
-  font-weight:700;
-  margin-bottom:12px;
+.zoom-btn:hover{
+  border-color:#e53232;
+  color:#e53232;
+}
+
+.zoom-label{
+  width:52px;
+  text-align:center;
+  font-size:12px;
+  color:#666;
 }
 
 .main-preview-wrap{
   width:100%;
-  height:560px;
-  background:#e9eaed;
-  border-radius:10px;
+  height:450px;
+  background:#eef0f3;
+  border-radius:12px;
   overflow:auto;
   display:flex;
+  align-items:center;
   justify-content:center;
-  align-items:flex-start;
   padding:20px;
 }
 
-#mainPreviewStage{
-  position:relative;
-  flex:none;
-}
-
-#mainPreviewCanvas{
-  display:block;
-  background:#fff;
-  box-shadow:0 3px 12px rgba(0,0,0,.2);
-}
-
-.preview-controls{
+.main-stage{
+  flex:0 0 auto;
   display:flex;
   align-items:center;
-  gap:8px;
-  margin-top:12px;
-  flex-wrap:wrap;
+  justify-content:center;
 }
 
-.preview-controls label{
-  font-size:14px;
-  font-weight:600;
-}
-
-.zoom-select{
-  padding:7px 10px;
-  border:1px solid #ccc;
-  border-radius:6px;
+.main-stage canvas{
+  display:block;
   background:#fff;
+  box-shadow:0 5px 22px rgba(0,0,0,.16);
 }
 
-.rotation-badge{
-  position:absolute;
-  top:8px;
-  right:8px;
-  background:#e53232;
-  color:#fff;
-  padding:5px 9px;
-  border-radius:6px;
-  font-size:12px;
-  font-weight:700;
-  z-index:5;
+
+/* =========================
+PAGES PANEL
+========================= */
+
+.pages-panel{
+  background:#fff;
+  border:1px solid #e4e4e9;
+  border-radius:17px;
+  padding:22px;
 }
+
+.pages-heading{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:20px;
+}
+
+.pages-heading h2{
+  font-size:21px;
+  margin-bottom:5px;
+}
+
+.pages-heading p{
+  color:#777;
+  font-size:13px;
+}
+
+.selection-count{
+  flex-shrink:0;
+  background:#f2f2f5;
+  padding:8px 12px;
+  border-radius:8px;
+  color:#555;
+  font-size:13px;
+}
+
+
+/* =========================
+PAGE GRID
+========================= */
 
 .page-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(205px,1fr));
-  gap:15px;
+  grid-template-columns:
+  repeat(auto-fill,minmax(205px,1fr));
+  gap:20px;
 }
 
+
+/* =========================
+PAGE CARD
+========================= */
+
 .page-card{
-  background:#fafafa;
-  border:1px solid #ddd;
-  border-radius:10px;
+  background:#fff;
+  border:2px solid #e3e3e8;
+  border-radius:14px;
   padding:10px;
-  position:relative;
-  transition:.15s;
+  cursor:grab;
+  transition:.2s;
+  min-width:0;
 }
 
 .page-card:hover{
-  border-color:#bbb;
+  border-color:#f1b5b5;
+  box-shadow:
+  0 7px 20px rgba(0,0,0,.07);
 }
 
 .page-card.selected{
-  border:2px solid #e53232;
+  border-color:#e53232;
+  background:#fffafa;
 }
 
 .page-card.dragging{
-  opacity:.45;
+  opacity:.35;
 }
 
 .page-card.drag-over{
-  border:2px dashed #e53232;
+  border-color:#e53232;
+  transform:scale(1.025);
 }
+
+
+/* =========================
+PAGE HEADER
+========================= */
 
 .page-top{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:7px;
-  margin-bottom:8px;
+  margin-bottom:9px;
 }
 
 .page-number{
-  font-weight:700;
-  font-size:14px;
-}
-
-.page-source{
-  color:#777;
-  font-size:11px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  max-width:120px;
-}
-
-.page-thumb-wrap{
-  width:100%;
-  height:255px;
-  background:#e8e8e8;
+  background:#f1f1f4;
+  padding:5px 9px;
   border-radius:7px;
-  overflow:auto;
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  padding:8px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.page-checkbox{
+  width:19px;
+  height:19px;
+  accent-color:#e53232;
   cursor:pointer;
 }
 
-.thumb-stage{
-  position:relative;
-  flex:none;
+
+/* =========================
+THUMBNAIL VIEWPORT
+========================= */
+
+.thumbnail-wrap{
+  width:100%;
+  height:255px;
+  background:#eef0f3;
+  border-radius:10px;
+  overflow:auto;
+  padding:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.page-thumb{
+.thumbnail-stage{
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+.thumbnail-stage canvas{
   display:block;
   background:#fff;
-  box-shadow:0 2px 7px rgba(0,0,0,.15);
+  box-shadow:
+  0 3px 12px rgba(0,0,0,.13);
 }
 
-.page-tools{
+
+/* =========================
+CROP OVERLAY
+========================= */
+
+.crop-overlay{
+  position:absolute;
+  border:2px dashed #e53232;
+  background:rgba(229,50,50,.08);
+  pointer-events:none;
+  z-index:5;
+}
+
+.crop-dim{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:4;
+}
+
+.crop-badge{
+  position:absolute;
+  top:6px;
+  left:6px;
+  z-index:8;
+  background:#e53232;
+  color:#fff;
+  border-radius:6px;
+  padding:4px 7px;
+  font-size:10px;
+  font-weight:700;
+}
+
+
+/* =========================
+PAGE ZOOM
+========================= */
+
+.page-zoom-controls{
   display:flex;
+  align-items:center;
+  justify-content:center;
   gap:5px;
-  flex-wrap:wrap;
+  margin-top:9px;
+}
+
+.small-zoom{
+  width:30px;
+  height:29px;
+  border:1px solid #ddd;
+  background:#fff;
+  border-radius:7px;
+  cursor:pointer;
+}
+
+.small-zoom:hover{
+  color:#e53232;
+  border-color:#e53232;
+}
+
+.page-zoom-text{
+  width:45px;
+  text-align:center;
+  font-size:11px;
+  color:#777;
+}
+
+
+/* =========================
+ROTATE / CROP
+========================= */
+
+.page-action-row{
+  display:grid;
+  grid-template-columns:
+  repeat(3,1fr);
+  gap:5px;
   margin-top:9px;
 }
 
 .page-action{
-  flex:1;
-  min-width:68px;
-  border:1px solid #d3d3d3;
+  height:33px;
+  border:1px solid #ddd;
   background:#fff;
-  border-radius:6px;
-  padding:7px 5px;
-  font-size:12px;
-  font-weight:600;
+  border-radius:7px;
   cursor:pointer;
+  font-size:11px;
+  font-weight:600;
 }
 
 .page-action:hover{
-  background:#f1f1f1;
+  border-color:#e53232;
+  color:#e53232;
 }
 
-.page-action.danger{
-  color:#c00;
+.crop-btn{
+  color:#e53232;
 }
 
-.page-action.danger:hover{
-  background:#fff0f0;
-}
 
-.page-bottom{
+/* =========================
+ORDER
+========================= */
+
+.order-row{
   display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:5px;
+  justify-content:center;
+  gap:7px;
   margin-top:8px;
 }
 
-.small-zoom{
-  padding:6px 7px;
-  border:1px solid #ccc;
-  border-radius:5px;
-  font-size:12px;
-  background:#fff;
-  cursor:pointer;
-}
-
 .order-btn{
-  border:1px solid #ccc;
+  width:38px;
+  height:30px;
+  border:1px solid #ddd;
   background:#fff;
-  border-radius:5px;
-  padding:5px 8px;
+  border-radius:7px;
   cursor:pointer;
+  font-size:15px;
 }
 
 .order-btn:hover{
-  background:#eee;
+  color:#e53232;
+  border-color:#e53232;
 }
 
-.page-checkbox{
-  width:17px;
-  height:17px;
-  cursor:pointer;
-}
+
+/* =========================
+ACTION BAR
+========================= */
 
 .action-bar{
   display:flex;
   justify-content:center;
-  gap:10px;
   flex-wrap:wrap;
-  margin-top:20px;
+  gap:10px;
+  margin-top:25px;
 }
+
+.action-btn{
+  border:0;
+  border-radius:9px;
+  padding:12px 20px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.select-all{
+  background:#f0f0f3;
+  color:#333;
+}
+
+.clear-selection{
+  background:#fff0f0;
+  color:#e53232;
+}
+
+.split-btn{
+  min-width:190px;
+  background:#e53232;
+  color:#fff;
+}
+
+.split-btn:hover{
+  background:#c92727;
+}
+
+.split-btn:disabled{
+  background:#ccc;
+  cursor:not-allowed;
+}
+
+
+/* =========================
+STATUS
+========================= */
 
 .status{
   display:none;
-  margin-top:18px;
-  text-align:center;
-  background:#fff;
-  padding:14px;
+  margin-top:17px;
+  padding:12px;
+  background:#f2f3f5;
   border-radius:9px;
-  font-weight:600;
+  text-align:center;
+  color:#555;
+  font-size:13px;
 }
+
+.status.show{
+  display:block;
+}
+
+
+/* =========================
+DOWNLOAD
+========================= */
 
 .download-area{
   display:none;
+  margin-top:18px;
+  padding:20px;
   text-align:center;
-  margin-top:15px;
+  background:#f4fff4;
+  border:1px solid #d7ecd7;
+  border-radius:13px;
+}
+
+.download-area h3{
+  font-size:18px;
+  margin-bottom:7px;
+}
+
+.download-area p{
+  color:#666;
+  font-size:13px;
+  margin-bottom:15px;
 }
 
 .download-btn{
   display:inline-block;
+  padding:12px 24px;
+  border-radius:9px;
   background:#e53232;
   color:#fff;
   text-decoration:none;
-  padding:12px 22px;
-  border-radius:7px;
   font-weight:700;
+  font-size:14px;
 }
 
-.download-btn:hover{
-  background:#c92525;
-}
 
-/* Crop Modal */
+/* =========================
+CROP MODAL
+========================= */
+
 .modal{
-  display:none;
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.72);
-  z-index:1000;
-  padding:20px;
-  overflow:auto;
-}
-
-.modal-content{
-  max-width:900px;
-  margin:20px auto;
-  background:#fff;
-  border-radius:12px;
-  padding:18px;
-}
-
-.modal-header{
-  display:flex;
-  justify-content:space-between;
+  z-index:5000;
+  background:rgba(0,0,0,.65);
+  display:none;
   align-items:center;
-  gap:10px;
+  justify-content:center;
+  padding:15px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.crop-modal-box{
+  width:100%;
+  max-width:850px;
+  max-height:94vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:17px;
+  padding:20px;
+}
+
+.crop-modal-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
   margin-bottom:15px;
 }
 
-.modal-header h2{
-  margin:0;
-  font-size:21px;
+.crop-modal-header h2{
+  font-size:20px;
 }
 
-.close-modal{
-  border:0;
-  background:#eee;
+.close-crop{
   width:35px;
   height:35px;
-  border-radius:50%;
-  font-size:20px;
+  border:1px solid #ddd;
+  background:#fff;
+  border-radius:8px;
   cursor:pointer;
+  font-size:20px;
 }
 
-.crop-area{
-  background:#222;
-  border-radius:9px;
-  min-height:500px;
+.close-crop:hover{
+  color:#e53232;
+  border-color:#e53232;
+}
+
+
+/* =========================
+CROP WORK AREA
+========================= */
+
+.crop-work-area{
+  width:100%;
+  height:500px;
+  background:#e9ebee;
+  border-radius:12px;
+  overflow:auto;
   display:flex;
   align-items:center;
   justify-content:center;
-  overflow:auto;
   padding:20px;
 }
 
-.crop-stage{
+.crop-surface{
   position:relative;
-  display:inline-block;
-  line-height:0;
+  flex:0 0 auto;
+  cursor:crosshair;
+  user-select:none;
+  touch-action:none;
+  box-shadow:0 4px 20px rgba(0,0,0,.16);
+  background:#fff;
 }
 
-#cropCanvas{
+.crop-surface canvas{
   display:block;
-  max-width:none;
 }
 
-.crop-selection{
+
+/* =========================
+CROP RECTANGLE
+========================= */
+
+.crop-rectangle{
   position:absolute;
   border:2px solid #e53232;
-  background:rgba(229,50,50,.12);
+  background:rgba(229,50,50,.10);
+  display:none;
   cursor:move;
+  z-index:20;
+}
+
+.crop-rectangle.active{
+  display:block;
 }
 
 .crop-handle{
-  width:13px;
-  height:13px;
+  position:absolute;
+  width:12px;
+  height:12px;
   background:#fff;
   border:2px solid #e53232;
   border-radius:50%;
-  position:absolute;
+  z-index:30;
 }
 
-.crop-handle.tl{
-  top:-7px;
+.handle-tl{
   left:-7px;
+  top:-7px;
   cursor:nwse-resize;
 }
 
-.crop-handle.tr{
+.handle-tr{
+  right:-7px;
   top:-7px;
-  right:-7px;
   cursor:nesw-resize;
 }
 
-.crop-handle.bl{
-  bottom:-7px;
+.handle-bl{
   left:-7px;
+  bottom:-7px;
   cursor:nesw-resize;
 }
 
-.crop-handle.br{
-  bottom:-7px;
+.handle-br{
   right:-7px;
+  bottom:-7px;
   cursor:nwse-resize;
 }
 
-.modal-actions{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  margin-top:15px;
-  flex-wrap:wrap;
-}
-
-.help-text{
+.crop-instruction{
+  text-align:center;
   color:#777;
   font-size:13px;
-  text-align:center;
-  margin-top:10px;
+  margin-top:12px;
 }
 
-@media(max-width:950px){
-  .workspace{
-    flex-direction:column;
+.crop-buttons{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:18px;
+}
+
+.crop-left-buttons,
+.crop-right-buttons{
+  display:flex;
+  gap:8px;
+}
+
+.modal-btn{
+  border:0;
+  border-radius:8px;
+  padding:11px 17px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.reset-crop{
+  background:#f0f0f3;
+  color:#555;
+}
+
+.clear-crop{
+  background:#fff0f0;
+  color:#e53232;
+}
+
+.cancel-crop{
+  background:#eee;
+  color:#333;
+}
+
+.apply-crop{
+  background:#e53232;
+  color:#fff;
+}
+
+.apply-crop:hover{
+  background:#c92727;
+}
+
+
+/* =========================
+ROTATION BADGE
+========================= */
+
+.rotation-badge{
+  position:absolute;
+  bottom:6px;
+  left:6px;
+  z-index:9;
+  background:#333;
+  color:#fff;
+  padding:4px 7px;
+  border-radius:6px;
+  font-size:10px;
+  font-weight:700;
+}
+
+
+/* =========================
+MOBILE
+========================= */
+
+@media(max-width:700px){
+
+  .container{
+    padding:30px 12px 50px;
   }
 
-  .preview-panel{
-    position:static;
-    width:100%;
-    flex:none;
+  .page-title h1{
+    font-size:30px;
+  }
+
+  .main-heading{
+    flex-direction:column;
+    align-items:flex-start;
   }
 
   .main-preview-wrap{
-    height:500px;
-  }
-}
-
-@media(max-width:600px){
-  .container{
-    padding:18px 10px 35px;
-  }
-
-  h1{
-    font-size:27px;
+    height:360px;
   }
 
   .page-grid{
-    grid-template-columns:1fr;
+    grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+    gap:10px;
   }
 
-  .main-preview-wrap{
-    height:430px;
-    padding:12px;
+  .page-card{
+    padding:7px;
   }
 
-  .crop-area{
-    min-height:350px;
+  .thumbnail-wrap{
+    height:210px;
   }
 
-  header{
-    padding:14px 15px;
+  .page-action{
+    font-size:9px;
   }
 
-  .logo{
-    font-size:20px;
+  .pages-heading{
+    flex-direction:column;
   }
+
+  .selection-count{
+    align-self:flex-start;
+  }
+
+  .action-btn{
+    width:100%;
+  }
+
+  .crop-work-area{
+    height:380px;
+  }
+
+  .crop-buttons{
+    flex-direction:column;
+  }
+
+  .crop-left-buttons,
+  .crop-right-buttons{
+    width:100%;
+  }
+
+  .modal-btn{
+    flex:1;
+  }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
-<header>
-  <div class="logo">PDF Editor Tools</div>
-  <a class="back-home" href="index.html">← Home</a>
+<header class="header">
+
+  <div class="header-inner">
+
+    <a href="index.html" class="logo">
+
+      <div class="logo-icon">
+        PDF
+      </div>
+
+      PDF Editor Tools
+
+    </a>
+
+    <a href="index.html" class="back-home">
+      ← Back to Home
+    </a>
+
+  </div>
+
 </header>
 
-<div class="container">
 
-  <h1>Split PDF</h1>
+<main class="container">
 
-  <div class="subtitle">
-    Split, reorder, rotate and crop PDF pages online for free.
+  <div class="page-title">
+
+    <h1>
+      Split <span>PDF</span>
+    </h1>
+
+    <p>
+      Select, reorder, rotate and crop PDF pages before downloading.
+    </p>
+
   </div>
+
 
   <div class="upload-box" id="uploadBox">
-    <h2>Select PDF File</h2>
-    <p>Click here or drag & drop your PDF</p>
-    <p>Maximum quality is preserved while splitting.</p>
-    <button type="button" class="primary-btn" id="selectPdfBtn">
-      Select PDF
+
+    <div class="upload-icon">
+      📄
+    </div>
+
+    <h2>
+      Select a PDF file
+    </h2>
+
+    <p>
+      Drag & drop your PDF here or choose a PDF from your device.
+    </p>
+
+    <button
+      type="button"
+      class="upload-btn"
+      id="uploadButton">
+
+      Choose PDF
+
     </button>
-    <input type="file" id="fileInput" accept="application/pdf">
+
+    <input
+      type="file"
+      id="fileInput"
+      accept="application/pdf">
+
   </div>
+
 
   <div class="file-info" id="fileInfo">
+
     <div>
-      <div class="file-name" id="fileName"></div>
-      <div id="filePages" style="color:#777;margin-top:4px;"></div>
+
+      <div
+        class="file-name"
+        id="fileName">
+        PDF
+      </div>
+
+      <div
+        class="file-pages"
+        id="filePages">
+        0 pages
+      </div>
+
     </div>
 
-    <button type="button" class="secondary-btn" id="changeFileBtn">
-      Change PDF
+    <button
+      type="button"
+      class="clear-file"
+      id="clearFile">
+
+      Remove PDF
+
     </button>
+
   </div>
 
-  <div class="workspace" id="workspace">
 
-    <!-- MAIN PREVIEW -->
-    <div class="preview-panel">
+  <div
+    class="workspace"
+    id="workspace">
 
-      <div class="panel-title">
-        Page Preview
-      </div>
 
-      <div class="main-preview-wrap" id="mainPreviewWrap">
-        <div id="mainPreviewStage">
-          <canvas id="mainPreviewCanvas"></canvas>
+    <div class="main-preview-box">
+
+      <div class="main-heading">
+
+        <h2>
+          PDF Preview — Page
+          <span id="mainPageNumber">1</span>
+        </h2>
+
+        <div class="main-tools">
+
+          <button
+            type="button"
+            class="zoom-btn"
+            id="mainZoomOut">
+            −
+          </button>
+
+          <span
+            class="zoom-label"
+            id="mainZoomLabel">
+            100%
+          </span>
+
+          <button
+            type="button"
+            class="zoom-btn"
+            id="mainZoomIn">
+            +
+          </button>
+
+          <button
+            type="button"
+            class="zoom-btn"
+            id="mainZoomReset">
+            ↺
+          </button>
+
         </div>
-      </div>
-
-      <div class="preview-controls">
-
-        <label for="mainZoom">
-          Zoom:
-        </label>
-
-        <select id="mainZoom" class="zoom-select">
-          <option value="0.5">50%</option>
-          <option value="0.75">75%</option>
-          <option value="1">100%</option>
-          <option value="1.25">125%</option>
-          <option value="1.5">150%</option>
-          <option value="2">200%</option>
-        </select>
-
-        <button type="button" class="secondary-btn" id="fitPreviewBtn">
-          Fit
-        </button>
 
       </div>
 
-      <div class="help-text">
-        Click any page to open it in the large preview.
+
+      <div class="main-preview-wrap">
+
+        <div
+          class="main-stage"
+          id="mainStage">
+        </div>
+
       </div>
 
     </div>
 
-    <!-- PAGE PANEL -->
+
     <div class="pages-panel">
 
-      <div class="panel-title">
-        PDF Pages
+      <div class="pages-heading">
+
+        <div>
+
+          <h2>
+            PDF Pages
+          </h2>
+
+          <p>
+            Select pages and use Rotate, Crop or drag to change order.
+          </p>
+
+        </div>
+
+        <div
+          class="selection-count"
+          id="selectionCount">
+
+          0 selected
+
+        </div>
+
       </div>
 
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">
 
-        <button type="button" class="secondary-btn" id="selectAllBtn">
+      <div
+        class="page-grid"
+        id="pageGrid">
+      </div>
+
+
+      <div class="action-bar">
+
+        <button
+          type="button"
+          class="action-btn select-all"
+          id="selectAll">
+
           Select All
+
         </button>
 
-        <button type="button" class="secondary-btn" id="deselectAllBtn">
-          Deselect All
+        <button
+          type="button"
+          class="action-btn clear-selection"
+          id="clearSelection">
+
+          Clear Selection
+
+        </button>
+
+        <button
+          type="button"
+          class="action-btn split-btn"
+          id="splitButton"
+          disabled>
+
+          Split & Download PDF
+
         </button>
 
       </div>
 
-      <div class="page-grid" id="pageGrid"></div>
+
+      <div
+        class="status"
+        id="status">
+      </div>
+
+
+      <div
+        class="download-area"
+        id="downloadArea">
+
+        <h3>
+          PDF Ready
+        </h3>
+
+        <p>
+          Your selected PDF pages are ready.
+        </p>
+
+        <a
+          class="download-btn"
+          id="downloadButton"
+          href="#"
+          download="split-pdf.pdf">
+
+          Download PDF
+
+        </a>
+
+      </div>
 
     </div>
 
   </div>
 
-  <div class="action-bar" id="actionBar" style="display:none;">
+</main>
 
-    <button type="button" class="primary-btn" id="splitBtn">
-      Split Selected Pages
-    </button>
 
-    <button type="button" class="danger-btn" id="clearBtn">
-      Clear
-    </button>
+<div
+  class="modal"
+  id="cropModal">
 
-  </div>
+  <div class="crop-modal-box">
 
-  <div class="status" id="status"></div>
+    <div class="crop-modal-header">
 
-  <div class="download-area" id="downloadArea">
-    <a href="#" class="download-btn" id="downloadBtn">
-      Download Split PDF
-    </a>
-  </div>
-
-</div>
-
-<!-- CROP MODAL -->
-<div class="modal" id="cropModal">
-
-  <div class="modal-content">
-
-    <div class="modal-header">
-      <h2>Crop PDF Page</h2>
+      <h2>
+        Crop Page <span id="cropPageNumber">1</span>
+      </h2>
 
       <button
         type="button"
-        class="close-modal"
-        id="closeCropBtn"
-      >
+        class="close-crop"
+        id="closeCrop">
+
         ×
+
       </button>
+
     </div>
 
-    <div class="crop-area">
 
-      <div class="crop-stage" id="cropStage">
-        <canvas id="cropCanvas"></canvas>
+    <div class="crop-work-area">
 
-        <div class="crop-selection" id="cropSelection">
-
-          <div class="crop-handle tl" data-handle="tl"></div>
-          <div class="crop-handle tr" data-handle="tr"></div>
-          <div class="crop-handle bl" data-handle="bl"></div>
-          <div class="crop-handle br" data-handle="br"></div>
-
-        </div>
+      <div
+        class="crop-surface"
+        id="cropSurface">
 
       </div>
 
     </div>
 
-    <div class="help-text">
-      Drag the red box to move it. Drag any corner to resize the crop area.
+
+    <div class="crop-instruction">
+
+      Mouse se page ke upar crop area drag karein.
+      Corner points se crop area resize bhi kar sakte hain.
+
     </div>
 
-    <div class="modal-actions">
 
-      <button type="button" class="secondary-btn" id="resetCropBtn">
-        Reset Crop
-      </button>
+    <div class="crop-buttons">
 
-      <button type="button" class="primary-btn" id="applyCropBtn">
-        Apply Crop
-      </button>
+      <div class="crop-left-buttons">
+
+        <button
+          type="button"
+          class="modal-btn reset-crop"
+          id="resetCrop">
+
+          Full Page
+
+        </button>
+
+        <button
+          type="button"
+          class="modal-btn clear-crop"
+          id="clearCrop">
+
+          Clear Crop
+
+        </button>
+
+      </div>
+
+
+      <div class="crop-right-buttons">
+
+        <button
+          type="button"
+          class="modal-btn cancel-crop"
+          id="cancelCrop">
+
+          Cancel
+
+        </button>
+
+        <button
+          type="button"
+          class="modal-btn apply-crop"
+          id="applyCrop">
+
+          Apply Crop
+
+        </button>
+
+      </div>
 
     </div>
 
@@ -770,63 +1344,58 @@ h1{
 </div>
 
 
-<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-
-
 <script>
-/* =========================================================
-   PDF.JS WORKER
-========================================================= */
+
+
+/* =====================================================
+PDF.JS
+===================================================== */
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
 "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
 
-/* =========================================================
-   GLOBAL VARIABLES
-========================================================= */
+/* =====================================================
+VARIABLES
+===================================================== */
 
-let pdfFile = null;
-let pdfBytes = null;
-let pdfDoc = null;
-
+let currentFile = null;
+let pdfJsDocument = null;
 let pages = [];
-
+let mainZoom = 1;
+let downloadUrl = null;
+let draggedIndex = null;
 let currentMainIndex = 0;
-let currentMainZoom = 1;
+
+
+/* =====================================================
+CROP VARIABLES
+===================================================== */
 
 let cropPageIndex = null;
-let cropPdfPage = null;
-let cropDisplayScale = 1;
-
+let cropTempRect = null;
+let cropDragging = false;
+let cropResizing = false;
+let cropMoving = false;
+let cropResizeHandle = null;
 let cropStartX = 0;
 let cropStartY = 0;
-
-let cropMode = null;
-let cropHandle = null;
-
-let cropBox = {
-  x: 0.05,
-  y: 0.05,
-  width: 0.90,
-  height: 0.90
-};
+let cropStartRect = null;
+let cropDisplayScale = 1;
 
 
-/* =========================================================
-   DOM ELEMENTS
-========================================================= */
+/* =====================================================
+DOM
+===================================================== */
+
+const fileInput =
+document.getElementById("fileInput");
 
 const uploadBox =
 document.getElementById("uploadBox");
 
-const selectPdfBtn =
-document.getElementById("selectPdfBtn");
-
-const fileInput =
-document.getElementById("fileInput");
+const uploadButton =
+document.getElementById("uploadButton");
 
 const fileInfo =
 document.getElementById("fileInfo");
@@ -837,366 +1406,388 @@ document.getElementById("fileName");
 const filePages =
 document.getElementById("filePages");
 
-const changeFileBtn =
-document.getElementById("changeFileBtn");
-
 const workspace =
 document.getElementById("workspace");
 
 const pageGrid =
 document.getElementById("pageGrid");
 
-const actionBar =
-document.getElementById("actionBar");
+const selectionCount =
+document.getElementById("selectionCount");
 
-const splitBtn =
-document.getElementById("splitBtn");
+const splitButton =
+document.getElementById("splitButton");
 
-const clearBtn =
-document.getElementById("clearBtn");
-
-const status =
+const statusBox =
 document.getElementById("status");
 
 const downloadArea =
 document.getElementById("downloadArea");
 
-const downloadBtn =
-document.getElementById("downloadBtn");
+const downloadButton =
+document.getElementById("downloadButton");
 
-const mainPreviewCanvas =
-document.getElementById("mainPreviewCanvas");
+const mainStage =
+document.getElementById("mainStage");
 
-const mainPreviewStage =
-document.getElementById("mainPreviewStage");
+const mainZoomLabel =
+document.getElementById("mainZoomLabel");
 
-const mainPreviewWrap =
-document.getElementById("mainPreviewWrap");
-
-const mainZoom =
-document.getElementById("mainZoom");
-
-const fitPreviewBtn =
-document.getElementById("fitPreviewBtn");
-
-const selectAllBtn =
-document.getElementById("selectAllBtn");
-
-const deselectAllBtn =
-document.getElementById("deselectAllBtn");
+const mainPageNumber =
+document.getElementById("mainPageNumber");
 
 const cropModal =
 document.getElementById("cropModal");
 
-const cropCanvas =
-document.getElementById("cropCanvas");
-
-const cropStage =
-document.getElementById("cropStage");
-
-const cropSelection =
-document.getElementById("cropSelection");
-
-const closeCropBtn =
-document.getElementById("closeCropBtn");
-
-const resetCropBtn =
-document.getElementById("resetCropBtn");
-
-const applyCropBtn =
-document.getElementById("applyCropBtn");
+const cropSurface =
+document.getElementById("cropSurface");
 
 
-/* =========================================================
-   ROTATE BUTTON - GLOBAL DELEGATED CLICK FIX
-   IMPORTANT:
-   This listener is attached only once to pageGrid.
-========================================================= */
+/* =====================================================
+ROTATE BUTTON - FINAL FIX
+ONLY ROTATE FUNCTIONALITY
+===================================================== */
 
 pageGrid.addEventListener(
-  "click",
-  async function(event){
+"click",
+async function(event){
 
-    const target = event.target;
+  const button =
+    event.target.closest(
+      'button[data-action="rotate-left"], button[data-action="rotate-right"]'
+    );
 
-    if(!target || !target.closest){
-      return;
-    }
 
-    const button =
-      target.closest(
-        'button[data-action="rotate-left"], button[data-action="rotate-right"]'
-      );
+  if(
+    !button ||
+    !pageGrid.contains(button)
+  ){
 
-    if(!button){
-      return;
-    }
-
-    if(!pageGrid.contains(button)){
-      return;
-    }
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    const index =
-      Number(button.dataset.pageIndex);
-
-    if(
-      !Number.isInteger(index) ||
-      !pages[index]
-    ){
-      return;
-    }
-
-    const pageData =
-      pages[index];
-
-    const currentRotation =
-      Number(pageData.rotation || 0);
-
-    if(
-      button.dataset.action === "rotate-left"
-    ){
-
-      pageData.rotation =
-        (
-          currentRotation + 270
-        ) % 360;
-
-    }else{
-
-      pageData.rotation =
-        (
-          currentRotation + 90
-        ) % 360;
-
-    }
-
-    /* Rebuild thumbnails so rotation becomes visible */
-    renderPages();
-
-    updateSelection();
-
-    /* Refresh large preview if this is the current page */
-    if(
-      currentMainIndex === index
-    ){
-
-      await renderMainPreview();
-
-    }
+    return;
 
   }
-);
 
 
-/* =========================================================
-   UPLOAD
-========================================================= */
+  event.preventDefault();
+  event.stopPropagation();
 
-selectPdfBtn.addEventListener(
-  "click",
-  function(event){
 
-    event.preventDefault();
-    event.stopPropagation();
+  const index =
+    Number(
+      button.dataset.pageIndex
+    );
 
-    fileInput.click();
+
+  if(
+    !Number.isInteger(index) ||
+    !pages[index]
+  ){
+
+    return;
 
   }
-);
+
+
+  const pageData =
+    pages[index];
+
+
+  if(
+    button.dataset.action ===
+    "rotate-left"
+  ){
+
+    pageData.rotation =
+      (
+        Number(
+          pageData.rotation || 0
+        ) +
+        270
+      ) % 360;
+
+  }
+  else{
+
+    pageData.rotation =
+      (
+        Number(
+          pageData.rotation || 0
+        ) +
+        90
+      ) % 360;
+
+  }
+
+
+  /* Rebuild page cards */
+  renderPages();
+
+
+  /* Keep selection count correct */
+  updateSelection();
+
+
+  /* Refresh main preview if this is
+     the currently displayed page */
+  if(
+    currentMainIndex === index
+  ){
+
+    await renderMainPreview();
+
+  }
+
+});
+
+
+/* =====================================================
+UPLOAD
+===================================================== */
+
+uploadButton.addEventListener(
+"click",
+function(event){
+
+  event.stopPropagation();
+
+  fileInput.click();
+
+});
 
 
 uploadBox.addEventListener(
-  "click",
-  function(event){
+"click",
+function(){
 
-    if(event.target === selectPdfBtn){
-      return;
-    }
+  fileInput.click();
 
-    fileInput.click();
-
-  }
-);
+});
 
 
 fileInput.addEventListener(
-  "change",
-  async function(){
+"change",
+function(){
 
-    const file =
-      fileInput.files[0];
+  if(
+    this.files &&
+    this.files.length
+  ){
 
-    if(file){
-      await loadPDF(file);
+    loadPDF(
+      this.files[0]
+    );
+
+  }
+
+});
+
+
+/* =====================================================
+DRAG DROP UPLOAD
+===================================================== */
+
+[
+"dragenter",
+"dragover"
+].forEach(
+function(eventName){
+
+  uploadBox.addEventListener(
+    eventName,
+    function(event){
+
+      event.preventDefault();
+
+      uploadBox.classList.add(
+        "dragover"
+      );
+
     }
+  );
 
-  }
-);
-
-
-/* =========================================================
-   DRAG & DROP PDF
-========================================================= */
-
-uploadBox.addEventListener(
-  "dragover",
-  function(event){
-
-    event.preventDefault();
-
-    uploadBox.classList.add(
-      "drag-over"
-    );
-
-  }
-);
+});
 
 
-uploadBox.addEventListener(
-  "dragleave",
-  function(){
+[
+"dragleave",
+"drop"
+].forEach(
+function(eventName){
 
-    uploadBox.classList.remove(
-      "drag-over"
-    );
+  uploadBox.addEventListener(
+    eventName,
+    function(event){
 
-  }
-);
+      event.preventDefault();
+
+      uploadBox.classList.remove(
+        "dragover"
+      );
+
+    }
+  );
+
+});
 
 
 uploadBox.addEventListener(
-  "drop",
-  async function(event){
+"drop",
+function(event){
 
-    event.preventDefault();
+  const files =
+    event.dataTransfer.files;
 
-    uploadBox.classList.remove(
-      "drag-over"
-    );
+
+  if(
+    files &&
+    files.length
+  ){
 
     const file =
-      event.dataTransfer.files[0];
+      files[0];
+
 
     if(
-      file &&
-      file.type === "application/pdf"
+      file.type ===
+      "application/pdf"
     ){
 
-      await loadPDF(file);
+      loadPDF(file);
 
-    }else{
+    }
+    else{
 
       showStatus(
-        "Please select a valid PDF file.",
-        true
+        "Please select a valid PDF file."
       );
 
     }
 
   }
-);
+
+});
 
 
-/* =========================================================
-   LOAD PDF
-========================================================= */
+/* =====================================================
+LOAD PDF
+===================================================== */
 
 async function loadPDF(file){
 
+  if(
+    file.type !==
+    "application/pdf"
+  ){
+
+    showStatus(
+      "Please select a valid PDF file."
+    );
+
+    return;
+
+  }
+
+
+  currentFile =
+    file;
+
+
+  showStatus(
+    "Loading PDF..."
+  );
+
+
   try{
 
-    if(
-      file.type !== "application/pdf" &&
-      !file.name.toLowerCase().endsWith(".pdf")
-    ){
-
-      showStatus(
-        "Please select a valid PDF file.",
-        true
-      );
-
-      return;
-    }
-
-    pdfFile = file;
-
-    pdfBytes =
+    const buffer =
       await file.arrayBuffer();
 
-    pdfDoc =
-      await pdfjsLib.getDocument({
-        data: pdfBytes.slice(0)
-      }).promise;
+
+    pdfJsDocument =
+      await pdfjsLib
+      .getDocument({
+        data:buffer
+      })
+      .promise;
+
 
     pages = [];
 
+
     for(
-      let i = 1;
-      i <= pdfDoc.numPages;
+      let i = 0;
+      i < pdfJsDocument.numPages;
       i++
     ){
 
       pages.push({
 
-        originalIndex: i - 1,
+        originalIndex:i,
 
-        selected: true,
+        selected:true,
 
-        zoom: 1,
+        zoom:1,
 
-        rotation: 0,
+        rotation:0,
 
-        crop: null
+        crop:null
 
       });
 
     }
+
+
+    currentMainIndex = 0;
+
 
     fileName.textContent =
       file.name;
 
+
     filePages.textContent =
-      pdfDoc.numPages +
+      pdfJsDocument.numPages +
       (
-        pdfDoc.numPages === 1
-          ? " page"
-          : " pages"
+        pdfJsDocument.numPages === 1
+        ? " page"
+        : " pages"
       );
+
 
     fileInfo.style.display =
       "flex";
 
-    workspace.style.display =
-      "flex";
 
-    actionBar.style.display =
-      "flex";
+    workspace.style.display =
+      "block";
+
 
     downloadArea.style.display =
       "none";
 
-    currentMainIndex = 0;
 
-    currentMainZoom = 1;
+    mainZoom = 1;
 
-    mainZoom.value = "1";
+    updateMainZoom();
+
 
     renderPages();
 
+    updateSelection();
+
+
     await renderMainPreview();
+
 
     hideStatus();
 
-  }catch(error){
+
+  }
+  catch(error){
 
     console.error(error);
 
     showStatus(
-      "Unable to open this PDF. Please try another file.",
-      true
+      "Unable to open this PDF."
     );
 
   }
@@ -1204,242 +1795,266 @@ async function loadPDF(file){
 }
 
 
-/* =========================================================
-   MAIN ZOOM
-========================================================= */
+/* =====================================================
+MAIN ZOOM
+===================================================== */
 
-mainZoom.addEventListener(
-  "change",
-  async function(){
+function updateMainZoom(){
 
-    currentMainZoom =
-      Number(mainZoom.value);
+  mainZoomLabel.textContent =
+    Math.round(
+      mainZoom * 100
+    ) + "%";
 
-    await renderMainPreview();
-
-  }
-);
-
-
-/* =========================================================
-   FIT PREVIEW
-========================================================= */
-
-fitPreviewBtn.addEventListener(
-  "click",
-  async function(){
-
-    if(!pdfDoc){
-      return;
-    }
-
-    try{
-
-      const page =
-        await pdfDoc.getPage(
-          currentMainIndex + 1
-        );
-
-      const baseViewport =
-        page.getViewport({
-          scale:1,
-          rotation:
-            pages[currentMainIndex].rotation
-        });
-
-      const availableWidth =
-        Math.max(
-          100,
-          mainPreviewWrap.clientWidth - 40
-        );
-
-      const availableHeight =
-        Math.max(
-          100,
-          mainPreviewWrap.clientHeight - 40
-        );
-
-      const scaleX =
-        availableWidth /
-        baseViewport.width;
-
-      const scaleY =
-        availableHeight /
-        baseViewport.height;
-
-      currentMainZoom =
-        Math.min(
-          scaleX,
-          scaleY
-        );
-
-      currentMainZoom =
-        Math.max(
-          0.5,
-          Math.min(
-            2,
-            currentMainZoom
-          )
-        );
-
-      mainZoom.value =
-        String(
-          nearestZoom(currentMainZoom)
-        );
-
-      currentMainZoom =
-        Number(mainZoom.value);
-
-      await renderMainPreview();
-
-    }catch(error){
-
-      console.error(error);
-
-    }
-
-  }
-);
-
-
-function nearestZoom(value){
-
-  const values =
-    [0.5,0.75,1,1.25,1.5,2];
-
-  let closest =
-    values[0];
-
-  let difference =
-    Math.abs(
-      value - closest
-    );
-
-  for(
-    const item of values
-  ){
-
-    const d =
-      Math.abs(
-        value - item
-      );
-
-    if(d < difference){
-
-      difference = d;
-      closest = item;
-
-    }
-
-  }
-
-  return closest;
 }
 
 
-/* =========================================================
-   MAIN PREVIEW
-========================================================= */
+document
+.getElementById("mainZoomIn")
+.addEventListener(
+"click",
+async function(){
+
+  mainZoom =
+    Math.min(
+      2,
+      mainZoom + .25
+    );
+
+  updateMainZoom();
+
+  await renderMainPreview();
+
+});
+
+
+document
+.getElementById("mainZoomOut")
+.addEventListener(
+"click",
+async function(){
+
+  mainZoom =
+    Math.max(
+      .5,
+      mainZoom - .25
+    );
+
+  updateMainZoom();
+
+  await renderMainPreview();
+
+});
+
+
+document
+.getElementById("mainZoomReset")
+.addEventListener(
+"click",
+async function(){
+
+  mainZoom = 1;
+
+  updateMainZoom();
+
+  await renderMainPreview();
+
+});
+
+
+/* =====================================================
+CALCULATE FIT SCALE
+===================================================== */
+
+function calculateFitScale(
+  containerWidth,
+  containerHeight,
+  pageWidth,
+  pageHeight,
+  padding
+){
+
+  const availableWidth =
+    Math.max(
+      50,
+      containerWidth - padding
+    );
+
+  const availableHeight =
+    Math.max(
+      50,
+      containerHeight - padding
+    );
+
+
+  const scaleX =
+    availableWidth /
+    pageWidth;
+
+
+  const scaleY =
+    availableHeight /
+    pageHeight;
+
+
+  return Math.min(
+    scaleX,
+    scaleY
+  );
+
+}
+
+
+/* =====================================================
+MAIN PREVIEW
+===================================================== */
 
 async function renderMainPreview(){
 
   if(
-    !pdfDoc ||
-    !pages[currentMainIndex]
+    !pdfJsDocument ||
+    pages.length === 0
   ){
+
     return;
+
   }
+
+
+  const pageData =
+    pages[
+      Math.max(
+        0,
+        Math.min(
+          currentMainIndex,
+          pages.length - 1
+        )
+      )
+    ];
+
 
   try{
 
     const page =
-      await pdfDoc.getPage(
-        currentMainIndex + 1
+      await pdfJsDocument
+      .getPage(
+        pageData.originalIndex + 1
       );
 
-    const pageData =
-      pages[currentMainIndex];
+
+    const baseViewport =
+      page.getViewport({
+        scale:1,
+        rotation:pageData.rotation
+      });
+
+
+    const wrap =
+      document.querySelector(
+        ".main-preview-wrap"
+      );
+
+
+    const fitScale =
+      calculateFitScale(
+
+        wrap.clientWidth,
+
+        wrap.clientHeight,
+
+        baseViewport.width,
+
+        baseViewport.height,
+
+        45
+
+      );
+
+
+    const scale =
+      fitScale * mainZoom;
+
 
     const viewport =
       page.getViewport({
-        scale: currentMainZoom,
-        rotation:
-          pageData.rotation
+
+        scale:scale,
+
+        rotation:pageData.rotation
+
       });
 
-    const outputScale =
-      window.devicePixelRatio || 1;
 
-    mainPreviewCanvas.width =
-      Math.floor(
-        viewport.width *
-        outputScale
+    const canvas =
+      document.createElement(
+        "canvas"
       );
 
-    mainPreviewCanvas.height =
-      Math.floor(
-        viewport.height *
-        outputScale
-      );
-
-    mainPreviewCanvas.style.width =
-      viewport.width + "px";
-
-    mainPreviewCanvas.style.height =
-      viewport.height + "px";
 
     const context =
-      mainPreviewCanvas.getContext("2d");
+      canvas.getContext(
+        "2d"
+      );
 
-    context.setTransform(
-      outputScale,
-      0,
-      0,
-      outputScale,
-      0,
-      0
+
+    canvas.width =
+      Math.ceil(
+        viewport.width
+      );
+
+
+    canvas.height =
+      Math.ceil(
+        viewport.height
+      );
+
+
+    canvas.style.width =
+      viewport.width + "px";
+
+
+    canvas.style.height =
+      viewport.height + "px";
+
+
+    mainStage.innerHTML =
+      "";
+
+
+    mainStage.style.width =
+      Math.max(
+        wrap.clientWidth - 40,
+        viewport.width
+      ) + "px";
+
+
+    mainStage.style.height =
+      Math.max(
+        wrap.clientHeight - 40,
+        viewport.height
+      ) + "px";
+
+
+    mainStage.appendChild(
+      canvas
     );
+
+
+    mainPageNumber.textContent =
+      currentMainIndex + 1;
+
 
     await page.render({
 
-      canvasContext: context,
+      canvasContext:context,
 
-      viewport: viewport
+      viewport:viewport
 
     }).promise;
 
-    mainPreviewStage.style.width =
-      viewport.width + "px";
 
-    mainPreviewStage.style.height =
-      viewport.height + "px";
-
-    mainPreviewStage
-      .querySelectorAll(".rotation-badge")
-      .forEach(
-        el => el.remove()
-      );
-
-    if(
-      pageData.rotation !== 0
-    ){
-
-      const badge =
-        document.createElement("div");
-
-      badge.className =
-        "rotation-badge";
-
-      badge.textContent =
-        pageData.rotation + "°";
-
-      mainPreviewStage.appendChild(
-        badge
-      );
-
-    }
-
-  }catch(error){
+  }
+  catch(error){
 
     console.error(error);
 
@@ -1448,13 +2063,14 @@ async function renderMainPreview(){
 }
 
 
-/* =========================================================
-   RENDER ALL PAGE CARDS
-========================================================= */
+/* =====================================================
+RENDER ALL PAGE CARDS
+===================================================== */
 
 function renderPages(){
 
   pageGrid.innerHTML = "";
+
 
   pages.forEach(
     function(pageData,index){
@@ -1465,13 +2081,8 @@ function renderPages(){
           index
         );
 
-      pageGrid.appendChild(
-        card
-      );
 
-      renderThumbnail(
-        pageData,
-        index,
+      pageGrid.appendChild(
         card
       );
 
@@ -1481,9 +2092,9 @@ function renderPages(){
 }
 
 
-/* =========================================================
-   CREATE PAGE CARD
-========================================================= */
+/* =====================================================
+CREATE PAGE CARD
+===================================================== */
 
 function createPageCard(
   pageData,
@@ -1491,10 +2102,14 @@ function createPageCard(
 ){
 
   const card =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
+
 
   card.className =
     "page-card";
+
 
   if(pageData.selected){
 
@@ -1504,44 +2119,51 @@ function createPageCard(
 
   }
 
+
   card.draggable = true;
 
-  card.dataset.index =
-    String(index);
+
+  /* =========================
+  TOP
+  ========================= */
+
+  const top =
+    document.createElement(
+      "div"
+    );
 
 
-  /* =======================================================
-     PAGE TOP
-  ======================================================= */
-
-  const pageTop =
-    document.createElement("div");
-
-  pageTop.className =
+  top.className =
     "page-top";
 
 
-  const leftTop =
-    document.createElement("div");
+  const number =
+    document.createElement(
+      "div"
+    );
 
-  leftTop.style.display =
-    "flex";
 
-  leftTop.style.alignItems =
-    "center";
+  number.className =
+    "page-number";
 
-  leftTop.style.gap =
-    "7px";
+
+  number.textContent =
+    "Page " + (index + 1);
 
 
   const checkbox =
-    document.createElement("input");
+    document.createElement(
+      "input"
+    );
+
 
   checkbox.type =
     "checkbox";
 
+
   checkbox.className =
     "page-checkbox";
+
 
   checkbox.checked =
     pageData.selected;
@@ -1561,17 +2183,15 @@ function createPageCard(
     "change",
     function(){
 
-      if(!pages[index]){
-        return;
-      }
+      pageData.selected =
+        this.checked;
 
-      pages[index].selected =
-        checkbox.checked;
 
       card.classList.toggle(
         "selected",
-        checkbox.checked
+        pageData.selected
       );
+
 
       updateSelection();
 
@@ -1579,105 +2199,236 @@ function createPageCard(
   );
 
 
-  const pageNumber =
-    document.createElement("span");
-
-  pageNumber.className =
-    "page-number";
-
-  pageNumber.textContent =
-    "Page " + (index + 1);
+  top.appendChild(
+    number
+  );
 
 
-  leftTop.appendChild(
+  top.appendChild(
     checkbox
   );
 
-  leftTop.appendChild(
-    pageNumber
+
+  /* =========================
+  THUMBNAIL
+  ========================= */
+
+  const thumbnailWrap =
+    document.createElement(
+      "div"
+    );
+
+
+  thumbnailWrap.className =
+    "thumbnail-wrap";
+
+
+  const thumbnailStage =
+    document.createElement(
+      "div"
+    );
+
+
+  thumbnailStage.className =
+    "thumbnail-stage";
+
+
+  thumbnailWrap.appendChild(
+    thumbnailStage
   );
 
 
-  const source =
-    document.createElement("span");
+  /* =========================
+  ZOOM
+  ========================= */
 
-  source.className =
-    "page-source";
-
-  source.textContent =
-    "Original " +
-    (pageData.originalIndex + 1);
-
-
-  pageTop.appendChild(
-    leftTop
-  );
-
-  pageTop.appendChild(
-    source
-  );
-
-  card.appendChild(
-    pageTop
-  );
+  const zoomControls =
+    document.createElement(
+      "div"
+    );
 
 
-  /* =======================================================
-     THUMBNAIL
-  ======================================================= */
+  zoomControls.className =
+    "page-zoom-controls";
 
-  const thumbWrap =
-    document.createElement("div");
 
-  thumbWrap.className =
-    "page-thumb-wrap";
+  const zoomMinus =
+    document.createElement(
+      "button"
+    );
 
-  thumbWrap.title =
-    "Click to preview this page";
 
-  thumbWrap.addEventListener(
+  zoomMinus.type =
+    "button";
+
+  zoomMinus.className =
+    "small-zoom";
+
+  zoomMinus.textContent =
+    "−";
+
+
+  const zoomText =
+    document.createElement(
+      "span"
+    );
+
+
+  zoomText.className =
+    "page-zoom-text";
+
+
+  zoomText.textContent =
+    Math.round(
+      pageData.zoom * 100
+    ) + "%";
+
+
+  const zoomPlus =
+    document.createElement(
+      "button"
+    );
+
+
+  zoomPlus.type =
+    "button";
+
+  zoomPlus.className =
+    "small-zoom";
+
+  zoomPlus.textContent =
+    "+";
+
+
+  const zoomReset =
+    document.createElement(
+      "button"
+    );
+
+
+  zoomReset.type =
+    "button";
+
+  zoomReset.className =
+    "small-zoom";
+
+  zoomReset.textContent =
+    "↺";
+
+
+  zoomMinus.addEventListener(
     "click",
-    async function(){
+    async function(event){
 
-      currentMainIndex =
-        index;
+      event.stopPropagation();
 
-      await renderMainPreview();
+      pageData.zoom =
+        Math.max(
+          .5,
+          pageData.zoom - .25
+        );
+
+
+      zoomText.textContent =
+        Math.round(
+          pageData.zoom * 100
+        ) + "%";
+
+
+      await renderThumbnail(
+        pageData,
+        thumbnailStage
+      );
 
     }
   );
 
 
-  const thumbStage =
-    document.createElement("div");
+  zoomPlus.addEventListener(
+    "click",
+    async function(event){
 
-  thumbStage.className =
-    "thumb-stage";
+      event.stopPropagation();
 
-  thumbWrap.appendChild(
-    thumbStage
+      pageData.zoom =
+        Math.min(
+          2,
+          pageData.zoom + .25
+        );
+
+
+      zoomText.textContent =
+        Math.round(
+          pageData.zoom * 100
+        ) + "%";
+
+
+      await renderThumbnail(
+        pageData,
+        thumbnailStage
+      );
+
+    }
   );
 
-  card.appendChild(
-    thumbWrap
+
+  zoomReset.addEventListener(
+    "click",
+    async function(event){
+
+      event.stopPropagation();
+
+      pageData.zoom = 1;
+
+      zoomText.textContent =
+        "100%";
+
+
+      await renderThumbnail(
+        pageData,
+        thumbnailStage
+      );
+
+    }
   );
 
 
-  /* =======================================================
-     PAGE TOOLS
-  ======================================================= */
+  zoomControls.appendChild(
+    zoomMinus
+  );
 
-  const tools =
-    document.createElement("div");
+  zoomControls.appendChild(
+    zoomText
+  );
 
-  tools.className =
-    "page-tools";
+  zoomControls.appendChild(
+    zoomPlus
+  );
+
+  zoomControls.appendChild(
+    zoomReset
+  );
 
 
-  /* ROTATE LEFT BUTTON */
+  /* =========================
+  ROTATE / CROP
+  ========================= */
+
+  const actionRow =
+    document.createElement(
+      "div"
+    );
+
+
+  actionRow.className =
+    "page-action-row";
+
 
   const rotateLeft =
-    document.createElement("button");
+    document.createElement(
+      "button"
+    );
+
 
   rotateLeft.type =
     "button";
@@ -1689,27 +2440,11 @@ function createPageCard(
     "↶ Rotate";
 
 
-  /*
-     IMPORTANT:
-     Only dataset is assigned here.
-     The actual click event is handled globally
-     by pageGrid delegated listener.
-  */
-
-  rotateLeft.dataset.action =
-    "rotate-left";
-
-  rotateLeft.dataset.pageIndex =
-    String(index);
-
-  rotateLeft.draggable =
-    false;
-
-
-  /* ROTATE RIGHT BUTTON */
-
   const rotateRight =
-    document.createElement("button");
+    document.createElement(
+      "button"
+    );
+
 
   rotateRight.type =
     "button";
@@ -1721,229 +2456,139 @@ function createPageCard(
     "Rotate ↷";
 
 
+  /* =================================================
+  ONLY CHANGE:
+  ROTATE BUTTON DATA
+  ================================================= */
+
+  rotateLeft.dataset.action =
+    "rotate-left";
+
+  rotateLeft.dataset.pageIndex =
+    String(index);
+
+
   rotateRight.dataset.action =
     "rotate-right";
 
   rotateRight.dataset.pageIndex =
     String(index);
 
+
+  rotateLeft.draggable =
+    false;
+
   rotateRight.draggable =
     false;
 
 
-  /* CROP BUTTON */
-
   const cropButton =
-    document.createElement("button");
+    document.createElement(
+      "button"
+    );
+
 
   cropButton.type =
     "button";
 
   cropButton.className =
-    "page-action";
+    "page-action crop-btn";
 
   cropButton.textContent =
-    "Crop";
+    "✂ Crop";
 
-  cropButton.draggable =
-    false;
 
+  /* =========================
+  CROP
+  ========================= */
 
   cropButton.addEventListener(
     "click",
     function(event){
 
       event.preventDefault();
+
       event.stopPropagation();
 
-      openCropEditor(index);
+
+      openCropEditor(
+        pageData,
+        index
+      );
 
     }
   );
 
 
-  /* DELETE BUTTON */
-
-  const deleteButton =
-    document.createElement("button");
-
-  deleteButton.type =
-    "button";
-
-  deleteButton.className =
-    "page-action danger";
-
-  deleteButton.textContent =
-    "Delete";
-
-  deleteButton.draggable =
-    false;
-
-
-  deleteButton.addEventListener(
-    "click",
-    function(event){
-
-      event.preventDefault();
-      event.stopPropagation();
-
-      deletePage(index);
-
-    }
-  );
-
-
-  tools.appendChild(
+  actionRow.appendChild(
     rotateLeft
   );
 
-  tools.appendChild(
+  actionRow.appendChild(
     rotateRight
   );
 
-  tools.appendChild(
+  actionRow.appendChild(
     cropButton
   );
 
-  tools.appendChild(
-    deleteButton
-  );
+
+  /* =========================
+  ORDER
+  ========================= */
+
+  const orderRow =
+    document.createElement(
+      "div"
+    );
 
 
-  card.appendChild(
-    tools
-  );
+  orderRow.className =
+    "order-row";
 
 
-  /* =======================================================
-     BOTTOM CONTROLS
-  ======================================================= */
-
-  const pageBottom =
-    document.createElement("div");
-
-  pageBottom.className =
-    "page-bottom";
+  const upButton =
+    document.createElement(
+      "button"
+    );
 
 
-  const zoomLabel =
-    document.createElement("span");
-
-  zoomLabel.textContent =
-    "Thumb:";
-
-  zoomLabel.style.fontSize =
-    "12px";
-
-  zoomLabel.style.color =
-    "#666";
-
-
-  const smallZoom =
-    document.createElement("select");
-
-  smallZoom.className =
-    "small-zoom";
-
-
-  [
-    ["0.75","75%"],
-    ["1","100%"],
-    ["1.25","125%"],
-    ["1.5","150%"]
-  ].forEach(
-    function(item){
-
-      const option =
-        document.createElement("option");
-
-      option.value =
-        item[0];
-
-      option.textContent =
-        item[1];
-
-      if(
-        Number(item[0]) ===
-        Number(pageData.zoom)
-      ){
-
-        option.selected =
-          true;
-
-      }
-
-      smallZoom.appendChild(
-        option
-      );
-
-    }
-  );
-
-
-  smallZoom.addEventListener(
-    "click",
-    function(event){
-
-      event.stopPropagation();
-
-    }
-  );
-
-
-  smallZoom.addEventListener(
-    "change",
-    function(){
-
-      pageData.zoom =
-        Number(
-          smallZoom.value
-        );
-
-      renderThumbnail(
-        pageData,
-        index,
-        card
-      );
-
-    }
-  );
-
-
-  const orderBox =
-    document.createElement("div");
-
-  orderBox.style.display =
-    "flex";
-
-  orderBox.style.gap =
-    "4px";
-
-
-  const upBtn =
-    document.createElement("button");
-
-  upBtn.type =
+  upButton.type =
     "button";
 
-  upBtn.className =
+  upButton.className =
     "order-btn";
 
-  upBtn.textContent =
+  upButton.textContent =
     "↑";
 
-  upBtn.title =
-    "Move page up";
-
-  upBtn.draggable =
-    false;
+  upButton.title =
+    "Move Up";
 
 
-  upBtn.addEventListener(
+  const downButton =
+    document.createElement(
+      "button"
+    );
+
+
+  downButton.type =
+    "button";
+
+  downButton.className =
+    "order-btn";
+
+  downButton.textContent =
+    "↓";
+
+  downButton.title =
+    "Move Down";
+
+
+  upButton.addEventListener(
     "click",
     function(event){
 
-      event.preventDefault();
       event.stopPropagation();
 
       movePage(
@@ -1955,30 +2600,10 @@ function createPageCard(
   );
 
 
-  const downBtn =
-    document.createElement("button");
-
-  downBtn.type =
-    "button";
-
-  downBtn.className =
-    "order-btn";
-
-  downBtn.textContent =
-    "↓";
-
-  downBtn.title =
-    "Move page down";
-
-  downBtn.draggable =
-    false;
-
-
-  downBtn.addEventListener(
+  downButton.addEventListener(
     "click",
     function(event){
 
-      event.preventDefault();
       event.stopPropagation();
 
       movePage(
@@ -1990,44 +2615,61 @@ function createPageCard(
   );
 
 
-  orderBox.appendChild(
-    upBtn
+  orderRow.appendChild(
+    upButton
   );
 
-  orderBox.appendChild(
-    downBtn
-  );
-
-
-  pageBottom.appendChild(
-    zoomLabel
-  );
-
-  pageBottom.appendChild(
-    smallZoom
-  );
-
-  pageBottom.appendChild(
-    orderBox
-  );
-
-  card.appendChild(
-    pageBottom
+  orderRow.appendChild(
+    downButton
   );
 
 
-  /* =======================================================
-     DRAG PAGE REORDER
-  ======================================================= */
+  /* =========================
+  CARD CLICK
+  ========================= */
+
+  card.addEventListener(
+    "click",
+    function(event){
+
+      if(
+        event.target.closest(
+          "button"
+        ) ||
+        event.target.closest(
+          "input"
+        )
+      ){
+
+        return;
+
+      }
+
+
+      currentMainIndex =
+        index;
+
+
+      renderMainPreview();
+
+    }
+  );
+
+
+  /* =========================
+  DRAG START
+  ========================= */
 
   card.addEventListener(
     "dragstart",
     function(event){
 
       if(
-        event.target.closest &&
         event.target.closest(
-          "button,input,select"
+          "button"
+        ) ||
+        event.target.closest(
+          "input"
         )
       ){
 
@@ -2037,42 +2679,57 @@ function createPageCard(
 
       }
 
+
+      draggedIndex =
+        index;
+
+
       card.classList.add(
         "dragging"
-      );
-
-      event.dataTransfer.effectAllowed =
-        "move";
-
-      event.dataTransfer.setData(
-        "text/plain",
-        String(index)
       );
 
     }
   );
 
+
+  /* =========================
+  DRAG END
+  ========================= */
 
   card.addEventListener(
     "dragend",
     function(){
 
+      draggedIndex =
+        null;
+
+
       card.classList.remove(
         "dragging"
       );
 
-      pageGrid
-        .querySelectorAll(".page-card")
-        .forEach(
-          el =>
-            el.classList.remove(
-              "drag-over"
-            )
-        );
+
+      document
+      .querySelectorAll(
+        ".page-card"
+      )
+      .forEach(
+        function(item){
+
+          item.classList.remove(
+            "drag-over"
+          );
+
+        }
+      );
 
     }
   );
 
+
+  /* =========================
+  DRAG OVER
+  ========================= */
 
   card.addEventListener(
     "dragover",
@@ -2080,9 +2737,17 @@ function createPageCard(
 
       event.preventDefault();
 
-      card.classList.add(
-        "drag-over"
-      );
+
+      if(
+        draggedIndex !== null &&
+        draggedIndex !== index
+      ){
+
+        card.classList.add(
+          "drag-over"
+        );
+
+      }
 
     }
   );
@@ -2100,6 +2765,10 @@ function createPageCard(
   );
 
 
+  /* =========================
+  DROP
+  ========================= */
+
   card.addEventListener(
     "drop",
     function(event){
@@ -2110,30 +2779,58 @@ function createPageCard(
         "drag-over"
       );
 
-      const fromIndex =
-        Number(
-          event.dataTransfer.getData(
-            "text/plain"
-          )
-        );
-
-      const toIndex =
-        index;
 
       if(
-        Number.isInteger(fromIndex) &&
-        Number.isInteger(toIndex) &&
-        fromIndex !== toIndex
+        draggedIndex === null ||
+        draggedIndex === index
       ){
 
-        movePage(
-          fromIndex,
-          toIndex
-        );
+        return;
 
       }
 
+
+      movePage(
+        draggedIndex,
+        index
+      );
+
     }
+  );
+
+
+  /* =========================
+  APPEND
+  ========================= */
+
+  card.appendChild(
+    top
+  );
+
+  card.appendChild(
+    thumbnailWrap
+  );
+
+  card.appendChild(
+    zoomControls
+  );
+
+  card.appendChild(
+    actionRow
+  );
+
+  card.appendChild(
+    orderRow
+  );
+
+
+  /* =========================
+  INITIAL RENDER
+  ========================= */
+
+  renderThumbnail(
+    pageData,
+    thumbnailStage
   );
 
 
@@ -2142,116 +2839,115 @@ function createPageCard(
 }
 
 
-/* =========================================================
-   RENDER THUMBNAIL
-========================================================= */
+/* =====================================================
+RENDER THUMBNAIL
+===================================================== */
 
 async function renderThumbnail(
   pageData,
-  index,
-  card
+  stage
 ){
+
+  if(!pdfJsDocument){
+
+    return;
+
+  }
+
 
   try{
 
     const page =
-      await pdfDoc.getPage(
+      await pdfJsDocument
+      .getPage(
         pageData.originalIndex + 1
       );
 
+
+    const wrap =
+      stage.parentElement;
+
+
     const baseViewport =
       page.getViewport({
-        scale: 1,
-        rotation:
-          pageData.rotation
+
+        scale:1,
+
+        rotation:pageData.rotation
+
       });
 
 
-    const maxWidth =
-      175;
+    const fitScale =
+      calculateFitScale(
+
+        wrap.clientWidth,
+
+        wrap.clientHeight,
+
+        baseViewport.width,
+
+        baseViewport.height,
+
+        16
+
+      );
+
 
     const scale =
-      (
-        maxWidth /
-        baseViewport.width
-      ) *
-      Number(pageData.zoom || 1);
+      fitScale *
+      pageData.zoom;
 
 
     const viewport =
       page.getViewport({
-        scale: scale,
-        rotation:
-          pageData.rotation
+
+        scale:scale,
+
+        rotation:pageData.rotation
+
       });
 
 
-    const wrap =
-      card.querySelector(
-        ".page-thumb-wrap"
-      );
-
-    const stage =
-      card.querySelector(
-        ".thumb-stage"
-      );
-
-
-    if(!wrap || !stage){
-      return;
-    }
-
-
-    stage.innerHTML = "";
-
-
     const canvas =
-      document.createElement("canvas");
+      document.createElement(
+        "canvas"
+      );
 
-    canvas.className =
-      "page-thumb";
 
-
-    const outputScale =
-      window.devicePixelRatio || 1;
+    const context =
+      canvas.getContext(
+        "2d"
+      );
 
 
     canvas.width =
-      Math.floor(
-        viewport.width *
-        outputScale
+      Math.ceil(
+        viewport.width
       );
 
+
     canvas.height =
-      Math.floor(
-        viewport.height *
-        outputScale
+      Math.ceil(
+        viewport.height
       );
 
 
     canvas.style.width =
       viewport.width + "px";
 
+
     canvas.style.height =
       viewport.height + "px";
 
 
-    const context =
-      canvas.getContext("2d");
-
-
-    context.setTransform(
-      outputScale,
-      0,
-      0,
-      outputScale,
-      0,
-      0
-    );
+    stage.innerHTML =
+      "";
 
 
     stage.style.width =
       viewport.width + "px";
+
 
     stage.style.height =
       viewport.height + "px";
@@ -2264,25 +2960,34 @@ async function renderThumbnail(
 
     await page.render({
 
-      canvasContext: context,
+      canvasContext:context,
 
-      viewport: viewport
+      viewport:viewport
 
     }).promise;
 
+
+    /* =====================
+    ROTATION BADGE
+    ===================== */
 
     if(
       pageData.rotation !== 0
     ){
 
       const badge =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
+
 
       badge.className =
         "rotation-badge";
 
+
       badge.textContent =
         pageData.rotation + "°";
+
 
       stage.appendChild(
         badge
@@ -2290,32 +2995,144 @@ async function renderThumbnail(
 
     }
 
-  }catch(error){
 
-    console.error(
-      "Thumbnail error:",
-      error
-    );
+    /* =====================
+    CROP BADGE
+    ===================== */
+
+    if(pageData.crop){
+
+      const badge =
+        document.createElement(
+          "div"
+        );
+
+
+      badge.className =
+        "crop-badge";
+
+
+      badge.textContent =
+        "Cropped";
+
+
+      stage.appendChild(
+        badge
+      );
+
+
+      drawThumbnailCrop(
+        stage,
+        pageData,
+        viewport
+      );
+
+    }
+
+  }
+  catch(error){
+
+    console.error(error);
 
   }
 
 }
 
 
-/* =========================================================
-   MOVE PAGE
-========================================================= */
+/* =====================================================
+DRAW CROP ON THUMBNAIL
+===================================================== */
+
+function drawThumbnailCrop(
+  stage,
+  pageData,
+  viewport
+){
+
+  if(!pageData.crop){
+
+    return;
+
+  }
+
+
+  const crop =
+    pageData.crop;
+
+
+  const fullW =
+    viewport.width;
+
+
+  const fullH =
+    viewport.height;
+
+
+  const left =
+    crop.x *
+    fullW;
+
+
+  const top =
+    crop.y *
+    fullH;
+
+
+  const width =
+    crop.width *
+    fullW;
+
+
+  const height =
+    crop.height *
+    fullH;
+
+
+  const overlay =
+    document.createElement(
+      "div"
+    );
+
+
+  overlay.className =
+    "crop-overlay";
+
+
+  overlay.style.left =
+    left + "px";
+
+
+  overlay.style.top =
+    top + "px";
+
+
+  overlay.style.width =
+    width + "px";
+
+
+  overlay.style.height =
+    height + "px";
+
+
+  stage.appendChild(
+    overlay
+  );
+
+}
+
+
+/* =====================================================
+MOVE PAGE
+===================================================== */
 
 function movePage(
-  fromIndex,
-  toIndex
+  from,
+  to
 ){
 
   if(
-    fromIndex < 0 ||
-    fromIndex >= pages.length ||
-    toIndex < 0 ||
-    toIndex >= pages.length
+    to < 0 ||
+    to >= pages.length
   ){
 
     return;
@@ -2323,37 +3140,39 @@ function movePage(
   }
 
 
-  const item =
+  const moved =
     pages.splice(
-      fromIndex,
+      from,
       1
     )[0];
 
 
   pages.splice(
-    toIndex,
+    to,
     0,
-    item
+    moved
   );
 
 
   if(
-    currentMainIndex === fromIndex
+    currentMainIndex === from
   ){
 
     currentMainIndex =
-      toIndex;
+      to;
 
-  }else if(
-    fromIndex < currentMainIndex &&
-    toIndex >= currentMainIndex
+  }
+  else if(
+    from < currentMainIndex &&
+    to >= currentMainIndex
   ){
 
     currentMainIndex--;
 
-  }else if(
-    fromIndex > currentMainIndex &&
-    toIndex <= currentMainIndex
+  }
+  else if(
+    from > currentMainIndex &&
+    to <= currentMainIndex
   ){
 
     currentMainIndex++;
@@ -2363,1065 +3182,1534 @@ function movePage(
 
   renderPages();
 
-  renderMainPreview();
-
-}
-
-
-/* =========================================================
-   DELETE PAGE
-========================================================= */
-
-function deletePage(index){
-
-  if(pages.length <= 1){
-
-    showStatus(
-      "At least one page must remain.",
-      true
-    );
-
-    return;
-
-  }
-
-
-  pages.splice(
-    index,
-    1
-  );
-
-
-  if(
-    currentMainIndex >= pages.length
-  ){
-
-    currentMainIndex =
-      pages.length - 1;
-
-  }else if(
-    index < currentMainIndex
-  ){
-
-    currentMainIndex--;
-
-  }
-
-
-  renderPages();
+  updateSelection();
 
   renderMainPreview();
 
 }
 
 
-/* =========================================================
-   SELECTION
-========================================================= */
+/* =====================================================
+SELECT ALL
+===================================================== */
 
-function updateSelection(){
+document
+.getElementById("selectAll")
+.addEventListener(
+"click",
+function(){
 
   pages.forEach(
-    function(pageData,index){
+    function(page){
 
-      const card =
-        pageGrid.children[index];
-
-      if(!card){
-        return;
-      }
-
-      card.classList.toggle(
-        "selected",
-        pageData.selected
-      );
-
-      const checkbox =
-        card.querySelector(
-          ".page-checkbox"
-        );
-
-      if(checkbox){
-
-        checkbox.checked =
-          pageData.selected;
-
-      }
+      page.selected =
+        true;
 
     }
   );
 
+
+  renderPages();
+
+  updateSelection();
+
+});
+
+
+/* =====================================================
+CLEAR SELECTION
+===================================================== */
+
+document
+.getElementById("clearSelection")
+.addEventListener(
+"click",
+function(){
+
+  pages.forEach(
+    function(page){
+
+      page.selected =
+        false;
+
+    }
+  );
+
+
+  renderPages();
+
+  updateSelection();
+
+});
+
+
+/* =====================================================
+UPDATE SELECTION
+===================================================== */
+
+function updateSelection(){
+
+  const count =
+    pages.filter(
+      function(page){
+
+        return page.selected;
+
+      }
+    ).length;
+
+
+  selectionCount.textContent =
+    count +
+    (
+      count === 1
+      ? " page selected"
+      : " pages selected"
+    );
+
+
+  splitButton.disabled =
+    count === 0;
+
 }
 
 
-/* =========================================================
-   SELECT ALL
-========================================================= */
+/* =====================================================
+OPEN CROP EDITOR
+===================================================== */
 
-selectAllBtn.addEventListener(
-  "click",
-  function(){
-
-    pages.forEach(
-      page =>
-        page.selected = true
-    );
-
-    updateSelection();
-
-  }
-);
-
-
-/* =========================================================
-   DESELECT ALL
-========================================================= */
-
-deselectAllBtn.addEventListener(
-  "click",
-  function(){
-
-    pages.forEach(
-      page =>
-        page.selected = false
-    );
-
-    updateSelection();
-
-  }
-);
-
-
-/* =========================================================
-   CROP EDITOR
-========================================================= */
-
-async function openCropEditor(index){
-
-  if(
-    !pdfDoc ||
-    !pages[index]
-  ){
-    return;
-  }
-
+async function openCropEditor(
+  pageData,
+  index
+){
 
   cropPageIndex =
     index;
 
 
-  cropPdfPage =
-    await pdfDoc.getPage(
-      pages[index].originalIndex + 1
-    );
+  document.getElementById(
+    "cropPageNumber"
+  ).textContent =
+    index + 1;
 
 
-  cropBox =
-    pages[index].crop
+  cropModal.classList.add(
+    "show"
+  );
+
+
+  cropTempRect =
+    pageData.crop
       ? {
-          ...pages[index].crop
+          ...pageData.crop
         }
       : {
-          x:0.05,
-          y:0.05,
-          width:0.90,
-          height:0.90
+          x:0,
+          y:0,
+          width:1,
+          height:1
         };
 
 
-  cropModal.style.display =
-    "block";
+  await renderCropSurface(
+    pageData
+  );
 
 
-  await renderCropCanvas();
+  setTimeout(
+    function(){
 
-  updateCropSelection();
+      displayCropRectangle();
 
-}
-
-
-async function renderCropCanvas(){
-
-  if(!cropPdfPage){
-    return;
-  }
-
-
-  const viewport =
-    cropPdfPage.getViewport({
-      scale: 1
-    });
-
-
-  const maxWidth =
-    Math.min(
-      760,
-      window.innerWidth - 100
-    );
-
-
-  const maxHeight =
-    Math.min(
-      650,
-      window.innerHeight - 180
-    );
-
-
-  const scaleX =
-    maxWidth /
-    viewport.width;
-
-
-  const scaleY =
-    maxHeight /
-    viewport.height;
-
-
-  cropDisplayScale =
-    Math.min(
-      scaleX,
-      scaleY,
-      1.5
-    );
-
-
-  const displayViewport =
-    cropPdfPage.getViewport({
-      scale:
-        cropDisplayScale
-    });
-
-
-  cropCanvas.width =
-    displayViewport.width;
-
-  cropCanvas.height =
-    displayViewport.height;
-
-
-  cropCanvas.style.width =
-    displayViewport.width + "px";
-
-  cropCanvas.style.height =
-    displayViewport.height + "px";
-
-
-  cropStage.style.width =
-    displayViewport.width + "px";
-
-  cropStage.style.height =
-    displayViewport.height + "px";
-
-
-  const context =
-    cropCanvas.getContext("2d");
-
-
-  await cropPdfPage.render({
-
-    canvasContext: context,
-
-    viewport:
-      displayViewport
-
-  }).promise;
+    },
+    50
+  );
 
 }
 
 
-/* =========================================================
-   CROP SELECTION DISPLAY
-========================================================= */
-
-function updateCropSelection(){
-
-  if(!cropCanvas.width){
-    return;
-  }
-
-
-  cropSelection.style.left =
-    (
-      cropBox.x *
-      cropCanvas.width
-    ) + "px";
-
-
-  cropSelection.style.top =
-    (
-      cropBox.y *
-      cropCanvas.height
-    ) + "px";
-
-
-  cropSelection.style.width =
-    (
-      cropBox.width *
-      cropCanvas.width
-    ) + "px";
-
-
-  cropSelection.style.height =
-    (
-      cropBox.height *
-      cropCanvas.height
-    ) + "px";
-
-}
-
-
-/* =========================================================
-   CROP MOUSE EVENTS
-========================================================= */
-
-cropSelection.addEventListener(
-  "mousedown",
-  function(event){
-
-    event.preventDefault();
-
-    const handle =
-      event.target.dataset.handle;
-
-    const rect =
-      cropCanvas.getBoundingClientRect();
-
-
-    cropStartX =
-      (
-        event.clientX -
-        rect.left
-      ) /
-      rect.width;
-
-
-    cropStartY =
-      (
-        event.clientY -
-        rect.top
-      ) /
-      rect.height;
-
-
-    if(handle){
-
-      cropMode =
-        "resize";
-
-      cropHandle =
-        handle;
-
-    }else{
-
-      cropMode =
-        "move";
-
-      cropHandle =
-        null;
-
-    }
-
-  }
-);
-
-
-document.addEventListener(
-  "mousemove",
-  function(event){
-
-    if(
-      !cropMode ||
-      !cropCanvas.width
-    ){
-      return;
-    }
-
-
-    const rect =
-      cropCanvas.getBoundingClientRect();
-
-
-    let x =
-      (
-        event.clientX -
-        rect.left
-      ) /
-      rect.width;
-
-
-    let y =
-      (
-        event.clientY -
-        rect.top
-      ) /
-      rect.height;
-
-
-    x =
-      Math.max(
-        0,
-        Math.min(
-          1,
-          x
-        )
-      );
-
-
-    y =
-      Math.max(
-        0,
-        Math.min(
-          1,
-          y
-        )
-      );
-
-
-    if(
-      cropMode === "move"
-    ){
-
-      const dx =
-        x - cropStartX;
-
-      const dy =
-        y - cropStartY;
-
-
-      let newX =
-        cropBox.x + dx;
-
-      let newY =
-        cropBox.y + dy;
-
-
-      newX =
-        Math.max(
-          0,
-          Math.min(
-            1 - cropBox.width,
-            newX
-          )
-        );
-
-
-      newY =
-        Math.max(
-          0,
-          Math.min(
-            1 - cropBox.height,
-            newY
-          )
-        );
-
-
-      cropBox.x =
-        newX;
-
-      cropBox.y =
-        newY;
-
-
-      cropStartX =
-        x;
-
-      cropStartY =
-        y;
-
-    }else{
-
-      resizeCrop(
-        x,
-        y
-      );
-
-    }
-
-
-    updateCropSelection();
-
-  }
-);
-
-
-document.addEventListener(
-  "mouseup",
-  function(){
-
-    cropMode =
-      null;
-
-    cropHandle =
-      null;
-
-  }
-);
-
-
-/* =========================================================
-   RESIZE CROP
-========================================================= */
-
-function resizeCrop(
-  x,
-  y
+/* =====================================================
+RENDER CROP SURFACE
+===================================================== */
+
+async function renderCropSurface(
+  pageData
 ){
 
-  const right =
-    cropBox.x +
-    cropBox.width;
+  try{
 
-  const bottom =
-    cropBox.y +
-    cropBox.height;
+    const page =
+      await pdfJsDocument
+      .getPage(
+        pageData.originalIndex + 1
+      );
 
 
-  const minSize =
-    0.03;
+    const baseViewport =
+      page.getViewport({
+
+        scale:1,
+
+        rotation:pageData.rotation
+
+      });
+
+
+    const area =
+      document.querySelector(
+        ".crop-work-area"
+      );
+
+
+    cropDisplayScale =
+      calculateFitScale(
+
+        area.clientWidth,
+
+        area.clientHeight,
+
+        baseViewport.width,
+
+        baseViewport.height,
+
+        50
+
+      );
+
+
+    const viewport =
+      page.getViewport({
+
+        scale:cropDisplayScale,
+
+        rotation:pageData.rotation
+
+      });
+
+
+    const canvas =
+      document.createElement(
+        "canvas"
+      );
+
+
+    const context =
+      canvas.getContext(
+        "2d"
+      );
+
+
+    canvas.width =
+      Math.ceil(
+        viewport.width
+      );
+
+
+    canvas.height =
+      Math.ceil(
+        viewport.height
+      );
+
+
+    canvas.style.width =
+      viewport.width + "px";
+
+
+    canvas.style.height =
+      viewport.height + "px";
+
+
+    cropSurface.innerHTML =
+      "";
+
+
+    cropSurface.style.width =
+      viewport.width + "px";
+
+
+    cropSurface.style.height =
+      viewport.height + "px";
+
+
+    cropSurface.appendChild(
+      canvas
+    );
+
+
+    await page.render({
+
+      canvasContext:context,
+
+      viewport:viewport
+
+    }).promise;
+
+
+    createCropRectangle();
+
+
+  }
+  catch(error){
+
+    console.error(error);
+
+  }
+
+}
+
+
+/* =====================================================
+CREATE CROP RECTANGLE
+===================================================== */
+
+function createCropRectangle(){
+
+  const old =
+    cropSurface.querySelector(
+      ".crop-rectangle"
+    );
+
+
+  if(old){
+
+    old.remove();
+
+  }
+
+
+  const rect =
+    document.createElement(
+      "div"
+    );
+
+
+  rect.className =
+    "crop-rectangle";
+
+
+  rect.id =
+    "cropRectangle";
+
+
+  rect.innerHTML =
+
+    '<div class="crop-handle handle-tl"></div>' +
+
+    '<div class="crop-handle handle-tr"></div>' +
+
+    '<div class="crop-handle handle-bl"></div>' +
+
+    '<div class="crop-handle handle-br"></div>';
+
+
+  cropSurface.appendChild(
+    rect
+  );
+
+
+  attachCropEvents(
+    rect
+  );
+
+}
+
+
+/* =====================================================
+DISPLAY CROP RECTANGLE
+===================================================== */
+
+function displayCropRectangle(){
+
+  const rect =
+    document.getElementById(
+      "cropRectangle"
+    );
 
 
   if(
-    cropHandle === "tl"
+    !rect ||
+    !cropTempRect
   ){
 
-    const newX =
-      Math.min(
-        x,
-        right - minSize
-      );
-
-    const newY =
-      Math.min(
-        y,
-        bottom - minSize
-      );
-
-    cropBox.x =
-      Math.max(
-        0,
-        newX
-      );
-
-    cropBox.y =
-      Math.max(
-        0,
-        newY
-      );
-
-    cropBox.width =
-      right -
-      cropBox.x;
-
-    cropBox.height =
-      bottom -
-      cropBox.y;
+    return;
 
   }
 
 
-  else if(
-    cropHandle === "tr"
-  ){
-
-    const newY =
-      Math.min(
-        y,
-        bottom - minSize
-      );
-
-    cropBox.y =
-      Math.max(
-        0,
-        newY
-      );
-
-    cropBox.width =
-      Math.max(
-        minSize,
-        Math.min(
-          1 - cropBox.x,
-          x - cropBox.x
-        )
-      );
-
-    cropBox.height =
-      bottom -
-      cropBox.y;
-
-  }
+  rect.style.left =
+    (
+      cropTempRect.x *
+      cropSurface.clientWidth
+    ) + "px";
 
 
-  else if(
-    cropHandle === "bl"
-  ){
-
-    cropBox.x =
-      Math.max(
-        0,
-        Math.min(
-          x,
-          right - minSize
-        )
-      );
-
-    cropBox.width =
-      right -
-      cropBox.x;
-
-    cropBox.height =
-      Math.max(
-        minSize,
-        Math.min(
-          1 - cropBox.y,
-          y - cropBox.y
-        )
-      );
-
-  }
+  rect.style.top =
+    (
+      cropTempRect.y *
+      cropSurface.clientHeight
+    ) + "px";
 
 
-  else if(
-    cropHandle === "br"
-  ){
+  rect.style.width =
+    (
+      cropTempRect.width *
+      cropSurface.clientWidth
+    ) + "px";
 
-    cropBox.width =
-      Math.max(
-        minSize,
-        Math.min(
-          1 - cropBox.x,
-          x - cropBox.x
-        )
-      );
 
-    cropBox.height =
-      Math.max(
-        minSize,
-        Math.min(
-          1 - cropBox.y,
-          y - cropBox.y
-        )
-      );
+  rect.style.height =
+    (
+      cropTempRect.height *
+      cropSurface.clientHeight
+    ) + "px";
 
-  }
+
+  rect.classList.add(
+    "active"
+  );
 
 }
 
 
-/* =========================================================
-   RESET CROP
-========================================================= */
+/* =====================================================
+CROP POINTER EVENTS
+===================================================== */
 
-resetCropBtn.addEventListener(
-  "click",
-  function(){
+function attachCropEvents(
+  rect
+){
 
-    cropBox = {
+  cropSurface.onpointerdown =
+    function(event){
 
-      x:0.05,
+      if(
+        event.target.closest(
+          ".crop-handle"
+        )
+      ){
 
-      y:0.05,
+        return;
 
-      width:0.90,
+      }
 
-      height:0.90
+
+      if(
+        event.target === rect ||
+        rect.contains(
+          event.target
+        )
+      ){
+
+        cropMoving = true;
+        cropResizing = false;
+        cropDragging = false;
+
+      }
+      else{
+
+        cropDragging = true;
+        cropMoving = false;
+        cropResizing = false;
+
+        const point =
+          getCropPoint(
+            event
+          );
+
+
+        cropStartX =
+          point.x;
+
+
+        cropStartY =
+          point.y;
+
+
+        cropTempRect = {
+
+          x:point.x,
+
+          y:point.y,
+
+          width:0,
+
+          height:0
+
+        };
+
+      }
+
+
+      cropStartRect =
+        {
+          ...cropTempRect
+        };
+
+
+      cropSurface.setPointerCapture(
+        event.pointerId
+      );
+
+
+      event.preventDefault();
+
+      displayCropRectangle();
 
     };
 
-    updateCropSelection();
 
-  }
-);
+  rect.addEventListener(
+    "pointerdown",
+    function(event){
+
+      const handle =
+        event.target.closest(
+          ".crop-handle"
+        );
 
 
-/* =========================================================
-   APPLY CROP
-========================================================= */
+      if(handle){
 
-applyCropBtn.addEventListener(
-  "click",
-  function(){
+        cropResizeHandle =
+          getHandleName(
+            handle
+          );
 
-    if(
-      cropPageIndex === null ||
-      !pages[cropPageIndex]
-    ){
 
-      return;
+        cropResizing = true;
+        cropMoving = false;
+        cropDragging = false;
+
+      }
+      else{
+
+        cropMoving = true;
+        cropResizing = false;
+        cropDragging = false;
+
+      }
+
+
+      const point =
+        getCropPoint(
+          event
+        );
+
+
+      cropStartX =
+        point.x;
+
+
+      cropStartY =
+        point.y;
+
+
+      cropStartRect =
+        {
+          ...cropTempRect
+        };
+
+
+      cropSurface.setPointerCapture(
+        event.pointerId
+      );
+
+
+      event.preventDefault();
+
+      event.stopPropagation();
 
     }
+  );
 
 
-    pages[cropPageIndex].crop = {
+  cropSurface.onpointermove =
+    function(event){
 
-      x:
-        cropBox.x,
+      if(
+        !cropDragging &&
+        !cropMoving &&
+        !cropResizing
+      ){
 
-      y:
-        cropBox.y,
+        return;
 
-      width:
-        cropBox.width,
+      }
 
-      height:
-        cropBox.height
+
+      const point =
+        getCropPoint(
+          event
+        );
+
+
+      const dx =
+        point.x -
+        cropStartX;
+
+
+      const dy =
+        point.y -
+        cropStartY;
+
+
+      if(cropDragging){
+
+        cropTempRect =
+          normalizeRect({
+
+            x:cropStartRect.x,
+
+            y:cropStartRect.y,
+
+            width:dx,
+
+            height:dy
+
+          });
+
+      }
+
+
+      if(cropMoving){
+
+        let x =
+          cropStartRect.x +
+          dx;
+
+
+        let y =
+          cropStartRect.y +
+          dy;
+
+
+        x =
+          Math.max(
+            0,
+            Math.min(
+              x,
+              1 -
+              cropStartRect.width
+            )
+          );
+
+
+        y =
+          Math.max(
+            0,
+            Math.min(
+              y,
+              1 -
+              cropStartRect.height
+            )
+          );
+
+
+        cropTempRect = {
+
+          x:x,
+
+          y:y,
+
+          width:
+            cropStartRect.width,
+
+          height:
+            cropStartRect.height
+
+        };
+
+      }
+
+
+      if(cropResizing){
+
+        resizeCropRect(
+          point.x,
+          point.y
+        );
+
+      }
+
+
+      displayCropRectangle();
 
     };
 
 
-    closeCropModal();
+  cropSurface.onpointerup =
+    function(event){
 
-    renderPages();
+      cropDragging = false;
+      cropMoving = false;
+      cropResizing = false;
+      cropResizeHandle = null;
 
-    if(
-      currentMainIndex ===
-      cropPageIndex
-    ){
 
-      renderMainPreview();
+      try{
 
-    }
+        cropSurface.releasePointerCapture(
+          event.pointerId
+        );
+
+      }
+      catch(e){}
+
+    };
+
+}
+
+
+/* =====================================================
+GET CROP POINT
+===================================================== */
+
+function getCropPoint(
+  event
+){
+
+  const rect =
+    cropSurface.getBoundingClientRect();
+
+
+  let x =
+    (
+      event.clientX -
+      rect.left
+    ) /
+    rect.width;
+
+
+  let y =
+    (
+      event.clientY -
+      rect.top
+    ) /
+    rect.height;
+
+
+  x =
+    Math.max(
+      0,
+      Math.min(
+        1,
+        x
+      )
+    );
+
+
+  y =
+    Math.max(
+      0,
+      Math.min(
+        1,
+        y
+      )
+    );
+
+
+  return {
+    x:x,
+    y:y
+  };
+
+}
+
+
+/* =====================================================
+NORMALIZE RECT
+===================================================== */
+
+function normalizeRect(
+  rect
+){
+
+  let x =
+    rect.x;
+
+  let y =
+    rect.y;
+
+  let width =
+    rect.width;
+
+  let height =
+    rect.height;
+
+
+  if(width < 0){
+
+    x += width;
+
+    width =
+      Math.abs(width);
 
   }
-);
 
 
-/* =========================================================
-   CLOSE CROP
-========================================================= */
+  if(height < 0){
 
-function closeCropModal(){
+    y += height;
 
-  cropModal.style.display =
-    "none";
+    height =
+      Math.abs(height);
+
+  }
+
+
+  x =
+    Math.max(
+      0,
+      Math.min(
+        1,
+        x
+      )
+    );
+
+
+  y =
+    Math.max(
+      0,
+      Math.min(
+        1,
+        y
+      )
+    );
+
+
+  width =
+    Math.min(
+      width,
+      1 - x
+    );
+
+
+  height =
+    Math.min(
+      height,
+      1 - y
+    );
+
+
+  return {
+
+    x:x,
+
+    y:y,
+
+    width:width,
+
+    height:height
+
+  };
+
+}
+
+
+/* =====================================================
+GET HANDLE NAME
+===================================================== */
+
+function getHandleName(
+  handle
+){
+
+  if(
+    handle.classList.contains(
+      "handle-tl"
+    )
+  ){
+
+    return "tl";
+
+  }
+
+
+  if(
+    handle.classList.contains(
+      "handle-tr"
+    )
+  ){
+
+    return "tr";
+
+  }
+
+
+  if(
+    handle.classList.contains(
+      "handle-bl"
+    )
+  ){
+
+    return "bl";
+
+  }
+
+
+  return "br";
+
+}
+
+
+/* =====================================================
+RESIZE CROP
+===================================================== */
+
+function resizeCropRect(
+  mouseX,
+  mouseY
+){
+
+  const r =
+    cropStartRect;
+
+
+  let left =
+    r.x;
+
+  let top =
+    r.y;
+
+  let right =
+    r.x +
+    r.width;
+
+  let bottom =
+    r.y +
+    r.height;
+
+
+  if(
+    cropResizeHandle === "tl"
+  ){
+
+    left =
+      Math.max(
+        0,
+        Math.min(
+          mouseX,
+          right - .03
+        )
+      );
+
+
+    top =
+      Math.max(
+        0,
+        Math.min(
+          mouseY,
+          bottom - .03
+        )
+      );
+
+  }
+
+
+  if(
+    cropResizeHandle === "tr"
+  ){
+
+    right =
+      Math.min(
+        1,
+        Math.max(
+          mouseX,
+          left + .03
+        )
+      );
+
+
+    top =
+      Math.max(
+        0,
+        Math.min(
+          mouseY,
+          bottom - .03
+        )
+      );
+
+  }
+
+
+  if(
+    cropResizeHandle === "bl"
+  ){
+
+    left =
+      Math.max(
+        0,
+        Math.min(
+          mouseX,
+          right - .03
+        )
+      );
+
+
+    bottom =
+      Math.min(
+        1,
+        Math.max(
+          mouseY,
+          top + .03
+        )
+      );
+
+  }
+
+
+  if(
+    cropResizeHandle === "br"
+  ){
+
+    right =
+      Math.min(
+        1,
+        Math.max(
+          mouseX,
+          left + .03
+        )
+      );
+
+
+    bottom =
+      Math.min(
+        1,
+        Math.max(
+          mouseY,
+          top + .03
+        )
+      );
+
+  }
+
+
+  cropTempRect = {
+
+    x:left,
+
+    y:top,
+
+    width:
+      right - left,
+
+    height:
+      bottom - top
+
+  };
+
+}
+
+
+/* =====================================================
+FULL PAGE
+===================================================== */
+
+document
+.getElementById("resetCrop")
+.addEventListener(
+"click",
+function(){
+
+  cropTempRect = {
+
+    x:0,
+
+    y:0,
+
+    width:1,
+
+    height:1
+
+  };
+
+
+  displayCropRectangle();
+
+});
+
+
+/* =====================================================
+CLEAR CROP
+===================================================== */
+
+document
+.getElementById("clearCrop")
+.addEventListener(
+"click",
+function(){
+
+  cropTempRect = {
+
+    x:0,
+
+    y:0,
+
+    width:1,
+
+    height:1
+
+  };
+
+
+  displayCropRectangle();
+
+});
+
+
+/* =====================================================
+APPLY CROP
+===================================================== */
+
+document
+.getElementById("applyCrop")
+.addEventListener(
+"click",
+function(){
+
+  if(
+    cropPageIndex === null ||
+    !pages[cropPageIndex]
+  ){
+
+    return;
+
+  }
+
+
+  const r =
+    normalizeRect(
+      cropTempRect
+    );
+
+
+  if(
+    r.width >= .995 &&
+    r.height >= .995 &&
+    r.x <= .005 &&
+    r.y <= .005
+  ){
+
+    pages[cropPageIndex].crop =
+      null;
+
+  }
+  else{
+
+    pages[cropPageIndex].crop =
+      r;
+
+  }
+
+
+  const index =
+    cropPageIndex;
+
+
+  closeCrop();
+
+
+  renderPages();
+
+  updateSelection();
+
+
+  if(
+    index === currentMainIndex
+  ){
+
+    renderMainPreview();
+
+  }
+
+});
+
+
+/* =====================================================
+CLOSE CROP
+===================================================== */
+
+function closeCrop(){
+
+  cropModal.classList.remove(
+    "show"
+  );
+
 
   cropPageIndex =
     null;
 
-  cropPdfPage =
-    null;
 
-  cropMode =
+  cropTempRect =
     null;
 
 }
 
 
-closeCropBtn.addEventListener(
-  "click",
-  closeCropModal
+document
+.getElementById("closeCrop")
+.addEventListener(
+"click",
+closeCrop
+);
+
+
+document
+.getElementById("cancelCrop")
+.addEventListener(
+"click",
+closeCrop
 );
 
 
 cropModal.addEventListener(
-  "click",
-  function(event){
+"click",
+function(event){
 
-    if(
-      event.target === cropModal
-    ){
+  if(
+    event.target ===
+    cropModal
+  ){
 
-      closeCropModal();
-
-    }
+    closeCrop();
 
   }
-);
+
+});
 
 
-/* =========================================================
-   SPLIT PDF
-========================================================= */
+/* =====================================================
+KEYBOARD ESC
+===================================================== */
 
-splitBtn.addEventListener(
-  "click",
-  async function(){
+document.addEventListener(
+"keydown",
+function(event){
 
-    if(
-      !pdfFile ||
-      !pages.length
+  if(
+    event.key === "Escape" &&
+    cropModal.classList.contains(
+      "show"
+    )
+  ){
+
+    closeCrop();
+
+  }
+
+});
+
+
+/* =====================================================
+SPLIT PDF
+===================================================== */
+
+splitButton.addEventListener(
+"click",
+async function(){
+
+  if(!currentFile){
+
+    return;
+
+  }
+
+
+  const selected =
+    pages.filter(
+      function(page){
+
+        return page.selected;
+
+      }
+    );
+
+
+  if(
+    selected.length === 0
+  ){
+
+    showStatus(
+      "Please select at least one page."
+    );
+
+    return;
+
+  }
+
+
+  splitButton.disabled =
+    true;
+
+
+  splitButton.textContent =
+    "Creating PDF...";
+
+
+  showStatus(
+    "Creating your PDF..."
+  );
+
+
+  try{
+
+    const buffer =
+      await currentFile.arrayBuffer();
+
+
+    const sourcePdf =
+      await PDFLib
+      .PDFDocument
+      .load(
+        buffer
+      );
+
+
+    const outputPdf =
+      await PDFLib
+      .PDFDocument
+      .create();
+
+
+    /* =========================
+    PROCESS CURRENT ORDER
+    ========================= */
+
+    for(
+      const pageData of selected
     ){
 
-      return;
+      const copied =
+        await outputPdf.copyPages(
 
-    }
+          sourcePdf,
 
+          [
+            pageData.originalIndex
+          ]
 
-    const selectedPages =
-      pages.filter(
-        page =>
-          page.selected
-      );
-
-
-    if(
-      selectedPages.length === 0
-    ){
-
-      showStatus(
-        "Please select at least one page.",
-        true
-      );
-
-      return;
-
-    }
-
-
-    try{
-
-      splitBtn.disabled =
-        true;
-
-      splitBtn.textContent =
-        "Creating PDF...";
-
-      showStatus(
-        "Creating your split PDF..."
-      );
-
-
-      const sourcePdf =
-        await PDFLib.PDFDocument.load(
-          pdfBytes
         );
 
 
-      const outputPdf =
-        await PDFLib.PDFDocument.create();
+      const newPage =
+        copied[0];
 
 
-      for(
-        const pageData of selectedPages
-      ){
+      /* =====================
+      ROTATION
+      ===================== */
 
-        const originalIndex =
-          pageData.originalIndex;
+      newPage.setRotation(
+        PDFLib.degrees(
+          pageData.rotation
+        )
+      );
 
 
-        const copiedPages =
-          await outputPdf.copyPages(
-            sourcePdf,
-            [originalIndex]
+      /* =====================
+      CROP
+      ===================== */
+
+      if(pageData.crop){
+
+        const pageWidth =
+          newPage.getWidth();
+
+
+        const pageHeight =
+          newPage.getHeight();
+
+
+        const x =
+          pageData.crop.x *
+          pageWidth;
+
+
+        const cropWidth =
+          pageData.crop.width *
+          pageWidth;
+
+
+        const cropHeight =
+          pageData.crop.height *
+          pageHeight;
+
+
+        const top =
+          pageData.crop.y *
+          pageHeight;
+
+
+        const bottomY =
+          pageHeight -
+          top -
+          cropHeight;
+
+
+        if(
+          cropWidth > 1 &&
+          cropHeight > 1
+        ){
+
+          newPage.setCropBox(
+
+            x,
+
+            bottomY,
+
+            cropWidth,
+
+            cropHeight
+
           );
-
-
-        const newPage =
-          copiedPages[0];
-
-
-        outputPdf.addPage(
-          newPage
-        );
-
-
-        /* =================================================
-           ROTATION
-        ================================================= */
-
-        newPage.setRotation(
-          PDFLib.degrees(
-            Number(
-              pageData.rotation || 0
-            )
-          )
-        );
-
-
-        /* =================================================
-           CROP
-        ================================================= */
-
-        if(pageData.crop){
-
-          const pageWidth =
-            newPage.getWidth();
-
-          const pageHeight =
-            newPage.getHeight();
-
-
-          const x =
-            pageData.crop.x *
-            pageWidth;
-
-
-          const cropWidth =
-            pageData.crop.width *
-            pageWidth;
-
-
-          const top =
-            pageData.crop.y *
-            pageHeight;
-
-
-          const cropHeight =
-            pageData.crop.height *
-            pageHeight;
-
-
-          const bottomY =
-            pageHeight -
-            top -
-            cropHeight;
-
-
-          if(
-            cropWidth > 1 &&
-            cropHeight > 1
-          ){
-
-            newPage.setCropBox(
-              x,
-              bottomY,
-              cropWidth,
-              cropHeight
-            );
-
-          }
 
         }
 
       }
 
 
-      const outputBytes =
-        await outputPdf.save();
-
-
-      const blob =
-        new Blob(
-          [outputBytes],
-          {
-            type:"application/pdf"
-          }
-        );
-
-
-      const url =
-        URL.createObjectURL(
-          blob
-        );
-
-
-      downloadBtn.href =
-        url;
-
-
-      downloadBtn.download =
-        getDownloadName(
-          pdfFile.name
-        );
-
-
-      downloadArea.style.display =
-        "block";
-
-
-      showStatus(
-        "PDF created successfully."
+      outputPdf.addPage(
+        newPage
       );
-
-
-      splitBtn.textContent =
-        "Split Selected Pages";
-
-      splitBtn.disabled =
-        false;
-
-
-    }catch(error){
-
-      console.error(error);
-
-      showStatus(
-        "Error while creating PDF. Please try again.",
-        true
-      );
-
-
-      splitBtn.textContent =
-        "Split Selected Pages";
-
-      splitBtn.disabled =
-        false;
 
     }
 
+
+    /* =========================
+    SAVE
+    ========================= */
+
+    const bytes =
+      await outputPdf.save();
+
+
+    if(downloadUrl){
+
+      URL.revokeObjectURL(
+        downloadUrl
+      );
+
+    }
+
+
+    const blob =
+      new Blob(
+        [bytes],
+        {
+          type:
+          "application/pdf"
+        }
+      );
+
+
+    downloadUrl =
+      URL.createObjectURL(
+        blob
+      );
+
+
+    downloadButton.href =
+      downloadUrl;
+
+
+    downloadButton.download =
+      createDownloadName(
+        currentFile.name
+      );
+
+
+    downloadArea.style.display =
+      "block";
+
+
+    hideStatus();
+
+
+    splitButton.disabled =
+      false;
+
+
+    splitButton.textContent =
+      "Split & Download PDF";
+
+
+    downloadArea.scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
+
   }
-);
+  catch(error){
+
+    console.error(error);
 
 
-/* =========================================================
-   DOWNLOAD NAME
-========================================================= */
+    showStatus(
+      "PDF creation failed. Please try again."
+    );
 
-function getDownloadName(
+
+    splitButton.disabled =
+      false;
+
+
+    splitButton.textContent =
+      "Split & Download PDF";
+
+  }
+
+});
+
+
+/* =====================================================
+DOWNLOAD NAME
+===================================================== */
+
+function createDownloadName(
   name
 ){
 
-  const dot =
-    name.lastIndexOf(".");
-
-
-  const base =
-    dot > 0
-      ? name.substring(
-          0,
-          dot
-        )
-      : name;
-
-
-  return (
-    base +
-    "-split.pdf"
-  );
+  return name.replace(
+    /\.pdf$/i,
+    ""
+  ) + "-split.pdf";
 
 }
 
 
-/* =========================================================
-   CLEAR
-========================================================= */
+/* =====================================================
+REMOVE FILE
+===================================================== */
 
-clearBtn.addEventListener(
-  "click",
-  function(){
+document
+.getElementById("clearFile")
+.addEventListener(
+"click",
+function(){
 
-    clearPDF();
+  currentFile =
+    null;
+
+  pdfJsDocument =
+    null;
+
+  pages =
+    [];
+
+  currentMainIndex =
+    0;
+
+
+  if(downloadUrl){
+
+    URL.revokeObjectURL(
+      downloadUrl
+    );
+
+    downloadUrl =
+      null;
 
   }
-);
-
-
-changeFileBtn.addEventListener(
-  "click",
-  function(){
-
-    fileInput.click();
-
-  }
-);
-
-
-function clearPDF(){
-
-  pdfFile = null;
-
-  pdfBytes = null;
-
-  pdfDoc = null;
-
-  pages = [];
-
-  currentMainIndex = 0;
-
-  currentMainZoom = 1;
-
-
-  pageGrid.innerHTML =
-    "";
 
 
   fileInput.value =
@@ -3436,116 +4724,95 @@ function clearPDF(){
     "none";
 
 
-  actionBar.style.display =
-    "none";
+  pageGrid.innerHTML =
+    "";
+
+
+  mainStage.innerHTML =
+    "";
 
 
   downloadArea.style.display =
     "none";
 
 
-  status.style.display =
-    "none";
+  hideStatus();
 
 
-  if(
-    downloadBtn.href
-  ){
+  window.scrollTo({
 
-    try{
+    top:0,
 
-      URL.revokeObjectURL(
-        downloadBtn.href
-      );
+    behavior:"smooth"
 
-    }catch(e){}
+  });
 
-  }
+});
 
 
-  downloadBtn.href =
-    "#";
-
-
-  mainPreviewCanvas
-    .getContext("2d")
-    .clearRect(
-      0,
-      0,
-      mainPreviewCanvas.width,
-      mainPreviewCanvas.height
-    );
-
-}
-
-
-/* =========================================================
-   STATUS
-========================================================= */
+/* =====================================================
+STATUS
+===================================================== */
 
 function showStatus(
-  message,
-  isError = false
+  message
 ){
 
-  status.textContent =
+  statusBox.textContent =
     message;
 
-  status.style.display =
-    "block";
-
-  if(isError){
-
-    status.style.background =
-      "#fff0f0";
-
-    status.style.color =
-      "#b00000";
-
-  }else{
-
-    status.style.background =
-      "#fff";
-
-    status.style.color =
-      "#222";
-
-  }
+  statusBox.classList.add(
+    "show"
+  );
 
 }
 
 
 function hideStatus(){
 
-  status.style.display =
-    "none";
+  statusBox.classList.remove(
+    "show"
+  );
 
 }
 
 
-/* =========================================================
-   WINDOW RESIZE
-========================================================= */
+/* =====================================================
+WINDOW RESIZE
+===================================================== */
+
+let resizeTimer = null;
+
 
 window.addEventListener(
-  "resize",
-  function(){
+"resize",
+function(){
 
-    if(
-      cropModal.style.display ===
-      "block" &&
-      cropPdfPage
-    ){
+  clearTimeout(
+    resizeTimer
+  );
 
-      renderCropCanvas()
-        .then(
-          updateCropSelection
-        );
 
-    }
+  resizeTimer =
+    setTimeout(
+      function(){
 
-  }
-);
+        if(
+          pdfJsDocument &&
+          pages.length
+        ){
+
+          renderPages();
+
+          renderMainPreview();
+
+        }
+
+      },
+      250
+    );
+
+});
 
 </script>
 
