@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +14,6 @@ content="Free online PDF page remover. Preview, select and remove unwanted pages
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 <style>
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -57,12 +57,14 @@ button{
   color:#e53232;
   font-size:21px;
   font-weight:800;
+  text-decoration:none;
 }
 
 .back{
   color:#555;
   font-size:14px;
   font-weight:600;
+  text-decoration:none;
 }
 
 .back:hover{
@@ -124,7 +126,7 @@ button{
 .file-label{
   display:inline-block;
   background:#e53232;
-  color:white;
+  color:#fff;
   padding:13px 25px;
   border-radius:10px;
   font-weight:700;
@@ -143,6 +145,7 @@ button{
   margin-top:12px;
   color:#555;
   font-size:14px;
+  word-break:break-word;
 }
 
 .toolbar{
@@ -219,8 +222,8 @@ button{
 
 .pages{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:20px;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
 }
 
 .page-card{
@@ -246,7 +249,7 @@ button{
   background:#eee;
   border-radius:8px;
   overflow:hidden;
-  min-height:300px;
+  min-height:400px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -254,7 +257,7 @@ button{
 
 .page-preview canvas{
   display:block;
-  max-width:100%;
+  width:100%;
   height:auto;
 }
 
@@ -288,7 +291,7 @@ button{
   border:1px solid #ddd;
   background:#fff;
   border-radius:7px;
-  padding:7px 5px;
+  padding:8px 5px;
   font-size:12px;
   font-weight:600;
 }
@@ -313,6 +316,7 @@ button{
   text-align:center;
   padding:30px;
   color:#666;
+  font-weight:600;
 }
 
 .message{
@@ -335,18 +339,28 @@ button{
   border:1px solid #ccebd5;
 }
 
+.message.info{
+  background:#f0f6ff;
+  color:#245a9c;
+  border:1px solid #cfe0ff;
+}
+
 @media(max-width:1000px){
 
   .pages{
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(2,1fr);
   }
 
+  .page-preview{
+    min-height:350px;
+  }
 }
 
 @media(max-width:750px){
 
   .pages{
     grid-template-columns:repeat(2,1fr);
+    gap:14px;
   }
 
   .hero h1{
@@ -358,6 +372,9 @@ button{
     margin-left:0;
   }
 
+  .page-preview{
+    min-height:260px;
+  }
 }
 
 @media(max-width:500px){
@@ -399,6 +416,10 @@ button{
     min-height:190px;
   }
 
+  .page-actions{
+    gap:4px;
+  }
+
   .page-actions button{
     font-size:10px;
     padding:6px 2px;
@@ -408,8 +429,11 @@ button{
     padding:10px;
   }
 
+  .toolbar button{
+    padding:8px 9px;
+    font-size:11px;
+  }
 }
-
 </style>
 </head>
 
@@ -453,7 +477,9 @@ button{
       PDF
     </div>
 
-    <h2>Select PDF File</h2>
+    <h2>
+      Select PDF File
+    </h2>
 
     <p style="color:#777;margin-top:7px;font-size:14px;">
       Choose a PDF file from your device
@@ -466,7 +492,7 @@ button{
     <input
       type="file"
       id="fileInput"
-      accept="application/pdf"
+      accept=".pdf,application/pdf"
     >
 
     <div class="file-name" id="fileName"></div>
@@ -480,13 +506,19 @@ button{
   <div class="pdf-info" id="pdfInfo">
 
     <div>
+
       <strong id="pdfName"></strong>
+
       <br>
+
       <span id="pageCount"></span>
+
     </div>
 
     <div>
+
       <span id="selectionInfo"></span>
+
     </div>
 
   </div>
@@ -502,7 +534,9 @@ button{
       Clear All
     </button>
 
-    <button class="danger" onclick="removeSelectedPages()">
+    <button
+      class="danger"
+      onclick="removeSelectedPages()">
       Remove Selected
     </button>
 
@@ -522,7 +556,9 @@ button{
       ↷ Rotate
     </button>
 
-    <button class="primary" onclick="downloadPDF()">
+    <button
+      class="primary"
+      onclick="downloadPDF()">
       Download PDF
     </button>
 
@@ -542,10 +578,16 @@ button{
 
 
   <div class="empty" id="empty">
-    <h3>No pages available</h3>
+
+    <h3>
+      No pages available
+    </h3>
+
     <p style="margin-top:7px;">
-      All pages have been removed. Please select another PDF.
+      All pages have been removed.
+      Please select another PDF.
     </p>
+
   </div>
 
 </main>
@@ -557,33 +599,77 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
 "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
 
+/* =========================
+   GLOBAL VARIABLES
+========================= */
+
 let originalPdfBytes = null;
+
 let pdfDocument = null;
+
 let pagesData = [];
+
 let selectedPages = new Set();
 
-
-const fileInput = document.getElementById("fileInput");
-const pagesContainer = document.getElementById("pages");
-const toolbar = document.getElementById("toolbar");
-const loading = document.getElementById("loading");
-const pdfInfo = document.getElementById("pdfInfo");
-const empty = document.getElementById("empty");
-const message = document.getElementById("message");
+let originalFileName = "document.pdf";
 
 
-fileInput.addEventListener("change", handleFile);
+/* =========================
+   ELEMENTS
+========================= */
 
+const fileInput =
+document.getElementById("fileInput");
+
+const pagesContainer =
+document.getElementById("pages");
+
+const toolbar =
+document.getElementById("toolbar");
+
+const loading =
+document.getElementById("loading");
+
+const pdfInfo =
+document.getElementById("pdfInfo");
+
+const empty =
+document.getElementById("empty");
+
+const message =
+document.getElementById("message");
+
+
+/* =========================
+   FILE INPUT
+========================= */
+
+fileInput.addEventListener(
+  "change",
+  handleFile
+);
+
+
+/* =========================
+   LOAD PDF
+========================= */
 
 async function handleFile(event){
 
-  const file = event.target.files[0];
+  const file =
+  event.target.files[0];
 
   if(!file){
     return;
   }
 
-  if(file.type !== "application/pdf"){
+
+  const isPDF =
+    file.type === "application/pdf" ||
+    file.name.toLowerCase().endsWith(".pdf");
+
+
+  if(!isPDF){
 
     showMessage(
       "Please select a valid PDF file.",
@@ -593,96 +679,158 @@ async function handleFile(event){
     return;
   }
 
+
   hideMessage();
 
-  originalPdfBytes =
-    await file.arrayBuffer();
-
-  document.getElementById("fileName").textContent =
-    file.name;
-
-  document.getElementById("pdfName").textContent =
-    file.name;
-
-  pagesContainer.innerHTML = "";
-
-  pagesData = [];
-
-  selectedPages.clear();
-
-  empty.style.display = "none";
-
-  toolbar.style.display = "flex";
-
-  pdfInfo.style.display = "flex";
-
-  loading.style.display = "block";
 
   try{
 
-    pdfDocument =
-      await pdfjsLib.getDocument({
-        data:originalPdfBytes
-      }).promise;
+    /*
+      IMPORTANT:
+      PDF data ki safe copy banayi ja rahi hai.
+      Isse PDF.js aur PDF-lib ek dusre
+      ke data ko damage nahi karenge.
+    */
 
-    document.getElementById("pageCount").textContent =
-      pdfDocument.numPages + " pages";
+    const fileBuffer =
+    await file.arrayBuffer();
+
+    originalPdfBytes =
+    new Uint8Array(fileBuffer);
+
+
+    originalFileName =
+    file.name;
+
+
+    document.getElementById(
+      "fileName"
+    ).textContent =
+    file.name;
+
+
+    document.getElementById(
+      "pdfName"
+    ).textContent =
+    file.name;
+
+
+    pagesContainer.innerHTML = "";
+
+    pagesData = [];
+
+    selectedPages.clear();
+
+    empty.style.display = "none";
+
+    toolbar.style.display = "flex";
+
+    pdfInfo.style.display = "flex";
+
+    loading.style.display = "block";
+
+
+    /*
+      PDF.js ko separate copy
+    */
+
+    const pdfJsData =
+    originalPdfBytes.slice();
+
+
+    pdfDocument =
+    await pdfjsLib.getDocument({
+      data:pdfJsData
+    }).promise;
+
+
+    document.getElementById(
+      "pageCount"
+    ).textContent =
+    pdfDocument.numPages +
+    " pages";
+
 
     await loadPages();
+
 
     updateSelectionInfo();
 
   }
   catch(error){
 
-    console.error(error);
-
-    showMessage(
-      "Unable to open this PDF file.",
-      "error"
+    console.error(
+      "PDF Load Error:",
+      error
     );
+
 
     toolbar.style.display = "none";
 
     pdfInfo.style.display = "none";
 
-  }
+    showMessage(
+      "Unable to open this PDF file. Please try another PDF.",
+      "error"
+    );
 
-  loading.style.display = "none";
+  }
+  finally{
+
+    loading.style.display = "none";
+
+  }
 
 }
 
+
+/* =========================
+   LOAD PAGE PREVIEWS
+========================= */
 
 async function loadPages(){
 
   pagesContainer.innerHTML = "";
 
-  for(let i=1;i<=pdfDocument.numPages;i++){
+  pagesData = [];
+
+
+  for(
+    let i = 1;
+    i <= pdfDocument.numPages;
+    i++
+  ){
 
     const page =
-      await pdfDocument.getPage(i);
+    await pdfDocument.getPage(i);
+
 
     const viewport =
-      page.getViewport({
-        scale:1.25
-      });
+    page.getViewport({
+      scale:1.5
+    });
+
 
     const canvas =
-      document.createElement("canvas");
+    document.createElement("canvas");
+
 
     const context =
-      canvas.getContext("2d");
+    canvas.getContext("2d");
+
 
     canvas.width =
-      viewport.width;
+    Math.floor(viewport.width);
 
     canvas.height =
-      viewport.height;
+    Math.floor(viewport.height);
+
 
     await page.render({
       canvasContext:context,
       viewport:viewport
     }).promise;
+
 
     pagesData.push({
 
@@ -698,14 +846,20 @@ async function loadPages(){
 
   }
 
+
   renderPages();
 
 }
 
 
+/* =========================
+   RENDER ALL PAGES
+========================= */
+
 function renderPages(){
 
   pagesContainer.innerHTML = "";
+
 
   if(pagesData.length === 0){
 
@@ -715,265 +869,338 @@ function renderPages(){
 
   }
 
+
   empty.style.display = "none";
 
 
-  pagesData.forEach(function(pageData,index){
+  pagesData.forEach(
+    function(pageData,index){
 
-    const card =
+      const card =
       document.createElement("div");
 
-    card.className = "page-card";
+      card.className =
+      "page-card";
 
 
-    if(pageData.selected){
+      if(pageData.selected){
 
-      card.classList.add("selected");
+        card.classList.add(
+          "selected"
+        );
 
-    }
+      }
 
 
-    const top =
+      /* TOP */
+
+      const top =
       document.createElement("div");
 
-    top.className = "page-top";
+      top.className =
+      "page-top";
 
 
-    const number =
+      const number =
       document.createElement("div");
 
-    number.className = "page-number";
+      number.className =
+      "page-number";
 
-    number.textContent =
+      number.textContent =
       "Page " + (index + 1);
 
 
-    const checkbox =
+      const checkbox =
       document.createElement("input");
 
-    checkbox.type = "checkbox";
+      checkbox.type =
+      "checkbox";
 
-    checkbox.className = "check";
+      checkbox.className =
+      "check";
 
-    checkbox.checked =
+      checkbox.checked =
       pageData.selected;
 
 
-    checkbox.addEventListener(
-      "change",
-      function(){
+      checkbox.addEventListener(
+        "change",
+        function(){
 
-        pageData.selected =
+          pageData.selected =
           checkbox.checked;
 
-        if(pageData.selected){
 
-          selectedPages.add(index);
+          if(pageData.selected){
+
+            selectedPages.add(index);
+
+          }
+          else{
+
+            selectedPages.delete(index);
+
+          }
+
+
+          renderPages();
+
+          updateSelectionInfo();
 
         }
-        else{
-
-          selectedPages.delete(index);
-
-        }
-
-        renderPages();
-
-        updateSelectionInfo();
-
-      }
-    );
+      );
 
 
-    top.appendChild(number);
-    top.appendChild(checkbox);
+      top.appendChild(number);
+
+      top.appendChild(checkbox);
 
 
-    const preview =
+      /* PREVIEW */
+
+      const preview =
       document.createElement("div");
 
-    preview.className =
+      preview.className =
       "page-preview";
 
 
-    const displayCanvas =
+      const displayCanvas =
       document.createElement("canvas");
 
-    const sourceCanvas =
+
+      const sourceCanvas =
       pageData.canvas;
 
-    const ctx =
+
+      const ctx =
       displayCanvas.getContext("2d");
 
 
-    const angle =
-      ((pageData.rotation % 360) + 360) % 360;
+      const angle =
+      (
+        (
+          pageData.rotation %
+          360
+        ) + 360
+      ) % 360;
 
 
-    if(angle === 90 || angle === 270){
+      if(
+        angle === 90 ||
+        angle === 270
+      ){
 
-      displayCanvas.width =
+        displayCanvas.width =
         sourceCanvas.height;
 
-      displayCanvas.height =
+        displayCanvas.height =
         sourceCanvas.width;
 
-    }
-    else{
+      }
+      else{
 
-      displayCanvas.width =
+        displayCanvas.width =
         sourceCanvas.width;
 
-      displayCanvas.height =
+        displayCanvas.height =
         sourceCanvas.height;
 
-    }
+      }
 
 
-    ctx.save();
+      ctx.save();
 
-    if(angle === 90){
 
-      ctx.translate(
-        displayCanvas.width,
+      if(angle === 90){
+
+        ctx.translate(
+          displayCanvas.width,
+          0
+        );
+
+        ctx.rotate(
+          Math.PI / 2
+        );
+
+      }
+
+      else if(angle === 180){
+
+        ctx.translate(
+          displayCanvas.width,
+          displayCanvas.height
+        );
+
+        ctx.rotate(
+          Math.PI
+        );
+
+      }
+
+      else if(angle === 270){
+
+        ctx.translate(
+          0,
+          displayCanvas.height
+        );
+
+        ctx.rotate(
+          -Math.PI / 2
+        );
+
+      }
+
+
+      ctx.drawImage(
+        sourceCanvas,
+        0,
         0
       );
 
-      ctx.rotate(Math.PI / 2);
 
-    }
-    else if(angle === 180){
+      ctx.restore();
 
-      ctx.translate(
-        displayCanvas.width,
-        displayCanvas.height
+
+      preview.appendChild(
+        displayCanvas
       );
 
-      ctx.rotate(Math.PI);
 
-    }
-    else if(angle === 270){
+      /* PAGE ACTIONS */
 
-      ctx.translate(
-        0,
-        displayCanvas.height
-      );
-
-      ctx.rotate(-Math.PI / 2);
-
-    }
-
-
-    ctx.drawImage(
-      sourceCanvas,
-      0,
-      0
-    );
-
-    ctx.restore();
-
-
-    preview.appendChild(displayCanvas);
-
-
-    const actions =
+      const actions =
       document.createElement("div");
 
-    actions.className =
+      actions.className =
       "page-actions";
 
 
-    const up =
+      const up =
       document.createElement("button");
 
-    up.textContent = "↑ Up";
+      up.textContent =
+      "↑ Up";
 
-    up.onclick = function(){
+      up.onclick =
+      function(){
 
-      movePage(index,-1);
+        movePage(
+          index,
+          -1
+        );
 
-    };
+      };
 
 
-    const down =
+      const down =
       document.createElement("button");
 
-    down.textContent = "↓ Down";
+      down.textContent =
+      "↓ Down";
 
-    down.onclick = function(){
+      down.onclick =
+      function(){
 
-      movePage(index,1);
+        movePage(
+          index,
+          1
+        );
 
-    };
+      };
 
 
-    const rotateLeft =
+      const rotateLeft =
       document.createElement("button");
 
-    rotateLeft.textContent = "↶";
+      rotateLeft.textContent =
+      "↶";
 
-    rotateLeft.title =
+      rotateLeft.title =
       "Rotate Left";
 
-    rotateLeft.onclick = function(){
+      rotateLeft.onclick =
+      function(){
 
-      pageData.rotation -= 90;
+        pageData.rotation -= 90;
 
-      renderPages();
+        renderPages();
 
-    };
+      };
 
 
-    const rotateRight =
+      const rotateRight =
       document.createElement("button");
 
-    rotateRight.textContent = "↷";
+      rotateRight.textContent =
+      "↷";
 
-    rotateRight.title =
+      rotateRight.title =
       "Rotate Right";
 
-    rotateRight.onclick = function(){
+      rotateRight.onclick =
+      function(){
 
-      pageData.rotation += 90;
+        pageData.rotation += 90;
 
-      renderPages();
+        renderPages();
 
-    };
-
-
-    actions.appendChild(up);
-    actions.appendChild(down);
-    actions.appendChild(rotateLeft);
-    actions.appendChild(rotateRight);
+      };
 
 
-    card.appendChild(top);
-    card.appendChild(preview);
-    card.appendChild(actions);
+      actions.appendChild(up);
+
+      actions.appendChild(down);
+
+      actions.appendChild(
+        rotateLeft
+      );
+
+      actions.appendChild(
+        rotateRight
+      );
 
 
-    pagesContainer.appendChild(card);
+      card.appendChild(top);
 
-  });
+      card.appendChild(preview);
+
+      card.appendChild(actions);
+
+
+      pagesContainer.appendChild(card);
+
+    }
+  );
 
 }
 
+
+/* =========================
+   SELECT ALL
+========================= */
 
 function selectAllPages(){
 
-  pagesData.forEach(function(page){
+  pagesData.forEach(
+    function(page){
+      page.selected = true;
+    }
+  );
 
-    page.selected = true;
-
-  });
 
   selectedPages.clear();
 
-  pagesData.forEach(function(page,index){
 
-    selectedPages.add(index);
+  pagesData.forEach(
+    function(page,index){
 
-  });
+      selectedPages.add(index);
+
+    }
+  );
+
 
   renderPages();
 
@@ -981,16 +1208,24 @@ function selectAllPages(){
 
 }
 
+
+/* =========================
+   CLEAR SELECTION
+========================= */
 
 function clearSelection(){
 
-  pagesData.forEach(function(page){
+  pagesData.forEach(
+    function(page){
 
-    page.selected = false;
+      page.selected = false;
 
-  });
+    }
+  );
+
 
   selectedPages.clear();
+
 
   renderPages();
 
@@ -998,13 +1233,19 @@ function clearSelection(){
 
 }
 
+
+/* =========================
+   REMOVE SELECTED PAGES
+========================= */
 
 function removeSelectedPages(){
 
   const count =
-    pagesData.filter(
-      page => page.selected
-    ).length;
+  pagesData.filter(
+    function(page){
+      return page.selected;
+    }
+  ).length;
 
 
   if(count === 0){
@@ -1019,7 +1260,9 @@ function removeSelectedPages(){
   }
 
 
-  if(count >= pagesData.length){
+  if(
+    count >= pagesData.length
+  ){
 
     showMessage(
       "You cannot remove all pages. Keep at least one page.",
@@ -1032,29 +1275,45 @@ function removeSelectedPages(){
 
 
   pagesData =
-    pagesData.filter(
-      page => !page.selected
-    );
+  pagesData.filter(
+    function(page){
+
+      return !page.selected;
+
+    }
+  );
 
 
   selectedPages.clear();
+
+
+  rebuildSelectionSet();
 
   renderPages();
 
   updateSelectionInfo();
 
+
   showMessage(
-    count + " page(s) removed from the working document.",
+    count +
+    " page(s) removed from the working document.",
     "success"
   );
 
 }
 
 
-function movePage(index,direction){
+/* =========================
+   MOVE SINGLE PAGE
+========================= */
+
+function movePage(
+  index,
+  direction
+){
 
   const newIndex =
-    index + direction;
+  index + direction;
 
 
   if(
@@ -1068,27 +1327,18 @@ function movePage(index,direction){
 
 
   const temp =
-    pagesData[index];
+  pagesData[index];
+
 
   pagesData[index] =
-    pagesData[newIndex];
+  pagesData[newIndex];
+
 
   pagesData[newIndex] =
-    temp;
+  temp;
 
 
-  selectedPages.clear();
-
-  pagesData.forEach(function(page,i){
-
-    if(page.selected){
-
-      selectedPages.add(i);
-
-    }
-
-  });
-
+  rebuildSelectionSet();
 
   renderPages();
 
@@ -1097,95 +1347,148 @@ function movePage(index,direction){
 }
 
 
+/* =========================
+   MOVE SELECTED UP
+========================= */
+
 function moveSelectedUp(){
 
-  for(let i=1;i<pagesData.length;i++){
+  let changed = false;
+
+
+  for(
+    let i = 1;
+    i < pagesData.length;
+    i++
+  ){
 
     if(
       pagesData[i].selected &&
-      !pagesData[i-1].selected
+      !pagesData[i - 1].selected
     ){
 
       const temp =
-        pagesData[i-1];
+      pagesData[i - 1];
 
-      pagesData[i-1] =
-        pagesData[i];
+
+      pagesData[i - 1] =
+      pagesData[i];
+
 
       pagesData[i] =
-        temp;
+      temp;
+
+
+      changed = true;
 
     }
 
   }
 
 
-  rebuildSelectionSet();
+  if(changed){
 
-  renderPages();
+    rebuildSelectionSet();
+
+    renderPages();
+
+    updateSelectionInfo();
+
+  }
 
 }
 
 
+/* =========================
+   MOVE SELECTED DOWN
+========================= */
+
 function moveSelectedDown(){
 
+  let changed = false;
+
+
   for(
-    let i=pagesData.length-2;
-    i>=0;
+    let i = pagesData.length - 2;
+    i >= 0;
     i--
   ){
 
     if(
       pagesData[i].selected &&
-      !pagesData[i+1].selected
+      !pagesData[i + 1].selected
     ){
 
       const temp =
-        pagesData[i+1];
+      pagesData[i + 1];
 
-      pagesData[i+1] =
-        pagesData[i];
+
+      pagesData[i + 1] =
+      pagesData[i];
+
 
       pagesData[i] =
-        temp;
+      temp;
+
+
+      changed = true;
 
     }
 
   }
 
 
-  rebuildSelectionSet();
+  if(changed){
 
-  renderPages();
+    rebuildSelectionSet();
+
+    renderPages();
+
+    updateSelectionInfo();
+
+  }
 
 }
 
+
+/* =========================
+   REBUILD SELECTION
+========================= */
 
 function rebuildSelectionSet(){
 
   selectedPages.clear();
 
-  pagesData.forEach(function(page,index){
 
-    if(page.selected){
+  pagesData.forEach(
+    function(page,index){
 
-      selectedPages.add(index);
+      if(page.selected){
+
+        selectedPages.add(index);
+
+      }
 
     }
-
-  });
-
-  updateSelectionInfo();
+  );
 
 }
 
+
+/* =========================
+   ROTATE SELECTED LEFT
+========================= */
 
 function rotateSelectedLeft(){
 
   const selected =
-    pagesData.filter(
-      page => page.selected
-    );
+  pagesData.filter(
+    function(page){
+
+      return page.selected;
+
+    }
+  );
 
 
   if(selected.length === 0){
@@ -1200,24 +1503,34 @@ function rotateSelectedLeft(){
   }
 
 
-  selected.forEach(function(page){
+  selected.forEach(
+    function(page){
 
-    page.rotation -= 90;
+      page.rotation -= 90;
 
-  });
+    }
+  );
 
 
   renderPages();
 
 }
 
+
+/* =========================
+   ROTATE SELECTED RIGHT
+========================= */
 
 function rotateSelectedRight(){
 
   const selected =
-    pagesData.filter(
-      page => page.selected
-    );
+  pagesData.filter(
+    function(page){
+
+      return page.selected;
+
+    }
+  );
 
 
   if(selected.length === 0){
@@ -1232,11 +1545,13 @@ function rotateSelectedRight(){
   }
 
 
-  selected.forEach(function(page){
+  selected.forEach(
+    function(page){
 
-    page.rotation += 90;
+      page.rotation += 90;
 
-  });
+    }
+  );
 
 
   renderPages();
@@ -1244,25 +1559,55 @@ function rotateSelectedRight(){
 }
 
 
+/* =========================
+   UPDATE SELECTION INFO
+========================= */
+
 function updateSelectionInfo(){
 
   const count =
-    pagesData.filter(
-      page => page.selected
-    ).length;
+  pagesData.filter(
+    function(page){
+
+      return page.selected;
+
+    }
+  ).length;
 
 
-  document.getElementById("status").textContent =
-    count + " page(s) selected";
+  document.getElementById(
+    "status"
+  ).textContent =
+  count +
+  " page(s) selected";
 
 
-  document.getElementById("selectionInfo").textContent =
-    count + " selected";
+  document.getElementById(
+    "selectionInfo"
+  ).textContent =
+  count +
+  " selected";
 
 }
 
 
+/* =========================
+   DOWNLOAD PDF
+========================= */
+
 async function downloadPDF(){
+
+  if(!originalPdfBytes){
+
+    showMessage(
+      "Please select a PDF file first.",
+      "error"
+    );
+
+    return;
+
+  }
+
 
   if(pagesData.length === 0){
 
@@ -1275,64 +1620,125 @@ async function downloadPDF(){
 
   }
 
+
   try{
 
     showMessage(
       "Creating your PDF...",
-      "success"
+      "info"
     );
 
-    const {
-      PDFDocument,
-      degrees
-    } = PDFLib;
 
-    const sourcePdf =
-      await PDFDocument.load(
-        originalPdfBytes
-      );
+    const PDFDocument =
+    PDFLib.PDFDocument;
 
-    const outputPdf =
-      await PDFDocument.create();
+
+    const degrees =
+    PDFLib.degrees;
 
 
     /*
-      pagesData में वही pages बचे हैं
-      जिन्हें final PDF में रखना है.
+      IMPORTANT:
+      PDF-lib ke liye original PDF
+      ki fresh copy use kar rahe hain.
     */
 
-    for(let i = 0; i < pagesData.length; i++){
+    const sourceBytes =
+    new Uint8Array(
+      originalPdfBytes
+    );
 
-      const pageData = pagesData[i];
+
+    const sourcePdf =
+    await PDFDocument.load(
+      sourceBytes,
+      {
+        ignoreEncryption:false,
+        updateMetadata:false
+      }
+    );
+
+
+    const outputPdf =
+    await PDFDocument.create();
+
+
+    /*
+      Pages ko exact current order me
+      one by one copy kiya ja raha hai.
+    */
+
+    for(
+      let i = 0;
+      i < pagesData.length;
+      i++
+    ){
+
+      const pageData =
+      pagesData[i];
+
 
       const originalIndex =
-        pageData.originalIndex - 1;
+      pageData.originalIndex - 1;
+
+
+      if(
+        originalIndex < 0 ||
+        originalIndex >= sourcePdf.getPageCount()
+      ){
+
+        throw new Error(
+          "Invalid page index."
+        );
+
+      }
 
 
       const copiedPages =
-        await outputPdf.copyPages(
-          sourcePdf,
-          [originalIndex]
+      await outputPdf.copyPages(
+        sourcePdf,
+        [originalIndex]
+      );
+
+
+      if(
+        !copiedPages ||
+        copiedPages.length === 0
+      ){
+
+        throw new Error(
+          "Page could not be copied."
         );
+
+      }
 
 
       const newPage =
-        copiedPages[0];
+      copiedPages[0];
 
 
       /*
-        Page rotation
+        Apply rotation
       */
 
       const rotation =
-        ((pageData.rotation % 360) + 360) % 360;
+      (
+        (
+          pageData.rotation %
+          360
+        ) + 360
+      ) % 360;
 
 
       if(rotation !== 0){
 
+        const currentRotation =
+        newPage.getRotation().angle || 0;
+
+
         newPage.setRotation(
           degrees(
-            newPage.getRotation().angle +
+            currentRotation +
             rotation
           )
         );
@@ -1340,51 +1746,128 @@ async function downloadPDF(){
       }
 
 
-      outputPdf.addPage(newPage);
+      outputPdf.addPage(
+        newPage
+      );
 
     }
 
 
-    const pdfBytes =
-      await outputPdf.save();
+    /*
+      Save final PDF
+    */
 
+    const pdfBytes =
+    await outputPdf.save({
+      useObjectStreams:true
+    });
+
+
+    if(
+      !pdfBytes ||
+      pdfBytes.length === 0
+    ){
+
+      throw new Error(
+        "Generated PDF is empty."
+      );
+
+    }
+
+
+    /*
+      Download filename
+    */
+
+    let downloadName =
+    originalFileName;
+
+
+    if(
+      downloadName
+      .toLowerCase()
+      .endsWith(".pdf")
+    ){
+
+      downloadName =
+      downloadName.slice(
+        0,
+        -4
+      );
+
+    }
+
+
+    downloadName +=
+    "-pages-removed.pdf";
+
+
+    /*
+      Blob create
+    */
 
     const blob =
-      new Blob(
-        [pdfBytes],
-        {
-          type:"application/pdf"
-        }
-      );
+    new Blob(
+      [pdfBytes],
+      {
+        type:"application/pdf"
+      }
+    );
 
 
     const url =
-      URL.createObjectURL(blob);
+    URL.createObjectURL(
+      blob
+    );
 
 
-    const a =
-      document.createElement("a");
+    /*
+      Download link
+    */
 
-    a.href = url;
-
-    a.download =
-      "removed-pages.pdf";
-
-    a.style.display =
-      "none";
-
-    document.body.appendChild(a);
-
-    a.click();
-
-    document.body.removeChild(a);
+    const link =
+    document.createElement("a");
 
 
-    setTimeout(function(){
+    link.href =
+    url;
 
-      URL.revokeObjectURL(url);
 
-    },1000);
+    link.download =
+    downloadName;
+
+
+    link.style.display =
+    "none";
+
+
+    document.body.appendChild(
+      link
+    );
+
+
+    /*
+      Browser ko click process complete
+      karne ka time
+    */
+
+    link.click();
+
+
+    setTimeout(
+      function(){
+
+        document.body.removeChild(
+          link
+        );
+
+        URL.revokeObjectURL(
+          url
+        );
+
+      },
+      1500
+    );
 
 
     showMessage(
@@ -1396,12 +1879,30 @@ async function downloadPDF(){
   catch(error){
 
     console.error(
-      "PDF Download Error:",
+      "REMOVE PDF DOWNLOAD ERROR:",
       error
     );
 
+
+    let errorMessage =
+    "Download failed. Please try again.";
+
+
+    if(
+      error &&
+      error.message
+    ){
+
+      console.error(
+        "Error details:",
+        error.message
+      );
+
+    }
+
+
     showMessage(
-      "Download failed. Please try again.",
+      errorMessage,
       "error"
     );
 
@@ -1410,16 +1911,25 @@ async function downloadPDF(){
 }
 
 
-function showMessage(text,type){
+/* =========================
+   MESSAGE
+========================= */
+
+function showMessage(
+  text,
+  type
+){
 
   message.textContent =
-    text;
+  text;
+
 
   message.className =
-    "message " + type;
+  "message " + type;
+
 
   message.style.display =
-    "block";
+  "block";
 
 }
 
@@ -1427,7 +1937,7 @@ function showMessage(text,type){
 function hideMessage(){
 
   message.style.display =
-    "none";
+  "none";
 
 }
 
@@ -1435,3 +1945,4 @@ function hideMessage(){
 
 </body>
 </html>
+```
