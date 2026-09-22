@@ -1444,8 +1444,7 @@ document.getElementById("cropSurface");
 
 
 /* =====================================================
-ROTATE BUTTON - FINAL FIX
-ONLY ROTATE FUNCTIONALITY
+ROTATE BUTTON - MAIN PREVIEW + THUMBNAIL
 ===================================================== */
 
 pageGrid.addEventListener(
@@ -1488,9 +1487,22 @@ async function(event){
   }
 
 
+  /* =========================
+  SELECT SAME PAGE
+  FOR MAIN PREVIEW
+  ========================= */
+
+  currentMainIndex =
+    index;
+
+
   const pageData =
     pages[index];
 
+
+  /* =========================
+  ROTATE
+  ========================= */
 
   if(
     button.dataset.action ===
@@ -1519,23 +1531,25 @@ async function(event){
   }
 
 
-  /* Rebuild page cards */
+  /* =========================
+  UPDATE MAIN PREVIEW FIRST
+  ========================= */
+
+  await renderMainPreview();
+
+
+  /* =========================
+  UPDATE THUMBNAILS
+  ========================= */
+
   renderPages();
 
 
-  /* Keep selection count correct */
+  /* =========================
+  UPDATE SELECTION
+  ========================= */
+
   updateSelection();
-
-
-  /* Refresh main preview if this is
-     the currently displayed page */
-  if(
-    currentMainIndex === index
-  ){
-
-    await renderMainPreview();
-
-  }
 
 });
 
@@ -1854,6 +1868,7 @@ document
 async function(){
 
   if(
+    !pdfJsDocument ||
     !pages[currentMainIndex]
   ){
 
@@ -1861,21 +1876,46 @@ async function(){
 
   }
 
-  pages[currentMainIndex].rotation =
+
+  const pageData =
+    pages[currentMainIndex];
+
+
+  /* =========================
+     ROTATE CURRENT MAIN PAGE
+     90 DEGREE RIGHT
+  ========================= */
+
+  pageData.rotation =
     (
       Number(
-        pages[currentMainIndex].rotation || 0
+        pageData.rotation || 0
       ) + 90
     ) % 360;
 
 
+  /* =========================
+     UPDATE MAIN PREVIEW FIRST
+  ========================= */
+
   await renderMainPreview();
 
+
+  /* =========================
+     UPDATE THUMBNAILS
+  ========================= */
+
   renderPages();
+
+
+  /* =========================
+     UPDATE SELECTION
+  ========================= */
 
   updateSelection();
 
 });
+
 
 /* =====================================================
 CALCULATE FIT SCALE
@@ -2037,17 +2077,11 @@ async function renderMainPreview(){
 
 
     mainStage.style.width =
-      Math.max(
-        wrap.clientWidth - 40,
-        viewport.width
-      ) + "px";
+      viewport.width + "px";
 
 
     mainStage.style.height =
-      Math.max(
-        wrap.clientHeight - 40,
-        viewport.height
-      ) + "px";
+      viewport.height + "px";
 
 
     mainStage.appendChild(
