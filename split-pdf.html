@@ -2193,21 +2193,6 @@ function createPageCard(
   zoomPlus.textContent =
     "+";
 
-  const zoomReset =
-    document.createElement(
-      "button"
-    );
-
-  zoomReset.type =
-    "button";
-
-  zoomReset.className =
-    "small-zoom";
-
-  zoomReset.textContent =
-    "↺";
-
-
   zoomMinus.addEventListener(
     "click",
     async function(event){
@@ -2260,27 +2245,6 @@ function createPageCard(
   );
 
 
-  zoomReset.addEventListener(
-    "click",
-    async function(event){
-
-      event.stopPropagation();
-
-      pageData.zoom =
-        1;
-
-      zoomText.textContent =
-        "100%";
-
-      await renderThumbnail(
-        pageData,
-        thumbnailStage
-      );
-
-    }
-  );
-
-
   zoomControls.appendChild(
     zoomMinus
   );
@@ -2292,11 +2256,6 @@ function createPageCard(
   zoomControls.appendChild(
     zoomPlus
   );
-
-  zoomControls.appendChild(
-    zoomReset
-  );
-
 
   /* ACTION ROW */
 
