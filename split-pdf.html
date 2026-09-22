@@ -850,11 +850,17 @@ input{
 <body>
 
 <header class="header">
+
   <div class="header-inner">
 
     <a href="index.html" class="logo">
-      <div class="logo-icon">PDF</div>
+
+      <div class="logo-icon">
+        PDF
+      </div>
+
       PDF Editor Tools
+
     </a>
 
     <a href="index.html" class="back-home">
@@ -862,9 +868,12 @@ input{
     </a>
 
   </div>
+
 </header>
 
+
 <main class="container">
+
 
   <div class="page-title">
 
@@ -878,11 +887,20 @@ input{
 
   </div>
 
-  <div class="upload-box" id="uploadBox">
 
-    <div class="upload-icon">📄</div>
+  <!-- UPLOAD -->
 
-    <h2>Select a PDF file</h2>
+  <div
+    class="upload-box"
+    id="uploadBox">
+
+    <div class="upload-icon">
+      📄
+    </div>
+
+    <h2>
+      Select a PDF file
+    </h2>
 
     <p>
       Drag & drop your PDF here or choose a PDF from your device.
@@ -892,7 +910,9 @@ input{
       type="button"
       class="upload-btn"
       id="uploadButton">
+
       Choose PDF
+
     </button>
 
     <input
@@ -902,16 +922,29 @@ input{
 
   </div>
 
-  <div class="file-info" id="fileInfo">
+
+  <!-- FILE INFO -->
+
+  <div
+    class="file-info"
+    id="fileInfo">
 
     <div>
 
-      <div class="file-name" id="fileName">
+      <div
+        class="file-name"
+        id="fileName">
+
         PDF
+
       </div>
 
-      <div class="file-pages" id="filePages">
+      <div
+        class="file-pages"
+        id="filePages">
+
         0 pages
+
       </div>
 
     </div>
@@ -920,21 +953,38 @@ input{
       type="button"
       class="clear-file"
       id="clearFile">
+
       Remove PDF
+
     </button>
 
   </div>
 
-  <div class="workspace" id="workspace">
+
+  <!-- WORKSPACE -->
+
+  <div
+    class="workspace"
+    id="workspace">
+
+
+    <!-- MAIN PREVIEW -->
 
     <div class="main-preview-box">
 
       <div class="main-heading">
 
         <h2>
+
           PDF Preview — Page
-          <span id="mainPageNumber">1</span>
+          <span id="mainPageNumber">
+            1
+          </span>
+
         </h2>
+
+
+        <!-- ONLY ZOOM BUTTONS -->
 
         <div class="main-tools">
 
@@ -942,34 +992,32 @@ input{
             type="button"
             class="zoom-btn"
             id="mainZoomOut">
+
             −
+
           </button>
 
           <span
             class="zoom-label"
             id="mainZoomLabel">
+
             100%
+
           </span>
 
           <button
             type="button"
             class="zoom-btn"
             id="mainZoomIn">
-            +
-          </button>
 
-          <!-- MAIN PREVIEW ROTATE -->
-          <button
-            type="button"
-            class="zoom-btn"
-            id="mainZoomReset"
-            title="Rotate main preview 90°">
-            ↺
+            +
+
           </button>
 
         </div>
 
       </div>
+
 
       <div class="main-preview-wrap">
 
@@ -982,13 +1030,18 @@ input{
 
     </div>
 
+
+    <!-- PAGES -->
+
     <div class="pages-panel">
 
       <div class="pages-heading">
 
         <div>
 
-          <h2>PDF Pages</h2>
+          <h2>
+            PDF Pages
+          </h2>
 
           <p>
             Select pages and use Rotate, Crop or drag to change order.
@@ -999,15 +1052,19 @@ input{
         <div
           class="selection-count"
           id="selectionCount">
+
           0 selected
+
         </div>
 
       </div>
+
 
       <div
         class="page-grid"
         id="pageGrid">
       </div>
+
 
       <div class="action-bar">
 
@@ -1015,14 +1072,18 @@ input{
           type="button"
           class="action-btn select-all"
           id="selectAll">
+
           Select All
+
         </button>
 
         <button
           type="button"
           class="action-btn clear-selection"
           id="clearSelection">
+
           Clear Selection
+
         </button>
 
         <button
@@ -1030,21 +1091,27 @@ input{
           class="action-btn split-btn"
           id="splitButton"
           disabled>
+
           Split & Download PDF
+
         </button>
 
       </div>
+
 
       <div
         class="status"
         id="status">
       </div>
 
+
       <div
         class="download-area"
         id="downloadArea">
 
-        <h3>PDF Ready</h3>
+        <h3>
+          PDF Ready
+        </h3>
 
         <p>
           Your selected PDF pages are ready.
@@ -1055,7 +1122,9 @@ input{
           id="downloadButton"
           href="#"
           download="split-pdf.pdf">
+
           Download PDF
+
         </a>
 
       </div>
@@ -1066,26 +1135,38 @@ input{
 
 </main>
 
+
+<!-- CROP MODAL -->
+
 <div
   class="modal"
   id="cropModal">
 
   <div class="crop-modal-box">
 
+
     <div class="crop-modal-header">
 
       <h2>
-        Crop Page <span id="cropPageNumber">1</span>
+
+        Crop Page
+        <span id="cropPageNumber">
+          1
+        </span>
+
       </h2>
 
       <button
         type="button"
         class="close-crop"
         id="closeCrop">
+
         ×
+
       </button>
 
     </div>
+
 
     <div class="crop-work-area">
 
@@ -1096,12 +1177,14 @@ input{
 
     </div>
 
+
     <div class="crop-instruction">
 
       Mouse se page ke upar crop area drag karein.
       Corner points se crop area resize bhi kar sakte hain.
 
     </div>
+
 
     <div class="crop-buttons">
 
@@ -1111,17 +1194,22 @@ input{
           type="button"
           class="modal-btn reset-crop"
           id="resetCrop">
+
           Full Page
+
         </button>
 
         <button
           type="button"
           class="modal-btn clear-crop"
           id="clearCrop">
+
           Clear Crop
+
         </button>
 
       </div>
+
 
       <div class="crop-right-buttons">
 
@@ -1129,14 +1217,18 @@ input{
           type="button"
           class="modal-btn cancel-crop"
           id="cancelCrop">
+
           Cancel
+
         </button>
 
         <button
           type="button"
           class="modal-btn apply-crop"
           id="applyCrop">
+
           Apply Crop
+
         </button>
 
       </div>
@@ -1146,6 +1238,7 @@ input{
   </div>
 
 </div>
+
 
 <script>
 
@@ -1234,9 +1327,6 @@ document.getElementById("mainZoomLabel");
 
 const mainPageNumber =
 document.getElementById("mainPageNumber");
-
-const mainZoomReset =
-document.getElementById("mainZoomReset");
 
 const cropModal =
 document.getElementById("cropModal");
@@ -1540,47 +1630,6 @@ async function(event){
 
 
 /* =====================================================
-MAIN PREVIEW ROTATE
-IMPORTANT:
-DIRECT ONCLICK - NO addEventListener
-===================================================== */
-
-mainZoomReset.onclick =
-async function(event){
-
-  event.preventDefault();
-  event.stopPropagation();
-
-  if(
-    !pdfJsDocument ||
-    !pages.length ||
-    !pages[currentMainIndex]
-  ){
-
-    return;
-
-  }
-
-  const pageData =
-    pages[currentMainIndex];
-
-  pageData.rotation =
-    (
-      Number(
-        pageData.rotation || 0
-      ) + 90
-    ) % 360;
-
-  await renderMainPreview();
-
-  renderPages();
-
-  updateSelection();
-
-};
-
-
-/* =====================================================
 FIT SCALE
 ===================================================== */
 
@@ -1622,7 +1671,6 @@ function calculateFitScale(
 
 /* =====================================================
 MAIN PREVIEW
-VISUAL CANVAS ROTATION
 ===================================================== */
 
 async function renderMainPreview(){
@@ -1673,11 +1721,6 @@ async function renderMainPreview(){
         ) % 360 + 360
       ) % 360;
 
-    /*
-      Always render original page
-      at 0 degree.
-    */
-
     const originalViewport =
       page.getViewport({
         scale:1,
@@ -1694,11 +1737,6 @@ async function renderMainPreview(){
       return;
 
     }
-
-    /*
-      For 90/270 degree rotation,
-      fit calculation uses swapped dimensions.
-    */
 
     let fitWidth =
       originalViewport.width;
@@ -1736,10 +1774,6 @@ async function renderMainPreview(){
         scale:scale,
         rotation:0
       });
-
-    /*
-      Render original page to source canvas.
-    */
 
     const sourceCanvas =
       document.createElement(
@@ -1779,10 +1813,6 @@ async function renderMainPreview(){
 
     }
 
-    /*
-      Create final rotated canvas.
-    */
-
     const finalCanvas =
       document.createElement(
         "canvas"
@@ -1815,10 +1845,6 @@ async function renderMainPreview(){
 
     }
 
-    /*
-      Rotate around center.
-    */
-
     finalContext.save();
 
     finalContext.translate(
@@ -1847,10 +1873,6 @@ async function renderMainPreview(){
       return;
 
     }
-
-    /*
-      Update main preview.
-    */
 
     mainStage.innerHTML =
       "";
@@ -1898,6 +1920,7 @@ async function renderMainPreview(){
 
 /* =====================================================
 THUMBNAIL ROTATE
+ONLY PAGE CARD ROTATE BUTTONS
 ===================================================== */
 
 pageGrid.addEventListener(
@@ -2184,6 +2207,7 @@ function createPageCard(
   zoomReset.textContent =
     "↺";
 
+
   zoomMinus.addEventListener(
     "click",
     async function(event){
@@ -2208,6 +2232,7 @@ function createPageCard(
 
     }
   );
+
 
   zoomPlus.addEventListener(
     "click",
@@ -2234,6 +2259,7 @@ function createPageCard(
     }
   );
 
+
   zoomReset.addEventListener(
     "click",
     async function(event){
@@ -2253,6 +2279,7 @@ function createPageCard(
 
     }
   );
+
 
   zoomControls.appendChild(
     zoomMinus
@@ -2281,6 +2308,9 @@ function createPageCard(
   actionRow.className =
     "page-action-row";
 
+
+  /* ROTATE LEFT */
+
   const rotateLeft =
     document.createElement(
       "button"
@@ -2305,6 +2335,8 @@ function createPageCard(
     false;
 
 
+  /* ROTATE RIGHT */
+
   const rotateRight =
     document.createElement(
       "button"
@@ -2328,6 +2360,8 @@ function createPageCard(
   rotateRight.draggable =
     false;
 
+
+  /* CROP */
 
   const cropButton =
     document.createElement(
@@ -2358,6 +2392,7 @@ function createPageCard(
     }
   );
 
+
   actionRow.appendChild(
     rotateLeft
   );
@@ -2381,6 +2416,7 @@ function createPageCard(
   orderRow.className =
     "order-row";
 
+
   const upButton =
     document.createElement(
       "button"
@@ -2397,6 +2433,7 @@ function createPageCard(
 
   upButton.title =
     "Move Up";
+
 
   const downButton =
     document.createElement(
@@ -2415,6 +2452,7 @@ function createPageCard(
   downButton.title =
     "Move Down";
 
+
   upButton.addEventListener(
     "click",
     function(event){
@@ -2429,6 +2467,7 @@ function createPageCard(
     }
   );
 
+
   downButton.addEventListener(
     "click",
     function(event){
@@ -2442,6 +2481,7 @@ function createPageCard(
 
     }
   );
+
 
   orderRow.appendChild(
     upButton
@@ -2610,7 +2650,9 @@ function createPageCard(
 
   /* APPEND */
 
-  card.appendChild(top);
+  card.appendChild(
+    top
+  );
 
   card.appendChild(
     thumbnailWrap
@@ -2627,6 +2669,7 @@ function createPageCard(
   card.appendChild(
     orderRow
   );
+
 
   renderThumbnail(
     pageData,
@@ -2733,6 +2776,7 @@ async function renderThumbnail(
     stage.appendChild(
       canvas
     );
+
 
     await page.render({
 
@@ -2895,6 +2939,7 @@ function movePage(
     moved
   );
 
+
   if(
     currentMainIndex === from
   ){
@@ -2919,6 +2964,7 @@ function movePage(
     currentMainIndex++;
 
   }
+
 
   renderPages();
 
@@ -3144,6 +3190,7 @@ async function renderCropSurface(
       canvas
     );
 
+
     await page.render({
 
       canvasContext:
@@ -3153,6 +3200,7 @@ async function renderCropSurface(
         viewport
 
     }).promise;
+
 
     createCropRectangle();
 
@@ -3413,6 +3461,7 @@ function attachCropEvents(
         point.y -
         cropStartY;
 
+
       if(cropDragging){
 
         cropTempRect =
@@ -3426,6 +3475,7 @@ function attachCropEvents(
           });
 
       }
+
 
       if(cropMoving){
 
@@ -3470,6 +3520,7 @@ function attachCropEvents(
 
       }
 
+
       if(cropResizing){
 
         resizeCropRect(
@@ -3478,6 +3529,7 @@ function attachCropEvents(
         );
 
       }
+
 
       displayCropRectangle();
 
@@ -3573,6 +3625,7 @@ function normalizeRect(rect){
   let height =
     rect.height;
 
+
   if(width < 0){
 
     x += width;
@@ -3580,12 +3633,14 @@ function normalizeRect(rect){
 
   }
 
+
   if(height < 0){
 
     y += height;
     height = Math.abs(height);
 
   }
+
 
   x =
     Math.max(
@@ -3605,6 +3660,7 @@ function normalizeRect(rect){
       )
     );
 
+
   width =
     Math.min(
       width,
@@ -3616,6 +3672,7 @@ function normalizeRect(rect){
       height,
       1 - y
     );
+
 
   return {
 
@@ -3696,6 +3753,7 @@ function resizeCropRect(
     r.y +
     r.height;
 
+
   if(
     cropResizeHandle === "tl"
   ){
@@ -3719,6 +3777,7 @@ function resizeCropRect(
       );
 
   }
+
 
   if(
     cropResizeHandle === "tr"
@@ -3744,6 +3803,7 @@ function resizeCropRect(
 
   }
 
+
   if(
     cropResizeHandle === "bl"
   ){
@@ -3768,6 +3828,7 @@ function resizeCropRect(
 
   }
 
+
   if(
     cropResizeHandle === "br"
   ){
@@ -3791,6 +3852,7 @@ function resizeCropRect(
       );
 
   }
+
 
   cropTempRect = {
 
@@ -3878,6 +3940,7 @@ function(){
       cropTempRect
     );
 
+
   if(
     r.width >= .995 &&
     r.height >= .995 &&
@@ -3896,6 +3959,7 @@ function(){
 
   }
 
+
   const index =
     cropPageIndex;
 
@@ -3904,6 +3968,7 @@ function(){
   renderPages();
 
   updateSelection();
+
 
   if(
     index === currentMainIndex
@@ -4003,6 +4068,7 @@ async function(){
 
   }
 
+
   const selected =
     pages.filter(
       function(page){
@@ -4011,6 +4077,7 @@ async function(){
 
       }
     );
+
 
   if(
     selected.length === 0
@@ -4024,6 +4091,7 @@ async function(){
 
   }
 
+
   splitButton.disabled =
     true;
 
@@ -4034,10 +4102,12 @@ async function(){
     "Creating your PDF..."
   );
 
+
   try{
 
     const buffer =
       await currentFile.arrayBuffer();
+
 
     const sourcePdf =
       await PDFLib
@@ -4046,10 +4116,12 @@ async function(){
         buffer
       );
 
+
     const outputPdf =
       await PDFLib
       .PDFDocument
       .create();
+
 
     for(
       const pageData of selected
@@ -4066,9 +4138,8 @@ async function(){
       const newPage =
         copied[0];
 
-      /*
-        PDF rotation
-      */
+
+      /* PDF ROTATION */
 
       newPage.setRotation(
         PDFLib.degrees(
@@ -4076,9 +4147,8 @@ async function(){
         )
       );
 
-      /*
-        Crop
-      */
+
+      /* CROP */
 
       if(pageData.crop){
 
@@ -4109,6 +4179,7 @@ async function(){
           top -
           cropHeight;
 
+
         if(
           cropWidth > 1 &&
           cropHeight > 1
@@ -4127,14 +4198,17 @@ async function(){
 
       }
 
+
       outputPdf.addPage(
         newPage
       );
 
     }
 
+
     const bytes =
       await outputPdf.save();
+
 
     if(downloadUrl){
 
@@ -4143,6 +4217,7 @@ async function(){
       );
 
     }
+
 
     const blob =
       new Blob(
@@ -4153,10 +4228,12 @@ async function(){
         }
       );
 
+
     downloadUrl =
       URL.createObjectURL(
         blob
       );
+
 
     downloadButton.href =
       downloadUrl;
@@ -4166,10 +4243,13 @@ async function(){
         currentFile.name
       );
 
+
     downloadArea.style.display =
       "block";
 
+
     hideStatus();
+
 
     splitButton.disabled =
       false;
@@ -4177,9 +4257,13 @@ async function(){
     splitButton.textContent =
       "Split & Download PDF";
 
+
     downloadArea.scrollIntoView({
+
       behavior:"smooth",
+
       block:"center"
+
     });
 
   }
@@ -4190,6 +4274,7 @@ async function(){
     showStatus(
       "PDF creation failed. Please try again."
     );
+
 
     splitButton.disabled =
       false;
@@ -4240,6 +4325,7 @@ function(){
 
   mainRenderVersion++;
 
+
   if(downloadUrl){
 
     URL.revokeObjectURL(
@@ -4250,6 +4336,7 @@ function(){
       null;
 
   }
+
 
   fileInput.value =
     "";
@@ -4270,6 +4357,7 @@ function(){
     "none";
 
   hideStatus();
+
 
   window.scrollTo({
 
