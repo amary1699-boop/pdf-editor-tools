@@ -1853,14 +1853,29 @@ document
 "click",
 async function(){
 
-  mainZoom = 1;
+  if(
+    !pages[currentMainIndex]
+  ){
 
-  updateMainZoom();
+    return;
+
+  }
+
+  pages[currentMainIndex].rotation =
+    (
+      Number(
+        pages[currentMainIndex].rotation || 0
+      ) + 90
+    ) % 360;
+
 
   await renderMainPreview();
 
-});
+  renderPages();
 
+  updateSelection();
+
+});
 
 /* =====================================================
 CALCULATE FIT SCALE
