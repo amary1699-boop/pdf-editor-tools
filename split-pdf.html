@@ -1865,10 +1865,14 @@ document
 .getElementById("mainZoomReset")
 .addEventListener(
 "click",
-async function(){
+async function(event){
+
+  event.preventDefault();
+  event.stopPropagation();
 
   if(
     !pdfJsDocument ||
+    !pages.length ||
     !pages[currentMainIndex]
   ){
 
@@ -1877,15 +1881,12 @@ async function(){
   }
 
 
+  /* CURRENT MAIN PREVIEW PAGE */
   const pageData =
     pages[currentMainIndex];
 
 
-  /* =========================
-     ROTATE CURRENT MAIN PAGE
-     90 DEGREE RIGHT
-  ========================= */
-
+  /* ROTATE 90 DEGREE RIGHT */
   pageData.rotation =
     (
       Number(
@@ -1894,28 +1895,18 @@ async function(){
     ) % 360;
 
 
-  /* =========================
-     UPDATE MAIN PREVIEW FIRST
-  ========================= */
-
+  /* RENDER MAIN PREVIEW */
   await renderMainPreview();
 
 
-  /* =========================
-     UPDATE THUMBNAILS
-  ========================= */
-
+  /* UPDATE THUMBNAIL */
   renderPages();
 
 
-  /* =========================
-     UPDATE SELECTION
-  ========================= */
-
+  /* UPDATE SELECTION */
   updateSelection();
 
 });
-
 
 /* =====================================================
 CALCULATE FIT SCALE
