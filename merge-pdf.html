@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -8,7 +7,6 @@
 <title>Merge PDF - Free Online PDF Merger</title>
 
 <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 <style>
@@ -32,11 +30,12 @@ body{
 }
 
 .header-inner{
-  max-width:1200px;
+  max-width:1250px;
   margin:auto;
   display:flex;
   align-items:center;
   justify-content:space-between;
+  gap:20px;
 }
 
 .logo{
@@ -52,30 +51,35 @@ body{
 }
 
 .container{
-  max-width:1200px;
-  margin:40px auto;
+  max-width:1250px;
+  margin:35px auto;
   padding:20px;
 }
 
 .card{
   background:#fff;
   border-radius:18px;
-  padding:35px;
+  padding:32px;
   box-shadow:0 8px 30px rgba(0,0,0,.08);
 }
 
 h1{
   text-align:center;
   font-size:36px;
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 
 .subtitle{
   text-align:center;
   color:#666;
   line-height:1.6;
-  margin-bottom:30px;
+  margin-bottom:28px;
 }
+
+
+/* =========================================
+   UPLOAD
+========================================= */
 
 .upload-box{
   border:2px dashed #e53232;
@@ -123,6 +127,14 @@ input[type="file"]{
   margin-bottom:18px;
 }
 
+.empty{
+  text-align:center;
+  padding:30px;
+  color:#888;
+  border:1px dashed #ddd;
+  border-radius:10px;
+}
+
 
 /* =========================================
    PDF CARD
@@ -130,22 +142,27 @@ input[type="file"]{
 
 .file-item{
   background:#fafafa;
-  border:1px solid #e1e1e1;
-  border-radius:15px;
-  padding:16px;
-  margin-bottom:20px;
+  border:1px solid #dedede;
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:24px;
 }
 
 .file-top{
-  display:flex;
-  align-items:center;
-  gap:15px;
+  display:grid;
+  grid-template-columns:50px 250px 1fr auto;
+  align-items:start;
+  gap:20px;
 }
 
+
+/* =========================================
+   ORDER
+========================================= */
+
 .order-number{
-  width:42px;
-  min-width:42px;
-  height:42px;
+  width:44px;
+  height:44px;
   border-radius:50%;
   background:#e53232;
   color:#fff;
@@ -153,29 +170,30 @@ input[type="file"]{
   align-items:center;
   justify-content:center;
   font-weight:700;
-  font-size:16px;
+  font-size:17px;
 }
 
 
 /* =========================================
-   PDF PREVIEW AREA
+   MAIN PREVIEW
 ========================================= */
 
 .preview-wrapper{
-  width:155px;
-  min-width:155px;
+  width:250px;
+  min-width:250px;
 }
 
 .preview{
-  width:155px;
-  height:205px;
-  background:#eee;
-  border:1px solid #d7d7d7;
-  border-radius:8px;
+  width:250px;
+  height:320px;
+  background:#e9e9e9;
+  border:1px solid #d1d1d1;
+  border-radius:10px;
   display:flex;
   align-items:center;
   justify-content:center;
   overflow:hidden;
+  position:relative;
 }
 
 .preview-inner{
@@ -192,29 +210,29 @@ input[type="file"]{
 }
 
 .preview-loading{
-  font-size:12px;
+  font-size:13px;
   color:#777;
   text-align:center;
-  padding:8px;
+  padding:10px;
 }
 
 
 /* =========================================
-   ZOOM CONTROLS
+   MAIN ZOOM
 ========================================= */
 
 .zoom-controls{
   display:flex;
   justify-content:center;
   align-items:center;
-  gap:5px;
-  margin-top:7px;
+  gap:6px;
+  margin-top:9px;
 }
 
 .zoom-btn{
-  width:32px;
-  height:28px;
-  border:1px solid #d8d8d8;
+  min-width:34px;
+  height:30px;
+  border:1px solid #d5d5d5;
   background:#fff;
   border-radius:6px;
   cursor:pointer;
@@ -226,17 +244,22 @@ input[type="file"]{
   background:#f0f0f0;
 }
 
+.zoom-btn:disabled{
+  opacity:.4;
+  cursor:not-allowed;
+}
+
 .zoom-value{
-  min-width:48px;
+  min-width:52px;
   text-align:center;
-  font-size:11px;
+  font-size:12px;
   color:#666;
+  font-weight:600;
 }
 
 .reset-zoom{
-  font-size:10px;
-  padding:0 7px;
-  height:28px;
+  padding:0 8px;
+  font-size:11px;
 }
 
 
@@ -245,21 +268,28 @@ input[type="file"]{
 ========================================= */
 
 .file-info{
-  flex:1;
   min-width:0;
+  padding-top:5px;
 }
 
 .file-name{
   font-weight:700;
-  font-size:17px;
+  font-size:18px;
   word-break:break-word;
-  margin-bottom:8px;
+  line-height:1.4;
+  margin-bottom:10px;
 }
 
 .file-pages{
   font-size:14px;
   color:#777;
-  margin-bottom:8px;
+  margin-bottom:14px;
+}
+
+.file-status{
+  font-size:13px;
+  color:#777;
+  line-height:1.5;
 }
 
 
@@ -270,15 +300,15 @@ input[type="file"]{
 .file-controls{
   display:flex;
   flex-direction:column;
-  gap:6px;
+  gap:7px;
 }
 
 .control-btn{
   border:1px solid #ddd;
   background:#fff;
   color:#333;
-  width:42px;
-  height:34px;
+  width:44px;
+  height:36px;
   border-radius:7px;
   cursor:pointer;
   font-size:18px;
@@ -314,21 +344,21 @@ input[type="file"]{
 ========================================= */
 
 .page-section{
-  margin-top:20px;
-  padding-top:18px;
-  border-top:1px solid #e4e4e4;
+  margin-top:24px;
+  padding-top:20px;
+  border-top:1px solid #e1e1e1;
 }
 
 .page-section-title{
-  font-size:15px;
+  font-size:17px;
   font-weight:700;
   margin-bottom:6px;
 }
 
 .page-help{
-  font-size:12px;
+  font-size:13px;
   color:#777;
-  margin-bottom:15px;
+  margin-bottom:17px;
 }
 
 
@@ -338,10 +368,26 @@ input[type="file"]{
 
 .pages-container{
   display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  min-height:150px;
-  padding:10px 4px;
+  align-items:flex-start;
+  gap:10px;
+  overflow-x:auto;
+  padding:12px 8px 18px;
+  min-height:265px;
+  scroll-behavior:smooth;
+}
+
+.pages-container::-webkit-scrollbar{
+  height:9px;
+}
+
+.pages-container::-webkit-scrollbar-track{
+  background:#eee;
+  border-radius:10px;
+}
+
+.pages-container::-webkit-scrollbar-thumb{
+  background:#bbb;
+  border-radius:10px;
 }
 
 
@@ -350,18 +396,20 @@ input[type="file"]{
 ========================================= */
 
 .page-card{
-  width:118px;
+  flex:0 0 166px;
+  width:166px;
   background:#fff;
-  border:1px solid #dcdcdc;
-  border-radius:10px;
-  padding:7px;
+  border:1px solid #d6d6d6;
+  border-radius:11px;
+  padding:8px;
   cursor:grab;
   position:relative;
   transition:.15s;
 }
 
 .page-card:hover{
-  box-shadow:0 4px 12px rgba(0,0,0,.08);
+  box-shadow:0 5px 16px rgba(0,0,0,.10);
+  border-color:#c8c8c8;
 }
 
 .page-card:active{
@@ -372,28 +420,95 @@ input[type="file"]{
   opacity:.35;
 }
 
+
+/* =========================================
+   PAGE PREVIEW
+========================================= */
+
 .page-preview{
-  width:102px;
-  height:136px;
-  background:#eee;
-  border-radius:6px;
+  width:148px;
+  height:198px;
+  background:#ededed;
+  border:1px solid #ddd;
+  border-radius:7px;
   overflow:hidden;
   display:flex;
   align-items:center;
   justify-content:center;
+  position:relative;
+}
+
+.page-preview-inner{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform-origin:center center;
 }
 
 .page-preview canvas{
-  width:100%;
-  height:100%;
-  object-fit:contain;
+  display:block;
+  max-width:none;
+  max-height:none;
 }
+
+
+/* =========================================
+   PAGE ZOOM CONTROLS
+========================================= */
+
+.page-zoom-controls{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  margin-top:7px;
+}
+
+.page-zoom-btn{
+  width:28px;
+  height:25px;
+  border:1px solid #d5d5d5;
+  background:#fff;
+  border-radius:5px;
+  cursor:pointer;
+  font-weight:700;
+  font-size:14px;
+}
+
+.page-zoom-btn:hover{
+  background:#f0f0f0;
+}
+
+.page-zoom-btn:disabled{
+  opacity:.4;
+  cursor:not-allowed;
+}
+
+.page-zoom-value{
+  min-width:43px;
+  text-align:center;
+  font-size:10px;
+  color:#666;
+  font-weight:600;
+}
+
+.page-reset{
+  width:auto;
+  padding:0 6px;
+  font-size:9px;
+}
+
+
+/* =========================================
+   PAGE NUMBER
+========================================= */
 
 .page-number{
   text-align:center;
-  font-size:12px;
+  font-size:13px;
   font-weight:700;
-  margin-top:6px;
+  margin-top:7px;
+  color:#333;
 }
 
 
@@ -404,13 +519,13 @@ input[type="file"]{
 .page-buttons{
   display:flex;
   justify-content:center;
-  gap:4px;
-  margin-top:6px;
+  gap:5px;
+  margin-top:7px;
 }
 
 .page-btn{
-  width:31px;
-  height:26px;
+  width:34px;
+  height:28px;
   border:1px solid #ddd;
   background:#fff;
   border-radius:5px;
@@ -429,12 +544,12 @@ input[type="file"]{
 
 .page-remove{
   width:100%;
-  margin-top:5px;
+  margin-top:6px;
   border:none;
   background:#fff0f0;
   color:#d00000;
   border-radius:5px;
-  padding:5px;
+  padding:6px;
   cursor:pointer;
   font-size:11px;
   font-weight:600;
@@ -450,9 +565,10 @@ input[type="file"]{
 ========================================= */
 
 .drop-zone{
-  width:18px;
-  min-width:18px;
-  height:145px;
+  flex:0 0 20px;
+  width:20px;
+  min-width:20px;
+  height:210px;
   border:2px dashed transparent;
   border-radius:8px;
   display:flex;
@@ -462,8 +578,9 @@ input[type="file"]{
 }
 
 .drop-zone.active{
-  width:42px;
-  min-width:42px;
+  flex-basis:48px;
+  width:48px;
+  min-width:48px;
   border-color:#e53232;
   background:#fff0f0;
 }
@@ -487,9 +604,9 @@ input[type="file"]{
 
 .empty-pages{
   width:100%;
-  min-height:100px;
+  min-height:150px;
   border:2px dashed #ddd;
-  border-radius:9px;
+  border-radius:10px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -551,6 +668,11 @@ input[type="file"]{
   background:#ddd;
 }
 
+.clear-btn:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
 
 /* =========================================
    STATUS
@@ -596,19 +718,6 @@ input[type="file"]{
 
 
 /* =========================================
-   EMPTY
-========================================= */
-
-.empty{
-  text-align:center;
-  padding:30px;
-  color:#888;
-  border:1px dashed #ddd;
-  border-radius:10px;
-}
-
-
-/* =========================================
    NOTE
 ========================================= */
 
@@ -625,95 +734,140 @@ input[type="file"]{
    MOBILE
 ========================================= */
 
+@media(max-width:900px){
+
+  .file-top{
+    grid-template-columns:44px 220px 1fr auto;
+    gap:14px;
+  }
+
+  .preview-wrapper{
+    width:220px;
+    min-width:220px;
+  }
+
+  .preview{
+    width:220px;
+    height:285px;
+  }
+
+}
+
+
 @media(max-width:700px){
 
+  .header{
+    padding:14px 12px;
+  }
+
+  .header-inner{
+    gap:10px;
+  }
+
+  .logo{
+    font-size:19px;
+  }
+
+  .back-btn{
+    font-size:13px;
+  }
+
   .container{
-    margin:20px auto;
-    padding:12px;
+    margin:18px auto;
+    padding:10px;
   }
 
   .card{
     padding:22px 12px;
+    border-radius:14px;
   }
 
   h1{
     font-size:28px;
   }
 
+  .subtitle{
+    font-size:13px;
+  }
+
+  .file-item{
+    padding:14px;
+  }
+
   .file-top{
-    gap:8px;
+    grid-template-columns:35px 1fr;
+    gap:10px;
   }
 
   .order-number{
-    width:30px;
-    min-width:30px;
-    height:30px;
-    font-size:13px;
+    width:35px;
+    height:35px;
+    font-size:14px;
   }
 
   .preview-wrapper{
-    width:100px;
-    min-width:100px;
+    width:100%;
+    min-width:0;
+    grid-column:2;
   }
 
   .preview{
-    width:100px;
-    height:135px;
+    width:100%;
+    max-width:260px;
+    height:330px;
+    margin:auto;
   }
 
-  .file-name{
-    font-size:13px;
+  .file-info{
+    grid-column:2;
+    padding-top:5px;
   }
 
-  .file-pages{
-    font-size:12px;
+  .file-controls{
+    grid-column:2;
+    flex-direction:row;
+    flex-wrap:wrap;
   }
 
   .control-btn{
-    width:32px;
-    height:28px;
-    font-size:15px;
+    width:38px;
+    height:32px;
   }
 
   .remove-btn{
-    padding:6px 7px;
-    font-size:11px;
+    padding:7px 12px;
   }
 
-  .zoom-btn{
-    width:28px;
-    height:25px;
-  }
-
-  .zoom-value{
-    min-width:40px;
+  .page-section{
+    margin-top:18px;
   }
 
   .pages-container{
-    gap:7px;
-    overflow-x:auto;
-    flex-wrap:nowrap;
-    padding-bottom:10px;
+    gap:8px;
+    min-height:245px;
+    padding-left:3px;
+    padding-right:3px;
   }
 
   .page-card{
-    min-width:92px;
-    width:92px;
+    flex-basis:150px;
+    width:150px;
   }
 
   .page-preview{
-    width:78px;
-    height:105px;
+    width:134px;
+    height:180px;
   }
 
   .drop-zone{
-    min-width:12px;
-    height:115px;
+    flex-basis:14px;
+    min-width:14px;
+    height:195px;
   }
 
   .drop-zone.active{
-    min-width:35px;
-    width:35px;
+    flex-basis:38px;
+    min-width:38px;
   }
 
   .actions button{
@@ -724,7 +878,6 @@ input[type="file"]{
 }
 
 </style>
-
 </head>
 
 <body>
@@ -733,19 +886,18 @@ input[type="file"]{
 
   <div class="header-inner">
 
-```
-<div class="logo">
-  PDF Editor Tools
-</div>
+    <div class="logo">
+      PDF Editor Tools
+    </div>
 
-<a href="index.html" class="back-btn">
-  ← Back to Home
-</a>
-```
+    <a href="index.html" class="back-btn">
+      ← Back to Home
+    </a>
 
   </div>
 
 </header>
+
 
 <main class="container">
 
@@ -758,102 +910,110 @@ input[type="file"]{
     Arrange PDFs and pages in any order.
   </p>
 
-  <!-- UPLOAD -->
+
+  <!-- =====================================
+       UPLOAD
+  ====================================== -->
 
   <div class="upload-box">
 
-```
-<p>
-  Select two or more PDF files
-</p>
+    <p>
+      Select two or more PDF files
+    </p>
 
-<label
-  for="fileInput"
-  class="select-btn"
->
-  Choose PDF Files
-</label>
+    <label
+      for="fileInput"
+      class="select-btn"
+    >
+      Choose PDF Files
+    </label>
 
-<input
-  type="file"
-  id="fileInput"
-  accept="application/pdf,.pdf"
-  multiple
->
-```
+    <input
+      type="file"
+      id="fileInput"
+      accept="application/pdf,.pdf"
+      multiple
+    >
 
   </div>
 
-  <!-- FILE LIST -->
+
+  <!-- =====================================
+       FILE LIST
+  ====================================== -->
 
   <div
     id="fileList"
     class="file-list"
   >
 
-```
-<div class="empty">
-  Your selected PDF files will appear here.
-</div>
-```
+    <div class="empty">
+      Your selected PDF files will appear here.
+    </div>
 
   </div>
 
-  <!-- ACTIONS -->
+
+  <!-- =====================================
+       ACTIONS
+  ====================================== -->
 
   <div class="actions">
 
-```
-<button
-  id="mergeBtn"
-  class="merge-btn"
-  disabled
->
-  Merge PDF
-</button>
+    <button
+      id="mergeBtn"
+      class="merge-btn"
+      disabled
+    >
+      Merge PDF
+    </button>
 
-<button
-  id="clearBtn"
-  class="clear-btn"
->
-  Clear All
-</button>
-```
+    <button
+      id="clearBtn"
+      class="clear-btn"
+    >
+      Clear All
+    </button>
 
   </div>
 
-  <!-- STATUS -->
+
+  <!-- =====================================
+       STATUS
+  ====================================== -->
 
   <div
     id="status"
     class="status"
   ></div>
 
-  <!-- RESULT -->
+
+  <!-- =====================================
+       RESULT
+  ====================================== -->
 
   <div
     id="result"
     class="result"
   >
 
-```
-<strong>
-  PDF merged successfully!
-</strong>
+    <strong>
+      PDF merged successfully!
+    </strong>
 
-<br>
+    <br>
 
-<a
-  id="downloadBtn"
-  class="download-btn"
-  href="#"
-  download="merged-pdf.pdf"
->
-  Download Merged PDF
-</a>
-```
+    <a
+      id="downloadBtn"
+      class="download-btn"
+      href="#"
+      download="merged-pdf.pdf"
+    >
+      Download Merged PDF
+    </a>
 
   </div>
+
 
   <p class="note">
     Your PDF files are processed directly in your browser.
@@ -863,6 +1023,7 @@ input[type="file"]{
 </div>
 
 </main>
+
 
 <script>
 
@@ -913,22 +1074,37 @@ let draggedPage = null;
 
 
 /*
-  Each PDF object:
+  Every PDF:
 
   {
     file: File,
     pageOrder: [
       {
-        source: same PDF object,
-        pageIndex: original zero-based page index
+        source: original PDF object,
+        pageIndex: original page index,
+        zoom: page-specific zoom
       }
     ],
     pageCount: number,
-    zoom: number
+    zoom: main preview zoom
   }
-
-  This is important for cross-PDF drag.
 */
+
+
+/* =========================================
+   PDF.JS CACHE
+========================================= */
+
+const pdfJsCache =
+  new WeakMap();
+
+
+/* =========================================
+   PDF-LIB CACHE
+========================================= */
+
+const pdfLibCache =
+  new WeakMap();
 
 
 /* =========================================
@@ -996,10 +1172,96 @@ fileInput.addEventListener(
 
     result.style.display = "none";
 
+    status.textContent = "";
+
     renderFileList();
 
   }
 );
+
+
+/* =========================================
+   GET PDF.JS DOCUMENT
+========================================= */
+
+async function getPdfDocument(
+  fileData
+){
+
+  if(
+    pdfJsCache.has(fileData)
+  ){
+
+    return pdfJsCache.get(
+      fileData
+    );
+
+  }
+
+
+  const arrayBuffer =
+    await fileData.file.arrayBuffer();
+
+
+  const loadingTask =
+    pdfjsLib.getDocument({
+      data:arrayBuffer
+    });
+
+
+  const pdf =
+    await loadingTask.promise;
+
+
+  pdfJsCache.set(
+    fileData,
+    pdf
+  );
+
+
+  return pdf;
+
+}
+
+
+/* =========================================
+   GET PDF-LIB DOCUMENT
+========================================= */
+
+async function getPdfLibDocument(
+  fileData
+){
+
+  if(
+    pdfLibCache.has(fileData)
+  ){
+
+    return pdfLibCache.get(
+      fileData
+    );
+
+  }
+
+
+  const bytes =
+    await fileData.file.arrayBuffer();
+
+
+  const pdf =
+    await PDFLib.PDFDocument.load(
+      bytes
+    );
+
+
+  pdfLibCache.set(
+    fileData,
+    pdf
+  );
+
+
+  return pdf;
+
+}
 
 
 /* =========================================
@@ -1011,7 +1273,9 @@ function renderFileList(){
   fileList.innerHTML = "";
 
 
-  if(selectedFiles.length === 0){
+  if(
+    selectedFiles.length === 0
+  ){
 
     fileList.innerHTML =
       '<div class="empty">Your selected PDF files will appear here.</div>';
@@ -1035,7 +1299,9 @@ function renderFileList(){
     ")";
 
 
-  fileList.appendChild(title);
+  fileList.appendChild(
+    title
+  );
 
 
   selectedFiles.forEach(
@@ -1072,7 +1338,9 @@ function createFileItem(
     "file-item";
 
 
-  /* TOP */
+  /* =====================================
+     TOP
+  ====================================== */
 
   const top =
     document.createElement("div");
@@ -1081,7 +1349,9 @@ function createFileItem(
     "file-top";
 
 
-  /* ORDER NUMBER */
+  /* =====================================
+     ORDER NUMBER
+  ====================================== */
 
   const order =
     document.createElement("div");
@@ -1093,7 +1363,9 @@ function createFileItem(
     index + 1;
 
 
-  /* PREVIEW WRAPPER */
+  /* =====================================
+     MAIN PREVIEW
+  ====================================== */
 
   const previewWrapper =
     document.createElement("div");
@@ -1109,10 +1381,12 @@ function createFileItem(
     "preview";
 
   preview.innerHTML =
-    '<div class="preview-loading">Loading...</div>';
+    '<div class="preview-loading">Loading preview...</div>';
 
 
-  /* ZOOM */
+  /* =====================================
+     MAIN ZOOM
+  ====================================== */
 
   const zoomControls =
     document.createElement("div");
@@ -1198,7 +1472,9 @@ function createFileItem(
   );
 
 
-  /* FILE INFO */
+  /* =====================================
+     FILE INFO
+  ====================================== */
 
   const info =
     document.createElement("div");
@@ -1224,15 +1500,42 @@ function createFileItem(
     "file-pages";
 
   pages.textContent =
-    "Reading PDF...";
+    fileData.pageCount
+    ? fileData.pageCount +
+      (
+        fileData.pageCount === 1
+        ? " page"
+        : " pages"
+      )
+    : "Reading PDF...";
 
 
-  info.appendChild(name);
+  const fileStatus =
+    document.createElement("div");
 
-  info.appendChild(pages);
+  fileStatus.className =
+    "file-status";
+
+  fileStatus.textContent =
+    "Arrange individual pages below. Drag pages between PDFs if needed.";
 
 
-  /* PDF CONTROLS */
+  info.appendChild(
+    name
+  );
+
+  info.appendChild(
+    pages
+  );
+
+  info.appendChild(
+    fileStatus
+  );
+
+
+  /* =====================================
+     PDF CONTROLS
+  ====================================== */
 
   const controls =
     document.createElement("div");
@@ -1309,31 +1612,51 @@ function createFileItem(
   removeBtn.onclick =
     function(){
 
-      removeFile(index);
+      removeFile(
+        index
+      );
 
     };
 
 
-  controls.appendChild(upBtn);
+  controls.appendChild(
+    upBtn
+  );
 
-  controls.appendChild(downBtn);
+  controls.appendChild(
+    downBtn
+  );
 
-  controls.appendChild(removeBtn);
-
-
-  top.appendChild(order);
-
-  top.appendChild(previewWrapper);
-
-  top.appendChild(info);
-
-  top.appendChild(controls);
+  controls.appendChild(
+    removeBtn
+  );
 
 
-  item.appendChild(top);
+  top.appendChild(
+    order
+  );
+
+  top.appendChild(
+    previewWrapper
+  );
+
+  top.appendChild(
+    info
+  );
+
+  top.appendChild(
+    controls
+  );
 
 
-  /* PAGE SECTION */
+  item.appendChild(
+    top
+  );
+
+
+  /* =====================================
+     PAGE SECTION
+  ====================================== */
 
   const pageSection =
     document.createElement("div");
@@ -1349,7 +1672,9 @@ function createFileItem(
     "page-section-title";
 
   pageTitle.textContent =
-    "Pages";
+    "Pages (" +
+    fileData.pageOrder.length +
+    ")";
 
 
   const pageHelp =
@@ -1359,7 +1684,7 @@ function createFileItem(
     "page-help";
 
   pageHelp.textContent =
-    "Drag any page to another position or another PDF.";
+    "Each page has its own zoom. Drag a page between any PDFs to change its position.";
 
 
   const pagesContainer =
@@ -1396,7 +1721,9 @@ function createFileItem(
   );
 
 
-  /* ZOOM EVENTS */
+  /* =====================================
+     MAIN ZOOM EVENTS
+  ====================================== */
 
   zoomOut.onclick =
     function(){
@@ -1407,10 +1734,12 @@ function createFileItem(
           +(fileData.zoom - 0.1).toFixed(1)
         );
 
+
       zoomValue.textContent =
         Math.round(
           fileData.zoom * 100
         ) + "%";
+
 
       renderMainPreview(
         fileData,
@@ -1429,10 +1758,12 @@ function createFileItem(
           +(fileData.zoom + 0.1).toFixed(1)
         );
 
+
       zoomValue.textContent =
         Math.round(
           fileData.zoom * 100
         ) + "%";
+
 
       renderMainPreview(
         fileData,
@@ -1445,10 +1776,13 @@ function createFileItem(
   resetZoom.onclick =
     function(){
 
-      fileData.zoom = 1;
+      fileData.zoom =
+        1;
+
 
       zoomValue.textContent =
         "100%";
+
 
       renderMainPreview(
         fileData,
@@ -1481,14 +1815,10 @@ async function loadPdfData(
 
   try{
 
-    const arrayBuffer =
-      await fileData.file.arrayBuffer();
-
-
     const pdf =
-      await pdfjsLib.getDocument({
-        data:arrayBuffer
-      }).promise;
+      await getPdfDocument(
+        fileData
+      );
 
 
     fileData.pageCount =
@@ -1496,7 +1826,8 @@ async function loadPdfData(
 
 
     /*
-      Create page objects only once.
+      Only initialize page order
+      when it is not already available.
     */
 
     if(
@@ -1511,7 +1842,9 @@ async function loadPdfData(
 
             source:fileData,
 
-            pageIndex:i
+            pageIndex:i,
+
+            zoom:1
 
           })
         );
@@ -1537,7 +1870,6 @@ async function loadPdfData(
 
     await renderPages(
       fileData,
-      pdf,
       pagesContainer
     );
 
@@ -1555,7 +1887,7 @@ async function loadPdfData(
 
 
     pagesElement.textContent =
-      "PDF file";
+      "Unable to read PDF";
 
 
     pagesContainer.innerHTML =
@@ -1567,7 +1899,7 @@ async function loadPdfData(
 
 
 /* =========================================
-   MAIN PREVIEW
+   MAIN PDF PREVIEW
 ========================================= */
 
 async function renderMainPreview(
@@ -1578,30 +1910,33 @@ async function renderMainPreview(
 
   try{
 
-    let pdf = existingPdf;
+    let pdf =
+      existingPdf;
 
 
     if(!pdf){
 
-      const arrayBuffer =
-        await fileData.file.arrayBuffer();
-
-
       pdf =
-        await pdfjsLib.getDocument({
-          data:arrayBuffer
-        }).promise;
+        await getPdfDocument(
+          fileData
+        );
 
     }
 
 
-    if(pdf.numPages < 1){
+    if(
+      pdf.numPages < 1
+    ){
+
       return;
+
     }
 
 
     const page =
-      await pdf.getPage(1);
+      await pdf.getPage(
+        1
+      );
 
 
     const baseViewport =
@@ -1611,23 +1946,28 @@ async function renderMainPreview(
 
 
     const availableWidth =
-      preview.clientWidth - 8;
+      preview.clientWidth - 12;
+
 
     const availableHeight =
-      preview.clientHeight - 8;
+      preview.clientHeight - 12;
 
 
     const fitScale =
       Math.min(
-        availableWidth / baseViewport.width,
-        availableHeight / baseViewport.height
+        availableWidth /
+        baseViewport.width,
+
+        availableHeight /
+        baseViewport.height
       );
 
 
     const scale =
       Math.max(
         0.1,
-        fitScale * fileData.zoom
+        fitScale *
+        fileData.zoom
       );
 
 
@@ -1642,14 +1982,21 @@ async function renderMainPreview(
 
 
     const context =
-      canvas.getContext("2d");
+      canvas.getContext(
+        "2d"
+      );
 
 
     canvas.width =
-      viewport.width;
+      Math.ceil(
+        viewport.width
+      );
+
 
     canvas.height =
-      viewport.height;
+      Math.ceil(
+        viewport.height
+      );
 
 
     const inner =
@@ -1693,19 +2040,20 @@ async function renderMainPreview(
 
 
 /* =========================================
-   RENDER PAGES
+   RENDER ALL PAGES
 ========================================= */
 
 async function renderPages(
   fileData,
-  pdf,
   container
 ){
 
   container.innerHTML = "";
 
 
-  if(fileData.pageOrder.length === 0){
+  if(
+    fileData.pageOrder.length === 0
+  ){
 
     const empty =
       document.createElement("div");
@@ -1732,7 +2080,9 @@ async function renderPages(
   }
 
 
-  /* FIRST DROP ZONE */
+  /*
+    FIRST DROP ZONE
+  */
 
   container.appendChild(
     createDropZone(
@@ -1742,14 +2092,21 @@ async function renderPages(
   );
 
 
+  /*
+    PAGE CARDS
+  */
+
   for(
     let position=0;
-    position<fileData.pageOrder.length;
+    position<
+    fileData.pageOrder.length;
     position++
   ){
 
     const pageData =
-      fileData.pageOrder[position];
+      fileData.pageOrder[
+        position
+      ];
 
 
     await createPageCard(
@@ -1787,10 +2144,13 @@ async function createPageCard(
   card.className =
     "page-card";
 
-  card.draggable = true;
+  card.draggable =
+    true;
 
 
-  /* PREVIEW */
+  /* =====================================
+     PAGE PREVIEW
+  ====================================== */
 
   const preview =
     document.createElement("div");
@@ -1799,10 +2159,92 @@ async function createPageCard(
     "page-preview";
 
   preview.innerHTML =
-    '<div class="preview-loading">...</div>';
+    '<div class="preview-loading">Loading...</div>';
 
 
-  /* NUMBER */
+  /* =====================================
+     PAGE ZOOM CONTROLS
+  ====================================== */
+
+  const zoomControls =
+    document.createElement("div");
+
+  zoomControls.className =
+    "page-zoom-controls";
+
+
+  const zoomOut =
+    document.createElement("button");
+
+  zoomOut.className =
+    "page-zoom-btn";
+
+  zoomOut.textContent =
+    "−";
+
+  zoomOut.title =
+    "Zoom Out";
+
+
+  const zoomValue =
+    document.createElement("span");
+
+  zoomValue.className =
+    "page-zoom-value";
+
+  zoomValue.textContent =
+    Math.round(
+      (pageData.zoom || 1) *
+      100
+    ) + "%";
+
+
+  const zoomIn =
+    document.createElement("button");
+
+  zoomIn.className =
+    "page-zoom-btn";
+
+  zoomIn.textContent =
+    "+";
+
+  zoomIn.title =
+    "Zoom In";
+
+
+  const reset =
+    document.createElement("button");
+
+  reset.className =
+    "page-zoom-btn page-reset";
+
+  reset.textContent =
+    "Reset";
+
+  reset.title =
+    "Reset page zoom";
+
+
+  zoomControls.appendChild(
+    zoomOut
+  );
+
+  zoomControls.appendChild(
+    zoomValue
+  );
+
+  zoomControls.appendChild(
+    zoomIn
+  );
+
+  zoomControls.appendChild(
+    reset
+  );
+
+
+  /* =====================================
+     PAGE NUMBER
+  ====================================== */
 
   const number =
     document.createElement("div");
@@ -1815,7 +2257,9 @@ async function createPageCard(
     (position + 1);
 
 
-  /* BUTTONS */
+  /* =====================================
+     PAGE BUTTONS
+  ====================================== */
 
   const buttons =
     document.createElement("div");
@@ -1885,12 +2329,18 @@ async function createPageCard(
     };
 
 
-  buttons.appendChild(up);
+  buttons.appendChild(
+    up
+  );
 
-  buttons.appendChild(down);
+  buttons.appendChild(
+    down
+  );
 
 
-  /* REMOVE */
+  /* =====================================
+     REMOVE
+  ====================================== */
 
   const remove =
     document.createElement("button");
@@ -1915,20 +2365,38 @@ async function createPageCard(
     };
 
 
-  card.appendChild(preview);
+  /* =====================================
+     APPEND
+  ====================================== */
 
-  card.appendChild(number);
+  card.appendChild(
+    preview
+  );
 
-  card.appendChild(buttons);
+  card.appendChild(
+    zoomControls
+  );
 
-  card.appendChild(remove);
+  card.appendChild(
+    number
+  );
+
+  card.appendChild(
+    buttons
+  );
+
+  card.appendChild(
+    remove
+  );
 
 
-  /* DRAG START */
+  /* =====================================
+     DRAG START
+  ====================================== */
 
   card.addEventListener(
     "dragstart",
-    function(){
+    function(e){
 
       draggedPage = {
 
@@ -1945,11 +2413,28 @@ async function createPageCard(
         "dragging"
       );
 
+
+      if(
+        e.dataTransfer
+      ){
+
+        e.dataTransfer.effectAllowed =
+          "move";
+
+        e.dataTransfer.setData(
+          "text/plain",
+          "pdf-page"
+        );
+
+      }
+
     }
   );
 
 
-  /* DRAG END */
+  /* =====================================
+     DRAG END
+  ====================================== */
 
   card.addEventListener(
     "dragend",
@@ -1959,9 +2444,12 @@ async function createPageCard(
         "dragging"
       );
 
+
       clearDropZones();
 
-      draggedPage = null;
+
+      draggedPage =
+        null;
 
     }
   );
@@ -1972,7 +2460,112 @@ async function createPageCard(
   );
 
 
-  /* RENDER ACTUAL SOURCE PAGE */
+  /* =====================================
+     PAGE ZOOM EVENTS
+  ====================================== */
+
+  zoomOut.onclick =
+    function(e){
+
+      e.stopPropagation();
+
+
+      pageData.zoom =
+        Math.max(
+          0.5,
+          +(
+            (pageData.zoom || 1) -
+            0.1
+          ).toFixed(1)
+        );
+
+
+      zoomValue.textContent =
+        Math.round(
+          pageData.zoom * 100
+        ) + "%";
+
+
+      renderPagePreview(
+        pageData,
+        preview
+      );
+
+    };
+
+
+  zoomIn.onclick =
+    function(e){
+
+      e.stopPropagation();
+
+
+      pageData.zoom =
+        Math.min(
+          2,
+          +(
+            (pageData.zoom || 1) +
+            0.1
+          ).toFixed(1)
+        );
+
+
+      zoomValue.textContent =
+        Math.round(
+          pageData.zoom * 100
+        ) + "%";
+
+
+      renderPagePreview(
+        pageData,
+        preview
+      );
+
+    };
+
+
+  reset.onclick =
+    function(e){
+
+      e.stopPropagation();
+
+
+      pageData.zoom =
+        1;
+
+
+      zoomValue.textContent =
+        "100%";
+
+
+      renderPagePreview(
+        pageData,
+        preview
+      );
+
+    };
+
+
+  /* =====================================
+     RENDER ACTUAL SOURCE PAGE
+  ====================================== */
+
+  await renderPagePreview(
+    pageData,
+    preview
+  );
+
+}
+
+
+/* =========================================
+   RENDER INDIVIDUAL PAGE PREVIEW
+========================================= */
+
+async function renderPagePreview(
+  pageData,
+  preview
+){
 
   try{
 
@@ -1988,9 +2581,44 @@ async function createPageCard(
       );
 
 
+    const baseViewport =
+      page.getViewport({
+        scale:1
+      });
+
+
+    const availableWidth =
+      preview.clientWidth - 8;
+
+
+    const availableHeight =
+      preview.clientHeight - 8;
+
+
+    const fitScale =
+      Math.min(
+        availableWidth /
+        baseViewport.width,
+
+        availableHeight /
+        baseViewport.height
+      );
+
+
+    const zoom =
+      pageData.zoom || 1;
+
+
+    const scale =
+      Math.max(
+        0.1,
+        fitScale * zoom
+      );
+
+
     const viewport =
       page.getViewport({
-        scale:.55
+        scale:scale
       });
 
 
@@ -1999,20 +2627,39 @@ async function createPageCard(
 
 
     const context =
-      canvas.getContext("2d");
+      canvas.getContext(
+        "2d"
+      );
 
 
     canvas.width =
-      viewport.width;
+      Math.ceil(
+        viewport.width
+      );
+
 
     canvas.height =
-      viewport.height;
+      Math.ceil(
+        viewport.height
+      );
+
+
+    const inner =
+      document.createElement("div");
+
+    inner.className =
+      "page-preview-inner";
+
+
+    inner.appendChild(
+      canvas
+    );
 
 
     preview.innerHTML = "";
 
     preview.appendChild(
-      canvas
+      inner
     );
 
 
@@ -2034,7 +2681,7 @@ async function createPageCard(
 
 
     preview.innerHTML =
-      '<div class="preview-loading">Error</div>';
+      '<div class="preview-loading">Preview error</div>';
 
   }
 
@@ -2042,55 +2689,7 @@ async function createPageCard(
 
 
 /* =========================================
-   PDF CACHE
-========================================= */
-
-const pdfCache =
-  new WeakMap();
-
-
-async function getPdfDocument(
-  fileData
-){
-
-  if(
-    pdfCache.has(fileData)
-  ){
-
-    return pdfCache.get(
-      fileData
-    );
-
-  }
-
-
-  const arrayBuffer =
-    await fileData.file.arrayBuffer();
-
-
-  const loadingTask =
-    pdfjsLib.getDocument({
-      data:arrayBuffer
-    });
-
-
-  const pdf =
-    await loadingTask.promise;
-
-
-  pdfCache.set(
-    fileData,
-    pdf
-  );
-
-
-  return pdf;
-
-}
-
-
-/* =========================================
-   DROP ZONE
+   CREATE DROP ZONE
 ========================================= */
 
 function createDropZone(
@@ -2127,14 +2726,28 @@ function createDropZone(
       e.preventDefault();
 
 
-      if(!draggedPage){
+      if(
+        !draggedPage
+      ){
+
         return;
+
       }
 
 
       zone.classList.add(
         "active"
       );
+
+
+      if(
+        e.dataTransfer
+      ){
+
+        e.dataTransfer.dropEffect =
+          "move";
+
+      }
 
     }
   );
@@ -2164,20 +2777,33 @@ function createDropZone(
       );
 
 
-      if(!draggedPage){
+      if(
+        !draggedPage
+      ){
+
         return;
+
       }
 
 
+      const sourceFile =
+        draggedPage.sourceFile;
+
+
+      const sourcePosition =
+        draggedPage.sourcePosition;
+
+
       moveDraggedPage(
-        draggedPage.sourceFile,
-        draggedPage.sourcePosition,
+        sourceFile,
+        sourcePosition,
         targetFile,
         targetPosition
       );
 
 
-      draggedPage = null;
+      draggedPage =
+        null;
 
     }
   );
@@ -2204,8 +2830,12 @@ function setupEmptyDropZone(
       e.preventDefault();
 
 
-      if(!draggedPage){
+      if(
+        !draggedPage
+      ){
+
         return;
+
       }
 
 
@@ -2241,20 +2871,33 @@ function setupEmptyDropZone(
       );
 
 
-      if(!draggedPage){
+      if(
+        !draggedPage
+      ){
+
         return;
+
       }
 
 
+      const sourceFile =
+        draggedPage.sourceFile;
+
+
+      const sourcePosition =
+        draggedPage.sourcePosition;
+
+
       moveDraggedPage(
-        draggedPage.sourceFile,
-        draggedPage.sourcePosition,
+        sourceFile,
+        sourcePosition,
         targetFile,
         0
       );
 
 
-      draggedPage = null;
+      draggedPage =
+        null;
 
     }
   );
@@ -2283,17 +2926,33 @@ function moveDraggedPage(
   }
 
 
-  /*
-    SAME PDF
-  */
+  if(
+    sourcePosition < 0 ||
+    sourcePosition >=
+    sourceFile.pageOrder.length
+  ){
+
+    return;
+
+  }
+
+
+  /* =====================================
+     SAME PDF
+  ====================================== */
 
   if(
     sourceFile === targetFile
   ){
 
+    /*
+      Dropping immediately before
+      the same page = no change.
+    */
+
     if(
-      sourcePosition === targetPosition ||
-      sourcePosition + 1 === targetPosition
+      targetPosition === sourcePosition ||
+      targetPosition === sourcePosition + 1
     ){
 
       return;
@@ -2322,22 +2981,14 @@ function moveDraggedPage(
     }
 
 
-    if(finalPosition < 0){
-
-      finalPosition = 0;
-
-    }
-
-
-    if(
-      finalPosition >
-      sourceFile.pageOrder.length
-    ){
-
-      finalPosition =
-        sourceFile.pageOrder.length;
-
-    }
+    finalPosition =
+      Math.max(
+        0,
+        Math.min(
+          finalPosition,
+          sourceFile.pageOrder.length
+        )
+      );
 
 
     sourceFile.pageOrder.splice(
@@ -2348,17 +2999,20 @@ function moveDraggedPage(
 
   }
 
-  /*
-    DIFFERENT PDF
-  */
+
+  /* =====================================
+     DIFFERENT PDF
+  ====================================== */
 
   else{
 
     /*
-      IMPORTANT:
-      We move the complete pageData object.
-      This keeps the original source PDF
-      and original page index.
+      Move complete pageData object.
+
+      It keeps:
+      - original source PDF
+      - original page index
+      - individual page zoom
     */
 
     const page =
@@ -2368,24 +3022,14 @@ function moveDraggedPage(
       )[0];
 
 
-    if(
-      targetPosition < 0
-    ){
-
-      targetPosition = 0;
-
-    }
-
-
-    if(
-      targetPosition >
-      targetFile.pageOrder.length
-    ){
-
-      targetPosition =
-        targetFile.pageOrder.length;
-
-    }
+    targetPosition =
+      Math.max(
+        0,
+        Math.min(
+          targetPosition,
+          targetFile.pageOrder.length
+        )
+      );
 
 
     targetFile.pageOrder.splice(
@@ -2399,6 +3043,9 @@ function moveDraggedPage(
 
   result.style.display =
     "none";
+
+
+  status.textContent = "";
 
 
   renderFileList();
@@ -2418,7 +3065,8 @@ function movePageWithinPdf(
 
   if(
     newPosition < 0 ||
-    newPosition >= fileData.pageOrder.length
+    newPosition >=
+    fileData.pageOrder.length
   ){
 
     return;
@@ -2465,6 +3113,17 @@ function removePage(
 ){
 
   if(
+    position < 0 ||
+    position >=
+    fileData.pageOrder.length
+  ){
+
+    return;
+
+  }
+
+
+  if(
     fileData.pageOrder.length <= 1
   ){
 
@@ -2474,7 +3133,9 @@ function removePage(
       );
 
 
-    if(!confirmRemove){
+    if(
+      !confirmRemove
+    ){
 
       return;
 
@@ -2509,7 +3170,8 @@ function moveFile(
 
   if(
     newIndex < 0 ||
-    newIndex >= selectedFiles.length
+    newIndex >=
+    selectedFiles.length
   ){
 
     return;
@@ -2518,14 +3180,22 @@ function moveFile(
 
 
   const temp =
-    selectedFiles[oldIndex];
+    selectedFiles[
+      oldIndex
+    ];
 
 
-  selectedFiles[oldIndex] =
-    selectedFiles[newIndex];
+  selectedFiles[
+    oldIndex
+  ] =
+    selectedFiles[
+      newIndex
+    ];
 
 
-  selectedFiles[newIndex] =
+  selectedFiles[
+    newIndex
+  ] =
     temp;
 
 
@@ -2545,6 +3215,17 @@ function moveFile(
 function removeFile(
   index
 ){
+
+  if(
+    index < 0 ||
+    index >=
+    selectedFiles.length
+  ){
+
+    return;
+
+  }
+
 
   selectedFiles.splice(
     index,
@@ -2568,7 +3249,9 @@ function removeFile(
 function clearDropZones(){
 
   document
-    .querySelectorAll(".drop-zone")
+    .querySelectorAll(
+      ".drop-zone"
+    )
     .forEach(
       zone => {
 
@@ -2599,9 +3282,11 @@ clearBtn.addEventListener(
     fileList.innerHTML =
       '<div class="empty">Your selected PDF files will appear here.</div>';
 
-    mergeBtn.disabled = true;
+    mergeBtn.disabled =
+      true;
 
-    status.textContent = "";
+    status.textContent =
+      "";
 
     result.style.display =
       "none";
@@ -2613,7 +3298,8 @@ clearBtn.addEventListener(
         downloadUrl
       );
 
-      downloadUrl = null;
+      downloadUrl =
+        null;
 
     }
 
@@ -2641,9 +3327,11 @@ mergeBtn.addEventListener(
     }
 
 
-    mergeBtn.disabled = true;
+    mergeBtn.disabled =
+      true;
 
-    clearBtn.disabled = true;
+    clearBtn.disabled =
+      true;
 
     result.style.display =
       "none";
@@ -2655,12 +3343,12 @@ mergeBtn.addEventListener(
         await PDFLib.PDFDocument.create();
 
 
-      let totalPages = 0;
+      let totalPages =
+        0;
 
 
       /*
-        Process PDFs in their current
-        PDF order.
+        Current PDF order
       */
 
       for(
@@ -2674,7 +3362,7 @@ mergeBtn.addEventListener(
 
 
         status.textContent =
-          "Processing PDF " +
+          "Preparing PDF " +
           (i + 1) +
           " of " +
           selectedFiles.length +
@@ -2682,13 +3370,13 @@ mergeBtn.addEventListener(
 
 
         /*
-          Pages can now belong to ANY
-          source PDF because of cross drag.
+          Current page order
         */
 
         for(
           let p=0;
-          p<targetFile.pageOrder.length;
+          p<
+          targetFile.pageOrder.length;
           p++
         ){
 
@@ -2700,16 +3388,24 @@ mergeBtn.addEventListener(
             pageData.source;
 
 
+          /*
+            Use cached PDF-Lib
+            document instead of loading
+            the same source repeatedly.
+          */
+
           const sourcePdf =
-            await PDFLib.PDFDocument.load(
-              await sourceFile.file.arrayBuffer()
+            await getPdfLibDocument(
+              sourceFile
             );
 
 
           const copiedPages =
             await mergedPdf.copyPages(
               sourcePdf,
-              [pageData.pageIndex]
+              [
+                pageData.pageIndex
+              ]
             );
 
 
@@ -2721,16 +3417,25 @@ mergeBtn.addEventListener(
               copiedPages[0]
             );
 
+
             totalPages++;
 
           }
+
+
+          status.textContent =
+            "Merging page " +
+            totalPages +
+            "...";
 
         }
 
       }
 
 
-      if(totalPages === 0){
+      if(
+        totalPages === 0
+      ){
 
         throw new Error(
           "No pages available to merge."
@@ -2740,7 +3445,7 @@ mergeBtn.addEventListener(
 
 
       status.textContent =
-        "Creating merged PDF...";
+        "Creating final PDF...";
 
 
       const pdfBytes =
@@ -2751,7 +3456,8 @@ mergeBtn.addEventListener(
         new Blob(
           [pdfBytes],
           {
-            type:"application/pdf"
+            type:
+              "application/pdf"
           }
         );
 
@@ -2773,6 +3479,10 @@ mergeBtn.addEventListener(
 
       downloadBtn.href =
         downloadUrl;
+
+
+      downloadBtn.download =
+        "merged-pdf.pdf";
 
 
       result.style.display =
