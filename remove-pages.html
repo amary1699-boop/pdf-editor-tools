@@ -1275,7 +1275,6 @@ async function downloadPDF(){
 
   }
 
-
   try{
 
     showMessage(
@@ -1283,65 +1282,67 @@ async function downloadPDF(){
       "success"
     );
 
-
     const {
       PDFDocument,
       degrees
     } = PDFLib;
-
 
     const sourcePdf =
       await PDFDocument.load(
         originalPdfBytes
       );
 
-
     const outputPdf =
       await PDFDocument.create();
 
 
-    const pageIndices =
-      pagesData.map(function(page){
+    /*
+      pagesData में वही pages बचे हैं
+      जिन्हें final PDF में रखना है.
+    */
 
-        return page.originalIndex - 1;
+    for(let i = 0; i < pagesData.length; i++){
 
-      });
+      const pageData = pagesData[i];
 
-
-    const copiedPages =
-      await outputPdf.copyPages(
-        sourcePdf,
-        pageIndices
-      );
+      const originalIndex =
+        pageData.originalIndex - 1;
 
 
-    pagesData.forEach(
-      function(pageData,index){
-
-        const page =
-          copiedPages[index];
-
-
-        const rotation =
-          ((pageData.rotation % 360) + 360) % 360;
+      const copiedPages =
+        await outputPdf.copyPages(
+          sourcePdf,
+          [originalIndex]
+        );
 
 
-        if(rotation !== 0){
-
-          page.setRotation(
-            degrees(
-              page.getRotation().angle +
-              rotation
-            )
-          );
-
-        }
+      const newPage =
+        copiedPages[0];
 
 
-        outputPdf.addPage(page);
+      /*
+        Page rotation
+      */
+
+      const rotation =
+        ((pageData.rotation % 360) + 360) % 360;
+
+
+      if(rotation !== 0){
+
+        newPage.setRotation(
+          degrees(
+            newPage.getRotation().angle +
+            rotation
+          )
+        );
 
       }
-    );
+
+
+      outputPdf.addPage(newPage);
+
+    }
 
 
     const pdfBytes =
@@ -1369,27 +1370,38 @@ async function downloadPDF(){
     a.download =
       "removed-pages.pdf";
 
+    a.style.display =
+      "none";
+
     document.body.appendChild(a);
 
     a.click();
 
-    a.remove();
+    document.body.removeChild(a);
 
-    URL.revokeObjectURL(url);
+
+    setTimeout(function(){
+
+      URL.revokeObjectURL(url);
+
+    },1000);
 
 
     showMessage(
-      "PDF created successfully.",
+      "PDF downloaded successfully.",
       "success"
     );
 
   }
   catch(error){
 
-    console.error(error);
+    console.error(
+      "PDF Download Error:",
+      error
+    );
 
     showMessage(
-      "Unable to create the PDF. Please try again.",
+      "Download failed. Please try again.",
       "error"
     );
 
