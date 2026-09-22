@@ -12,6 +12,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -107,6 +108,8 @@ input[type="file"]{
   display:none;
 }
 
+/* PDF LIST */
+
 .file-list{
   margin-top:30px;
 }
@@ -124,12 +127,7 @@ input[type="file"]{
   border:1px solid #e1e1e1;
   border-radius:15px;
   padding:16px;
-  margin-bottom:18px;
-  transition:.2s;
-}
-
-.file-item:hover{
-  box-shadow:0 5px 18px rgba(0,0,0,.07);
+  margin-bottom:20px;
 }
 
 .file-top{
@@ -152,7 +150,7 @@ input[type="file"]{
   font-size:16px;
 }
 
-/* LARGE PREVIEW */
+/* BIG PDF PREVIEW */
 
 .preview{
   width:125px;
@@ -195,8 +193,10 @@ input[type="file"]{
 .file-pages{
   font-size:14px;
   color:#777;
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
+
+/* PDF ORDER BUTTONS */
 
 .file-controls{
   display:flex;
@@ -239,7 +239,7 @@ input[type="file"]{
   background:#ffd1d1;
 }
 
-/* PAGE SECTION */
+/* PAGE AREA */
 
 .page-section{
   margin-top:20px;
@@ -250,25 +250,40 @@ input[type="file"]{
 .page-section-title{
   font-size:15px;
   font-weight:700;
-  margin-bottom:13px;
+  margin-bottom:12px;
 }
+
+.page-help{
+  font-size:12px;
+  color:#777;
+  margin-bottom:15px;
+}
+
+/* PAGES */
 
 .pages-container{
   display:flex;
   flex-wrap:wrap;
-  gap:14px;
+  gap:12px;
+  min-height:145px;
+  padding:10px 4px;
 }
 
-/* INDIVIDUAL PAGE */
+/* PAGE CARD */
 
 .page-card{
-  width:115px;
+  width:118px;
   background:#fff;
-  border:1px solid #ddd;
+  border:1px solid #dcdcdc;
   border-radius:10px;
   padding:7px;
-  position:relative;
   cursor:grab;
+  position:relative;
+  transition:.15s;
+}
+
+.page-card:hover{
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
 }
 
 .page-card:active{
@@ -276,12 +291,12 @@ input[type="file"]{
 }
 
 .page-card.dragging{
-  opacity:.45;
+  opacity:.35;
 }
 
 .page-preview{
-  width:101px;
-  height:135px;
+  width:102px;
+  height:136px;
   background:#eee;
   border-radius:6px;
   overflow:hidden;
@@ -303,6 +318,8 @@ input[type="file"]{
   margin-top:6px;
 }
 
+/* SMALL PAGE CONTROLS */
+
 .page-buttons{
   display:flex;
   justify-content:center;
@@ -311,8 +328,8 @@ input[type="file"]{
 }
 
 .page-btn{
-  width:30px;
-  height:27px;
+  width:31px;
+  height:26px;
   border:1px solid #ddd;
   background:#fff;
   border-radius:5px;
@@ -344,6 +361,55 @@ input[type="file"]{
 
 .page-remove:hover{
   background:#ffe0e0;
+}
+
+/* DROP ZONE */
+
+.drop-zone{
+  width:18px;
+  min-width:18px;
+  height:145px;
+  border:2px dashed transparent;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.15s;
+}
+
+.drop-zone.active{
+  width:42px;
+  min-width:42px;
+  border-color:#e53232;
+  background:#fff0f0;
+}
+
+.drop-text{
+  display:none;
+  writing-mode:vertical-rl;
+  font-size:10px;
+  color:#e53232;
+  font-weight:700;
+}
+
+.drop-zone.active .drop-text{
+  display:block;
+}
+
+/* EMPTY PAGES */
+
+.empty-pages{
+  width:100%;
+  min-height:100px;
+  border:2px dashed #ddd;
+  border-radius:9px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#999;
+  font-size:13px;
+  text-align:center;
+  padding:20px;
 }
 
 /* ACTIONS */
@@ -496,10 +562,14 @@ input[type="file"]{
   }
 
   .pages-container{
-    gap:9px;
+    gap:7px;
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    padding-bottom:10px;
   }
 
   .page-card{
+    min-width:92px;
     width:92px;
   }
 
@@ -508,21 +578,23 @@ input[type="file"]{
     height:105px;
   }
 
-  .page-buttons{
-    gap:2px;
+  .drop-zone{
+    min-width:12px;
+    height:115px;
   }
 
-  .page-btn{
-    width:25px;
-    height:24px;
-    font-size:12px;
+  .drop-zone.active{
+    min-width:35px;
+    width:35px;
   }
 
   .actions button{
     width:100%;
     margin:5px 0;
   }
+
 }
+
 </style>
 
 </head>
@@ -530,18 +602,21 @@ input[type="file"]{
 <body>
 
 <header class="header">
+
   <div class="header-inner">
-    <div class="logo">
-      PDF Editor Tools
-    </div>
 
 ```
+<div class="logo">
+  PDF Editor Tools
+</div>
+
 <a href="index.html" class="back-btn">
   ← Back to Home
 </a>
 ```
 
   </div>
+
 </header>
 
 <main class="container">
@@ -551,9 +626,11 @@ input[type="file"]{
   <h1>Merge PDF</h1>
 
   <p class="subtitle">
-    Combine multiple PDF files into one PDF document.
-    Arrange PDF files and individual pages in your preferred order.
+    Combine multiple PDF files into one PDF.
+    Arrange PDFs and pages in any order.
   </p>
+
+  <!-- UPLOAD -->
 
   <div class="upload-box">
 
@@ -576,6 +653,8 @@ input[type="file"]{
 
   </div>
 
+  <!-- FILE LIST -->
+
   <div id="fileList" class="file-list">
 
 ```
@@ -585,6 +664,8 @@ input[type="file"]{
 ```
 
   </div>
+
+  <!-- ACTIONS -->
 
   <div class="actions">
 
@@ -607,7 +688,11 @@ input[type="file"]{
 
   </div>
 
+  <!-- STATUS -->
+
   <div id="status" class="status"></div>
+
+  <!-- RESULT -->
 
   <div id="result" class="result">
 
@@ -644,6 +729,7 @@ input[type="file"]{
 pdfjsLib.GlobalWorkerOptions.workerSrc =
   "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
+
 const fileInput =
   document.getElementById("fileInput");
 
@@ -665,55 +751,65 @@ const result =
 const downloadBtn =
   document.getElementById("downloadBtn");
 
+
 let selectedFiles = [];
 
 let downloadUrl = null;
+
+let draggedPage = null;
 
 
 /* =========================================
    FILE SELECT
 ========================================= */
 
-fileInput.addEventListener("change", function(){
+fileInput.addEventListener(
+  "change",
+  function(){
 
-  const newFiles =
-    Array.from(fileInput.files);
+    const newFiles =
+      Array.from(fileInput.files);
 
-  newFiles.forEach(file => {
+    newFiles.forEach(file => {
 
-    if(
-      file.type !== "application/pdf" &&
-      !file.name.toLowerCase().endsWith(".pdf")
-    ){
-      return;
-    }
+      if(
+        file.type !== "application/pdf" &&
+        !file.name.toLowerCase().endsWith(".pdf")
+      ){
+        return;
+      }
 
-    const exists =
-      selectedFiles.some(existing =>
-        existing.name === file.name &&
-        existing.size === file.size &&
-        existing.lastModified === file.lastModified
-      );
+      const exists =
+        selectedFiles.some(item =>
+          item.file.name === file.name &&
+          item.file.size === file.size &&
+          item.file.lastModified === file.lastModified
+        );
 
-    if(!exists){
+      if(!exists){
 
-      selectedFiles.push({
-        file:file,
-        pageOrder:null,
-        pageCount:0
-      });
+        selectedFiles.push({
 
-    }
+          file:file,
 
-  });
+          pageOrder:null,
 
-  fileInput.value = "";
+          pageCount:0
 
-  result.style.display = "none";
+        });
 
-  renderFileList();
+      }
 
-});
+    });
+
+    fileInput.value = "";
+
+    result.style.display = "none";
+
+    renderFileList();
+
+  }
+);
 
 
 /* =========================================
@@ -732,7 +828,9 @@ function renderFileList(){
     mergeBtn.disabled = true;
 
     return;
+
   }
+
 
   const title =
     document.createElement("div");
@@ -744,14 +842,22 @@ function renderFileList(){
 
   fileList.appendChild(title);
 
-  selectedFiles.forEach((fileData,index) => {
 
-    createFileItem(fileData,index);
+  selectedFiles.forEach(
+    (fileData,index) => {
 
-  });
+      createFileItem(
+        fileData,
+        index
+      );
+
+    }
+  );
+
 
   mergeBtn.disabled =
     selectedFiles.length < 2;
+
 }
 
 
@@ -759,14 +865,20 @@ function renderFileList(){
    CREATE PDF ITEM
 ========================================= */
 
-function createFileItem(fileData,index){
+function createFileItem(
+  fileData,
+  index
+){
 
-  const file = fileData.file;
+  const file =
+    fileData.file;
+
 
   const item =
     document.createElement("div");
 
-  item.className = "file-item";
+  item.className =
+    "file-item";
 
 
   /* TOP */
@@ -774,7 +886,8 @@ function createFileItem(fileData,index){
   const top =
     document.createElement("div");
 
-  top.className = "file-top";
+  top.className =
+    "file-top";
 
 
   /* ORDER */
@@ -782,7 +895,8 @@ function createFileItem(fileData,index){
   const order =
     document.createElement("div");
 
-  order.className = "order-number";
+  order.className =
+    "order-number";
 
   order.textContent =
     index + 1;
@@ -793,7 +907,8 @@ function createFileItem(fileData,index){
   const preview =
     document.createElement("div");
 
-  preview.className = "preview";
+  preview.className =
+    "preview";
 
   preview.innerHTML =
     '<div class="preview-loading">Loading...</div>';
@@ -804,13 +919,15 @@ function createFileItem(fileData,index){
   const info =
     document.createElement("div");
 
-  info.className = "file-info";
+  info.className =
+    "file-info";
 
 
   const name =
     document.createElement("div");
 
-  name.className = "file-name";
+  name.className =
+    "file-name";
 
   name.textContent =
     file.name;
@@ -819,7 +936,8 @@ function createFileItem(fileData,index){
   const pages =
     document.createElement("div");
 
-  pages.className = "file-pages";
+  pages.className =
+    "file-pages";
 
   pages.textContent =
     "Reading PDF...";
@@ -830,64 +948,82 @@ function createFileItem(fileData,index){
   info.appendChild(pages);
 
 
-  /* CONTROLS */
+  /* PDF CONTROLS */
 
   const controls =
     document.createElement("div");
 
-  controls.className = "file-controls";
+  controls.className =
+    "file-controls";
 
 
   const upBtn =
     document.createElement("button");
 
-  upBtn.className = "control-btn";
+  upBtn.className =
+    "control-btn";
 
-  upBtn.textContent = "↑";
+  upBtn.textContent =
+    "↑";
 
-  upBtn.title = "Move PDF Up";
+  upBtn.title =
+    "Move PDF Up";
 
   upBtn.disabled =
     index === 0;
 
-  upBtn.onclick = function(){
+  upBtn.onclick =
+    function(){
 
-    moveFile(index,index - 1);
+      moveFile(
+        index,
+        index - 1
+      );
 
-  };
+    };
 
 
   const downBtn =
     document.createElement("button");
 
-  downBtn.className = "control-btn";
+  downBtn.className =
+    "control-btn";
 
-  downBtn.textContent = "↓";
+  downBtn.textContent =
+    "↓";
 
-  downBtn.title = "Move PDF Down";
+  downBtn.title =
+    "Move PDF Down";
 
   downBtn.disabled =
     index === selectedFiles.length - 1;
 
-  downBtn.onclick = function(){
+  downBtn.onclick =
+    function(){
 
-    moveFile(index,index + 1);
+      moveFile(
+        index,
+        index + 1
+      );
 
-  };
+    };
 
 
   const removeBtn =
     document.createElement("button");
 
-  removeBtn.className = "remove-btn";
+  removeBtn.className =
+    "remove-btn";
 
-  removeBtn.textContent = "Remove";
+  removeBtn.textContent =
+    "Remove";
 
-  removeBtn.onclick = function(){
+  removeBtn.onclick =
+    function(){
 
-    removeFile(index);
+      removeFile(index);
 
-  };
+    };
 
 
   controls.appendChild(upBtn);
@@ -925,7 +1061,17 @@ function createFileItem(fileData,index){
     "page-section-title";
 
   pageTitle.textContent =
-    "Pages — drag pages or use ↑ ↓ to change order";
+    "Pages";
+
+
+  const pageHelp =
+    document.createElement("div");
+
+  pageHelp.className =
+    "page-help";
+
+  pageHelp.textContent =
+    "Drag any page to another position or another PDF.";
 
 
   const pagesContainer =
@@ -934,11 +1080,14 @@ function createFileItem(fileData,index){
   pagesContainer.className =
     "pages-container";
 
+
   pagesContainer.innerHTML =
     '<div class="preview-loading">Loading pages...</div>';
 
 
   pageSection.appendChild(pageTitle);
+
+  pageSection.appendChild(pageHelp);
 
   pageSection.appendChild(pagesContainer);
 
@@ -959,7 +1108,7 @@ function createFileItem(fileData,index){
 
 
 /* =========================================
-   LOAD PDF DATA
+   LOAD PDF
 ========================================= */
 
 async function loadPdfData(
@@ -974,18 +1123,18 @@ async function loadPdfData(
     const arrayBuffer =
       await fileData.file.arrayBuffer();
 
+
     const pdf =
       await pdfjsLib.getDocument({
         data:arrayBuffer
       }).promise;
 
+
     fileData.pageCount =
       pdf.numPages;
 
-    if(
-      !fileData.pageOrder ||
-      fileData.pageOrder.length !== pdf.numPages
-    ){
+
+    if(!fileData.pageOrder){
 
       fileData.pageOrder =
         Array.from(
@@ -995,65 +1144,68 @@ async function loadPdfData(
 
     }
 
+
     pagesElement.textContent =
       pdf.numPages +
-      (pdf.numPages === 1 ? " page" : " pages");
+      (
+        pdf.numPages === 1
+        ? " page"
+        : " pages"
+      );
 
 
-    /* FIRST PAGE */
+    /* FIRST PAGE PREVIEW */
 
-    const firstPage =
-      await pdf.getPage(1);
+    if(pdf.numPages > 0){
 
-    const viewport =
-      firstPage.getViewport({
-        scale:1
-      });
+      const firstPage =
+        await pdf.getPage(1);
 
-    const canvas =
-      document.createElement("canvas");
 
-    const context =
-      canvas.getContext("2d");
+      const viewport =
+        firstPage.getViewport({
+          scale:1
+        });
 
-    canvas.width =
-      viewport.width;
 
-    canvas.height =
-      viewport.height;
+      const canvas =
+        document.createElement("canvas");
 
-    preview.innerHTML = "";
 
-    preview.appendChild(canvas);
+      const context =
+        canvas.getContext("2d");
 
-    await firstPage.render({
-      canvasContext:context,
-      viewport:viewport
-    }).promise;
+
+      canvas.width =
+        viewport.width;
+
+      canvas.height =
+        viewport.height;
+
+
+      preview.innerHTML = "";
+
+      preview.appendChild(canvas);
+
+
+      await firstPage.render({
+
+        canvasContext:context,
+
+        viewport:viewport
+
+      }).promise;
+
+    }
 
 
     /* ALL PAGES */
 
-    pagesContainer.innerHTML = "";
-
-    for(
-      let position=0;
-      position<fileData.pageOrder.length;
-      position++
-    ){
-
-      const originalPageIndex =
-        fileData.pageOrder[position];
-
-      await createPageCard(
-        pdf,
-        fileData,
-        pagesContainer,
-        originalPageIndex,
-        position
-      );
-
-    }
+    renderPages(
+      pdf,
+      fileData,
+      pagesContainer
+    );
 
   }
   catch(error){
@@ -1078,6 +1230,85 @@ async function loadPdfData(
 
 
 /* =========================================
+   RENDER ALL PAGES
+========================================= */
+
+async function renderPages(
+  pdf,
+  fileData,
+  container
+){
+
+  container.innerHTML = "";
+
+
+  if(fileData.pageOrder.length === 0){
+
+    const empty =
+      document.createElement("div");
+
+    empty.className =
+      "empty-pages";
+
+    empty.textContent =
+      "No pages. Drag a page here from another PDF.";
+
+    setupEmptyDropZone(
+      empty,
+      fileData
+    );
+
+    container.appendChild(empty);
+
+    return;
+
+  }
+
+
+  /* LEFT DROP ZONE */
+
+  container.appendChild(
+    createDropZone(
+      fileData,
+      0
+    )
+  );
+
+
+  for(
+    let position=0;
+    position<fileData.pageOrder.length;
+    position++
+  ){
+
+    const originalPageIndex =
+      fileData.pageOrder[position];
+
+
+    await createPageCard(
+      pdf,
+      fileData,
+      container,
+      originalPageIndex,
+      position
+    );
+
+
+    /* DROP ZONE AFTER PAGE */
+
+    container.appendChild(
+      createDropZone(
+        fileData,
+        position + 1
+      )
+    );
+
+  }
+
+}
+
+
+/* =========================================
    CREATE PAGE CARD
 ========================================= */
 
@@ -1089,37 +1320,40 @@ async function createPageCard(
   position
 ){
 
-  const pageCard =
+  const card =
     document.createElement("div");
 
-  pageCard.className =
+  card.className =
     "page-card";
 
-  pageCard.draggable = true;
-
-  pageCard.dataset.position =
-    position;
+  card.draggable = true;
 
 
-  const pagePreview =
+  /* PREVIEW */
+
+  const preview =
     document.createElement("div");
 
-  pagePreview.className =
+  preview.className =
     "page-preview";
 
-  pagePreview.innerHTML =
+  preview.innerHTML =
     '<div class="preview-loading">...</div>';
 
 
-  const pageNumber =
+  /* NUMBER */
+
+  const number =
     document.createElement("div");
 
-  pageNumber.className =
+  number.className =
     "page-number";
 
-  pageNumber.textContent =
+  number.textContent =
     "Page " + (position + 1);
 
+
+  /* BUTTONS */
 
   const buttons =
     document.createElement("div");
@@ -1143,17 +1377,18 @@ async function createPageCard(
   up.disabled =
     position === 0;
 
-  up.onclick = function(e){
+  up.onclick =
+    function(e){
 
-    e.stopPropagation();
+      e.stopPropagation();
 
-    movePage(
-      fileData,
-      position,
-      position - 1
-    );
+      movePageWithinPdf(
+        fileData,
+        position,
+        position - 1
+      );
 
-  };
+    };
 
 
   const down =
@@ -1171,18 +1406,26 @@ async function createPageCard(
   down.disabled =
     position === fileData.pageOrder.length - 1;
 
-  down.onclick = function(e){
+  down.onclick =
+    function(e){
 
-    e.stopPropagation();
+      e.stopPropagation();
 
-    movePage(
-      fileData,
-      position,
-      position + 1
-    );
+      movePageWithinPdf(
+        fileData,
+        position,
+        position + 1
+      );
 
-  };
+    };
 
+
+  buttons.appendChild(up);
+
+  buttons.appendChild(down);
+
+
+  /* REMOVE */
 
   const remove =
     document.createElement("button");
@@ -1191,127 +1434,74 @@ async function createPageCard(
     "page-remove";
 
   remove.textContent =
-    "Remove Page";
+    "Remove";
 
-  remove.onclick = function(e){
+  remove.onclick =
+    function(e){
 
-    e.stopPropagation();
+      e.stopPropagation();
 
-    removePage(
-      fileData,
-      position
-    );
+      removePage(
+        fileData,
+        position
+      );
 
-  };
-
-
-  buttons.appendChild(up);
-
-  buttons.appendChild(down);
+    };
 
 
-  pageCard.appendChild(pagePreview);
+  card.appendChild(preview);
 
-  pageCard.appendChild(pageNumber);
+  card.appendChild(number);
 
-  pageCard.appendChild(buttons);
+  card.appendChild(buttons);
 
-  pageCard.appendChild(remove);
+  card.appendChild(remove);
 
 
-  /* DRAG */
+  /* DRAG START */
 
-  pageCard.addEventListener(
+  card.addEventListener(
     "dragstart",
     function(){
 
-      pageCard.classList.add("dragging");
+      draggedPage = {
 
-      window.draggedPageData = {
         fileData:fileData,
+
         position:position
+
       };
+
+      card.classList.add(
+        "dragging"
+      );
 
     }
   );
 
 
-  pageCard.addEventListener(
+  /* DRAG END */
+
+  card.addEventListener(
     "dragend",
     function(){
 
-      pageCard.classList.remove("dragging");
-
-    }
-  );
-
-
-  pageCard.addEventListener(
-    "dragover",
-    function(e){
-
-      e.preventDefault();
-
-    }
-  );
-
-
-  pageCard.addEventListener(
-    "drop",
-    function(e){
-
-      e.preventDefault();
-
-      const data =
-        window.draggedPageData;
-
-      if(!data){
-        return;
-      }
-
-      if(data.fileData !== fileData){
-
-        return;
-      }
-
-      let from =
-        data.position;
-
-      let to =
-        position;
-
-      if(from === to){
-        return;
-      }
-
-      const moved =
-        fileData.pageOrder.splice(
-          from,
-          1
-        )[0];
-
-      fileData.pageOrder.splice(
-        to,
-        0,
-        moved
+      card.classList.remove(
+        "dragging"
       );
 
-      result.style.display =
-        "none";
+      clearDropZones();
 
-      renderFileList();
-
-      window.draggedPageData =
-        null;
+      draggedPage = null;
 
     }
   );
 
 
-  container.appendChild(pageCard);
+  container.appendChild(card);
 
 
-  /* RENDER */
+  /* RENDER PAGE */
 
   try{
 
@@ -1320,16 +1510,20 @@ async function createPageCard(
         originalPageIndex + 1
       );
 
+
     const viewport =
       page.getViewport({
         scale:.55
       });
 
+
     const canvas =
       document.createElement("canvas");
 
+
     const context =
       canvas.getContext("2d");
+
 
     canvas.width =
       viewport.width;
@@ -1337,19 +1531,24 @@ async function createPageCard(
     canvas.height =
       viewport.height;
 
-    pagePreview.innerHTML = "";
 
-    pagePreview.appendChild(canvas);
+    preview.innerHTML = "";
+
+    preview.appendChild(canvas);
+
 
     await page.render({
+
       canvasContext:context,
+
       viewport:viewport
+
     }).promise;
 
   }
   catch(error){
 
-    pagePreview.innerHTML =
+    preview.innerHTML =
       '<div class="preview-loading">Error</div>';
 
   }
@@ -1358,50 +1557,169 @@ async function createPageCard(
 
 
 /* =========================================
-   MOVE PDF
+   DROP ZONE
 ========================================= */
 
-function moveFile(oldIndex,newIndex){
+function createDropZone(
+  targetFileData,
+  targetPosition
+){
 
-  if(
-    newIndex < 0 ||
-    newIndex >= selectedFiles.length
-  ){
-    return;
-  }
+  const zone =
+    document.createElement("div");
 
-  const temp =
-    selectedFiles[oldIndex];
+  zone.className =
+    "drop-zone";
 
-  selectedFiles[oldIndex] =
-    selectedFiles[newIndex];
 
-  selectedFiles[newIndex] =
-    temp;
+  const text =
+    document.createElement("div");
 
-  result.style.display =
-    "none";
+  text.className =
+    "drop-text";
 
-  renderFileList();
+  text.textContent =
+    "Drop page here";
+
+
+  zone.appendChild(text);
+
+
+  zone.addEventListener(
+    "dragover",
+    function(e){
+
+      e.preventDefault();
+
+      if(!draggedPage){
+        return;
+      }
+
+      zone.classList.add(
+        "active"
+      );
+
+    }
+  );
+
+
+  zone.addEventListener(
+    "dragleave",
+    function(){
+
+      zone.classList.remove(
+        "active"
+      );
+
+    }
+  );
+
+
+  zone.addEventListener(
+    "drop",
+    function(e){
+
+      e.preventDefault();
+
+      zone.classList.remove(
+        "active"
+      );
+
+
+      if(!draggedPage){
+        return;
+      }
+
+
+      moveDraggedPage(
+        draggedPage.fileData,
+        draggedPage.position,
+        targetFileData,
+        targetPosition
+      );
+
+
+      draggedPage = null;
+
+    }
+  );
+
+
+  return zone;
 
 }
 
 
 /* =========================================
-   REMOVE PDF
+   EMPTY PDF DROP
 ========================================= */
 
-function removeFile(index){
+function setupEmptyDropZone(
+  element,
+  targetFileData
+){
 
-  selectedFiles.splice(
-    index,
-    1
+  element.addEventListener(
+    "dragover",
+    function(e){
+
+      e.preventDefault();
+
+      element.style.borderColor =
+        "#e53232";
+
+      element.style.background =
+        "#fff5f5";
+
+    }
   );
 
-  result.style.display =
-    "none";
 
-  renderFileList();
+  element.addEventListener(
+    "dragleave",
+    function(){
+
+      element.style.borderColor =
+        "#ddd";
+
+      element.style.background =
+        "";
+
+    }
+  );
+
+
+  element.addEventListener(
+    "drop",
+    function(e){
+
+      e.preventDefault();
+
+
+      if(!draggedPage){
+        return;
+      }
+
+
+      element.style.borderColor =
+        "#ddd";
+
+      element.style.background =
+        "";
+
+
+      moveDraggedPage(
+        draggedPage.fileData,
+        draggedPage.position,
+        targetFileData,
+        0
+      );
+
+
+      draggedPage = null;
+
+    }
+  );
 
 }
 
@@ -1410,30 +1728,153 @@ function removeFile(index){
    MOVE PAGE
 ========================================= */
 
-function movePage(
+function moveDraggedPage(
+  sourceFile,
+  sourcePosition,
+  targetFile,
+  targetPosition
+){
+
+  if(!sourceFile || !targetFile){
+    return;
+  }
+
+
+  /* SAME PDF */
+
+  if(sourceFile === targetFile){
+
+    let adjustedTarget =
+      targetPosition;
+
+
+    if(sourcePosition < targetPosition){
+
+      adjustedTarget--;
+
+    }
+
+
+    if(
+      adjustedTarget < 0
+    ){
+      adjustedTarget = 0;
+    }
+
+
+    if(
+      adjustedTarget >
+      sourceFile.pageOrder.length - 1
+    ){
+
+      adjustedTarget =
+        sourceFile.pageOrder.length - 1;
+
+    }
+
+
+    if(
+      sourcePosition === adjustedTarget
+    ){
+      return;
+    }
+
+
+    const page =
+      sourceFile.pageOrder.splice(
+        sourcePosition,
+        1
+      )[0];
+
+
+    sourceFile.pageOrder.splice(
+      adjustedTarget,
+      0,
+      page
+    );
+
+  }
+
+  /* DIFFERENT PDF */
+
+  else{
+
+    const page =
+      sourceFile.pageOrder.splice(
+        sourcePosition,
+        1
+      )[0];
+
+
+    if(
+      targetPosition < 0
+    ){
+      targetPosition = 0;
+    }
+
+
+    if(
+      targetPosition >
+      targetFile.pageOrder.length
+    ){
+
+      targetPosition =
+        targetFile.pageOrder.length;
+
+    }
+
+
+    targetFile.pageOrder.splice(
+      targetPosition,
+      0,
+      page
+    );
+
+  }
+
+
+  result.style.display =
+    "none";
+
+
+  renderFileList();
+
+}
+
+
+/* =========================================
+   MOVE PAGE UP / DOWN
+========================================= */
+
+function movePageWithinPdf(
   fileData,
-  oldIndex,
-  newIndex
+  oldPosition,
+  newPosition
 ){
 
   if(
-    newIndex < 0 ||
-    newIndex >= fileData.pageOrder.length
+    newPosition < 0 ||
+    newPosition >= fileData.pageOrder.length
   ){
     return;
   }
 
-  const temp =
-    fileData.pageOrder[oldIndex];
 
-  fileData.pageOrder[oldIndex] =
-    fileData.pageOrder[newIndex];
+  const page =
+    fileData.pageOrder[oldPosition];
 
-  fileData.pageOrder[newIndex] =
-    temp;
+
+  fileData.pageOrder[oldPosition] =
+    fileData.pageOrder[newPosition];
+
+
+  fileData.pageOrder[newPosition] =
+    page;
+
 
   result.style.display =
     "none";
+
 
   renderFileList();
 
@@ -1453,23 +1894,108 @@ function removePage(
     fileData.pageOrder.length <= 1
   ){
 
-    alert(
-      "A PDF must contain at least one page."
-    );
+    const confirmRemove =
+      confirm(
+        "This is the last page of this PDF. Remove this page?"
+      );
 
-    return;
+
+    if(!confirmRemove){
+      return;
+    }
 
   }
+
 
   fileData.pageOrder.splice(
     position,
     1
   );
 
+
   result.style.display =
     "none";
 
+
   renderFileList();
+
+}
+
+
+/* =========================================
+   MOVE PDF
+========================================= */
+
+function moveFile(
+  oldIndex,
+  newIndex
+){
+
+  if(
+    newIndex < 0 ||
+    newIndex >= selectedFiles.length
+  ){
+    return;
+  }
+
+
+  const temp =
+    selectedFiles[oldIndex];
+
+
+  selectedFiles[oldIndex] =
+    selectedFiles[newIndex];
+
+
+  selectedFiles[newIndex] =
+    temp;
+
+
+  result.style.display =
+    "none";
+
+
+  renderFileList();
+
+}
+
+
+/* =========================================
+   REMOVE PDF
+========================================= */
+
+function removeFile(index){
+
+  selectedFiles.splice(
+    index,
+    1
+  );
+
+
+  result.style.display =
+    "none";
+
+
+  renderFileList();
+
+}
+
+
+/* =========================================
+   CLEAR DROP ZONES
+========================================= */
+
+function clearDropZones(){
+
+  document
+    .querySelectorAll(".drop-zone")
+    .forEach(zone => {
+
+      zone.classList.remove(
+        "active"
+      );
+
+    });
 
 }
 
@@ -1484,6 +2010,8 @@ clearBtn.addEventListener(
 
     selectedFiles = [];
 
+    draggedPage = null;
+
     fileInput.value = "";
 
     fileList.innerHTML =
@@ -1495,6 +2023,7 @@ clearBtn.addEventListener(
 
     result.style.display =
       "none";
+
 
     if(downloadUrl){
 
@@ -1527,6 +2056,7 @@ mergeBtn.addEventListener(
 
     }
 
+
     mergeBtn.disabled = true;
 
     clearBtn.disabled = true;
@@ -1534,10 +2064,14 @@ mergeBtn.addEventListener(
     result.style.display =
       "none";
 
+
     try{
 
       const mergedPdf =
         await PDFLib.PDFDocument.create();
+
+
+      let totalPages = 0;
 
 
       for(
@@ -1549,12 +2083,22 @@ mergeBtn.addEventListener(
         const fileData =
           selectedFiles[i];
 
+
         status.textContent =
           "Processing PDF " +
-          (i+1) +
+          (i + 1) +
           " of " +
           selectedFiles.length +
           "...";
+
+
+        /* SKIP EMPTY PDF */
+
+        if(
+          fileData.pageOrder.length === 0
+        ){
+          continue;
+        }
 
 
         const arrayBuffer =
@@ -1567,23 +2111,33 @@ mergeBtn.addEventListener(
           );
 
 
-        const pageIndices =
-          fileData.pageOrder ||
-          sourcePdf.getPageIndices();
-
-
         const copiedPages =
           await mergedPdf.copyPages(
             sourcePdf,
-            pageIndices
+            fileData.pageOrder
           );
 
 
-        copiedPages.forEach(page => {
+        copiedPages.forEach(
+          page => {
 
-          mergedPdf.addPage(page);
+            mergedPdf.addPage(
+              page
+            );
 
-        });
+            totalPages++;
+
+          }
+        );
+
+      }
+
+
+      if(totalPages === 0){
+
+        throw new Error(
+          "No pages available to merge."
+        );
 
       }
 
@@ -1629,7 +2183,8 @@ mergeBtn.addEventListener(
 
 
       status.textContent =
-        "PDFs merged successfully.";
+        totalPages +
+        " pages merged successfully.";
 
     }
     catch(error){
@@ -1638,6 +2193,7 @@ mergeBtn.addEventListener(
         "Merge error:",
         error
       );
+
 
       status.textContent =
         "Error: Unable to merge the PDF files. Please check that the files are valid PDFs.";
