@@ -1,0 +1,1223 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Watermark PDF Online - Free PDF Watermark Tool</title>
+
+<meta name="description"
+content="Add a text watermark to your PDF online for free. Customize text, size, opacity, color, rotation and position.">
+
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f6f7f9;
+  color:#222;
+}
+
+.navbar{
+  height:68px;
+  background:#fff;
+  border-bottom:1px solid #e5e5e5;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 6%;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.logo{
+  color:#e53232;
+  text-decoration:none;
+  font-size:25px;
+  font-weight:700;
+}
+
+.home-link{
+  color:#333;
+  text-decoration:none;
+  font-size:15px;
+  font-weight:600;
+}
+
+.home-link:hover{
+  color:#e53232;
+}
+
+.hero{
+  text-align:center;
+  padding:42px 20px 25px;
+}
+
+.hero h1{
+  margin:0 0 12px;
+  font-size:38px;
+}
+
+.hero p{
+  margin:0 auto;
+  max-width:700px;
+  color:#666;
+  line-height:1.6;
+}
+
+.container{
+  width:94%;
+  max-width:1200px;
+  margin:auto;
+}
+
+.upload-box{
+  background:#fff;
+  border:2px dashed #d8d8d8;
+  border-radius:14px;
+  padding:35px 20px;
+  text-align:center;
+  margin:20px auto;
+}
+
+.upload-box:hover{
+  border-color:#e53232;
+}
+
+.upload-btn{
+  display:inline-block;
+  background:#e53232;
+  color:#fff;
+  padding:13px 25px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+#fileInput{
+  display:none;
+}
+
+.file-name{
+  margin-top:14px;
+  color:#555;
+  font-size:14px;
+  word-break:break-word;
+}
+
+.editor{
+  display:none;
+  background:#fff;
+  border-radius:14px;
+  padding:20px;
+  margin:25px 0;
+  box-shadow:0 3px 15px rgba(0,0,0,.06);
+}
+
+.settings-title{
+  font-size:21px;
+  font-weight:700;
+  margin:0 0 18px;
+}
+
+.settings-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.field.full{
+  grid-column:1 / -1;
+}
+
+.field label{
+  font-size:14px;
+  font-weight:600;
+}
+
+.field input[type="text"],
+.field input[type="number"],
+.field select{
+  width:100%;
+  padding:11px 12px;
+  border:1px solid #d5d5d5;
+  border-radius:7px;
+  font-size:14px;
+  outline:none;
+  background:#fff;
+}
+
+.field input:focus,
+.field select:focus{
+  border-color:#e53232;
+}
+
+.range-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.range-row input{
+  flex:1;
+}
+
+.range-value{
+  min-width:55px;
+  font-size:14px;
+  font-weight:600;
+  text-align:right;
+}
+
+.color-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.color-row input[type="color"]{
+  width:55px;
+  height:40px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  padding:3px;
+  background:#fff;
+  cursor:pointer;
+}
+
+.position-buttons{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+}
+
+.position-btn{
+  border:1px solid #ddd;
+  background:#f4f4f4;
+  padding:9px 5px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:12px;
+  font-weight:600;
+}
+
+.position-btn:hover{
+  border-color:#e53232;
+}
+
+.position-btn.active{
+  background:#e53232;
+  color:#fff;
+  border-color:#e53232;
+}
+
+.action-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:20px;
+}
+
+.action-btn{
+  border:0;
+  border-radius:8px;
+  padding:12px 18px;
+  cursor:pointer;
+  font-size:14px;
+  font-weight:600;
+}
+
+.preview-btn{
+  background:#333;
+  color:#fff;
+}
+
+.download-btn{
+  background:#e53232;
+  color:#fff;
+}
+
+.download-btn:hover{
+  background:#c92828;
+}
+
+.status{
+  text-align:center;
+  color:#666;
+  font-size:14px;
+  margin:12px 0;
+}
+
+.preview-title{
+  display:none;
+  font-size:22px;
+  margin:28px 0 15px;
+}
+
+.pages-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:22px;
+  margin-bottom:40px;
+}
+
+.page-card{
+  background:#fff;
+  border-radius:12px;
+  padding:14px;
+  box-shadow:0 3px 14px rgba(0,0,0,.07);
+}
+
+.page-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
+
+.page-number{
+  font-weight:700;
+}
+
+.page-label{
+  color:#777;
+  font-size:12px;
+}
+
+.canvas-wrap{
+  width:100%;
+  background:#eee;
+  border-radius:8px;
+  padding:10px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+.preview-canvas{
+  display:block;
+  max-width:100%;
+  height:auto;
+  background:#fff;
+  box-shadow:0 2px 7px rgba(0,0,0,.18);
+}
+
+.loading{
+  display:none;
+  text-align:center;
+  padding:20px;
+  color:#555;
+}
+
+footer{
+  background:#222;
+  color:#aaa;
+  text-align:center;
+  padding:25px 15px;
+  margin-top:45px;
+  font-size:13px;
+}
+
+@media(max-width:700px){
+
+  .hero h1{
+    font-size:29px;
+  }
+
+  .navbar{
+    padding:0 18px;
+  }
+
+  .logo{
+    font-size:21px;
+  }
+
+  .settings-grid{
+    grid-template-columns:1fr;
+  }
+
+  .field.full{
+    grid-column:auto;
+  }
+
+  .pages-grid{
+    grid-template-columns:1fr;
+  }
+
+  .action-row{
+    flex-direction:column;
+  }
+
+  .action-btn{
+    width:100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="logo">PDF Editor Tools</a>
+  <a href="index.html" class="home-link">Home</a>
+</nav>
+
+<section class="hero">
+  <h1>Watermark PDF</h1>
+  <p>
+    Add a customizable text watermark to your PDF.
+    Change the text, size, opacity, color, rotation and position.
+  </p>
+</section>
+
+<main class="container">
+
+  <div class="upload-box">
+
+    <label for="fileInput" class="upload-btn">
+      Select PDF
+    </label>
+
+    <input
+      type="file"
+      id="fileInput"
+      accept="application/pdf,.pdf"
+    >
+
+    <div class="file-name" id="fileName">
+      No PDF selected
+    </div>
+
+  </div>
+
+  <div class="loading" id="loading">
+    Loading PDF...
+  </div>
+
+  <div class="editor" id="editor">
+
+    <h2 class="settings-title">
+      Watermark Settings
+    </h2>
+
+    <div class="settings-grid">
+
+      <div class="field full">
+
+        <label for="watermarkText">
+          Watermark Text
+        </label>
+
+        <input
+          type="text"
+          id="watermarkText"
+          value="CONFIDENTIAL"
+          placeholder="Enter watermark text"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="fontSize">
+          Font Size
+        </label>
+
+        <input
+          type="number"
+          id="fontSize"
+          value="50"
+          min="8"
+          max="300"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="rotation">
+          Rotation
+        </label>
+
+        <select id="rotation">
+
+          <option value="0">0°</option>
+          <option value="15">15°</option>
+          <option value="30">30°</option>
+          <option value="45">45°</option>
+          <option value="60">60°</option>
+          <option value="90">90°</option>
+          <option value="270">270°</option>
+          <option value="315">315°</option>
+          <option value="330">330°</option>
+          <option value="345">345°</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Opacity
+        </label>
+
+        <div class="range-row">
+
+          <input
+            type="range"
+            id="opacity"
+            min="10"
+            max="100"
+            value="35"
+          >
+
+          <span
+            class="range-value"
+            id="opacityValue">
+            35%
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Text Color
+        </label>
+
+        <div class="color-row">
+
+          <input
+            type="color"
+            id="textColor"
+            value="#888888"
+          >
+
+          <span id="colorValue">
+            #888888
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="field full">
+
+        <label>
+          Position
+        </label>
+
+        <div class="position-buttons">
+
+          <button
+            type="button"
+            class="position-btn"
+            data-position="top-left">
+            Top Left
+          </button>
+
+          <button
+            type="button"
+            class="position-btn"
+            data-position="top-center">
+            Top Center
+          </button>
+
+          <button
+            type="button"
+            class="position-btn"
+            data-position="top-right">
+            Top Right
+          </button>
+
+          <button
+            type="button"
+            class="position-btn"
+            data-position="center-left">
+            Center Left
+          </button>
+
+          <button
+            type="button"
+            class="position-btn active"
+            data-position="center">
+            Center
+          </button>
+
+          <button
+            type="button"
+            class="position-btn"
+            data-position="center-right">
+            Center Right
+          </button>
+
+          <button
+            type="button"
+            class="position-btn"
+            data-position="bottom-left">
+            Bottom Left
+          </button>
+
+          <button
+            type="button"
+            class="position-btn"
+            data-position="bottom-center">
+            Bottom Center
+          </button>
+
+          <button
+            type="button"
+            class="position-btn"
+            data-position="bottom-right">
+            Bottom Right
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="action-row">
+
+      <button
+        type="button"
+        class="action-btn preview-btn"
+        id="updatePreview">
+        Update Preview
+      </button>
+
+      <button
+        type="button"
+        class="action-btn download-btn"
+        id="downloadBtn">
+        Download Watermarked PDF
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="status" id="status"></div>
+
+  <h2 class="preview-title" id="previewTitle">
+    PDF Preview
+  </h2>
+
+  <div class="pages-grid" id="pagesGrid"></div>
+
+</main>
+
+<footer>
+  © 2026 PDF Editor Tools. All rights reserved.
+</footer>
+
+
+<script>
+
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+
+const fileInput =
+document.getElementById("fileInput");
+
+const fileName =
+document.getElementById("fileName");
+
+const loading =
+document.getElementById("loading");
+
+const editor =
+document.getElementById("editor");
+
+const pagesGrid =
+document.getElementById("pagesGrid");
+
+const previewTitle =
+document.getElementById("previewTitle");
+
+const status =
+document.getElementById("status");
+
+const watermarkText =
+document.getElementById("watermarkText");
+
+const fontSize =
+document.getElementById("fontSize");
+
+const rotation =
+document.getElementById("rotation");
+
+const opacity =
+document.getElementById("opacity");
+
+const opacityValue =
+document.getElementById("opacityValue");
+
+const textColor =
+document.getElementById("textColor");
+
+const colorValue =
+document.getElementById("colorValue");
+
+const updatePreview =
+document.getElementById("updatePreview");
+
+const downloadBtn =
+document.getElementById("downloadBtn");
+
+
+let originalFile = null;
+let originalBytes = null;
+let pdfDocument = null;
+let selectedPosition = "center";
+let pageCanvases = [];
+
+
+/* =========================
+   FILE SELECT
+========================= */
+
+fileInput.addEventListener("change", async function(){
+
+  const file = this.files[0];
+
+  if(!file){
+    return;
+  }
+
+  if(
+    file.type !== "application/pdf" &&
+    !file.name.toLowerCase().endsWith(".pdf")
+  ){
+
+    alert("Please select a PDF file.");
+    fileInput.value = "";
+    return;
+  }
+
+  originalFile = file;
+
+  fileName.textContent = file.name;
+
+  pagesGrid.innerHTML = "";
+  pageCanvases = [];
+
+  editor.style.display = "none";
+  previewTitle.style.display = "none";
+  status.textContent = "";
+
+  loading.style.display = "block";
+
+  try{
+
+    originalBytes =
+      await file.arrayBuffer();
+
+    pdfDocument =
+      await pdfjsLib.getDocument({
+        data: originalBytes.slice(0)
+      }).promise;
+
+    await renderPages();
+
+    editor.style.display = "block";
+    previewTitle.style.display = "block";
+
+    status.textContent =
+      pdfDocument.numPages +
+      " page" +
+      (pdfDocument.numPages > 1 ? "s" : "") +
+      " loaded successfully.";
+
+    updateAllPreviews();
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "Unable to open this PDF. Please try another PDF."
+    );
+
+    pagesGrid.innerHTML = "";
+    pageCanvases = [];
+
+  }finally{
+
+    loading.style.display = "none";
+
+  }
+
+});
+
+
+/* =========================
+   RENDER PDF PAGES
+========================= */
+
+async function renderPages(){
+
+  for(
+    let pageNumber = 1;
+    pageNumber <= pdfDocument.numPages;
+    pageNumber++
+  ){
+
+    const page =
+      await pdfDocument.getPage(pageNumber);
+
+    const baseViewport =
+      page.getViewport({
+        scale:1
+      });
+
+    const targetWidth = 500;
+
+    const scale =
+      Math.min(
+        targetWidth / baseViewport.width,
+        1.5
+      );
+
+    const viewport =
+      page.getViewport({
+        scale:scale
+      });
+
+    const card =
+      document.createElement("div");
+
+    card.className = "page-card";
+
+
+    const header =
+      document.createElement("div");
+
+    header.className = "page-header";
+
+
+    const pageNumberElement =
+      document.createElement("div");
+
+    pageNumberElement.className =
+      "page-number";
+
+    pageNumberElement.textContent =
+      "Page " + pageNumber;
+
+
+    const label =
+      document.createElement("div");
+
+    label.className =
+      "page-label";
+
+    label.textContent =
+      "Preview";
+
+
+    header.appendChild(
+      pageNumberElement
+    );
+
+    header.appendChild(label);
+
+
+    const canvasWrap =
+      document.createElement("div");
+
+    canvasWrap.className =
+      "canvas-wrap";
+
+
+    const canvas =
+      document.createElement("canvas");
+
+    canvas.className =
+      "preview-canvas";
+
+    canvas.width =
+      Math.ceil(viewport.width);
+
+    canvas.height =
+      Math.ceil(viewport.height);
+
+
+    const ctx =
+      canvas.getContext("2d");
+
+
+    await page.render({
+      canvasContext:ctx,
+      viewport:viewport
+    }).promise;
+
+
+    canvasWrap.appendChild(canvas);
+
+    card.appendChild(header);
+    card.appendChild(canvasWrap);
+
+    pagesGrid.appendChild(card);
+
+
+    pageCanvases.push({
+      pageNumber:pageNumber,
+      canvas:canvas,
+      originalImage:canvas.toDataURL("image/png"),
+      pageWidth:baseViewport.width,
+      pageHeight:baseViewport.height
+    });
+
+  }
+
+}
+
+
+/* =========================
+   POSITION
+========================= */
+
+document
+.querySelectorAll(".position-btn")
+.forEach(function(button){
+
+  button.addEventListener("click", function(){
+
+    document
+    .querySelectorAll(".position-btn")
+    .forEach(function(btn){
+      btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    selectedPosition =
+      button.dataset.position;
+
+    updateAllPreviews();
+
+  });
+
+});
+
+
+/* =========================
+   RANGE / COLOR
+========================= */
+
+opacity.addEventListener("input", function(){
+
+  opacityValue.textContent =
+    opacity.value + "%";
+
+  updateAllPreviews();
+
+});
+
+
+textColor.addEventListener("input", function(){
+
+  colorValue.textContent =
+    textColor.value.toUpperCase();
+
+  updateAllPreviews();
+
+});
+
+
+watermarkText.addEventListener("input", updateAllPreviews);
+fontSize.addEventListener("input", updateAllPreviews);
+rotation.addEventListener("change", updateAllPreviews);
+
+
+/* =========================
+   UPDATE PREVIEW
+========================= */
+
+updatePreview.addEventListener(
+  "click",
+  updateAllPreviews
+);
+
+
+function updateAllPreviews(){
+
+  if(pageCanvases.length === 0){
+    return;
+  }
+
+  pageCanvases.forEach(function(data){
+
+    drawWatermarkPreview(data);
+
+  });
+
+}
+
+
+/* =========================
+   PREVIEW DRAWING
+========================= */
+
+function drawWatermarkPreview(data){
+
+  const image =
+    new Image();
+
+  image.onload = function(){
+
+    const canvas =
+      data.canvas;
+
+    const ctx =
+      canvas.getContext("2d");
+
+    ctx.clearRect(
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+    ctx.drawImage(
+      image,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+
+    const text =
+      watermarkText.value.trim();
+
+    if(!text){
+      return;
+    }
+
+
+    const previewScale =
+      canvas.width / data.pageWidth;
+
+
+    const size =
+      Math.max(
+        8,
+        Number(fontSize.value) *
+        previewScale
+      );
+
+
+    const angle =
+      Number(rotation.value) *
+      Math.PI / 180;
+
+
+    const alpha =
+      Number(opacity.value) / 100;
+
+
+    const rgb =
+      hexToRgb(textColor.value);
+
+
+    ctx.save();
+
+    ctx.globalAlpha = alpha;
+
+    ctx.fillStyle =
+      "rgb(" +
+      rgb.r + "," +
+      rgb.g + "," +
+      rgb.b +
+      ")";
+
+    ctx.font =
+      "bold " +
+      size +
+      "px Arial";
+
+    ctx.textAlign = "center";
+
+    ctx.textBaseline = "middle";
+
+
+    const position =
+      getPreviewPosition(
+        canvas,
+        selectedPosition
+      );
+
+
+    ctx.translate(
+      position.x,
+      position.y
+    );
+
+    ctx.rotate(angle);
+
+    ctx.fillText(
+      text,
+      0,
+      0
+    );
+
+    ctx.restore();
+
+  };
+
+  image.src =
+    data.originalImage;
+
+}
+
+
+function getPreviewPosition(
+  canvas,
+  position
+){
+
+  const margin =
+    Math.min(
+      canvas.width,
+      canvas.height
+    ) * 0.12;
+
+
+  let x = canvas.width / 2;
+  let y = canvas.height / 2;
+
+
+  if(position === "top-left"){
+    x = margin;
+    y = margin;
+  }
+
+  if(position === "top-center"){
+    x = canvas.width / 2;
+    y = margin;
+  }
+
+  if(position === "top-right"){
+    x = canvas.width - margin;
+    y = margin;
+  }
+
+  if(position === "center-left"){
+    x = margin;
+    y = canvas.height / 2;
+  }
+
+  if(position === "center"){
+    x = canvas.width / 2;
+    y = canvas.height / 2;
+  }
+
+  if(position === "center-right"){
+    x = canvas.width - margin;
+    y = canvas.height / 2;
+  }
+
+  if(position === "bottom-left"){
+    x = margin;
+    y = canvas.height - margin;
+  }
+
+  if(position === "bottom-center"){
+    x = canvas.width / 2;
+    y = canvas.height - margin;
+  }
+
+  if(position === "bottom-right"){
+    x = canvas.width - margin;
+    y = canvas.height - margin;
+  }
+
+
+  return {
+    x:x,
+    y:y
+  };
+
+}
+
+
+/* =========================
+   COLOR
+========================= */
+
+function hexToRgb(hex){
+
+  hex =
+    hex.replace("#","");
+
+  return {
+    r:parseInt(
+      hex.substring(0,2),
+      16
+    ),
+    g:parseInt(
+      hex.substring(2,4),
+      16
+    ),
+    b:parseInt(
+      hex.substring(4,6),
+      16
+    )
+  };
+
+}
+
+
+/* =========================
+   DOWNLOAD
+========================= */
+
+downloadBtn.addEventListener(
+  "click",
+  async function(){
+
+    if(!originalBytes){
+
+      alert(
+        "Please select a PDF first."
+      );
+
+      return;
+    }
+
+
+    const text =
+      watermarkText.value.trim();
+
+
+    if(!te
+```
