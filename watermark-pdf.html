@@ -1,4 +1,3 @@
-html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,10 +25,6 @@ body{
     background:#f6f7f9;
     color:#222;
 }
-
-/* =========================
-   NAVBAR
-========================= */
 
 .navbar{
     height:68px;
@@ -67,10 +62,6 @@ body{
     color:#e53232;
 }
 
-/* =========================
-   HERO
-========================= */
-
 .hero{
     text-align:center;
     padding:35px 20px 25px;
@@ -87,19 +78,11 @@ body{
     line-height:1.6;
 }
 
-/* =========================
-   CONTAINER
-========================= */
-
 .container{
     width:94%;
     max-width:1250px;
     margin:auto;
 }
-
-/* =========================
-   UPLOAD
-========================= */
 
 .upload-box{
     background:#fff;
@@ -148,20 +131,12 @@ body{
     word-break:break-word;
 }
 
-/* =========================
-   LOADING
-========================= */
-
 .loading{
     display:none;
     text-align:center;
     padding:18px;
     color:#555;
 }
-
-/* =========================
-   SIDE BY SIDE WORK AREA
-========================= */
 
 .work-area{
     display:grid;
@@ -172,10 +147,6 @@ body{
     min-height:600px;
     margin-bottom:25px;
 }
-
-/* =========================
-   LEFT PREVIEW
-========================= */
 
 .preview-panel{
     background:#fff;
@@ -204,10 +175,6 @@ body{
     color:#666;
     margin-bottom:15px;
 }
-
-/* =========================
-   RIGHT TOOLBAR
-========================= */
 
 .editor{
     background:#fff;
@@ -253,10 +220,6 @@ body{
     border-color:#e53232;
 }
 
-/* =========================
-   RANGE
-========================= */
-
 .range-row{
     display:flex;
     align-items:center;
@@ -273,10 +236,6 @@ body{
     font-weight:600;
     font-size:14px;
 }
-
-/* =========================
-   COLOR
-========================= */
 
 .color-row{
     display:flex;
@@ -297,10 +256,6 @@ body{
     font-size:14px;
     font-weight:600;
 }
-
-/* =========================
-   POSITION GRID
-========================= */
 
 .position-grid{
     display:grid;
@@ -327,10 +282,6 @@ body{
     color:#fff;
     border-color:#e53232;
 }
-
-/* =========================
-   MANUAL POSITION
-========================= */
 
 .manual-box{
     background:#fafafa;
@@ -369,10 +320,6 @@ body{
     color:#e53232;
 }
 
-/* =========================
-   ACTIONS
-========================= */
-
 .actions{
     display:flex;
     flex-direction:column;
@@ -400,20 +347,12 @@ body{
     cursor:not-allowed;
 }
 
-/* =========================
-   STATUS
-========================= */
-
 .status{
     text-align:center;
     color:#666;
     font-size:14px;
     margin:12px 0 25px;
 }
-
-/* =========================
-   PAGE GRID
-========================= */
 
 .pages-grid{
     display:flex;
@@ -456,10 +395,6 @@ body{
     align-items:center;
     overflow:hidden;
 }
-
-/* =========================
-   CANVAS + DRAG
-========================= */
 
 .canvas-holder{
     position:relative;
@@ -511,10 +446,6 @@ body{
     cursor:grabbing !important;
 }
 
-/* =========================
-   SCROLLBAR
-========================= */
-
 .preview-panel::-webkit-scrollbar,
 .editor::-webkit-scrollbar{
     width:8px;
@@ -537,10 +468,6 @@ body{
     background:#aaa;
 }
 
-/* =========================
-   FOOTER
-========================= */
-
 footer{
     background:#222;
     color:#aaa;
@@ -549,10 +476,6 @@ footer{
     margin-top:35px;
     font-size:13px;
 }
-
-/* =========================
-   MOBILE
-========================= */
 
 @media(max-width:900px){
 
@@ -598,10 +521,6 @@ footer{
 
 <body>
 
-<!-- =========================
-     NAVBAR
-========================= -->
-
 <nav class="navbar">
 
     <a href="index.html" class="logo">
@@ -626,11 +545,6 @@ footer{
 
 </nav>
 
-
-<!-- =========================
-     HERO
-========================= -->
-
 <section class="hero">
 
     <h1>
@@ -643,12 +557,7 @@ footer{
 
 </section>
 
-
 <main class="container">
-
-<!-- =========================
-     UPLOAD
-========================= -->
 
 <div class="upload-box">
 
@@ -682,7 +591,6 @@ footer{
 
 </div>
 
-
 <div
     class="loading"
     id="loading"
@@ -690,20 +598,11 @@ footer{
     Loading PDF preview...
 </div>
 
-
-<!-- =========================
-     WORK AREA
-========================= -->
-
 <div
     class="work-area"
     id="workArea"
     style="display:none;"
 >
-
-    <!-- =====================
-         LEFT PREVIEW
-    ====================== -->
 
     <div class="preview-panel">
 
@@ -727,19 +626,11 @@ footer{
 
     </div>
 
-
-    <!-- =====================
-         RIGHT TOOLBAR
-    ====================== -->
-
     <div class="editor">
 
         <h2 class="settings-title">
             Watermark Settings
         </h2>
-
-
-        <!-- TEXT -->
 
         <div class="field">
 
@@ -756,9 +647,6 @@ footer{
 
         </div>
 
-
-        <!-- FONT SIZE -->
-
         <div class="field">
 
             <label for="fontSize">
@@ -774,9 +662,6 @@ footer{
             >
 
         </div>
-
-
-        <!-- OPACITY -->
 
         <div class="field">
 
@@ -804,9 +689,6 @@ footer{
             </div>
 
         </div>
-
-
-        <!-- ROTATION -->
 
         <div class="field">
 
@@ -860,9 +742,6 @@ footer{
 
         </div>
 
-
-        <!-- COLOR -->
-
         <div class="field">
 
             <label>
@@ -888,9 +767,6 @@ footer{
 
         </div>
 
-
-        <!-- QUICK POSITION -->
-
         <div class="field">
 
             <label>
@@ -899,84 +775,21 @@ footer{
 
             <div class="position-grid">
 
-                <button
-                    type="button"
-                    class="position-btn"
-                    data-position="top-left"
-                >
-                    ↖
-                </button>
+                <button type="button" class="position-btn" data-position="top-left">↖</button>
+                <button type="button" class="position-btn" data-position="top-center">↑</button>
+                <button type="button" class="position-btn" data-position="top-right">↗</button>
 
-                <button
-                    type="button"
-                    class="position-btn"
-                    data-position="top-center"
-                >
-                    ↑
-                </button>
+                <button type="button" class="position-btn" data-position="center-left">←</button>
+                <button type="button" class="position-btn active" data-position="center">●</button>
+                <button type="button" class="position-btn" data-position="center-right">→</button>
 
-                <button
-                    type="button"
-                    class="position-btn"
-                    data-position="top-right"
-                >
-                    ↗
-                </button>
-
-                <button
-                    type="button"
-                    class="position-btn"
-                    data-position="center-left"
-                >
-                    ←
-                </button>
-
-                <button
-                    type="button"
-                    class="position-btn active"
-                    data-position="center"
-                >
-                    ●
-                </button>
-
-                <button
-                    type="button"
-                    class="position-btn"
-                    data-position="center-right"
-                >
-                    →
-                </button>
-
-                <button
-                    type="button"
-                    class="position-btn"
-                    data-position="bottom-left"
-                >
-                    ↙
-                </button>
-
-                <button
-                    type="button"
-                    class="position-btn"
-                    data-position="bottom-center"
-                >
-                    ↓
-                </button>
-
-                <button
-                    type="button"
-                    class="position-btn"
-                    data-position="bottom-right"
-                >
-                    ↘
-                </button>
+                <button type="button" class="position-btn" data-position="bottom-left">↙</button>
+                <button type="button" class="position-btn" data-position="bottom-center">↓</button>
+                <button type="button" class="position-btn" data-position="bottom-right">↘</button>
 
             </div>
 
         </div>
-
-
-        <!-- MANUAL CONTROL -->
 
         <div class="manual-box">
 
@@ -985,9 +798,9 @@ footer{
             </div>
 
             <div class="manual-text">
-                Preview me watermark ko mouse/touch se
-                drag karke kisi bhi position par set karein.
-                Download me wahi position apply hogi.
+                Preview me watermark ko mouse/touch se drag karke
+                kisi bhi position par set karein. Download me wahi
+                center position apply hogi.
             </div>
 
             <button
@@ -999,9 +812,6 @@ footer{
             </button>
 
         </div>
-
-
-        <!-- ACTIONS -->
 
         <div class="actions">
 
@@ -1027,7 +837,6 @@ footer{
 
 </div>
 
-
 <div
     class="status"
     id="status"
@@ -1035,19 +844,13 @@ footer{
 
 </main>
 
-
 <footer>
 
     © 2026 PDF Editor Tools. All rights reserved.
 
 </footer>
 
-
 <script>
-
-/* =====================================================
-   PDF.JS WORKER
-===================================================== */
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
 "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
@@ -1117,32 +920,24 @@ document.getElementById("resetPositionBtn");
 ===================================================== */
 
 let originalFile = null;
-
 let originalBytes = null;
-
 let pdfDocument = null;
-
 let pageData = [];
 
-
 /*
-   IMPORTANT:
+    IMPORTANT
 
-   Position is stored as normalized values.
+    Watermark position is stored as the CENTER
+    of the watermark.
 
-   x = 0   -> left edge
-   x = 0.5 -> center
-   x = 1   -> right edge
+    0.00 = left/top
+    0.50 = center
+    1.00 = right/bottom
 
-   y = 0   -> top
-   y = 0.5 -> center
-   y = 1   -> bottom
-
-   This prevents preview/download displacement.
+    Preview and PDF both use this same center.
 */
 
 let watermarkX = 0.50;
-
 let watermarkY = 0.50;
 
 
@@ -1155,7 +950,6 @@ selectBtn.addEventListener(
     function(){
 
         fileInput.value = "";
-
         fileInput.click();
 
     }
@@ -1178,24 +972,19 @@ fileInput.addEventListener(
             return;
         }
 
-
         const isPDF =
         file.type === "application/pdf" ||
         file.name.toLowerCase().endsWith(".pdf");
 
-
         if(!isPDF){
 
-            alert(
-                "Please select a PDF file."
-            );
+            alert("Please select a PDF file.");
 
             fileInput.value = "";
 
             return;
 
         }
-
 
         originalFile = file;
 
@@ -1206,31 +995,29 @@ fileInput.addEventListener(
 
         pageData = [];
 
+        watermarkX = 0.50;
+        watermarkY = 0.50;
+
         workArea.style.display = "none";
 
         status.textContent = "";
 
         loading.style.display = "block";
 
-
         try{
 
             originalBytes =
             await file.arrayBuffer();
-
 
             pdfDocument =
             await pdfjsLib.getDocument({
                 data:originalBytes.slice(0)
             }).promise;
 
-
             await renderPages();
-
 
             workArea.style.display =
             "grid";
-
 
             previewInfo.textContent =
             pdfDocument.numPages +
@@ -1242,10 +1029,8 @@ fileInput.addEventListener(
             ) +
             " loaded. Drag the watermark to adjust its position.";
 
-
             status.textContent =
             "PDF loaded successfully.";
-
 
             updateAllWatermarks();
 
@@ -1257,11 +1042,9 @@ fileInput.addEventListener(
                 error
             );
 
-
             alert(
                 "Unable to open this PDF. Please try another PDF file."
             );
-
 
             pagesGrid.innerHTML = "";
 
@@ -1299,32 +1082,24 @@ async function renderPages(){
             pageNumber
         );
 
-
         const baseViewport =
         page.getViewport({
             scale:1
         });
 
-
         const targetWidth =
         700;
 
-
         const scale =
         Math.min(
-            targetWidth /
-            baseViewport.width,
+            targetWidth / baseViewport.width,
             1.5
         );
-
 
         const viewport =
         page.getViewport({
             scale:scale
         });
-
-
-        /* PAGE CARD */
 
         const card =
         document.createElement("div");
@@ -1332,15 +1107,11 @@ async function renderPages(){
         card.className =
         "page-card";
 
-
-        /* HEADER */
-
         const header =
         document.createElement("div");
 
         header.className =
         "page-header";
-
 
         const pageNumberElement =
         document.createElement("div");
@@ -1349,9 +1120,7 @@ async function renderPages(){
         "page-number";
 
         pageNumberElement.textContent =
-        "Page " +
-        pageNumber;
-
+        "Page " + pageNumber;
 
         const label =
         document.createElement("div");
@@ -1362,7 +1131,6 @@ async function renderPages(){
         label.textContent =
         "Preview";
 
-
         header.appendChild(
             pageNumberElement
         );
@@ -1371,17 +1139,11 @@ async function renderPages(){
             label
         );
 
-
-        /* CANVAS WRAP */
-
         const canvasWrap =
         document.createElement("div");
 
         canvasWrap.className =
         "canvas-wrap";
-
-
-        /* CANVAS HOLDER */
 
         const canvasHolder =
         document.createElement("div");
@@ -1389,30 +1151,20 @@ async function renderPages(){
         canvasHolder.className =
         "canvas-holder";
 
-
-        /* CANVAS */
-
         const canvas =
         document.createElement("canvas");
 
         canvas.className =
         "preview-canvas";
 
-
         canvas.width =
-        Math.ceil(
-            viewport.width
-        );
+        Math.ceil(viewport.width);
 
         canvas.height =
-        Math.ceil(
-            viewport.height
-        );
-
+        Math.ceil(viewport.height);
 
         const ctx =
         canvas.getContext("2d");
-
 
         await page.render({
 
@@ -1422,17 +1174,11 @@ async function renderPages(){
 
         }).promise;
 
-
-        /* WATERMARK LAYER */
-
         const watermarkLayer =
         document.createElement("div");
 
         watermarkLayer.className =
         "watermark-layer";
-
-
-        /* WATERMARK HANDLE */
 
         const watermarkHandle =
         document.createElement("div");
@@ -1443,11 +1189,9 @@ async function renderPages(){
         watermarkHandle.textContent =
         watermarkText.value;
 
-
         watermarkLayer.appendChild(
             watermarkHandle
         );
-
 
         canvasHolder.appendChild(
             canvas
@@ -1457,11 +1201,9 @@ async function renderPages(){
             watermarkLayer
         );
 
-
         canvasWrap.appendChild(
             canvasHolder
         );
-
 
         card.appendChild(
             header
@@ -1471,11 +1213,9 @@ async function renderPages(){
             canvasWrap
         );
 
-
         pagesGrid.appendChild(
             card
         );
-
 
         const data = {
 
@@ -1505,11 +1245,9 @@ async function renderPages(){
 
         };
 
-
         pageData.push(
             data
         );
-
 
         enableDragging(
             data
@@ -1530,7 +1268,6 @@ function updateAllWatermarks(){
         return;
     }
 
-
     pageData.forEach(
         function(data){
 
@@ -1545,7 +1282,7 @@ function updateAllWatermarks(){
 
 
 /* =====================================================
-   UPDATE SINGLE WATERMARK
+   UPDATE WATERMARK PREVIEW
 ===================================================== */
 
 function updateWatermark(data){
@@ -1553,10 +1290,8 @@ function updateWatermark(data){
     const text =
     watermarkText.value.trim();
 
-
     data.watermarkHandle.textContent =
     text || "Watermark";
-
 
     const size =
     Math.max(
@@ -1565,42 +1300,38 @@ function updateWatermark(data){
         data.previewScale
     );
 
-
     const alpha =
-    Number(opacity.value) /
-    100;
-
+    Number(opacity.value) / 100;
 
     const angle =
     Number(rotation.value);
 
-
     data.watermarkHandle.style.fontSize =
     size + "px";
-
 
     data.watermarkHandle.style.opacity =
     alpha;
 
-
     data.watermarkHandle.style.color =
     textColor.value;
 
+    /*
+        IMPORTANT:
+
+        translate(-50%,-50%) means the CSS
+        element is positioned by its CENTER.
+    */
 
     data.watermarkHandle.style.transform =
     "translate(-50%, -50%) rotate(" +
     angle +
     "deg)";
 
-
     data.watermarkHandle.style.left =
-    (watermarkX * 100) +
-    "%";
-
+    (watermarkX * 100) + "%";
 
     data.watermarkHandle.style.top =
-    (watermarkY * 100) +
-    "%";
+    (watermarkY * 100) + "%";
 
 }
 
@@ -1614,14 +1345,9 @@ function enableDragging(data){
     const handle =
     data.watermarkHandle;
 
+    let dragging = false;
 
-    let dragging =
-    false;
-
-
-    let pointerId =
-    null;
-
+    let pointerId = null;
 
     handle.addEventListener(
         "pointerdown",
@@ -1631,31 +1357,24 @@ function enableDragging(data){
 
             event.stopPropagation();
 
-
-            dragging =
-            true;
-
+            dragging = true;
 
             pointerId =
             event.pointerId;
-
 
             handle.setPointerCapture(
                 pointerId
             );
 
-
             handle.classList.add(
                 "dragging"
             );
-
 
             status.textContent =
             "Move the watermark to your desired position.";
 
         }
     );
-
 
     handle.addEventListener(
         "pointermove",
@@ -1665,33 +1384,22 @@ function enableDragging(data){
                 return;
             }
 
-
             event.preventDefault();
-
 
             const rect =
             data.holder.getBoundingClientRect();
-
 
             let x =
             (
                 event.clientX -
                 rect.left
-            ) /
-            rect.width;
-
+            ) / rect.width;
 
             let y =
             (
                 event.clientY -
                 rect.top
-            ) /
-            rect.height;
-
-
-            /*
-              Keep watermark inside preview.
-            */
+            ) / rect.height;
 
             x =
             Math.max(
@@ -1702,7 +1410,6 @@ function enableDragging(data){
                 )
             );
 
-
             y =
             Math.max(
                 0.02,
@@ -1712,22 +1419,19 @@ function enableDragging(data){
                 )
             );
 
+            /*
+                Store CENTER position.
+            */
 
-            watermarkX =
-            x;
-
-            watermarkY =
-            y;
-
+            watermarkX = x;
+            watermarkY = y;
 
             updateAllWatermarks();
-
 
             updatePositionButtons();
 
         }
     );
-
 
     function stopDragging(){
 
@@ -1735,33 +1439,26 @@ function enableDragging(data){
             return;
         }
 
-
-        dragging =
-        false;
-
+        dragging = false;
 
         handle.classList.remove(
             "dragging"
         );
-
 
         status.textContent =
         "Watermark position updated.";
 
     }
 
-
     handle.addEventListener(
         "pointerup",
         stopDragging
     );
 
-
     handle.addEventListener(
         "pointercancel",
         stopDragging
     );
-
 
     handle.addEventListener(
         "lostpointercapture",
@@ -1787,11 +1484,9 @@ document
                 const position =
                 button.dataset.position;
 
-
                 setQuickPosition(
                     position
                 );
-
 
                 updatePositionButtons();
 
@@ -1807,133 +1502,6 @@ document
 ===================================================== */
 
 function setQuickPosition(position){
-
-    if(position === "top-left"){
-
-        watermarkX =
-        0.15;
-
-        watermarkY =
-        0.12;
-
-    }
-
-    else if(position === "top-center"){
-
-        watermarkX =
-        0.50;
-
-        watermarkY =
-        0.12;
-
-    }
-
-    else if(position === "top-right"){
-
-        watermarkX =
-        0.85;
-
-        watermarkY =
-        0.12;
-
-    }
-
-    else if(position === "center-left"){
-
-        watermarkX =
-        0.15;
-
-        watermarkY =
-        0.50;
-
-    }
-
-    else if(position === "center"){
-
-        watermarkX =
-        0.50;
-
-        watermarkY =
-        0.50;
-
-    }
-
-    else if(position === "center-right"){
-
-        watermarkX =
-        0.85;
-
-        watermarkY =
-        0.50;
-
-    }
-
-    else if(position === "bottom-left"){
-
-        watermarkX =
-        0.15;
-
-        watermarkY =
-        0.88;
-
-    }
-
-    else if(position === "bottom-center"){
-
-        watermarkX =
-        0.50;
-
-        watermarkY =
-        0.88;
-
-    }
-
-    else if(position === "bottom-right"){
-
-        watermarkX =
-        0.85;
-
-        watermarkY =
-        0.88;
-
-    }
-
-
-    updateAllWatermarks();
-
-
-    status.textContent =
-    "Watermark position updated.";
-
-}
-
-
-/* =====================================================
-   UPDATE ACTIVE QUICK POSITION
-===================================================== */
-
-function updatePositionButtons(){
-
-    document
-    .querySelectorAll(".position-btn")
-    .forEach(
-        function(button){
-
-            button.classList.remove(
-                "active"
-            );
-
-        }
-    );
-
-
-    let closestButton =
-    null;
-
-
-    let closestDistance =
-    Infinity;
-
 
     const positions = {
 
@@ -1966,6 +1534,76 @@ function updatePositionButtons(){
 
     };
 
+    if(positions[position]){
+
+        watermarkX =
+        positions[position][0];
+
+        watermarkY =
+        positions[position][1];
+
+    }
+
+    updateAllWatermarks();
+
+    status.textContent =
+    "Watermark position updated.";
+
+}
+
+
+/* =====================================================
+   UPDATE ACTIVE POSITION
+===================================================== */
+
+function updatePositionButtons(){
+
+    document
+    .querySelectorAll(".position-btn")
+    .forEach(
+        function(button){
+
+            button.classList.remove(
+                "active"
+            );
+
+        }
+    );
+
+    const positions = {
+
+        "top-left":
+        [0.15,0.12],
+
+        "top-center":
+        [0.50,0.12],
+
+        "top-right":
+        [0.85,0.12],
+
+        "center-left":
+        [0.15,0.50],
+
+        "center":
+        [0.50,0.50],
+
+        "center-right":
+        [0.85,0.50],
+
+        "bottom-left":
+        [0.15,0.88],
+
+        "bottom-center":
+        [0.50,0.88],
+
+        "bottom-right":
+        [0.85,0.88]
+
+    };
+
+    let closestButton = null;
+
+    let closestDistance = Infinity;
 
     Object.keys(positions)
     .forEach(
@@ -1976,7 +1614,6 @@ function updatePositionButtons(){
 
             const py =
             positions[position][1];
-
 
             const distance =
             Math.sqrt(
@@ -1989,7 +1626,6 @@ function updatePositionButtons(){
                     2
                 )
             );
-
 
             if(
                 distance <
@@ -2007,7 +1643,6 @@ function updatePositionButtons(){
         }
     );
 
-
     if(
         closestButton &&
         closestDistance < 0.08
@@ -2019,7 +1654,6 @@ function updatePositionButtons(){
             closestButton +
             '"]'
         );
-
 
         if(button){
 
@@ -2035,7 +1669,7 @@ function updatePositionButtons(){
 
 
 /* =====================================================
-   RESET POSITION
+   RESET
 ===================================================== */
 
 resetPositionBtn.addEventListener(
@@ -2048,11 +1682,9 @@ resetPositionBtn.addEventListener(
         watermarkY =
         0.50;
 
-
         updateAllWatermarks();
 
         updatePositionButtons();
-
 
         status.textContent =
         "Watermark reset to center.";
@@ -2062,36 +1694,18 @@ resetPositionBtn.addEventListener(
 
 
 /* =====================================================
-   TEXT CHANGE
+   LIVE SETTINGS
 ===================================================== */
 
 watermarkText.addEventListener(
     "input",
-    function(){
-
-        updateAllWatermarks();
-
-    }
+    updateAllWatermarks
 );
-
-
-/* =====================================================
-   FONT SIZE CHANGE
-===================================================== */
 
 fontSize.addEventListener(
     "input",
-    function(){
-
-        updateAllWatermarks();
-
-    }
+    updateAllWatermarks
 );
-
-
-/* =====================================================
-   OPACITY CHANGE
-===================================================== */
 
 opacity.addEventListener(
     "input",
@@ -2100,30 +1714,15 @@ opacity.addEventListener(
         opacityValue.textContent =
         opacity.value + "%";
 
-
         updateAllWatermarks();
 
     }
 );
-
-
-/* =====================================================
-   ROTATION CHANGE
-===================================================== */
 
 rotation.addEventListener(
     "change",
-    function(){
-
-        updateAllWatermarks();
-
-    }
+    updateAllWatermarks
 );
-
-
-/* =====================================================
-   COLOR CHANGE
-===================================================== */
 
 textColor.addEventListener(
     "input",
@@ -2131,7 +1730,6 @@ textColor.addEventListener(
 
         colorCode.textContent =
         textColor.value.toUpperCase();
-
 
         updateAllWatermarks();
 
@@ -2149,7 +1747,6 @@ updateBtn.addEventListener(
 
         updateAllWatermarks();
 
-
         status.textContent =
         "Preview updated successfully.";
 
@@ -2164,11 +1761,7 @@ updateBtn.addEventListener(
 function hexToRgb(hex){
 
     hex =
-    hex.replace(
-        "#",
-        ""
-    );
-
+    hex.replace("#","");
 
     return {
 
@@ -2196,6 +1789,117 @@ function hexToRgb(hex){
 
 
 /* =====================================================
+   GET PDF TEXT METRICS
+===================================================== */
+
+/*
+    This function calculates the position of the
+    PDF text so that the CENTER of the rotated
+    text matches watermarkX / watermarkY.
+
+    This is the main fix for the displacement problem.
+*/
+
+function getCenteredTextPosition(
+    font,
+    text,
+    size,
+    centerX,
+    centerY,
+    angleDegrees
+){
+
+    const width =
+    font.widthOfTextAtSize(
+        text,
+        size
+    );
+
+    /*
+        PDF standard font height.
+
+        Use descender so the complete text
+        box is considered.
+    */
+
+    let height;
+
+    try{
+
+        height =
+        font.heightAtSize(
+            size,
+            {
+                descender:true
+            }
+        );
+
+    }
+    catch(error){
+
+        height =
+        size;
+
+    }
+
+    /*
+        Rotation around the PDF drawText anchor.
+
+        We calculate where the center of the
+        rotated rectangle goes, then compensate
+        the anchor so its center lands exactly
+        at the requested point.
+    */
+
+    const angle =
+    angleDegrees *
+    Math.PI /
+    180;
+
+    const cos =
+    Math.cos(angle);
+
+    const sin =
+    Math.sin(angle);
+
+    const halfW =
+    width / 2;
+
+    const halfH =
+    height / 2;
+
+    const rotatedCenterX =
+    cos * halfW -
+    sin * halfH;
+
+    const rotatedCenterY =
+    sin * halfW +
+    cos * halfH;
+
+    const x =
+    centerX -
+    rotatedCenterX;
+
+    const y =
+    centerY -
+    rotatedCenterY;
+
+    return {
+
+        x:x,
+
+        y:y,
+
+        width:width,
+
+        height:height
+
+    };
+
+}
+
+
+/* =====================================================
    DOWNLOAD PDF
 ===================================================== */
 
@@ -2213,10 +1917,8 @@ downloadBtn.addEventListener(
 
         }
 
-
         const text =
         watermarkText.value.trim();
-
 
         if(!text){
 
@@ -2230,26 +1932,20 @@ downloadBtn.addEventListener(
 
         }
 
-
         const oldText =
         downloadBtn.textContent;
-
 
         downloadBtn.disabled =
         true;
 
-
         updateBtn.disabled =
         true;
-
 
         downloadBtn.textContent =
         "Creating PDF...";
 
-
         status.textContent =
         "Adding watermark to PDF. Please wait...";
-
 
         try{
 
@@ -2258,16 +1954,13 @@ downloadBtn.addEventListener(
                 originalBytes.slice(0)
             );
 
-
             const pages =
             pdfDoc.getPages();
-
 
             const font =
             await pdfDoc.embedFont(
                 PDFLib.StandardFonts.HelveticaBold
             );
-
 
             const fontSizeValue =
             Math.max(
@@ -2275,21 +1968,16 @@ downloadBtn.addEventListener(
                 Number(fontSize.value)
             );
 
-
             const opacityNumber =
-            Number(opacity.value) /
-            100;
-
+            Number(opacity.value) / 100;
 
             const angleDegrees =
             Number(rotation.value);
-
 
             const rgb =
             hexToRgb(
                 textColor.value
             );
-
 
             const color =
             PDFLib.rgb(
@@ -2300,14 +1988,21 @@ downloadBtn.addEventListener(
 
 
             /*
-              IMPORTANT:
+                =================================================
+                IMPORTANT POSITION FIX
+                =================================================
 
-              We use the SAME normalized
-              X/Y position that was used
-              by the preview.
+                Preview:
 
-              Therefore preview and
-              downloaded PDF stay aligned.
+                watermarkX/Y = CENTER
+
+                PDF:
+
+                watermarkX/Y = CENTER
+
+                We calculate the PDF baseline/anchor
+                required to put the CENTER at exactly
+                the same normalized position.
             */
 
 
@@ -2317,30 +2012,29 @@ downloadBtn.addEventListener(
                     const pageWidth =
                     page.getWidth();
 
-
                     const pageHeight =
                     page.getHeight();
 
 
                     /*
-                      PDF coordinate system:
+                        Desired CENTER in PDF coordinates.
 
-                      bottom-left = 0,0
+                        Preview Y starts from TOP.
 
-                      Preview coordinate system:
+                        PDF Y starts from BOTTOM.
 
-                      top-left = 0,0
+                        Therefore:
 
-                      So Y is inverted here.
+                        centerY =
+                        pageHeight -
+                        (watermarkY * pageHeight)
                     */
 
-
-                    const x =
+                    const centerX =
                     watermarkX *
                     pageWidth;
 
-
-                    const y =
+                    const centerY =
                     (
                         1 -
                         watermarkY
@@ -2348,15 +2042,35 @@ downloadBtn.addEventListener(
                     pageHeight;
 
 
+                    /*
+                        Calculate corrected text anchor.
+                    */
+
+                    const position =
+                    getCenteredTextPosition(
+                        font,
+                        text,
+                        fontSizeValue,
+                        centerX,
+                        centerY,
+                        angleDegrees
+                    );
+
+
+                    /*
+                        Draw text using the corrected
+                        anchor position.
+                    */
+
                     page.drawText(
                         text,
                         {
 
                             x:
-                            x,
+                            position.x,
 
                             y:
-                            y,
+                            position.y,
 
                             size:
                             fontSizeValue,
@@ -2373,13 +2087,7 @@ downloadBtn.addEventListener(
                             rotate:
                             PDFLib.degrees(
                                 angleDegrees
-                            ),
-
-                            xSkew:
-                            PDFLib.degrees(0),
-
-                            ySkew:
-                            PDFLib.degrees(0)
+                            )
 
                         }
                     );
@@ -2413,7 +2121,6 @@ downloadBtn.addEventListener(
                 "a"
             );
 
-
             link.href =
             url;
 
@@ -2436,9 +2143,7 @@ downloadBtn.addEventListener(
                 link
             );
 
-
             link.click();
-
 
             link.remove();
 
@@ -2466,11 +2171,9 @@ downloadBtn.addEventListener(
                 error
             );
 
-
             alert(
                 "Download failed. Please try again."
             );
-
 
             status.textContent =
             "Unable to create the watermarked PDF.";
@@ -2496,4 +2199,3 @@ downloadBtn.addEventListener(
 
 </body>
 </html>
-
