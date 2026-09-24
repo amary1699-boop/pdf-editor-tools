@@ -8,2171 +8,1396 @@
 <title>Watermark PDF Online - Free PDF Watermark Tool</title>
 
 <meta name="description"
-content="Add a text watermark to PDF online for free. Customize text, size, opacity, color, rotation and position.">
+content="Add custom text watermark to PDF files online for free. Adjust font size, opacity, color, rotation and position.">
 
 <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 <style>
-
 *{
-  box-sizing:border-box;
+    box-sizing:border-box;
 }
 
 body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:#f6f7f9;
-  color:#222;
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f6f7f9;
+    color:#222;
 }
 
-/* ================= NAVBAR ================= */
-
 .navbar{
-  height:68px;
-  background:#fff;
-  border-bottom:1px solid #e5e5e5;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 6%;
-  position:sticky;
-  top:0;
-  z-index:100;
+    background:#fff;
+    border-bottom:1px solid #e5e5e5;
+    height:64px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    position:sticky;
+    top:0;
+    z-index:1000;
 }
 
 .logo{
-  color:#e53232;
-  text-decoration:none;
-  font-size:25px;
-  font-weight:700;
+    text-decoration:none;
+    font-size:22px;
+    font-weight:800;
+    color:#e53232;
 }
 
-.home-link{
-  color:#333;
-  text-decoration:none;
-  font-size:15px;
-  font-weight:600;
+.nav-links{
+    display:flex;
+    gap:25px;
 }
 
-.home-link:hover{
-  color:#e53232;
+.nav-links a{
+    text-decoration:none;
+    color:#333;
+    font-size:15px;
+    font-weight:600;
 }
-
-/* ================= HERO ================= */
 
 .hero{
-  text-align:center;
-  padding:42px 20px 25px;
+    text-align:center;
+    padding:45px 20px 30px;
 }
 
 .hero h1{
-  margin:0 0 12px;
-  font-size:38px;
+    margin:0 0 10px;
+    font-size:38px;
 }
 
 .hero p{
-  margin:0 auto;
-  max-width:700px;
-  color:#666;
-  line-height:1.6;
+    margin:0;
+    color:#666;
+    font-size:16px;
 }
-
-/* ================= MAIN ================= */
 
 .container{
-  width:94%;
-  max-width:1350px;
-  margin:auto;
+    width:92%;
+    max-width:1450px;
+    margin:auto;
 }
-
-/* ================= UPLOAD ================= */
 
 .upload-box{
-  background:#fff;
-  border:2px dashed #d8d8d8;
-  border-radius:14px;
-  padding:30px 20px;
-  text-align:center;
-  margin:20px auto 25px;
+    background:#fff;
+    border:2px dashed #ddd;
+    border-radius:16px;
+    padding:35px 20px;
+    text-align:center;
+    margin-bottom:25px;
 }
 
-.upload-box:hover{
-  border-color:#e53232;
+.upload-box h2{
+    margin:0 0 8px;
+    font-size:22px;
 }
 
-.upload-btn{
-  display:inline-block;
-  background:#e53232;
-  color:#fff;
-  padding:13px 25px;
-  border-radius:8px;
-  cursor:pointer;
-  font-weight:600;
-  border:0;
-  font-size:15px;
+.upload-box p{
+    color:#777;
+    margin:0 0 20px;
 }
 
-.upload-btn:hover{
-  background:#c92828;
+.primary-btn{
+    background:#e53232;
+    color:#fff;
+    border:none;
+    border-radius:9px;
+    padding:13px 22px;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.primary-btn:hover{
+    background:#c92727;
+}
+
+.secondary-btn{
+    background:#fff;
+    color:#333;
+    border:1px solid #ccc;
+    border-radius:9px;
+    padding:12px 18px;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.secondary-btn:hover{
+    background:#f5f5f5;
 }
 
 .file-name{
-  margin-top:14px;
-  color:#555;
-  font-size:14px;
-  word-break:break-word;
+    margin-top:14px;
+    color:#555;
+    font-size:14px;
+    word-break:break-word;
 }
-
-/* ================= LOADING ================= */
 
 .loading{
-  display:none;
-  text-align:center;
-  padding:20px;
-  color:#555;
+    display:none;
+    text-align:center;
+    padding:20px;
+    color:#666;
 }
-
-/* ================= WORK AREA ================= */
 
 .work-area{
-  display:grid;
-  grid-template-columns:minmax(0,1.35fr) minmax(340px,.65fr);
-  gap:24px;
-  align-items:start;
+    display:grid;
+    grid-template-columns:minmax(0,1.6fr) minmax(360px,.4fr);
+    gap:24px;
+    align-items:start;
+    margin-bottom:25px;
 }
 
-/* ================= PREVIEW PANEL ================= */
+.preview-panel,
+.editor{
+    background:#fff;
+    border-radius:16px;
+    border:1px solid #e5e5e5;
+}
 
 .preview-panel{
-  background:#fff;
-  border-radius:14px;
-  padding:20px;
-  box-shadow:0 3px 15px rgba(0,0,0,.06);
-  min-width:0;
+    padding:20px;
+    min-width:0;
 }
 
-.preview-heading-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:18px;
+.editor{
+    padding:20px;
+    position:sticky;
+    top:84px;
+    max-height:calc(100vh - 100px);
+    overflow-y:auto;
 }
 
-.preview-title{
-  display:none;
-  font-size:22px;
-  margin:0;
+.panel-title{
+    font-size:21px;
+    font-weight:800;
+    margin:0 0 5px;
+}
+
+.panel-subtitle{
+    font-size:13px;
+    color:#777;
+    margin:0 0 18px;
 }
 
 .preview-info{
-  display:none;
-  color:#777;
-  font-size:13px;
+    display:none;
+    background:#f7f7f7;
+    border-radius:8px;
+    padding:10px 12px;
+    margin-bottom:16px;
+    font-size:13px;
+    color:#666;
 }
 
-/* ================= PAGES GRID ================= */
-
 .pages-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+    gap:20px;
 }
 
 .page-card{
-  background:#fafafa;
-  border:1px solid #e5e5e5;
-  border-radius:12px;
-  padding:12px;
-}
-
-.page-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
-}
-
-.page-number{
-  font-weight:700;
-  font-size:14px;
+    background:#f0f0f0;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:14px;
 }
 
 .page-label{
-  color:#777;
-  font-size:12px;
+    text-align:center;
+    font-size:13px;
+    font-weight:700;
+    color:#555;
+    margin-bottom:10px;
 }
 
 .canvas-wrap{
-  width:100%;
-  background:#eee;
-  border-radius:8px;
-  padding:10px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  overflow:hidden;
+    background:#fff;
+    border-radius:7px;
+    overflow:hidden;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    position:relative;
 }
 
-.preview-canvas{
-  display:block;
-  width:100%;
-  max-width:100%;
-  height:auto;
-  background:#fff;
-  box-shadow:0 2px 7px rgba(0,0,0,.18);
-}
-
-/* ================= SETTINGS ================= */
-
-.editor{
-  display:none;
-  background:#fff;
-  border-radius:14px;
-  padding:20px;
-  box-shadow:0 3px 15px rgba(0,0,0,.06);
-  position:sticky;
-  top:88px;
+.canvas-wrap canvas{
+    display:block;
+    width:100%;
+    height:auto;
 }
 
 .settings-title{
-  font-size:21px;
-  font-weight:700;
-  margin:0 0 18px;
-}
-
-.settings-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
+    font-size:21px;
+    font-weight:800;
+    margin:0 0 18px;
 }
 
 .field{
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-}
-
-.field.full{
-  grid-column:1 / -1;
+    margin-bottom:17px;
 }
 
 .field label{
-  font-size:14px;
-  font-weight:600;
+    display:block;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:7px;
+    color:#333;
 }
 
 .field input[type="text"],
 .field input[type="number"],
 .field select{
-  width:100%;
-  padding:11px 12px;
-  border:1px solid #d5d5d5;
-  border-radius:7px;
-  font-size:14px;
-  outline:none;
-  background:#fff;
+    width:100%;
+    height:42px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    padding:0 11px;
+    font-size:14px;
+    outline:none;
+    background:#fff;
 }
 
-.field input:focus,
+.field input[type="text"]:focus,
+.field input[type="number"]:focus,
 .field select:focus{
-  border-color:#e53232;
+    border-color:#e53232;
 }
-
-/* ================= OPACITY ================= */
 
 .range-row{
-  display:flex;
-  align-items:center;
-  gap:12px;
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
-.range-row input{
-  flex:1;
+.range-row input[type="range"]{
+    flex:1;
 }
 
 .range-value{
-  min-width:55px;
-  font-size:14px;
-  font-weight:600;
-  text-align:right;
+    width:48px;
+    text-align:right;
+    font-size:13px;
+    font-weight:700;
 }
 
-/* ================= COLOR ================= */
-
 .color-row{
-  display:flex;
-  align-items:center;
-  gap:12px;
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
 .color-row input[type="color"]{
-  width:55px;
-  height:40px;
-  border:1px solid #ccc;
-  border-radius:6px;
-  padding:3px;
-  background:#fff;
-  cursor:pointer;
+    width:52px;
+    height:42px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    padding:3px;
+    background:#fff;
+    cursor:pointer;
 }
 
-.color-row span{
-  font-size:13px;
-  color:#555;
+.color-code{
+    font-size:13px;
+    color:#666;
 }
 
-/* ================= POSITION ================= */
-
-.position-buttons{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:7px;
+.position-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:6px;
 }
 
 .position-btn{
-  border:1px solid #ddd;
-  background:#f4f4f4;
-  padding:9px 5px;
-  border-radius:6px;
-  cursor:pointer;
-  font-size:12px;
-  font-weight:600;
+    height:38px;
+    border:1px solid #ccc;
+    background:#fff;
+    border-radius:7px;
+    cursor:pointer;
+    font-size:16px;
 }
 
 .position-btn:hover{
-  border-color:#e53232;
+    background:#f5f5f5;
 }
 
 .position-btn.active{
-  background:#e53232;
-  color:#fff;
-  border-color:#e53232;
+    background:#e53232;
+    color:#fff;
+    border-color:#e53232;
 }
 
-/* ================= ACTION ================= */
-
-.action-row{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  margin-top:20px;
+.actions{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
 }
 
-.action-btn{
-  width:100%;
-  border:0;
-  border-radius:8px;
-  padding:13px 18px;
-  cursor:pointer;
-  font-size:14px;
-  font-weight:600;
+.actions button{
+    flex:1;
 }
-
-.preview-btn{
-  background:#333;
-  color:#fff;
-}
-
-.preview-btn:hover{
-  background:#222;
-}
-
-.download-btn{
-  background:#e53232;
-  color:#fff;
-}
-
-.download-btn:hover{
-  background:#c92828;
-}
-
-.download-btn:disabled{
-  opacity:.6;
-  cursor:not-allowed;
-}
-
-/* ================= STATUS ================= */
 
 .status{
-  text-align:center;
-  color:#666;
-  font-size:14px;
-  margin:18px 0;
-  min-height:18px;
+    display:none;
+    background:#fff;
+    border:1px solid #e5e5e5;
+    border-radius:12px;
+    padding:15px;
+    margin-bottom:30px;
+    text-align:center;
+    font-size:14px;
 }
 
-/* ================= FOOTER ================= */
-
-footer{
-  background:#222;
-  color:#aaa;
-  text-align:center;
-  padding:25px 15px;
-  margin-top:45px;
-  font-size:13px;
+.footer{
+    background:#fff;
+    border-top:1px solid #e5e5e5;
+    text-align:center;
+    padding:25px 15px;
+    color:#777;
+    font-size:13px;
+    margin-top:35px;
 }
 
-/* ================= TABLET ================= */
+@media(max-width:950px){
 
-@media(max-width:1050px){
+    .work-area{
+        grid-template-columns:1fr;
+    }
 
-  .work-area{
-    grid-template-columns:1fr;
-  }
+    .preview-panel{
+        order:1;
+    }
 
-  .editor{
-    position:relative;
-    top:auto;
-  }
+    .editor{
+        order:2;
+        position:relative;
+        top:auto;
+        max-height:none;
+        overflow:visible;
+    }
 
-  .preview-panel{
-    order:1;
-  }
-
-  .editor{
-    order:2;
-  }
-
+    .pages-grid{
+        grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    }
 }
-
-/* ================= MOBILE ================= */
 
 @media(max-width:700px){
 
-  .hero{
-    padding:32px 18px 22px;
-  }
+    .navbar{
+        padding:0 4%;
+    }
 
-  .hero h1{
-    font-size:29px;
-  }
+    .nav-links{
+        gap:12px;
+    }
 
-  .hero p{
-    font-size:14px;
-  }
+    .nav-links a{
+        font-size:13px;
+    }
 
-  .navbar{
-    padding:0 18px;
-  }
+    .hero{
+        padding:30px 15px 25px;
+    }
 
-  .logo{
-    font-size:21px;
-  }
+    .hero h1{
+        font-size:30px;
+    }
 
-  .container{
-    width:94%;
-  }
+    .container{
+        width:94%;
+    }
 
-  .upload-box{
-    padding:25px 15px;
-  }
+    .pages-grid{
+        grid-template-columns:1fr;
+    }
 
-  .preview-panel{
-    padding:14px;
-  }
-
-  .preview-heading-row{
-    align-items:flex-start;
-    flex-direction:column;
-  }
-
-  .pages-grid{
-    grid-template-columns:1fr;
-  }
-
-  .settings-grid{
-    grid-template-columns:1fr;
-  }
-
-  .field.full{
-    grid-column:auto;
-  }
-
-  .position-buttons{
-    grid-template-columns:repeat(2,1fr);
-  }
-
+    .actions{
+        flex-direction:column;
+    }
 }
-
-/* ================= SMALL MOBILE ================= */
-
-@media(max-width:430px){
-
-  .preview-title{
-    font-size:19px;
-  }
-
-  .settings-title{
-    font-size:19px;
-  }
-
-  .position-btn{
-    font-size:11px;
-    padding:9px 3px;
-  }
-
-}
-
 </style>
 
 </head>
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
-
 <nav class="navbar">
-
-  <a href="index.html" class="logo">
-    PDF Editor Tools
-  </a>
-
-  <a href="index.html" class="home-link">
-    Home
-  </a>
-
-</nav>
-
-<!-- ================= HERO ================= -->
-
-<section class="hero">
-
-  <h1>
-    Watermark PDF
-  </h1>
-
-  <p>
-    Add a customizable text watermark to your PDF.
-    Change text, size, opacity, color, rotation and position.
-  </p>
-
-</section>
-
-<main class="container">
-
-  <!-- ================= UPLOAD ================= -->
-
-  <div class="upload-box">
+    <a href="index.html" class="logo">PDF Editor Tools</a>
 
 ```
-<button
-  type="button"
-  id="selectPdfBtn"
-  class="upload-btn">
-
-  Select PDF
-
-</button>
-
-<input
-  type="file"
-  id="fileInput"
-  accept=".pdf,application/pdf"
-  style="display:none;">
-
-<div
-  class="file-name"
-  id="fileName">
-
-  No PDF selected
-
+<div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#pdf-tools">PDF Tools</a>
+    <a href="index.html#about">About</a>
 </div>
 ```
 
-  </div>
+</nav>
 
-  <!-- ================= LOADING ================= -->
-
-  <div
-    class="loading"
-    id="loading">
-
-```
-Loading PDF...
-```
-
-  </div>
-
-  <!-- ================= WORK AREA ================= -->
-
-  <div
-    class="work-area"
-    id="workArea"
-    style="display:none;">
-
-```
-<!-- ================= PREVIEW ================= -->
-
-<section class="preview-panel">
-
-  <div class="preview-heading-row">
-
-    <h2
-      class="preview-title"
-      id="previewTitle">
-
-      PDF Preview
-
-    </h2>
-
-    <div
-      class="preview-info"
-      id="previewInfo">
-
-    </div>
-
-  </div>
-
-
-  <div
-    class="pages-grid"
-    id="pagesGrid">
-
-  </div>
-
+<section class="hero">
+    <h1>Watermark PDF</h1>
+    <p>Add a custom text watermark to your PDF online for free.</p>
 </section>
 
-
-<!-- ================= SETTINGS ================= -->
-
-<section
-  class="editor"
-  id="editor">
-
-  <h2 class="settings-title">
-    Watermark Settings
-  </h2>
-
-
-  <div class="settings-grid">
-
-
-    <!-- WATERMARK TEXT -->
-
-    <div class="field full">
-
-      <label for="watermarkText">
-        Watermark Text
-      </label>
-
-      <input
-        type="text"
-        id="watermarkText"
-        value="CONFIDENTIAL"
-        placeholder="Enter watermark text">
-
-    </div>
-
-
-    <!-- FONT SIZE -->
-
-    <div class="field">
-
-      <label for="fontSize">
-        Font Size
-      </label>
-
-      <input
-        type="number"
-        id="fontSize"
-        value="50"
-        min="8"
-        max="300">
-
-    </div>
-
-
-    <!-- ROTATION -->
-
-    <div class="field">
-
-      <label for="rotation">
-        Rotation
-      </label>
-
-      <select id="rotation">
-
-        <option value="0">0°</option>
-        <option value="15">15°</option>
-        <option value="30">30°</option>
-        <option value="45">45°</option>
-        <option value="60">60°</option>
-        <option value="90">90°</option>
-        <option value="270">270°</option>
-        <option value="315">315°</option>
-        <option value="330">330°</option>
-        <option value="345">345°</option>
-
-      </select>
-
-    </div>
-
-
-    <!-- OPACITY -->
-
-    <div class="field">
-
-      <label>
-        Opacity
-      </label>
-
-      <div class="range-row">
-
-        <input
-          type="range"
-          id="opacity"
-          min="10"
-          max="100"
-          value="35">
-
-        <span
-          class="range-value"
-          id="opacityValue">
-
-          35%
-
-        </span>
-
-      </div>
-
-    </div>
-
-
-    <!-- COLOR -->
-
-    <div class="field">
-
-      <label>
-        Text Color
-      </label>
-
-      <div class="color-row">
-
-        <input
-          type="color"
-          id="textColor"
-          value="#888888">
-
-        <span id="colorValue">
-          #888888
-        </span>
-
-      </div>
-
-    </div>
-
-
-    <!-- POSITION -->
-
-    <div class="field full">
-
-      <label>
-        Position
-      </label>
-
-      <div class="position-buttons">
-
-
-        <button
-          type="button"
-          class="position-btn"
-          data-position="top-left">
-
-          Top Left
-
-        </button>
-
-
-        <button
-          type="button"
-          class="position-btn"
-          data-position="top-center">
-
-          Top Center
-
-        </button>
-
-
-        <button
-          type="button"
-          class="position-btn"
-          data-position="top-right">
-
-          Top Right
-
-        </button>
-
-
-        <button
-          type="button"
-          class="position-btn"
-          data-position="center-left">
-
-          Center Left
-
-        </button>
-
-
-        <button
-          type="button"
-          class="position-btn active"
-          data-position="center">
-
-          Center
-
-        </button>
-
-
-        <button
-          type="button"
-          class="position-btn"
-          data-position="center-right">
-
-          Center Right
-
-        </button>
-
-
-        <button
-          type="button"
-          class="position-btn"
-          data-position="bottom-left">
-
-          Bottom Left
-
-        </button>
-
-
-        <button
-          type="button"
-          class="position-btn"
-          data-position="bottom-center">
-
-          Bottom Center
-
-        </button>
-
-
-        <button
-          type="button"
-          class="position-btn"
-          data-position="bottom-right">
-
-          Bottom Right
-
-        </button>
-
-
-      </div>
-
-    </div>
-
-
-  </div>
-
-
-  <!-- ACTION BUTTONS -->
-
-  <div class="action-row">
+<div class="container">
+
+```
+<div class="upload-box">
+
+    <h2>Select PDF File</h2>
+
+    <p>
+        Choose a PDF file to add your custom watermark.
+    </p>
+
+    <input
+        type="file"
+        id="fileInput"
+        accept="application/pdf,.pdf"
+        hidden
+    >
 
     <button
-      type="button"
-      class="action-btn preview-btn"
-      id="updatePreview">
-
-      Update Preview
-
+        type="button"
+        class="primary-btn"
+        id="selectBtn"
+    >
+        Select PDF
     </button>
 
+    <div class="file-name" id="fileName"></div>
 
-    <button
-      type="button"
-      class="action-btn download-btn"
-      id="downloadBtn">
+</div>
 
-      Download Watermarked PDF
+<div class="loading" id="loading">
+    Loading PDF preview...
+</div>
 
-    </button>
+<div class="work-area" id="workArea" style="display:none;">
 
-  </div>
+    <!-- LEFT SIDE : PDF PREVIEW -->
+    <div class="preview-panel">
 
+        <h2 class="panel-title">PDF Preview</h2>
 
-</section>
+        <p class="panel-subtitle">
+            Preview all PDF pages with your watermark.
+        </p>
+
+        <div class="preview-info" id="previewInfo"></div>
+
+        <div class="pages-grid" id="pagesGrid"></div>
+
+    </div>
+
+    <!-- RIGHT SIDE : EDITING TOOLBAR -->
+    <div class="editor">
+
+        <h2 class="settings-title">
+            Watermark Settings
+        </h2>
+
+        <div class="field">
+
+            <label for="watermarkText">
+                Watermark Text
+            </label>
+
+            <input
+                type="text"
+                id="watermarkText"
+                placeholder="Enter watermark text"
+                value="CONFIDENTIAL"
+            >
+
+        </div>
+
+        <div class="field">
+
+            <label for="fontSize">
+                Font Size
+            </label>
+
+            <input
+                type="number"
+                id="fontSize"
+                min="8"
+                max="150"
+                value="40"
+            >
+
+        </div>
+
+        <div class="field">
+
+            <label for="opacity">
+                Opacity
+            </label>
+
+            <div class="range-row">
+
+                <input
+                    type="range"
+                    id="opacity"
+                    min="10"
+                    max="100"
+                    value="35"
+                >
+
+                <div class="range-value" id="opacityValue">
+                    35%
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="field">
+
+            <label for="rotation">
+                Rotation
+            </label>
+
+            <select id="rotation">
+
+                <option value="0">0°</option>
+                <option value="15">15°</option>
+                <option value="30">30°</option>
+                <option value="45" selected>45°</option>
+                <option value="60">60°</option>
+                <option value="90">90°</option>
+                <option value="270">270°</option>
+                <option value="315">315°</option>
+                <option value="330">330°</option>
+                <option value="345">345°</option>
+
+            </select>
+
+        </div>
+
+        <div class="field">
+
+            <label>
+                Text Color
+            </label>
+
+            <div class="color-row">
+
+                <input
+                    type="color"
+                    id="textColor"
+                    value="#e53232"
+                >
+
+                <span
+                    class="color-code"
+                    id="colorCode"
+                >
+                    #e53232
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="field">
+
+            <label>
+                Position
+            </label>
+
+            <div class="position-grid">
+
+                <button class="position-btn" data-position="top-left">↖</button>
+                <button class="position-btn" data-position="top-center">↑</button>
+                <button class="position-btn" data-position="top-right">↗</button>
+
+                <button class="position-btn" data-position="center-left">←</button>
+                <button class="position-btn active" data-position="center">●</button>
+                <button class="position-btn" data-position="center-right">→</button>
+
+                <button class="position-btn" data-position="bottom-left">↙</button>
+                <button class="position-btn" data-position="bottom-center">↓</button>
+                <button class="position-btn" data-position="bottom-right">↘</button>
+
+            </div>
+
+        </div>
+
+        <div class="actions">
+
+            <button
+                type="button"
+                class="secondary-btn"
+                id="updateBtn"
+            >
+                Update Preview
+            </button>
+
+            <button
+                type="button"
+                class="primary-btn"
+                id="downloadBtn"
+            >
+                Download PDF
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="status" id="status"></div>
 ```
 
-  </div>
+</div>
 
-  <!-- ================= STATUS ================= -->
+<footer class="footer">
 
-  <div
-    class="status"
-    id="status">
-
-  </div>
-
-</main>
-
-<!-- ================= FOOTER ================= -->
-
-<footer>
-
+```
 © 2026 PDF Editor Tools. All rights reserved.
+```
 
 </footer>
 
 <script>
 
-/* ==========================================
-   PDF.JS WORKER
-========================================== */
-
 pdfjsLib.GlobalWorkerOptions.workerSrc =
-"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
+const fileInput = document.getElementById("fileInput");
+const selectBtn = document.getElementById("selectBtn");
+const fileName = document.getElementById("fileName");
+const loading = document.getElementById("loading");
 
-/* ==========================================
-   ELEMENTS
-========================================== */
+const workArea = document.getElementById("workArea");
+const pagesGrid = document.getElementById("pagesGrid");
+const previewInfo = document.getElementById("previewInfo");
 
-const selectPdfBtn =
-document.getElementById("selectPdfBtn");
+const watermarkText = document.getElementById("watermarkText");
+const fontSize = document.getElementById("fontSize");
+const opacity = document.getElementById("opacity");
+const opacityValue = document.getElementById("opacityValue");
+const rotation = document.getElementById("rotation");
+const textColor = document.getElementById("textColor");
+const colorCode = document.getElementById("colorCode");
 
-const fileInput =
-document.getElementById("fileInput");
+const updateBtn = document.getElementById("updateBtn");
+const downloadBtn = document.getElementById("downloadBtn");
+const status = document.getElementById("status");
 
-const fileName =
-document.getElementById("fileName");
-
-const loading =
-document.getElementById("loading");
-
-const workArea =
-document.getElementById("workArea");
-
-const editor =
-document.getElementById("editor");
-
-const pagesGrid =
-document.getElementById("pagesGrid");
-
-const previewTitle =
-document.getElementById("previewTitle");
-
-const previewInfo =
-document.getElementById("previewInfo");
-
-const status =
-document.getElementById("status");
-
-const watermarkText =
-document.getElementById("watermarkText");
-
-const fontSize =
-document.getElementById("fontSize");
-
-const rotation =
-document.getElementById("rotation");
-
-const opacity =
-document.getElementById("opacity");
-
-const opacityValue =
-document.getElementById("opacityValue");
-
-const textColor =
-document.getElementById("textColor");
-
-const colorValue =
-document.getElementById("colorValue");
-
-const updatePreview =
-document.getElementById("updatePreview");
-
-const downloadBtn =
-document.getElementById("downloadBtn");
-
-
-/* ==========================================
-   VARIABLES
-========================================== */
-
-let originalFile = null;
-
-let originalBytes = null;
-
+let selectedFile = null;
+let originalPdfBytes = null;
 let pdfDocument = null;
-
+let pageCanvases = [];
 let selectedPosition = "center";
 
-let pageCanvases = [];
-
-
-/* ==========================================
-   SELECT PDF
-========================================== */
-
-selectPdfBtn.addEventListener(
-  "click",
-  function(){
+selectBtn.addEventListener("click", function(){
 
     fileInput.value = "";
-
     fileInput.click();
-
-  }
-);
-
-
-/* ==========================================
-   FILE SELECT
-========================================== */
-
-fileInput.addEventListener(
-  "change",
-  async function(){
-
-    const file =
-      this.files && this.files[0];
-
-    if(!file){
-      return;
-    }
-
-
-    const isPDF =
-      file.type === "application/pdf" ||
-      file.name.toLowerCase().endsWith(".pdf");
-
-
-    if(!isPDF){
-
-      alert(
-        "Please select a PDF file."
-      );
-
-      fileInput.value = "";
-
-      return;
-
-    }
-
-
-    originalFile = file;
-
-    fileName.textContent =
-      file.name;
-
-
-    pagesGrid.innerHTML = "";
-
-    pageCanvases = [];
-
-
-    workArea.style.display = "none";
-
-    editor.style.display = "none";
-
-    previewTitle.style.display = "none";
-
-    previewInfo.style.display = "none";
-
-
-    status.textContent = "";
-
-    loading.style.display = "block";
-
-
-    try{
-
-      originalBytes =
-        await file.arrayBuffer();
-
-
-      pdfDocument =
-        await pdfjsLib.getDocument({
-          data: originalBytes.slice(0)
-        }).promise;
-
-
-      await renderPages();
-
-
-      workArea.style.display = "grid";
-
-      editor.style.display = "block";
-
-      previewTitle.style.display = "block";
-
-      previewInfo.style.display = "block";
-
-
-      previewInfo.textContent =
-        pdfDocument.numPages +
-        (pdfDocument.numPages > 1
-          ? " pages"
-          : " page");
-
-
-      status.textContent =
-        pdfDocument.numPages +
-        " page" +
-        (
-          pdfDocument.numPages > 1
-          ? "s"
-          : ""
-        ) +
-        " loaded successfully.";
-
-
-      updateAllPreviews();
-
-    }
-
-    catch(error){
-
-      console.error(
-        "PDF loading error:",
-        error
-      );
-
-
-      alert(
-        "Unable to open this PDF. Please try another PDF file."
-      );
-
-
-      pagesGrid.innerHTML = "";
-
-      pageCanvases = [];
-
-      workArea.style.display = "none";
-
-    }
-
-    finally{
-
-      loading.style.display = "none";
-
-    }
-
-  }
-);
-
-
-/* ==========================================
-   RENDER PDF PAGES
-========================================== */
-
-async function renderPages(){
-
-  for(
-    let pageNumber = 1;
-    pageNumber <= pdfDocument.numPages;
-    pageNumber++
-  ){
-
-    const page =
-      await pdfDocument.getPage(
-        pageNumber
-      );
-
-
-    const baseViewport =
-      page.getViewport({
-        scale:1
-      });
-
-
-    /*
-      Larger preview width
-    */
-
-    const targetWidth = 650;
-
-
-    const scale =
-      Math.min(
-        targetWidth / baseViewport.width,
-        1.8
-      );
-
-
-    const viewport =
-      page.getViewport({
-        scale:scale
-      });
-
-
-    const card =
-      document.createElement("div");
-
-    card.className =
-      "page-card";
-
-
-    const header =
-      document.createElement("div");
-
-    header.className =
-      "page-header";
-
-
-    const pageNumberElement =
-      document.createElement("div");
-
-    pageNumberElement.className =
-      "page-number";
-
-    pageNumberElement.textContent =
-      "Page " +
-      pageNumber;
-
-
-    const label =
-      document.createElement("div");
-
-    label.className =
-      "page-label";
-
-    label.textContent =
-      "Preview";
-
-
-    header.appendChild(
-      pageNumberElement
-    );
-
-    header.appendChild(
-      label
-    );
-
-
-    const canvasWrap =
-      document.createElement("div");
-
-    canvasWrap.className =
-      "canvas-wrap";
-
-
-    const canvas =
-      document.createElement("canvas");
-
-    canvas.className =
-      "preview-canvas";
-
-
-    canvas.width =
-      Math.ceil(
-        viewport.width
-      );
-
-    canvas.height =
-      Math.ceil(
-        viewport.height
-      );
-
-
-    const ctx =
-      canvas.getContext("2d");
-
-
-    await page.render({
-
-      canvasContext:ctx,
-
-      viewport:viewport
-
-    }).promise;
-
-
-    canvasWrap.appendChild(
-      canvas
-    );
-
-
-    card.appendChild(
-      header
-    );
-
-    card.appendChild(
-      canvasWrap
-    );
-
-
-    pagesGrid.appendChild(
-      card
-    );
-
-
-    pageCanvases.push({
-
-      pageNumber:pageNumber,
-
-      canvas:canvas,
-
-      originalImage:
-        canvas.toDataURL("image/png"),
-
-      pageWidth:
-        baseViewport.width,
-
-      pageHeight:
-        baseViewport.height
-
-    });
-
-  }
-
-}
-
-
-/* ==========================================
-   POSITION BUTTONS
-========================================== */
-
-document
-.querySelectorAll(".position-btn")
-.forEach(function(button){
-
-  button.addEventListener(
-    "click",
-    function(){
-
-      document
-      .querySelectorAll(".position-btn")
-      .forEach(function(btn){
-
-        btn.classList.remove(
-          "active"
-        );
-
-      });
-
-
-      button.classList.add(
-        "active"
-      );
-
-
-      selectedPosition =
-        button.dataset.position;
-
-
-      updateAllPreviews();
-
-    }
-  );
 
 });
 
+fileInput.addEventListener("change", async function(){
 
-/* ==========================================
-   OPACITY
-========================================== */
+    const file = this.files[0];
 
-opacity.addEventListener(
-  "input",
-  function(){
-
-    opacityValue.textContent =
-      opacity.value + "%";
-
-
-    updateAllPreviews();
-
-  }
-);
-
-
-/* ==========================================
-   COLOR
-========================================== */
-
-textColor.addEventListener(
-  "input",
-  function(){
-
-    colorValue.textContent =
-      textColor.value.toUpperCase();
-
-
-    updateAllPreviews();
-
-  }
-);
-
-
-/* ==========================================
-   TEXT
-========================================== */
-
-watermarkText.addEventListener(
-  "input",
-  updateAllPreviews
-);
-
-
-/* ==========================================
-   FONT SIZE
-========================================== */
-
-fontSize.addEventListener(
-  "input",
-  updateAllPreviews
-);
-
-
-/* ==========================================
-   ROTATION
-========================================== */
-
-rotation.addEventListener(
-  "change",
-  updateAllPreviews
-);
-
-
-/* ==========================================
-   UPDATE BUTTON
-========================================== */
-
-updatePreview.addEventListener(
-  "click",
-  updateAllPreviews
-);
-
-
-/* ==========================================
-   UPDATE ALL PREVIEWS
-========================================== */
-
-function updateAllPreviews(){
-
-  if(pageCanvases.length === 0){
-    return;
-  }
-
-
-  pageCanvases.forEach(
-    function(data){
-
-      drawWatermarkPreview(
-        data
-      );
-
-    }
-  );
-
-}
-
-
-/* ==========================================
-   DRAW WATERMARK PREVIEW
-========================================== */
-
-function drawWatermarkPreview(data){
-
-  const image =
-    new Image();
-
-
-  image.onload =
-  function(){
-
-    const canvas =
-      data.canvas;
-
-
-    const ctx =
-      canvas.getContext("2d");
-
-
-    ctx.clearRect(
-      0,
-      0,
-      canvas.width,
-      canvas.height
-    );
-
-
-    ctx.drawImage(
-      image,
-      0,
-      0,
-      canvas.width,
-      canvas.height
-    );
-
-
-    const text =
-      watermarkText.value.trim();
-
-
-    if(!text){
-      return;
+    if(!file){
+        return;
     }
 
-
-    const previewScale =
-      canvas.width /
-      data.pageWidth;
-
-
-    const size =
-      Math.max(
-        8,
-        Number(fontSize.value) *
-        previewScale
-      );
-
-
-    const angle =
-      Number(rotation.value) *
-      Math.PI /
-      180;
-
-
-    const alpha =
-      Number(opacity.value) /
-      100;
-
-
-    const rgb =
-      hexToRgb(
-        textColor.value
-      );
-
-
-    ctx.save();
-
-
-    ctx.globalAlpha =
-      alpha;
-
-
-    ctx.fillStyle =
-      "rgb(" +
-      rgb.r + "," +
-      rgb.g + "," +
-      rgb.b +
-      ")";
-
-
-    ctx.font =
-      "bold " +
-      size +
-      "px Arial";
-
-
-    ctx.textAlign =
-      "center";
-
-
-    ctx.textBaseline =
-      "middle";
-
-
-    const position =
-      getPreviewPosition(
-        canvas,
-        selectedPosition
-      );
-
-
-    ctx.translate(
-      position.x,
-      position.y
-    );
-
-
-    ctx.rotate(
-      angle
-    );
-
-
-    ctx.fillText(
-      text,
-      0,
-      0
-    );
-
-
-    ctx.restore();
-
-  };
-
-
-  image.src =
-    data.originalImage;
-
-}
-
-
-/* ==========================================
-   PREVIEW POSITION
-========================================== */
-
-function getPreviewPosition(
-  canvas,
-  position
-){
-
-  const margin =
-    Math.min(
-      canvas.width,
-      canvas.height
-    ) * 0.12;
-
-
-  let x =
-    canvas.width / 2;
-
-
-  let y =
-    canvas.height / 2;
-
-
-  if(position === "top-left"){
-
-    x = margin;
-
-    y = margin;
-
-  }
-
-
-  if(position === "top-center"){
-
-    x =
-      canvas.width / 2;
-
-    y = margin;
-
-  }
-
-
-  if(position === "top-right"){
-
-    x =
-      canvas.width - margin;
-
-    y = margin;
-
-  }
-
-
-  if(position === "center-left"){
-
-    x = margin;
-
-    y =
-      canvas.height / 2;
-
-  }
-
-
-  if(position === "center"){
-
-    x =
-      canvas.width / 2;
-
-    y =
-      canvas.height / 2;
-
-  }
-
-
-  if(position === "center-right"){
-
-    x =
-      canvas.width - margin;
-
-    y =
-      canvas.height / 2;
-
-  }
-
-
-  if(position === "bottom-left"){
-
-    x = margin;
-
-    y =
-      canvas.height - margin;
-
-  }
-
-
-  if(position === "bottom-center"){
-
-    x =
-      canvas.width / 2;
-
-    y =
-      canvas.height - margin;
-
-  }
-
-
-  if(position === "bottom-right"){
-
-    x =
-      canvas.width - margin;
-
-    y =
-      canvas.height - margin;
-
-  }
-
-
-  return {
-    x:x,
-    y:y
-  };
-
-}
-
-
-/* ==========================================
-   HEX TO RGB
-========================================== */
-
-function hexToRgb(hex){
-
-  hex =
-    hex.replace(
-      "#",
-      ""
-    );
-
-
-  return {
-
-    r:parseInt(
-      hex.substring(0,2),
-      16
-    ),
-
-    g:parseInt(
-      hex.substring(2,4),
-      16
-    ),
-
-    b:parseInt(
-      hex.substring(4,6),
-      16
-    )
-
-  };
-
-}
-
-
-/* ==========================================
-   DOWNLOAD WATERMARKED PDF
-========================================== */
-
-downloadBtn.addEventListener(
-  "click",
-  async function(){
-
-    if(!originalBytes){
-
-      alert(
-        "Please select a PDF first."
-      );
-
-      return;
-
+    if(
+        file.type !== "application/pdf" &&
+        !file.name.toLowerCase().endsWith(".pdf")
+    ){
+        alert("Please select a PDF file.");
+        return;
     }
 
+    selectedFile = file;
 
-    const text =
-      watermarkText.value.trim();
+    fileName.textContent =
+        "Selected: " + file.name;
 
-
-    if(!text){
-
-      alert(
-        "Please enter watermark text."
-      );
-
-      watermarkText.focus();
-
-      return;
-
-    }
-
-
-    const oldText =
-      downloadBtn.textContent;
-
-
-    downloadBtn.disabled =
-      true;
-
-
-    downloadBtn.textContent =
-      "Creating PDF...";
-
-
-    status.textContent =
-      "Adding watermark to PDF. Please wait...";
-
+    loading.style.display = "block";
+    workArea.style.display = "none";
+    status.style.display = "none";
+    pagesGrid.innerHTML = "";
+    pageCanvases = [];
 
     try{
 
-      const pdfDoc =
-        await PDFLib.PDFDocument.load(
-          originalBytes.slice(0)
+        originalPdfBytes =
+            new Uint8Array(await file.arrayBuffer());
+
+        pdfDocument =
+            await pdfjsLib.getDocument({
+                data: originalPdfBytes
+            }).promise;
+
+        previewInfo.textContent =
+            pdfDocument.numPages +
+            " page" +
+            (pdfDocument.numPages > 1 ? "s" : "") +
+            " • " +
+            file.name;
+
+        previewInfo.style.display = "block";
+
+        await renderPages();
+
+        workArea.style.display = "grid";
+
+        updateAllPreviews();
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            "Unable to open this PDF. Please try another PDF file."
         );
 
+    }finally{
 
-      const pages =
-        pdfDoc.getPages();
+        loading.style.display = "none";
 
+    }
 
-      const font =
-        await pdfDoc.embedFont(
-          PDFLib.StandardFonts.HelveticaBold
-        );
+});
 
+async function renderPages(){
 
-      const fontSizeValue =
-        Math.max(
-          8,
-          Number(fontSize.value)
-        );
+    pagesGrid.innerHTML = "";
+    pageCanvases = [];
 
+    for(let pageNumber = 1; pageNumber <= pdfDocument.numPages; pageNumber++){
 
-      const opacityNumber =
-        Number(opacity.value) /
-        100;
+        const page =
+            await pdfDocument.getPage(pageNumber);
 
+        const originalViewport =
+            page.getViewport({scale:1});
 
-      const angleDegrees =
-        Number(rotation.value);
+        const targetWidth = 650;
 
-
-      const rgb =
-        hexToRgb(
-          textColor.value
-        );
-
-
-      const color =
-        PDFLib.rgb(
-          rgb.r / 255,
-          rgb.g / 255,
-          rgb.b / 255
-        );
-
-
-      pages.forEach(
-        function(page){
-
-          const pageWidth =
-            page.getWidth();
-
-
-          const pageHeight =
-            page.getHeight();
-
-
-          const textWidth =
-            font.widthOfTextAtSize(
-              text,
-              fontSizeValue
+        const scale =
+            Math.min(
+                targetWidth / originalViewport.width,
+                1.8
             );
 
+        const viewport =
+            page.getViewport({
+                scale: scale
+            });
 
-          let x =
-            pageWidth / 2;
+        const card =
+            document.createElement("div");
 
+        card.className = "page-card";
 
-          let y =
-            pageHeight / 2;
+        const label =
+            document.createElement("div");
 
+        label.className = "page-label";
 
-          const margin =
-            Math.min(
-              pageWidth,
-              pageHeight
-            ) * 0.12;
+        label.textContent =
+            "Page " + pageNumber;
 
+        const canvasWrap =
+            document.createElement("div");
 
-          if(
-            selectedPosition ===
-            "top-left"
-          ){
+        canvasWrap.className = "canvas-wrap";
 
-            x =
-              margin +
-              textWidth / 2;
+        const canvas =
+            document.createElement("canvas");
 
-            y =
-              pageHeight -
-              margin;
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
 
-          }
+        canvasWrap.appendChild(canvas);
 
+        card.appendChild(label);
+        card.appendChild(canvasWrap);
 
-          if(
-            selectedPosition ===
-            "top-center"
-          ){
+        pagesGrid.appendChild(card);
 
-            x =
-              pageWidth / 2;
+        const context =
+            canvas.getContext("2d");
 
-            y =
-              pageHeight -
-              margin;
+        await page.render({
+            canvasContext: context,
+            viewport: viewport
+        }).promise;
 
-          }
+        pageCanvases.push(canvas);
 
+    }
 
-          if(
-            selectedPosition ===
-            "top-right"
-          ){
+}
 
-            x =
-              pageWidth -
-              margin -
-              textWidth / 2;
+function hexToRgb(hex){
 
-            y =
-              pageHeight -
-              margin;
+    hex = hex.replace("#","");
 
-          }
+    if(hex.length === 3){
 
+        hex =
+            hex[0] + hex[0] +
+            hex[1] + hex[1] +
+            hex[2] + hex[2];
 
-          if(
-            selectedPosition ===
-            "center-left"
-          ){
+    }
 
-            x =
-              margin +
-              textWidth / 2;
+    return {
+        r: parseInt(hex.substring(0,2),16),
+        g: parseInt(hex.substring(2,4),16),
+        b: parseInt(hex.substring(4,6),16)
+    };
 
-            y =
-              pageHeight / 2;
+}
 
-          }
+function getSettings(){
 
+    return {
 
-          if(
-            selectedPosition ===
-            "center"
-          ){
+        text:
+            watermarkText.value || "CONFIDENTIAL",
 
-            x =
-              pageWidth / 2;
-
-            y =
-              pageHeight / 2;
-
-          }
-
-
-          if(
-            selectedPosition ===
-            "center-right"
-          ){
-
-            x =
-              pageWidth -
-              margin -
-              textWidth / 2;
-
-            y =
-              pageHeight / 2;
-
-          }
-
-
-          if(
-            selectedPosition ===
-            "bottom-left"
-          ){
-
-            x =
-              margin +
-              textWidth / 2;
-
-            y =
-              margin;
-
-          }
-
-
-          if(
-            selectedPosition ===
-            "bottom-center"
-          ){
-
-            x =
-              pageWidth / 2;
-
-            y =
-              margin;
-
-          }
-
-
-          if(
-            selectedPosition ===
-            "bottom-right"
-          ){
-
-            x =
-              pageWidth -
-              margin -
-              textWidth / 2;
-
-            y =
-              margin;
-
-          }
-
-
-          page.drawText(
-            text,
-            {
-
-              x:x,
-
-              y:y,
-
-              size:
-                fontSizeValue,
-
-              font:font,
-
-              color:color,
-
-              opacity:
-                opacityNumber,
-
-              rotate:
-                PDFLib.degrees(
-                  angleDegrees
+        fontSize:
+            Math.max(
+                8,
+                Math.min(
+                    150,
+                    Number(fontSize.value) || 40
                 )
+            ),
+
+        opacity:
+            Number(opacity.value) / 100,
+
+        rotation:
+            Number(rotation.value) || 0,
+
+        color:
+            hexToRgb(textColor.value),
+
+        position:
+            selectedPosition
+
+    };
+
+}
+
+function getPreviewPosition(
+    canvas,
+    ctx,
+    textWidth,
+    textHeight,
+    position
+){
+
+    const margin =
+        Math.max(
+            20,
+            Math.min(canvas.width,canvas.height) * 0.05
+        );
+
+    let x = canvas.width / 2;
+    let y = canvas.height / 2;
+
+    if(position === "top-left"){
+        x = margin;
+        y = margin + textHeight;
+    }
+
+    else if(position === "top-center"){
+        x = canvas.width / 2;
+        y = margin + textHeight;
+    }
+
+    else if(position === "top-right"){
+        x = canvas.width - margin;
+        y = margin + textHeight;
+    }
+
+    else if(position === "center-left"){
+        x = margin;
+        y = canvas.height / 2;
+    }
+
+    else if(position === "center"){
+        x = canvas.width / 2;
+        y = canvas.height / 2;
+    }
+
+    else if(position === "center-right"){
+        x = canvas.width - margin;
+        y = canvas.height / 2;
+    }
+
+    else if(position === "bottom-left"){
+        x = margin;
+        y = canvas.height - margin;
+    }
+
+    else if(position === "bottom-center"){
+        x = canvas.width / 2;
+        y = canvas.height - margin;
+    }
+
+    else if(position === "bottom-right"){
+        x = canvas.width - margin;
+        y = canvas.height - margin;
+    }
+
+    return {
+        x:x,
+        y:y
+    };
+
+}
+
+function drawWatermarkPreview(canvas){
+
+    const ctx =
+        canvas.getContext("2d");
+
+    const settings =
+        getSettings();
+
+    const text =
+        settings.text;
+
+    ctx.save();
+
+    ctx.font =
+        "bold " +
+        settings.fontSize +
+        "px Arial";
+
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    const metrics =
+        ctx.measureText(text);
+
+    const textWidth =
+        metrics.width;
+
+    const textHeight =
+        settings.fontSize;
+
+    const pos =
+        getPreviewPosition(
+            canvas,
+            ctx,
+            textWidth,
+            textHeight,
+            settings.position
+        );
+
+    ctx.translate(
+        pos.x,
+        pos.y
+    );
+
+    ctx.rotate(
+        settings.rotation *
+        Math.PI /
+        180
+    );
+
+    ctx.globalAlpha =
+        settings.opacity;
+
+    ctx.fillStyle =
+        textColor.value;
+
+    ctx.fillText(
+        text,
+        0,
+        0
+    );
+
+    ctx.restore();
+
+}
+
+function updateAllPreviews(){
+
+    pageCanvases.forEach(function(canvas){
+
+        drawWatermarkPreview(canvas);
+
+    });
+
+}
+
+watermarkText.addEventListener(
+    "input",
+    updateAllPreviews
+);
+
+fontSize.addEventListener(
+    "input",
+    updateAllPreviews
+);
+
+opacity.addEventListener(
+    "input",
+    function(){
+
+        opacityValue.textContent =
+            opacity.value + "%";
+
+        updateAllPreviews();
+
+    }
+);
+
+rotation.addEventListener(
+    "change",
+    updateAllPreviews
+);
+
+textColor.addEventListener(
+    "input",
+    function(){
+
+        colorCode.textContent =
+            textColor.value;
+
+        updateAllPreviews();
+
+    }
+);
+
+document.querySelectorAll(".position-btn").forEach(
+    function(button){
+
+        button.addEventListener(
+            "click",
+            function(){
+
+                document
+                    .querySelectorAll(".position-btn")
+                    .forEach(function(btn){
+                        btn.classList.remove("active");
+                    });
+
+                this.classList.add("active");
+
+                selectedPosition =
+                    this.dataset.position;
+
+                updateAllPreviews();
 
             }
-          );
+        );
+
+    }
+);
+
+updateBtn.addEventListener(
+    "click",
+    function(){
+
+        updateAllPreviews();
+
+        status.style.display = "block";
+
+        status.textContent =
+            "Preview updated successfully.";
+
+        setTimeout(function(){
+
+            status.style.display = "none";
+
+        },2000);
+
+    }
+);
+
+function getPdfPosition(
+    page,
+    textWidth,
+    textHeight,
+    position
+){
+
+    const pageWidth =
+        page.getWidth();
+
+    const pageHeight =
+        page.getHeight();
+
+    const margin =
+        Math.max(
+            30,
+            Math.min(
+                pageWidth,
+                pageHeight
+            ) * 0.05
+        );
+
+    let x =
+        (pageWidth - textWidth) / 2;
+
+    let y =
+        (pageHeight - textHeight) / 2;
+
+    if(position === "top-left"){
+
+        x = margin;
+        y = pageHeight - margin - textHeight;
+
+    }
+
+    else if(position === "top-center"){
+
+        x =
+            (pageWidth - textWidth) / 2;
+
+        y =
+            pageHeight - margin - textHeight;
+
+    }
+
+    else if(position === "top-right"){
+
+        x =
+            pageWidth - margin - textWidth;
+
+        y =
+            pageHeight - margin - textHeight;
+
+    }
+
+    else if(position === "center-left"){
+
+        x = margin;
+        y =
+            (pageHeight - textHeight) / 2;
+
+    }
+
+    else if(position === "center"){
+
+        x =
+            (pageWidth - textWidth) / 2;
+
+        y =
+            (pageHeight - textHeight) / 2;
+
+    }
+
+    else if(position === "center-right"){
+
+        x =
+            pageWidth - margin - textWidth;
+
+        y =
+            (pageHeight - textHeight) / 2;
+
+    }
+
+    else if(position === "bottom-left"){
+
+        x = margin;
+        y = margin;
+
+    }
+
+    else if(position === "bottom-center"){
+
+        x =
+            (pageWidth - textWidth) / 2;
+
+        y = margin;
+
+    }
+
+    else if(position === "bottom-right"){
+
+        x =
+            pageWidth - margin - textWidth;
+
+        y = margin;
+
+    }
+
+    return {
+        x:x,
+        y:y
+    };
+
+}
+
+downloadBtn.addEventListener(
+    "click",
+    async function(){
+
+        if(!selectedFile || !originalPdfBytes){
+
+            alert("Please select a PDF first.");
+
+            return;
 
         }
-      );
 
+        try{
 
-      const outputBytes =
-        await pdfDoc.save();
+            downloadBtn.disabled = true;
 
+            downloadBtn.textContent =
+                "Creating PDF...";
 
-      const blob =
-        new Blob(
-          [outputBytes],
-          {
-            type:
-              "application/pdf"
-          }
-        );
+            const {
+                PDFDocument,
+                StandardFonts,
+                rgb,
+                degrees
+            } = PDFLib;
 
+            const pdfDoc =
+                await PDFDocument.load(
+                    originalPdfBytes
+                );
 
-      const url =
-        URL.createObjectURL(
-          blob
-        );
+            const font =
+                await pdfDoc.embedFont(
+                    StandardFonts.HelveticaBold
+                );
 
+            const settings =
+                getSettings();
 
-      const link =
-        document.createElement(
-          "a"
-        );
+            const color =
+                rgb(
+                    settings.color.r / 255,
+                    settings.color.g / 255,
+                    settings.color.b / 255
+                );
 
+            for(
+                const page of pdfDoc.getPages()
+            ){
 
-      link.href =
-        url;
+                const pageWidth =
+                    page.getWidth();
 
+                const pageHeight =
+                    page.getHeight();
 
-      const originalName =
-        originalFile
-        ? originalFile.name.replace(
-            /\.pdf$/i,
-            ""
-          )
-        : "document";
+                const size =
+                    settings.fontSize;
 
+                const textWidth =
+                    font.widthOfTextAtSize(
+                        settings.text,
+                        size
+                    );
 
-      link.download =
-        originalName +
-        "-watermarked.pdf";
+                const textHeight =
+                    font.heightAtSize(
+                        size
+                    );
 
+                const pos =
+                    getPdfPosition(
+                        page,
+                        textWidth,
+                        textHeight,
+                        settings.position
+                    );
 
-      document.body.appendChild(
-        link
-      );
+                page.drawText(
+                    settings.text,
+                    {
+                        x:pos.x,
+                        y:pos.y,
 
+                        size:size,
 
-      link.click();
+                        font:font,
 
+                        color:color,
 
-      link.remove();
+                        opacity:settings.opacity,
 
+                        rotate:degrees(
+                            settings.rotation
+                        )
+                    }
+                );
 
-      setTimeout(
-        function(){
+            }
 
-          URL.revokeObjectURL(
-            url
-          );
+            const pdfBytes =
+                await pdfDoc.save();
 
-        },
-        1000
-      );
+            const blob =
+                new Blob(
+                    [pdfBytes],
+                    {
+                        type:"application/pdf"
+                    }
+                );
 
+            const url =
+                URL.createObjectURL(blob);
 
-      status.textContent =
-        "Watermarked PDF downloaded successfully.";
+            const link =
+                document.createElement("a");
+
+            link.href = url;
+
+            const originalName =
+                selectedFile.name.replace(
+                    /\.pdf$/i,
+                    ""
+                );
+
+            link.download =
+                originalName +
+                "-watermarked.pdf";
+
+            document.body.appendChild(link);
+
+            link.click();
+
+            link.remove();
+
+            URL.revokeObjectURL(url);
+
+            status.style.display = "block";
+
+            status.textContent =
+                "Watermarked PDF downloaded successfully.";
+
+        }catch(error){
+
+            console.error(error);
+
+            alert(
+                "Failed to create the watermarked PDF. Please try again."
+            );
+
+        }finally{
+
+            downloadBtn.disabled = false;
+
+            downloadBtn.textContent =
+                "Download PDF";
+
+        }
 
     }
-
-    catch(error){
-
-      console.error(
-        "PDF creation error:",
-        error
-      );
-
-
-      alert(
-        "Download failed. Please try again."
-      );
-
-
-      status.textContent =
-        "Unable to create the watermarked PDF.";
-
-    }
-
-    finally{
-
-      downloadBtn.disabled =
-        false;
-
-
-      downloadBtn.textContent =
-        oldText;
-
-    }
-
-  }
 );
 
 </script>
