@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,7 +10,6 @@
 content="Add a text watermark to PDF online for free. Customize text, size, opacity, color, rotation and position.">
 
 <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 <style>
@@ -21,21 +18,12 @@ content="Add a text watermark to PDF online for free. Customize text, size, opac
   box-sizing:border-box;
 }
 
-html,
 body{
   margin:0;
-  padding:0;
-}
-
-body{
   font-family:Arial,Helvetica,sans-serif;
   background:#f6f7f9;
   color:#222;
 }
-
-/* ================================
-   NAVBAR
-================================ */
 
 .navbar{
   height:68px;
@@ -57,23 +45,6 @@ body{
   font-weight:700;
 }
 
-.nav-links{
-  display:flex;
-  align-items:center;
-  gap:25px;
-}
-
-.nav-links a{
-  color:#333;
-  text-decoration:none;
-  font-size:15px;
-  font-weight:600;
-}
-
-.nav-links a:hover{
-  color:#e53232;
-}
-
 .home-link{
   color:#333;
   text-decoration:none;
@@ -84,10 +55,6 @@ body{
 .home-link:hover{
   color:#e53232;
 }
-
-/* ================================
-   HERO
-================================ */
 
 .hero{
   text-align:center;
@@ -106,19 +73,11 @@ body{
   line-height:1.6;
 }
 
-/* ================================
-   CONTAINER
-================================ */
-
 .container{
   width:94%;
   max-width:1200px;
   margin:auto;
 }
-
-/* ================================
-   UPLOAD
-================================ */
 
 .upload-box{
   background:#fff;
@@ -156,70 +115,12 @@ body{
   word-break:break-word;
 }
 
-/* ================================
-   WORK AREA
-   PREVIEW + TOOLBAR
-================================ */
-
-.work-area{
-  display:grid;
-  grid-template-columns:minmax(0,1.45fr) minmax(330px,.55fr);
-  gap:22px;
-  align-items:start;
-  margin:25px 0;
-  height:calc(100vh - 250px);
-  min-height:600px;
-}
-
-/* ================================
-   LEFT PREVIEW
-   ONLY THIS AREA SCROLLS
-================================ */
-
-.preview-panel{
-  background:#fff;
-  border:1px solid #e5e5e5;
-  border-radius:16px;
-  padding:20px;
-  min-width:0;
-  height:100%;
-  overflow-y:auto;
-  box-shadow:0 3px 15px rgba(0,0,0,.06);
-}
-
-.panel-title{
-  font-size:22px;
-  margin:0 0 6px;
-}
-
-.panel-subtitle{
-  margin:0 0 15px;
-  color:#777;
-  font-size:14px;
-}
-
-.preview-info{
-  font-size:13px;
-  color:#666;
-  margin-bottom:15px;
-}
-
-/* ================================
-   RIGHT TOOLBAR
-   ONLY THIS AREA SCROLLS
-================================ */
-
 .editor{
-  display:block;
+  display:none;
   background:#fff;
-  border:1px solid #e5e5e5;
-  border-radius:16px;
+  border-radius:14px;
   padding:20px;
-  height:100%;
-  overflow-y:auto;
-  position:relative;
-  top:auto;
-  margin:0;
+  margin:25px 0;
   box-shadow:0 3px 15px rgba(0,0,0,.06);
 }
 
@@ -262,15 +163,10 @@ body{
   background:#fff;
 }
 
-.field input[type="text"]:focus,
-.field input[type="number"]:focus,
+.field input:focus,
 .field select:focus{
   border-color:#e53232;
 }
-
-/* ================================
-   RANGE
-================================ */
 
 .range-row{
   display:flex;
@@ -280,7 +176,6 @@ body{
 
 .range-row input{
   flex:1;
-  cursor:pointer;
 }
 
 .range-value{
@@ -289,10 +184,6 @@ body{
   font-weight:600;
   text-align:right;
 }
-
-/* ================================
-   COLOR
-================================ */
 
 .color-row{
   display:flex;
@@ -310,15 +201,6 @@ body{
   cursor:pointer;
 }
 
-.color-row span{
-  font-size:14px;
-  font-weight:600;
-}
-
-/* ================================
-   POSITION
-================================ */
-
 .position-buttons{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -328,12 +210,11 @@ body{
 .position-btn{
   border:1px solid #ddd;
   background:#f4f4f4;
-  padding:10px 5px;
+  padding:9px 5px;
   border-radius:6px;
   cursor:pointer;
   font-size:12px;
   font-weight:600;
-  transition:.15s;
 }
 
 .position-btn:hover{
@@ -345,10 +226,6 @@ body{
   color:#fff;
   border-color:#e53232;
 }
-
-/* ================================
-   ACTIONS
-================================ */
 
 .action-row{
   display:flex;
@@ -371,10 +248,6 @@ body{
   color:#fff;
 }
 
-.preview-btn:hover{
-  background:#222;
-}
-
 .download-btn{
   background:#e53232;
   color:#fff;
@@ -389,27 +262,24 @@ body{
   cursor:not-allowed;
 }
 
-/* ================================
-   STATUS
-================================ */
-
 .status{
   text-align:center;
   color:#666;
   font-size:14px;
   margin:12px 0;
-  min-height:20px;
 }
 
-/* ================================
-   PAGES
-================================ */
+.preview-title{
+  display:none;
+  font-size:22px;
+  margin:28px 0 15px;
+}
 
 .pages-grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
   gap:22px;
-  margin-bottom:25px;
+  margin-bottom:40px;
 }
 
 .page-card{
@@ -454,10 +324,6 @@ body{
   box-shadow:0 2px 7px rgba(0,0,0,.18);
 }
 
-/* ================================
-   LOADING
-================================ */
-
 .loading{
   display:none;
   text-align:center;
@@ -465,84 +331,23 @@ body{
   color:#555;
 }
 
-/* ================================
-   SCROLLBAR
-================================ */
-
-.preview-panel::-webkit-scrollbar,
-.editor::-webkit-scrollbar{
-  width:8px;
-}
-
-.preview-panel::-webkit-scrollbar-track,
-.editor::-webkit-scrollbar-track{
-  background:#f1f1f1;
-  border-radius:10px;
-}
-
-.preview-panel::-webkit-scrollbar-thumb,
-.editor::-webkit-scrollbar-thumb{
-  background:#c8c8c8;
-  border-radius:10px;
-}
-
-.preview-panel::-webkit-scrollbar-thumb:hover,
-.editor::-webkit-scrollbar-thumb:hover{
-  background:#999;
-}
-
-/* ================================
-   FOOTER
-================================ */
-
 footer{
   background:#222;
   color:#aaa;
   text-align:center;
   padding:25px 15px;
-  margin-top:30px;
+  margin-top:45px;
   font-size:13px;
-}
-
-/* ================================
-   MOBILE
-================================ */
-
-@media(max-width:900px){
-
-  .navbar{
-    padding:0 18px;
-  }
-
-  .nav-links{
-    display:none;
-  }
-
-  .work-area{
-    display:grid;
-    grid-template-columns:1fr;
-    height:auto;
-    min-height:0;
-  }
-
-  .preview-panel{
-    height:auto;
-    max-height:none;
-    overflow:visible;
-  }
-
-  .editor{
-    height:auto;
-    max-height:none;
-    overflow:visible;
-  }
-
 }
 
 @media(max-width:700px){
 
   .hero h1{
     font-size:29px;
+  }
+
+  .navbar{
+    padding:0 18px;
   }
 
   .logo{
@@ -570,24 +375,15 @@ footer{
   }
 
   .position-buttons{
-    grid-template-columns:repeat(3,1fr);
-  }
-
-  .upload-box{
-    padding:30px 15px;
+    grid-template-columns:repeat(2,1fr);
   }
 
 }
 
 </style>
-
 </head>
 
 <body>
-
-<!-- ================================
-     NAVBAR
-================================ -->
 
 <nav class="navbar">
 
@@ -595,29 +391,12 @@ footer{
     PDF Editor Tools
   </a>
 
-  <div class="nav-links">
-
-```
-<a href="index.html">
-  Home
-</a>
-
-<a href="index.html#pdf-tools">
-  PDF Tools
-</a>
-
-<a href="index.html#about">
-  About
-</a>
-```
-
-  </div>
+  <a href="index.html" class="home-link">
+    Home
+  </a>
 
 </nav>
 
-<!-- ================================
-     HERO
-================================ -->
 
 <section class="hero">
 
@@ -632,400 +411,361 @@ footer{
 
 </section>
 
+
 <main class="container">
 
-<!-- ================================
-     UPLOAD
-================================ -->
 
-<div class="upload-box">
+  <!-- UPLOAD -->
 
-<button
- type="button"
- id="selectPdfBtn"
- class="upload-btn">
+  <div class="upload-box">
 
-```
-Select PDF
-```
+    <button
+      type="button"
+      id="selectPdfBtn"
+      class="upload-btn">
 
-  </button>
+      Select PDF
 
-<input
- type="file"
- id="fileInput"
- accept=".pdf,application/pdf"
- style="display:none;">
+    </button>
+
+    <input
+      type="file"
+      id="fileInput"
+      accept=".pdf,application/pdf"
+      style="display:none;">
+
+    <div
+      class="file-name"
+      id="fileName">
+
+      No PDF selected
+
+    </div>
+
+  </div>
+
 
   <div
-    class="file-name"
-    id="fileName">
+    class="loading"
+    id="loading">
 
-```
-No PDF selected
-```
+    Loading PDF...
 
   </div>
 
-</div>
 
-<div
-  class="loading"
-  id="loading">
-
-Loading PDF...
-
-</div>
-
-<!-- ================================
-     WORK AREA
-================================ -->
-
-<div
-  class="work-area"
-  id="workArea"
-  style="display:none;">
-
-  <!-- ==============================
-       LEFT : PREVIEW
-  =============================== -->
-
-  <div class="preview-panel">
-
-```
-<h2 class="panel-title">
-  PDF Preview
-</h2>
-
-<p class="panel-subtitle">
-  Preview your PDF with watermark.
-</p>
-
-<div
-  class="preview-info"
-  id="previewInfo">
-</div>
-
-<div
-  class="pages-grid"
-  id="pagesGrid">
-</div>
-```
-
-  </div>
-
-  <!-- ==============================
-       RIGHT : SETTINGS
-  =============================== -->
+  <!-- SETTINGS -->
 
   <div
     class="editor"
     id="editor">
 
-```
-<h2 class="settings-title">
-  Watermark Settings
-</h2>
+    <h2 class="settings-title">
+      Watermark Settings
+    </h2>
 
 
-<div class="settings-grid">
+    <div class="settings-grid">
 
 
-  <!-- WATERMARK TEXT -->
+      <div class="field full">
 
-  <div class="field full">
+        <label for="watermarkText">
+          Watermark Text
+        </label>
 
-    <label for="watermarkText">
-      Watermark Text
-    </label>
+        <input
+          type="text"
+          id="watermarkText"
+          value="CONFIDENTIAL"
+          placeholder="Enter watermark text">
 
-    <input
-      type="text"
-      id="watermarkText"
-      value="CONFIDENTIAL"
-      placeholder="Enter watermark text">
+      </div>
 
-  </div>
 
+      <div class="field">
 
-  <!-- FONT SIZE -->
+        <label for="fontSize">
+          Font Size
+        </label>
 
-  <div class="field">
+        <input
+          type="number"
+          id="fontSize"
+          value="50"
+          min="8"
+          max="300">
 
-    <label for="fontSize">
-      Font Size
-    </label>
+      </div>
 
-    <input
-      type="number"
-      id="fontSize"
-      value="50"
-      min="8"
-      max="300">
 
-  </div>
+      <div class="field">
 
+        <label for="rotation">
+          Rotation
+        </label>
 
-  <!-- ROTATION -->
+        <select id="rotation">
 
-  <div class="field">
+          <option value="0">
+            0°
+          </option>
 
-    <label for="rotation">
-      Rotation
-    </label>
+          <option value="15">
+            15°
+          </option>
 
-    <select id="rotation">
+          <option value="30">
+            30°
+          </option>
 
-      <option value="0">
-        0°
-      </option>
+          <option value="45">
+            45°
+          </option>
 
-      <option value="15">
-        15°
-      </option>
+          <option value="60">
+            60°
+          </option>
 
-      <option value="30">
-        30°
-      </option>
+          <option value="90">
+            90°
+          </option>
 
-      <option value="45" selected>
-        45°
-      </option>
+          <option value="270">
+            270°
+          </option>
 
-      <option value="60">
-        60°
-      </option>
+          <option value="315">
+            315°
+          </option>
 
-      <option value="90">
-        90°
-      </option>
+          <option value="330">
+            330°
+          </option>
 
-      <option value="270">
-        270°
-      </option>
+          <option value="345">
+            345°
+          </option>
 
-      <option value="315">
-        315°
-      </option>
+        </select>
 
-      <option value="330">
-        330°
-      </option>
+      </div>
 
-      <option value="345">
-        345°
-      </option>
 
-    </select>
+      <div class="field">
 
-  </div>
+        <label>
+          Opacity
+        </label>
 
+        <div class="range-row">
 
-  <!-- OPACITY -->
+          <input
+            type="range"
+            id="opacity"
+            min="10"
+            max="100"
+            value="35">
 
-  <div class="field">
+          <span
+            class="range-value"
+            id="opacityValue">
 
-    <label for="opacity">
-      Opacity
-    </label>
+            35%
 
-    <div class="range-row">
+          </span>
 
-      <input
-        type="range"
-        id="opacity"
-        min="10"
-        max="100"
-        value="35">
+        </div>
 
-      <span
-        class="range-value"
-        id="opacityValue">
+      </div>
 
-        35%
 
-      </span>
+      <div class="field">
 
-    </div>
+        <label>
+          Text Color
+        </label>
 
-  </div>
+        <div class="color-row">
 
+          <input
+            type="color"
+            id="textColor"
+            value="#888888">
 
-  <!-- COLOR -->
+          <span id="colorValue">
+            #888888
+          </span>
 
-  <div class="field">
+        </div>
 
-    <label>
-      Text Color
-    </label>
+      </div>
 
-    <div class="color-row">
 
-      <input
-        type="color"
-        id="textColor"
-        value="#888888">
+      <div class="field full">
 
-      <span id="colorValue">
-        #888888
-      </span>
+        <label>
+          Position
+        </label>
 
-    </div>
+        <div class="position-buttons">
 
-  </div>
 
+          <button
+            type="button"
+            class="position-btn"
+            data-position="top-left">
 
-  <!-- POSITION -->
+            Top Left
 
-  <div class="field full">
+          </button>
 
-    <label>
-      Position
-    </label>
 
-    <div class="position-buttons">
+          <button
+            type="button"
+            class="position-btn"
+            data-position="top-center">
 
+            Top Center
 
-      <button
-        type="button"
-        class="position-btn"
-        data-position="top-left">
+          </button>
 
-        Top Left
 
-      </button>
+          <button
+            type="button"
+            class="position-btn"
+            data-position="top-right">
 
+            Top Right
 
-      <button
-        type="button"
-        class="position-btn"
-        data-position="top-center">
+          </button>
 
-        Top Center
 
-      </button>
+          <button
+            type="button"
+            class="position-btn"
+            data-position="center-left">
 
+            Center Left
 
-      <button
-        type="button"
-        class="position-btn"
-        data-position="top-right">
+          </button>
 
-        Top Right
 
-      </button>
+          <button
+            type="button"
+            class="position-btn active"
+            data-position="center">
 
+            Center
 
-      <button
-        type="button"
-        class="position-btn"
-        data-position="center-left">
+          </button>
 
-        Center Left
 
-      </button>
+          <button
+            type="button"
+            class="position-btn"
+            data-position="center-right">
 
+            Center Right
 
-      <button
-        type="button"
-        class="position-btn active"
-        data-position="center">
+          </button>
 
-        Center
 
-      </button>
+          <button
+            type="button"
+            class="position-btn"
+            data-position="bottom-left">
 
+            Bottom Left
 
-      <button
-        type="button"
-        class="position-btn"
-        data-position="center-right">
+          </button>
 
-        Center Right
 
-      </button>
+          <button
+            type="button"
+            class="position-btn"
+            data-position="bottom-center">
 
+            Bottom Center
 
-      <button
-        type="button"
-        class="position-btn"
-        data-position="bottom-left">
+          </button>
 
-        Bottom Left
 
-      </button>
+          <button
+            type="button"
+            class="position-btn"
+            data-position="bottom-right">
 
+            Bottom Right
 
-      <button
-        type="button"
-        class="position-btn"
-        data-position="bottom-center">
+          </button>
 
-        Bottom Center
 
-      </button>
+        </div>
 
-
-      <button
-        type="button"
-        class="position-btn"
-        data-position="bottom-right">
-
-        Bottom Right
-
-      </button>
+      </div>
 
 
     </div>
 
+
+    <div class="action-row">
+
+      <button
+        type="button"
+        class="action-btn preview-btn"
+        id="updatePreview">
+
+        Update Preview
+
+      </button>
+
+
+      <button
+        type="button"
+        class="action-btn download-btn"
+        id="downloadBtn">
+
+        Download Watermarked PDF
+
+      </button>
+
+    </div>
+
+
   </div>
 
 
-</div>
-
-
-<!-- ACTIONS -->
-
-<div class="action-row">
-
-  <button
-    type="button"
-    class="action-btn preview-btn"
-    id="updatePreview">
-
-    Update Preview
-
-  </button>
-
-
-  <button
-    type="button"
-    class="action-btn download-btn"
-    id="downloadBtn">
-
-    Download Watermarked PDF
-
-  </button>
-
-</div>
-```
-
+  <div
+    class="status"
+    id="status">
   </div>
 
-</div>
 
-<div
-  class="status"
-  id="status">
-</div>
+  <h2
+    class="preview-title"
+    id="previewTitle">
+
+    PDF Preview
+
+  </h2>
+
+
+  <div
+    class="pages-grid"
+    id="pagesGrid">
+  </div>
+
 
 </main>
 
+
 <footer>
 
-© 2026 PDF Editor Tools. All rights reserved.
+  © 2026 PDF Editor Tools. All rights reserved.
 
 </footer>
+
 
 <script>
 
@@ -1056,14 +796,11 @@ document.getElementById("loading");
 const editor =
 document.getElementById("editor");
 
-const workArea =
-document.getElementById("workArea");
-
 const pagesGrid =
 document.getElementById("pagesGrid");
 
-const previewInfo =
-document.getElementById("previewInfo");
+const previewTitle =
+document.getElementById("previewTitle");
 
 const status =
 document.getElementById("status");
@@ -1112,7 +849,7 @@ let pageCanvases = [];
 
 
 /* ==========================================
-   SELECT PDF
+   SELECT PDF BUTTON
 ========================================== */
 
 selectPdfBtn.addEventListener(
@@ -1170,11 +907,13 @@ fileInput.addEventListener(
 
     pageCanvases = [];
 
-    workArea.style.display = "none";
+    editor.style.display = "none";
+
+    previewTitle.style.display = "none";
+
+    downloadBtn.disabled = false;
 
     status.textContent = "";
-
-    previewInfo.textContent = "";
 
     loading.style.display = "block";
 
@@ -1187,31 +926,31 @@ fileInput.addEventListener(
 
       pdfDocument =
         await pdfjsLib.getDocument({
-          data:originalBytes.slice(0)
+          data: originalBytes.slice(0)
         }).promise;
 
 
       await renderPages();
 
 
-      workArea.style.display = "grid";
+      editor.style.display = "block";
 
-      previewInfo.textContent =
-        pdfDocument.numPages +
-        " page" +
-        (
-          pdfDocument.numPages === 1
-          ? ""
-          : "s"
-        ) +
-        " loaded";
+      previewTitle.style.display = "block";
 
 
       status.textContent =
-        "PDF loaded successfully. Customize your watermark.";
+        pdfDocument.numPages +
+        " page" +
+        (
+          pdfDocument.numPages > 1
+          ? "s"
+          : ""
+        ) +
+        " loaded successfully.";
 
 
       updateAllPreviews();
+
 
     }
     catch(error){
@@ -1231,13 +970,9 @@ fileInput.addEventListener(
 
       pageCanvases = [];
 
-      workArea.style.display = "none";
+      editor.style.display = "none";
 
-      originalFile = null;
-
-      originalBytes = null;
-
-      pdfDocument = null;
+      previewTitle.style.display = "none";
 
     }
     finally{
@@ -1251,7 +986,7 @@ fileInput.addEventListener(
 
 
 /* ==========================================
-   RENDER PDF PAGES
+   RENDER PAGES
 ========================================== */
 
 async function renderPages(){
@@ -1274,8 +1009,7 @@ async function renderPages(){
       });
 
 
-    const targetWidth =
-      500;
+    const targetWidth = 500;
 
 
     const scale =
@@ -1362,9 +1096,7 @@ async function renderPages(){
 
 
     const ctx =
-      canvas.getContext("2d", {
-        willReadFrequently:true
-      });
+      canvas.getContext("2d");
 
 
     await page.render({
@@ -1374,22 +1106,6 @@ async function renderPages(){
       viewport:viewport
 
     }).promise;
-
-
-    /*
-       IMPORTANT:
-       Original PDF page image is stored as ImageData.
-       This prevents old watermark from remaining
-       when the settings are changed.
-    */
-
-    const originalImage =
-      ctx.getImageData(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      );
 
 
     canvasWrap.appendChild(
@@ -1417,13 +1133,14 @@ async function renderPages(){
 
       canvas:canvas,
 
-      originalImage:originalImage,
+      originalImage:
+        canvas.toDataURL("image/png"),
 
-      pageWidth:baseViewport.width,
+      pageWidth:
+        baseViewport.width,
 
-      pageHeight:baseViewport.height,
-
-      scale:scale
+      pageHeight:
+        baseViewport.height
 
     });
 
@@ -1473,7 +1190,7 @@ document
 
 
 /* ==========================================
-   OPACITY
+   SETTINGS EVENTS
 ========================================== */
 
 opacity.addEventListener(
@@ -1489,10 +1206,6 @@ opacity.addEventListener(
 );
 
 
-/* ==========================================
-   COLOR
-========================================== */
-
 textColor.addEventListener(
   "input",
   function(){
@@ -1506,67 +1219,32 @@ textColor.addEventListener(
 );
 
 
-/* ==========================================
-   WATERMARK TEXT
-========================================== */
-
 watermarkText.addEventListener(
   "input",
-  function(){
-
-    updateAllPreviews();
-
-  }
+  updateAllPreviews
 );
 
-
-/* ==========================================
-   FONT SIZE
-========================================== */
 
 fontSize.addEventListener(
   "input",
-  function(){
-
-    updateAllPreviews();
-
-  }
+  updateAllPreviews
 );
 
-
-/* ==========================================
-   ROTATION
-========================================== */
 
 rotation.addEventListener(
   "change",
-  function(){
-
-    updateAllPreviews();
-
-  }
+  updateAllPreviews
 );
 
-
-/* ==========================================
-   UPDATE BUTTON
-========================================== */
 
 updatePreview.addEventListener(
   "click",
-  function(){
-
-    updateAllPreviews();
-
-    status.textContent =
-      "Preview updated.";
-
-  }
+  updateAllPreviews
 );
 
 
 /* ==========================================
-   UPDATE ALL PREVIEWS
+   UPDATE PREVIEWS
 ========================================== */
 
 function updateAllPreviews(){
@@ -1595,343 +1273,259 @@ function updateAllPreviews(){
 
 function drawWatermarkPreview(data){
 
-  const canvas =
-    data.canvas;
-
-  const ctx =
-    canvas.getContext("2d");
+  const image =
+    new Image();
 
 
-  /*
-     RESTORE ORIGINAL PDF PAGE
-     This completely removes the
-     previous watermark.
-  */
+  image.onload =
+  function(){
 
-  ctx.putImageData(
-    data.originalImage,
-    0,
-    0
-  );
+    const canvas =
+      data.canvas;
+
+    const ctx =
+      canvas.getContext("2d");
 
 
-  const text =
-    watermarkText.value.trim();
-
-
-  if(!text){
-    return;
-  }
-
-
-  const previewScale =
-    data.scale;
-
-
-  const size =
-    Math.max(
-      8,
-      Number(fontSize.value) *
-      previewScale
-    );
-
-
-  const angleDegrees =
-    Number(rotation.value);
-
-
-  const angle =
-    angleDegrees *
-    Math.PI /
-    180;
-
-
-  const alpha =
-    Number(opacity.value) /
-    100;
-
-
-  const rgb =
-    hexToRgb(
-      textColor.value
-    );
-
-
-  ctx.save();
-
-
-  ctx.globalAlpha =
-    alpha;
-
-
-  ctx.fillStyle =
-    "rgb(" +
-    rgb.r + "," +
-    rgb.g + "," +
-    rgb.b +
-    ")";
-
-
-  ctx.font =
-    "bold " +
-    size +
-    "px Arial";
-
-
-  ctx.textAlign =
-    "left";
-
-
-  ctx.textBaseline =
-    "alphabetic";
-
-
-  const metrics =
-    ctx.measureText(text);
-
-
-  const textWidth =
-    metrics.width;
-
-
-  const textHeight =
-    size;
-
-
-  const position =
-    getRotatedPosition(
+    ctx.clearRect(
+      0,
+      0,
       canvas.width,
-      canvas.height,
-      textWidth,
-      textHeight,
-      angle,
-      selectedPosition,
-      Math.min(
-        canvas.width,
-        canvas.height
-      ) * 0.10
+      canvas.height
     );
 
 
-  ctx.translate(
-    position.x,
-    position.y
-  );
+    ctx.drawImage(
+      image,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
 
 
-  ctx.rotate(
-    angle
-  );
+    const text =
+      watermarkText.value.trim();
 
 
-  ctx.fillText(
-    text,
-    0,
-    0
-  );
+    if(!text){
+      return;
+    }
 
 
-  ctx.restore();
+    const previewScale =
+      canvas.width /
+      data.pageWidth;
+
+
+    const size =
+      Math.max(
+        8,
+        Number(fontSize.value) *
+        previewScale
+      );
+
+
+    const angle =
+      Number(rotation.value) *
+      Math.PI /
+      180;
+
+
+    const alpha =
+      Number(opacity.value) /
+      100;
+
+
+    const rgb =
+      hexToRgb(
+        textColor.value
+      );
+
+
+    ctx.save();
+
+
+    ctx.globalAlpha =
+      alpha;
+
+
+    ctx.fillStyle =
+      "rgb(" +
+      rgb.r + "," +
+      rgb.g + "," +
+      rgb.b +
+      ")";
+
+
+    ctx.font =
+      "bold " +
+      size +
+      "px Arial";
+
+
+    ctx.textAlign =
+      "center";
+
+
+    ctx.textBaseline =
+      "middle";
+
+
+    const position =
+      getPreviewPosition(
+        canvas,
+        selectedPosition
+      );
+
+
+    ctx.translate(
+      position.x,
+      position.y
+    );
+
+
+    ctx.rotate(
+      angle
+    );
+
+
+    ctx.fillText(
+      text,
+      0,
+      0
+    );
+
+
+    ctx.restore();
+
+  };
+
+
+  image.src =
+    data.originalImage;
 
 }
 
 
 /* ==========================================
-   CALCULATE ROTATED POSITION
+   PREVIEW POSITION
 ========================================== */
 
-function getRotatedPosition(
-  canvasWidth,
-  canvasHeight,
-  textWidth,
-  textHeight,
-  angle,
-  position,
-  margin
+function getPreviewPosition(
+  canvas,
+  position
 ){
 
-  /*
-     Calculate rotated bounding box.
-  */
-
-  const cos =
-    Math.abs(
-      Math.cos(angle)
-    );
-
-  const sin =
-    Math.abs(
-      Math.sin(angle)
-    );
+  const margin =
+    Math.min(
+      canvas.width,
+      canvas.height
+    ) * 0.12;
 
 
-  const rotatedWidth =
-    textWidth * cos +
-    textHeight * sin;
+  let x =
+    canvas.width / 2;
 
-
-  const rotatedHeight =
-    textWidth * sin +
-    textHeight * cos;
-
-
-  let centerX =
-    canvasWidth / 2;
-
-  let centerY =
-    canvasHeight / 2;
+  let y =
+    canvas.height / 2;
 
 
   if(position === "top-left"){
 
-    centerX =
-      margin +
-      rotatedWidth / 2;
-
-    centerY =
-      margin +
-      rotatedHeight / 2;
+    x = margin;
+    y = margin;
 
   }
 
 
-  else if(position === "top-center"){
+  if(position === "top-center"){
 
-    centerX =
-      canvasWidth / 2;
+    x =
+      canvas.width / 2;
 
-    centerY =
-      margin +
-      rotatedHeight / 2;
+    y = margin;
 
   }
 
 
-  else if(position === "top-right"){
+  if(position === "top-right"){
 
-    centerX =
-      canvasWidth -
-      margin -
-      rotatedWidth / 2;
+    x =
+      canvas.width - margin;
 
-    centerY =
-      margin +
-      rotatedHeight / 2;
+    y = margin;
 
   }
 
 
-  else if(position === "center-left"){
+  if(position === "center-left"){
 
-    centerX =
-      margin +
-      rotatedWidth / 2;
+    x = margin;
 
-    centerY =
-      canvasHeight / 2;
+    y =
+      canvas.height / 2;
 
   }
 
 
-  else if(position === "center"){
+  if(position === "center"){
 
-    centerX =
-      canvasWidth / 2;
+    x =
+      canvas.width / 2;
 
-    centerY =
-      canvasHeight / 2;
-
-  }
-
-
-  else if(position === "center-right"){
-
-    centerX =
-      canvasWidth -
-      margin -
-      rotatedWidth / 2;
-
-    centerY =
-      canvasHeight / 2;
+    y =
+      canvas.height / 2;
 
   }
 
 
-  else if(position === "bottom-left"){
+  if(position === "center-right"){
 
-    centerX =
-      margin +
-      rotatedWidth / 2;
+    x =
+      canvas.width - margin;
 
-    centerY =
-      canvasHeight -
-      margin -
-      rotatedHeight / 2;
+    y =
+      canvas.height / 2;
 
   }
 
 
-  else if(position === "bottom-center"){
+  if(position === "bottom-left"){
 
-    centerX =
-      canvasWidth / 2;
+    x = margin;
 
-    centerY =
-      canvasHeight -
-      margin -
-      rotatedHeight / 2;
+    y =
+      canvas.height - margin;
 
   }
 
 
-  else if(position === "bottom-right"){
+  if(position === "bottom-center"){
 
-    centerX =
-      canvasWidth -
-      margin -
-      rotatedWidth / 2;
+    x =
+      canvas.width / 2;
 
-    centerY =
-      canvasHeight -
-      margin -
-      rotatedHeight / 2;
+    y =
+      canvas.height - margin;
 
   }
 
 
-  /*
-     Canvas text is drawn from its baseline.
-     Convert desired center to drawing origin.
-  */
+  if(position === "bottom-right"){
 
-  const halfW =
-    textWidth / 2;
+    x =
+      canvas.width - margin;
 
-  const halfH =
-    textHeight / 2;
+    y =
+      canvas.height - margin;
 
-
-  const originCenterX =
-    halfW * Math.cos(angle) -
-    halfH * Math.sin(angle);
-
-
-  const originCenterY =
-    halfW * Math.sin(angle) +
-    halfH * Math.cos(angle);
+  }
 
 
   return {
-
-    x:
-      centerX -
-      originCenterX,
-
-    y:
-      centerY -
-      originCenterY +
-      textHeight
-
+    x:x,
+    y:y
   };
 
 }
@@ -1944,8 +1538,7 @@ function getRotatedPosition(
 function hexToRgb(hex){
 
   hex =
-    String(hex)
-    .replace(
+    hex.replace(
       "#",
       ""
     );
@@ -1953,23 +1546,20 @@ function hexToRgb(hex){
 
   return {
 
-    r:
-      parseInt(
-        hex.substring(0,2),
-        16
-      ) || 0,
+    r:parseInt(
+      hex.substring(0,2),
+      16
+    ),
 
-    g:
-      parseInt(
-        hex.substring(2,4),
-        16
-      ) || 0,
+    g:parseInt(
+      hex.substring(2,4),
+      16
+    ),
 
-    b:
-      parseInt(
-        hex.substring(4,6),
-        16
-      ) || 0
+    b:parseInt(
+      hex.substring(4,6),
+      16
+    )
 
   };
 
@@ -1977,7 +1567,7 @@ function hexToRgb(hex){
 
 
 /* ==========================================
-   PDF DOWNLOAD
+   DOWNLOAD PDF
 ========================================== */
 
 downloadBtn.addEventListener(
@@ -2010,58 +1600,11 @@ downloadBtn.addEventListener(
     }
 
 
-    const fontSizeValue =
-      Math.max(
-        8,
-        Math.min(
-          300,
-          Number(fontSize.value) || 50
-        )
-      );
-
-
-    const opacityNumber =
-      Math.max(
-        0.1,
-        Math.min(
-          1,
-          Number(opacity.value) / 100
-        )
-      );
-
-
-    const angleDegrees =
-      Number(rotation.value) || 0;
-
-
-    const angle =
-      angleDegrees *
-      Math.PI /
-      180;
-
-
-    const rgb =
-      hexToRgb(
-        textColor.value
-      );
-
-
-    const color =
-      PDFLib.rgb(
-        rgb.r / 255,
-        rgb.g / 255,
-        rgb.b / 255
-      );
-
-
     const oldText =
       downloadBtn.textContent;
 
 
     downloadBtn.disabled =
-      true;
-
-    updatePreview.disabled =
       true;
 
 
@@ -2075,11 +1618,6 @@ downloadBtn.addEventListener(
 
     try{
 
-      /*
-         LOAD ORIGINAL PDF
-         Never load a preview image.
-      */
-
       const pdfDoc =
         await PDFLib.PDFDocument.load(
           originalBytes.slice(0)
@@ -2090,14 +1628,39 @@ downloadBtn.addEventListener(
         pdfDoc.getPages();
 
 
-      /*
-         HelveticaBold works reliably for
-         standard Latin text.
-      */
-
       const font =
         await pdfDoc.embedFont(
           PDFLib.StandardFonts.HelveticaBold
+        );
+
+
+      const fontSizeValue =
+        Math.max(
+          8,
+          Number(fontSize.value)
+        );
+
+
+      const opacityNumber =
+        Number(opacity.value) /
+        100;
+
+
+      const angleDegrees =
+        Number(rotation.value);
+
+
+      const rgb =
+        hexToRgb(
+          textColor.value
+        );
+
+
+      const color =
+        PDFLib.rgb(
+          rgb.r / 255,
+          rgb.g / 255,
+          rgb.b / 255
         );
 
 
@@ -2112,10 +1675,6 @@ downloadBtn.addEventListener(
             page.getHeight();
 
 
-          /*
-             Measure text.
-          */
-
           const textWidth =
             font.widthOfTextAtSize(
               text,
@@ -2123,253 +1682,169 @@ downloadBtn.addEventListener(
             );
 
 
-          /*
-             Approximate text height.
-          */
+          let x =
+            pageWidth / 2;
 
-          const textHeight =
-            fontSizeValue;
+          let y =
+            pageHeight / 2;
 
-
-          /*
-             Calculate rotated bounding box.
-          */
-
-          const cos =
-            Math.abs(
-              Math.cos(angle)
-            );
-
-          const sin =
-            Math.abs(
-              Math.sin(angle)
-            );
-
-
-          const rotatedWidth =
-            textWidth * cos +
-            textHeight * sin;
-
-
-          const rotatedHeight =
-            textWidth * sin +
-            textHeight * cos;
-
-
-          /*
-             Keep watermark inside page.
-          */
 
           const margin =
             Math.min(
               pageWidth,
               pageHeight
-            ) * 0.10;
+            ) * 0.12;
 
 
-          let centerX =
-            pageWidth / 2;
+          if(
+            selectedPosition ===
+            "top-left"
+          ){
 
-          let centerY =
-            pageHeight / 2;
-
-
-          if(selectedPosition === "top-left"){
-
-            centerX =
+            x =
               margin +
-              rotatedWidth / 2;
+              textWidth / 2;
 
-            centerY =
+            y =
               pageHeight -
-              margin -
-              rotatedHeight / 2;
+              margin;
 
           }
 
 
-          else if(
+          if(
             selectedPosition ===
             "top-center"
           ){
 
-            centerX =
+            x =
               pageWidth / 2;
 
-            centerY =
+            y =
               pageHeight -
-              margin -
-              rotatedHeight / 2;
+              margin;
 
           }
 
 
-          else if(
+          if(
             selectedPosition ===
             "top-right"
           ){
 
-            centerX =
+            x =
               pageWidth -
               margin -
-              rotatedWidth / 2;
+              textWidth / 2;
 
-            centerY =
+            y =
               pageHeight -
-              margin -
-              rotatedHeight / 2;
+              margin;
 
           }
 
 
-          else if(
+          if(
             selectedPosition ===
             "center-left"
           ){
 
-            centerX =
+            x =
               margin +
-              rotatedWidth / 2;
+              textWidth / 2;
 
-            centerY =
+            y =
               pageHeight / 2;
 
           }
 
 
-          else if(
+          if(
             selectedPosition ===
             "center"
           ){
 
-            centerX =
+            x =
               pageWidth / 2;
 
-            centerY =
+            y =
               pageHeight / 2;
 
           }
 
 
-          else if(
+          if(
             selectedPosition ===
             "center-right"
           ){
 
-            centerX =
+            x =
               pageWidth -
               margin -
-              rotatedWidth / 2;
+              textWidth / 2;
 
-            centerY =
+            y =
               pageHeight / 2;
 
           }
 
 
-          else if(
+          if(
             selectedPosition ===
             "bottom-left"
           ){
 
-            centerX =
+            x =
               margin +
-              rotatedWidth / 2;
+              textWidth / 2;
 
-            centerY =
-              margin +
-              rotatedHeight / 2;
+            y = margin;
 
           }
 
 
-          else if(
+          if(
             selectedPosition ===
             "bottom-center"
           ){
 
-            centerX =
+            x =
               pageWidth / 2;
 
-            centerY =
-              margin +
-              rotatedHeight / 2;
+            y = margin;
 
           }
 
 
-          else if(
+          if(
             selectedPosition ===
             "bottom-right"
           ){
 
-            centerX =
+            x =
               pageWidth -
               margin -
-              rotatedWidth / 2;
+              textWidth / 2;
 
-            centerY =
-              margin +
-              rotatedHeight / 2;
+            y = margin;
 
           }
-
-
-          /*
-             Convert desired visual center
-             into pdf-lib text origin.
-          */
-
-          const halfW =
-            textWidth / 2;
-
-
-          const halfH =
-            textHeight / 2;
-
-
-          const originCenterX =
-            halfW *
-            Math.cos(angle) -
-            halfH *
-            Math.sin(angle);
-
-
-          const originCenterY =
-            halfW *
-            Math.sin(angle) +
-            halfH *
-            Math.cos(angle);
-
-
-          const drawX =
-            centerX -
-            originCenterX;
-
-
-          const drawY =
-            centerY -
-            originCenterY;
 
 
           page.drawText(
             text,
             {
 
-              x:
-                drawX,
+              x:x,
 
-              y:
-                drawY,
+              y:y,
 
               size:
                 fontSizeValue,
 
-              font:
-                font,
+              font:font,
 
-              color:
-                color,
+              color:color,
 
               opacity:
                 opacityNumber,
@@ -2385,10 +1860,6 @@ downloadBtn.addEventListener(
         }
       );
 
-
-      /*
-         SAVE PDF
-      */
 
       const outputBytes =
         await pdfDoc.save();
@@ -2453,7 +1924,7 @@ downloadBtn.addEventListener(
           );
 
         },
-        1500
+        1000
       );
 
 
@@ -2483,9 +1954,6 @@ downloadBtn.addEventListener(
       downloadBtn.disabled =
         false;
 
-      updatePreview.disabled =
-        false;
-
       downloadBtn.textContent =
         oldText;
 
@@ -2493,19 +1961,6 @@ downloadBtn.addEventListener(
 
   }
 );
-
-
-/* ==========================================
-   INITIAL UI
-========================================== */
-
-opacityValue.textContent =
-  opacity.value + "%";
-
-
-colorValue.textContent =
-  textColor.value.toUpperCase();
-
 
 </script>
 
