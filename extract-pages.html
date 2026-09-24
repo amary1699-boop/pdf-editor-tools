@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Extract Pages from PDF Online - Free PDF Page Extractor</title>
+
+<meta name="description"
+content="Free online PDF page extractor. Preview, select and extract specific pages from PDF files.">
+
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<style>
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f6f7fb;
+  color:#202124;
+}
+
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* HEADER */
+
+.header{
+  background:#fff;
+  border-bottom:1px solid #e5e5ea;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.nav{
+  max-width:1200px;
+  margin:auto;
+  min-height:68px;
+  padding:0 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  color:#e53232;
+  font-size:21px;
+  font-weight:800;
+  text-decoration:none;
+}
+
+.back{
+  color:#555;
+  font-size:14px;
+  font-weight:600;
+  text-decoration:none;
+}
+
+.back:hover{
+  color:#e53232;
+}
+
+/* HERO */
+
+.hero{
+  text-align:center;
+  padding:48px 20px 35px;
+}
+
+.hero h1{
+  font-size:40px;
+  margin-bottom:12px;
+}
+
+.hero h1 span{
+  color:#e53232;
+}
+
+.hero p{
+  color:#707070;
+  font-size:16px;
+}
+
+/* CONTAINER */
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:0 20px 60px;
+}
+
+/* UPLOAD */
+
+.upload-box{
+  background:#fff;
+  border:2px dashed #e0e0e5;
+  border-radius:18px;
+  padding:35px 20px;
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.upload-box:hover{
+  border-color:#e53232;
+}
+
+.upload-icon{
+  width:60px;
+  height:60px;
+  margin:0 auto 15px;
+  border-radius:14px;
+  background:#fff0f0;
+  color:#e53232;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  font-weight:bold;
+}
+
+.file-label{
+  display:inline-block;
+  background:#e53232;
+  color:#fff;
+  padding:13px 25px;
+  border-radius:10px;
+  font-weight:700;
+  margin-top:15px;
+}
+
+.file-label:hover{
+  background:#c92727;
+}
+
+#fileInput{
+  display:none;
+}
+
+.file-name{
+  margin-top:12px;
+  color:#555;
+  font-size:14px;
+  word-break:break-word;
+}
+
+/* MESSAGE */
+
+.message{
+  display:none;
+  padding:13px 15px;
+  border-radius:10px;
+  margin-bottom:18px;
+  font-size:14px;
+}
+
+.message.error{
+  background:#fff0f0;
+  color:#c62828;
+  border:1px solid #ffd0d0;
+}
+
+.message.success{
+  background:#eefbf2;
+  color:#217a3a;
+  border:1px solid #ccebd5;
+}
+
+.message.info{
+  background:#f0f6ff;
+  color:#245a9c;
+  border:1px solid #cfe0ff;
+}
+
+/* PDF INFO */
+
+.pdf-info{
+  display:none;
+  background:#fff;
+  border:1px solid #e5e5ea;
+  border-radius:14px;
+  padding:14px 18px;
+  margin-bottom:20px;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.pdf-info strong{
+  color:#333;
+}
+
+.pdf-info span{
+  color:#777;
+  font-size:13px;
+}
+
+/* TOOLBAR */
+
+.toolbar{
+  display:none;
+  background:#fff;
+  border:1px solid #e5e5ea;
+  border-radius:15px;
+  padding:15px;
+  margin-bottom:22px;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+.toolbar button{
+  border:1px solid #ddd;
+  background:#fff;
+  color:#333;
+  padding:9px 14px;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:600;
+}
+
+.toolbar button:hover{
+  border-color:#e53232;
+  color:#e53232;
+}
+
+.toolbar .primary{
+  background:#e53232;
+  color:#fff;
+  border-color:#e53232;
+}
+
+.toolbar .primary:hover{
+  background:#c92727;
+  color:#fff;
+}
+
+.status{
+  margin-left:auto;
+  color:#666;
+  font-size:13px;
+  font-weight:600;
+}
+
+/* PAGES */
+
+.pages{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+
+.page-card{
+  background:#fff;
+  border:2px solid #e5e5ea;
+  border-radius:14px;
+  padding:12px;
+  position:relative;
+  transition:.2s;
+}
+
+.page-card:hover{
+  border-color:#f0aaaa;
+  box-shadow:0 8px 25px rgba(0,0,0,.06);
+}
+
+.page-card.selected{
+  border-color:#e53232;
+  box-shadow:0 0 0 2px rgba(229,50,50,.08);
+}
+
+.page-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.page-number{
+  font-size:14px;
+  font-weight:800;
+}
+
+.check{
+  width:22px;
+  height:22px;
+  accent-color:#e53232;
+  cursor:pointer;
+}
+
+.page-preview{
+  background:#eee;
+  border-radius:8px;
+  overflow:hidden;
+  min-height:400px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.page-preview canvas{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+.page-actions{
+  display:flex;
+  gap:7px;
+  margin-top:10px;
+}
+
+.page-actions button{
+  flex:1;
+  border:1px solid #ddd;
+  background:#fff;
+  border-radius:7px;
+  padding:8px 5px;
+  font-size:12px;
+  font-weight:600;
+}
+
+.page-actions button:hover{
+  border-color:#e53232;
+  color:#e53232;
+}
+
+/* EMPTY */
+
+.empty{
+  display:none;
+  text-align:center;
+  background:#fff;
+  border:1px solid #e5e5ea;
+  border-radius:15px;
+  padding:45px 20px;
+  color:#777;
+}
+
+.loading{
+  display:none;
+  text-align:center;
+  padding:30px;
+  color:#666;
+  font-weight:600;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+  .pages{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .page-preview{
+    min-height:350px;
+  }
+}
+
+@media(max-width:750px){
+
+  .pages{
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+  }
+
+  .hero h1{
+    font-size:32px;
+  }
+
+  .status{
+    width:100%;
+    margin-left:0;
+  }
+
+  .page-preview{
+    min-height:260px;
+  }
+}
+
+@media(max-width:500px){
+
+  .nav{
+    padding:0 15px;
+  }
+
+  .logo{
+    font-size:18px;
+  }
+
+  .hero{
+    padding:35px 15px 25px;
+  }
+
+  .hero h1{
+    font-size:28px;
+  }
+
+  .hero p{
+    font-size:14px;
+  }
+
+  .container{
+    padding:0 12px 40px;
+  }
+
+  .pages{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+
+  .page-card{
+    padding:8px;
+  }
+
+  .page-preview{
+    min-height:190px;
+  }
+
+  .page-actions{
+    gap:4px;
+  }
+
+  .page-actions button{
+    font-size:10px;
+    padding:6px 2px;
+  }
+
+  .toolbar{
+    padding:10px;
+  }
+
+  .toolbar button{
+    padding:8px 9px;
+    font-size:11px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+  <div class="nav">
+
+    <a href="index.html" class="logo">
+      PDF Editor Tools
+    </a>
+
+    <a href="index.html" class="back">
+      ← Back to Home
+    </a>
+
+  </div>
+
+</header>
+
+
+<section class="hero">
+
+  <h1>
+    Extract <span>Pages from PDF</span>
+  </h1>
+
+  <p>
+    Preview your PDF, select the pages you want and create a new PDF.
+  </p>
+
+</section>
+
+
+<main class="container">
+
+  <div class="upload-box">
+
+    <div class="upload-icon">
+      PDF
+    </div>
+
+    <h2>
+      Select PDF File
+    </h2>
+
+    <p style="color:#777;margin-top:7px;font-size:14px;">
+      Choose a PDF file from your device
+    </p>
+
+    <label for="fileInput" class="file-label">
+      Select PDF
+    </label>
+
+    <input
+      type="file"
+      id="fileInput"
+      accept=".pdf,application/pdf"
+    >
+
+    <div class="file-name" id="fileName"></div>
+
+  </div>
+
+
+  <div class="message" id="message"></div>
+
+
+  <div class="pdf-info" id="pdfInfo">
+
+    <div>
+
+      <strong id="pdfName"></strong>
+
+      <br>
+
+      <span id="pageCount"></span>
+
+    </div>
+
+    <div>
+
+      <span id="selectionInfo"></span>
+
+    </div>
+
+  </div>
+
+
+  <div class="toolbar" id="toolbar">
+
+    <button onclick="selectAllPages()">
+      Select All
+    </button>
+
+    <button onclick="clearSelection()">
+      Clear All
+    </button>
+
+    <button onclick="moveSelectedUp()">
+      ↑ Move Up
+    </button>
+
+    <button onclick="moveSelectedDown()">
+      ↓ Move Down
+    </button>
+
+    <button onclick="rotateSelectedLeft()">
+      ↶ Rotate
+    </button>
+
+    <button onclick="rotateSelectedRight()">
+      ↷ Rotate
+    </button>
+
+    <button
+      class="primary"
+      onclick="extractPDF()">
+      Extract Selected
+    </button>
+
+    <div class="status" id="status">
+      0 pages selected
+    </div>
+
+  </div>
+
+
+  <div class="loading" id="loading">
+    Loading PDF pages...
+  </div>
+
+
+  <div class="pages" id="pages"></div>
+
+
+  <div class="empty" id="empty">
+
+    <h3>
+      No pages selected
+    </h3>
+
+    <p style="margin-top:7px;">
+      Select the pages you want to extract.
+    </p>
+
+  </div>
+
+</main>
+
+
+<script>
+
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+
+/* =========================
+   GLOBAL VARIABLES
+========================= */
+
+let originalPdfBytes = null;
+
+let pdfDocument = null;
+
+let pagesData = [];
+
+let originalFileName = "document.pdf";
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const fileInput =
+document.getElementById("fileInput");
+
+const pagesContainer =
+document.getElementById("pages");
+
+const toolbar =
+document.getElementById("toolbar");
+
+const loading =
+document.getElementById("loading");
+
+const pdfInfo =
+document.getElementById("pdfInfo");
+
+const empty =
+document.getElementById("empty");
+
+const message =
+document.getElementById("message");
+
+
+/* =========================
+   FILE INPUT
+========================= */
+
+fileInput.addEventListener(
+  "change",
+  handleFile
+);
+
+
+/* =========================
+   LOAD PDF
+========================= */
+
+async function handleFile(event){
+
+  const file =
+  event.target.files[0];
+
+  if(!file){
+    return;
+  }
+
+
+  const isPDF =
+    file.type === "application/pdf" ||
+    file.name.toLowerCase().endsWith(".pdf");
+
+
+  if(!isPDF){
+
+    showMessage(
+      "Please select a valid PDF file.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  hideMessage();
+
+
+  try{
+
+    const fileBuffer =
+    await file.arrayBuffer();
+
+    originalPdfBytes =
+    new Uint8Array(fileBuffer);
+
+
+    originalFileName =
+    file.name;
+
+
+    document.getElementById(
+      "fileName"
+    ).textContent =
+    file.name;
+
+
+    document.getElementById(
+      "pdfName"
+    ).textContent =
+    file.name;
+
+
+    pagesContainer.innerHTML = "";
+
+    pagesData = [];
+
+    empty.style.display = "none";
+
+    toolbar.style.display = "flex";
+
+    pdfInfo.style.display = "flex";
+
+    loading.style.display = "block";
+
+
+    const pdfJsData =
+    originalPdfBytes.slice();
+
+
+    pdfDocument =
+    await pdfjsLib.getDocument({
+      data:pdfJsData
+    }).promise;
+
+
+    document.getElementById(
+      "pageCount"
+    ).textContent =
+    pdfDocument.numPages +
+    " pages";
+
+
+    await loadPages();
+
+    updateSelectionInfo();
+
+  }
+
+  catch(error){
+
+    console.error(
+      "PDF Load Error:",
+      error
+    );
+
+    toolbar.style.display = "none";
+
+    pdfInfo.style.display = "none";
+
+    showMessage(
+      "Unable to open this PDF file. Please try another PDF.",
+      "error"
+    );
+
+  }
+
+  finally{
+
+    loading.style.display = "none";
+
+  }
+
+}
+
+
+/* =========================
+   LOAD PAGE PREVIEWS
+========================= */
+
+async function loadPages(){
+
+  pagesContainer.innerHTML = "";
+
+  pagesData = [];
+
+
+  for(
+    let i = 1;
+    i <= pdfDocument.numPages;
+    i++
+  ){
+
+    const page =
+    await pdfDocument.getPage(i);
+
+
+    const viewport =
+    page.getViewport({
+      scale:1.5
+    });
+
+
+    const canvas =
+    document.createElement("canvas");
+
+
+    const context =
+    canvas.getContext("2d");
+
+
+    canvas.width =
+    Math.floor(viewport.width);
+
+    canvas.height =
+    Math.floor(viewport.height);
+
+
+    await page.render({
+      canvasContext:context,
+      viewport:viewport
+    }).promise;
+
+
+    pagesData.push({
+
+      originalIndex:i,
+
+      rotation:0,
+
+      canvas:canvas,
+
+      selected:false
+
+    });
+
+  }
+
+
+  renderPages();
+
+}
+
+
+/* =========================
+   RENDER ALL PAGES
+========================= */
+
+function renderPages(){
+
+  pagesContainer.innerHTML = "";
+
+
+  if(pagesData.length === 0){
+
+    empty.style.display = "block";
+
+    return;
+
+  }
+
+
+  empty.style.display = "none";
+
+
+  pagesData.forEach(
+    function(pageData,index){
+
+      const card =
+      document.createElement("div");
+
+      card.className =
+      "page-card";
+
+
+      if(pageData.selected){
+
+        card.classList.add(
+          "selected"
+        );
+
+      }
+
+
+      /* TOP */
+
+      const top =
+      document.createElement("div");
+
+      top.className =
+      "page-top";
+
+
+      const number =
+      document.createElement("div");
+
+      number.className =
+      "page-number";
+
+      number.textContent =
+      "Page " + (index + 1);
+
+
+      const checkbox =
+      document.createElement("input");
+
+      checkbox.type =
+      "checkbox";
+
+      checkbox.className =
+      "check";
+
+      checkbox.checked =
+      pageData.selected;
+
+
+      checkbox.addEventListener(
+        "change",
+        function(){
+
+          pageData.selected =
+          checkbox.checked;
+
+          renderPages();
+
+          updateSelectionInfo();
+
+        }
+      );
+
+
+      top.appendChild(number);
+
+      top.appendChild(checkbox);
+
+
+      /* PREVIEW */
+
+      const preview =
+      document.createElement("div");
+
+      preview.className =
+      "page-preview";
+
+
+      const displayCanvas =
+      document.createElement("canvas");
+
+
+      const sourceCanvas =
+      pageData.canvas;
+
+
+      const ctx =
+      displayCanvas.getContext("2d");
+
+
+      const angle =
+      (
+        (
+          pageData.rotation %
+          360
+        ) + 360
+      ) % 360;
+
+
+      if(
+        angle === 90 ||
+        angle === 270
+      ){
+
+        displayCanvas.width =
+        sourceCanvas.height;
+
+        displayCanvas.height =
+        sourceCanvas.width;
+
+      }
+      else{
+
+        displayCanvas.width =
+        sourceCanvas.width;
+
+        displayCanvas.height =
+        sourceCanvas.height;
+
+      }
+
+
+      ctx.save();
+
+
+      if(angle === 90){
+
+        ctx.translate(
+          displayCanvas.width,
+          0
+        );
+
+        ctx.rotate(
+          Math.PI / 2
+        );
+
+      }
+
+      else if(angle === 180){
+
+        ctx.translate(
+          displayCanvas.width,
+          displayCanvas.height
+        );
+
+        ctx.rotate(
+          Math.PI
+        );
+
+      }
+
+      else if(angle === 270){
+
+        ctx.translate(
+          0,
+          displayCanvas.height
+        );
+
+        ctx.rotate(
+          -Math.PI / 2
+        );
+
+      }
+
+
+      ctx.drawImage(
+        sourceCanvas,
+        0,
+        0
+      );
+
+
+      ctx.restore();
+
+
+      preview.appendChild(
+        displayCanvas
+      );
+
+
+      /* PAGE ACTIONS */
+
+      const actions =
+      document.createElement("div");
+
+      actions.className =
+      "page-actions";
+
+
+      const up =
+      document.createElement("button");
+
+      up.textContent =
+      "↑ Up";
+
+      up.onclick =
+      function(){
+
+        movePage(
+          index,
+          -1
+        );
+
+      };
+
+
+      const down =
+      document.createElement("button");
+
+      down.textContent =
+      "↓ Down";
+
+      down.onclick =
+      function(){
+
+        movePage(
+          index,
+          1
+        );
+
+      };
+
+
+      const rotateLeft =
+      document.createElement("button");
+
+      rotateLeft.textContent =
+      "↶";
+
+      rotateLeft.title =
+      "Rotate Left";
+
+      rotateLeft.onclick =
+      function(){
+
+        pageData.rotation -= 90;
+
+        renderPages();
+
+      };
+
+
+      const rotateRight =
+      document.createElement("button");
+
+      rotateRight.textContent =
+      "↷";
+
+      rotateRight.title =
+      "Rotate Right";
+
+      rotateRight.onclick =
+      function(){
+
+        pageData.rotation += 90;
+
+        renderPages();
+
+      };
+
+
+      actions.appendChild(up);
+
+      actions.appendChild(down);
+
+      actions.appendChild(
+        rotateLeft
+      );
+
+      actions.appendChild(
+        rotateRight
+      );
+
+
+      card.appendChild(top);
+
+      card.appendChild(preview);
+
+      card.appendChild(actions);
+
+
+      pagesContainer.appendChild(card);
+
+    }
+  );
+
+}
+
+
+/* =========================
+   SELECT ALL
+========================= */
+
+function selectAllPages(){
+
+  pagesData.forEach(
+    function(page){
+
+      page.selected = true;
+
+    }
+  );
+
+
+  renderPages();
+
+  updateSelectionInfo();
+
+}
+
+
+/* =========================
+   CLEAR SELECTION
+========================= */
+
+function clearSelection(){
+
+  pagesData.forEach(
+    function(page){
+
+      page.selected = false;
+
+    }
+  );
+
+
+  renderPages();
+
+  updateSelectionInfo();
+
+}
+
+
+/* =========================
+   MOVE SINGLE PAGE
+========================= */
+
+function movePage(
+  index,
+  direction
+){
+
+  const newIndex =
+  index + direction;
+
+
+  if(
+    newIndex < 0 ||
+    newIndex >= pagesData.length
+  ){
+
+    return;
+
+  }
+
+
+  const temp =
+  pagesData[index];
+
+
+  pagesData[index] =
+  pagesData[newIndex];
+
+
+  pagesData[newIndex] =
+  temp;
+
+
+  renderPages();
+
+  updateSelectionInfo();
+
+}
+
+
+/* =========================
+   MOVE SELECTED UP
+========================= */
+
+function moveSelectedUp(){
+
+  let changed = false;
+
+
+  for(
+    let i = 1;
+    i < pagesData.length;
+    i++
+  ){
+
+    if(
+      pagesData[i].selected &&
+      !pagesData[i - 1].selected
+    ){
+
+      const temp =
+      pagesData[i - 1];
+
+
+      pagesData[i - 1] =
+      pagesData[i];
+
+
+      pagesData[i] =
+      temp;
+
+
+      changed = true;
+
+    }
+
+  }
+
+
+  if(changed){
+
+    renderPages();
+
+    updateSelectionInfo();
+
+  }
+
+}
+
+
+/* =========================
+   MOVE SELECTED DOWN
+========================= */
+
+function moveSelectedDown(){
+
+  let changed = false;
+
+
+  for(
+    let i = pagesData.length - 2;
+    i >= 0;
+    i--
+  ){
+
+    if(
+      pagesData[i].selected &&
+      !pagesData[i + 1].selected
+    ){
+
+      const temp =
+      pagesData[i + 1];
+
+
+      pagesData[i + 1] =
+      pagesData[i];
+
+
+      pagesData[i] =
+      temp;
+
+
+      changed = true;
+
+    }
+
+  }
+
+
+  if(changed){
+
+    renderPages();
+
+    updateSelectionInfo();
+
+  }
+
+}
+
+
+/* =========================
+   ROTATE SELECTED LEFT
+========================= */
+
+function rotateSelectedLeft(){
+
+  const selected =
+  pagesData.filter(
+    function(page){
+
+      return page.selected;
+
+    }
+  );
+
+
+  if(selected.length === 0){
+
+    showMessage(
+      "Please select page(s) first.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  selected.forEach(
+    function(page){
+
+      page.rotation -= 90;
+
+    }
+  );
+
+
+  renderPages();
+
+}
+
+
+/* =========================
+   ROTATE SELECTED RIGHT
+========================= */
+
+function rotateSelectedRight(){
+
+  const selected =
+  pagesData.filter(
+    function(page){
+
+      return page.selected;
+
+    }
+  );
+
+
+  if(selected.length === 0){
+
+    showMessage(
+      "Please select page(s) first.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  selected.forEach(
+    function(page){
+
+      page.rotation += 90;
+
+    }
+  );
+
+
+  renderPages();
+
+}
+
+
+/* =========================
+   UPDATE SELECTION INFO
+========================= */
+
+function updateSelectionInfo(){
+
+  const count =
+  pagesData.filter(
+    function(page){
+
+      return page.selected;
+
+    }
+  ).length;
+
+
+  document.getElementById(
+    "status"
+  ).textContent =
+  count +
+  " page(s) selected";
+
+
+  document.getElementById(
+    "selectionInfo"
+  ).textContent =
+  count +
+  " selected";
+
+}
+
+
+/* =========================
+   EXTRACT PDF
+========================= */
+
+async function extractPDF(){
+
+  if(!originalPdfBytes){
+
+    showMessage(
+      "Please select a PDF file first.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const selected =
+  pagesData.filter(
+    function(page){
+
+      return page.selected;
+
+    }
+  );
+
+
+  if(selected.length === 0){
+
+    showMessage(
+      "Please select at least one page to extract.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    showMessage(
+      "Creating your extracted PDF...",
+      "info"
+    );
+
+
+    const PDFDocument =
+    PDFLib.PDFDocument;
+
+
+    const degrees =
+    PDFLib.degrees;
+
+
+    const sourcePdf =
+    await PDFDocument.load(
+      new Uint8Array(
+        originalPdfBytes
+      ),
+      {
+        ignoreEncryption:false,
+        updateMetadata:false
+      }
+    );
+
+
+    const outputPdf =
+    await PDFDocument.create();
+
+
+    for(
+      let i = 0;
+      i < pagesData.length;
+      i++
+    ){
+
+      const pageData =
+      pagesData[i];
+
+
+      if(!pageData.selected){
+        continue;
+      }
+
+
+      const originalIndex =
+      pageData.originalIndex - 1;
+
+
+      if(
+        originalIndex < 0 ||
+        originalIndex >=
+        sourcePdf.getPageCount()
+      ){
+
+        throw new Error(
+          "Invalid page index."
+        );
+
+      }
+
+
+      const copiedPages =
+      await outputPdf.copyPages(
+        sourcePdf,
+        [originalIndex]
+      );
+
+
+      if(
+        !copiedPages ||
+        copiedPages.length === 0
+      ){
+
+        throw new Error(
+          "Page could not be copied."
+        );
+
+      }
+
+
+      const newPage =
+      copiedPages[0];
+
+
+      const rotation =
+      (
+        (
+          pageData.rotation %
+          360
+        ) + 360
+      ) % 360;
+
+
+      if(rotation !== 0){
+
+        const currentRotation =
+        newPage.getRotation().angle || 0;
+
+
+        newPage.setRotation(
+          degrees(
+            currentRotation +
+            rotation
+          )
+        );
+
+      }
+
+
+      outputPdf.addPage(
+        newPage
+      );
+
+    }
+
+
+    const pdfBytes =
+    await outputPdf.save({
+      useObjectStreams:true
+    });
+
+
+    if(
+      !pdfBytes ||
+      pdfBytes.length === 0
+    ){
+
+      throw new Error(
+        "Generated PDF is empty."
+      );
+
+    }
+
+
+    let downloadName =
+    originalFileName;
+
+
+    if(
+      downloadName
+      .toLowerCase()
+      .endsWith(".pdf")
+    ){
+
+      downloadName =
+      downloadName.slice(
+        0,
+        -4
+      );
+
+    }
+
+
+    downloadName +=
+    "-extracted-pages.pdf";
+
+
+    const blob =
+    new Blob(
+      [pdfBytes],
+      {
+        type:"application/pdf"
+      }
+    );
+
+
+    const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
+    const link =
+    document.createElement("a");
+
+
+    link.href =
+    url;
+
+    link.download =
+    downloadName;
+
+    link.style.display =
+    "none";
+
+
+    document.body.appendChild(
+      link
+    );
+
+
+    link.click();
+
+
+    setTimeout(
+      function(){
+
+        document.body.removeChild(
+          link
+        );
+
+        URL.revokeObjectURL(
+          url
+        );
+
+      },
+      1500
+    );
+
+
+    showMessage(
+      "PDF downloaded successfully.",
+      "success"
+    );
+
+  }
+
+  catch(error){
+
+    console.error(
+      "EXTRACT PDF ERROR:",
+      error
+    );
+
+
+    showMessage(
+      "Download failed. Please try again.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+function showMessage(
+  text,
+  type
+){
+
+  message.textContent =
+  text;
+
+
+  message.className =
+  "message " + type;
+
+
+  message.style.display =
+  "block";
+
+}
+
+
+function hideMessage(){
+
+  message.style.display =
+  "none";
+
+}
+
+</script>
+
+</body>
+</html>
