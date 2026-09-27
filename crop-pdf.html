@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Crop PDF Online - Free PDF Cropper</title>
+
+<meta name="description"
+content="Crop PDF pages online for free. Select and crop PDF pages easily with a visual preview.">
+
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5f6f8;
+    color:#222;
+}
+
+header{
+    background:#fff;
+    border-bottom:1px solid #ddd;
+    padding:16px 25px;
+}
+
+.logo{
+    font-size:26px;
+    font-weight:700;
+    color:#e53232;
+}
+
+.container{
+    max-width:1200px;
+    margin:25px auto;
+    padding:0 15px;
+}
+
+h1{
+    text-align:center;
+    margin:10px 0 8px;
+    font-size:34px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#666;
+    margin-bottom:25px;
+}
+
+.upload-box{
+    background:#fff;
+    border:2px dashed #ccc;
+    border-radius:12px;
+    padding:35px 20px;
+    text-align:center;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.upload-box:hover{
+    border-color:#e53232;
+    background:#fffafa;
+}
+
+.upload-box input{
+    display:none;
+}
+
+.upload-title{
+    font-size:20px;
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+.upload-text{
+    color:#777;
+}
+
+.file-info{
+    display:none;
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:12px 15px;
+    margin-top:15px;
+    font-weight:600;
+}
+
+.workspace{
+    display:none;
+    margin-top:20px;
+    grid-template-columns:1fr 280px;
+    gap:18px;
+}
+
+.preview-area{
+    background:#fff;
+    border-radius:12px;
+    border:1px solid #ddd;
+    padding:18px;
+}
+
+.preview-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:15px;
+}
+
+.page-title{
+    font-size:18px;
+    font-weight:700;
+}
+
+.page-controls{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+button{
+    border:none;
+    border-radius:7px;
+    padding:10px 15px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+}
+
+.small-btn{
+    background:#eee;
+}
+
+.small-btn:hover{
+    background:#ddd;
+}
+
+.canvas-wrapper{
+    width:100%;
+    min-height:650px;
+    background:#e9eaec;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:auto;
+    padding:25px;
+}
+
+.canvas-box{
+    position:relative;
+    display:inline-block;
+    box-shadow:0 2px 12px rgba(0,0,0,.18);
+    background:white;
+}
+
+#pdfCanvas{
+    display:block;
+    background:#fff;
+}
+
+.crop-selection{
+    position:absolute;
+    border:2px dashed #e53232;
+    background:rgba(229,50,50,.12);
+    cursor:move;
+    display:none;
+}
+
+.crop-handle{
+    width:12px;
+    height:12px;
+    background:#e53232;
+    position:absolute;
+}
+
+.tl{left:-6px;top:-6px;cursor:nwse-resize;}
+.tr{right:-6px;top:-6px;cursor:nesw-resize;}
+.bl{left:-6px;bottom:-6px;cursor:nesw-resize;}
+.br{right:-6px;bottom:-6px;cursor:nwse-resize;}
+
+.crop-label{
+    position:absolute;
+    top:-30px;
+    left:0;
+    background:#e53232;
+    color:white;
+    padding:5px 8px;
+    border-radius:4px;
+    font-size:12px;
+    white-space:nowrap;
+}
+
+.sidebar{
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:18px;
+    height:max-content;
+}
+
+.sidebar h3{
+    margin-top:0;
+    margin-bottom:15px;
+}
+
+.option{
+    margin-bottom:18px;
+}
+
+.option label{
+    display:block;
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+select,
+input[type="number"]{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:7px;
+    font-size:14px;
+}
+
+.action-btn{
+    width:100%;
+    margin-top:8px;
+    background:#e53232;
+    color:white;
+}
+
+.action-btn:hover{
+    background:#c92525;
+}
+
+.reset-btn{
+    width:100%;
+    margin-top:8px;
+    background:#eee;
+}
+
+.help{
+    margin-top:18px;
+    padding:12px;
+    background:#f7f7f7;
+    border-radius:8px;
+    font-size:13px;
+    line-height:1.5;
+    color:#555;
+}
+
+.status{
+    margin-top:15px;
+    padding:10px;
+    border-radius:7px;
+    display:none;
+    font-size:14px;
+}
+
+.page-list{
+    margin-top:15px;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.page-btn{
+    background:#eee;
+    min-width:45px;
+}
+
+.page-btn.active{
+    background:#e53232;
+    color:#fff;
+}
+
+.download-area{
+    display:none;
+    margin-top:20px;
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:20px;
+    text-align:center;
+}
+
+.download-btn{
+    background:#e53232;
+    color:#fff;
+    padding:13px 25px;
+    font-size:16px;
+}
+
+footer{
+    text-align:center;
+    padding:30px 15px;
+    color:#777;
+    font-size:14px;
+}
+
+@media(max-width:850px){
+
+    .workspace{
+        grid-template-columns:1fr;
+    }
+
+    .canvas-wrapper{
+        min-height:450px;
+        padding:15px;
+    }
+
+    h1{
+        font-size:28px;
+    }
+}
+
+@media(max-width:500px){
+
+    header{
+        padding:14px 15px;
+    }
+
+    .logo{
+        font-size:22px;
+    }
+
+    .container{
+        padding:0 10px;
+    }
+
+    .preview-area,
+    .sidebar{
+        padding:12px;
+    }
+
+    .canvas-wrapper{
+        min-height:400px;
+        padding:10px;
+    }
+
+    button{
+        padding:9px 11px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <div class="logo">PDF Editor Tools</div>
+</header>
+
+<div class="container">
+
+<h1>Crop PDF Online</h1>
+
+<div class="subtitle">
+    Crop PDF pages easily with a visual selection tool.
+</div>
+
+<label class="upload-box">
+    <input type="file" id="fileInput" accept="application/pdf">
+    <div class="upload-title">📄 Select PDF File</div>
+    <div class="upload-text">
+        Click here to upload your PDF
+    </div>
+</label>
+
+<div class="file-info" id="fileInfo"></div>
+
+<div class="workspace" id="workspace">
+
+```
+<div class="preview-area">
+
+    <div class="preview-header">
+
+        <div class="page-title" id="pageTitle">
+            Page 1
+        </div>
+
+        <div class="page-controls">
+            <button class="small-btn" id="prevBtn">◀</button>
+            <span id="pageNumber">1 / 1</span>
+            <button class="small-btn" id="nextBtn">▶</button>
+        </div>
+
+    </div>
+
+    <div class="canvas-wrapper">
+
+        <div class="canvas-box" id="canvasBox">
+
+            <canvas id="pdfCanvas"></canvas>
+
+            <div class="crop-selection" id="cropSelection">
+
+                <div class="crop-label" id="cropLabel">
+                    Crop Area
+                </div>
+
+                <div class="crop-handle tl"></div>
+                <div class="crop-handle tr"></div>
+                <div class="crop-handle bl"></div>
+                <div class="crop-handle br"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="page-list" id="pageList"></div>
+
+</div>
+
+
+<div class="sidebar">
+
+    <h3>Crop Settings</h3>
+
+    <div class="option">
+
+        <label>Apply Crop To</label>
+
+        <select id="applyMode">
+
+            <option value="current">
+                Current Page
+            </option>
+
+            <option value="all">
+                All Pages
+            </option>
+
+        </select>
+
+    </div>
+
+    <div class="option">
+
+        <label>Crop Area</label>
+
+        <div style="font-size:13px;color:#666;line-height:1.5;">
+            Drag the red box to move it.<br>
+            Drag the corner handles to resize it.
+        </div>
+
+    </div>
+
+    <button class="action-btn" id="applyBtn">
+        ✂ Apply Crop
+    </button>
+
+    <button class="reset-btn" id="resetBtn">
+        Reset Crop
+    </button>
+
+    <div class="help">
+
+        <b>How to use:</b><br><br>
+
+        1. Upload your PDF.<br>
+        2. Select a page.<br>
+        3. Adjust the red crop box.<br>
+        4. Choose Current Page or All Pages.<br>
+        5. Click Apply Crop.<br>
+        6. Download your cropped PDF.
+
+    </div>
+
+    <div class="status" id="status"></div>
+
+</div>
+```
+
+</div>
+
+<div class="download-area" id="downloadArea">
+
+```
+<h3>✅ PDF Cropped Successfully</h3>
+
+<p id="downloadInfo">
+    Your cropped PDF is ready.
+</p>
+
+<button class="download-btn" id="downloadBtn">
+    ⬇ Download Cropped PDF
+</button>
+```
+
+</div>
+
+</div>
+
+<footer>
+    © 2026 PDF Editor Tools. All rights reserved.
+</footer>
+
+<script>
+
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+const {
+    PDFDocument
+} = PDFLib;
+
+const fileInput =
+document.getElementById("fileInput");
+
+const fileInfo =
+document.getElementById("fileInfo");
+
+const workspace =
+document.getElementById("workspace");
+
+const pdfCanvas =
+document.getElementById("pdfCanvas");
+
+const canvasBox =
+document.getElementById("canvasBox");
+
+const cropSelection =
+document.getElementById("cropSelection");
+
+const cropLabel =
+document.getElementById("cropLabel");
+
+const pageTitle =
+document.getElementById("pageTitle");
+
+const pageNumber =
+document.getElementById("pageNumber");
+
+const pageList =
+document.getElementById("pageList");
+
+const prevBtn =
+document.getElementById("prevBtn");
+
+const nextBtn =
+document.getElementById("nextBtn");
+
+const applyBtn =
+document.getElementById("applyBtn");
+
+const resetBtn =
+document.getElementById("resetBtn");
+
+const applyMode =
+document.getElementById("applyMode");
+
+const status =
+document.getElementById("status");
+
+const downloadArea =
+document.getElementById("downloadArea");
+
+const downloadBtn =
+document.getElementById("downloadBtn");
+
+let pdfFile = null;
+let pdfData = null;
+let pdfDocument = null;
+let currentPage = 1;
+let totalPages = 0;
+let renderedScale = 1;
+
+let crop = {
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0
+};
+
+let outputBytes = null;
+
+
+/* =========================
+   FILE UPLOAD
+========================= */
+
+fileInput.addEventListener("change", async function(){
+
+    const file = this.files[0];
+
+    if(!file) return;
+
+    if(file.type !== "application/pdf"){
+        alert("Please select a PDF file.");
+        return;
+    }
+
+    pdfFile = file;
+
+    fileInfo.style.display = "block";
+
+    fileInfo.textContent =
+        "📄 " + file.name +
+        " • " +
+        formatBytes(file.size);
+
+    try{
+
+        pdfData = await file.arrayBuffer();
+
+        pdfDocument =
+            await pdfjsLib.getDocument({
+                data: pdfData
+            }).promise;
+
+        totalPages =
+            pdfDocument.numPages;
+
+        currentPage = 1;
+
+        workspace.style.display = "grid";
+
+        createPageButtons();
+
+        await renderPage(currentPage);
+
+        downloadArea.style.display = "none";
+
+    }catch(error){
+
+        console.error(error);
+
+        alert("Unable to open this PDF.");
+
+    }
+
+});
+
+
+/* =========================
+   PAGE BUTTONS
+========================= */
+
+function createPageButtons(){
+
+    pageList.innerHTML = "";
+
+    for(let i=1;i<=totalPages;i++){
+
+        const btn =
+            document.createElement("button");
+
+        btn.className = "page-btn";
+
+        btn.textContent = "Page " + i;
+
+        btn.addEventListener("click", async function(){
+
+            currentPage = i;
+
+            await renderPage(currentPage);
+
+        });
+
+        pageList.appendChild(btn);
+    }
+}
+
+
+/* =========================
+   RENDER PAGE
+========================= */
+
+async function renderPage(pageNumberValue){
+
+    const page =
+        await pdfDocument.getPage(pageNumberValue);
+
+    const baseViewport =
+        page.getViewport({
+            scale:1
+        });
+
+    const maxWidth =
+        Math.min(
+            canvasBox.parentElement.clientWidth - 40,
+            850
+        );
+
+    renderedScale =
+        maxWidth / baseViewport.width;
+
+    if(renderedScale < 0.5)
+        renderedScale = 0.5;
+
+    if(renderedScale > 1.5)
+        renderedScale = 1.5;
+
+    const viewport =
+        page.getViewport({
+            scale: renderedScale
+        });
+
+    pdfCanvas.width =
+        Math.round(viewport.width);
+
+    pdfCanvas.height =
+        Math.round(viewport.height);
+
+    canvasBox.style.width =
+        pdfCanvas.width + "px";
+
+    canvasBox.style.height =
+        pdfCanvas.height + "px";
+
+    const context =
+        pdfCanvas.getContext("2d");
+
+    context.clearRect(
+        0,
+        0,
+        pdfCanvas.width,
+        pdfCanvas.height
+    );
+
+    await page.render({
+        canvasContext:context,
+        viewport:viewport
+    }).promise;
+
+    currentPage = pageNumberValue;
+
+    pageTitle.textContent =
+        "Page " + currentPage;
+
+    pageNumber.textContent =
+        currentPage + " / " + totalPages;
+
+    updatePageButtons();
+
+    resetCropBox();
+
+}
+
+
+/* =========================
+   PAGE NAVIGATION
+========================= */
+
+prevBtn.addEventListener("click", async function(){
+
+    if(currentPage <= 1) return;
+
+    currentPage--;
+
+    await renderPage(currentPage);
+
+});
+
+nextBtn.addEventListener("click", async function(){
+
+    if(currentPage >= totalPages) return;
+
+    currentPage++;
+
+    await renderPage(currentPage);
+
+});
+
+
+function updatePageButtons(){
+
+    const buttons =
+        pageList.querySelectorAll(".page-btn");
+
+    buttons.forEach((btn,index)=>{
+
+        btn.classList.toggle(
+            "active",
+            index + 1 === currentPage
+        );
+
+    });
+
+}
+
+
+/* =========================
+   RESET CROP
+========================= */
+
+function resetCropBox(){
+
+    const marginX =
+        pdfCanvas.width * 0.10;
+
+    const marginY =
+        pdfCanvas.height * 0.10;
+
+    crop.x = marginX;
+    crop.y = marginY;
+
+    crop.width =
+        pdfCanvas.width - marginX * 2;
+
+    crop.height =
+        pdfCanvas.height - marginY * 2;
+
+    updateCropBox();
+
+}
+
+
+function updateCropBox(){
+
+    cropSelection.style.display =
+        "block";
+
+    cropSelection.style.left =
+        crop.x + "px";
+
+    cropSelection.style.top =
+        crop.y + "px";
+
+    cropSelection.style.width =
+        crop.width + "px";
+
+    cropSelection.style.height =
+        crop.height + "px";
+
+    cropLabel.textContent =
+        Math.round(crop.width / renderedScale) +
+        " × " +
+        Math.round(crop.height / renderedScale);
+
+}
+
+
+resetBtn.addEventListener(
+    "click",
+    resetCropBox
+);
+
+
+/* =========================
+   CROP BOX DRAGGING
+========================= */
+
+let dragMode = null;
+
+let startMouseX = 0;
+let startMouseY = 0;
+
+let startCrop = null;
+
+cropSelection.addEventListener(
+    "mousedown",
+    function(e){
+
+        if(
+            e.target.classList.contains("crop-handle")
+        ){
+            return;
+        }
+
+        e.preventDefault();
+
+        dragMode = "move";
+
+        startMouseX = e.clientX;
+        startMouseY = e.clientY;
+
+        startCrop = {
+            x:crop.x,
+            y:crop.y,
+            width:crop.width,
+            height:crop.height
+        };
+
+    }
+);
+
+
+document.addEventListener(
+    "mousemove",
+    function(e){
+
+        if(!dragMode) return;
+
+        const dx =
+            e.clientX - startMouseX;
+
+        const dy =
+            e.clientY - startMouseY;
+
+        if(dragMode === "move"){
+
+            crop.x =
+                startCrop.x + dx;
+
+            crop.y =
+                startCrop.y + dy;
+
+            crop.x =
+                Math.max(
+                    0,
+                    Math.min(
+                        crop.x,
+                        pdfCanvas.width - crop.width
+                    )
+                );
+
+            crop.y =
+                Math.max(
+                    0,
+                    Math.min(
+                        crop.y,
+                        pdfCanvas.height - crop.height
+                    )
+                );
+
+        }
+
+        if(dragMode === "tl"){
+            
+            const right =
+                startCrop.x +
+                startCrop.width;
+
+            const bottom =
+                startCrop.y +
+                startCrop.height;
+
+            let newX =
+                Math.max(
+                    0,
+                    Math.min(e.offsetX || 0, right - 30)
+                );
+
+        }
+
+        updateCropBox();
+
+    }
+);
+
+
+document.addEventListener(
+    "mouseup",
+    function(){
+
+        dragMode = null;
+
+    }
+);
+
+
+/* =========================
+   RESIZE HANDLES
+========================= */
+
+document.querySelectorAll(
+    ".crop-handle"
+).forEach(handle=>{
+
+    handle.addEventListener(
+        "mousedown",
+        function(e){
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            dragMode =
+                handle.classList.contains("tl") ? "tl" :
+                handle.classList.contains("tr") ? "tr" :
+                handle.classList.contains("bl") ? "bl" :
+                "br";
+
+            startMouseX =
+                e.clientX;
+
+            startMouseY =
+                e.clientY;
+
+            startCrop = {
+                x:crop.x,
+                y:crop.y,
+                width:crop.width,
+                height:crop.height
+            };
+
+        }
+    );
+
+});
+
+
+document.addEventListener(
+    "mousemove",
+    function(e){
+
+        if(
+            !dragMode ||
+            dragMode === "move"
+        ) return;
+
+        const dx =
+            e.clientX - startMouseX;
+
+        const dy =
+            e.clientY - startMouseY;
+
+        const minSize = 40;
+
+        let left =
+            startCrop.x;
+
+        let top =
+            startCrop.y;
+
+        let right =
+            startCrop.x +
+            startCrop.width;
+
+        let bottom =
+            startCrop.y +
+            startCrop.height;
+
+
+        if(dragMode === "tl"){
+
+            left =
+                Math.max(
+                    0,
+                    Math.min(
+                        startCrop.x + dx,
+                        right - minSize
+                    )
+                );
+
+            top =
+                Math.max(
+                    0,
+                    Math.min(
+                        startCrop.y + dy,
+                        bottom - minSize
+                    )
+                );
+
+        }
+
+
+        if(dragMode === "tr"){
+
+            right =
+                Math.min(
+                    pdfCanvas.width,
+                    Math.max(
+                        startCrop.x + minSize,
+                        startCrop.x +
+                        startCrop.width +
+                        dx
+                    )
+                );
+
+            top =
+                Math.max(
+                    0,
+                    Math.min(
+                        startCrop.y + dy,
+                        bottom - minSize
+                    )
+                );
+
+        }
+
+
+        if(dragMode === "bl"){
+
+            left =
+                Math.max(
+                    0,
+                    Math.min(
+                        startCrop.x + dx,
+                        right - minSize
+                    )
+                );
+
+            bottom =
+                Math.min(
+                    pdfCanvas.height,
+                    Math.max(
+                        startCrop.y + minSize,
+                        startCrop.y +
+                        startCrop.height +
+                        dy
+                    )
+                );
+
+        }
+
+
+        if(dragMode === "br"){
+
+            right =
+                Math.min(
+                    pdfCanvas.width,
+                    Math.max(
+                        startCrop.x + minSize,
+                        startCrop.x +
+                        startCrop.width +
+                        dx
+                    )
+                );
+
+            bottom =
+                Math.min(
+                    pdfCanvas.height,
+                    Math.max(
+                        startCrop.y + minSize,
+                        startCrop.y +
+                        startCrop.height +
+                        dy
+                    )
+                );
+
+        }
+
+
+        crop.x = left;
+        crop.y = top;
+        crop.width = right - left;
+        crop.height = bottom - top;
+
+        updateCropBox();
+
+    }
+);
+
+
+/* =========================
+   TOUCH SUPPORT
+========================= */
+
+let touchStart = null;
+
+cropSelection.addEventListener(
+    "touchstart",
+    function(e){
+
+        if(
+            e.target.classList.contains("crop-handle")
+        ) return;
+
+        const touch =
+            e.touches[0];
+
+        touchStart = {
+            x:touch.clientX,
+            y:touch.clientY,
+            crop:{
+                ...crop
+            }
+        };
+
+    },
+    {passive:true}
+);
+
+cropSelection.addEventListener(
+    "touchmove",
+    function(e){
+
+        if(!touchStart) return;
+
+        const touch =
+            e.touches[0];
+
+        const dx =
+            touch.clientX -
+            touchStart.x;
+
+        const dy =
+            touch.clientY -
+            touchStart.y;
+
+        crop.x =
+            Math.max(
+                0,
+                Math.min(
+                    touchStart.crop.x + dx,
+                    pdfCanvas.width -
+                    crop.width
+                )
+            );
+
+        crop.y =
+            Math.max(
+                0,
+                Math.min(
+                    touchStart.crop.y + dy,
+                    pdfCanvas.height -
+                    crop.height
+                )
+            );
+
+        updateCropBox();
+
+    },
+    {passive:true}
+);
+
+cropSelection.addEventListener(
+    "touchend",
+    function(){
+        touchStart = null;
+    }
+);
+
+
+/* =========================
+   APPLY CROP
+========================= */
+
+applyBtn.addEventListener(
+    "click",
+    async function(){
+
+        if(!pdfData){
+
+            alert("Please upload a PDF first.");
+
+            return;
+        }
+
+        applyBtn.disabled = true;
+
+        showStatus(
+            "Processing PDF...",
+            true
+        );
+
+        try{
+
+            const sourcePdf =
+                await PDFDocument.load(pdfData);
+
+            const outputPdf =
+                await PDFDocument.create();
+
+            const sourcePages =
+                sourcePdf.getPages();
+
+            const mode =
+                applyMode.value;
+
+
+            for(
+                let i=0;
+                i<sourcePages.length;
+                i++
+            ){
+
+                const sourcePage =
+                    sourcePages[i];
+
+                const pageWidth =
+                    sourcePage.getWidth();
+
+                const pageHeight =
+                    sourcePage.getHeight();
+
+                let cropX;
+                let cropY;
+                let cropWidth;
+                let cropHeight;
+
+
+                if(
+                    mode === "current" &&
+                    i !== currentPage - 1
+                ){
+
+                    cropX = 0;
+                    cropY = 0;
+                    cropWidth = pageWidth;
+                    cropHeight = pageHeight;
+
+                }else{
+
+                    const scaleX =
+                        pageWidth /
+                        pdfCanvas.width;
+
+                    const scaleY =
+                        pageHeight /
+                        pdfCanvas.height;
+
+                    cropX =
+                        crop.x * scaleX;
+
+                    cropWidth =
+                        crop.width * scaleX;
+
+                    cropHeight =
+                        crop.height * scaleY;
+
+                    /*
+                       Canvas coordinates start from top.
+                       PDF coordinates start from bottom.
+                    */
+
+                    cropY =
+                        pageHeight -
+                        (
+                            crop.y +
+                            crop.height
+                        ) * scaleY;
+
+                }
+
+
+                /*
+                   Keep the original PDF page size,
+                   but change the visible CropBox.
+                */
+
+                sourcePage.setCropBox(
+                    cropX,
+                    cropY,
+                    cropWidth,
+                    cropHeight
+                );
+
+            }
+
+
+            /*
+               Copy modified pages to new PDF.
+            */
+
+            const copiedPages =
+                await outputPdf.copyPages(
+                    sourcePdf,
+                    sourcePdf.getPageIndices()
+                );
+
+            copiedPages.forEach(page=>{
+                outputPdf.addPage(page);
+            });
+
+
+            outputBytes =
+                await outputPdf.save();
+
+            showStatus(
+                "PDF cropped successfully.",
+                false
+            );
+
+            downloadArea.style.display =
+                "block";
+
+            document.getElementById(
+                "downloadInfo"
+            ).textContent =
+                "Your cropped PDF is ready to download.";
+
+        }catch(error){
+
+            console.error(error);
+
+            showStatus(
+                "Crop failed. Please try another PDF.",
+                false
+            );
+
+        }
+
+        applyBtn.disabled = false;
+
+    }
+);
+
+
+/* =========================
+   DOWNLOAD
+========================= */
+
+downloadBtn.addEventListener(
+    "click",
+    function(){
+
+        if(!outputBytes){
+
+            alert(
+                "Please apply crop first."
+            );
+
+            return;
+        }
+
+        const blob =
+            new Blob(
+                [outputBytes],
+                {
+                    type:"application/pdf"
+                }
+            );
+
+        const url =
+            URL.createObjectURL(blob);
+
+        const a =
+            document.createElement("a");
+
+        a.href = url;
+
+        const originalName =
+            pdfFile.name
+            .replace(
+                /\.pdf$/i,
+                ""
+            );
+
+        a.download =
+            originalName +
+            "-cropped.pdf";
+
+        document.body.appendChild(a);
+
+        a.click();
+
+        a.remove();
+
+        setTimeout(()=>{
+            URL.revokeObjectURL(url);
+        },1000);
+
+    }
+);
+
+
+/* =========================
+   STATUS
+========================= */
+
+function showStatus(
+    message,
+    loading
+){
+
+    status.style.display =
+        "block";
+
+    status.style.background =
+        loading
+        ? "#fff3cd"
+        : "#e8f5e9";
+
+    status.textContent =
+        message;
+}
+
+
+/* =========================
+   FILE SIZE
+========================= */
+
+function formatBytes(bytes){
+
+    if(bytes === 0)
+        return "0 Bytes";
+
+    const units =
+        [
+            "Bytes",
+            "KB",
+            "MB",
+            "GB"
+        ];
+
+    const index =
+        Math.floor(
+            Math.log(bytes) /
+            Math.log(1024)
+        );
+
+    return (
+        parseFloat(
+            (
+                bytes /
+                Math.pow(
+                    1024,
+                    index
+                )
+            ).toFixed(2)
+        ) +
+        " " +
+        units[index]
+    );
+}
+
+</script>
+
+</body>
+</html>
