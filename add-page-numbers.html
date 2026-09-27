@@ -15,10 +15,6 @@ content="Add page numbers to PDF files online for free. Choose position, startin
 
 <style>
 
-/* =========================
-   RESET
-========================= */
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -30,10 +26,6 @@ body{
   background:#f5f7fb;
   color:#222;
 }
-
-/* =========================
-   HEADER
-========================= */
 
 header{
   background:#ffffff;
@@ -68,10 +60,6 @@ header{
   background:#f3f4f6;
 }
 
-/* =========================
-   MAIN
-========================= */
-
 .container{
   max-width:900px;
   margin:45px auto;
@@ -94,20 +82,12 @@ header{
   font-size:17px;
 }
 
-/* =========================
-   TOOL BOX
-========================= */
-
 .tool-box{
   background:#ffffff;
   padding:35px;
   border-radius:18px;
   box-shadow:0 8px 30px rgba(0,0,0,.08);
 }
-
-/* =========================
-   UPLOAD
-========================= */
 
 .upload-area{
   border:2px dashed #d1d5db;
@@ -156,10 +136,6 @@ header{
   background:#c92525;
 }
 
-/* =========================
-   FILE INFO
-========================= */
-
 .file-info{
   display:none;
   margin-top:25px;
@@ -178,10 +154,6 @@ header{
   color:#6b7280;
   margin-top:6px;
 }
-
-/* =========================
-   CONTROLS
-========================= */
 
 .controls{
   display:none;
@@ -225,10 +197,6 @@ header{
   border-color:#e53232;
 }
 
-/* =========================
-   INPUTS
-========================= */
-
 .input-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -259,10 +227,6 @@ header{
 .input-group select:focus{
   border-color:#e53232;
 }
-
-/* =========================
-   PREVIEW
-========================= */
 
 .preview-area{
   display:none;
@@ -336,16 +300,12 @@ header{
 
 .page-number-preview{
   position:absolute;
-  transform:translate(-50%,-50%);
   color:#000;
   font-weight:500;
   white-space:nowrap;
   pointer-events:none;
+  line-height:1;
 }
-
-/* =========================
-   PAGE NAVIGATION
-========================= */
 
 .page-navigation{
   display:none;
@@ -388,10 +348,6 @@ header{
   border-color:#e53232;
   color:#fff;
 }
-
-/* =========================
-   ACTION BUTTONS
-========================= */
 
 .actions{
   display:none;
@@ -441,10 +397,6 @@ header{
   cursor:not-allowed;
 }
 
-/* =========================
-   RESULT
-========================= */
-
 .result{
   display:none;
   margin-top:28px;
@@ -460,10 +412,6 @@ header{
   margin-bottom:18px;
 }
 
-/* =========================
-   NOTE
-========================= */
-
 .note{
   margin-top:28px;
   padding:18px;
@@ -474,10 +422,6 @@ header{
   line-height:1.6;
   font-size:14px;
 }
-
-/* =========================
-   INFO
-========================= */
 
 .info-section{
   margin-top:35px;
@@ -496,10 +440,6 @@ header{
   margin-bottom:12px;
 }
 
-/* =========================
-   FOOTER
-========================= */
-
 footer{
   margin-top:50px;
   padding:25px;
@@ -508,10 +448,6 @@ footer{
   border-top:1px solid #e5e7eb;
   font-size:14px;
 }
-
-/* =========================
-   MOBILE
-========================= */
 
 @media(max-width:700px){
 
@@ -546,10 +482,6 @@ footer{
 
 <body>
 
-<!-- =========================
-     HEADER
-========================= -->
-
 <header>
 
   <div class="header-inner">
@@ -566,10 +498,6 @@ footer{
 
 </header>
 
-
-<!-- =========================
-     MAIN
-========================= -->
 
 <div class="container">
 
@@ -588,8 +516,6 @@ footer{
 
   <div class="tool-box">
 
-
-    <!-- UPLOAD -->
 
     <div class="upload-area">
 
@@ -612,13 +538,11 @@ footer{
       <input
         type="file"
         id="fileInput"
-        accept="application/pdf"
+        accept=".pdf,application/pdf"
       >
 
     </div>
 
-
-    <!-- FILE INFO -->
 
     <div class="file-info" id="fileInfo">
 
@@ -629,12 +553,8 @@ footer{
     </div>
 
 
-    <!-- CONTROLS -->
-
     <div class="controls" id="controls">
 
-
-      <!-- POSITION -->
 
       <div class="control-section">
 
@@ -673,8 +593,6 @@ footer{
       </div>
 
 
-      <!-- PAGE RANGE -->
-
       <div class="control-section">
 
         <h3>
@@ -702,8 +620,6 @@ footer{
       </div>
 
 
-      <!-- INPUT SETTINGS -->
-
       <div class="control-section">
 
         <h3>
@@ -711,7 +627,6 @@ footer{
         </h3>
 
         <div class="input-grid">
-
 
           <div class="input-group">
 
@@ -774,13 +689,10 @@ footer{
 
           </div>
 
-
         </div>
 
       </div>
 
-
-      <!-- PAGE NAVIGATION -->
 
       <div
         class="page-navigation"
@@ -801,8 +713,6 @@ footer{
 
     </div>
 
-
-    <!-- PREVIEW -->
 
     <div class="preview-area" id="previewArea">
 
@@ -848,8 +758,6 @@ footer{
     </div>
 
 
-    <!-- ACTIONS -->
-
     <div class="actions" id="actions">
 
       <button
@@ -869,8 +777,6 @@ footer{
     </div>
 
 
-    <!-- RESULT -->
-
     <div class="result" id="result">
 
       <h3>
@@ -887,8 +793,6 @@ footer{
     </div>
 
 
-    <!-- NOTE -->
-
     <div class="note">
 
       <strong>Note:</strong>
@@ -900,8 +804,6 @@ footer{
 
   </div>
 
-
-  <!-- INFO -->
 
   <div class="info-section">
 
@@ -924,10 +826,6 @@ footer{
 
 </div>
 
-
-<!-- =========================
-     FOOTER
-========================= -->
 
 <footer>
 
@@ -1010,35 +908,25 @@ const zoomValue =
 document.getElementById("zoomValue");
 
 
-let selectedPosition =
-"bottom-center";
+let selectedPosition = "bottom-center";
 
-let applyMode =
-"all";
+let applyMode = "all";
 
-let pdfFile =
-null;
+let pdfFile = null;
 
-let pdfBytes =
-null;
+let pdfBytes = null;
 
-let pdfDocument =
-null;
+let pdfDocument = null;
 
-let totalPages =
-0;
+let totalPages = 0;
 
-let zoom =
-1;
+let zoom = 1;
 
-let selectedPages =
-new Set();
+let selectedPages = new Set();
 
-let outputBytes =
-null;
+let outputBytes = null;
 
-let baseFileName =
-"document";
+let baseFileName = "document";
 
 
 /* =========================
@@ -1049,14 +937,17 @@ fileInput.addEventListener(
 "change",
 async function(){
 
-  const file =
-  this.files[0];
+  const file = this.files[0];
 
   if(!file){
     return;
   }
 
-  if(file.type !== "application/pdf"){
+  const isPDF =
+    file.type === "application/pdf" ||
+    /\.pdf$/i.test(file.name);
+
+  if(!isPDF){
 
     alert("Please select a PDF file.");
 
@@ -1067,8 +958,7 @@ async function(){
   }
 
 
-  pdfFile =
-  file;
+  pdfFile = file;
 
   baseFileName =
   file.name.replace(
@@ -1083,22 +973,49 @@ async function(){
   fileSize.textContent =
   formatFileSize(file.size);
 
-
   fileInfo.style.display =
   "block";
 
 
+  controls.style.display =
+  "none";
+
+  previewArea.style.display =
+  "none";
+
+  actions.style.display =
+  "none";
+
+  result.style.display =
+  "none";
+
+  outputBytes =
+  null;
+
+
   try{
 
+    const buffer =
+    await file.arrayBuffer();
+
+
     pdfBytes =
-    new Uint8Array(
-      await file.arrayBuffer()
-    );
+    new Uint8Array(buffer);
+
+
+    /*
+      PDF.js gets its own copy.
+      This prevents PDF.js from changing
+      the byte array used by PDF-lib.
+    */
+
+    const previewBytes =
+    pdfBytes.slice(0);
 
 
     pdfDocument =
     await pdfjsLib.getDocument({
-      data:pdfBytes
+      data:previewBytes
     }).promise;
 
 
@@ -1123,8 +1040,6 @@ async function(){
 
     createPageButtons();
 
-    renderPreview();
-
 
     controls.style.display =
     "block";
@@ -1135,18 +1050,40 @@ async function(){
     actions.style.display =
     "block";
 
-    result.style.display =
-    "none";
 
+    await renderPreview();
 
   }
 
   catch(error){
 
-    console.error(error);
+    console.error(
+      "PDF loading error:",
+      error
+    );
+
+
+    pdfFile = null;
+
+    pdfBytes = null;
+
+    pdfDocument = null;
+
+    totalPages = 0;
+
+
+    controls.style.display =
+    "none";
+
+    previewArea.style.display =
+    "none";
+
+    actions.style.display =
+    "none";
+
 
     alert(
-      "Unable to open this PDF file."
+      "Unable to open this PDF file. Please try another PDF."
     );
 
   }
@@ -1193,7 +1130,7 @@ document
 
   button.addEventListener(
     "click",
-    function(){
+    async function(){
 
       document
       .querySelectorAll(
@@ -1217,7 +1154,7 @@ document
       this.dataset.position;
 
 
-      renderPreview();
+      await renderPreview();
 
     }
   );
@@ -1231,7 +1168,7 @@ document
 
 allPagesBtn.addEventListener(
 "click",
-function(){
+async function(){
 
   applyMode =
   "all";
@@ -1250,14 +1187,14 @@ function(){
   "none";
 
 
-  renderPreview();
+  await renderPreview();
 
 });
 
 
 selectedPagesBtn.addEventListener(
 "click",
-function(){
+async function(){
 
   applyMode =
   "selected";
@@ -1276,7 +1213,7 @@ function(){
   "block";
 
 
-  renderPreview();
+  await renderPreview();
 
 });
 
@@ -1303,6 +1240,9 @@ function createPageButtons(){
     );
 
 
+    button.type =
+    "button";
+
     button.className =
     "page-btn selected";
 
@@ -1312,7 +1252,7 @@ function createPageButtons(){
 
     button.addEventListener(
       "click",
-      function(){
+      async function(){
 
         if(
           selectedPages.has(i)
@@ -1337,7 +1277,7 @@ function createPageButtons(){
         }
 
 
-        renderPreview();
+        await renderPreview();
 
       }
     );
@@ -1353,6 +1293,125 @@ function createPageButtons(){
 
 
 /* =========================
+   NUMBER FOR PAGE
+========================= */
+
+function getNumberForPage(
+  pageIndex
+){
+
+  const start =
+  getStartNumber();
+
+
+  /*
+    All pages:
+    page 1 = start
+    page 2 = start + 1
+
+    Selected pages:
+    selected page 3 = start
+    selected page 5 = start + 1
+  */
+
+  if(applyMode === "all"){
+
+    return start + pageIndex - 1;
+
+  }
+
+
+  let count = 0;
+
+
+  for(let i=1; i<=pageIndex; i++){
+
+    if(selectedPages.has(i)){
+
+      count++;
+
+    }
+
+  }
+
+
+  return start + count - 1;
+
+}
+
+
+/* =========================
+   START NUMBER
+========================= */
+
+function getStartNumber(){
+
+  let value =
+  parseInt(
+    startNumber.value,
+    10
+  );
+
+
+  if(
+    Number.isNaN(value)
+  ){
+
+    value = 1;
+
+  }
+
+
+  if(value < 0){
+
+    value = 0;
+
+  }
+
+
+  return value;
+
+}
+
+
+/* =========================
+   FONT SIZE
+========================= */
+
+function getFontSize(){
+
+  let value =
+  parseInt(
+    fontSize.value,
+    10
+  );
+
+
+  if(
+    Number.isNaN(value)
+  ){
+
+    value = 12;
+
+  }
+
+
+  value =
+  Math.max(
+    6,
+    Math.min(
+      72,
+      value
+    )
+  );
+
+
+  return value;
+
+}
+
+
+/* =========================
    FORMAT NUMBER
 ========================= */
 
@@ -1360,14 +1419,16 @@ function getPageNumberText(
   pageIndex
 ){
 
-  const start =
-  parseInt(
-    startNumber.value
-  ) || 1;
-
-
   const number =
-  start + pageIndex - 1;
+  getNumberForPage(
+    pageIndex
+  );
+
+
+  const count =
+  applyMode === "selected"
+  ? selectedPages.size
+  : totalPages;
 
 
   switch(
@@ -1384,7 +1445,11 @@ function getPageNumberText(
       return (
         number +
         " of " +
-        totalPages
+        (
+          applyMode === "selected"
+          ? count
+          : totalPages
+        )
       );
 
 
@@ -1394,7 +1459,11 @@ function getPageNumberText(
         "Page " +
         number +
         " of " +
-        totalPages
+        (
+          applyMode === "selected"
+          ? count
+          : totalPages
+        )
       );
 
 
@@ -1408,13 +1477,118 @@ function getPageNumberText(
 
 
 /* =========================
+   POSITION CALCULATION
+========================= */
+
+function calculatePosition(
+  position,
+  width,
+  height,
+  textWidth,
+  size
+){
+
+  /*
+    Same margin logic is used for
+    both preview and downloaded PDF.
+  */
+
+  const margin =
+  Math.max(
+    20,
+    size * 1.5
+  );
+
+
+  let x = 0;
+
+  let y = 0;
+
+
+  if(position === "top-left"){
+
+    x = margin;
+
+    y =
+    height -
+    margin -
+    size;
+
+  }
+
+  else if(position === "top-center"){
+
+    x =
+    (width - textWidth) / 2;
+
+    y =
+    height -
+    margin -
+    size;
+
+  }
+
+  else if(position === "top-right"){
+
+    x =
+    width -
+    textWidth -
+    margin;
+
+    y =
+    height -
+    margin -
+    size;
+
+  }
+
+  else if(position === "bottom-left"){
+
+    x = margin;
+
+    y = margin;
+
+  }
+
+  else if(position === "bottom-right"){
+
+    x =
+    width -
+    textWidth -
+    margin;
+
+    y = margin;
+
+  }
+
+  else{
+
+    x =
+    (width - textWidth) / 2;
+
+    y = margin;
+
+  }
+
+
+  return {
+    x:x,
+    y:y
+  };
+
+}
+
+
+/* =========================
    PREVIEW
 ========================= */
 
 async function renderPreview(){
 
   if(!pdfDocument){
+
     return;
+
   }
 
 
@@ -1427,6 +1601,10 @@ async function renderPreview(){
     totalPages,
     10
   );
+
+
+  const size =
+  getFontSize();
 
 
   for(
@@ -1446,7 +1624,7 @@ async function renderPreview(){
       const viewport =
       page.getViewport({
         scale:
-          0.85 * zoom
+        0.85 * zoom
       });
 
 
@@ -1454,6 +1632,7 @@ async function renderPreview(){
       document.createElement(
         "div"
       );
+
 
       wrapper.className =
       "page-wrapper";
@@ -1465,21 +1644,29 @@ async function renderPreview(){
       );
 
 
-      const context =
-      canvas.getContext("2d");
-
-
       canvas.width =
-      viewport.width;
+      Math.ceil(
+        viewport.width
+      );
 
       canvas.height =
-      viewport.height;
+      Math.ceil(
+        viewport.height
+      );
+
+
+      const context =
+      canvas.getContext(
+        "2d",
+        {
+          alpha:false
+        }
+      );
 
 
       wrapper.appendChild(
         canvas
       );
-
 
       pdfPreview.appendChild(
         wrapper
@@ -1489,10 +1676,10 @@ async function renderPreview(){
       await page.render({
 
         canvasContext:
-          context,
+        context,
 
         viewport:
-          viewport
+        viewport
 
       }).promise;
 
@@ -1522,22 +1709,75 @@ async function renderPreview(){
         );
 
 
+        /*
+          PDF font size is converted
+          to preview pixels.
+        */
+
+        const previewFontSize =
+        size *
+        0.85 *
+        zoom;
+
+
         number.style.fontSize =
-        (
-          parseInt(
-            fontSize.value
-          ) *
-          zoom *
-          0.85
-        ) + "px";
+        previewFontSize +
+        "px";
 
 
-        setPreviewPosition(
-          number,
-          selectedPosition,
-          viewport.width,
-          viewport.height
+        /*
+          Approximate Helvetica width
+          for visual positioning.
+        */
+
+        const estimatedTextWidth =
+        estimateTextWidth(
+          number.textContent,
+          previewFontSize
         );
+
+
+        const position =
+        calculatePosition(
+
+          selectedPosition,
+
+          viewport.width,
+
+          viewport.height,
+
+          estimatedTextWidth,
+
+          previewFontSize
+
+        );
+
+
+        number.style.left =
+        position.x +
+        "px";
+
+
+        /*
+          CSS top is from top,
+          PDF y is from bottom.
+
+          Convert PDF bottom coordinate
+          to preview top coordinate.
+        */
+
+        const topPosition =
+        viewport.height -
+        position.y -
+        previewFontSize;
+
+
+        number.style.top =
+        Math.max(
+          0,
+          topPosition
+        ) +
+        "px";
 
 
         wrapper.appendChild(
@@ -1567,14 +1807,17 @@ async function renderPreview(){
       "div"
     );
 
+
     more.style.padding =
     "10px";
 
     more.style.color =
     "#666";
 
+
     more.textContent =
     "Preview shows first 10 pages.";
+
 
     pdfPreview.appendChild(
       more
@@ -1586,102 +1829,24 @@ async function renderPreview(){
 
 
 /* =========================
-   PREVIEW POSITION
+   TEXT WIDTH ESTIMATE
 ========================= */
 
-function setPreviewPosition(
-  element,
-  position,
-  width,
-  height
+function estimateTextWidth(
+  text,
+  fontSizePx
 ){
 
-  const margin =
-  Math.max(
-    18,
-    width * 0.04
+  /*
+    Helvetica average width
+    approximation for preview.
+  */
+
+  return (
+    text.length *
+    fontSizePx *
+    0.52
   );
-
-
-  if(position === "top-left"){
-
-    element.style.left =
-    margin + "px";
-
-    element.style.top =
-    margin + "px";
-
-    element.style.transform =
-    "translate(0,-50%)";
-
-  }
-
-  else if(
-    position === "top-center"
-  ){
-
-    element.style.left =
-    (width / 2) + "px";
-
-    element.style.top =
-    margin + "px";
-
-  }
-
-  else if(
-    position === "top-right"
-  ){
-
-    element.style.left =
-    (width - margin) + "px";
-
-    element.style.top =
-    margin + "px";
-
-    element.style.transform =
-    "translate(-100%,-50%)";
-
-  }
-
-  else if(
-    position === "bottom-left"
-  ){
-
-    element.style.left =
-    margin + "px";
-
-    element.style.top =
-    (height - margin) + "px";
-
-    element.style.transform =
-    "translate(0,-50%)";
-
-  }
-
-  else if(
-    position === "bottom-right"
-  ){
-
-    element.style.left =
-    (width - margin) + "px";
-
-    element.style.top =
-    (height - margin) + "px";
-
-    element.style.transform =
-    "translate(-100%,-50%)";
-
-  }
-
-  else{
-
-    element.style.left =
-    (width / 2) + "px";
-
-    element.style.top =
-    (height - margin) + "px";
-
-  }
 
 }
 
@@ -1690,28 +1855,31 @@ function setPreviewPosition(
    INPUT LIVE PREVIEW
 ========================= */
 
-[
-  startNumber,
-  fontSize,
-  numberFormat
-]
-.forEach(function(input){
+startNumber.addEventListener(
+"input",
+function(){
 
-  input.addEventListener(
-    "input",
-    function(){
-
-      renderPreview();
-
-    }
-  );
+  renderPreview();
 
 });
 
+
+fontSize.addEventListener(
+"input",
+function(){
+
+  renderPreview();
+
+});
+
+
 numberFormat.addEventListener(
 "change",
-renderPreview
-);
+function(){
+
+  renderPreview();
+
+});
 
 
 /* =========================
@@ -1720,36 +1888,40 @@ renderPreview
 
 zoomIn.addEventListener(
 "click",
-function(){
+async function(){
 
   zoom =
   Math.min(
     1.6,
-    zoom + 0.1
+    Math.round(
+      (zoom + 0.1) * 10
+    ) / 10
   );
 
 
   updateZoom();
 
-  renderPreview();
+  await renderPreview();
 
 });
 
 
 zoomOut.addEventListener(
 "click",
-function(){
+async function(){
 
   zoom =
   Math.max(
     0.5,
-    zoom - 0.1
+    Math.round(
+      (zoom - 0.1) * 10
+    ) / 10
   );
 
 
   updateZoom();
 
-  renderPreview();
+  await renderPreview();
 
 });
 
@@ -1804,24 +1976,34 @@ async function(){
   "Processing...";
 
 
+  result.style.display =
+  "none";
+
+
   try{
 
-    const {
-      PDFDocument,
-      StandardFonts,
-      rgb
-    } = PDFLib;
+    /*
+      Make a fresh copy before giving
+      the bytes to PDF-lib.
+    */
+
+    const sourceBytes =
+    pdfBytes.slice(0);
 
 
     const pdfDoc =
-    await PDFDocument.load(
-      pdfBytes
+    await PDFLib.PDFDocument.load(
+      sourceBytes,
+      {
+        ignoreEncryption:false,
+        updateMetadata:false
+      }
     );
 
 
     const font =
     await pdfDoc.embedFont(
-      StandardFonts.Helvetica
+      PDFLib.StandardFonts.Helvetica
     );
 
 
@@ -1829,10 +2011,25 @@ async function(){
     pdfDoc.getPages();
 
 
+    if(!pages.length){
+
+      throw new Error(
+        "PDF has no pages."
+      );
+
+    }
+
+
+    const size =
+    getFontSize();
+
+
     const start =
-    parseInt(
-      startNumber.value
-    ) || 1;
+    getStartNumber();
+
+
+    let selectedCounter =
+    0;
 
 
     for(
@@ -1845,35 +2042,41 @@ async function(){
       i + 1;
 
 
-      if(
-        applyMode === "selected" &&
-        !selectedPages.has(
-          pageNumber
-        )
-      ){
+      const shouldAdd =
+      applyMode === "all" ||
+      selectedPages.has(
+        pageNumber
+      );
+
+
+      if(!shouldAdd){
 
         continue;
 
       }
 
 
-      const page =
-      pages[i];
+      let number;
 
 
-      const {
-        width,
-        height
-      } =
-      page.getSize();
+      if(applyMode === "all"){
+
+        number =
+        start + i;
+
+      }
+
+      else{
+
+        number =
+        start + selectedCounter;
+
+        selectedCounter++;
+
+      }
 
 
-      const number =
-      start + i;
-
-
-      let text =
-      "";
+      let text;
 
 
       switch(
@@ -1894,7 +2097,11 @@ async function(){
           text =
           number +
           " of " +
-          pages.length;
+          (
+            applyMode === "selected"
+            ? selectedPages.size
+            : pages.length
+          );
 
           break;
 
@@ -1905,7 +2112,11 @@ async function(){
           "Page " +
           number +
           " of " +
-          pages.length;
+          (
+            applyMode === "selected"
+            ? selectedPages.size
+            : pages.length
+          );
 
           break;
 
@@ -1918,17 +2129,20 @@ async function(){
       }
 
 
-      const size =
-      Math.max(
-        6,
-        Math.min(
-          72,
-          parseInt(
-            fontSize.value
-          ) || 12
-        )
-      );
+      const page =
+      pages[i];
 
+
+      const {
+        width,
+        height
+      } =
+      page.getSize();
+
+
+      /*
+        pdf-lib gives actual text width.
+      */
 
       const textWidth =
       font.widthOfTextAtSize(
@@ -1937,114 +2151,33 @@ async function(){
       );
 
 
-      const margin =
-      Math.max(
-        20,
-        size * 1.5
+      const position =
+      calculatePosition(
+
+        selectedPosition,
+
+        width,
+
+        height,
+
+        textWidth,
+
+        size
+
       );
-
-
-      let x;
-      let y;
-
-
-      if(
-        selectedPosition ===
-        "top-left"
-      ){
-
-        x =
-        margin;
-
-        y =
-        height -
-        margin;
-
-      }
-
-      else if(
-        selectedPosition ===
-        "top-center"
-      ){
-
-        x =
-        (width -
-        textWidth) / 2;
-
-        y =
-        height -
-        margin;
-
-      }
-
-      else if(
-        selectedPosition ===
-        "top-right"
-      ){
-
-        x =
-        width -
-        textWidth -
-        margin;
-
-        y =
-        height -
-        margin;
-
-      }
-
-      else if(
-        selectedPosition ===
-        "bottom-left"
-      ){
-
-        x =
-        margin;
-
-        y =
-        margin -
-        size * 0.25;
-
-      }
-
-      else if(
-        selectedPosition ===
-        "bottom-right"
-      ){
-
-        x =
-        width -
-        textWidth -
-        margin;
-
-        y =
-        margin -
-        size * 0.25;
-
-      }
-
-      else{
-
-        x =
-        (width -
-        textWidth) / 2;
-
-        y =
-        margin -
-        size * 0.25;
-
-      }
 
 
       page.drawText(
         text,
         {
-          x:x,
-          y:y,
+          x:position.x,
+          y:position.y,
           size:size,
           font:font,
-          color:rgb(
-            0,0,0
+          color:PDFLib.rgb(
+            0,
+            0,
+            0
           )
         }
       );
@@ -2054,6 +2187,18 @@ async function(){
 
     outputBytes =
     await pdfDoc.save();
+
+
+    if(
+      !outputBytes ||
+      outputBytes.length === 0
+    ){
+
+      throw new Error(
+        "Output PDF is empty."
+      );
+
+    }
 
 
     result.style.display =
@@ -2069,11 +2214,33 @@ async function(){
 
   catch(error){
 
-    console.error(error);
-
-    alert(
-      "Failed to add page numbers. Please try another PDF."
+    console.error(
+      "Add page numbers error:",
+      error
     );
+
+
+    outputBytes =
+    null;
+
+
+    let message =
+    "Failed to add page numbers. Please try another PDF.";
+
+
+    if(
+      error &&
+      error.message
+    ){
+
+      console.error(
+        error.message
+      );
+
+    }
+
+
+    alert(message);
 
   }
 
@@ -2098,7 +2265,10 @@ downloadBtn.addEventListener(
 "click",
 function(){
 
-  if(!outputBytes){
+  if(
+    !outputBytes ||
+    outputBytes.length === 0
+  ){
 
     alert(
       "Please add page numbers first."
@@ -2109,57 +2279,77 @@ function(){
   }
 
 
-  const blob =
-  new Blob(
-    [outputBytes],
-    {
-      type:
-      "application/pdf"
-    }
-  );
+  try{
+
+    const blob =
+    new Blob(
+      [outputBytes],
+      {
+        type:
+        "application/pdf"
+      }
+    );
 
 
-  const url =
-  URL.createObjectURL(
-    blob
-  );
+    const url =
+    URL.createObjectURL(
+      blob
+    );
 
 
-  const link =
-  document.createElement(
-    "a"
-  );
+    const link =
+    document.createElement(
+      "a"
+    );
 
 
-  link.href =
-  url;
+    link.href =
+    url;
 
-  link.download =
-  baseFileName +
-  "-numbered.pdf";
-
-
-  document.body.appendChild(
-    link
-  );
-
-  link.click();
-
-  document.body.removeChild(
-    link
-  );
+    link.download =
+    baseFileName +
+    "-numbered.pdf";
 
 
-  setTimeout(
-    function(){
+    document.body.appendChild(
+      link
+    );
 
-      URL.revokeObjectURL(
-        url
-      );
 
-    },
-    1000
-  );
+    link.click();
+
+
+    document.body.removeChild(
+      link
+    );
+
+
+    setTimeout(
+      function(){
+
+        URL.revokeObjectURL(
+          url
+        );
+
+      },
+      1500
+    );
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Download error:",
+      error
+    );
+
+
+    alert(
+      "Download failed. Please try again."
+    );
+
+  }
 
 });
 
@@ -2215,6 +2405,7 @@ function(){
   pageNavigation.style.display =
   "none";
 
+
   pdfPreview.innerHTML =
   "";
 
@@ -2255,13 +2446,19 @@ function(){
   });
 
 
-  document
-  .querySelector(
+  const defaultPosition =
+  document.querySelector(
     '[data-position="bottom-center"]'
-  )
-  .classList.add(
-    "active"
   );
+
+
+  if(defaultPosition){
+
+    defaultPosition.classList.add(
+      "active"
+    );
+
+  }
 
 
   allPagesBtn.classList.add(
@@ -2276,7 +2473,6 @@ function(){
   updateZoom();
 
 });
-
 
 </script>
 
