@@ -1,0 +1,2284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Add Page Numbers to PDF Online - Free PDF Tool</title>
+
+<meta name="description"
+content="Add page numbers to PDF files online for free. Choose position, starting number, font size and apply page numbers to all or selected pages.">
+
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f5f7fb;
+  color:#222;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+  background:#ffffff;
+  border-bottom:1px solid #e5e7eb;
+  padding:16px 20px;
+}
+
+.header-inner{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  text-decoration:none;
+  color:#e53232;
+  font-size:24px;
+  font-weight:800;
+}
+
+.home-btn{
+  text-decoration:none;
+  color:#333;
+  font-weight:600;
+  padding:9px 16px;
+  border-radius:8px;
+}
+
+.home-btn:hover{
+  background:#f3f4f6;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.container{
+  max-width:900px;
+  margin:45px auto;
+  padding:0 20px;
+}
+
+.hero{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.hero h1{
+  font-size:42px;
+  color:#111827;
+  margin-bottom:12px;
+}
+
+.hero p{
+  color:#6b7280;
+  font-size:17px;
+}
+
+/* =========================
+   TOOL BOX
+========================= */
+
+.tool-box{
+  background:#ffffff;
+  padding:35px;
+  border-radius:18px;
+  box-shadow:0 8px 30px rgba(0,0,0,.08);
+}
+
+/* =========================
+   UPLOAD
+========================= */
+
+.upload-area{
+  border:2px dashed #d1d5db;
+  border-radius:15px;
+  padding:45px 20px;
+  text-align:center;
+  transition:.2s;
+}
+
+.upload-area:hover{
+  border-color:#e53232;
+  background:#fffafa;
+}
+
+.upload-icon{
+  font-size:55px;
+  margin-bottom:14px;
+}
+
+.upload-area h2{
+  margin-bottom:8px;
+}
+
+.upload-area p{
+  color:#6b7280;
+  margin-bottom:22px;
+}
+
+#fileInput{
+  display:none;
+}
+
+.select-btn{
+  display:inline-block;
+  background:#e53232;
+  color:#ffffff;
+  padding:12px 24px;
+  border-radius:9px;
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+  user-select:none;
+}
+
+.select-btn:hover{
+  background:#c92525;
+}
+
+/* =========================
+   FILE INFO
+========================= */
+
+.file-info{
+  display:none;
+  margin-top:25px;
+  padding:18px;
+  background:#f9fafb;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+}
+
+.file-name{
+  font-weight:700;
+  word-break:break-all;
+}
+
+.file-size{
+  color:#6b7280;
+  margin-top:6px;
+}
+
+/* =========================
+   CONTROLS
+========================= */
+
+.controls{
+  display:none;
+  margin-top:25px;
+}
+
+.control-section{
+  margin-bottom:22px;
+}
+
+.control-section h3{
+  font-size:16px;
+  margin-bottom:10px;
+  color:#111827;
+}
+
+.control-row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.option-btn{
+  background:#fff;
+  border:1px solid #d1d5db;
+  color:#333;
+  padding:10px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:14px;
+  font-weight:600;
+}
+
+.option-btn:hover{
+  border-color:#e53232;
+}
+
+.option-btn.active{
+  background:#e53232;
+  color:#fff;
+  border-color:#e53232;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+.input-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.input-group label{
+  display:block;
+  font-size:13px;
+  color:#555;
+  margin-bottom:6px;
+  font-weight:600;
+}
+
+.input-group input,
+.input-group select{
+  width:100%;
+  height:42px;
+  border:1px solid #d1d5db;
+  border-radius:8px;
+  padding:0 10px;
+  font-size:14px;
+  outline:none;
+  background:#fff;
+}
+
+.input-group input:focus,
+.input-group select:focus{
+  border-color:#e53232;
+}
+
+/* =========================
+   PREVIEW
+========================= */
+
+.preview-area{
+  display:none;
+  margin-top:30px;
+}
+
+.preview-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:15px;
+  flex-wrap:wrap;
+}
+
+.preview-header h3{
+  font-size:18px;
+  color:#111827;
+}
+
+.preview-controls{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.zoom-btn{
+  width:36px;
+  height:36px;
+  border:1px solid #d1d5db;
+  background:#fff;
+  border-radius:7px;
+  cursor:pointer;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.zoom-btn:hover{
+  border-color:#e53232;
+  color:#e53232;
+}
+
+.zoom-value{
+  min-width:55px;
+  text-align:center;
+  font-size:13px;
+  color:#555;
+}
+
+.pdf-preview{
+  background:#e5e7eb;
+  border-radius:12px;
+  padding:25px;
+  overflow:auto;
+  max-height:700px;
+  text-align:center;
+}
+
+.page-wrapper{
+  position:relative;
+  display:inline-block;
+  margin:0 auto 25px;
+  background:#fff;
+  box-shadow:0 4px 15px rgba(0,0,0,.12);
+}
+
+.page-wrapper canvas{
+  display:block;
+  max-width:none;
+}
+
+.page-number-preview{
+  position:absolute;
+  transform:translate(-50%,-50%);
+  color:#000;
+  font-weight:500;
+  white-space:nowrap;
+  pointer-events:none;
+}
+
+/* =========================
+   PAGE NAVIGATION
+========================= */
+
+.page-navigation{
+  display:none;
+  margin-top:20px;
+  padding:15px;
+  background:#f9fafb;
+  border:1px solid #e5e7eb;
+  border-radius:10px;
+}
+
+.page-navigation-title{
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.page-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+}
+
+.page-btn{
+  min-width:38px;
+  height:36px;
+  padding:0 9px;
+  border:1px solid #d1d5db;
+  background:#fff;
+  border-radius:7px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.page-btn:hover{
+  border-color:#e53232;
+}
+
+.page-btn.selected{
+  background:#e53232;
+  border-color:#e53232;
+  color:#fff;
+}
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+
+.actions{
+  display:none;
+  margin-top:28px;
+  text-align:center;
+}
+
+.main-btn{
+  border:none;
+  padding:12px 24px;
+  border-radius:9px;
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+  margin:5px;
+}
+
+.add-btn{
+  background:#e53232;
+  color:#fff;
+}
+
+.add-btn:hover{
+  background:#c92525;
+}
+
+.reset-btn{
+  background:#374151;
+  color:#fff;
+}
+
+.reset-btn:hover{
+  background:#1f2937;
+}
+
+.download-btn{
+  background:#16a34a;
+  color:#fff;
+}
+
+.download-btn:hover{
+  background:#15803d;
+}
+
+.main-btn:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+/* =========================
+   RESULT
+========================= */
+
+.result{
+  display:none;
+  margin-top:28px;
+  padding:25px;
+  background:#f0fdf4;
+  border:1px solid #bbf7d0;
+  border-radius:14px;
+  text-align:center;
+}
+
+.result h3{
+  color:#166534;
+  margin-bottom:18px;
+}
+
+/* =========================
+   NOTE
+========================= */
+
+.note{
+  margin-top:28px;
+  padding:18px;
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+  border-radius:10px;
+  color:#7c2d12;
+  line-height:1.6;
+  font-size:14px;
+}
+
+/* =========================
+   INFO
+========================= */
+
+.info-section{
+  margin-top:35px;
+  background:#ffffff;
+  padding:30px;
+  border-radius:15px;
+}
+
+.info-section h2{
+  margin-bottom:15px;
+}
+
+.info-section p{
+  color:#555;
+  line-height:1.7;
+  margin-bottom:12px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  margin-top:50px;
+  padding:25px;
+  text-align:center;
+  color:#6b7280;
+  border-top:1px solid #e5e7eb;
+  font-size:14px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px){
+
+  .hero h1{
+    font-size:32px;
+  }
+
+  .tool-box{
+    padding:20px;
+  }
+
+  .input-grid{
+    grid-template-columns:1fr;
+  }
+
+  .pdf-preview{
+    padding:12px;
+  }
+
+  .control-row{
+    flex-direction:column;
+  }
+
+  .option-btn{
+    width:100%;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+  <div class="header-inner">
+
+    <a href="index.html" class="logo">
+      PDF Editor Tools
+    </a>
+
+    <a href="index.html" class="home-btn">
+      Home
+    </a>
+
+  </div>
+
+</header>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<div class="container">
+
+  <div class="hero">
+
+    <h1>
+      Add Page Numbers to PDF
+    </h1>
+
+    <p>
+      Add page numbers to your PDF documents easily.
+    </p>
+
+  </div>
+
+
+  <div class="tool-box">
+
+
+    <!-- UPLOAD -->
+
+    <div class="upload-area">
+
+      <div class="upload-icon">
+        📄
+      </div>
+
+      <h2>
+        Select PDF File
+      </h2>
+
+      <p>
+        Upload the PDF file you want to add page numbers to.
+      </p>
+
+      <label for="fileInput" class="select-btn">
+        Select PDF
+      </label>
+
+      <input
+        type="file"
+        id="fileInput"
+        accept="application/pdf"
+      >
+
+    </div>
+
+
+    <!-- FILE INFO -->
+
+    <div class="file-info" id="fileInfo">
+
+      <div class="file-name" id="fileName"></div>
+
+      <div class="file-size" id="fileSize"></div>
+
+    </div>
+
+
+    <!-- CONTROLS -->
+
+    <div class="controls" id="controls">
+
+
+      <!-- POSITION -->
+
+      <div class="control-section">
+
+        <h3>
+          Page Number Position
+        </h3>
+
+        <div class="control-row">
+
+          <button class="option-btn" data-position="top-left">
+            Top Left
+          </button>
+
+          <button class="option-btn" data-position="top-center">
+            Top Center
+          </button>
+
+          <button class="option-btn" data-position="top-right">
+            Top Right
+          </button>
+
+          <button class="option-btn" data-position="bottom-left">
+            Bottom Left
+          </button>
+
+          <button class="option-btn active" data-position="bottom-center">
+            Bottom Center
+          </button>
+
+          <button class="option-btn" data-position="bottom-right">
+            Bottom Right
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- PAGE RANGE -->
+
+      <div class="control-section">
+
+        <h3>
+          Apply Page Numbers
+        </h3>
+
+        <div class="control-row">
+
+          <button
+            class="option-btn active"
+            id="allPagesBtn"
+          >
+            All Pages
+          </button>
+
+          <button
+            class="option-btn"
+            id="selectedPagesBtn"
+          >
+            Selected Pages
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- INPUT SETTINGS -->
+
+      <div class="control-section">
+
+        <h3>
+          Number Settings
+        </h3>
+
+        <div class="input-grid">
+
+
+          <div class="input-group">
+
+            <label for="startNumber">
+              Starting Number
+            </label>
+
+            <input
+              type="number"
+              id="startNumber"
+              value="1"
+              min="0"
+            >
+
+          </div>
+
+
+          <div class="input-group">
+
+            <label for="fontSize">
+              Font Size
+            </label>
+
+            <input
+              type="number"
+              id="fontSize"
+              value="12"
+              min="6"
+              max="72"
+            >
+
+          </div>
+
+
+          <div class="input-group">
+
+            <label for="numberFormat">
+              Number Format
+            </label>
+
+            <select id="numberFormat">
+
+              <option value="number">
+                1, 2, 3
+              </option>
+
+              <option value="page">
+                Page 1, Page 2
+              </option>
+
+              <option value="of">
+                1 of 10, 2 of 10
+              </option>
+
+              <option value="pageof">
+                Page 1 of 10, Page 2 of 10
+              </option>
+
+            </select>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- PAGE NAVIGATION -->
+
+      <div
+        class="page-navigation"
+        id="pageNavigation"
+      >
+
+        <div class="page-navigation-title">
+          Select pages:
+        </div>
+
+        <div
+          class="page-buttons"
+          id="pageButtons"
+        ></div>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- PREVIEW -->
+
+    <div class="preview-area" id="previewArea">
+
+      <div class="preview-header">
+
+        <h3>
+          PDF Preview
+        </h3>
+
+        <div class="preview-controls">
+
+          <button
+            class="zoom-btn"
+            id="zoomOut"
+          >
+            −
+          </button>
+
+          <span
+            class="zoom-value"
+            id="zoomValue"
+          >
+            100%
+          </span>
+
+          <button
+            class="zoom-btn"
+            id="zoomIn"
+          >
+            +
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="pdf-preview"
+        id="pdfPreview"
+      ></div>
+
+    </div>
+
+
+    <!-- ACTIONS -->
+
+    <div class="actions" id="actions">
+
+      <button
+        class="main-btn add-btn"
+        id="addNumbersBtn"
+      >
+        Add Page Numbers
+      </button>
+
+      <button
+        class="main-btn reset-btn"
+        id="resetBtn"
+      >
+        Reset
+      </button>
+
+    </div>
+
+
+    <!-- RESULT -->
+
+    <div class="result" id="result">
+
+      <h3>
+        Page Numbers Added Successfully
+      </h3>
+
+      <button
+        class="main-btn download-btn"
+        id="downloadBtn"
+      >
+        Download PDF
+      </button>
+
+    </div>
+
+
+    <!-- NOTE -->
+
+    <div class="note">
+
+      <strong>Note:</strong>
+      Page numbers are added directly to the PDF pages.
+      Your original PDF file is not changed.
+
+    </div>
+
+
+  </div>
+
+
+  <!-- INFO -->
+
+  <div class="info-section">
+
+    <h2>
+      Add Page Numbers to PDF Online
+    </h2>
+
+    <p>
+      Add page numbers to your PDF documents quickly and easily.
+      Choose the position, starting number and font size before
+      creating your new PDF.
+    </p>
+
+    <p>
+      You can apply page numbers to all pages or select specific
+      pages. The generated PDF can then be downloaded directly.
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+  PDF Editor Tools © 2026 —
+  Free Online PDF & Image Tools
+
+</footer>
+
+
+<script>
+
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+
+const fileInput =
+document.getElementById("fileInput");
+
+const fileInfo =
+document.getElementById("fileInfo");
+
+const fileName =
+document.getElementById("fileName");
+
+const fileSize =
+document.getElementById("fileSize");
+
+const controls =
+document.getElementById("controls");
+
+const previewArea =
+document.getElementById("previewArea");
+
+const pdfPreview =
+document.getElementById("pdfPreview");
+
+const actions =
+document.getElementById("actions");
+
+const result =
+document.getElementById("result");
+
+const downloadBtn =
+document.getElementById("downloadBtn");
+
+const addNumbersBtn =
+document.getElementById("addNumbersBtn");
+
+const resetBtn =
+document.getElementById("resetBtn");
+
+const startNumber =
+document.getElementById("startNumber");
+
+const fontSize =
+document.getElementById("fontSize");
+
+const numberFormat =
+document.getElementById("numberFormat");
+
+const pageNavigation =
+document.getElementById("pageNavigation");
+
+const pageButtons =
+document.getElementById("pageButtons");
+
+const allPagesBtn =
+document.getElementById("allPagesBtn");
+
+const selectedPagesBtn =
+document.getElementById("selectedPagesBtn");
+
+const zoomIn =
+document.getElementById("zoomIn");
+
+const zoomOut =
+document.getElementById("zoomOut");
+
+const zoomValue =
+document.getElementById("zoomValue");
+
+
+let selectedPosition =
+"bottom-center";
+
+let applyMode =
+"all";
+
+let pdfFile =
+null;
+
+let pdfBytes =
+null;
+
+let pdfDocument =
+null;
+
+let totalPages =
+0;
+
+let zoom =
+1;
+
+let selectedPages =
+new Set();
+
+let outputBytes =
+null;
+
+let baseFileName =
+"document";
+
+
+/* =========================
+   FILE UPLOAD
+========================= */
+
+fileInput.addEventListener(
+"change",
+async function(){
+
+  const file =
+  this.files[0];
+
+  if(!file){
+    return;
+  }
+
+  if(file.type !== "application/pdf"){
+
+    alert("Please select a PDF file.");
+
+    this.value = "";
+
+    return;
+
+  }
+
+
+  pdfFile =
+  file;
+
+  baseFileName =
+  file.name.replace(
+    /\.pdf$/i,
+    ""
+  );
+
+
+  fileName.textContent =
+  file.name;
+
+  fileSize.textContent =
+  formatFileSize(file.size);
+
+
+  fileInfo.style.display =
+  "block";
+
+
+  try{
+
+    pdfBytes =
+    new Uint8Array(
+      await file.arrayBuffer()
+    );
+
+
+    pdfDocument =
+    await pdfjsLib.getDocument({
+      data:pdfBytes
+    }).promise;
+
+
+    totalPages =
+    pdfDocument.numPages;
+
+
+    selectedPages =
+    new Set();
+
+
+    for(
+      let i=1;
+      i<=totalPages;
+      i++
+    ){
+
+      selectedPages.add(i);
+
+    }
+
+
+    createPageButtons();
+
+    renderPreview();
+
+
+    controls.style.display =
+    "block";
+
+    previewArea.style.display =
+    "block";
+
+    actions.style.display =
+    "block";
+
+    result.style.display =
+    "none";
+
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    alert(
+      "Unable to open this PDF file."
+    );
+
+  }
+
+});
+
+
+/* =========================
+   FILE SIZE
+========================= */
+
+function formatFileSize(bytes){
+
+  if(bytes < 1024){
+
+    return bytes + " Bytes";
+
+  }
+
+  if(bytes < 1024 * 1024){
+
+    return (
+      bytes / 1024
+    ).toFixed(2) + " KB";
+
+  }
+
+  return (
+    bytes / (1024 * 1024)
+  ).toFixed(2) + " MB";
+
+}
+
+
+/* =========================
+   POSITION
+========================= */
+
+document
+.querySelectorAll(
+  "[data-position]"
+)
+.forEach(function(button){
+
+  button.addEventListener(
+    "click",
+    function(){
+
+      document
+      .querySelectorAll(
+        "[data-position]"
+      )
+      .forEach(function(btn){
+
+        btn.classList.remove(
+          "active"
+        );
+
+      });
+
+
+      this.classList.add(
+        "active"
+      );
+
+
+      selectedPosition =
+      this.dataset.position;
+
+
+      renderPreview();
+
+    }
+  );
+
+});
+
+
+/* =========================
+   APPLY MODE
+========================= */
+
+allPagesBtn.addEventListener(
+"click",
+function(){
+
+  applyMode =
+  "all";
+
+
+  allPagesBtn.classList.add(
+    "active"
+  );
+
+  selectedPagesBtn.classList.remove(
+    "active"
+  );
+
+
+  pageNavigation.style.display =
+  "none";
+
+
+  renderPreview();
+
+});
+
+
+selectedPagesBtn.addEventListener(
+"click",
+function(){
+
+  applyMode =
+  "selected";
+
+
+  selectedPagesBtn.classList.add(
+    "active"
+  );
+
+  allPagesBtn.classList.remove(
+    "active"
+  );
+
+
+  pageNavigation.style.display =
+  "block";
+
+
+  renderPreview();
+
+});
+
+
+/* =========================
+   PAGE BUTTONS
+========================= */
+
+function createPageButtons(){
+
+  pageButtons.innerHTML =
+  "";
+
+
+  for(
+    let i=1;
+    i<=totalPages;
+    i++
+  ){
+
+    const button =
+    document.createElement(
+      "button"
+    );
+
+
+    button.className =
+    "page-btn selected";
+
+    button.textContent =
+    i;
+
+
+    button.addEventListener(
+      "click",
+      function(){
+
+        if(
+          selectedPages.has(i)
+        ){
+
+          selectedPages.delete(i);
+
+          this.classList.remove(
+            "selected"
+          );
+
+        }
+
+        else{
+
+          selectedPages.add(i);
+
+          this.classList.add(
+            "selected"
+          );
+
+        }
+
+
+        renderPreview();
+
+      }
+    );
+
+
+    pageButtons.appendChild(
+      button
+    );
+
+  }
+
+}
+
+
+/* =========================
+   FORMAT NUMBER
+========================= */
+
+function getPageNumberText(
+  pageIndex
+){
+
+  const start =
+  parseInt(
+    startNumber.value
+  ) || 1;
+
+
+  const number =
+  start + pageIndex - 1;
+
+
+  switch(
+    numberFormat.value
+  ){
+
+    case "page":
+
+      return "Page " + number;
+
+
+    case "of":
+
+      return (
+        number +
+        " of " +
+        totalPages
+      );
+
+
+    case "pageof":
+
+      return (
+        "Page " +
+        number +
+        " of " +
+        totalPages
+      );
+
+
+    default:
+
+      return String(number);
+
+  }
+
+}
+
+
+/* =========================
+   PREVIEW
+========================= */
+
+async function renderPreview(){
+
+  if(!pdfDocument){
+    return;
+  }
+
+
+  pdfPreview.innerHTML =
+  "";
+
+
+  const previewCount =
+  Math.min(
+    totalPages,
+    10
+  );
+
+
+  for(
+    let pageNumber=1;
+    pageNumber<=previewCount;
+    pageNumber++
+  ){
+
+    try{
+
+      const page =
+      await pdfDocument.getPage(
+        pageNumber
+      );
+
+
+      const viewport =
+      page.getViewport({
+        scale:
+          0.85 * zoom
+      });
+
+
+      const wrapper =
+      document.createElement(
+        "div"
+      );
+
+      wrapper.className =
+      "page-wrapper";
+
+
+      const canvas =
+      document.createElement(
+        "canvas"
+      );
+
+
+      const context =
+      canvas.getContext("2d");
+
+
+      canvas.width =
+      viewport.width;
+
+      canvas.height =
+      viewport.height;
+
+
+      wrapper.appendChild(
+        canvas
+      );
+
+
+      pdfPreview.appendChild(
+        wrapper
+      );
+
+
+      await page.render({
+
+        canvasContext:
+          context,
+
+        viewport:
+          viewport
+
+      }).promise;
+
+
+      const shouldShow =
+      applyMode === "all" ||
+      selectedPages.has(
+        pageNumber
+      );
+
+
+      if(shouldShow){
+
+        const number =
+        document.createElement(
+          "div"
+        );
+
+
+        number.className =
+        "page-number-preview";
+
+
+        number.textContent =
+        getPageNumberText(
+          pageNumber
+        );
+
+
+        number.style.fontSize =
+        (
+          parseInt(
+            fontSize.value
+          ) *
+          zoom *
+          0.85
+        ) + "px";
+
+
+        setPreviewPosition(
+          number,
+          selectedPosition,
+          viewport.width,
+          viewport.height
+        );
+
+
+        wrapper.appendChild(
+          number
+        );
+
+      }
+
+    }
+
+    catch(error){
+
+      console.error(
+        "Preview error:",
+        error
+      );
+
+    }
+
+  }
+
+
+  if(totalPages > 10){
+
+    const more =
+    document.createElement(
+      "div"
+    );
+
+    more.style.padding =
+    "10px";
+
+    more.style.color =
+    "#666";
+
+    more.textContent =
+    "Preview shows first 10 pages.";
+
+    pdfPreview.appendChild(
+      more
+    );
+
+  }
+
+}
+
+
+/* =========================
+   PREVIEW POSITION
+========================= */
+
+function setPreviewPosition(
+  element,
+  position,
+  width,
+  height
+){
+
+  const margin =
+  Math.max(
+    18,
+    width * 0.04
+  );
+
+
+  if(position === "top-left"){
+
+    element.style.left =
+    margin + "px";
+
+    element.style.top =
+    margin + "px";
+
+    element.style.transform =
+    "translate(0,-50%)";
+
+  }
+
+  else if(
+    position === "top-center"
+  ){
+
+    element.style.left =
+    (width / 2) + "px";
+
+    element.style.top =
+    margin + "px";
+
+  }
+
+  else if(
+    position === "top-right"
+  ){
+
+    element.style.left =
+    (width - margin) + "px";
+
+    element.style.top =
+    margin + "px";
+
+    element.style.transform =
+    "translate(-100%,-50%)";
+
+  }
+
+  else if(
+    position === "bottom-left"
+  ){
+
+    element.style.left =
+    margin + "px";
+
+    element.style.top =
+    (height - margin) + "px";
+
+    element.style.transform =
+    "translate(0,-50%)";
+
+  }
+
+  else if(
+    position === "bottom-right"
+  ){
+
+    element.style.left =
+    (width - margin) + "px";
+
+    element.style.top =
+    (height - margin) + "px";
+
+    element.style.transform =
+    "translate(-100%,-50%)";
+
+  }
+
+  else{
+
+    element.style.left =
+    (width / 2) + "px";
+
+    element.style.top =
+    (height - margin) + "px";
+
+  }
+
+}
+
+
+/* =========================
+   INPUT LIVE PREVIEW
+========================= */
+
+[
+  startNumber,
+  fontSize,
+  numberFormat
+]
+.forEach(function(input){
+
+  input.addEventListener(
+    "input",
+    function(){
+
+      renderPreview();
+
+    }
+  );
+
+});
+
+numberFormat.addEventListener(
+"change",
+renderPreview
+);
+
+
+/* =========================
+   ZOOM
+========================= */
+
+zoomIn.addEventListener(
+"click",
+function(){
+
+  zoom =
+  Math.min(
+    1.6,
+    zoom + 0.1
+  );
+
+
+  updateZoom();
+
+  renderPreview();
+
+});
+
+
+zoomOut.addEventListener(
+"click",
+function(){
+
+  zoom =
+  Math.max(
+    0.5,
+    zoom - 0.1
+  );
+
+
+  updateZoom();
+
+  renderPreview();
+
+});
+
+
+function updateZoom(){
+
+  zoomValue.textContent =
+  Math.round(
+    zoom * 100
+  ) + "%";
+
+}
+
+
+/* =========================
+   ADD PAGE NUMBERS
+========================= */
+
+addNumbersBtn.addEventListener(
+"click",
+async function(){
+
+  if(!pdfBytes){
+
+    alert(
+      "Please select a PDF file first."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    applyMode === "selected" &&
+    selectedPages.size === 0
+  ){
+
+    alert(
+      "Please select at least one page."
+    );
+
+    return;
+
+  }
+
+
+  addNumbersBtn.disabled =
+  true;
+
+  addNumbersBtn.textContent =
+  "Processing...";
+
+
+  try{
+
+    const {
+      PDFDocument,
+      StandardFonts,
+      rgb
+    } = PDFLib;
+
+
+    const pdfDoc =
+    await PDFDocument.load(
+      pdfBytes
+    );
+
+
+    const font =
+    await pdfDoc.embedFont(
+      StandardFonts.Helvetica
+    );
+
+
+    const pages =
+    pdfDoc.getPages();
+
+
+    const start =
+    parseInt(
+      startNumber.value
+    ) || 1;
+
+
+    for(
+      let i=0;
+      i<pages.length;
+      i++
+    ){
+
+      const pageNumber =
+      i + 1;
+
+
+      if(
+        applyMode === "selected" &&
+        !selectedPages.has(
+          pageNumber
+        )
+      ){
+
+        continue;
+
+      }
+
+
+      const page =
+      pages[i];
+
+
+      const {
+        width,
+        height
+      } =
+      page.getSize();
+
+
+      const number =
+      start + i;
+
+
+      let text =
+      "";
+
+
+      switch(
+        numberFormat.value
+      ){
+
+        case "page":
+
+          text =
+          "Page " +
+          number;
+
+          break;
+
+
+        case "of":
+
+          text =
+          number +
+          " of " +
+          pages.length;
+
+          break;
+
+
+        case "pageof":
+
+          text =
+          "Page " +
+          number +
+          " of " +
+          pages.length;
+
+          break;
+
+
+        default:
+
+          text =
+          String(number);
+
+      }
+
+
+      const size =
+      Math.max(
+        6,
+        Math.min(
+          72,
+          parseInt(
+            fontSize.value
+          ) || 12
+        )
+      );
+
+
+      const textWidth =
+      font.widthOfTextAtSize(
+        text,
+        size
+      );
+
+
+      const margin =
+      Math.max(
+        20,
+        size * 1.5
+      );
+
+
+      let x;
+      let y;
+
+
+      if(
+        selectedPosition ===
+        "top-left"
+      ){
+
+        x =
+        margin;
+
+        y =
+        height -
+        margin;
+
+      }
+
+      else if(
+        selectedPosition ===
+        "top-center"
+      ){
+
+        x =
+        (width -
+        textWidth) / 2;
+
+        y =
+        height -
+        margin;
+
+      }
+
+      else if(
+        selectedPosition ===
+        "top-right"
+      ){
+
+        x =
+        width -
+        textWidth -
+        margin;
+
+        y =
+        height -
+        margin;
+
+      }
+
+      else if(
+        selectedPosition ===
+        "bottom-left"
+      ){
+
+        x =
+        margin;
+
+        y =
+        margin -
+        size * 0.25;
+
+      }
+
+      else if(
+        selectedPosition ===
+        "bottom-right"
+      ){
+
+        x =
+        width -
+        textWidth -
+        margin;
+
+        y =
+        margin -
+        size * 0.25;
+
+      }
+
+      else{
+
+        x =
+        (width -
+        textWidth) / 2;
+
+        y =
+        margin -
+        size * 0.25;
+
+      }
+
+
+      page.drawText(
+        text,
+        {
+          x:x,
+          y:y,
+          size:size,
+          font:font,
+          color:rgb(
+            0,0,0
+          )
+        }
+      );
+
+    }
+
+
+    outputBytes =
+    await pdfDoc.save();
+
+
+    result.style.display =
+    "block";
+
+
+    result.scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    alert(
+      "Failed to add page numbers. Please try another PDF."
+    );
+
+  }
+
+  finally{
+
+    addNumbersBtn.disabled =
+    false;
+
+    addNumbersBtn.textContent =
+    "Add Page Numbers";
+
+  }
+
+});
+
+
+/* =========================
+   DOWNLOAD
+========================= */
+
+downloadBtn.addEventListener(
+"click",
+function(){
+
+  if(!outputBytes){
+
+    alert(
+      "Please add page numbers first."
+    );
+
+    return;
+
+  }
+
+
+  const blob =
+  new Blob(
+    [outputBytes],
+    {
+      type:
+      "application/pdf"
+    }
+  );
+
+
+  const url =
+  URL.createObjectURL(
+    blob
+  );
+
+
+  const link =
+  document.createElement(
+    "a"
+  );
+
+
+  link.href =
+  url;
+
+  link.download =
+  baseFileName +
+  "-numbered.pdf";
+
+
+  document.body.appendChild(
+    link
+  );
+
+  link.click();
+
+  document.body.removeChild(
+    link
+  );
+
+
+  setTimeout(
+    function(){
+
+      URL.revokeObjectURL(
+        url
+      );
+
+    },
+    1000
+  );
+
+});
+
+
+/* =========================
+   RESET
+========================= */
+
+resetBtn.addEventListener(
+"click",
+function(){
+
+  fileInput.value =
+  "";
+
+  pdfFile =
+  null;
+
+  pdfBytes =
+  null;
+
+  pdfDocument =
+  null;
+
+  totalPages =
+  0;
+
+  selectedPages =
+  new Set();
+
+  outputBytes =
+  null;
+
+  baseFileName =
+  "document";
+
+
+  fileInfo.style.display =
+  "none";
+
+  controls.style.display =
+  "none";
+
+  previewArea.style.display =
+  "none";
+
+  actions.style.display =
+  "none";
+
+  result.style.display =
+  "none";
+
+  pageNavigation.style.display =
+  "none";
+
+  pdfPreview.innerHTML =
+  "";
+
+  pageButtons.innerHTML =
+  "";
+
+
+  selectedPosition =
+  "bottom-center";
+
+  applyMode =
+  "all";
+
+  zoom =
+  1;
+
+
+  startNumber.value =
+  "1";
+
+  fontSize.value =
+  "12";
+
+  numberFormat.value =
+  "number";
+
+
+  document
+  .querySelectorAll(
+    "[data-position]"
+  )
+  .forEach(function(btn){
+
+    btn.classList.remove(
+      "active"
+    );
+
+  });
+
+
+  document
+  .querySelector(
+    '[data-position="bottom-center"]'
+  )
+  .classList.add(
+    "active"
+  );
+
+
+  allPagesBtn.classList.add(
+    "active"
+  );
+
+  selectedPagesBtn.classList.remove(
+    "active"
+  );
+
+
+  updateZoom();
+
+});
+
+
+</script>
+
+</body>
+</html>
