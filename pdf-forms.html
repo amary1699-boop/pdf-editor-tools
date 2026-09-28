@@ -15,10 +15,6 @@ content="Create fillable PDF forms online. Add text fields, checkboxes, radio bu
 
 <style>
 
-/* =========================
-   RESET
-========================= */
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -31,17 +27,13 @@ body{
   color:#202124;
 }
 
-/* =========================
-   HEADER
-========================= */
-
 header{
   background:#fff;
   border-bottom:1px solid #e5e5ea;
 }
 
 .header-inner{
-  max-width:900px;
+  max-width:1000px;
   margin:auto;
   min-height:70px;
   display:flex;
@@ -55,14 +47,10 @@ header{
   font-weight:800;
 }
 
-/* =========================
-   MAIN
-========================= */
-
 .container{
-  max-width:900px;
+  max-width:1000px;
   margin:auto;
-  padding:55px 20px;
+  padding:50px 20px;
 }
 
 .hero{
@@ -85,20 +73,12 @@ header{
   font-size:16px;
 }
 
-/* =========================
-   TOOL BOX
-========================= */
-
 .tool-box{
   background:#fff;
   border-radius:18px;
-  padding:35px;
+  padding:30px;
   box-shadow:0 8px 30px rgba(0,0,0,.06);
 }
-
-/* =========================
-   UPLOAD
-========================= */
 
 .upload-area{
   border:2px dashed #ddd;
@@ -125,17 +105,13 @@ header{
 .upload-btn{
   display:inline-block;
   background:#e53232;
-  color:white;
+  color:#fff;
   padding:12px 24px;
   border-radius:9px;
   cursor:pointer;
   font-weight:700;
   border:none;
 }
-
-/* =========================
-   FILE INFO
-========================= */
 
 .file-info{
   display:none;
@@ -156,10 +132,6 @@ header{
   font-size:13px;
   margin-top:4px;
 }
-
-/* =========================
-   CONTROLS
-========================= */
 
 .controls{
   display:none;
@@ -199,9 +171,7 @@ header{
   color:#fff;
 }
 
-/* =========================
-   FIELD SETTINGS
-========================= */
+/* SETTINGS */
 
 .field-settings{
   display:none;
@@ -247,9 +217,18 @@ header{
   border-color:#e53232;
 }
 
-/* =========================
-   PAGE NAVIGATION
-========================= */
+.apply-settings{
+  margin-top:15px;
+  background:#e53232;
+  color:#fff;
+  border:none;
+  padding:10px 18px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+/* PAGE NAVIGATION */
 
 .page-navigation{
   display:none;
@@ -288,9 +267,7 @@ header{
   border-color:#e53232;
 }
 
-/* =========================
-   PREVIEW
-========================= */
+/* PREVIEW */
 
 .preview-section{
   display:none;
@@ -300,7 +277,7 @@ header{
 .preview-title{
   font-size:18px;
   font-weight:800;
-  margin-bottom:15px;
+  margin-bottom:8px;
 }
 
 .preview-note{
@@ -315,14 +292,14 @@ header{
   border-radius:12px;
   padding:25px;
   overflow:auto;
-  min-height:300px;
+  min-height:400px;
 }
 
 .preview-page{
   position:relative;
   display:block;
   width:max-content;
-  margin:0 auto 25px;
+  margin:0 auto 30px;
   background:#fff;
   box-shadow:0 5px 18px rgba(0,0,0,.15);
 }
@@ -331,21 +308,25 @@ header{
   display:block;
 }
 
+/* FORM FIELD */
+
 .form-field{
   position:absolute;
   border:2px solid #e53232;
-  background:rgba(255,255,255,.75);
+  background:rgba(255,255,255,.82);
   cursor:move;
   user-select:none;
   z-index:10;
   display:flex;
   align-items:center;
   justify-content:center;
-  overflow:hidden;
+  overflow:visible;
+  min-width:20px;
+  min-height:20px;
 }
 
 .form-field:hover{
-  background:rgba(255,240,240,.9);
+  background:rgba(255,240,240,.92);
 }
 
 .form-field.selected{
@@ -362,6 +343,7 @@ header{
   text-align:left;
   display:flex;
   align-items:center;
+  overflow:hidden;
 }
 
 .form-field-checkbox{
@@ -386,9 +368,27 @@ header{
   text-align:left;
 }
 
-/* =========================
-   FIELD ACTIONS
-========================= */
+/* RESIZE HANDLE */
+
+.resize-handle{
+  position:absolute;
+  width:11px;
+  height:11px;
+  background:#e53232;
+  border:2px solid #fff;
+  border-radius:50%;
+  right:-7px;
+  bottom:-7px;
+  cursor:nwse-resize;
+  z-index:30;
+  display:none;
+}
+
+.form-field.selected .resize-handle{
+  display:block;
+}
+
+/* FIELD ACTIONS */
 
 .field-actions{
   display:none;
@@ -420,9 +420,7 @@ header{
   border-color:#e53232;
 }
 
-/* =========================
-   BOTTOM BUTTONS
-========================= */
+/* BOTTOM */
 
 .bottom-actions{
   display:none;
@@ -455,9 +453,7 @@ header{
   cursor:not-allowed;
 }
 
-/* =========================
-   RESULT
-========================= */
+/* RESULT */
 
 .result{
   display:none;
@@ -486,11 +482,10 @@ header{
   padding:12px 25px;
   border-radius:8px;
   font-weight:700;
+  text-decoration:none;
 }
 
-/* =========================
-   FOOTER
-========================= */
+/* FOOTER */
 
 footer{
   text-align:center;
@@ -499,9 +494,7 @@ footer{
   font-size:13px;
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media(max-width:700px){
 
@@ -510,7 +503,7 @@ footer{
   }
 
   .tool-box{
-    padding:22px 16px;
+    padding:20px 15px;
   }
 
   .hero h1{
@@ -529,9 +522,14 @@ footer{
     padding:15px;
   }
 
+  .bottom-actions{
+    flex-direction:column;
+  }
+
 }
 
 </style>
+
 </head>
 
 <body>
@@ -539,9 +537,11 @@ footer{
 <header>
 
   <div class="header-inner">
+
     <div class="logo">
       PDF Editor Tools
     </div>
+
   </div>
 
 </header>
@@ -549,303 +549,288 @@ footer{
 
 <main class="container">
 
-  <section class="hero">
+<section class="hero">
 
-    <h1>
-      Create <span>PDF Forms</span> Online
-    </h1>
+  <h1>
+    Create <span>PDF Forms</span> Online
+  </h1>
 
-    <p>
-      Add fillable fields to your PDF document quickly and easily.
-    </p>
+  <p>
+    Add fillable fields to your PDF document quickly and easily.
+  </p>
 
-  </section>
-
-
-  <div class="tool-box">
+</section>
 
 
-    <!-- =========================
-         UPLOAD
-    ========================= -->
+<div class="tool-box">
 
-    <div class="upload-area">
+<!-- UPLOAD -->
 
-      <h3>
-        Upload your PDF
-      </h3>
+<div class="upload-area">
 
-      <p>
-        Select a PDF file to create fillable form fields.
-      </p>
+  <h3>
+    Upload your PDF
+  </h3>
 
-      <input
-        type="file"
-        id="fileInput"
-        class="file-input"
-        accept=".pdf,application/pdf"
-      >
+  <p>
+    Select a PDF file to create fillable form fields.
+  </p>
 
-      <label
-        for="fileInput"
-        class="upload-btn"
-      >
-        Choose PDF
-      </label>
+  <input
+    type="file"
+    id="fileInput"
+    class="file-input"
+    accept=".pdf,application/pdf"
+  >
 
-    </div>
+  <label
+    for="fileInput"
+    class="upload-btn"
+  >
+    Choose PDF
+  </label>
+
+</div>
 
 
-    <!-- =========================
-         FILE INFO
-    ========================= -->
+<!-- FILE INFO -->
 
-    <div
-      class="file-info"
-      id="fileInfo"
+<div
+  class="file-info"
+  id="fileInfo"
+>
+
+  <div
+    class="file-name"
+    id="fileName"
+  ></div>
+
+  <div
+    class="file-pages"
+    id="filePages"
+  ></div>
+
+</div>
+
+
+<!-- CONTROLS -->
+
+<div
+  class="controls"
+  id="controls"
+>
+
+  <div class="control-title">
+    Form Fields
+  </div>
+
+
+  <div class="form-tools">
+
+    <button
+      class="tool-btn"
+      data-type="text"
     >
+      Text Field
+    </button>
 
-      <div
-        class="file-name"
-        id="fileName"
-      ></div>
-
-      <div
-        class="file-pages"
-        id="filePages"
-      ></div>
-
-    </div>
-
-
-    <!-- =========================
-         CONTROLS
-    ========================= -->
-
-    <div
-      class="controls"
-      id="controls"
+    <button
+      class="tool-btn"
+      data-type="checkbox"
     >
+      Checkbox
+    </button>
 
-      <div class="control-title">
-        Form Fields
-      </div>
+    <button
+      class="tool-btn"
+      data-type="radio"
+    >
+      Radio Button
+    </button>
 
-
-      <div class="form-tools">
-
-        <button
-          class="tool-btn"
-          data-type="text"
-        >
-          Text Field
-        </button>
-
-        <button
-          class="tool-btn"
-          data-type="checkbox"
-        >
-          Checkbox
-        </button>
-
-        <button
-          class="tool-btn"
-          data-type="radio"
-        >
-          Radio Button
-        </button>
-
-        <button
-          class="tool-btn"
-          data-type="dropdown"
-        >
-          Dropdown
-        </button>
-
-      </div>
-
-
-      <!-- =========================
-           FIELD SETTINGS
-      ========================= -->
-
-      <div
-        class="field-settings"
-        id="fieldSettings"
-      >
-
-        <h3>
-          Field Settings
-        </h3>
-
-        <div class="setting-grid">
-
-
-          <div class="setting-group">
-
-            <label>
-              Field Name
-            </label>
-
-            <input
-              type="text"
-              id="fieldName"
-              value="Field1"
-            >
-
-          </div>
-
-
-          <div class="setting-group">
-
-            <label>
-              Default Value
-            </label>
-
-            <input
-              type="text"
-              id="fieldValue"
-              placeholder="Optional"
-            >
-
-          </div>
-
-
-        </div>
-
-      </div>
-
-
-      <!-- =========================
-           PAGE NAVIGATION
-      ========================= -->
-
-      <div
-        class="page-navigation"
-        id="pageNavigation"
-      >
-
-        <div class="page-navigation-title">
-          Select page to add field
-        </div>
-
-        <div
-          class="page-buttons"
-          id="pageButtons"
-        ></div>
-
-      </div>
-
-
-      <!-- =========================
-           PREVIEW
-      ========================= -->
-
-      <div
-        class="preview-section"
-        id="previewSection"
-      >
-
-        <div class="preview-title">
-          PDF Preview
-        </div>
-
-        <div class="preview-note">
-          Select a field above, then click on the PDF page to add it.
-          Drag an added field to move it.
-        </div>
-
-        <div
-          class="preview-area"
-          id="previewArea"
-        ></div>
-
-      </div>
-
-
-      <!-- =========================
-           FIELD ACTIONS
-      ========================= -->
-
-      <div
-        class="field-actions"
-        id="fieldActions"
-      >
-
-        <button
-          id="duplicateBtn"
-        >
-          Duplicate
-        </button>
-
-        <button
-          id="deleteBtn"
-          class="delete-btn"
-        >
-          Delete
-        </button>
-
-      </div>
-
-
-      <!-- =========================
-           BOTTOM ACTIONS
-      ========================= -->
-
-      <div
-        class="bottom-actions"
-        id="bottomActions"
-      >
-
-        <button
-          class="action-btn download-btn"
-          id="createBtn"
-        >
-          Create Fillable PDF
-        </button>
-
-        <button
-          class="action-btn reset-btn"
-          id="resetBtn"
-        >
-          Reset
-        </button>
-
-      </div>
-
-
-      <!-- =========================
-           RESULT
-      ========================= -->
-
-      <div
-        class="result"
-        id="result"
-      >
-
-        <h3>
-          PDF Form Created Successfully
-        </h3>
-
-        <p>
-          Your fillable PDF is ready.
-        </p>
-
-        <a
-          id="downloadLink"
-          class="download-result"
-          href="#"
-          download="fillable-form.pdf"
-        >
-          Download PDF
-        </a>
-
-      </div>
-
-
-    </div>
+    <button
+      class="tool-btn"
+      data-type="dropdown"
+    >
+      Dropdown
+    </button>
 
   </div>
+
+
+  <!-- SETTINGS -->
+
+  <div
+    class="field-settings"
+    id="fieldSettings"
+  >
+
+    <h3>
+      Field Settings
+    </h3>
+
+    <div class="setting-grid">
+
+      <div class="setting-group">
+
+        <label>
+          Field Name
+        </label>
+
+        <input
+          type="text"
+          id="fieldName"
+          value="Field1"
+        >
+
+      </div>
+
+
+      <div class="setting-group">
+
+        <label>
+          Default Value
+        </label>
+
+        <input
+          type="text"
+          id="fieldValue"
+          placeholder="Optional"
+        >
+
+      </div>
+
+    </div>
+
+    <button
+      class="apply-settings"
+      id="applySettings"
+    >
+      Apply Settings
+    </button>
+
+  </div>
+
+
+  <!-- PAGE NAVIGATION -->
+
+  <div
+    class="page-navigation"
+    id="pageNavigation"
+  >
+
+    <div class="page-navigation-title">
+      Select page to add field
+    </div>
+
+    <div
+      class="page-buttons"
+      id="pageButtons"
+    ></div>
+
+  </div>
+
+
+  <!-- PREVIEW -->
+
+  <div
+    class="preview-section"
+    id="previewSection"
+  >
+
+    <div class="preview-title">
+      PDF Preview
+    </div>
+
+    <div class="preview-note">
+      Select a field, then click on a PDF page to add it.
+      Drag the field to move it and use the bottom-right handle to resize it.
+    </div>
+
+    <div
+      class="preview-area"
+      id="previewArea"
+    ></div>
+
+  </div>
+
+
+  <!-- FIELD ACTIONS -->
+
+  <div
+    class="field-actions"
+    id="fieldActions"
+  >
+
+    <button
+      id="duplicateBtn"
+    >
+      Duplicate
+    </button>
+
+    <button
+      id="deleteBtn"
+      class="delete-btn"
+    >
+      Delete
+    </button>
+
+  </div>
+
+
+  <!-- BOTTOM ACTIONS -->
+
+  <div
+    class="bottom-actions"
+    id="bottomActions"
+  >
+
+    <button
+      class="action-btn download-btn"
+      id="createBtn"
+    >
+      Create Fillable PDF
+    </button>
+
+    <button
+      class="action-btn reset-btn"
+      id="resetBtn"
+    >
+      Reset
+    </button>
+
+  </div>
+
+
+  <!-- RESULT -->
+
+  <div
+    class="result"
+    id="result"
+  >
+
+    <h3>
+      PDF Form Created Successfully
+    </h3>
+
+    <p>
+      Your fillable PDF is ready.
+    </p>
+
+    <a
+      id="downloadLink"
+      class="download-result"
+      href="#"
+      download="fillable-form.pdf"
+    >
+      Download PDF
+    </a>
+
+  </div>
+
+</div>
+
+</div>
 
 </main>
 
@@ -901,6 +886,9 @@ const fieldName =
 const fieldValue =
   document.getElementById("fieldValue");
 
+const applySettings =
+  document.getElementById("applySettings");
+
 const pageNavigation =
   document.getElementById("pageNavigation");
 
@@ -937,6 +925,7 @@ const downloadLink =
 ========================= */
 
 let pdfBytes = null;
+
 let pdfDocument = null;
 
 let totalPages = 0;
@@ -958,102 +947,106 @@ let outputUrl = null;
    UPLOAD PDF
 ========================= */
 
-fileInput.addEventListener("change", async function(){
+fileInput.addEventListener(
+  "change",
+  async function(){
 
-  const file = this.files[0];
+    const file = this.files[0];
 
-  if(!file){
-    return;
+    if(!file){
+      return;
+    }
+
+    if(
+      !file.name.toLowerCase().endsWith(".pdf") &&
+      file.type !== "application/pdf"
+    ){
+
+      alert("Please select a PDF file.");
+
+      fileInput.value = "";
+
+      return;
+    }
+
+
+    try{
+
+      const buffer =
+        await file.arrayBuffer();
+
+
+      pdfBytes =
+        new Uint8Array(
+          buffer.slice(0)
+        );
+
+
+      const previewBytes =
+        new Uint8Array(
+          buffer.slice(0)
+        );
+
+
+      pdfDocument =
+        await pdfjsLib
+          .getDocument({
+            data:previewBytes
+          })
+          .promise;
+
+
+      totalPages =
+        pdfDocument.numPages;
+
+
+      fileName.textContent =
+        file.name;
+
+      filePages.textContent =
+        totalPages +
+        (
+          totalPages === 1
+          ? " page"
+          : " pages"
+        );
+
+
+      fileInfo.style.display =
+        "block";
+
+      controls.style.display =
+        "block";
+
+      previewSection.style.display =
+        "block";
+
+      pageNavigation.style.display =
+        "block";
+
+      bottomActions.style.display =
+        "flex";
+
+
+      createPageButtons();
+
+      await renderAllPages();
+
+    }
+    catch(error){
+
+      console.error(error);
+
+      alert(
+        "Unable to open this PDF. Please try another PDF."
+      );
+
+      resetTool();
+
+    }
+
   }
-
-  if(
-    !file.name.toLowerCase().endsWith(".pdf") &&
-    file.type !== "application/pdf"
-  ){
-
-    alert("Please select a PDF file.");
-
-    fileInput.value = "";
-
-    return;
-  }
-
-
-  try{
-
-    const buffer =
-      await file.arrayBuffer();
-
-
-    /*
-      IMPORTANT:
-      Keep separate copy for PDF.js.
-      PDF.js can transfer its ArrayBuffer
-      to the worker.
-    */
-
-    pdfBytes =
-      new Uint8Array(buffer.slice(0));
-
-
-    const previewBytes =
-      new Uint8Array(buffer.slice(0));
-
-
-    pdfDocument =
-      await pdfjsLib
-        .getDocument({
-          data:previewBytes
-        })
-        .promise;
-
-
-    totalPages =
-      pdfDocument.numPages;
-
-
-    fileName.textContent =
-      file.name;
-
-    filePages.textContent =
-      totalPages +
-      (totalPages === 1 ? " page" : " pages");
-
-
-    fileInfo.style.display =
-      "block";
-
-    controls.style.display =
-      "block";
-
-    previewSection.style.display =
-      "block";
-
-    pageNavigation.style.display =
-      "block";
-
-    bottomActions.style.display =
-      "flex";
-
-
-    createPageButtons();
-
-    await renderAllPages();
-
-
-  }catch(error){
-
-    console.error(error);
-
-    alert(
-      "Unable to open this PDF. Please try another PDF."
-    );
-
-    resetTool();
-
-  }
-
-});
+);
 
 
 /* =========================
@@ -1064,7 +1057,6 @@ function createPageButtons(){
 
   pageButtons.innerHTML = "";
 
-
   for(
     let i = 1;
     i <= totalPages;
@@ -1074,10 +1066,8 @@ function createPageButtons(){
     const button =
       document.createElement("button");
 
-
     button.className =
       "page-btn";
-
 
     button.textContent =
       i;
@@ -1100,24 +1090,52 @@ function createPageButtons(){
           .querySelectorAll(".page-btn")
           .forEach(function(btn){
 
-            btn.classList.remove("active");
+            btn.classList.remove(
+              "active"
+            );
 
           });
 
 
-        button.classList.add("active");
+        button.classList.add(
+          "active"
+        );
 
 
-        selectedField = null;
-
-        fieldActions.style.display =
-          "none";
+        scrollToPage(i);
 
       }
     );
 
 
-    pageButtons.appendChild(button);
+    pageButtons.appendChild(
+      button
+    );
+
+  }
+
+}
+
+
+/* =========================
+   SCROLL TO PAGE
+========================= */
+
+function scrollToPage(pageNumber){
+
+  const page =
+    document.querySelector(
+      '.preview-page[data-page="' +
+      pageNumber +
+      '"]'
+    );
+
+  if(page){
+
+    page.scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
 
   }
 
@@ -1132,7 +1150,6 @@ async function renderAllPages(){
 
   previewArea.innerHTML = "";
 
-
   for(
     let pageNumber = 1;
     pageNumber <= totalPages;
@@ -1145,7 +1162,7 @@ async function renderAllPages(){
       );
 
 
-    const scale = 1.1;
+    const scale = 1.35;
 
     const viewport =
       page.getViewport({
@@ -1158,7 +1175,6 @@ async function renderAllPages(){
 
     wrapper.className =
       "preview-page";
-
 
     wrapper.dataset.page =
       pageNumber;
@@ -1173,7 +1189,6 @@ async function renderAllPages(){
 
     const canvas =
       document.createElement("canvas");
-
 
     const context =
       canvas.getContext("2d");
@@ -1192,10 +1207,13 @@ async function renderAllPages(){
       viewport.height + "px";
 
 
-    wrapper.appendChild(canvas);
+    wrapper.appendChild(
+      canvas
+    );
 
-
-    previewArea.appendChild(wrapper);
+    previewArea.appendChild(
+      wrapper
+    );
 
 
     await page.render({
@@ -1250,7 +1268,7 @@ function renderFieldsForPage(
 
 
 /* =========================
-   FORM TOOL BUTTONS
+   TOOL BUTTONS
 ========================= */
 
 document
@@ -1269,12 +1287,16 @@ document
           .querySelectorAll(".tool-btn")
           .forEach(function(btn){
 
-            btn.classList.remove("active");
+            btn.classList.remove(
+              "active"
+            );
 
           });
 
 
-        button.classList.add("active");
+        button.classList.add(
+          "active"
+        );
 
 
         fieldSettings.style.display =
@@ -1304,7 +1326,7 @@ document
         ){
 
           fieldName.value =
-            "Radio" + fieldCounter;
+            "RadioGroup" + fieldCounter;
 
         }
 
@@ -1317,6 +1339,10 @@ document
 
         }
 
+        fieldValue.value = "";
+
+        selectedField = null;
+
       }
     );
 
@@ -1324,7 +1350,7 @@ document
 
 
 /* =========================
-   CLICK PDF PAGE TO ADD FIELD
+   CLICK PDF PAGE
 ========================= */
 
 previewArea.addEventListener(
@@ -1347,16 +1373,14 @@ previewArea.addEventListener(
     }
 
 
-    /*
-      Don't create a new field
-      when clicking an existing field.
-    */
-
     if(
-      event.target.closest(".form-field")
+      event.target.closest(
+        ".form-field"
+      )
     ){
 
       return;
+
     }
 
 
@@ -1367,7 +1391,6 @@ previewArea.addEventListener(
     const x =
       event.clientX -
       rect.left;
-
 
     const y =
       event.clientY -
@@ -1389,16 +1412,13 @@ previewArea.addEventListener(
     fieldCounter++;
 
 
-    const viewport = {
-      width:pageElement.clientWidth,
-      height:pageElement.clientHeight
-    };
-
-
     createFieldElement(
       pageElement,
       field,
-      viewport
+      {
+        width:pageElement.clientWidth,
+        height:pageElement.clientHeight
+      }
     );
 
 
@@ -1418,13 +1438,20 @@ previewArea.addEventListener(
       .querySelectorAll(".tool-btn")
       .forEach(function(btn){
 
-        btn.classList.remove("active");
+        btn.classList.remove(
+          "active"
+        );
 
       });
 
 
     fieldSettings.style.display =
-      "none";
+      "block";
+
+
+    updateSettingsFromField(
+      field
+    );
 
   }
 );
@@ -1443,10 +1470,13 @@ function createFieldData(
 ){
 
   let width = 160;
+
   let height = 36;
 
 
-  if(selectedFieldType === "checkbox"){
+  if(
+    selectedFieldType === "checkbox"
+  ){
 
     width = 32;
     height = 32;
@@ -1454,7 +1484,9 @@ function createFieldData(
   }
 
 
-  if(selectedFieldType === "radio"){
+  if(
+    selectedFieldType === "radio"
+  ){
 
     width = 32;
     height = 32;
@@ -1462,7 +1494,9 @@ function createFieldData(
   }
 
 
-  if(selectedFieldType === "dropdown"){
+  if(
+    selectedFieldType === "dropdown"
+  ){
 
     width = 180;
     height = 36;
@@ -1471,6 +1505,7 @@ function createFieldData(
 
 
   x -= width / 2;
+
   y -= height / 2;
 
 
@@ -1567,7 +1602,11 @@ function createFieldElement(
     field.height + "px";
 
 
-  if(field.type === "text"){
+  /* FIELD CONTENT */
+
+  if(
+    field.type === "text"
+  ){
 
     const text =
       document.createElement("div");
@@ -1578,7 +1617,9 @@ function createFieldElement(
     text.textContent =
       field.name;
 
-    element.appendChild(text);
+    element.appendChild(
+      text
+    );
 
   }
 
@@ -1607,7 +1648,9 @@ function createFieldElement(
     radio.className =
       "form-field-radio";
 
-    element.appendChild(radio);
+    element.appendChild(
+      radio
+    );
 
   }
 
@@ -1626,13 +1669,32 @@ function createFieldElement(
       field.name +
       " ▼";
 
-    element.appendChild(text);
+    element.appendChild(
+      text
+    );
 
   }
 
 
-  wrapper.appendChild(element);
+  /* RESIZE HANDLE */
 
+  const resizeHandle =
+    document.createElement("div");
+
+  resizeHandle.className =
+    "resize-handle";
+
+  element.appendChild(
+    resizeHandle
+  );
+
+
+  wrapper.appendChild(
+    element
+  );
+
+
+  /* SELECT */
 
   element.addEventListener(
     "click",
@@ -1649,10 +1711,22 @@ function createFieldElement(
   );
 
 
+  /* DRAG */
+
   makeDraggable(
     element,
     field,
     wrapper
+  );
+
+
+  /* RESIZE */
+
+  makeResizable(
+    element,
+    field,
+    wrapper,
+    resizeHandle
   );
 
 }
@@ -1675,7 +1749,9 @@ function selectField(
     .querySelectorAll(".form-field")
     .forEach(function(item){
 
-      item.classList.remove("selected");
+      item.classList.remove(
+        "selected"
+      );
 
     });
 
@@ -1687,6 +1763,140 @@ function selectField(
 
   fieldActions.style.display =
     "block";
+
+
+  fieldSettings.style.display =
+    "block";
+
+
+  updateSettingsFromField(
+    field
+  );
+
+}
+
+
+/* =========================
+   UPDATE SETTINGS UI
+========================= */
+
+function updateSettingsFromField(
+  field
+){
+
+  fieldName.value =
+    field.name;
+
+  fieldValue.value =
+    field.value || "";
+
+}
+
+
+/* =========================
+   APPLY SETTINGS
+========================= */
+
+applySettings.addEventListener(
+  "click",
+  function(){
+
+    if(!selectedField){
+
+      alert(
+        "Please select a field first."
+      );
+
+      return;
+
+    }
+
+
+    const newName =
+      fieldName.value.trim();
+
+
+    if(!newName){
+
+      alert(
+        "Field name cannot be empty."
+      );
+
+      return;
+
+    }
+
+
+    selectedField.name =
+      newName;
+
+
+    selectedField.value =
+      fieldValue.value;
+
+
+    const element =
+      document.querySelector(
+        '[data-field-id="' +
+        selectedField.id +
+        '"]'
+      );
+
+
+    if(element){
+
+      updateFieldVisual(
+        element,
+        selectedField
+      );
+
+    }
+
+
+    alert(
+      "Field settings updated."
+    );
+
+  }
+);
+
+
+/* =========================
+   UPDATE VISUAL
+========================= */
+
+function updateFieldVisual(
+  element,
+  field
+){
+
+  const text =
+    element.querySelector(
+      ".form-field-text"
+    );
+
+
+  if(text){
+
+    text.textContent =
+      field.name;
+
+  }
+
+
+  const dropdown =
+    element.querySelector(
+      ".form-field-dropdown"
+    );
+
+
+  if(dropdown){
+
+    dropdown.textContent =
+      field.name +
+      " ▼";
+
+  }
 
 }
 
@@ -1704,9 +1914,11 @@ function makeDraggable(
   let dragging = false;
 
   let startX = 0;
+
   let startY = 0;
 
   let originalX = 0;
+
   let originalY = 0;
 
 
@@ -1714,15 +1926,23 @@ function makeDraggable(
     "pointerdown",
     function(event){
 
+      if(
+        event.target.classList.contains(
+          "resize-handle"
+        )
+      ){
+
+        return;
+
+      }
+
+
       event.preventDefault();
+
       event.stopPropagation();
 
 
       dragging = true;
-
-
-      selectedField =
-        field;
 
 
       selectField(
@@ -1831,7 +2051,179 @@ function makeDraggable(
           event.pointerId
         );
 
-      }catch(e){}
+      }
+      catch(e){}
+
+    }
+  );
+
+}
+
+
+/* =========================
+   RESIZE FIELD
+========================= */
+
+function makeResizable(
+  element,
+  field,
+  wrapper,
+  handle
+){
+
+  let resizing = false;
+
+  let startX = 0;
+
+  let startY = 0;
+
+  let startWidth = 0;
+
+  let startHeight = 0;
+
+
+  handle.addEventListener(
+    "pointerdown",
+    function(event){
+
+      event.preventDefault();
+
+      event.stopPropagation();
+
+
+      resizing = true;
+
+
+      selectField(
+        field,
+        element
+      );
+
+
+      startX =
+        event.clientX;
+
+      startY =
+        event.clientY;
+
+
+      startWidth =
+        field.width;
+
+      startHeight =
+        field.height;
+
+
+      handle.setPointerCapture(
+        event.pointerId
+      );
+
+    }
+  );
+
+
+  handle.addEventListener(
+    "pointermove",
+    function(event){
+
+      if(!resizing){
+        return;
+      }
+
+
+      const dx =
+        event.clientX -
+        startX;
+
+
+      const dy =
+        event.clientY -
+        startY;
+
+
+      let newWidth =
+        startWidth + dx;
+
+
+      let newHeight =
+        startHeight + dy;
+
+
+      const minWidth =
+        field.type === "checkbox" ||
+        field.type === "radio"
+        ? 25
+        : 60;
+
+
+      const minHeight =
+        field.type === "checkbox" ||
+        field.type === "radio"
+        ? 25
+        : 25;
+
+
+      newWidth =
+        Math.max(
+          minWidth,
+          newWidth
+        );
+
+
+      newHeight =
+        Math.max(
+          minHeight,
+          newHeight
+        );
+
+
+      newWidth =
+        Math.min(
+          newWidth,
+          wrapper.clientWidth -
+          field.x
+        );
+
+
+      newHeight =
+        Math.min(
+          newHeight,
+          wrapper.clientHeight -
+          field.y
+        );
+
+
+      field.width =
+        newWidth;
+
+      field.height =
+        newHeight;
+
+
+      element.style.width =
+        newWidth + "px";
+
+      element.style.height =
+        newHeight + "px";
+
+    }
+  );
+
+
+  handle.addEventListener(
+    "pointerup",
+    function(event){
+
+      resizing = false;
+
+      try{
+
+        handle.releasePointerCapture(
+          event.pointerId
+        );
+
+      }
+      catch(e){}
 
     }
   );
@@ -1848,7 +2240,13 @@ deleteBtn.addEventListener(
   function(){
 
     if(!selectedField){
+
+      alert(
+        "Please select a field first."
+      );
+
       return;
+
     }
 
 
@@ -1888,6 +2286,9 @@ deleteBtn.addEventListener(
     fieldActions.style.display =
       "none";
 
+    fieldSettings.style.display =
+      "none";
+
   }
 );
 
@@ -1901,7 +2302,13 @@ duplicateBtn.addEventListener(
   function(){
 
     if(!selectedField){
+
+      alert(
+        "Please select a field first."
+      );
+
       return;
+
     }
 
 
@@ -1922,6 +2329,7 @@ duplicateBtn.addEventListener(
 
 
     copy.x += 15;
+
     copy.y += 15;
 
 
@@ -1941,7 +2349,9 @@ duplicateBtn.addEventListener(
       );
 
 
-    fields.push(copy);
+    fields.push(
+      copy
+    );
 
 
     const wrapper =
@@ -1969,6 +2379,9 @@ duplicateBtn.addEventListener(
     selectedField =
       copy;
 
+
+    fieldCounter++;
+
   }
 );
 
@@ -1988,6 +2401,7 @@ createBtn.addEventListener(
       );
 
       return;
+
     }
 
 
@@ -1998,6 +2412,7 @@ createBtn.addEventListener(
       );
 
       return;
+
     }
 
 
@@ -2026,8 +2441,7 @@ createBtn.addEventListener(
 
 
       /*
-        Convert preview CSS pixels
-        back to PDF points.
+        Create PDF fields
       */
 
       for(
@@ -2085,6 +2499,8 @@ createBtn.addEventListener(
         let pdfField;
 
 
+        /* TEXT */
+
         if(
           field.type === "text"
         ){
@@ -2117,6 +2533,8 @@ createBtn.addEventListener(
         }
 
 
+        /* CHECKBOX */
+
         else if(
           field.type === "checkbox"
         ){
@@ -2140,23 +2558,35 @@ createBtn.addEventListener(
         }
 
 
+        /* RADIO */
+
         else if(
           field.type === "radio"
         ){
 
-          /*
-            Radio groups need a shared
-            group name.
-          */
+          let radioGroup;
 
-          let radioGroup =
-            form.getRadioGroup(
-              field.name
-            );
+
+          try{
+
+            radioGroup =
+              form.getRadioGroup(
+                field.name
+              );
+
+          }
+          catch(error){
+
+            radioGroup =
+              form.createRadioGroup(
+                field.name
+              );
+
+          }
 
 
           radioGroup.addOptionToPage(
-            "Option" +
+            "Option_" +
             field.id,
             page,
             {
@@ -2169,6 +2599,8 @@ createBtn.addEventListener(
 
         }
 
+
+        /* DROPDOWN */
 
         else if(
           field.type === "dropdown"
@@ -2195,7 +2627,8 @@ createBtn.addEventListener(
                 field.value
               );
 
-            }catch(e){}
+            }
+            catch(e){}
 
           }
 
@@ -2216,7 +2649,7 @@ createBtn.addEventListener(
 
 
       /*
-        Update appearance streams.
+        Update appearance
       */
 
       form.updateFieldAppearances();
@@ -2268,12 +2701,14 @@ createBtn.addEventListener(
       });
 
 
-    }catch(error){
+    }
+    catch(error){
 
       console.error(error);
 
       alert(
-        "Failed to create fillable PDF. Please try another PDF."
+        "Failed to create fillable PDF.\n\n" +
+        error.message
       );
 
     }
@@ -2339,9 +2774,11 @@ function resetTool(){
   fieldCounter = 1;
 
 
-  fileName.textContent = "";
+  fileName.textContent =
+    "";
 
-  filePages.textContent = "";
+  filePages.textContent =
+    "";
 
 
   fileInfo.style.display =
@@ -2380,9 +2817,18 @@ function resetTool(){
     .querySelectorAll(".tool-btn")
     .forEach(function(btn){
 
-      btn.classList.remove("active");
+      btn.classList.remove(
+        "active"
+      );
 
     });
+
+
+  fieldName.value =
+    "Field1";
+
+  fieldValue.value =
+    "";
 
 }
 
