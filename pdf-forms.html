@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,9 +51,9 @@ header{
 }
 
 .home-btn{
-    text-decoration:none;
-    color:#fff;
     background:#e53232;
+    color:#fff;
+    text-decoration:none;
     padding:9px 18px;
     border-radius:7px;
     font-weight:bold;
@@ -63,7 +62,7 @@ header{
 .container{
     max-width:1200px;
     margin:auto;
-    padding:30px 15px 50px;
+    padding:30px 15px 60px;
 }
 
 .hero{
@@ -79,20 +78,18 @@ header{
 .hero p{
     margin:0;
     color:#666;
-    font-size:16px;
 }
 
 .card{
     background:#fff;
-    border-radius:12px;
     padding:20px;
+    border-radius:12px;
     margin-bottom:20px;
     box-shadow:0 2px 10px rgba(0,0,0,.07);
 }
 
 .card h2{
     margin-top:0;
-    font-size:20px;
 }
 
 .upload-area{
@@ -120,7 +117,6 @@ header{
 .file-name{
     margin-top:12px;
     color:#555;
-    font-size:14px;
 }
 
 .toolbar{
@@ -130,18 +126,16 @@ header{
     margin-bottom:15px;
 }
 
-.toolbar button,
-.action-btn{
+.toolbar button{
     border:1px solid #ddd;
     background:#fff;
-    padding:9px 13px;
+    padding:10px 14px;
     border-radius:7px;
     cursor:pointer;
     font-weight:bold;
 }
 
-.toolbar button:hover,
-.action-btn:hover{
+.toolbar button:hover{
     border-color:#e53232;
     color:#e53232;
 }
@@ -156,44 +150,50 @@ header{
     display:grid;
     grid-template-columns:1fr 1fr auto;
     gap:10px;
-    margin-bottom:15px;
+    margin-bottom:12px;
 }
 
-.settings input,
-.settings select{
+.settings input{
     width:100%;
-    padding:10px;
+    padding:11px;
     border:1px solid #ccc;
     border-radius:6px;
     outline:none;
 }
 
-.settings input:focus,
-.settings select:focus{
+.settings input:focus{
     border-color:#e53232;
 }
 
 .apply-btn{
     background:#e53232;
     color:#fff;
-    border:none;
-    padding:10px 18px;
+    border:0;
+    padding:10px 20px;
     border-radius:6px;
     cursor:pointer;
     font-weight:bold;
+}
+
+.status{
+    text-align:center;
+    padding:8px;
+    color:#555;
+    font-size:14px;
+    min-height:32px;
 }
 
 .page-navigation{
     display:flex;
     justify-content:center;
     align-items:center;
-    gap:10px;
+    gap:12px;
     margin:15px 0;
 }
 
 .page-navigation button{
-    border:1px solid #ddd;
     background:#fff;
+    border:1px solid #ddd;
     padding:8px 14px;
     border-radius:6px;
     cursor:pointer;
@@ -209,59 +209,44 @@ header{
 }
 
 .preview-wrapper{
-    overflow:auto;
     background:#e9e9e9;
     border-radius:10px;
     padding:25px;
+    overflow:auto;
     min-height:400px;
 }
 
 .page-container{
     position:relative;
-    margin:0 auto 25px;
     background:#fff;
+    margin:0 auto 25px;
     box-shadow:0 2px 12px rgba(0,0,0,.2);
 }
 
 .page-container canvas{
     display:block;
-    width:100%;
-    height:auto;
 }
 
 .form-field{
     position:absolute;
     border:2px solid #e53232;
-    background:rgba(255,255,255,.65);
-    min-width:35px;
-    min-height:22px;
+    background:rgba(255,255,255,.70);
+    min-width:40px;
+    min-height:25px;
     cursor:move;
     user-select:none;
     z-index:10;
 }
 
 .form-field.selected{
-    border:2px solid #0066ff;
-}
-
-.field-label{
-    position:absolute;
-    left:4px;
-    top:2px;
-    right:4px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    color:#222;
-    font-size:12px;
-    pointer-events:none;
+    border-color:#0066ff;
 }
 
 .field-value{
     position:absolute;
     left:5px;
-    top:2px;
     right:5px;
+    top:2px;
     bottom:2px;
     display:flex;
     align-items:center;
@@ -273,17 +258,17 @@ header{
 
 .checkbox-preview,
 .radio-preview{
+    height:100%;
     display:flex;
     align-items:center;
-    gap:6px;
-    height:100%;
+    gap:7px;
     padding:2px 5px;
     pointer-events:none;
 }
 
 .checkbox-box{
-    width:16px;
-    height:16px;
+    width:17px;
+    height:17px;
     border:2px solid #222;
     background:#fff;
     flex:none;
@@ -297,14 +282,14 @@ header{
     content:"✓";
     position:absolute;
     left:1px;
-    top:-5px;
-    font-size:16px;
+    top:-6px;
+    font-size:17px;
     font-weight:bold;
 }
 
 .radio-circle{
-    width:16px;
-    height:16px;
+    width:17px;
+    height:17px;
     border:2px solid #222;
     border-radius:50%;
     background:#fff;
@@ -324,15 +309,15 @@ header{
 
 .field-actions{
     display:flex;
+    justify-content:center;
     flex-wrap:wrap;
     gap:10px;
-    justify-content:center;
     margin-top:15px;
 }
 
 .field-actions button{
-    border:1px solid #ddd;
     background:#fff;
+    border:1px solid #ddd;
     padding:9px 16px;
     border-radius:7px;
     cursor:pointer;
@@ -346,15 +331,15 @@ header{
 .bottom-actions{
     display:flex;
     justify-content:center;
-    gap:12px;
     flex-wrap:wrap;
+    gap:12px;
     margin-top:20px;
 }
 
 .create-btn{
     background:#e53232;
     color:#fff;
-    border:none;
+    border:0;
     padding:12px 25px;
     border-radius:7px;
     cursor:pointer;
@@ -364,7 +349,7 @@ header{
 .reset-btn{
     background:#555;
     color:#fff;
-    border:none;
+    border:0;
     padding:12px 25px;
     border-radius:7px;
     cursor:pointer;
@@ -386,11 +371,16 @@ header{
     font-weight:bold;
 }
 
-.status{
-    text-align:center;
-    margin:10px 0;
-    color:#555;
-    font-size:14px;
+.error-box{
+    background:#fff0f0;
+    border:1px solid #e53232;
+    color:#b00000;
+    padding:12px;
+    border-radius:7px;
+    margin-top:15px;
+    text-align:left;
+    white-space:pre-wrap;
+    word-break:break-word;
 }
 
 @media(max-width:700px){
@@ -419,6 +409,7 @@ header{
 <body>
 
 <header>
+
     <div class="header-inner">
 
         <a href="index.html" class="logo">
@@ -430,7 +421,9 @@ header{
         </a>
 
     </div>
+
 </header>
+
 
 <div class="container">
 
@@ -472,27 +465,46 @@ header{
     </div>
 
 
-    <!-- TOOL -->
+    <!-- EDITOR -->
 
-    <div class="card" id="editorCard" style="display:none;">
+    <div
+        class="card"
+        id="editorCard"
+        style="display:none;"
+    >
 
         <h2>2. Add Form Fields</h2>
 
+
+        <!-- FIELD BUTTONS -->
+
         <div class="toolbar">
 
-            <button type="button" id="textBtn">
+            <button
+                type="button"
+                id="textBtn"
+            >
                 Text Field
             </button>
 
-            <button type="button" id="checkboxBtn">
+            <button
+                type="button"
+                id="checkboxBtn"
+            >
                 Checkbox
             </button>
 
-            <button type="button" id="radioBtn">
+            <button
+                type="button"
+                id="radioBtn"
+            >
                 Radio Button
             </button>
 
-            <button type="button" id="dropdownBtn">
+            <button
+                type="button"
+                id="dropdownBtn"
+            >
                 Dropdown
             </button>
 
@@ -507,18 +519,20 @@ header{
                 type="text"
                 id="fieldName"
                 placeholder="Field Name"
+                autocomplete="off"
             >
 
             <input
                 type="text"
                 id="fieldValue"
                 placeholder="Default Value"
+                autocomplete="off"
             >
 
             <button
                 type="button"
-                class="apply-btn"
                 id="applySettings"
+                class="apply-btn"
             >
                 Apply
             </button>
@@ -526,24 +540,36 @@ header{
         </div>
 
 
-        <div class="status" id="status">
-            Select a field type and click on the PDF to add it.
+        <div
+            id="status"
+            class="status"
+        >
+            Select a field type and click on the PDF.
         </div>
 
 
         <!-- PAGE NAVIGATION -->
 
-        <div class="page-navigation" id="pageNavigation">
+        <div class="page-navigation">
 
-            <button type="button" id="prevPage">
+            <button
+                type="button"
+                id="prevPage"
+            >
                 ← Previous
             </button>
 
-            <span class="page-info" id="pageInfo">
+            <span
+                id="pageInfo"
+                class="page-info"
+            >
                 Page 1 / 1
             </span>
 
-            <button type="button" id="nextPage">
+            <button
+                type="button"
+                id="nextPage"
+            >
                 Next →
             </button>
 
@@ -552,45 +578,56 @@ header{
 
         <!-- PREVIEW -->
 
-        <div class="preview-wrapper" id="previewArea">
-        </div>
+        <div
+            id="previewArea"
+            class="preview-wrapper"
+        ></div>
 
 
         <!-- FIELD ACTIONS -->
 
         <div class="field-actions">
 
-            <button type="button" id="duplicateBtn">
+            <button
+                type="button"
+                id="duplicateBtn"
+            >
                 Duplicate
             </button>
 
-            <button type="button" id="deleteBtn">
+            <button
+                type="button"
+                id="deleteBtn"
+            >
                 Delete
             </button>
 
-            <button type="button" id="clearSelectionBtn">
+            <button
+                type="button"
+                id="clearSelectionBtn"
+            >
                 Clear Selection
             </button>
 
         </div>
 
 
-        <!-- BOTTOM -->
+        <!-- BOTTOM ACTIONS -->
 
         <div class="bottom-actions">
 
             <button
                 type="button"
-                class="create-btn"
                 id="createPdfBtn"
+                class="create-btn"
             >
                 Create Fillable PDF
             </button>
 
             <button
                 type="button"
-                class="reset-btn"
                 id="resetBtn"
+                class="reset-btn"
             >
                 Reset
             </button>
@@ -598,8 +635,10 @@ header{
         </div>
 
 
-        <div class="result" id="result">
-        </div>
+        <div
+            id="result"
+            class="result"
+        ></div>
 
     </div>
 
@@ -608,13 +647,17 @@ header{
 
 <script>
 
+/* =====================================================
+   PDF.JS
+===================================================== */
+
 pdfjsLib.GlobalWorkerOptions.workerSrc =
 "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
 
-/* =========================
+/* =====================================================
    VARIABLES
-========================= */
+===================================================== */
 
 let pdfBytes = null;
 let pdfDocument = null;
@@ -637,9 +680,9 @@ let originalFileName = "document.pdf";
 let isAddingField = false;
 
 
-/* =========================
+/* =====================================================
    ELEMENTS
-========================= */
+===================================================== */
 
 const pdfInput =
 document.getElementById("pdfInput");
@@ -705,9 +748,9 @@ const result =
 document.getElementById("result");
 
 
-/* =========================
-   FIELD TYPE BUTTONS
-========================= */
+/* =====================================================
+   FIELD TYPE
+===================================================== */
 
 function setFieldType(type){
 
@@ -737,108 +780,123 @@ function setFieldType(type){
     isAddingField = true;
 
     status.textContent =
-        "Now click anywhere on the PDF to add the " +
+        "Click anywhere on the PDF to add the " +
         type +
         " field.";
 
 }
 
 
-textBtn.addEventListener("click",function(){
-
-    setFieldType("text");
-
-});
-
-
-checkboxBtn.addEventListener("click",function(){
-
-    setFieldType("checkbox");
-
-});
-
-
-radioBtn.addEventListener("click",function(){
-
-    setFieldType("radio");
-
-});
-
-
-dropdownBtn.addEventListener("click",function(){
-
-    setFieldType("dropdown");
-
-});
-
-
-/* =========================
-   UPLOAD PDF
-========================= */
-
-pdfInput.addEventListener("change",async function(){
-
-    const file = this.files[0];
-
-    if(!file){
-        return;
+textBtn.addEventListener(
+    "click",
+    function(){
+        setFieldType("text");
     }
+);
 
-    try{
 
-        originalFileName = file.name;
+checkboxBtn.addEventListener(
+    "click",
+    function(){
+        setFieldType("checkbox");
+    }
+);
 
-        fileName.textContent =
-            "Selected: " + file.name;
 
-        const arrayBuffer =
-            await file.arrayBuffer();
+radioBtn.addEventListener(
+    "click",
+    function(){
+        setFieldType("radio");
+    }
+);
 
-        pdfBytes =
-            new Uint8Array(arrayBuffer);
 
-        pdfDocument =
-            await pdfjsLib.getDocument({
-                data:pdfBytes
-            }).promise;
+dropdownBtn.addEventListener(
+    "click",
+    function(){
+        setFieldType("dropdown");
+    }
+);
 
-        totalPages =
-            pdfDocument.numPages;
 
-        activePage = 1;
+/* =====================================================
+   UPLOAD
+===================================================== */
 
-        fields = [];
+pdfInput.addEventListener(
+    "change",
+    async function(){
 
-        selectedField = null;
+        const file =
+            this.files[0];
 
-        fieldCounter = 1;
+        if(!file){
+            return;
+        }
 
-        editorCard.style.display = "block";
+        try{
 
-        result.innerHTML = "";
+            originalFileName =
+                file.name;
 
-        updatePageInfo();
+            fileName.textContent =
+                "Selected: " + file.name;
 
-        await renderPage();
+            const buffer =
+                await file.arrayBuffer();
 
-        status.textContent =
-            "PDF loaded. Select a field type and click on the PDF.";
+            pdfBytes =
+                new Uint8Array(buffer);
+
+            pdfDocument =
+                await pdfjsLib
+                    .getDocument({
+                        data:pdfBytes
+                    })
+                    .promise;
+
+            totalPages =
+                pdfDocument.numPages;
+
+            activePage = 1;
+
+            fields = [];
+
+            selectedField = null;
+
+            fieldCounter = 1;
+
+            editorCard.style.display =
+                "block";
+
+            result.innerHTML = "";
+
+            updatePageInfo();
+
+            await renderPage();
+
+            status.textContent =
+                "PDF loaded successfully.";
+
+        }
+        catch(error){
+
+            console.error(error);
+
+            alert(
+                "PDF could not be opened:\n\n" +
+                error.message
+            );
+
+        }
 
     }
-    catch(error){
-
-        console.error(error);
-
-        alert("Unable to open PDF.");
-
-    }
-
-});
+);
 
 
-/* =========================
+/* =====================================================
    PAGE INFO
-========================= */
+===================================================== */
 
 function updatePageInfo(){
 
@@ -857,62 +915,72 @@ function updatePageInfo(){
 }
 
 
-/* =========================
+/* =====================================================
    PREVIOUS PAGE
-========================= */
+===================================================== */
 
-prevPage.addEventListener("click",async function(){
+prevPage.addEventListener(
+    "click",
+    async function(){
 
-    if(activePage <= 1){
-        return;
+        if(activePage <= 1){
+            return;
+        }
+
+        activePage--;
+
+        selectedField = null;
+
+        updatePageInfo();
+
+        await renderPage();
+
     }
-
-    activePage--;
-
-    selectedField = null;
-
-    updatePageInfo();
-
-    await renderPage();
-
-});
+);
 
 
-/* =========================
+/* =====================================================
    NEXT PAGE
-========================= */
+===================================================== */
 
-nextPage.addEventListener("click",async function(){
+nextPage.addEventListener(
+    "click",
+    async function(){
 
-    if(activePage >= totalPages){
-        return;
+        if(activePage >= totalPages){
+            return;
+        }
+
+        activePage++;
+
+        selectedField = null;
+
+        updatePageInfo();
+
+        await renderPage();
+
     }
-
-    activePage++;
-
-    selectedField = null;
-
-    updatePageInfo();
-
-    await renderPage();
-
-});
+);
 
 
-/* =========================
+/* =====================================================
    RENDER PAGE
-========================= */
+===================================================== */
 
 async function renderPage(){
 
     previewArea.innerHTML = "";
 
     const page =
-        await pdfDocument.getPage(activePage);
+        await pdfDocument.getPage(
+            activePage
+        );
+
+    const SCALE = 1.5;
 
     const viewport =
         page.getViewport({
-            scale:1.5
+            scale:SCALE
         });
 
     const pageContainer =
@@ -930,11 +998,9 @@ async function renderPage(){
     pageContainer.dataset.page =
         activePage;
 
+
     const canvas =
         document.createElement("canvas");
-
-    const context =
-        canvas.getContext("2d");
 
     canvas.width =
         viewport.width;
@@ -942,58 +1008,92 @@ async function renderPage(){
     canvas.height =
         viewport.height;
 
-    pageContainer.appendChild(canvas);
+    canvas.style.width =
+        viewport.width + "px";
 
-    previewArea.appendChild(pageContainer);
+    canvas.style.height =
+        viewport.height + "px";
+
+
+    const context =
+        canvas.getContext("2d");
+
+
+    pageContainer.appendChild(
+        canvas
+    );
+
+    previewArea.appendChild(
+        pageContainer
+    );
+
 
     await page.render({
+
         canvasContext:context,
+
         viewport:viewport
+
     }).promise;
 
 
-    /* CLICK TO ADD FIELD */
+    /*
+     * ADD FIELD BY CLICK
+     */
 
-    pageContainer.addEventListener("click",function(event){
+    pageContainer.addEventListener(
+        "click",
+        function(event){
 
-        if(!isAddingField){
-            return;
+            if(!isAddingField){
+                return;
+            }
+
+            if(
+                event.target !==
+                pageContainer &&
+                event.target !==
+                canvas
+            ){
+                return;
+            }
+
+
+            const rect =
+                pageContainer
+                    .getBoundingClientRect();
+
+
+            const x =
+                event.clientX -
+                rect.left;
+
+
+            const y =
+                event.clientY -
+                rect.top;
+
+
+            addField(
+                selectedFieldType,
+                x,
+                y,
+                pageContainer
+            );
+
+
+            isAddingField = false;
+
+            status.textContent =
+                "Field added successfully.";
+
         }
-
-        if(
-            event.target !== pageContainer &&
-            event.target !== canvas
-        ){
-            return;
-        }
-
-        const rect =
-            pageContainer.getBoundingClientRect();
-
-        const x =
-            event.clientX -
-            rect.left;
-
-        const y =
-            event.clientY -
-            rect.top;
-
-        addField(
-            selectedFieldType,
-            x,
-            y,
-            pageContainer
-        );
-
-        isAddingField = false;
-
-        status.textContent =
-            "Field added. You can drag or resize it.";
-
-    });
+    );
 
 
-    /* RENDER EXISTING FIELDS */
+    /*
+     * RENDER EXISTING FIELDS
+     */
 
     fields
         .filter(function(field){
@@ -1013,31 +1113,57 @@ async function renderPage(){
 }
 
 
-/* =========================
-   UNIQUE NAME
-========================= */
+/* =====================================================
+   UNIQUE FIELD NAME
+===================================================== */
 
-function getUniqueFieldName(baseName){
+function getUniqueFieldName(
+    baseName
+){
 
-    let name =
-        baseName ||
-        ("field_" + fieldCounter);
+    let cleanName =
+        String(
+            baseName || ""
+        )
+        .trim();
 
-    let original =
-        name;
+
+    if(!cleanName){
+
+        cleanName =
+            "field_" +
+            fieldCounter;
+
+    }
+
+
+    /*
+     * PDF field names should not
+     * contain empty spaces only.
+     */
+
+    cleanName =
+        cleanName
+            .replace(/\s+/g,"_");
+
+
+    let finalName =
+        cleanName;
 
     let number = 1;
+
 
     while(
         fields.some(function(field){
 
-            return field.name === name;
+            return field.name ===
+                finalName;
 
         })
     ){
 
-        name =
-            original +
+        finalName =
+            cleanName +
             "_" +
             number;
 
@@ -1045,14 +1171,15 @@ function getUniqueFieldName(baseName){
 
     }
 
-    return name;
+
+    return finalName;
 
 }
 
 
-/* =========================
+/* =====================================================
    ADD FIELD
-========================= */
+===================================================== */
 
 function addField(
     type,
@@ -1068,14 +1195,6 @@ function addField(
         fieldValue.value.trim();
 
 
-    if(!name){
-
-        name =
-            "field_" +
-            fieldCounter;
-
-    }
-
     name =
         getUniqueFieldName(name);
 
@@ -1086,16 +1205,16 @@ function addField(
 
     if(type === "checkbox"){
 
-        width = 150;
-        height = 35;
+        width = 160;
+        height = 38;
 
     }
 
 
     if(type === "radio"){
 
-        width = 150;
-        height = 35;
+        width = 160;
+        height = 38;
 
     }
 
@@ -1108,42 +1227,38 @@ function addField(
     }
 
 
-    /* keep inside page */
+    /*
+     * Keep inside page
+     */
 
-    if(
-        x + width >
-        pageContainer.clientWidth
-    ){
-
-        x =
-            pageContainer.clientWidth -
-            width -
-            10;
-
-    }
-
-
-    if(
-        y + height >
-        pageContainer.clientHeight
-    ){
-
-        y =
-            pageContainer.clientHeight -
-            height -
-            10;
-
-    }
+    x =
+        Math.max(
+            0,
+            Math.min(
+                x,
+                pageContainer.clientWidth -
+                width -
+                5
+            )
+        );
 
 
-    x = Math.max(0,x);
-
-    y = Math.max(0,y);
+    y =
+        Math.max(
+            0,
+            Math.min(
+                y,
+                pageContainer.clientHeight -
+                height -
+                5
+            )
+        );
 
 
     const field = {
 
         id:
+            "field_" +
             Date.now() +
             "_" +
             Math.random()
@@ -1179,12 +1294,15 @@ function addField(
 
     fieldCounter++;
 
-    selectedField = field;
+    selectedField =
+        field;
+
 
     createFieldElement(
         field,
         pageContainer
     );
+
 
     fieldName.value =
         field.name;
@@ -1195,9 +1313,9 @@ function addField(
 }
 
 
-/* =========================
-   CREATE FIELD ELEMENT
-========================= */
+/* =====================================================
+   CREATE FIELD PREVIEW
+===================================================== */
 
 function createFieldElement(
     field,
@@ -1213,6 +1331,7 @@ function createFieldElement(
     element.dataset.id =
         field.id;
 
+
     element.style.left =
         field.x + "px";
 
@@ -1226,7 +1345,9 @@ function createFieldElement(
         field.height + "px";
 
 
-    /* TEXT */
+    /*
+     * TEXT
+     */
 
     if(field.type === "text"){
 
@@ -1237,39 +1358,55 @@ function createFieldElement(
             "field-value";
 
         value.textContent =
-            field.value || field.name;
+            field.value ||
+            field.name;
 
-        element.appendChild(value);
+        element.appendChild(
+            value
+        );
 
     }
 
 
-    /* CHECKBOX */
+    /*
+     * CHECKBOX
+     */
 
     if(field.type === "checkbox"){
+
+        const wrapper =
+            document.createElement("div");
+
+        wrapper.className =
+            "checkbox-preview";
+
 
         const box =
             document.createElement("div");
 
         box.className =
-            "checkbox-preview";
-
-        const checkbox =
-            document.createElement("div");
-
-        checkbox.className =
             "checkbox-box";
 
-        const checked =
-            field.value.toLowerCase() === "true" ||
-            field.value.toLowerCase() === "yes" ||
-            field.value.toLowerCase() === "checked";
 
-        if(checked){
+        const currentValue =
+            String(
+                field.value || ""
+            )
+            .toLowerCase();
 
-            checkbox.classList.add("checked");
+
+        if(
+            currentValue === "true" ||
+            currentValue === "yes" ||
+            currentValue === "checked"
+        ){
+
+            box.classList.add(
+                "checked"
+            );
 
         }
+
 
         const label =
             document.createElement("span");
@@ -1277,24 +1414,28 @@ function createFieldElement(
         label.textContent =
             field.name;
 
-        box.appendChild(checkbox);
 
-        box.appendChild(label);
+        wrapper.appendChild(box);
 
-        element.appendChild(box);
+        wrapper.appendChild(label);
+
+        element.appendChild(wrapper);
 
     }
 
 
-    /* RADIO */
+    /*
+     * RADIO
+     */
 
     if(field.type === "radio"){
 
-        const box =
+        const wrapper =
             document.createElement("div");
 
-        box.className =
+        wrapper.className =
             "radio-preview";
+
 
         const circle =
             document.createElement("div");
@@ -1302,22 +1443,26 @@ function createFieldElement(
         circle.className =
             "radio-circle";
 
+
         const label =
             document.createElement("span");
 
         label.textContent =
             field.name;
 
-        box.appendChild(circle);
 
-        box.appendChild(label);
+        wrapper.appendChild(circle);
 
-        element.appendChild(box);
+        wrapper.appendChild(label);
+
+        element.appendChild(wrapper);
 
     }
 
 
-    /* DROPDOWN */
+    /*
+     * DROPDOWN
+     */
 
     if(field.type === "dropdown"){
 
@@ -1331,262 +1476,330 @@ function createFieldElement(
             field.value ||
             field.options[0];
 
-        element.appendChild(value);
+        element.appendChild(
+            value
+        );
 
     }
 
 
-    /* RESIZE */
+    /*
+     * RESIZE HANDLE
+     */
 
-    const resize =
+    const resizeHandle =
         document.createElement("div");
 
-    resize.className =
+    resizeHandle.className =
         "resize-handle";
 
-    element.appendChild(resize);
+    element.appendChild(
+        resizeHandle
+    );
 
 
-    /* SELECT */
+    /*
+     * SELECT
+     */
 
-    element.addEventListener("mousedown",function(event){
+    element.addEventListener(
+        "mousedown",
+        function(event){
 
-        if(event.target === resize){
-            return;
+            if(
+                event.target ===
+                resizeHandle
+            ){
+                return;
+            }
+
+            event.stopPropagation();
+
+            selectField(
+                field,
+                element
+            );
+
         }
-
-        event.stopPropagation();
-
-        selectField(field,element);
-
-    });
+    );
 
 
-    /* DRAG */
+    /*
+     * DRAG
+     */
 
-    element.addEventListener("mousedown",function(event){
+    element.addEventListener(
+        "mousedown",
+        function(event){
 
-        if(event.target === resize){
-            return;
-        }
+            if(
+                event.target ===
+                resizeHandle
+            ){
+                return;
+            }
 
-        event.preventDefault();
+            event.preventDefault();
 
-        event.stopPropagation();
-
-        selectField(field,element);
-
-        const startX =
-            event.clientX;
-
-        const startY =
-            event.clientY;
-
-        const originalX =
-            field.x;
-
-        const originalY =
-            field.y;
+            event.stopPropagation();
 
 
-        function move(e){
-
-            let newX =
-                originalX +
-                (e.clientX - startX);
-
-            let newY =
-                originalY +
-                (e.clientY - startY);
+            selectField(
+                field,
+                element
+            );
 
 
-            newX =
-                Math.max(
-                    0,
-                    Math.min(
-                        newX,
-                        pageContainer.clientWidth -
-                        field.width
-                    )
+            const startX =
+                event.clientX;
+
+            const startY =
+                event.clientY;
+
+            const originalX =
+                field.x;
+
+            const originalY =
+                field.y;
+
+
+            function move(e){
+
+                let newX =
+                    originalX +
+                    (
+                        e.clientX -
+                        startX
+                    );
+
+
+                let newY =
+                    originalY +
+                    (
+                        e.clientY -
+                        startY
+                    );
+
+
+                newX =
+                    Math.max(
+                        0,
+                        Math.min(
+                            newX,
+                            pageContainer.clientWidth -
+                            field.width
+                        )
+                    );
+
+
+                newY =
+                    Math.max(
+                        0,
+                        Math.min(
+                            newY,
+                            pageContainer.clientHeight -
+                            field.height
+                        )
+                    );
+
+
+                field.x =
+                    newX;
+
+                field.y =
+                    newY;
+
+
+                element.style.left =
+                    newX + "px";
+
+                element.style.top =
+                    newY + "px";
+
+            }
+
+
+            function stop(){
+
+                document.removeEventListener(
+                    "mousemove",
+                    move
                 );
 
-
-            newY =
-                Math.max(
-                    0,
-                    Math.min(
-                        newY,
-                        pageContainer.clientHeight -
-                        field.height
-                    )
+                document.removeEventListener(
+                    "mouseup",
+                    stop
                 );
 
-
-            field.x =
-                newX;
-
-            field.y =
-                newY;
-
-            element.style.left =
-                newX + "px";
-
-            element.style.top =
-                newY + "px";
-
-        }
+            }
 
 
-        function stop(){
-
-            document.removeEventListener(
+            document.addEventListener(
                 "mousemove",
                 move
             );
 
-            document.removeEventListener(
+            document.addEventListener(
                 "mouseup",
                 stop
             );
 
         }
+    );
 
 
-        document.addEventListener(
-            "mousemove",
-            move
-        );
+    /*
+     * RESIZE
+     */
 
-        document.addEventListener(
-            "mouseup",
-            stop
-        );
+    resizeHandle.addEventListener(
+        "mousedown",
+        function(event){
 
-    });
+            event.preventDefault();
 
-
-    /* RESIZE */
-
-    resize.addEventListener("mousedown",function(event){
-
-        event.preventDefault();
-
-        event.stopPropagation();
-
-        selectField(field,element);
-
-        const startX =
-            event.clientX;
-
-        const startY =
-            event.clientY;
-
-        const originalWidth =
-            field.width;
-
-        const originalHeight =
-            field.height;
+            event.stopPropagation();
 
 
-        function resizeMove(e){
-
-            let newWidth =
-                originalWidth +
-                (e.clientX - startX);
-
-            let newHeight =
-                originalHeight +
-                (e.clientY - startY);
+            selectField(
+                field,
+                element
+            );
 
 
-            newWidth =
-                Math.max(
-                    50,
-                    Math.min(
-                        newWidth,
-                        pageContainer.clientWidth -
-                        field.x
-                    )
+            const startX =
+                event.clientX;
+
+            const startY =
+                event.clientY;
+
+            const originalWidth =
+                field.width;
+
+            const originalHeight =
+                field.height;
+
+
+            function resizeMove(e){
+
+                let newWidth =
+                    originalWidth +
+                    (
+                        e.clientX -
+                        startX
+                    );
+
+
+                let newHeight =
+                    originalHeight +
+                    (
+                        e.clientY -
+                        startY
+                    );
+
+
+                newWidth =
+                    Math.max(
+                        50,
+                        Math.min(
+                            newWidth,
+                            pageContainer.clientWidth -
+                            field.x
+                        )
+                    );
+
+
+                newHeight =
+                    Math.max(
+                        25,
+                        Math.min(
+                            newHeight,
+                            pageContainer.clientHeight -
+                            field.y
+                        )
+                    );
+
+
+                field.width =
+                    newWidth;
+
+                field.height =
+                    newHeight;
+
+
+                element.style.width =
+                    newWidth + "px";
+
+                element.style.height =
+                    newHeight + "px";
+
+            }
+
+
+            function resizeStop(){
+
+                document.removeEventListener(
+                    "mousemove",
+                    resizeMove
                 );
 
-
-            newHeight =
-                Math.max(
-                    25,
-                    Math.min(
-                        newHeight,
-                        pageContainer.clientHeight -
-                        field.y
-                    )
+                document.removeEventListener(
+                    "mouseup",
+                    resizeStop
                 );
 
-
-            field.width =
-                newWidth;
-
-            field.height =
-                newHeight;
-
-            element.style.width =
-                newWidth + "px";
-
-            element.style.height =
-                newHeight + "px";
-
-        }
+            }
 
 
-        function resizeStop(){
-
-            document.removeEventListener(
+            document.addEventListener(
                 "mousemove",
                 resizeMove
             );
 
-            document.removeEventListener(
+            document.addEventListener(
                 "mouseup",
                 resizeStop
             );
 
         }
+    );
 
 
-        document.addEventListener(
-            "mousemove",
-            resizeMove
-        );
-
-        document.addEventListener(
-            "mouseup",
-            resizeStop
-        );
-
-    });
-
-
-    pageContainer.appendChild(element);
+    pageContainer.appendChild(
+        element
+    );
 
 }
 
 
-/* =========================
+/* =====================================================
    SELECT FIELD
-========================= */
+===================================================== */
 
-function selectField(field,element){
+function selectField(
+    field,
+    element
+){
 
     document
         .querySelectorAll(".form-field")
         .forEach(function(item){
 
-            item.classList.remove("selected");
+            item.classList.remove(
+                "selected"
+            );
 
         });
 
-    element.classList.add("selected");
+
+    element.classList.add(
+        "selected"
+    );
+
 
     selectedField =
         field;
+
 
     fieldName.value =
         field.name;
@@ -1597,204 +1810,216 @@ function selectField(field,element){
 }
 
 
-/* =========================
+/* =====================================================
    APPLY SETTINGS
-========================= */
+===================================================== */
 
-applySettings.addEventListener("click",function(){
+applySettings.addEventListener(
+    "click",
+    function(){
 
-    if(!selectedField){
+        if(!selectedField){
 
-        alert(
-            "Please select a field first."
-        );
-
-        return;
-
-    }
-
-
-    let newName =
-        fieldName.value.trim();
-
-    let newValue =
-        fieldValue.value.trim();
-
-
-    if(!newName){
-
-        newName =
-            selectedField.name;
-
-    }
-
-
-    /* Don't allow duplicate names */
-
-    const duplicate =
-        fields.some(function(field){
-
-            return (
-                field !== selectedField &&
-                field.name === newName
+            alert(
+                "Please select a field first."
             );
 
-        });
-
-
-    if(duplicate){
-
-        newName =
-            getUniqueFieldName(newName);
-
-    }
-
-
-    selectedField.name =
-        newName;
-
-    selectedField.value =
-        newValue;
-
-
-    renderPage();
-
-});
-
-
-/* =========================
-   ENTER KEY
-========================= */
-
-[fieldName,fieldValue].forEach(function(input){
-
-    input.addEventListener(
-        "keydown",
-        function(event){
-
-            if(event.key === "Enter"){
-
-                event.preventDefault();
-
-                event.stopPropagation();
-
-                applySettings.click();
-
-            }
+            return;
 
         }
-    );
-
-});
 
 
-/* =========================
-   DUPLICATE
-========================= */
+        let newName =
+            fieldName.value.trim();
 
-duplicateBtn.addEventListener("click",function(){
+        let newValue =
+            fieldValue.value.trim();
 
-    if(!selectedField){
 
-        alert(
-            "Please select a field first."
-        );
+        if(!newName){
 
-        return;
+            newName =
+                selectedField.name;
+
+        }
+
+
+        /*
+         * Make name unique
+         */
+
+        let conflict =
+            fields.some(function(field){
+
+                return (
+                    field !== selectedField &&
+                    field.name === newName
+                );
+
+            });
+
+
+        if(conflict){
+
+            newName =
+                getUniqueFieldName(
+                    newName
+                );
+
+        }
+
+
+        selectedField.name =
+            newName;
+
+        selectedField.value =
+            newValue;
+
+
+        renderPage();
 
     }
+);
 
 
-    const copy =
-        JSON.parse(
-            JSON.stringify(selectedField)
+/* =====================================================
+   ENTER KEY
+===================================================== */
+
+[fieldName,fieldValue].forEach(
+    function(input){
+
+        input.addEventListener(
+            "keydown",
+            function(event){
+
+                if(
+                    event.key ===
+                    "Enter"
+                ){
+
+                    event.preventDefault();
+
+                    event.stopPropagation();
+
+                    applySettings.click();
+
+                }
+
+            }
         );
 
-
-    copy.id =
-        Date.now() +
-        "_" +
-        Math.random()
-            .toString(36)
-            .substring(2,8);
+    }
+);
 
 
-    if(copy.type !== "radio"){
+/* =====================================================
+   DUPLICATE
+===================================================== */
+
+duplicateBtn.addEventListener(
+    "click",
+    function(){
+
+        if(!selectedField){
+
+            alert(
+                "Please select a field first."
+            );
+
+            return;
+
+        }
+
+
+        const copy =
+            JSON.parse(
+                JSON.stringify(
+                    selectedField
+                )
+            );
+
+
+        copy.id =
+            "field_" +
+            Date.now() +
+            "_" +
+            Math.random()
+                .toString(36)
+                .substring(2,8);
+
 
         copy.name =
             getUniqueFieldName(
                 copy.name
             );
 
+
+        copy.x += 20;
+
+        copy.y += 20;
+
+
+        fields.push(copy);
+
+        selectedField =
+            copy;
+
+
+        renderPage();
+
     }
+);
 
 
-    copy.x += 20;
-
-    copy.y += 20;
-
-
-    if(
-        copy.x + copy.width >
-        800
-    ){
-
-        copy.x = 20;
-
-    }
-
-
-    fields.push(copy);
-
-    selectedField =
-        copy;
-
-    renderPage();
-
-});
-
-
-/* =========================
+/* =====================================================
    DELETE
-========================= */
+===================================================== */
 
-deleteBtn.addEventListener("click",function(){
+deleteBtn.addEventListener(
+    "click",
+    function(){
 
-    if(!selectedField){
+        if(!selectedField){
 
-        alert(
-            "Please select a field first."
-        );
+            alert(
+                "Please select a field first."
+            );
 
-        return;
+            return;
+
+        }
+
+
+        fields =
+            fields.filter(
+                function(field){
+
+                    return (
+                        field.id !==
+                        selectedField.id
+                    );
+
+                }
+            );
+
+
+        selectedField = null;
+
+        fieldName.value = "";
+
+        fieldValue.value = "";
+
+
+        renderPage();
 
     }
+);
 
 
-    fields =
-        fields.filter(function(field){
-
-            return field.id !==
-                selectedField.id;
-
-        });
-
-
-    selectedField =
-        null;
-
-    fieldName.value = "";
-
-    fieldValue.value = "";
-
-    renderPage();
-
-});
-
-
-/* =========================
+/* =====================================================
    CLEAR SELECTION
-========================= */
+===================================================== */
 
 clearSelectionBtn.addEventListener(
     "click",
@@ -1806,23 +2031,28 @@ clearSelectionBtn.addEventListener(
 
         fieldValue.value = "";
 
+
         document
-            .querySelectorAll(".form-field")
-            .forEach(function(item){
+            .querySelectorAll(
+                ".form-field"
+            )
+            .forEach(
+                function(item){
 
-                item.classList.remove(
-                    "selected"
-                );
+                    item.classList.remove(
+                        "selected"
+                    );
 
-            });
+                }
+            );
 
     }
 );
 
 
-/* =========================
-   CREATE PDF
-========================= */
+/* =====================================================
+   CREATE FILLABLE PDF
+===================================================== */
 
 createPdfBtn.addEventListener(
     "click",
@@ -1852,13 +2082,23 @@ createPdfBtn.addEventListener(
 
         try{
 
+            createPdfBtn.disabled =
+                true;
+
             status.textContent =
                 "Creating fillable PDF...";
 
 
-            const {
-                PDFDocument
-            } = PDFLib;
+            /*
+             * PDF-LIB
+             */
+
+            const PDFLibObject =
+                PDFLib;
+
+
+            const PDFDocument =
+                PDFLibObject.PDFDocument;
 
 
             const pdfDoc =
@@ -1876,31 +2116,146 @@ createPdfBtn.addEventListener(
 
 
             /*
-             * Important:
-             * preview scale = 1.5
-             *
-             * PDF coordinates are converted
-             * from preview coordinates.
+             * Existing field names
              */
 
-            const PREVIEW_SCALE = 1.5;
+            const existingNames =
+                new Set();
 
 
-            const radioGroups = {};
+            form.getFields()
+                .forEach(
+                    function(existingField){
 
+                        try{
+
+                            existingNames.add(
+                                existingField.getName()
+                            );
+
+                        }
+                        catch(e){
+
+                            /* ignore */
+
+                        }
+
+                    }
+                );
+
+
+            /*
+             * Preview scale
+             */
+
+            const PREVIEW_SCALE =
+                1.5;
+
+
+            /*
+             * Keep track of names
+             * created in this export.
+             */
+
+            const usedNames =
+                new Set(
+                    existingNames
+                );
+
+
+            /*
+             * RADIO GROUPS
+             */
+
+            const radioGroups =
+                {};
+
+
+            /*
+             * Process every field
+             */
 
             for(
-                const field of fields
+                let i = 0;
+                i < fields.length;
+                i++
             ){
 
+                const field =
+                    fields[i];
+
+
                 const page =
-                    pages[field.page - 1];
+                    pages[
+                        field.page - 1
+                    ];
 
 
                 if(!page){
+
                     continue;
+
                 }
 
+
+                /*
+                 * Generate a safe unique
+                 * PDF field name.
+                 */
+
+                let pdfFieldName =
+                    String(
+                        field.name ||
+                        "field_" +
+                        (i + 1)
+                    )
+                    .trim()
+                    .replace(
+                        /\s+/g,
+                        "_"
+                    );
+
+
+                if(!pdfFieldName){
+
+                    pdfFieldName =
+                        "field_" +
+                        (i + 1);
+
+                }
+
+
+                const originalName =
+                    pdfFieldName;
+
+
+                let nameNumber = 1;
+
+
+                while(
+                    usedNames.has(
+                        pdfFieldName
+                    )
+                ){
+
+                    pdfFieldName =
+                        originalName +
+                        "_" +
+                        nameNumber;
+
+                    nameNumber++;
+
+                }
+
+
+                usedNames.add(
+                    pdfFieldName
+                );
+
+
+                /*
+                 * PDF dimensions
+                 */
 
                 const pageWidth =
                     page.getWidth();
@@ -1909,28 +2264,15 @@ createPdfBtn.addEventListener(
                     page.getHeight();
 
 
-                const previewWidth =
-                    pageWidth *
-                    PREVIEW_SCALE;
-
-                const previewHeight =
-                    pageHeight *
-                    PREVIEW_SCALE;
-
-
-                const scaleX =
-                    pageWidth /
-                    previewWidth;
-
-
-                const scaleY =
-                    pageHeight /
-                    previewHeight;
-
+                /*
+                 * Convert preview
+                 * coordinates to PDF
+                 * coordinates.
+                 */
 
                 const x =
-                    field.x *
-                    scaleX;
+                    field.x /
+                    PREVIEW_SCALE;
 
 
                 const y =
@@ -1938,51 +2280,61 @@ createPdfBtn.addEventListener(
                     (
                         field.y +
                         field.height
-                    ) *
-                    scaleY;
+                    ) /
+                    PREVIEW_SCALE;
 
 
                 const width =
-                    field.width *
-                    scaleX;
+                    field.width /
+                    PREVIEW_SCALE;
 
 
                 const height =
-                    field.height *
-                    scaleY;
+                    field.height /
+                    PREVIEW_SCALE;
 
 
-                /* =====================
+                /* =================================
                    TEXT FIELD
-                ===================== */
+                ================================= */
 
-                if(field.type === "text"){
+                if(
+                    field.type ===
+                    "text"
+                ){
 
                     const textField =
                         form.createTextField(
-                            field.name
+                            pdfFieldName
                         );
 
 
-                    if(field.value){
+                    /*
+                     * Default value
+                     */
+
+                    if(
+                        field.value &&
+                        field.value.length > 0
+                    ){
 
                         textField.setText(
-                            field.value
+                            String(
+                                field.value
+                            )
                         );
 
                     }
 
 
                     /*
-                     * IMPORTANT:
+                     * IMPORTANT
                      *
                      * borderWidth: 0
                      *
-                     * This removes the visible
-                     * field box/border from
-                     * the downloaded PDF.
-                     *
-                     * The field remains fillable.
+                     * The field remains
+                     * fillable but the
+                     * visible box is removed.
                      */
 
                     textField.addToPage(
@@ -1992,7 +2344,6 @@ createPdfBtn.addEventListener(
                             y:y,
                             width:width,
                             height:height,
-
                             borderWidth:0
                         }
                     );
@@ -2000,17 +2351,18 @@ createPdfBtn.addEventListener(
                 }
 
 
-                /* =====================
+                /* =================================
                    CHECKBOX
-                ===================== */
+                ================================= */
 
                 else if(
-                    field.type === "checkbox"
+                    field.type ===
+                    "checkbox"
                 ){
 
                     const checkbox =
                         form.createCheckBox(
-                            field.name
+                            pdfFieldName
                         );
 
 
@@ -2021,27 +2373,29 @@ createPdfBtn.addEventListener(
                             y:y,
                             width:width,
                             height:height,
-
                             borderWidth:1
                         }
                     );
 
 
-                    const checked =
-                        field.value
-                            .toLowerCase() ===
-                            "true" ||
-
-                        field.value
-                            .toLowerCase() ===
-                            "yes" ||
-
-                        field.value
-                            .toLowerCase() ===
-                            "checked";
+                    const checkboxValue =
+                        String(
+                            field.value ||
+                            ""
+                        )
+                        .toLowerCase();
 
 
-                    if(checked){
+                    if(
+                        checkboxValue ===
+                        "true" ||
+
+                        checkboxValue ===
+                        "yes" ||
+
+                        checkboxValue ===
+                        "checked"
+                    ){
 
                         checkbox.check();
 
@@ -2050,43 +2404,49 @@ createPdfBtn.addEventListener(
                 }
 
 
-                /* =====================
+                /* =================================
                    RADIO BUTTON
-                ===================== */
+                ================================= */
 
                 else if(
-                    field.type === "radio"
+                    field.type ===
+                    "radio"
                 ){
 
-                    const groupName =
-                        field.name ||
-                        "radio_group";
+                    /*
+                     * Every radio field
+                     * gets its own unique
+                     * group unless same
+                     * name is intentionally
+                     * used.
+                     */
+
+                    let group =
+                        radioGroups[
+                            pdfFieldName
+                        ];
 
 
-                    let radioGroup =
-                        radioGroups[groupName];
+                    if(!group){
 
-
-                    if(!radioGroup){
-
-                        radioGroup =
+                        group =
                             form.createRadioGroup(
-                                groupName
+                                pdfFieldName
                             );
 
-                        radioGroups[groupName] =
-                            radioGroup;
+                        radioGroups[
+                            pdfFieldName
+                        ] = group;
 
                     }
 
 
                     const optionValue =
-                        field.value ||
-                        "Option_" +
+                        "option_" +
                         field.id;
 
 
-                    radioGroup.addOptionToPage(
+                    group.addOptionToPage(
                         optionValue,
                         page,
                         {
@@ -2100,45 +2460,59 @@ createPdfBtn.addEventListener(
                 }
 
 
-                /* =====================
+                /* =================================
                    DROPDOWN
-                ===================== */
+                ================================= */
 
                 else if(
-                    field.type === "dropdown"
+                    field.type ===
+                    "dropdown"
                 ){
 
                     const dropdown =
                         form.createDropdown(
-                            field.name
+                            pdfFieldName
                         );
 
 
+                    const options =
+                        Array.isArray(
+                            field.options
+                        ) &&
+                        field.options.length
+                        ? field.options
+                        : [
+                            "Option 1",
+                            "Option 2",
+                            "Option 3"
+                        ];
+
+
                     dropdown.setOptions(
-                        field.options
+                        options
                     );
 
 
-                    let selected =
+                    let selectedValue =
                         field.value;
 
 
                     if(
-                        !field.options.includes(
-                            selected
+                        !options.includes(
+                            selectedValue
                         )
                     ){
 
-                        selected =
-                            field.options[0];
+                        selectedValue =
+                            options[0];
 
                     }
 
 
-                    if(selected){
+                    if(selectedValue){
 
                         dropdown.select(
-                            selected
+                            selectedValue
                         );
 
                     }
@@ -2160,15 +2534,23 @@ createPdfBtn.addEventListener(
 
 
             /*
-             * Update appearance
+             * Update all field appearances
              */
 
             form.updateFieldAppearances();
 
 
+            /*
+             * Save PDF
+             */
+
             const finalBytes =
                 await pdfDoc.save();
 
+
+            /*
+             * Create download URL
+             */
 
             const blob =
                 new Blob(
@@ -2195,6 +2577,10 @@ createPdfBtn.addEventListener(
                 );
 
 
+            /*
+             * File name
+             */
+
             let baseName =
                 originalFileName
                     .replace(
@@ -2203,14 +2589,22 @@ createPdfBtn.addEventListener(
                     );
 
 
+            if(!baseName){
+
+                baseName =
+                    "document";
+
+            }
+
+
             const downloadName =
                 baseName +
                 "-fillable.pdf";
 
 
             result.innerHTML =
-
-                '<a class="download-btn" ' +
+                '<a ' +
+                'class="download-btn" ' +
                 'href="' +
                 outputUrl +
                 '" ' +
@@ -2228,15 +2622,36 @@ createPdfBtn.addEventListener(
         }
         catch(error){
 
-            console.error(error);
-
-            alert(
-                "PDF creation failed.\n\n" +
-                error.message
+            console.error(
+                "PDF CREATION ERROR:",
+                error
             );
+
+
+            const message =
+                error &&
+                error.message
+                ? error.message
+                : String(error);
+
+
+            result.innerHTML =
+                '<div class="error-box">' +
+                '<strong>PDF creation failed</strong>' +
+                '\n\n' +
+                message +
+                '</div>';
+
 
             status.textContent =
                 "PDF creation failed.";
+
+
+        }
+        finally{
+
+            createPdfBtn.disabled =
+                false;
 
         }
 
@@ -2244,9 +2659,9 @@ createPdfBtn.addEventListener(
 );
 
 
-/* =========================
+/* =====================================================
    RESET
-========================= */
+===================================================== */
 
 resetBtn.addEventListener(
     "click",
@@ -2299,8 +2714,10 @@ resetBtn.addEventListener(
         editorCard.style.display =
             "none";
 
+
         status.textContent =
-            "Select a field type and click on the PDF to add it.";
+            "Select a field type and click on the PDF.";
+
 
         textBtn.classList.remove(
             "active"
@@ -2318,6 +2735,7 @@ resetBtn.addEventListener(
             "active"
         );
 
+
         pageInfo.textContent =
             "Page 1 / 1";
 
@@ -2328,4 +2746,3 @@ resetBtn.addEventListener(
 
 </body>
 </html>
-```
