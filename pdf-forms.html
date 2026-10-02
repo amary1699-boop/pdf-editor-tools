@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,908 +17,599 @@ content="Create fillable PDF forms online. Add text fields, checkboxes, radio bu
 <style>
 
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+    box-sizing:border-box;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#f5f7fb;
-  color:#202124;
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f6f7fb;
+    color:#222;
 }
 
 header{
-  background:#fff;
-  border-bottom:1px solid #e5e5ea;
+    background:#fff;
+    border-bottom:1px solid #ddd;
+    padding:15px 20px;
+    position:sticky;
+    top:0;
+    z-index:1000;
 }
 
 .header-inner{
-  max-width:1000px;
-  margin:auto;
-  min-height:70px;
-  display:flex;
-  align-items:center;
-  padding:0 20px;
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
 .logo{
-  color:#e53232;
-  font-size:21px;
-  font-weight:800;
+    color:#e53232;
+    font-size:25px;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+.home-btn{
+    text-decoration:none;
+    color:#fff;
+    background:#e53232;
+    padding:9px 18px;
+    border-radius:7px;
+    font-weight:bold;
 }
 
 .container{
-  max-width:1000px;
-  margin:auto;
-  padding:50px 20px;
+    max-width:1200px;
+    margin:auto;
+    padding:30px 15px 50px;
 }
 
 .hero{
-  text-align:center;
-  margin-bottom:30px;
+    text-align:center;
+    margin-bottom:25px;
 }
 
 .hero h1{
-  font-size:42px;
-  line-height:1.2;
-  margin-bottom:12px;
-}
-
-.hero h1 span{
-  color:#e53232;
+    margin:0 0 10px;
+    font-size:34px;
 }
 
 .hero p{
-  color:#666;
-  font-size:16px;
+    margin:0;
+    color:#666;
+    font-size:16px;
 }
 
-.tool-box{
-  background:#fff;
-  border-radius:18px;
-  padding:30px;
-  box-shadow:0 8px 30px rgba(0,0,0,.06);
+.card{
+    background:#fff;
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,.07);
+}
+
+.card h2{
+    margin-top:0;
+    font-size:20px;
 }
 
 .upload-area{
-  border:2px dashed #ddd;
-  border-radius:14px;
-  padding:35px 20px;
-  text-align:center;
-  background:#fafafa;
+    border:2px dashed #e53232;
+    border-radius:12px;
+    padding:35px 20px;
+    text-align:center;
+    background:#fffafa;
 }
 
-.upload-area h3{
-  margin-bottom:8px;
-}
-
-.upload-area p{
-  color:#777;
-  font-size:14px;
-  margin-bottom:18px;
-}
-
-.file-input{
-  display:none;
+.upload-area input{
+    display:none;
 }
 
 .upload-btn{
-  display:inline-block;
-  background:#e53232;
-  color:#fff;
-  padding:12px 24px;
-  border-radius:9px;
-  cursor:pointer;
-  font-weight:700;
-  border:none;
-}
-
-.file-info{
-  display:none;
-  margin-top:20px;
-  padding:15px;
-  border-radius:10px;
-  background:#f7f7f9;
-  border:1px solid #e5e5ea;
+    display:inline-block;
+    background:#e53232;
+    color:#fff;
+    padding:12px 22px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
 .file-name{
-  font-weight:700;
-  word-break:break-word;
+    margin-top:12px;
+    color:#555;
+    font-size:14px;
 }
 
-.file-pages{
-  color:#777;
-  font-size:13px;
-  margin-top:4px;
+.toolbar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:15px;
 }
 
-.controls{
-  display:none;
-  margin-top:25px;
+.toolbar button,
+.action-btn{
+    border:1px solid #ddd;
+    background:#fff;
+    padding:9px 13px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-.control-title{
-  font-size:18px;
-  font-weight:800;
-  margin-bottom:15px;
+.toolbar button:hover,
+.action-btn:hover{
+    border-color:#e53232;
+    color:#e53232;
 }
 
-.form-tools{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
+.toolbar button.active{
+    background:#e53232;
+    color:#fff;
+    border-color:#e53232;
 }
 
-.tool-btn{
-  border:1px solid #ddd;
-  background:#fff;
-  padding:12px 8px;
-  border-radius:9px;
-  cursor:pointer;
-  font-size:13px;
-  font-weight:700;
+.settings{
+    display:grid;
+    grid-template-columns:1fr 1fr auto;
+    gap:10px;
+    margin-bottom:15px;
 }
 
-.tool-btn:hover{
-  border-color:#e53232;
-  color:#e53232;
+.settings input,
+.settings select{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    outline:none;
 }
 
-.tool-btn.active{
-  background:#e53232;
-  border-color:#e53232;
-  color:#fff;
+.settings input:focus,
+.settings select:focus{
+    border-color:#e53232;
 }
 
-/* SETTINGS */
-
-.field-settings{
-  display:none;
-  margin-top:20px;
-  padding:20px;
-  background:#fafafa;
-  border:1px solid #e5e5ea;
-  border-radius:12px;
+.apply-btn{
+    background:#e53232;
+    color:#fff;
+    border:none;
+    padding:10px 18px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
 }
-
-.field-settings h3{
-  font-size:16px;
-  margin-bottom:15px;
-}
-
-.setting-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-}
-
-.setting-group label{
-  display:block;
-  font-size:13px;
-  font-weight:700;
-  margin-bottom:6px;
-}
-
-.setting-group input,
-.setting-group select{
-  width:100%;
-  height:42px;
-  border:1px solid #ddd;
-  border-radius:8px;
-  padding:0 10px;
-  font-size:14px;
-  background:#fff;
-  outline:none;
-}
-
-.setting-group input:focus,
-.setting-group select:focus{
-  border-color:#e53232;
-}
-
-.apply-settings{
-  margin-top:15px;
-  background:#e53232;
-  color:#fff;
-  border:none;
-  padding:10px 18px;
-  border-radius:8px;
-  cursor:pointer;
-  font-weight:700;
-}
-
-/* PAGE NAVIGATION */
 
 .page-navigation{
-  display:none;
-  margin-top:20px;
-  padding:15px;
-  background:#fafafa;
-  border:1px solid #e5e5ea;
-  border-radius:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    margin:15px 0;
 }
 
-.page-navigation-title{
-  font-size:13px;
-  font-weight:700;
-  margin-bottom:10px;
+.page-navigation button{
+    border:1px solid #ddd;
+    background:#fff;
+    padding:8px 14px;
+    border-radius:6px;
+    cursor:pointer;
 }
 
-.page-buttons{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
+.page-navigation button:disabled{
+    opacity:.5;
+    cursor:not-allowed;
 }
 
-.page-btn{
-  min-width:38px;
-  height:36px;
-  border:1px solid #ddd;
-  background:#fff;
-  border-radius:7px;
-  cursor:pointer;
-  font-weight:700;
+.page-info{
+    font-weight:bold;
 }
 
-.page-btn.active{
-  background:#e53232;
-  color:#fff;
-  border-color:#e53232;
+.preview-wrapper{
+    overflow:auto;
+    background:#e9e9e9;
+    border-radius:10px;
+    padding:25px;
+    min-height:400px;
 }
 
-/* PREVIEW */
-
-.preview-section{
-  display:none;
-  margin-top:30px;
+.page-container{
+    position:relative;
+    margin:0 auto 25px;
+    background:#fff;
+    box-shadow:0 2px 12px rgba(0,0,0,.2);
 }
 
-.preview-title{
-  font-size:18px;
-  font-weight:800;
-  margin-bottom:8px;
+.page-container canvas{
+    display:block;
+    width:100%;
+    height:auto;
 }
-
-.preview-note{
-  color:#777;
-  font-size:13px;
-  margin-bottom:15px;
-}
-
-.preview-area{
-  background:#eef0f4;
-  border:1px solid #ddd;
-  border-radius:12px;
-  padding:25px;
-  overflow:auto;
-  min-height:400px;
-}
-
-.preview-page{
-  position:relative;
-  display:block;
-  width:max-content;
-  margin:0 auto 30px;
-  background:#fff;
-  box-shadow:0 5px 18px rgba(0,0,0,.15);
-}
-
-.preview-page canvas{
-  display:block;
-}
-
-/* FORM FIELD */
 
 .form-field{
-  position:absolute;
-  border:2px solid #e53232;
-  background:rgba(255,255,255,.82);
-  cursor:move;
-  user-select:none;
-  z-index:10;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:visible;
-  min-width:20px;
-  min-height:20px;
-}
-
-.form-field:hover{
-  background:rgba(255,240,240,.92);
+    position:absolute;
+    border:2px solid #e53232;
+    background:rgba(255,255,255,.65);
+    min-width:35px;
+    min-height:22px;
+    cursor:move;
+    user-select:none;
+    z-index:10;
 }
 
 .form-field.selected{
-  outline:2px solid #202124;
-  outline-offset:2px;
+    border:2px solid #0066ff;
 }
 
-.form-field-text{
-  width:100%;
-  height:100%;
-  padding:4px;
-  font-size:13px;
-  color:#555;
-  text-align:left;
-  display:flex;
-  align-items:center;
-  overflow:hidden;
+.field-label{
+    position:absolute;
+    left:4px;
+    top:2px;
+    right:4px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    color:#222;
+    font-size:12px;
+    pointer-events:none;
 }
 
-.form-field-checkbox{
-  font-size:22px;
-  line-height:1;
-  color:#e53232;
+.field-value{
+    position:absolute;
+    left:5px;
+    top:2px;
+    right:5px;
+    bottom:2px;
+    display:flex;
+    align-items:center;
+    color:#222;
+    font-size:13px;
+    overflow:hidden;
+    pointer-events:none;
 }
 
-.form-field-radio{
-  width:16px;
-  height:16px;
-  border:2px solid #e53232;
-  border-radius:50%;
-  background:#fff;
+.checkbox-preview,
+.radio-preview{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    height:100%;
+    padding:2px 5px;
+    pointer-events:none;
 }
 
-.form-field-dropdown{
-  width:100%;
-  padding:3px 5px;
-  font-size:12px;
-  color:#555;
-  text-align:left;
+.checkbox-box{
+    width:16px;
+    height:16px;
+    border:2px solid #222;
+    background:#fff;
+    flex:none;
 }
 
-/* RESIZE HANDLE */
+.checkbox-box.checked{
+    position:relative;
+}
+
+.checkbox-box.checked::after{
+    content:"✓";
+    position:absolute;
+    left:1px;
+    top:-5px;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.radio-circle{
+    width:16px;
+    height:16px;
+    border:2px solid #222;
+    border-radius:50%;
+    background:#fff;
+    flex:none;
+}
 
 .resize-handle{
-  position:absolute;
-  width:11px;
-  height:11px;
-  background:#e53232;
-  border:2px solid #fff;
-  border-radius:50%;
-  right:-7px;
-  bottom:-7px;
-  cursor:nwse-resize;
-  z-index:30;
-  display:none;
+    position:absolute;
+    width:10px;
+    height:10px;
+    right:-5px;
+    bottom:-5px;
+    background:#0066ff;
+    border-radius:2px;
+    cursor:nwse-resize;
 }
-
-.form-field.selected .resize-handle{
-  display:block;
-}
-
-/* FIELD ACTIONS */
 
 .field-actions{
-  display:none;
-  margin-top:15px;
-  padding:15px;
-  background:#fafafa;
-  border:1px solid #e5e5ea;
-  border-radius:10px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+    margin-top:15px;
 }
 
 .field-actions button{
-  border:1px solid #ddd;
-  background:#fff;
-  padding:9px 14px;
-  border-radius:8px;
-  cursor:pointer;
-  font-weight:700;
-  margin-right:7px;
+    border:1px solid #ddd;
+    background:#fff;
+    padding:9px 16px;
+    border-radius:7px;
+    cursor:pointer;
 }
 
 .field-actions button:hover{
-  border-color:#e53232;
-  color:#e53232;
+    border-color:#e53232;
+    color:#e53232;
 }
-
-.field-actions .delete-btn{
-  background:#e53232;
-  color:#fff;
-  border-color:#e53232;
-}
-
-/* BOTTOM */
 
 .bottom-actions{
-  display:none;
-  margin-top:25px;
-  gap:12px;
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:20px;
 }
 
-.action-btn{
-  flex:1;
-  height:48px;
-  border:none;
-  border-radius:9px;
-  font-size:15px;
-  font-weight:800;
-  cursor:pointer;
-}
-
-.download-btn{
-  background:#e53232;
-  color:#fff;
+.create-btn{
+    background:#e53232;
+    color:#fff;
+    border:none;
+    padding:12px 25px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
 .reset-btn{
-  background:#eee;
-  color:#333;
+    background:#555;
+    color:#fff;
+    border:none;
+    padding:12px 25px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
 }
-
-.action-btn:disabled{
-  opacity:.5;
-  cursor:not-allowed;
-}
-
-/* RESULT */
 
 .result{
-  display:none;
-  margin-top:25px;
-  padding:20px;
-  border:1px solid #dcdde3;
-  border-radius:12px;
-  background:#fafafa;
-  text-align:center;
+    text-align:center;
+    margin-top:20px;
 }
 
-.result h3{
-  margin-bottom:7px;
+.download-btn{
+    display:inline-block;
+    background:#198754;
+    color:#fff;
+    text-decoration:none;
+    padding:12px 25px;
+    border-radius:7px;
+    font-weight:bold;
 }
 
-.result p{
-  color:#777;
-  font-size:14px;
-  margin-bottom:15px;
+.status{
+    text-align:center;
+    margin:10px 0;
+    color:#555;
+    font-size:14px;
 }
-
-.download-result{
-  display:inline-block;
-  background:#e53232;
-  color:#fff;
-  padding:12px 25px;
-  border-radius:8px;
-  font-weight:700;
-  text-decoration:none;
-}
-
-/* FOOTER */
-
-footer{
-  text-align:center;
-  padding:30px 20px;
-  color:#777;
-  font-size:13px;
-}
-
-/* MOBILE */
 
 @media(max-width:700px){
 
-  .container{
-    padding:40px 15px;
-  }
+    .hero h1{
+        font-size:27px;
+    }
 
-  .tool-box{
-    padding:20px 15px;
-  }
+    .settings{
+        grid-template-columns:1fr;
+    }
 
-  .hero h1{
-    font-size:31px;
-  }
+    .preview-wrapper{
+        padding:10px;
+    }
 
-  .form-tools{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .setting-grid{
-    grid-template-columns:1fr;
-  }
-
-  .preview-area{
-    padding:15px;
-  }
-
-  .bottom-actions{
-    flex-direction:column;
-  }
+    .toolbar button{
+        flex:1;
+    }
 
 }
 
 </style>
-
 </head>
 
 <body>
 
 <header>
+    <div class="header-inner">
 
-  <div class="header-inner">
+        <a href="index.html" class="logo">
+            PDF Editor Tools
+        </a>
 
-    <div class="logo">
-      PDF Editor Tools
+        <a href="index.html" class="home-btn">
+            Home
+        </a>
+
     </div>
-
-  </div>
-
 </header>
 
+<div class="container">
 
-<main class="container">
+    <div class="hero">
 
-<section class="hero">
+        <h1>Create PDF Forms Online</h1>
 
-  <h1>
-    Create <span>PDF Forms</span> Online
-  </h1>
-
-  <p>
-    Add fillable fields to your PDF document quickly and easily.
-  </p>
-
-</section>
-
-
-<div class="tool-box">
-
-<!-- UPLOAD -->
-
-<div class="upload-area">
-
-  <h3>
-    Upload your PDF
-  </h3>
-
-  <p>
-    Select a PDF file to create fillable form fields.
-  </p>
-
-  <input
-    type="file"
-    id="fileInput"
-    class="file-input"
-    accept=".pdf,application/pdf"
-  >
-
-  <label
-    for="fileInput"
-    class="upload-btn"
-  >
-    Choose PDF
-  </label>
-
-</div>
-
-
-<!-- FILE INFO -->
-
-<div
-  class="file-info"
-  id="fileInfo"
->
-
-  <div
-    class="file-name"
-    id="fileName"
-  ></div>
-
-  <div
-    class="file-pages"
-    id="filePages"
-  ></div>
-
-</div>
-
-
-<!-- CONTROLS -->
-
-<div
-  class="controls"
-  id="controls"
->
-
-  <div class="control-title">
-    Form Fields
-  </div>
-
-
-  <div class="form-tools">
-
-    <button
-      class="tool-btn"
-      data-type="text"
-    >
-      Text Field
-    </button>
-
-    <button
-      class="tool-btn"
-      data-type="checkbox"
-    >
-      Checkbox
-    </button>
-
-    <button
-      class="tool-btn"
-      data-type="radio"
-    >
-      Radio Button
-    </button>
-
-    <button
-      class="tool-btn"
-      data-type="dropdown"
-    >
-      Dropdown
-    </button>
-
-  </div>
-
-
-  <!-- SETTINGS -->
-
-  <div
-    class="field-settings"
-    id="fieldSettings"
-  >
-
-    <h3>
-      Field Settings
-    </h3>
-
-    <div class="setting-grid">
-
-      <div class="setting-group">
-
-        <label>
-          Field Name
-        </label>
-
-        <input
-          type="text"
-          id="fieldName"
-          value="Field1"
-        >
-
-      </div>
-
-
-      <div class="setting-group">
-
-        <label>
-          Default Value
-        </label>
-
-        <input
-          type="text"
-          id="fieldValue"
-          placeholder="Optional"
-        >
-
-      </div>
+        <p>
+            Add fillable text fields, checkboxes, radio buttons and dropdowns to your PDF.
+        </p>
 
     </div>
 
-    <button
-      class="apply-settings"
-      id="applySettings"
-    >
-      Apply Settings
-    </button>
 
-  </div>
+    <!-- UPLOAD -->
 
+    <div class="card">
 
-  <!-- PAGE NAVIGATION -->
+        <h2>1. Upload PDF</h2>
 
-  <div
-    class="page-navigation"
-    id="pageNavigation"
-  >
+        <div class="upload-area">
 
-    <div class="page-navigation-title">
-      Select page to add field
+            <label for="pdfInput" class="upload-btn">
+                Choose PDF
+            </label>
+
+            <input
+                type="file"
+                id="pdfInput"
+                accept="application/pdf"
+            >
+
+            <div id="fileName" class="file-name">
+                No PDF selected
+            </div>
+
+        </div>
+
     </div>
 
-    <div
-      class="page-buttons"
-      id="pageButtons"
-    ></div>
 
-  </div>
+    <!-- TOOL -->
+
+    <div class="card" id="editorCard" style="display:none;">
+
+        <h2>2. Add Form Fields</h2>
+
+        <div class="toolbar">
+
+            <button type="button" id="textBtn">
+                Text Field
+            </button>
+
+            <button type="button" id="checkboxBtn">
+                Checkbox
+            </button>
+
+            <button type="button" id="radioBtn">
+                Radio Button
+            </button>
+
+            <button type="button" id="dropdownBtn">
+                Dropdown
+            </button>
+
+        </div>
 
 
-  <!-- PREVIEW -->
+        <!-- SETTINGS -->
 
-  <div
-    class="preview-section"
-    id="previewSection"
-  >
+        <div class="settings">
 
-    <div class="preview-title">
-      PDF Preview
+            <input
+                type="text"
+                id="fieldName"
+                placeholder="Field Name"
+            >
+
+            <input
+                type="text"
+                id="fieldValue"
+                placeholder="Default Value"
+            >
+
+            <button
+                type="button"
+                class="apply-btn"
+                id="applySettings"
+            >
+                Apply
+            </button>
+
+        </div>
+
+
+        <div class="status" id="status">
+            Select a field type and click on the PDF to add it.
+        </div>
+
+
+        <!-- PAGE NAVIGATION -->
+
+        <div class="page-navigation" id="pageNavigation">
+
+            <button type="button" id="prevPage">
+                ← Previous
+            </button>
+
+            <span class="page-info" id="pageInfo">
+                Page 1 / 1
+            </span>
+
+            <button type="button" id="nextPage">
+                Next →
+            </button>
+
+        </div>
+
+
+        <!-- PREVIEW -->
+
+        <div class="preview-wrapper" id="previewArea">
+        </div>
+
+
+        <!-- FIELD ACTIONS -->
+
+        <div class="field-actions">
+
+            <button type="button" id="duplicateBtn">
+                Duplicate
+            </button>
+
+            <button type="button" id="deleteBtn">
+                Delete
+            </button>
+
+            <button type="button" id="clearSelectionBtn">
+                Clear Selection
+            </button>
+
+        </div>
+
+
+        <!-- BOTTOM -->
+
+        <div class="bottom-actions">
+
+            <button
+                type="button"
+                class="create-btn"
+                id="createPdfBtn"
+            >
+                Create Fillable PDF
+            </button>
+
+            <button
+                type="button"
+                class="reset-btn"
+                id="resetBtn"
+            >
+                Reset
+            </button>
+
+        </div>
+
+
+        <div class="result" id="result">
+        </div>
+
     </div>
-
-    <div class="preview-note">
-      Select a field, then click on a PDF page to add it.
-      Drag the field to move it and use the bottom-right handle to resize it.
-    </div>
-
-    <div
-      class="preview-area"
-      id="previewArea"
-    ></div>
-
-  </div>
-
-
-  <!-- FIELD ACTIONS -->
-
-  <div
-    class="field-actions"
-    id="fieldActions"
-  >
-
-    <button
-      id="duplicateBtn"
-    >
-      Duplicate
-    </button>
-
-    <button
-      id="deleteBtn"
-      class="delete-btn"
-    >
-      Delete
-    </button>
-
-  </div>
-
-
-  <!-- BOTTOM ACTIONS -->
-
-  <div
-    class="bottom-actions"
-    id="bottomActions"
-  >
-
-    <button
-      class="action-btn download-btn"
-      id="createBtn"
-    >
-      Create Fillable PDF
-    </button>
-
-    <button
-      class="action-btn reset-btn"
-      id="resetBtn"
-    >
-      Reset
-    </button>
-
-  </div>
-
-
-  <!-- RESULT -->
-
-  <div
-    class="result"
-    id="result"
-  >
-
-    <h3>
-      PDF Form Created Successfully
-    </h3>
-
-    <p>
-      Your fillable PDF is ready.
-    </p>
-
-    <a
-      id="downloadLink"
-      class="download-result"
-      href="#"
-      download="fillable-form.pdf"
-    >
-      Download PDF
-    </a>
-
-  </div>
 
 </div>
-
-</div>
-
-</main>
-
-
-<footer>
-
-  PDF Editor Tools © 2026
-
-</footer>
 
 
 <script>
 
-/* =========================
-   PDF.JS
-========================= */
-
 pdfjsLib.GlobalWorkerOptions.workerSrc =
-  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-
-
-/* =========================
-   ELEMENTS
-========================= */
-
-const fileInput =
-  document.getElementById("fileInput");
-
-const fileInfo =
-  document.getElementById("fileInfo");
-
-const fileName =
-  document.getElementById("fileName");
-
-const filePages =
-  document.getElementById("filePages");
-
-const controls =
-  document.getElementById("controls");
-
-const previewSection =
-  document.getElementById("previewSection");
-
-const previewArea =
-  document.getElementById("previewArea");
-
-const fieldSettings =
-  document.getElementById("fieldSettings");
-
-const fieldName =
-  document.getElementById("fieldName");
-
-const fieldValue =
-  document.getElementById("fieldValue");
-
-const applySettings =
-  document.getElementById("applySettings");
-
-const pageNavigation =
-  document.getElementById("pageNavigation");
-
-const pageButtons =
-  document.getElementById("pageButtons");
-
-const fieldActions =
-  document.getElementById("fieldActions");
-
-const duplicateBtn =
-  document.getElementById("duplicateBtn");
-
-const deleteBtn =
-  document.getElementById("deleteBtn");
-
-const bottomActions =
-  document.getElementById("bottomActions");
-
-const createBtn =
-  document.getElementById("createBtn");
-
-const resetBtn =
-  document.getElementById("resetBtn");
-
-const result =
-  document.getElementById("result");
-
-const downloadLink =
-  document.getElementById("downloadLink");
+"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
 
 /* =========================
@@ -925,14 +617,12 @@ const downloadLink =
 ========================= */
 
 let pdfBytes = null;
-
 let pdfDocument = null;
 
 let totalPages = 0;
-
-let selectedFieldType = null;
-
 let activePage = 1;
+
+let selectedFieldType = "text";
 
 let selectedField = null;
 
@@ -942,627 +632,565 @@ let fieldCounter = 1;
 
 let outputUrl = null;
 
+let originalFileName = "document.pdf";
+
+let isAddingField = false;
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const pdfInput =
+document.getElementById("pdfInput");
+
+const fileName =
+document.getElementById("fileName");
+
+const editorCard =
+document.getElementById("editorCard");
+
+const previewArea =
+document.getElementById("previewArea");
+
+const pageInfo =
+document.getElementById("pageInfo");
+
+const prevPage =
+document.getElementById("prevPage");
+
+const nextPage =
+document.getElementById("nextPage");
+
+const fieldName =
+document.getElementById("fieldName");
+
+const fieldValue =
+document.getElementById("fieldValue");
+
+const applySettings =
+document.getElementById("applySettings");
+
+const status =
+document.getElementById("status");
+
+const textBtn =
+document.getElementById("textBtn");
+
+const checkboxBtn =
+document.getElementById("checkboxBtn");
+
+const radioBtn =
+document.getElementById("radioBtn");
+
+const dropdownBtn =
+document.getElementById("dropdownBtn");
+
+const duplicateBtn =
+document.getElementById("duplicateBtn");
+
+const deleteBtn =
+document.getElementById("deleteBtn");
+
+const clearSelectionBtn =
+document.getElementById("clearSelectionBtn");
+
+const createPdfBtn =
+document.getElementById("createPdfBtn");
+
+const resetBtn =
+document.getElementById("resetBtn");
+
+const result =
+document.getElementById("result");
+
+
+/* =========================
+   FIELD TYPE BUTTONS
+========================= */
+
+function setFieldType(type){
+
+    selectedFieldType = type;
+
+    textBtn.classList.remove("active");
+    checkboxBtn.classList.remove("active");
+    radioBtn.classList.remove("active");
+    dropdownBtn.classList.remove("active");
+
+    if(type === "text"){
+        textBtn.classList.add("active");
+    }
+
+    if(type === "checkbox"){
+        checkboxBtn.classList.add("active");
+    }
+
+    if(type === "radio"){
+        radioBtn.classList.add("active");
+    }
+
+    if(type === "dropdown"){
+        dropdownBtn.classList.add("active");
+    }
+
+    isAddingField = true;
+
+    status.textContent =
+        "Now click anywhere on the PDF to add the " +
+        type +
+        " field.";
+
+}
+
+
+textBtn.addEventListener("click",function(){
+
+    setFieldType("text");
+
+});
+
+
+checkboxBtn.addEventListener("click",function(){
+
+    setFieldType("checkbox");
+
+});
+
+
+radioBtn.addEventListener("click",function(){
+
+    setFieldType("radio");
+
+});
+
+
+dropdownBtn.addEventListener("click",function(){
+
+    setFieldType("dropdown");
+
+});
+
 
 /* =========================
    UPLOAD PDF
 ========================= */
 
-fileInput.addEventListener(
-  "change",
-  async function(){
+pdfInput.addEventListener("change",async function(){
 
     const file = this.files[0];
 
     if(!file){
-      return;
+        return;
     }
-
-    if(
-      !file.name.toLowerCase().endsWith(".pdf") &&
-      file.type !== "application/pdf"
-    ){
-
-      alert("Please select a PDF file.");
-
-      fileInput.value = "";
-
-      return;
-    }
-
 
     try{
 
-      const buffer =
-        await file.arrayBuffer();
+        originalFileName = file.name;
 
+        fileName.textContent =
+            "Selected: " + file.name;
 
-      pdfBytes =
-        new Uint8Array(
-          buffer.slice(0)
-        );
+        const arrayBuffer =
+            await file.arrayBuffer();
 
+        pdfBytes =
+            new Uint8Array(arrayBuffer);
 
-      const previewBytes =
-        new Uint8Array(
-          buffer.slice(0)
-        );
+        pdfDocument =
+            await pdfjsLib.getDocument({
+                data:pdfBytes
+            }).promise;
 
+        totalPages =
+            pdfDocument.numPages;
 
-      pdfDocument =
-        await pdfjsLib
-          .getDocument({
-            data:previewBytes
-          })
-          .promise;
+        activePage = 1;
 
+        fields = [];
 
-      totalPages =
-        pdfDocument.numPages;
+        selectedField = null;
 
+        fieldCounter = 1;
 
-      fileName.textContent =
-        file.name;
+        editorCard.style.display = "block";
 
-      filePages.textContent =
-        totalPages +
-        (
-          totalPages === 1
-          ? " page"
-          : " pages"
-        );
+        result.innerHTML = "";
 
+        updatePageInfo();
 
-      fileInfo.style.display =
-        "block";
+        await renderPage();
 
-      controls.style.display =
-        "block";
-
-      previewSection.style.display =
-        "block";
-
-      pageNavigation.style.display =
-        "block";
-
-      bottomActions.style.display =
-        "flex";
-
-
-      createPageButtons();
-
-      await renderAllPages();
+        status.textContent =
+            "PDF loaded. Select a field type and click on the PDF.";
 
     }
     catch(error){
 
-      console.error(error);
+        console.error(error);
 
-      alert(
-        "Unable to open this PDF. Please try another PDF."
-      );
-
-      resetTool();
+        alert("Unable to open PDF.");
 
     }
 
-  }
-);
+});
 
 
 /* =========================
-   PAGE BUTTONS
+   PAGE INFO
 ========================= */
 
-function createPageButtons(){
+function updatePageInfo(){
 
-  pageButtons.innerHTML = "";
+    pageInfo.textContent =
+        "Page " +
+        activePage +
+        " / " +
+        totalPages;
 
-  for(
-    let i = 1;
-    i <= totalPages;
-    i++
-  ){
+    prevPage.disabled =
+        activePage <= 1;
 
-    const button =
-      document.createElement("button");
-
-    button.className =
-      "page-btn";
-
-    button.textContent =
-      i;
-
-
-    if(i === activePage){
-
-      button.classList.add("active");
-
-    }
-
-
-    button.addEventListener(
-      "click",
-      function(){
-
-        activePage = i;
-
-        document
-          .querySelectorAll(".page-btn")
-          .forEach(function(btn){
-
-            btn.classList.remove(
-              "active"
-            );
-
-          });
-
-
-        button.classList.add(
-          "active"
-        );
-
-
-        scrollToPage(i);
-
-      }
-    );
-
-
-    pageButtons.appendChild(
-      button
-    );
-
-  }
+    nextPage.disabled =
+        activePage >= totalPages;
 
 }
 
 
 /* =========================
-   SCROLL TO PAGE
+   PREVIOUS PAGE
 ========================= */
 
-function scrollToPage(pageNumber){
+prevPage.addEventListener("click",async function(){
 
-  const page =
-    document.querySelector(
-      '.preview-page[data-page="' +
-      pageNumber +
-      '"]'
-    );
+    if(activePage <= 1){
+        return;
+    }
 
-  if(page){
+    activePage--;
 
-    page.scrollIntoView({
-      behavior:"smooth",
-      block:"center"
-    });
+    selectedField = null;
 
-  }
+    updatePageInfo();
 
-}
+    await renderPage();
+
+});
 
 
 /* =========================
-   RENDER ALL PAGES
+   NEXT PAGE
 ========================= */
 
-async function renderAllPages(){
+nextPage.addEventListener("click",async function(){
 
-  previewArea.innerHTML = "";
+    if(activePage >= totalPages){
+        return;
+    }
 
-  for(
-    let pageNumber = 1;
-    pageNumber <= totalPages;
-    pageNumber++
-  ){
+    activePage++;
+
+    selectedField = null;
+
+    updatePageInfo();
+
+    await renderPage();
+
+});
+
+
+/* =========================
+   RENDER PAGE
+========================= */
+
+async function renderPage(){
+
+    previewArea.innerHTML = "";
 
     const page =
-      await pdfDocument.getPage(
-        pageNumber
-      );
-
-
-    const scale = 1.35;
+        await pdfDocument.getPage(activePage);
 
     const viewport =
-      page.getViewport({
-        scale:scale
-      });
+        page.getViewport({
+            scale:1.5
+        });
 
+    const pageContainer =
+        document.createElement("div");
 
-    const wrapper =
-      document.createElement("div");
+    pageContainer.className =
+        "page-container";
 
-    wrapper.className =
-      "preview-page";
+    pageContainer.style.width =
+        viewport.width + "px";
 
-    wrapper.dataset.page =
-      pageNumber;
+    pageContainer.style.height =
+        viewport.height + "px";
 
-
-    wrapper.style.width =
-      viewport.width + "px";
-
-    wrapper.style.height =
-      viewport.height + "px";
-
+    pageContainer.dataset.page =
+        activePage;
 
     const canvas =
-      document.createElement("canvas");
+        document.createElement("canvas");
 
     const context =
-      canvas.getContext("2d");
-
+        canvas.getContext("2d");
 
     canvas.width =
-      viewport.width;
+        viewport.width;
 
     canvas.height =
-      viewport.height;
+        viewport.height;
 
-    canvas.style.width =
-      viewport.width + "px";
+    pageContainer.appendChild(canvas);
 
-    canvas.style.height =
-      viewport.height + "px";
-
-
-    wrapper.appendChild(
-      canvas
-    );
-
-    previewArea.appendChild(
-      wrapper
-    );
-
+    previewArea.appendChild(pageContainer);
 
     await page.render({
-
-      canvasContext:context,
-
-      viewport:viewport
-
+        canvasContext:context,
+        viewport:viewport
     }).promise;
 
 
-    renderFieldsForPage(
-      wrapper,
-      pageNumber,
-      viewport
-    );
+    /* CLICK TO ADD FIELD */
 
-  }
+    pageContainer.addEventListener("click",function(event){
 
-}
+        if(!isAddingField){
+            return;
+        }
 
+        if(
+            event.target !== pageContainer &&
+            event.target !== canvas
+        ){
+            return;
+        }
 
-/* =========================
-   RENDER EXISTING FIELDS
-========================= */
+        const rect =
+            pageContainer.getBoundingClientRect();
 
-function renderFieldsForPage(
-  wrapper,
-  pageNumber,
-  viewport
-){
+        const x =
+            event.clientX -
+            rect.left;
 
-  const pageFields =
-    fields.filter(function(field){
+        const y =
+            event.clientY -
+            rect.top;
 
-      return field.page === pageNumber;
+        addField(
+            selectedFieldType,
+            x,
+            y,
+            pageContainer
+        );
+
+        isAddingField = false;
+
+        status.textContent =
+            "Field added. You can drag or resize it.";
 
     });
 
 
-  pageFields.forEach(function(field){
+    /* RENDER EXISTING FIELDS */
 
-    createFieldElement(
-      wrapper,
-      field,
-      viewport
-    );
+    fields
+        .filter(function(field){
 
-  });
+            return field.page === activePage;
+
+        })
+        .forEach(function(field){
+
+            createFieldElement(
+                field,
+                pageContainer
+            );
+
+        });
 
 }
 
 
 /* =========================
-   TOOL BUTTONS
+   UNIQUE NAME
 ========================= */
 
-document
-  .querySelectorAll(".tool-btn")
-  .forEach(function(button){
+function getUniqueFieldName(baseName){
 
-    button.addEventListener(
-      "click",
-      function(){
+    let name =
+        baseName ||
+        ("field_" + fieldCounter);
 
-        selectedFieldType =
-          button.dataset.type;
+    let original =
+        name;
 
+    let number = 1;
 
-        document
-          .querySelectorAll(".tool-btn")
-          .forEach(function(btn){
+    while(
+        fields.some(function(field){
 
-            btn.classList.remove(
-              "active"
-            );
+            return field.name === name;
 
-          });
+        })
+    ){
 
+        name =
+            original +
+            "_" +
+            number;
 
-        button.classList.add(
-          "active"
-        );
+        number++;
 
+    }
 
-        fieldSettings.style.display =
-          "block";
+    return name;
 
-
-        if(
-          selectedFieldType === "text"
-        ){
-
-          fieldName.value =
-            "Field" + fieldCounter;
-
-        }
-
-        else if(
-          selectedFieldType === "checkbox"
-        ){
-
-          fieldName.value =
-            "Check" + fieldCounter;
-
-        }
-
-        else if(
-          selectedFieldType === "radio"
-        ){
-
-          fieldName.value =
-            "RadioGroup" + fieldCounter;
-
-        }
-
-        else if(
-          selectedFieldType === "dropdown"
-        ){
-
-          fieldName.value =
-            "Dropdown" + fieldCounter;
-
-        }
-
-        fieldValue.value = "";
-
-        selectedField = null;
-
-      }
-    );
-
-  });
+}
 
 
 /* =========================
-   CLICK PDF PAGE
+   ADD FIELD
 ========================= */
 
-previewArea.addEventListener(
-  "click",
-  function(event){
+function addField(
+    type,
+    x,
+    y,
+    pageContainer
+){
 
-    if(!selectedFieldType){
-      return;
+    let name =
+        fieldName.value.trim();
+
+    let value =
+        fieldValue.value.trim();
+
+
+    if(!name){
+
+        name =
+            "field_" +
+            fieldCounter;
+
+    }
+
+    name =
+        getUniqueFieldName(name);
+
+
+    let width = 180;
+    let height = 40;
+
+
+    if(type === "checkbox"){
+
+        width = 150;
+        height = 35;
+
     }
 
 
-    const pageElement =
-      event.target.closest(
-        ".preview-page"
-      );
+    if(type === "radio"){
+
+        width = 150;
+        height = 35;
+
+    }
 
 
-    if(!pageElement){
-      return;
+    if(type === "dropdown"){
+
+        width = 180;
+        height = 40;
+
+    }
+
+
+    /* keep inside page */
+
+    if(
+        x + width >
+        pageContainer.clientWidth
+    ){
+
+        x =
+            pageContainer.clientWidth -
+            width -
+            10;
+
     }
 
 
     if(
-      event.target.closest(
-        ".form-field"
-      )
+        y + height >
+        pageContainer.clientHeight
     ){
 
-      return;
+        y =
+            pageContainer.clientHeight -
+            height -
+            10;
 
     }
 
 
-    const rect =
-      pageElement.getBoundingClientRect();
+    x = Math.max(0,x);
+
+    y = Math.max(0,y);
 
 
-    const x =
-      event.clientX -
-      rect.left;
+    const field = {
 
-    const y =
-      event.clientY -
-      rect.top;
+        id:
+            Date.now() +
+            "_" +
+            Math.random()
+                .toString(36)
+                .substring(2,8),
 
+        type:type,
 
-    const field =
-      createFieldData(
-        Number(pageElement.dataset.page),
-        x,
-        y,
-        pageElement.clientWidth,
-        pageElement.clientHeight
-      );
+        name:name,
+
+        value:value,
+
+        page:activePage,
+
+        x:x,
+
+        y:y,
+
+        width:width,
+
+        height:height,
+
+        options:[
+            "Option 1",
+            "Option 2",
+            "Option 3"
+        ]
+
+    };
 
 
     fields.push(field);
 
     fieldCounter++;
 
+    selectedField = field;
 
     createFieldElement(
-      pageElement,
-      field,
-      {
-        width:pageElement.clientWidth,
-        height:pageElement.clientHeight
-      }
+        field,
+        pageContainer
     );
 
+    fieldName.value =
+        field.name;
 
-    selectedField =
-      field;
-
-
-    fieldActions.style.display =
-      "block";
-
-
-    selectedFieldType =
-      null;
-
-
-    document
-      .querySelectorAll(".tool-btn")
-      .forEach(function(btn){
-
-        btn.classList.remove(
-          "active"
-        );
-
-      });
-
-
-    fieldSettings.style.display =
-      "block";
-
-
-    updateSettingsFromField(
-      field
-    );
-
-  }
-);
-
-
-/* =========================
-   CREATE FIELD DATA
-========================= */
-
-function createFieldData(
-  page,
-  x,
-  y,
-  pageWidth,
-  pageHeight
-){
-
-  let width = 160;
-
-  let height = 36;
-
-
-  if(
-    selectedFieldType === "checkbox"
-  ){
-
-    width = 32;
-    height = 32;
-
-  }
-
-
-  if(
-    selectedFieldType === "radio"
-  ){
-
-    width = 32;
-    height = 32;
-
-  }
-
-
-  if(
-    selectedFieldType === "dropdown"
-  ){
-
-    width = 180;
-    height = 36;
-
-  }
-
-
-  x -= width / 2;
-
-  y -= height / 2;
-
-
-  x =
-    Math.max(
-      0,
-      Math.min(
-        x,
-        pageWidth - width
-      )
-    );
-
-
-  y =
-    Math.max(
-      0,
-      Math.min(
-        y,
-        pageHeight - height
-      )
-    );
-
-
-  return {
-
-    id:
-      "field_" +
-      Date.now() +
-      "_" +
-      Math.random()
-        .toString(36)
-        .slice(2,8),
-
-    page:page,
-
-    type:selectedFieldType,
-
-    name:
-      fieldName.value.trim() ||
-      "Field" + fieldCounter,
-
-    value:
-      fieldValue.value,
-
-    x:x,
-
-    y:y,
-
-    width:width,
-
-    height:height,
-
-    pageWidth:pageWidth,
-
-    pageHeight:pageHeight
-
-  };
+    fieldValue.value =
+        field.value;
 
 }
 
@@ -1572,162 +1200,371 @@ function createFieldData(
 ========================= */
 
 function createFieldElement(
-  wrapper,
-  field,
-  viewport
+    field,
+    pageContainer
 ){
 
-  const element =
-    document.createElement("div");
+    const element =
+        document.createElement("div");
+
+    element.className =
+        "form-field";
+
+    element.dataset.id =
+        field.id;
+
+    element.style.left =
+        field.x + "px";
+
+    element.style.top =
+        field.y + "px";
+
+    element.style.width =
+        field.width + "px";
+
+    element.style.height =
+        field.height + "px";
 
 
-  element.className =
-    "form-field";
+    /* TEXT */
 
+    if(field.type === "text"){
 
-  element.dataset.fieldId =
-    field.id;
+        const value =
+            document.createElement("div");
 
+        value.className =
+            "field-value";
 
-  element.style.left =
-    field.x + "px";
+        value.textContent =
+            field.value || field.name;
 
-  element.style.top =
-    field.y + "px";
-
-  element.style.width =
-    field.width + "px";
-
-  element.style.height =
-    field.height + "px";
-
-
-  /* FIELD CONTENT */
-
-  if(
-    field.type === "text"
-  ){
-
-    const text =
-      document.createElement("div");
-
-    text.className =
-      "form-field-text";
-
-    text.textContent =
-      field.name;
-
-    element.appendChild(
-      text
-    );
-
-  }
-
-
-  else if(
-    field.type === "checkbox"
-  ){
-
-    element.classList.add(
-      "form-field-checkbox"
-    );
-
-    element.textContent =
-      "☐";
-
-  }
-
-
-  else if(
-    field.type === "radio"
-  ){
-
-    const radio =
-      document.createElement("div");
-
-    radio.className =
-      "form-field-radio";
-
-    element.appendChild(
-      radio
-    );
-
-  }
-
-
-  else if(
-    field.type === "dropdown"
-  ){
-
-    const text =
-      document.createElement("div");
-
-    text.className =
-      "form-field-dropdown";
-
-    text.textContent =
-      field.name +
-      " ▼";
-
-    element.appendChild(
-      text
-    );
-
-  }
-
-
-  /* RESIZE HANDLE */
-
-  const resizeHandle =
-    document.createElement("div");
-
-  resizeHandle.className =
-    "resize-handle";
-
-  element.appendChild(
-    resizeHandle
-  );
-
-
-  wrapper.appendChild(
-    element
-  );
-
-
-  /* SELECT */
-
-  element.addEventListener(
-    "click",
-    function(event){
-
-      event.stopPropagation();
-
-      selectField(
-        field,
-        element
-      );
+        element.appendChild(value);
 
     }
-  );
 
 
-  /* DRAG */
+    /* CHECKBOX */
 
-  makeDraggable(
-    element,
-    field,
-    wrapper
-  );
+    if(field.type === "checkbox"){
+
+        const box =
+            document.createElement("div");
+
+        box.className =
+            "checkbox-preview";
+
+        const checkbox =
+            document.createElement("div");
+
+        checkbox.className =
+            "checkbox-box";
+
+        const checked =
+            field.value.toLowerCase() === "true" ||
+            field.value.toLowerCase() === "yes" ||
+            field.value.toLowerCase() === "checked";
+
+        if(checked){
+
+            checkbox.classList.add("checked");
+
+        }
+
+        const label =
+            document.createElement("span");
+
+        label.textContent =
+            field.name;
+
+        box.appendChild(checkbox);
+
+        box.appendChild(label);
+
+        element.appendChild(box);
+
+    }
 
 
-  /* RESIZE */
+    /* RADIO */
 
-  makeResizable(
-    element,
-    field,
-    wrapper,
-    resizeHandle
-  );
+    if(field.type === "radio"){
+
+        const box =
+            document.createElement("div");
+
+        box.className =
+            "radio-preview";
+
+        const circle =
+            document.createElement("div");
+
+        circle.className =
+            "radio-circle";
+
+        const label =
+            document.createElement("span");
+
+        label.textContent =
+            field.name;
+
+        box.appendChild(circle);
+
+        box.appendChild(label);
+
+        element.appendChild(box);
+
+    }
+
+
+    /* DROPDOWN */
+
+    if(field.type === "dropdown"){
+
+        const value =
+            document.createElement("div");
+
+        value.className =
+            "field-value";
+
+        value.textContent =
+            field.value ||
+            field.options[0];
+
+        element.appendChild(value);
+
+    }
+
+
+    /* RESIZE */
+
+    const resize =
+        document.createElement("div");
+
+    resize.className =
+        "resize-handle";
+
+    element.appendChild(resize);
+
+
+    /* SELECT */
+
+    element.addEventListener("mousedown",function(event){
+
+        if(event.target === resize){
+            return;
+        }
+
+        event.stopPropagation();
+
+        selectField(field,element);
+
+    });
+
+
+    /* DRAG */
+
+    element.addEventListener("mousedown",function(event){
+
+        if(event.target === resize){
+            return;
+        }
+
+        event.preventDefault();
+
+        event.stopPropagation();
+
+        selectField(field,element);
+
+        const startX =
+            event.clientX;
+
+        const startY =
+            event.clientY;
+
+        const originalX =
+            field.x;
+
+        const originalY =
+            field.y;
+
+
+        function move(e){
+
+            let newX =
+                originalX +
+                (e.clientX - startX);
+
+            let newY =
+                originalY +
+                (e.clientY - startY);
+
+
+            newX =
+                Math.max(
+                    0,
+                    Math.min(
+                        newX,
+                        pageContainer.clientWidth -
+                        field.width
+                    )
+                );
+
+
+            newY =
+                Math.max(
+                    0,
+                    Math.min(
+                        newY,
+                        pageContainer.clientHeight -
+                        field.height
+                    )
+                );
+
+
+            field.x =
+                newX;
+
+            field.y =
+                newY;
+
+            element.style.left =
+                newX + "px";
+
+            element.style.top =
+                newY + "px";
+
+        }
+
+
+        function stop(){
+
+            document.removeEventListener(
+                "mousemove",
+                move
+            );
+
+            document.removeEventListener(
+                "mouseup",
+                stop
+            );
+
+        }
+
+
+        document.addEventListener(
+            "mousemove",
+            move
+        );
+
+        document.addEventListener(
+            "mouseup",
+            stop
+        );
+
+    });
+
+
+    /* RESIZE */
+
+    resize.addEventListener("mousedown",function(event){
+
+        event.preventDefault();
+
+        event.stopPropagation();
+
+        selectField(field,element);
+
+        const startX =
+            event.clientX;
+
+        const startY =
+            event.clientY;
+
+        const originalWidth =
+            field.width;
+
+        const originalHeight =
+            field.height;
+
+
+        function resizeMove(e){
+
+            let newWidth =
+                originalWidth +
+                (e.clientX - startX);
+
+            let newHeight =
+                originalHeight +
+                (e.clientY - startY);
+
+
+            newWidth =
+                Math.max(
+                    50,
+                    Math.min(
+                        newWidth,
+                        pageContainer.clientWidth -
+                        field.x
+                    )
+                );
+
+
+            newHeight =
+                Math.max(
+                    25,
+                    Math.min(
+                        newHeight,
+                        pageContainer.clientHeight -
+                        field.y
+                    )
+                );
+
+
+            field.width =
+                newWidth;
+
+            field.height =
+                newHeight;
+
+            element.style.width =
+                newWidth + "px";
+
+            element.style.height =
+                newHeight + "px";
+
+        }
+
+
+        function resizeStop(){
+
+            document.removeEventListener(
+                "mousemove",
+                resizeMove
+            );
+
+            document.removeEventListener(
+                "mouseup",
+                resizeStop
+            );
+
+        }
+
+
+        document.addEventListener(
+            "mousemove",
+            resizeMove
+        );
+
+        document.addEventListener(
+            "mouseup",
+            resizeStop
+        );
+
+    });
+
+
+    pageContainer.appendChild(element);
 
 }
 
@@ -1736,59 +1573,26 @@ function createFieldElement(
    SELECT FIELD
 ========================= */
 
-function selectField(
-  field,
-  element
-){
+function selectField(field,element){
 
-  selectedField =
-    field;
+    document
+        .querySelectorAll(".form-field")
+        .forEach(function(item){
 
+            item.classList.remove("selected");
 
-  document
-    .querySelectorAll(".form-field")
-    .forEach(function(item){
+        });
 
-      item.classList.remove(
-        "selected"
-      );
+    element.classList.add("selected");
 
-    });
+    selectedField =
+        field;
 
+    fieldName.value =
+        field.name;
 
-  element.classList.add(
-    "selected"
-  );
-
-
-  fieldActions.style.display =
-    "block";
-
-
-  fieldSettings.style.display =
-    "block";
-
-
-  updateSettingsFromField(
-    field
-  );
-
-}
-
-
-/* =========================
-   UPDATE SETTINGS UI
-========================= */
-
-function updateSettingsFromField(
-  field
-){
-
-  fieldName.value =
-    field.name;
-
-  fieldValue.value =
-    field.value || "";
+    fieldValue.value =
+        field.value;
 
 }
 
@@ -1797,592 +1601,222 @@ function updateSettingsFromField(
    APPLY SETTINGS
 ========================= */
 
-applySettings.addEventListener(
-  "click",
-  function(){
+applySettings.addEventListener("click",function(){
 
     if(!selectedField){
 
-      alert(
-        "Please select a field first."
-      );
+        alert(
+            "Please select a field first."
+        );
 
-      return;
+        return;
 
     }
 
 
-    const newName =
-      fieldName.value.trim();
+    let newName =
+        fieldName.value.trim();
+
+    let newValue =
+        fieldValue.value.trim();
 
 
     if(!newName){
 
-      alert(
-        "Field name cannot be empty."
-      );
+        newName =
+            selectedField.name;
 
-      return;
+    }
+
+
+    /* Don't allow duplicate names */
+
+    const duplicate =
+        fields.some(function(field){
+
+            return (
+                field !== selectedField &&
+                field.name === newName
+            );
+
+        });
+
+
+    if(duplicate){
+
+        newName =
+            getUniqueFieldName(newName);
 
     }
 
 
     selectedField.name =
-      newName;
-
+        newName;
 
     selectedField.value =
-      fieldValue.value;
+        newValue;
 
 
-    const element =
-      document.querySelector(
-        '[data-field-id="' +
-        selectedField.id +
-        '"]'
-      );
+    renderPage();
 
-
-    if(element){
-
-      updateFieldVisual(
-        element,
-        selectedField
-      );
-
-    }
-
-
-    alert(
-      "Field settings updated."
-    );
-
-  }
-);
+});
 
 
 /* =========================
-   UPDATE VISUAL
+   ENTER KEY
 ========================= */
 
-function updateFieldVisual(
-  element,
-  field
-){
+[fieldName,fieldValue].forEach(function(input){
 
-  const text =
-    element.querySelector(
-      ".form-field-text"
-    );
+    input.addEventListener(
+        "keydown",
+        function(event){
 
+            if(event.key === "Enter"){
 
-  if(text){
+                event.preventDefault();
 
-    text.textContent =
-      field.name;
+                event.stopPropagation();
 
-  }
+                applySettings.click();
 
-
-  const dropdown =
-    element.querySelector(
-      ".form-field-dropdown"
-    );
-
-
-  if(dropdown){
-
-    dropdown.textContent =
-      field.name +
-      " ▼";
-
-  }
-
-}
-
-
-/* =========================
-   DRAG FIELD
-========================= */
-
-function makeDraggable(
-  element,
-  field,
-  wrapper
-){
-
-  let dragging = false;
-
-  let startX = 0;
-
-  let startY = 0;
-
-  let originalX = 0;
-
-  let originalY = 0;
-
-
-  element.addEventListener(
-    "pointerdown",
-    function(event){
-
-      if(
-        event.target.classList.contains(
-          "resize-handle"
-        )
-      ){
-
-        return;
-
-      }
-
-
-      event.preventDefault();
-
-      event.stopPropagation();
-
-
-      dragging = true;
-
-
-      selectField(
-        field,
-        element
-      );
-
-
-      startX =
-        event.clientX;
-
-      startY =
-        event.clientY;
-
-
-      originalX =
-        field.x;
-
-      originalY =
-        field.y;
-
-
-      element.setPointerCapture(
-        event.pointerId
-      );
-
-    }
-  );
-
-
-  element.addEventListener(
-    "pointermove",
-    function(event){
-
-      if(!dragging){
-        return;
-      }
-
-
-      const dx =
-        event.clientX -
-        startX;
-
-
-      const dy =
-        event.clientY -
-        startY;
-
-
-      let newX =
-        originalX + dx;
-
-
-      let newY =
-        originalY + dy;
-
-
-      newX =
-        Math.max(
-          0,
-          Math.min(
-            newX,
-            wrapper.clientWidth -
-            field.width
-          )
-        );
-
-
-      newY =
-        Math.max(
-          0,
-          Math.min(
-            newY,
-            wrapper.clientHeight -
-            field.height
-          )
-        );
-
-
-      field.x =
-        newX;
-
-      field.y =
-        newY;
-
-
-      element.style.left =
-        newX + "px";
-
-      element.style.top =
-        newY + "px";
-
-    }
-  );
-
-
-  element.addEventListener(
-    "pointerup",
-    function(event){
-
-      dragging = false;
-
-      try{
-
-        element.releasePointerCapture(
-          event.pointerId
-        );
-
-      }
-      catch(e){}
-
-    }
-  );
-
-}
-
-
-/* =========================
-   RESIZE FIELD
-========================= */
-
-function makeResizable(
-  element,
-  field,
-  wrapper,
-  handle
-){
-
-  let resizing = false;
-
-  let startX = 0;
-
-  let startY = 0;
-
-  let startWidth = 0;
-
-  let startHeight = 0;
-
-
-  handle.addEventListener(
-    "pointerdown",
-    function(event){
-
-      event.preventDefault();
-
-      event.stopPropagation();
-
-
-      resizing = true;
-
-
-      selectField(
-        field,
-        element
-      );
-
-
-      startX =
-        event.clientX;
-
-      startY =
-        event.clientY;
-
-
-      startWidth =
-        field.width;
-
-      startHeight =
-        field.height;
-
-
-      handle.setPointerCapture(
-        event.pointerId
-      );
-
-    }
-  );
-
-
-  handle.addEventListener(
-    "pointermove",
-    function(event){
-
-      if(!resizing){
-        return;
-      }
-
-
-      const dx =
-        event.clientX -
-        startX;
-
-
-      const dy =
-        event.clientY -
-        startY;
-
-
-      let newWidth =
-        startWidth + dx;
-
-
-      let newHeight =
-        startHeight + dy;
-
-
-      const minWidth =
-        field.type === "checkbox" ||
-        field.type === "radio"
-        ? 25
-        : 60;
-
-
-      const minHeight =
-        field.type === "checkbox" ||
-        field.type === "radio"
-        ? 25
-        : 25;
-
-
-      newWidth =
-        Math.max(
-          minWidth,
-          newWidth
-        );
-
-
-      newHeight =
-        Math.max(
-          minHeight,
-          newHeight
-        );
-
-
-      newWidth =
-        Math.min(
-          newWidth,
-          wrapper.clientWidth -
-          field.x
-        );
-
-
-      newHeight =
-        Math.min(
-          newHeight,
-          wrapper.clientHeight -
-          field.y
-        );
-
-
-      field.width =
-        newWidth;
-
-      field.height =
-        newHeight;
-
-
-      element.style.width =
-        newWidth + "px";
-
-      element.style.height =
-        newHeight + "px";
-
-    }
-  );
-
-
-  handle.addEventListener(
-    "pointerup",
-    function(event){
-
-      resizing = false;
-
-      try{
-
-        handle.releasePointerCapture(
-          event.pointerId
-        );
-
-      }
-      catch(e){}
-
-    }
-  );
-
-}
-
-
-/* =========================
-   DELETE
-========================= */
-
-deleteBtn.addEventListener(
-  "click",
-  function(){
-
-    if(!selectedField){
-
-      alert(
-        "Please select a field first."
-      );
-
-      return;
-
-    }
-
-
-    const id =
-      selectedField.id;
-
-
-    fields =
-      fields.filter(
-        function(field){
-
-          return field.id !== id;
+            }
 
         }
-      );
+    );
 
-
-    const element =
-      document.querySelector(
-        '[data-field-id="' +
-        id +
-        '"]'
-      );
-
-
-    if(element){
-
-      element.remove();
-
-    }
-
-
-    selectedField =
-      null;
-
-
-    fieldActions.style.display =
-      "none";
-
-    fieldSettings.style.display =
-      "none";
-
-  }
-);
+});
 
 
 /* =========================
    DUPLICATE
 ========================= */
 
-duplicateBtn.addEventListener(
-  "click",
-  function(){
+duplicateBtn.addEventListener("click",function(){
 
     if(!selectedField){
 
-      alert(
-        "Please select a field first."
-      );
+        alert(
+            "Please select a field first."
+        );
 
-      return;
+        return;
 
     }
 
 
     const copy =
-      Object.assign(
-        {},
-        selectedField
-      );
+        JSON.parse(
+            JSON.stringify(selectedField)
+        );
 
 
     copy.id =
-      "field_" +
-      Date.now() +
-      "_" +
-      Math.random()
-        .toString(36)
-        .slice(2,8);
+        Date.now() +
+        "_" +
+        Math.random()
+            .toString(36)
+            .substring(2,8);
 
 
-    copy.x += 15;
+    if(copy.type !== "radio"){
 
-    copy.y += 15;
-
-
-    copy.x =
-      Math.min(
-        copy.x,
-        copy.pageWidth -
-        copy.width
-      );
-
-
-    copy.y =
-      Math.min(
-        copy.y,
-        copy.pageHeight -
-        copy.height
-      );
-
-
-    fields.push(
-      copy
-    );
-
-
-    const wrapper =
-      document.querySelector(
-        '.preview-page[data-page="' +
-        copy.page +
-        '"]'
-      );
-
-
-    if(wrapper){
-
-      createFieldElement(
-        wrapper,
-        copy,
-        {
-          width:wrapper.clientWidth,
-          height:wrapper.clientHeight
-        }
-      );
+        copy.name =
+            getUniqueFieldName(
+                copy.name
+            );
 
     }
 
 
+    copy.x += 20;
+
+    copy.y += 20;
+
+
+    if(
+        copy.x + copy.width >
+        800
+    ){
+
+        copy.x = 20;
+
+    }
+
+
+    fields.push(copy);
+
     selectedField =
-      copy;
+        copy;
+
+    renderPage();
+
+});
 
 
-    fieldCounter++;
+/* =========================
+   DELETE
+========================= */
 
-  }
+deleteBtn.addEventListener("click",function(){
+
+    if(!selectedField){
+
+        alert(
+            "Please select a field first."
+        );
+
+        return;
+
+    }
+
+
+    fields =
+        fields.filter(function(field){
+
+            return field.id !==
+                selectedField.id;
+
+        });
+
+
+    selectedField =
+        null;
+
+    fieldName.value = "";
+
+    fieldValue.value = "";
+
+    renderPage();
+
+});
+
+
+/* =========================
+   CLEAR SELECTION
+========================= */
+
+clearSelectionBtn.addEventListener(
+    "click",
+    function(){
+
+        selectedField = null;
+
+        fieldName.value = "";
+
+        fieldValue.value = "";
+
+        document
+            .querySelectorAll(".form-field")
+            .forEach(function(item){
+
+                item.classList.remove(
+                    "selected"
+                );
+
+            });
+
+    }
 );
 
 
@@ -2390,343 +1824,423 @@ duplicateBtn.addEventListener(
    CREATE PDF
 ========================= */
 
-createBtn.addEventListener(
-  "click",
-  async function(){
+createPdfBtn.addEventListener(
+    "click",
+    async function(){
 
-    if(!pdfBytes){
+        if(!pdfBytes){
 
-      alert(
-        "Please upload a PDF first."
-      );
-
-      return;
-
-    }
-
-
-    if(fields.length === 0){
-
-      alert(
-        "Please add at least one form field."
-      );
-
-      return;
-
-    }
-
-
-    createBtn.disabled =
-      true;
-
-    createBtn.textContent =
-      "Creating PDF...";
-
-
-    try{
-
-      const {
-        PDFDocument
-      } = PDFLib;
-
-
-      const pdfDoc =
-        await PDFDocument.load(
-          pdfBytes.slice()
-        );
-
-
-      const form =
-        pdfDoc.getForm();
-
-
-      /*
-        Create PDF fields
-      */
-
-      for(
-        const field of fields
-      ){
-
-        const page =
-          pdfDoc.getPages()[
-            field.page - 1
-          ];
-
-
-        const pageWidth =
-          page.getWidth();
-
-
-        const pageHeight =
-          page.getHeight();
-
-
-        const scaleX =
-          pageWidth /
-          field.pageWidth;
-
-
-        const scaleY =
-          pageHeight /
-          field.pageHeight;
-
-
-        const x =
-          field.x *
-          scaleX;
-
-
-        const width =
-          field.width *
-          scaleX;
-
-
-        const height =
-          field.height *
-          scaleY;
-
-
-        const y =
-          pageHeight -
-          (
-            field.y +
-            field.height
-          ) *
-          scaleY;
-
-
-        let pdfField;
-
-
-        /* TEXT */
-
-        if(
-          field.type === "text"
-        ){
-
-          pdfField =
-            form.createTextField(
-              field.name
+            alert(
+                "Please upload a PDF first."
             );
 
-
-          if(field.value){
-
-            pdfField.setText(
-              field.value
-            );
-
-          }
-
-
-          pdfField.addToPage(
-            page,
-            {
-              x:x,
-              y:y,
-              width:width,
-              height:height
-            }
-          );
+            return;
 
         }
 
 
-        /* CHECKBOX */
+        if(fields.length === 0){
 
-        else if(
-          field.type === "checkbox"
-        ){
-
-          pdfField =
-            form.createCheckBox(
-              field.name
+            alert(
+                "Please add at least one field."
             );
 
-
-          pdfField.addToPage(
-            page,
-            {
-              x:x,
-              y:y,
-              width:width,
-              height:height
-            }
-          );
+            return;
 
         }
 
 
-        /* RADIO */
+        try{
 
-        else if(
-          field.type === "radio"
-        ){
-
-          let radioGroup;
+            status.textContent =
+                "Creating fillable PDF...";
 
 
-          try{
-
-            radioGroup =
-              form.getRadioGroup(
-                field.name
-              );
-
-          }
-          catch(error){
-
-            radioGroup =
-              form.createRadioGroup(
-                field.name
-              );
-
-          }
+            const {
+                PDFDocument
+            } = PDFLib;
 
 
-          radioGroup.addOptionToPage(
-            "Option_" +
-            field.id,
-            page,
-            {
-              x:x,
-              y:y,
-              width:width,
-              height:height
+            const pdfDoc =
+                await PDFDocument.load(
+                    pdfBytes
+                );
+
+
+            const form =
+                pdfDoc.getForm();
+
+
+            const pages =
+                pdfDoc.getPages();
+
+
+            /*
+             * Important:
+             * preview scale = 1.5
+             *
+             * PDF coordinates are converted
+             * from preview coordinates.
+             */
+
+            const PREVIEW_SCALE = 1.5;
+
+
+            const radioGroups = {};
+
+
+            for(
+                const field of fields
+            ){
+
+                const page =
+                    pages[field.page - 1];
+
+
+                if(!page){
+                    continue;
+                }
+
+
+                const pageWidth =
+                    page.getWidth();
+
+                const pageHeight =
+                    page.getHeight();
+
+
+                const previewWidth =
+                    pageWidth *
+                    PREVIEW_SCALE;
+
+                const previewHeight =
+                    pageHeight *
+                    PREVIEW_SCALE;
+
+
+                const scaleX =
+                    pageWidth /
+                    previewWidth;
+
+
+                const scaleY =
+                    pageHeight /
+                    previewHeight;
+
+
+                const x =
+                    field.x *
+                    scaleX;
+
+
+                const y =
+                    pageHeight -
+                    (
+                        field.y +
+                        field.height
+                    ) *
+                    scaleY;
+
+
+                const width =
+                    field.width *
+                    scaleX;
+
+
+                const height =
+                    field.height *
+                    scaleY;
+
+
+                /* =====================
+                   TEXT FIELD
+                ===================== */
+
+                if(field.type === "text"){
+
+                    const textField =
+                        form.createTextField(
+                            field.name
+                        );
+
+
+                    if(field.value){
+
+                        textField.setText(
+                            field.value
+                        );
+
+                    }
+
+
+                    /*
+                     * IMPORTANT:
+                     *
+                     * borderWidth: 0
+                     *
+                     * This removes the visible
+                     * field box/border from
+                     * the downloaded PDF.
+                     *
+                     * The field remains fillable.
+                     */
+
+                    textField.addToPage(
+                        page,
+                        {
+                            x:x,
+                            y:y,
+                            width:width,
+                            height:height,
+
+                            borderWidth:0
+                        }
+                    );
+
+                }
+
+
+                /* =====================
+                   CHECKBOX
+                ===================== */
+
+                else if(
+                    field.type === "checkbox"
+                ){
+
+                    const checkbox =
+                        form.createCheckBox(
+                            field.name
+                        );
+
+
+                    checkbox.addToPage(
+                        page,
+                        {
+                            x:x,
+                            y:y,
+                            width:width,
+                            height:height,
+
+                            borderWidth:1
+                        }
+                    );
+
+
+                    const checked =
+                        field.value
+                            .toLowerCase() ===
+                            "true" ||
+
+                        field.value
+                            .toLowerCase() ===
+                            "yes" ||
+
+                        field.value
+                            .toLowerCase() ===
+                            "checked";
+
+
+                    if(checked){
+
+                        checkbox.check();
+
+                    }
+
+                }
+
+
+                /* =====================
+                   RADIO BUTTON
+                ===================== */
+
+                else if(
+                    field.type === "radio"
+                ){
+
+                    const groupName =
+                        field.name ||
+                        "radio_group";
+
+
+                    let radioGroup =
+                        radioGroups[groupName];
+
+
+                    if(!radioGroup){
+
+                        radioGroup =
+                            form.createRadioGroup(
+                                groupName
+                            );
+
+                        radioGroups[groupName] =
+                            radioGroup;
+
+                    }
+
+
+                    const optionValue =
+                        field.value ||
+                        "Option_" +
+                        field.id;
+
+
+                    radioGroup.addOptionToPage(
+                        optionValue,
+                        page,
+                        {
+                            x:x,
+                            y:y,
+                            width:width,
+                            height:height
+                        }
+                    );
+
+                }
+
+
+                /* =====================
+                   DROPDOWN
+                ===================== */
+
+                else if(
+                    field.type === "dropdown"
+                ){
+
+                    const dropdown =
+                        form.createDropdown(
+                            field.name
+                        );
+
+
+                    dropdown.setOptions(
+                        field.options
+                    );
+
+
+                    let selected =
+                        field.value;
+
+
+                    if(
+                        !field.options.includes(
+                            selected
+                        )
+                    ){
+
+                        selected =
+                            field.options[0];
+
+                    }
+
+
+                    if(selected){
+
+                        dropdown.select(
+                            selected
+                        );
+
+                    }
+
+
+                    dropdown.addToPage(
+                        page,
+                        {
+                            x:x,
+                            y:y,
+                            width:width,
+                            height:height
+                        }
+                    );
+
+                }
+
             }
-          );
+
+
+            /*
+             * Update appearance
+             */
+
+            form.updateFieldAppearances();
+
+
+            const finalBytes =
+                await pdfDoc.save();
+
+
+            const blob =
+                new Blob(
+                    [finalBytes],
+                    {
+                        type:
+                        "application/pdf"
+                    }
+                );
+
+
+            if(outputUrl){
+
+                URL.revokeObjectURL(
+                    outputUrl
+                );
+
+            }
+
+
+            outputUrl =
+                URL.createObjectURL(
+                    blob
+                );
+
+
+            let baseName =
+                originalFileName
+                    .replace(
+                        /\.pdf$/i,
+                        ""
+                    );
+
+
+            const downloadName =
+                baseName +
+                "-fillable.pdf";
+
+
+            result.innerHTML =
+
+                '<a class="download-btn" ' +
+                'href="' +
+                outputUrl +
+                '" ' +
+                'download="' +
+                downloadName +
+                '">' +
+                'Download Fillable PDF' +
+                '</a>';
+
+
+            status.textContent =
+                "Fillable PDF created successfully.";
+
 
         }
+        catch(error){
 
+            console.error(error);
 
-        /* DROPDOWN */
-
-        else if(
-          field.type === "dropdown"
-        ){
-
-          pdfField =
-            form.createDropdown(
-              field.name
+            alert(
+                "PDF creation failed.\n\n" +
+                error.message
             );
 
-
-          pdfField.addOptions([
-            "Option 1",
-            "Option 2",
-            "Option 3"
-          ]);
-
-
-          if(field.value){
-
-            try{
-
-              pdfField.select(
-                field.value
-              );
-
-            }
-            catch(e){}
-
-          }
-
-
-          pdfField.addToPage(
-            page,
-            {
-              x:x,
-              y:y,
-              width:width,
-              height:height
-            }
-          );
+            status.textContent =
+                "PDF creation failed.";
 
         }
 
-      }
-
-
-      /*
-        Update appearance
-      */
-form.getFields().forEach(function(field){
-
-  if(field.constructor.name === "PDFTextField"){
-    field.setFontSize(12);
-  }
-
-});
-      form.updateFieldAppearances();
-
-
-      const outputBytes =
-        await pdfDoc.save();
-
-
-      if(outputUrl){
-
-        URL.revokeObjectURL(
-          outputUrl
-        );
-
-      }
-
-
-      const blob =
-        new Blob(
-          [outputBytes],
-          {
-            type:"application/pdf"
-          }
-        );
-
-
-      outputUrl =
-        URL.createObjectURL(
-          blob
-        );
-
-
-      downloadLink.href =
-        outputUrl;
-
-
-      downloadLink.download =
-        "fillable-form.pdf";
-
-
-      result.style.display =
-        "block";
-
-
-      result.scrollIntoView({
-        behavior:"smooth",
-        block:"center"
-      });
-
-
     }
-    catch(error){
-
-      console.error(error);
-
-      alert(
-        "Failed to create fillable PDF.\n\n" +
-        error.message
-      );
-
-    }
-
-
-    createBtn.disabled =
-      false;
-
-    createBtn.textContent =
-      "Create Fillable PDF";
-
-  }
 );
 
 
@@ -2735,117 +2249,83 @@ form.getFields().forEach(function(field){
 ========================= */
 
 resetBtn.addEventListener(
-  "click",
-  function(){
+    "click",
+    function(){
 
-    resetTool();
+        if(outputUrl){
 
-  }
+            URL.revokeObjectURL(
+                outputUrl
+            );
+
+            outputUrl = null;
+
+        }
+
+
+        pdfBytes = null;
+
+        pdfDocument = null;
+
+        totalPages = 0;
+
+        activePage = 1;
+
+        selectedFieldType =
+            "text";
+
+        selectedField = null;
+
+        fields = [];
+
+        fieldCounter = 1;
+
+        isAddingField = false;
+
+
+        pdfInput.value = "";
+
+        fileName.textContent =
+            "No PDF selected";
+
+        fieldName.value = "";
+
+        fieldValue.value = "";
+
+        previewArea.innerHTML = "";
+
+        result.innerHTML = "";
+
+        editorCard.style.display =
+            "none";
+
+        status.textContent =
+            "Select a field type and click on the PDF to add it.";
+
+        textBtn.classList.remove(
+            "active"
+        );
+
+        checkboxBtn.classList.remove(
+            "active"
+        );
+
+        radioBtn.classList.remove(
+            "active"
+        );
+
+        dropdownBtn.classList.remove(
+            "active"
+        );
+
+        pageInfo.textContent =
+            "Page 1 / 1";
+
+    }
 );
-
-
-/* =========================
-   RESET FUNCTION
-========================= */
-
-function resetTool(){
-
-  if(outputUrl){
-
-    URL.revokeObjectURL(
-      outputUrl
-    );
-
-    outputUrl = null;
-
-  }
-
-
-  fileInput.value = "";
-
-  pdfBytes = null;
-
-  pdfDocument = null;
-
-  totalPages = 0;
-
-  activePage = 1;
-
-  selectedField = null;
-
-  selectedFieldType = null;
-
-  fields = [];
-
-  fieldCounter = 1;
-
-
-  fileName.textContent =
-    "";
-
-  filePages.textContent =
-    "";
-
-
-  fileInfo.style.display =
-    "none";
-
-  controls.style.display =
-    "none";
-
-  fieldSettings.style.display =
-    "none";
-
-  pageNavigation.style.display =
-    "none";
-
-  previewSection.style.display =
-    "none";
-
-  fieldActions.style.display =
-    "none";
-
-  bottomActions.style.display =
-    "none";
-
-  result.style.display =
-    "none";
-
-
-  previewArea.innerHTML =
-    "";
-
-  pageButtons.innerHTML =
-    "";
-
-
-  document
-    .querySelectorAll(".tool-btn")
-    .forEach(function(btn){
-
-      btn.classList.remove(
-        "active"
-      );
-
-    });
-
-
-  fieldName.value =
-    "Field1";
-
-  fieldValue.value =
-    "";
-
-}
-
-
-/* =========================
-   INITIAL STATE
-========================= */
-
-resetTool();
 
 </script>
 
 </body>
 </html>
+```
