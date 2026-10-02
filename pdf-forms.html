@@ -2651,7 +2651,13 @@ createBtn.addEventListener(
       /*
         Update appearance
       */
+form.getFields().forEach(function(field){
 
+  if(field.constructor.name === "PDFTextField"){
+    field.setFontSize(12);
+  }
+
+});
       form.updateFieldAppearances();
 
 
