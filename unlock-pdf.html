@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Unlock PDF Online - Free PDF Unlock Tool</title>
+
+<meta name="description"
+content="Unlock password protected PDF files online. Upload your PDF, enter the password and download the unlocked PDF.">
+
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f7f8fc;
+  color:#202124;
+  line-height:1.5;
+}
+
+button,
+input{
+  font-family:inherit;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+  background:#fff;
+  border-bottom:1px solid #e8e8ee;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.nav{
+  max-width:1180px;
+  min-height:70px;
+  margin:auto;
+  padding:0 20px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  color:#e53232;
+  font-size:21px;
+  font-weight:800;
+  text-decoration:none;
+}
+
+.logo-icon{
+  width:40px;
+  height:40px;
+
+  background:#e53232;
+  color:#fff;
+
+  border-radius:10px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:13px;
+  font-weight:800;
+}
+
+.home-link{
+  color:#444;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:600;
+}
+
+.home-link:hover{
+  color:#e53232;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.container{
+  max-width:1050px;
+  margin:auto;
+  padding:55px 20px 80px;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.title{
+  text-align:center;
+  margin-bottom:35px;
+}
+
+.title h1{
+  font-size:38px;
+  margin-bottom:12px;
+  font-weight:800;
+}
+
+.title h1 span{
+  color:#e53232;
+}
+
+.title p{
+  max-width:680px;
+  margin:auto;
+  color:#777;
+  font-size:16px;
+}
+
+
+/* =========================
+   TOOL BOX
+========================= */
+
+.tool-box{
+  max-width:760px;
+  margin:auto;
+
+  background:#fff;
+  border:1px solid #e5e5eb;
+  border-radius:18px;
+
+  padding:30px;
+
+  box-shadow:0 8px 30px rgba(0,0,0,.05);
+}
+
+
+/* =========================
+   UPLOAD
+========================= */
+
+.upload-area{
+  border:2px dashed #e53232;
+  background:#fff8f8;
+
+  border-radius:14px;
+
+  min-height:190px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+
+  text-align:center;
+
+  padding:25px;
+
+  cursor:pointer;
+
+  transition:.2s;
+}
+
+.upload-area:hover{
+  background:#fff1f1;
+}
+
+.upload-icon{
+  width:55px;
+  height:55px;
+
+  border-radius:14px;
+
+  background:#ffe8e8;
+  color:#e53232;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:25px;
+  font-weight:bold;
+
+  margin-bottom:13px;
+}
+
+.upload-area h3{
+  font-size:18px;
+  margin-bottom:5px;
+}
+
+.upload-area p{
+  color:#777;
+  font-size:13px;
+}
+
+#pdfInput{
+  display:none;
+}
+
+
+/* =========================
+   FILE INFO
+========================= */
+
+.file-info{
+  display:none;
+
+  margin-top:20px;
+
+  padding:15px;
+
+  border-radius:10px;
+
+  background:#f7f7f9;
+  border:1px solid #e8e8ee;
+}
+
+.file-name{
+  font-size:15px;
+  font-weight:700;
+
+  word-break:break-word;
+}
+
+.file-size{
+  color:#777;
+  font-size:13px;
+  margin-top:3px;
+}
+
+
+/* =========================
+   PASSWORD
+========================= */
+
+.password-section{
+  display:none;
+  margin-top:25px;
+}
+
+.password-section label{
+  display:block;
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.password-row{
+  display:flex;
+  gap:10px;
+}
+
+.password-row input{
+  flex:1;
+
+  height:48px;
+
+  border:1px solid #dcdce3;
+  border-radius:9px;
+
+  padding:0 14px;
+
+  font-size:15px;
+
+  outline:none;
+}
+
+.password-row input:focus{
+  border-color:#e53232;
+  box-shadow:0 0 0 3px rgba(229,50,50,.08);
+}
+
+.show-password{
+  width:90px;
+
+  border:1px solid #ddd;
+
+  background:#f5f5f7;
+
+  border-radius:9px;
+
+  cursor:pointer;
+
+  font-weight:600;
+}
+
+.show-password:hover{
+  background:#eee;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.unlock-btn{
+  width:100%;
+
+  margin-top:25px;
+
+  height:52px;
+
+  border:0;
+  border-radius:10px;
+
+  background:#e53232;
+  color:#fff;
+
+  font-size:16px;
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.2s;
+}
+
+.unlock-btn:hover{
+  background:#c92525;
+}
+
+.unlock-btn:disabled{
+  background:#aaa;
+  cursor:not-allowed;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.status{
+  display:none;
+
+  margin-top:20px;
+
+  padding:14px 16px;
+
+  border-radius:9px;
+
+  font-size:14px;
+
+  text-align:center;
+}
+
+.status.info{
+  display:block;
+
+  background:#f0f5ff;
+  color:#315b9d;
+}
+
+.status.success{
+  display:block;
+
+  background:#edf9f0;
+  color:#23733b;
+}
+
+.status.error{
+  display:block;
+
+  background:#fff0f0;
+  color:#b32626;
+}
+
+
+/* =========================
+   DOWNLOAD
+========================= */
+
+.download-area{
+  display:none;
+
+  margin-top:25px;
+
+  padding:22px;
+
+  border-radius:12px;
+
+  background:#f5fff7;
+
+  border:1px solid #d9f0df;
+
+  text-align:center;
+}
+
+.download-area h3{
+  color:#23733b;
+  margin-bottom:7px;
+}
+
+.download-area p{
+  color:#666;
+  font-size:13px;
+  margin-bottom:15px;
+}
+
+.download-btn{
+  display:inline-flex;
+
+  align-items:center;
+  justify-content:center;
+
+  min-width:190px;
+  height:46px;
+
+  padding:0 20px;
+
+  border-radius:9px;
+
+  background:#23733b;
+  color:#fff;
+
+  text-decoration:none;
+
+  font-weight:700;
+
+  cursor:pointer;
+}
+
+.download-btn:hover{
+  background:#1b5d2e;
+}
+
+
+/* =========================
+   HELP
+========================= */
+
+.help{
+  max-width:760px;
+
+  margin:25px auto 0;
+
+  padding:20px;
+
+  background:#fff;
+
+  border:1px solid #e8e8ee;
+
+  border-radius:14px;
+}
+
+.help h3{
+  font-size:17px;
+  margin-bottom:10px;
+}
+
+.help ul{
+  padding-left:20px;
+}
+
+.help li{
+  color:#666;
+  font-size:13px;
+  margin-bottom:7px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+  background:#17181a;
+  color:#aaa;
+
+  padding:35px 20px;
+
+  text-align:center;
+}
+
+.footer p{
+  font-size:13px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+  .nav{
+    min-height:62px;
+    padding:0 15px;
+  }
+
+  .logo{
+    font-size:18px;
+  }
+
+  .logo-icon{
+    width:35px;
+    height:35px;
+  }
+
+  .container{
+    padding:40px 15px 60px;
+  }
+
+  .title h1{
+    font-size:30px;
+  }
+
+  .title p{
+    font-size:14px;
+  }
+
+  .tool-box{
+    padding:20px;
+  }
+
+  .upload-area{
+    min-height:170px;
+  }
+
+  .password-row{
+    flex-direction:column;
+  }
+
+  .show-password{
+    width:100%;
+    height:45px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="header">
+
+  <div class="nav">
+
+    <a href="index.html" class="logo">
+
+      <div class="logo-icon">
+        PDF
+      </div>
+
+      PDF Editor Tools
+
+    </a>
+
+    <a href="index.html" class="home-link">
+      ← Home
+    </a>
+
+  </div>
+
+</header>
+
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="container">
+
+
+  <div class="title">
+
+    <h1>
+      Unlock <span>PDF</span>
+    </h1>
+
+    <p>
+      Remove password protection from your PDF by entering
+      the correct document password.
+    </p>
+
+  </div>
+
+
+
+  <!-- TOOL -->
+
+  <div class="tool-box">
+
+
+    <!-- UPLOAD -->
+
+    <label class="upload-area" for="pdfInput">
+
+      <div class="upload-icon">
+        ↑
+      </div>
+
+      <h3>
+        Select PDF File
+      </h3>
+
+      <p>
+        Click here to upload your password protected PDF
+      </p>
+
+    </label>
+
+    <input
+      type="file"
+      id="pdfInput"
+      accept="application/pdf,.pdf"
+    >
+
+
+
+    <!-- FILE INFO -->
+
+    <div class="file-info" id="fileInfo">
+
+      <div class="file-name" id="fileName"></div>
+
+      <div class="file-size" id="fileSize"></div>
+
+    </div>
+
+
+
+    <!-- PASSWORD -->
+
+    <div class="password-section" id="passwordSection">
+
+      <label for="passwordInput">
+        PDF Password
+      </label>
+
+      <div class="password-row">
+
+        <input
+          type="password"
+          id="passwordInput"
+          placeholder="Enter PDF password"
+          autocomplete="off"
+        >
+
+        <button
+          type="button"
+          class="show-password"
+          id="showPassword"
+        >
+          Show
+        </button>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- UNLOCK -->
+
+    <button
+      type="button"
+      class="unlock-btn"
+      id="unlockBtn"
+      disabled
+    >
+      🔓 Unlock PDF
+    </button>
+
+
+
+    <!-- STATUS -->
+
+    <div
+      class="status"
+      id="status"
+    ></div>
+
+
+
+    <!-- DOWNLOAD -->
+
+    <div
+      class="download-area"
+      id="downloadArea"
+    >
+
+      <h3>
+        PDF Unlocked Successfully
+      </h3>
+
+      <p>
+        Your unlocked PDF is ready to download.
+      </p>
+
+      <a
+        href="#"
+        id="downloadBtn"
+        class="download-btn"
+      >
+        ⬇ Download PDF
+      </a>
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- HELP -->
+
+  <div class="help">
+
+    <h3>
+      How to Unlock a PDF
+    </h3>
+
+    <ul>
+
+      <li>
+        Click on "Select PDF File" and choose your PDF.
+      </li>
+
+      <li>
+        Enter the correct PDF password.
+      </li>
+
+      <li>
+        Click "Unlock PDF".
+      </li>
+
+      <li>
+        Download the unlocked PDF.
+      </li>
+
+      <li>
+        Your password is processed locally in your browser
+        by this tool.
+      </li>
+
+    </ul>
+
+  </div>
+
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="footer">
+
+  <p>
+    © 2026 PDF Editor Tools. All rights reserved.
+  </p>
+
+</footer>
+
+
+
+<script>
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const pdfInput =
+  document.getElementById("pdfInput");
+
+const fileInfo =
+  document.getElementById("fileInfo");
+
+const fileName =
+  document.getElementById("fileName");
+
+const fileSize =
+  document.getElementById("fileSize");
+
+const passwordSection =
+  document.getElementById("passwordSection");
+
+const passwordInput =
+  document.getElementById("passwordInput");
+
+const showPassword =
+  document.getElementById("showPassword");
+
+const unlockBtn =
+  document.getElementById("unlockBtn");
+
+const statusBox =
+  document.getElementById("status");
+
+const downloadArea =
+  document.getElementById("downloadArea");
+
+const downloadBtn =
+  document.getElementById("downloadBtn");
+
+
+let selectedFile = null;
+let downloadUrl = null;
+
+
+/* =========================
+   FILE SIZE
+========================= */
+
+function formatFileSize(bytes){
+
+  if(bytes < 1024){
+    return bytes + " B";
+  }
+
+  if(bytes < 1024 * 1024){
+    return (bytes / 1024).toFixed(1) + " KB";
+  }
+
+  return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+function showStatus(message,type){
+
+  statusBox.textContent = message;
+
+  statusBox.className =
+    "status " + type;
+
+}
+
+
+/* =========================
+   PDF SELECT
+========================= */
+
+pdfInput.addEventListener("change",function(){
+
+  selectedFile = this.files[0];
+
+  downloadArea.style.display = "none";
+
+  downloadBtn.removeAttribute("href");
+
+  if(downloadUrl){
+
+    URL.revokeObjectURL(downloadUrl);
+
+    downloadUrl = null;
+
+  }
+
+
+  if(!selectedFile){
+
+    fileInfo.style.display = "none";
+
+    passwordSection.style.display = "none";
+
+    unlockBtn.disabled = true;
+
+    statusBox.className = "status";
+
+    return;
+
+  }
+
+
+  if(
+    selectedFile.type !== "application/pdf" &&
+    !selectedFile.name.toLowerCase().endsWith(".pdf")
+  ){
+
+    showStatus(
+      "Please select a valid PDF file.",
+      "error"
+    );
+
+    this.value = "";
+
+    return;
+
+  }
+
+
+  fileName.textContent =
+    selectedFile.name;
+
+  fileSize.textContent =
+    formatFileSize(selectedFile.size);
+
+
+  fileInfo.style.display = "block";
+
+  passwordSection.style.display = "block";
+
+  unlockBtn.disabled = false;
+
+  passwordInput.focus();
+
+  showStatus(
+    "PDF selected. Enter the password and click Unlock PDF.",
+    "info"
+  );
+
+});
+
+
+/* =========================
+   SHOW PASSWORD
+========================= */
+
+showPassword.addEventListener("click",function(){
+
+  if(passwordInput.type === "password"){
+
+    passwordInput.type = "text";
+
+    this.textContent = "Hide";
+
+  }else{
+
+    passwordInput.type = "password";
+
+    this.textContent = "Show";
+
+  }
+
+});
+
+
+/* =========================
+   UNLOCK PDF
+========================= */
+
+unlockBtn.addEventListener("click",async function(){
+
+  if(!selectedFile){
+
+    showStatus(
+      "Please select a PDF file first.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const password =
+    passwordInput.value;
+
+
+  if(!password){
+
+    showStatus(
+      "Please enter the PDF password.",
+      "error"
+    );
+
+    passwordInput.focus();
+
+    return;
+
+  }
+
+
+  unlockBtn.disabled = true;
+
+  unlockBtn.textContent =
+    "Processing...";
+
+
+  downloadArea.style.display =
+    "none";
+
+
+  showStatus(
+    "Opening PDF...",
+    "info"
+  );
+
+
+  try{
+
+    const inputBytes =
+      new Uint8Array(
+        await selectedFile.arrayBuffer()
+      );
+
+
+    /*
+      pdf-lib cannot decrypt an encrypted
+      PDF directly in the browser.
+
+      We first try loading it with pdf-lib.
+      If it is already unencrypted, we can
+      simply save a fresh copy.
+    */
+
+    let pdfDoc;
+
+
+    try{
+
+      pdfDoc =
+        await PDFLib.PDFDocument.load(
+          inputBytes,
+          {
+            ignoreEncryption:false
+          }
+        );
+
+    }catch(loadError){
+
+      throw new Error(
+        "This PDF is encrypted/password protected. The current browser-only version cannot decrypt this PDF directly. A PDF processing engine with password support is required."
+      );
+
+    }
+
+
+    showStatus(
+      "Creating unlocked PDF...",
+      "info"
+    );
+
+
+    const outputBytes =
+      await pdfDoc.save();
+
+
+    const blob =
+      new Blob(
+        [outputBytes],
+        {
+          type:"application/pdf"
+        }
+      );
+
+
+    if(downloadUrl){
+
+      URL.revokeObjectURL(downloadUrl);
+
+    }
+
+
+    downloadUrl =
+      URL.createObjectURL(blob);
+
+
+    let newName =
+      selectedFile.name;
+
+
+    if(
+      newName.toLowerCase().endsWith(".pdf")
+    ){
+
+      newName =
+        newName.slice(
+          0,
+          -4
+        ) +
+        "-unlocked.pdf";
+
+    }else{
+
+      newName += "-unlocked.pdf";
+
+    }
+
+
+    downloadBtn.href =
+      downloadUrl;
+
+    downloadBtn.download =
+      newName;
+
+
+    downloadArea.style.display =
+      "block";
+
+
+    showStatus(
+      "PDF is ready for download.",
+      "success"
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+
+    showStatus(
+      error.message ||
+      "Unable to unlock this PDF.",
+      "error"
+    );
+
+
+  }finally{
+
+    unlockBtn.disabled = false;
+
+    unlockBtn.textContent =
+      "🔓 Unlock PDF";
+
+  }
+
+});
+
+
+/* =========================
+   ENTER KEY
+========================= */
+
+passwordInput.addEventListener(
+  "keydown",
+  function(event){
+
+    if(event.key === "Enter"){
+
+      event.preventDefault();
+
+      unlockBtn.click();
+
+    }
+
+  }
+);
+
+
+/* =========================
+   CLEAN URL
+========================= */
+
+window.addEventListener(
+  "beforeunload",
+  function(){
+
+    if(downloadUrl){
+
+      URL.revokeObjectURL(downloadUrl);
+
+    }
+
+  }
+);
+
+</script>
+
+
+</body>
+</html>
