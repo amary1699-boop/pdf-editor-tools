@@ -20,7 +20,7 @@ header{background:#fff;border-bottom:1px solid #ddd;padding:15px 5%;display:flex
 .settings{padding:15px;margin-bottom:15px}.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.setting-group label{display:block;font-weight:700;font-size:13px;margin-bottom:6px}.setting-group input,.setting-group select{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;font-size:14px}.setting-help{font-size:12px;color:#777;margin-top:5px}
 .page-navigation{padding:12px;display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:15px}.nav-button{background:#e53232;color:#fff;border:0;border-radius:6px;padding:8px 15px;cursor:pointer}.nav-button:disabled{background:#ccc;cursor:not-allowed}.page-info{font-weight:700}
 .preview-wrapper{background:#ddd;border:1px solid #ccc;border-radius:10px;padding:20px;overflow:auto;min-height:500px}.preview-area{position:relative;margin:0 auto;width:max-content;box-shadow:0 2px 10px rgba(0,0,0,.15);background:#fff}.pdf-canvas{display:block;background:#fff}.fields-layer{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
-.form-field{position:absolute;background:rgba(255,255,255,.88);border:2px solid #e53232;border-radius:4px;cursor:move;user-select:none;min-width:30px;min-height:20px;display:flex;align-items:center;justify-content:center;overflow:visible;pointer-events:auto}.form-field.selected{border:2px solid #111}.field-label{padding:3px 6px;font-size:12px;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}.field-checkbox{width:18px;height:18px;border:2px solid #555;pointer-events:none;position:relative}.field-checkbox.checked:after{content:'✓';position:absolute;left:1px;top:-5px;font-size:18px;font-weight:700}.field-radio{width:18px;height:18px;border:2px solid #555;border-radius:50%;pointer-events:none;position:relative}.field-radio.checked:after{content:'';position:absolute;width:8px;height:8px;background:#555;border-radius:50%;left:3px;top:3px}.field-dropdown{width:100%;text-align:left;padding:5px 8px;font-size:12px;pointer-events:none;white-space:nowrap;overflow:hidden}.field-ghost{position:absolute;background:rgba(229,50,50,.15);border:2px dashed #e53232;border-radius:4px;pointer-events:none;z-index:20;display:flex;align-items:center;justify-content:center;color:#e53232;font-size:12px;font-weight:700}.resize-handle{position:absolute;width:12px;height:12px;right:-6px;bottom:-6px;background:#e53232;border:2px solid #fff;border-radius:50%;cursor:nwse-resize;z-index:5}
+.form-field{position:absolute;background:rgba(255,255,255,.88);border:2px solid #e53232;border-radius:4px;cursor:move;user-select:none;min-width:30px;min-height:20px;display:flex;align-items:center;justify-content:center;overflow:visible;pointer-events:auto}.form-field.selected{border:2px solid #111}.field-label{padding:3px 6px;font-size:12px;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}.field-checkbox{width:18px;height:18px;border:2px solid #555;pointer-events:none;position:relative}.field-checkbox.checked:after{content:'✓';position:absolute;left:1px;top:-5px;font-size:18px;font-weight:700}.field-radio{width:18px;height:18px;border:2px solid #555;border-radius:50%;pointer-events:none;position:relative}.field-radio.checked:after{content:'';position:absolute;width:8px;height:8px;background:#555;border-radius:50%;left:3px;top:3px}.field-dropdown{width:100%;text-align:left;padding:5px 8px;font-size:12px;pointer-events:none;white-space:nowrap;overflow:hidden}.field-ghost{position:absolute;background:rgba(229,50,50,.15);border:2px dashed #e53232;border-radius:4px;pointer-events:none;z-index:20;display:flex;align-items:center;justify-content:center;color:#e53232;font-size:12px;font-weight:700;transform:translate(-50%,-50%)}.resize-handle{position:absolute;width:12px;height:12px;right:-6px;bottom:-6px;background:#e53232;border:2px solid #fff;border-radius:50%;cursor:nwse-resize;z-index:5}
 .field-actions,.bottom-actions{padding:15px;margin-top:15px;display:flex;flex-wrap:wrap;gap:8px}.action-button{background:#555;color:#fff;border:0;padding:10px 15px;border-radius:6px;cursor:pointer}.action-button:hover{opacity:.9}.action-button.delete{background:#d32f2f}.action-button.primary{background:#e53232}.action-button.green{background:#198754}.action-button:disabled{opacity:.5;cursor:not-allowed}
 .result{display:none;padding:20px;margin-top:20px;text-align:center}.download-link{display:inline-block;background:#e53232;color:#fff;text-decoration:none;padding:12px 25px;border-radius:7px;font-weight:700;margin-top:10px}.error-box{display:none;background:#fff0f0;color:#b00020;border:1px solid #ffb3b3;border-radius:8px;padding:12px;margin-top:15px;white-space:pre-wrap;word-break:break-word;font-size:14px}.help-box{padding:18px;margin-top:20px}.help-box h3{margin-top:0}.help-box ol{padding-left:20px}.help-box li{margin-bottom:7px}
 .status{font-size:13px;color:#555;margin-top:8px}.add-mode-note{display:none;background:#fff8e1;border:1px solid #f0d58a;color:#765900;border-radius:7px;padding:9px 11px;margin-top:10px;font-size:13px}.add-mode-note.show{display:block}
@@ -124,6 +124,20 @@ function cssToPdfPoint(cssX,cssY,w,h,pageWidth,pageHeight){return {x:cssX/render
 function removeGhostField(){
  if(ghostField){ghostField.remove();ghostField=null;}
 }
+
+function getPointerPosition(event){
+ const rect=pdfCanvas.getBoundingClientRect();
+ const scaleX=pdfCanvas.width/rect.width;
+ const scaleY=pdfCanvas.height/rect.height;
+ return {
+  x:(event.clientX-rect.left)*scaleX,
+  y:(event.clientY-rect.top)*scaleY,
+  rect:rect,
+  scaleX:scaleX,
+  scaleY:scaleY
+ };
+}
+
 function createGhostField(){
  removeGhostField();
  if(!isAddingField||!selectedFieldType)return;
@@ -134,35 +148,68 @@ function createGhostField(){
  ghostField.style.height=s.h+'px';
  ghostField.textContent=selectedFieldType==='checkbox'?'Checkbox':selectedFieldType==='radio'?'Radio':selectedFieldType==='dropdown'?'Dropdown':'Text Field';
  fieldsLayer.appendChild(ghostField);
- updateGhostPosition(lastMouseX,lastMouseY);
+ ghostField.style.display='none';
 }
-let lastMouseX=0,lastMouseY=0;
-function updateGhostPosition(clientX,clientY){
+
+function updateGhostPosition(event){
  if(!ghostField||!isAddingField||!selectedFieldType)return;
- const rect=previewArea.getBoundingClientRect();
+ const p=getPointerPosition(event);
  const s=defaultSize(selectedFieldType);
- let cx=clientX-rect.left,cy=clientY-rect.top;
- cx=Math.max(0,Math.min(cx,rect.width-s.w));
- cy=Math.max(0,Math.min(cy,rect.height-s.h));
+ const pageW=pdfCanvas.width;
+ const pageH=pdfCanvas.height;
+ const halfW=s.w/2;
+ const halfH=s.h/2;
+ let cx=Math.max(halfW,Math.min(p.x,pageW-halfW));
+ let cy=Math.max(halfH,Math.min(p.y,pageH-halfH));
  ghostField.style.left=cx+'px';
  ghostField.style.top=cy+'px';
+ ghostField.style.display='flex';
 }
-previewArea.addEventListener('mousemove',e=>{
- lastMouseX=e.clientX; lastMouseY=e.clientY; updateGhostPosition(e.clientX,e.clientY);
+
+pdfCanvas.addEventListener('pointermove',function(e){
+ if(!isAddingField)return;
+ updateGhostPosition(e);
 });
-previewArea.addEventListener('mouseleave',()=>{if(ghostField)ghostField.style.display='none'});
-previewArea.addEventListener('mouseenter',e=>{if(ghostField){ghostField.style.display='flex';updateGhostPosition(e.clientX,e.clientY)}});
-previewArea.addEventListener('click',async e=>{
- if(e.target.closest('.form-field'))return;
+
+pdfCanvas.addEventListener('pointerleave',function(){
+ if(ghostField)ghostField.style.display='none';
+});
+
+pdfCanvas.addEventListener('pointerenter',function(e){
+ if(isAddingField)updateGhostPosition(e);
+});
+
+pdfCanvas.addEventListener('pointerdown',async function(e){
+ if(e.button!==0)return;
  if(!isAddingField||!selectedFieldType||!pdfDocument)return;
+ e.preventDefault();
+ e.stopPropagation();
  try{
-  const page=await pdfDocument.getPage(activePage);const vp=page.getViewport({scale:renderScale});const rect=previewArea.getBoundingClientRect();
-  const s=defaultSize(selectedFieldType);let cx=e.clientX-rect.left,cy=e.clientY-rect.top;cx=Math.max(0,Math.min(cx,rect.width-s.w));cy=Math.max(0,Math.min(cy,rect.height-s.h));
-  const pos=cssToPdfPoint(cx,cy,s.w,s.h,vp.width/renderScale,vp.height/renderScale);
+  const page=await pdfDocument.getPage(activePage);
+  const vp=page.getViewport({scale:renderScale});
+  const p=getPointerPosition(e);
+  const s=defaultSize(selectedFieldType);
+  const halfW=s.w/2;
+  const halfH=s.h/2;
+  let cx=Math.max(halfW,Math.min(p.x,vp.width-halfW));
+  let cy=Math.max(halfH,Math.min(p.y,vp.height-halfH));
+  const topLeftX=cx-halfW;
+  const topLeftY=cy-halfH;
+  const pos=cssToPdfPoint(topLeftX,topLeftY,s.w,s.h,vp.width/renderScale,vp.height/renderScale);
   const name=uniqueName(fieldNameInput.value.trim()||(selectedFieldType==='radio'?'RadioGroup':selectedFieldType+'_'+fieldCounter));
   const field={id:makeId(),type:selectedFieldType,name,value:fieldValueInput.value,page:activePage,pageWidth:vp.width/renderScale,pageHeight:vp.height/renderScale,x:pos.x,y:pos.y,width:pos.width,height:pos.height};
-  fields.push(field);selectedField=field;fieldNameInput.value=field.name;fieldValueInput.value=field.value;isAddingField=false;removeGhostField();updateAddNote();renderFields();
- }catch(err){console.error(err);showError('Could not add field.\n\n'+err.message)}
+  fields.push(field);
+  selectedField=field;
+  fieldNameInput.value=field.name;
+  fieldValueInput.value=field.value;
+  isAddingField=false;
+  removeGhostField();
+  updateAddNote();
+  renderFields();
+ }catch(err){
+  console.error(err);
+  showError('Could not add field.\n\n'+(err&&err.message?err.message:err));
+ }
 });
 
 function renderFields(){
